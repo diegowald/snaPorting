@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using Catalogo.util.emitter_receiver;
+
 
 namespace Catalogo._productos
 {
-    public partial class GridViewFilter2 : UserControl, util.emitter_receiver.IReceptor<string>
+    public partial class GridViewFilter2 : UserControl, util.emitter_receiver.IReceptor<string>, util.emitter_receiver.IEmisor<DataGridViewRow>
     {
 
 
@@ -52,7 +54,7 @@ namespace Catalogo._productos
         private bool xAplicoPorcentajeLinea = false;
  
         private string strComando = "SELECT " +
-               "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto as Medidas, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
+               "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
                "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
                "FROM v_CatVehProdLin AS c";
 
@@ -198,9 +200,9 @@ namespace Catalogo._productos
             dataGridView1.Columns[(int)CCol.cAño].HeaderText = "Año";
             dataGridView1.Columns[(int)CCol.cAño].DataPropertyName = "Año";
 
-            dataGridView1.Columns[(int)CCol.cMedidas].Name = "Medidas";
+            dataGridView1.Columns[(int)CCol.cMedidas].Name = "O_Productos";
             dataGridView1.Columns[(int)CCol.cMedidas].HeaderText = "Medidas";
-            dataGridView1.Columns[(int)CCol.cMedidas].DataPropertyName = "Medidas";
+            dataGridView1.Columns[(int)CCol.cMedidas].DataPropertyName = "O_Productos";
 
             dataGridView1.Columns[(int)CCol.cReemplazaA].Name = "ReemplazaA";
             dataGridView1.Columns[(int)CCol.cReemplazaA].HeaderText = "Reemplaza A";
@@ -362,8 +364,7 @@ namespace Catalogo._productos
             if (cell != null)
             {
                 DataGridViewRow row = cell.OwningRow;
-                lblProductoDetalle1.Text = row.Cells["C_Producto"].Value.ToString() + " - ";
-                lblProductoDetalle1.Text += row.Cells["N_Producto"].Value.ToString();
+                this.emitir(row);
                 // etc.
             }
         }
@@ -374,6 +375,19 @@ namespace Catalogo._productos
         {
             filterString = dato;
             loadDataGridView();
+        }
+
+        private util.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
+        public util.emitter_receiver.emisorHandler<DataGridViewRow> emisor
+        {
+            get
+            {
+                return _emisor;
+            }
+            set
+            {
+                _emisor = value;
+            }
         }
     }
 }

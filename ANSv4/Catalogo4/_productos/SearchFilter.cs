@@ -233,7 +233,58 @@ namespace Catalogo._productos
 
         private void btnApply0_Click(object sender, EventArgs e)
         {
-            this.emitir(filterString);
+            if (dtProducts != null && dtProducts.Rows.Count > 0)
+            {
+                filterString = string.Empty;
+                FilterBuilder fb = new FilterBuilder();
+
+                fb.ApplyFilter(ref filterString, "Linea", cboLinea.SelectedItem.ToString());
+                fb.ApplyFilter(ref filterString, "Familia", cboFamilia.SelectedItem.ToString());
+                fb.ApplyFilter(ref filterString, "Marca", cboMarca.SelectedItem.ToString());
+                fb.ApplyFilter(ref filterString, "Modelo", cboModelo.SelectedItem.ToString());
+
+                string discontinuedValue = string.Empty;
+                string controlValue = string.Empty;
+
+                if (cboOtros.SelectedItem.ToString() == "(todos)") { controlValue = null; }
+
+                if (cboOtros.SelectedItem.ToString() == "Ofertas") { controlValue = "O"; }
+
+                if (!string.IsNullOrEmpty(controlValue))
+                {
+                    fb.ApplyFilter(ref filterString, "Control", controlValue);
+                }
+
+                if (!string.IsNullOrEmpty(txtBuscar.Text))
+                {
+                    fb.ApplyFilter(ref filterString, "(txtBuscar)", txtBuscar.Text.ToUpper());
+                }
+
+                if (cboOtros.SelectedItem.ToString() == "Nuevos")
+                {
+                    fb.ApplyFilter(ref filterString, "Vigencia", "30");
+                }
+
+                fb = null;
+                this.emitir(filterString);
+            }
+        }
+
+        private void btnClearFilters_Click(object sender, EventArgs e)
+        {
+            if (dtProducts != null && dtProducts.Rows.Count > 0)
+            {
+                filterString = string.Empty;
+
+                if (cboLinea.Items.Count > 0) cboLinea.SelectedIndex = 0;
+                if (cboFamilia.Items.Count > 0) cboFamilia.SelectedIndex = 0;
+                if (cboMarca.Items.Count > 0) cboMarca.SelectedIndex = 0;
+                if (cboModelo.Items.Count > 0) cboModelo.SelectedIndex = 0;
+
+                cboOtros.SelectedIndex = 0;
+
+                this.emitir(filterString);
+            }
         }
     }
 }

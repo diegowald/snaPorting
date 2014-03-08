@@ -17,16 +17,21 @@ namespace Catalogo._productos
     /// <summary>
     /// Interaction logic for DetalleProducto.xaml
     /// </summary>
-    public partial class DetalleProducto : UserControl, util.emitter_receiver.IReceptor<System.Data.DataRow>
+    public partial class DetalleProducto : UserControl, util.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>
     {
         public DetalleProducto()
         {
             InitializeComponent();
         }
 
-        public void onRecibir(System.Data.DataRow dato)
+        public void onRecibir(System.Windows.Forms.DataGridViewRow dato)
         {
-            txtDetalle.NavigateToString("hola");
+            if (dato != null)
+            {
+                string s = dato.Cells["C_Producto"].Value.ToString() + " - " +
+                    dato.Cells["N_Producto"].Value.ToString();
+                txtDetalle.NavigateToString(s);
+            }
         }
 
     }

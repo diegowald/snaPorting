@@ -86,6 +86,7 @@ namespace Catalogo
             Catalogo._productos.GridViewFilter2 gv = addProductsArea();
 
             sf.attachReceptor(gv);
+            gv.attachReceptor(productDetalle);
 
             this.sugerencias.Visibility = System.Windows.Visibility.Collapsed;
         }

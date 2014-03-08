@@ -206,6 +206,7 @@
             this.btnClearFilters.Name = "btnClearFilters";
             this.btnClearFilters.Size = new System.Drawing.Size(23, 20);
             this.btnClearFilters.Text = "ver todos";
+            this.btnClearFilters.Click += new System.EventHandler(this.btnClearFilters_Click);
             // 
             // toolStripSeparator3
             // 
