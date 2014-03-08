@@ -311,7 +311,6 @@
             this.Controls.Add(this.toolStrip1);
             this.Name = "GridViewFilter2";
             this.Size = new System.Drawing.Size(682, 547);
-            this.Load += new System.EventHandler(this.GridViewFilter2_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

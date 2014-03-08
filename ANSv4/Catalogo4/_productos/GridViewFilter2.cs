@@ -59,6 +59,7 @@ namespace Catalogo._productos
         private string strSQLCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Catalogo ANS\\datos\\catalogo.mdb;Persist Security Info=True;Password=video80min;User ID=inVent;Jet OLEDB:System database=C:\\Windows\\Help\\kbappcat.hlp";
 
         private util.BackgroundReader.BackgroundDataLoader backgroundWorker;
+
         private string filterString = string.Empty;
 
         private int currentRowCount = 0;
@@ -79,11 +80,15 @@ namespace Catalogo._productos
 
         public GridViewFilter2()
         {
+          
             InitializeComponent();
+            
             backgroundWorker = new util.BackgroundReader.BackgroundDataLoader(Catalogo.util.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
                 strSQLCon);
             backgroundWorker.onWorkFinishedHandler += dataReady;
+            
             xCargarDataControl();
+
         }
 
         private static DataTable xGetData(string strConn, string sqlCommand)
@@ -103,10 +108,6 @@ namespace Catalogo._productos
 
         }
 
-        private void GridViewFilter2_Load(object sender, EventArgs e)
-        {
-            xCargarDataControl();
-        }
 
         private void xCargarDataControl()
         {
