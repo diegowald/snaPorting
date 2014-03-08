@@ -69,11 +69,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="util\adoModulo.cs" />
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
     <Compile Include="util\emitter-receiver\IEmisor.cs" />
     <Compile Include="util\emitter-receiver\IReceptor.cs" />
     <Compile Include="util\ModINIs.cs" />
+    <Compile Include="util\OleDbFunciones.cs" />
+    <Compile Include="util\Utilidades.cs" />
+    <Compile Include="util\xListItem.cs" />
     <Compile Include="_productos\DetalleProducto.xaml.cs">
       <DependentUpon>DetalleProducto.xaml</DependentUpon>
     </Compile>
@@ -153,9 +155,7 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="util\modulos\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

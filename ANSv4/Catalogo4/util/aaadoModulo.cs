@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Data;
 using System.Data.OleDb;
 
-namespace Catalogo.Funciones
+namespace Catalogo.util
 {
 
     public class adoModulo
@@ -190,8 +190,6 @@ namespace Catalogo.Funciones
             cmd.Parameters.AddWithValue("@Tabla", Tabla);
             cmd.Parameters.AddWithValue("@Condicion", Condicion);
             cmd.Parameters.AddWithValue("@Orden", Orden);
-
-
 
             return cmd.ExecuteReader();
 

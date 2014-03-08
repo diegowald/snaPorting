@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Catalogo
 {
-    namespace util
+    namespace Funciones
     {
         namespace emitter_receiver
         {

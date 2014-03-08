@@ -17,7 +17,7 @@ namespace Catalogo._productos
     /// <summary>
     /// Interaction logic for DetalleProducto.xaml
     /// </summary>
-    public partial class DetalleProducto : UserControl, util.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>
+    public partial class DetalleProducto : UserControl, Funciones.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>
     {
         public DetalleProducto()
         {

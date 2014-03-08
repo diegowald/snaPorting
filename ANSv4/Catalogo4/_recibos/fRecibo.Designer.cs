@@ -43,60 +43,66 @@
             this.raTopPnl = new System.Windows.Forms.Panel();
             this.raImporteTotalLbl = new System.Windows.Forms.Label();
             this.CargaValoresTab = new System.Windows.Forms.TabPage();
-            this.AplicacionTab = new System.Windows.Forms.TabPage();
-            this.ADeducirTab = new System.Windows.Forms.TabPage();
-            this.CtaCteTab = new System.Windows.Forms.TabPage();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.CargaValoresPnl = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cvTipoValorCbo = new System.Windows.Forms.ComboBox();
-            this.cvBancoCbo = new System.Windows.Forms.ComboBox();
-            this.cvImporteTxt = new System.Windows.Forms.TextBox();
-            this.cvTipoCambioTxt = new System.Windows.Forms.TextBox();
-            this.cvNroCuentaTxt = new System.Windows.Forms.TextBox();
-            this.cvNroChequeTxt = new System.Windows.Forms.TextBox();
-            this.cvFecEmiDt = new System.Windows.Forms.DateTimePicker();
-            this.cvFecCobroDt = new System.Windows.Forms.DateTimePicker();
-            this.cvDeTerceroCb = new System.Windows.Forms.CheckBox();
-            this.cvASucursalCb = new System.Windows.Forms.CheckBox();
-            this.cvCpaTxt = new System.Windows.Forms.TextBox();
-            this.cvAceptarBtn = new System.Windows.Forms.Button();
             this.cvCancelarBtn = new System.Windows.Forms.Button();
-            this.ApTopPnl = new System.Windows.Forms.Panel();
-            this.ApMainPnl = new System.Windows.Forms.Panel();
+            this.cvAceptarBtn = new System.Windows.Forms.Button();
+            this.cvCpaTxt = new System.Windows.Forms.TextBox();
+            this.cvASucursalCb = new System.Windows.Forms.CheckBox();
+            this.cvDeTerceroCb = new System.Windows.Forms.CheckBox();
+            this.cvFecCobroDt = new System.Windows.Forms.DateTimePicker();
+            this.cvFecEmiDt = new System.Windows.Forms.DateTimePicker();
+            this.cvNroChequeTxt = new System.Windows.Forms.TextBox();
+            this.cvNroCuentaTxt = new System.Windows.Forms.TextBox();
+            this.cvTipoCambioTxt = new System.Windows.Forms.TextBox();
+            this.cvImporteTxt = new System.Windows.Forms.TextBox();
+            this.cvBancoCbo = new System.Windows.Forms.ComboBox();
+            this.cvTipoValorCbo = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.AplicacionTab = new System.Windows.Forms.TabPage();
             this.ApBottonPnl = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.apConceptoTxt = new System.Windows.Forms.TextBox();
-            this.apImporteTxt = new System.Windows.Forms.TextBox();
-            this.apPercepcionTxt = new System.Windows.Forms.TextBox();
-            this.apAgregarBtn = new System.Windows.Forms.Button();
-            this.apTotalAplicacionLbl = new System.Windows.Forms.Label();
             this.apTotalPercepcionLbl = new System.Windows.Forms.Label();
+            this.apTotalAplicacionLbl = new System.Windows.Forms.Label();
+            this.ApMainPnl = new System.Windows.Forms.Panel();
             this.apDataGridView = new System.Windows.Forms.DataGridView();
-            this.adBottonPnl = new System.Windows.Forms.Panel();
-            this.adTotalDeducirLbl = new System.Windows.Forms.Label();
+            this.ApTopPnl = new System.Windows.Forms.Panel();
+            this.apAgregarBtn = new System.Windows.Forms.Button();
+            this.apPercepcionTxt = new System.Windows.Forms.TextBox();
+            this.apImporteTxt = new System.Windows.Forms.TextBox();
+            this.apConceptoTxt = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.ADeducirTab = new System.Windows.Forms.TabPage();
+            this.adMainPnl = new System.Windows.Forms.Panel();
+            this.adDataGridView = new System.Windows.Forms.DataGridView();
             this.adTopPnl = new System.Windows.Forms.Panel();
+            this.adAplicarRestoCb = new System.Windows.Forms.CheckBox();
+            this.adPorcentajeCb = new System.Windows.Forms.CheckBox();
+            this.adCascaraBtn = new System.Windows.Forms.Button();
             this.adAgregarBtn = new System.Windows.Forms.Button();
             this.adImporteTxt = new System.Windows.Forms.TextBox();
             this.adConceptoTxt = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.adMainPnl = new System.Windows.Forms.Panel();
-            this.adDataGridView = new System.Windows.Forms.DataGridView();
-            this.adCascaraBtn = new System.Windows.Forms.Button();
-            this.adAplicarRestoCb = new System.Windows.Forms.CheckBox();
-            this.adPorcentajeCb = new System.Windows.Forms.CheckBox();
+            this.adBottonPnl = new System.Windows.Forms.Panel();
+            this.adTotalDeducirLbl = new System.Windows.Forms.Label();
+            this.CtaCteTab = new System.Windows.Forms.TabPage();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.cboCliente = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ccMainPnl = new System.Windows.Forms.Panel();
+            this.ccBottonPnl = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ccCtaCteActualizadaFechaLbl = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.ReciboTab.SuspendLayout();
             this.raTab.SuspendLayout();
@@ -105,23 +111,29 @@
             ((System.ComponentModel.ISupportInitialize)(this.raDataGridView)).BeginInit();
             this.raTopPnl.SuspendLayout();
             this.CargaValoresTab.SuspendLayout();
-            this.AplicacionTab.SuspendLayout();
-            this.ADeducirTab.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.CargaValoresPnl.SuspendLayout();
-            this.ApTopPnl.SuspendLayout();
-            this.ApMainPnl.SuspendLayout();
+            this.AplicacionTab.SuspendLayout();
             this.ApBottonPnl.SuspendLayout();
+            this.ApMainPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.apDataGridView)).BeginInit();
-            this.adBottonPnl.SuspendLayout();
-            this.adTopPnl.SuspendLayout();
+            this.ApTopPnl.SuspendLayout();
+            this.ADeducirTab.SuspendLayout();
             this.adMainPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.adDataGridView)).BeginInit();
+            this.adTopPnl.SuspendLayout();
+            this.adBottonPnl.SuspendLayout();
+            this.CtaCteTab.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            this.ccMainPnl.SuspendLayout();
+            this.ccBottonPnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cboCliente,
+            this.toolStripSeparator1,
             this.tsBtnVer,
             this.tsBtnConfirmar,
             this.tsBtnIniciar});
@@ -265,58 +277,6 @@
             this.CargaValoresTab.Text = "Carga de Valores";
             this.CargaValoresTab.UseVisualStyleBackColor = true;
             // 
-            // AplicacionTab
-            // 
-            this.AplicacionTab.Controls.Add(this.ApBottonPnl);
-            this.AplicacionTab.Controls.Add(this.ApMainPnl);
-            this.AplicacionTab.Controls.Add(this.ApTopPnl);
-            this.AplicacionTab.Location = new System.Drawing.Point(4, 22);
-            this.AplicacionTab.Name = "AplicacionTab";
-            this.AplicacionTab.Padding = new System.Windows.Forms.Padding(3);
-            this.AplicacionTab.Size = new System.Drawing.Size(745, 338);
-            this.AplicacionTab.TabIndex = 2;
-            this.AplicacionTab.Text = "Aplicación";
-            this.AplicacionTab.UseVisualStyleBackColor = true;
-            // 
-            // ADeducirTab
-            // 
-            this.ADeducirTab.Controls.Add(this.adMainPnl);
-            this.ADeducirTab.Controls.Add(this.adTopPnl);
-            this.ADeducirTab.Controls.Add(this.adBottonPnl);
-            this.ADeducirTab.Location = new System.Drawing.Point(4, 22);
-            this.ADeducirTab.Name = "ADeducirTab";
-            this.ADeducirTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ADeducirTab.Size = new System.Drawing.Size(745, 338);
-            this.ADeducirTab.TabIndex = 3;
-            this.ADeducirTab.Text = "A Deducir";
-            this.ADeducirTab.UseVisualStyleBackColor = true;
-            // 
-            // CtaCteTab
-            // 
-            this.CtaCteTab.Location = new System.Drawing.Point(4, 22);
-            this.CtaCteTab.Name = "CtaCteTab";
-            this.CtaCteTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CtaCteTab.Size = new System.Drawing.Size(745, 338);
-            this.CtaCteTab.TabIndex = 4;
-            this.CtaCteTab.Text = "Cta. Cte.";
-            this.CtaCteTab.UseVisualStyleBackColor = true;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 389);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(753, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
             // CargaValoresPnl
             // 
             this.CargaValoresPnl.Controls.Add(this.cvCancelarBtn);
@@ -347,154 +307,30 @@
             this.CargaValoresPnl.Size = new System.Drawing.Size(739, 332);
             this.CargaValoresPnl.TabIndex = 0;
             // 
-            // label1
+            // cvCancelarBtn
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(35, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tipo Valor";
+            this.cvCancelarBtn.Location = new System.Drawing.Point(260, 224);
+            this.cvCancelarBtn.Name = "cvCancelarBtn";
+            this.cvCancelarBtn.Size = new System.Drawing.Size(75, 23);
+            this.cvCancelarBtn.TabIndex = 21;
+            this.cvCancelarBtn.Text = "Cancelar";
+            this.cvCancelarBtn.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // cvAceptarBtn
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(216, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Importe";
+            this.cvAceptarBtn.Location = new System.Drawing.Point(159, 224);
+            this.cvAceptarBtn.Name = "cvAceptarBtn";
+            this.cvAceptarBtn.Size = new System.Drawing.Size(75, 23);
+            this.cvAceptarBtn.TabIndex = 20;
+            this.cvAceptarBtn.Text = "Aceptar";
+            this.cvAceptarBtn.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // cvCpaTxt
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(335, 21);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Tipo Cambio";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(35, 72);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Banco";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(216, 72);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "n° Cuenta";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(335, 72);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "n° Cheque";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(35, 124);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(76, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Fecha Emisión";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(257, 124);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Fecha Cobro";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(35, 169);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(26, 13);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Cpa";
-            // 
-            // cvTipoValorCbo
-            // 
-            this.cvTipoValorCbo.FormattingEnabled = true;
-            this.cvTipoValorCbo.Location = new System.Drawing.Point(34, 37);
-            this.cvTipoValorCbo.Name = "cvTipoValorCbo";
-            this.cvTipoValorCbo.Size = new System.Drawing.Size(156, 21);
-            this.cvTipoValorCbo.TabIndex = 9;
-            // 
-            // cvBancoCbo
-            // 
-            this.cvBancoCbo.FormattingEnabled = true;
-            this.cvBancoCbo.Location = new System.Drawing.Point(34, 86);
-            this.cvBancoCbo.Name = "cvBancoCbo";
-            this.cvBancoCbo.Size = new System.Drawing.Size(156, 21);
-            this.cvBancoCbo.TabIndex = 10;
-            // 
-            // cvImporteTxt
-            // 
-            this.cvImporteTxt.Location = new System.Drawing.Point(219, 37);
-            this.cvImporteTxt.Name = "cvImporteTxt";
-            this.cvImporteTxt.Size = new System.Drawing.Size(100, 20);
-            this.cvImporteTxt.TabIndex = 11;
-            // 
-            // cvTipoCambioTxt
-            // 
-            this.cvTipoCambioTxt.Location = new System.Drawing.Point(338, 37);
-            this.cvTipoCambioTxt.Name = "cvTipoCambioTxt";
-            this.cvTipoCambioTxt.Size = new System.Drawing.Size(100, 20);
-            this.cvTipoCambioTxt.TabIndex = 12;
-            // 
-            // cvNroCuentaTxt
-            // 
-            this.cvNroCuentaTxt.Location = new System.Drawing.Point(219, 88);
-            this.cvNroCuentaTxt.Name = "cvNroCuentaTxt";
-            this.cvNroCuentaTxt.Size = new System.Drawing.Size(100, 20);
-            this.cvNroCuentaTxt.TabIndex = 13;
-            // 
-            // cvNroChequeTxt
-            // 
-            this.cvNroChequeTxt.Location = new System.Drawing.Point(338, 87);
-            this.cvNroChequeTxt.Name = "cvNroChequeTxt";
-            this.cvNroChequeTxt.Size = new System.Drawing.Size(100, 20);
-            this.cvNroChequeTxt.TabIndex = 14;
-            // 
-            // cvFecEmiDt
-            // 
-            this.cvFecEmiDt.Location = new System.Drawing.Point(34, 140);
-            this.cvFecEmiDt.Name = "cvFecEmiDt";
-            this.cvFecEmiDt.Size = new System.Drawing.Size(200, 20);
-            this.cvFecEmiDt.TabIndex = 15;
-            // 
-            // cvFecCobroDt
-            // 
-            this.cvFecCobroDt.Location = new System.Drawing.Point(260, 140);
-            this.cvFecCobroDt.Name = "cvFecCobroDt";
-            this.cvFecCobroDt.Size = new System.Drawing.Size(200, 20);
-            this.cvFecCobroDt.TabIndex = 16;
-            // 
-            // cvDeTerceroCb
-            // 
-            this.cvDeTerceroCb.AutoSize = true;
-            this.cvDeTerceroCb.Location = new System.Drawing.Point(483, 140);
-            this.cvDeTerceroCb.Name = "cvDeTerceroCb";
-            this.cvDeTerceroCb.Size = new System.Drawing.Size(80, 17);
-            this.cvDeTerceroCb.TabIndex = 17;
-            this.cvDeTerceroCb.Text = "De Tercero";
-            this.cvDeTerceroCb.UseVisualStyleBackColor = true;
+            this.cvCpaTxt.Location = new System.Drawing.Point(34, 185);
+            this.cvCpaTxt.Name = "cvCpaTxt";
+            this.cvCpaTxt.Size = new System.Drawing.Size(100, 20);
+            this.cvCpaTxt.TabIndex = 19;
             // 
             // cvASucursalCb
             // 
@@ -506,30 +342,216 @@
             this.cvASucursalCb.Text = "A Sucursal";
             this.cvASucursalCb.UseVisualStyleBackColor = true;
             // 
-            // cvCpaTxt
+            // cvDeTerceroCb
             // 
-            this.cvCpaTxt.Location = new System.Drawing.Point(34, 185);
-            this.cvCpaTxt.Name = "cvCpaTxt";
-            this.cvCpaTxt.Size = new System.Drawing.Size(100, 20);
-            this.cvCpaTxt.TabIndex = 19;
+            this.cvDeTerceroCb.AutoSize = true;
+            this.cvDeTerceroCb.Location = new System.Drawing.Point(483, 140);
+            this.cvDeTerceroCb.Name = "cvDeTerceroCb";
+            this.cvDeTerceroCb.Size = new System.Drawing.Size(80, 17);
+            this.cvDeTerceroCb.TabIndex = 17;
+            this.cvDeTerceroCb.Text = "De Tercero";
+            this.cvDeTerceroCb.UseVisualStyleBackColor = true;
             // 
-            // cvAceptarBtn
+            // cvFecCobroDt
             // 
-            this.cvAceptarBtn.Location = new System.Drawing.Point(159, 224);
-            this.cvAceptarBtn.Name = "cvAceptarBtn";
-            this.cvAceptarBtn.Size = new System.Drawing.Size(75, 23);
-            this.cvAceptarBtn.TabIndex = 20;
-            this.cvAceptarBtn.Text = "Aceptar";
-            this.cvAceptarBtn.UseVisualStyleBackColor = true;
+            this.cvFecCobroDt.Location = new System.Drawing.Point(260, 140);
+            this.cvFecCobroDt.Name = "cvFecCobroDt";
+            this.cvFecCobroDt.Size = new System.Drawing.Size(200, 20);
+            this.cvFecCobroDt.TabIndex = 16;
             // 
-            // cvCancelarBtn
+            // cvFecEmiDt
             // 
-            this.cvCancelarBtn.Location = new System.Drawing.Point(260, 224);
-            this.cvCancelarBtn.Name = "cvCancelarBtn";
-            this.cvCancelarBtn.Size = new System.Drawing.Size(75, 23);
-            this.cvCancelarBtn.TabIndex = 21;
-            this.cvCancelarBtn.Text = "Cancelar";
-            this.cvCancelarBtn.UseVisualStyleBackColor = true;
+            this.cvFecEmiDt.Location = new System.Drawing.Point(34, 140);
+            this.cvFecEmiDt.Name = "cvFecEmiDt";
+            this.cvFecEmiDt.Size = new System.Drawing.Size(200, 20);
+            this.cvFecEmiDt.TabIndex = 15;
+            // 
+            // cvNroChequeTxt
+            // 
+            this.cvNroChequeTxt.Location = new System.Drawing.Point(338, 87);
+            this.cvNroChequeTxt.Name = "cvNroChequeTxt";
+            this.cvNroChequeTxt.Size = new System.Drawing.Size(100, 20);
+            this.cvNroChequeTxt.TabIndex = 14;
+            // 
+            // cvNroCuentaTxt
+            // 
+            this.cvNroCuentaTxt.Location = new System.Drawing.Point(219, 88);
+            this.cvNroCuentaTxt.Name = "cvNroCuentaTxt";
+            this.cvNroCuentaTxt.Size = new System.Drawing.Size(100, 20);
+            this.cvNroCuentaTxt.TabIndex = 13;
+            // 
+            // cvTipoCambioTxt
+            // 
+            this.cvTipoCambioTxt.Location = new System.Drawing.Point(338, 37);
+            this.cvTipoCambioTxt.Name = "cvTipoCambioTxt";
+            this.cvTipoCambioTxt.Size = new System.Drawing.Size(100, 20);
+            this.cvTipoCambioTxt.TabIndex = 12;
+            // 
+            // cvImporteTxt
+            // 
+            this.cvImporteTxt.Location = new System.Drawing.Point(219, 37);
+            this.cvImporteTxt.Name = "cvImporteTxt";
+            this.cvImporteTxt.Size = new System.Drawing.Size(100, 20);
+            this.cvImporteTxt.TabIndex = 11;
+            // 
+            // cvBancoCbo
+            // 
+            this.cvBancoCbo.FormattingEnabled = true;
+            this.cvBancoCbo.Location = new System.Drawing.Point(34, 86);
+            this.cvBancoCbo.Name = "cvBancoCbo";
+            this.cvBancoCbo.Size = new System.Drawing.Size(156, 21);
+            this.cvBancoCbo.TabIndex = 10;
+            // 
+            // cvTipoValorCbo
+            // 
+            this.cvTipoValorCbo.FormattingEnabled = true;
+            this.cvTipoValorCbo.Location = new System.Drawing.Point(34, 37);
+            this.cvTipoValorCbo.Name = "cvTipoValorCbo";
+            this.cvTipoValorCbo.Size = new System.Drawing.Size(156, 21);
+            this.cvTipoValorCbo.TabIndex = 9;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(35, 169);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(26, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Cpa";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(257, 124);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(68, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Fecha Cobro";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(35, 124);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(76, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Fecha Emisión";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(335, 72);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "n° Cheque";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(216, 72);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(54, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "n° Cuenta";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(35, 72);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Banco";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(335, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Tipo Cambio";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(216, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Importe";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(35, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Tipo Valor";
+            // 
+            // AplicacionTab
+            // 
+            this.AplicacionTab.Controls.Add(this.ApBottonPnl);
+            this.AplicacionTab.Controls.Add(this.ApMainPnl);
+            this.AplicacionTab.Controls.Add(this.ApTopPnl);
+            this.AplicacionTab.Location = new System.Drawing.Point(4, 22);
+            this.AplicacionTab.Name = "AplicacionTab";
+            this.AplicacionTab.Padding = new System.Windows.Forms.Padding(3);
+            this.AplicacionTab.Size = new System.Drawing.Size(745, 338);
+            this.AplicacionTab.TabIndex = 2;
+            this.AplicacionTab.Text = "Aplicación";
+            this.AplicacionTab.UseVisualStyleBackColor = true;
+            // 
+            // ApBottonPnl
+            // 
+            this.ApBottonPnl.Controls.Add(this.apTotalPercepcionLbl);
+            this.ApBottonPnl.Controls.Add(this.apTotalAplicacionLbl);
+            this.ApBottonPnl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ApBottonPnl.Location = new System.Drawing.Point(3, 282);
+            this.ApBottonPnl.Name = "ApBottonPnl";
+            this.ApBottonPnl.Size = new System.Drawing.Size(739, 53);
+            this.ApBottonPnl.TabIndex = 2;
+            // 
+            // apTotalPercepcionLbl
+            // 
+            this.apTotalPercepcionLbl.AutoSize = true;
+            this.apTotalPercepcionLbl.Location = new System.Drawing.Point(194, 21);
+            this.apTotalPercepcionLbl.Name = "apTotalPercepcionLbl";
+            this.apTotalPercepcionLbl.Size = new System.Drawing.Size(126, 13);
+            this.apTotalPercepcionLbl.TabIndex = 1;
+            this.apTotalPercepcionLbl.Text = "Total Importe Percepción";
+            // 
+            // apTotalAplicacionLbl
+            // 
+            this.apTotalAplicacionLbl.AutoSize = true;
+            this.apTotalAplicacionLbl.Location = new System.Drawing.Point(63, 21);
+            this.apTotalAplicacionLbl.Name = "apTotalAplicacionLbl";
+            this.apTotalAplicacionLbl.Size = new System.Drawing.Size(121, 13);
+            this.apTotalAplicacionLbl.TabIndex = 0;
+            this.apTotalAplicacionLbl.Text = "Total Importe Aplicación";
+            // 
+            // ApMainPnl
+            // 
+            this.ApMainPnl.Controls.Add(this.apDataGridView);
+            this.ApMainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ApMainPnl.Location = new System.Drawing.Point(3, 56);
+            this.ApMainPnl.Name = "ApMainPnl";
+            this.ApMainPnl.Size = new System.Drawing.Size(739, 279);
+            this.ApMainPnl.TabIndex = 1;
+            // 
+            // apDataGridView
+            // 
+            this.apDataGridView.AllowUserToAddRows = false;
+            this.apDataGridView.AllowUserToDeleteRows = false;
+            this.apDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.apDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.apDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.apDataGridView.Name = "apDataGridView";
+            this.apDataGridView.ReadOnly = true;
+            this.apDataGridView.Size = new System.Drawing.Size(739, 279);
+            this.apDataGridView.TabIndex = 0;
             // 
             // ApTopPnl
             // 
@@ -546,42 +568,35 @@
             this.ApTopPnl.Size = new System.Drawing.Size(739, 53);
             this.ApTopPnl.TabIndex = 0;
             // 
-            // ApMainPnl
+            // apAgregarBtn
             // 
-            this.ApMainPnl.Controls.Add(this.apDataGridView);
-            this.ApMainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ApMainPnl.Location = new System.Drawing.Point(3, 56);
-            this.ApMainPnl.Name = "ApMainPnl";
-            this.ApMainPnl.Size = new System.Drawing.Size(739, 279);
-            this.ApMainPnl.TabIndex = 1;
+            this.apAgregarBtn.Location = new System.Drawing.Point(431, 20);
+            this.apAgregarBtn.Name = "apAgregarBtn";
+            this.apAgregarBtn.Size = new System.Drawing.Size(75, 23);
+            this.apAgregarBtn.TabIndex = 6;
+            this.apAgregarBtn.Text = "Agregar";
+            this.apAgregarBtn.UseVisualStyleBackColor = true;
             // 
-            // ApBottonPnl
+            // apPercepcionTxt
             // 
-            this.ApBottonPnl.Controls.Add(this.apTotalPercepcionLbl);
-            this.ApBottonPnl.Controls.Add(this.apTotalAplicacionLbl);
-            this.ApBottonPnl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ApBottonPnl.Location = new System.Drawing.Point(3, 282);
-            this.ApBottonPnl.Name = "ApBottonPnl";
-            this.ApBottonPnl.Size = new System.Drawing.Size(739, 53);
-            this.ApBottonPnl.TabIndex = 2;
+            this.apPercepcionTxt.Location = new System.Drawing.Point(280, 21);
+            this.apPercepcionTxt.Name = "apPercepcionTxt";
+            this.apPercepcionTxt.Size = new System.Drawing.Size(100, 20);
+            this.apPercepcionTxt.TabIndex = 5;
             // 
-            // label10
+            // apImporteTxt
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(30, 5);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 13);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Concepto";
+            this.apImporteTxt.Location = new System.Drawing.Point(151, 21);
+            this.apImporteTxt.Name = "apImporteTxt";
+            this.apImporteTxt.Size = new System.Drawing.Size(100, 20);
+            this.apImporteTxt.TabIndex = 4;
             // 
-            // label11
+            // apConceptoTxt
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(148, 5);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(42, 13);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Importe";
+            this.apConceptoTxt.Location = new System.Drawing.Point(33, 21);
+            this.apConceptoTxt.Name = "apConceptoTxt";
+            this.apConceptoTxt.Size = new System.Drawing.Size(100, 20);
+            this.apConceptoTxt.TabIndex = 3;
             // 
             // label12
             // 
@@ -592,83 +607,57 @@
             this.label12.TabIndex = 2;
             this.label12.Text = "Percepción";
             // 
-            // apConceptoTxt
+            // label11
             // 
-            this.apConceptoTxt.Location = new System.Drawing.Point(33, 21);
-            this.apConceptoTxt.Name = "apConceptoTxt";
-            this.apConceptoTxt.Size = new System.Drawing.Size(100, 20);
-            this.apConceptoTxt.TabIndex = 3;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(148, 5);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(42, 13);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Importe";
             // 
-            // apImporteTxt
+            // label10
             // 
-            this.apImporteTxt.Location = new System.Drawing.Point(151, 21);
-            this.apImporteTxt.Name = "apImporteTxt";
-            this.apImporteTxt.Size = new System.Drawing.Size(100, 20);
-            this.apImporteTxt.TabIndex = 4;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(30, 5);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(53, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Concepto";
             // 
-            // apPercepcionTxt
+            // ADeducirTab
             // 
-            this.apPercepcionTxt.Location = new System.Drawing.Point(280, 21);
-            this.apPercepcionTxt.Name = "apPercepcionTxt";
-            this.apPercepcionTxt.Size = new System.Drawing.Size(100, 20);
-            this.apPercepcionTxt.TabIndex = 5;
+            this.ADeducirTab.Controls.Add(this.adMainPnl);
+            this.ADeducirTab.Controls.Add(this.adTopPnl);
+            this.ADeducirTab.Controls.Add(this.adBottonPnl);
+            this.ADeducirTab.Location = new System.Drawing.Point(4, 22);
+            this.ADeducirTab.Name = "ADeducirTab";
+            this.ADeducirTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ADeducirTab.Size = new System.Drawing.Size(745, 338);
+            this.ADeducirTab.TabIndex = 3;
+            this.ADeducirTab.Text = "A Deducir";
+            this.ADeducirTab.UseVisualStyleBackColor = true;
             // 
-            // apAgregarBtn
+            // adMainPnl
             // 
-            this.apAgregarBtn.Location = new System.Drawing.Point(431, 20);
-            this.apAgregarBtn.Name = "apAgregarBtn";
-            this.apAgregarBtn.Size = new System.Drawing.Size(75, 23);
-            this.apAgregarBtn.TabIndex = 6;
-            this.apAgregarBtn.Text = "Agregar";
-            this.apAgregarBtn.UseVisualStyleBackColor = true;
+            this.adMainPnl.Controls.Add(this.adDataGridView);
+            this.adMainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.adMainPnl.Location = new System.Drawing.Point(3, 56);
+            this.adMainPnl.Name = "adMainPnl";
+            this.adMainPnl.Size = new System.Drawing.Size(739, 226);
+            this.adMainPnl.TabIndex = 5;
             // 
-            // apTotalAplicacionLbl
+            // adDataGridView
             // 
-            this.apTotalAplicacionLbl.AutoSize = true;
-            this.apTotalAplicacionLbl.Location = new System.Drawing.Point(63, 21);
-            this.apTotalAplicacionLbl.Name = "apTotalAplicacionLbl";
-            this.apTotalAplicacionLbl.Size = new System.Drawing.Size(121, 13);
-            this.apTotalAplicacionLbl.TabIndex = 0;
-            this.apTotalAplicacionLbl.Text = "Total Importe Aplicación";
-            // 
-            // apTotalPercepcionLbl
-            // 
-            this.apTotalPercepcionLbl.AutoSize = true;
-            this.apTotalPercepcionLbl.Location = new System.Drawing.Point(194, 21);
-            this.apTotalPercepcionLbl.Name = "apTotalPercepcionLbl";
-            this.apTotalPercepcionLbl.Size = new System.Drawing.Size(126, 13);
-            this.apTotalPercepcionLbl.TabIndex = 1;
-            this.apTotalPercepcionLbl.Text = "Total Importe Percepción";
-            // 
-            // apDataGridView
-            // 
-            this.apDataGridView.AllowUserToAddRows = false;
-            this.apDataGridView.AllowUserToDeleteRows = false;
-            this.apDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.apDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.apDataGridView.Location = new System.Drawing.Point(0, 0);
-            this.apDataGridView.Name = "apDataGridView";
-            this.apDataGridView.ReadOnly = true;
-            this.apDataGridView.Size = new System.Drawing.Size(739, 279);
-            this.apDataGridView.TabIndex = 0;
-            // 
-            // adBottonPnl
-            // 
-            this.adBottonPnl.Controls.Add(this.adTotalDeducirLbl);
-            this.adBottonPnl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.adBottonPnl.Location = new System.Drawing.Point(3, 282);
-            this.adBottonPnl.Name = "adBottonPnl";
-            this.adBottonPnl.Size = new System.Drawing.Size(739, 53);
-            this.adBottonPnl.TabIndex = 3;
-            // 
-            // adTotalDeducirLbl
-            // 
-            this.adTotalDeducirLbl.AutoSize = true;
-            this.adTotalDeducirLbl.Location = new System.Drawing.Point(63, 21);
-            this.adTotalDeducirLbl.Name = "adTotalDeducirLbl";
-            this.adTotalDeducirLbl.Size = new System.Drawing.Size(118, 13);
-            this.adTotalDeducirLbl.TabIndex = 0;
-            this.adTotalDeducirLbl.Text = "Total Importe a Deducir";
+            this.adDataGridView.AllowUserToAddRows = false;
+            this.adDataGridView.AllowUserToDeleteRows = false;
+            this.adDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.adDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.adDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.adDataGridView.Name = "adDataGridView";
+            this.adDataGridView.ReadOnly = true;
+            this.adDataGridView.Size = new System.Drawing.Size(739, 226);
+            this.adDataGridView.TabIndex = 0;
             // 
             // adTopPnl
             // 
@@ -685,6 +674,35 @@
             this.adTopPnl.Name = "adTopPnl";
             this.adTopPnl.Size = new System.Drawing.Size(739, 53);
             this.adTopPnl.TabIndex = 4;
+            // 
+            // adAplicarRestoCb
+            // 
+            this.adAplicarRestoCb.AutoSize = true;
+            this.adAplicarRestoCb.Location = new System.Drawing.Point(305, 21);
+            this.adAplicarRestoCb.Name = "adAplicarRestoCb";
+            this.adAplicarRestoCb.Size = new System.Drawing.Size(98, 17);
+            this.adAplicarRestoCb.TabIndex = 20;
+            this.adAplicarRestoCb.Text = "Apicar al Resto";
+            this.adAplicarRestoCb.UseVisualStyleBackColor = true;
+            // 
+            // adPorcentajeCb
+            // 
+            this.adPorcentajeCb.AutoSize = true;
+            this.adPorcentajeCb.Location = new System.Drawing.Point(265, 21);
+            this.adPorcentajeCb.Name = "adPorcentajeCb";
+            this.adPorcentajeCb.Size = new System.Drawing.Size(34, 17);
+            this.adPorcentajeCb.TabIndex = 19;
+            this.adPorcentajeCb.Text = "%";
+            this.adPorcentajeCb.UseVisualStyleBackColor = true;
+            // 
+            // adCascaraBtn
+            // 
+            this.adCascaraBtn.Location = new System.Drawing.Point(512, 18);
+            this.adCascaraBtn.Name = "adCascaraBtn";
+            this.adCascaraBtn.Size = new System.Drawing.Size(75, 23);
+            this.adCascaraBtn.TabIndex = 7;
+            this.adCascaraBtn.Text = "Cascara";
+            this.adCascaraBtn.UseVisualStyleBackColor = true;
             // 
             // adAgregarBtn
             // 
@@ -727,55 +745,101 @@
             this.label19.TabIndex = 0;
             this.label19.Text = "Concepto";
             // 
-            // adMainPnl
+            // adBottonPnl
             // 
-            this.adMainPnl.Controls.Add(this.adDataGridView);
-            this.adMainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.adMainPnl.Location = new System.Drawing.Point(3, 56);
-            this.adMainPnl.Name = "adMainPnl";
-            this.adMainPnl.Size = new System.Drawing.Size(739, 226);
-            this.adMainPnl.TabIndex = 5;
+            this.adBottonPnl.Controls.Add(this.adTotalDeducirLbl);
+            this.adBottonPnl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.adBottonPnl.Location = new System.Drawing.Point(3, 282);
+            this.adBottonPnl.Name = "adBottonPnl";
+            this.adBottonPnl.Size = new System.Drawing.Size(739, 53);
+            this.adBottonPnl.TabIndex = 3;
             // 
-            // adDataGridView
+            // adTotalDeducirLbl
             // 
-            this.adDataGridView.AllowUserToAddRows = false;
-            this.adDataGridView.AllowUserToDeleteRows = false;
-            this.adDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.adDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.adDataGridView.Location = new System.Drawing.Point(0, 0);
-            this.adDataGridView.Name = "adDataGridView";
-            this.adDataGridView.ReadOnly = true;
-            this.adDataGridView.Size = new System.Drawing.Size(739, 226);
-            this.adDataGridView.TabIndex = 0;
+            this.adTotalDeducirLbl.AutoSize = true;
+            this.adTotalDeducirLbl.Location = new System.Drawing.Point(63, 21);
+            this.adTotalDeducirLbl.Name = "adTotalDeducirLbl";
+            this.adTotalDeducirLbl.Size = new System.Drawing.Size(118, 13);
+            this.adTotalDeducirLbl.TabIndex = 0;
+            this.adTotalDeducirLbl.Text = "Total Importe a Deducir";
             // 
-            // adCascaraBtn
+            // CtaCteTab
             // 
-            this.adCascaraBtn.Location = new System.Drawing.Point(512, 18);
-            this.adCascaraBtn.Name = "adCascaraBtn";
-            this.adCascaraBtn.Size = new System.Drawing.Size(75, 23);
-            this.adCascaraBtn.TabIndex = 7;
-            this.adCascaraBtn.Text = "Cascara";
-            this.adCascaraBtn.UseVisualStyleBackColor = true;
+            this.CtaCteTab.Controls.Add(this.ccBottonPnl);
+            this.CtaCteTab.Controls.Add(this.ccMainPnl);
+            this.CtaCteTab.Location = new System.Drawing.Point(4, 22);
+            this.CtaCteTab.Name = "CtaCteTab";
+            this.CtaCteTab.Padding = new System.Windows.Forms.Padding(3);
+            this.CtaCteTab.Size = new System.Drawing.Size(745, 338);
+            this.CtaCteTab.TabIndex = 4;
+            this.CtaCteTab.Text = "Cta. Cte.";
+            this.CtaCteTab.UseVisualStyleBackColor = true;
             // 
-            // adAplicarRestoCb
+            // statusStrip1
             // 
-            this.adAplicarRestoCb.AutoSize = true;
-            this.adAplicarRestoCb.Location = new System.Drawing.Point(305, 21);
-            this.adAplicarRestoCb.Name = "adAplicarRestoCb";
-            this.adAplicarRestoCb.Size = new System.Drawing.Size(98, 17);
-            this.adAplicarRestoCb.TabIndex = 20;
-            this.adAplicarRestoCb.Text = "Apicar al Resto";
-            this.adAplicarRestoCb.UseVisualStyleBackColor = true;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 389);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(753, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // adPorcentajeCb
+            // toolStripStatusLabel1
             // 
-            this.adPorcentajeCb.AutoSize = true;
-            this.adPorcentajeCb.Location = new System.Drawing.Point(265, 21);
-            this.adPorcentajeCb.Name = "adPorcentajeCb";
-            this.adPorcentajeCb.Size = new System.Drawing.Size(34, 17);
-            this.adPorcentajeCb.TabIndex = 19;
-            this.adPorcentajeCb.Text = "%";
-            this.adPorcentajeCb.UseVisualStyleBackColor = true;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // cboCliente
+            // 
+            this.cboCliente.Margin = new System.Windows.Forms.Padding(1, 0, 5, 0);
+            this.cboCliente.Name = "cboCliente";
+            this.cboCliente.Size = new System.Drawing.Size(221, 25);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // ccMainPnl
+            // 
+            this.ccMainPnl.Controls.Add(this.dataGridView1);
+            this.ccMainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ccMainPnl.Location = new System.Drawing.Point(3, 3);
+            this.ccMainPnl.Name = "ccMainPnl";
+            this.ccMainPnl.Size = new System.Drawing.Size(739, 332);
+            this.ccMainPnl.TabIndex = 0;
+            // 
+            // ccBottonPnl
+            // 
+            this.ccBottonPnl.Controls.Add(this.ccCtaCteActualizadaFechaLbl);
+            this.ccBottonPnl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ccBottonPnl.Location = new System.Drawing.Point(3, 301);
+            this.ccBottonPnl.Name = "ccBottonPnl";
+            this.ccBottonPnl.Size = new System.Drawing.Size(739, 34);
+            this.ccBottonPnl.TabIndex = 1;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(739, 332);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // ccCtaCteActualizadaFechaLbl
+            // 
+            this.ccCtaCteActualizadaFechaLbl.AutoSize = true;
+            this.ccCtaCteActualizadaFechaLbl.Location = new System.Drawing.Point(5, 9);
+            this.ccCtaCteActualizadaFechaLbl.Name = "ccCtaCteActualizadaFechaLbl";
+            this.ccCtaCteActualizadaFechaLbl.Size = new System.Drawing.Size(128, 13);
+            this.ccCtaCteActualizadaFechaLbl.TabIndex = 0;
+            this.ccCtaCteActualizadaFechaLbl.Text = "Cta. Cte. actualizada al ...";
             // 
             // fRecibo
             // 
@@ -798,24 +862,29 @@
             this.raTopPnl.ResumeLayout(false);
             this.raTopPnl.PerformLayout();
             this.CargaValoresTab.ResumeLayout(false);
-            this.AplicacionTab.ResumeLayout(false);
-            this.ADeducirTab.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.CargaValoresPnl.ResumeLayout(false);
             this.CargaValoresPnl.PerformLayout();
-            this.ApTopPnl.ResumeLayout(false);
-            this.ApTopPnl.PerformLayout();
-            this.ApMainPnl.ResumeLayout(false);
+            this.AplicacionTab.ResumeLayout(false);
             this.ApBottonPnl.ResumeLayout(false);
             this.ApBottonPnl.PerformLayout();
+            this.ApMainPnl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.apDataGridView)).EndInit();
-            this.adBottonPnl.ResumeLayout(false);
-            this.adBottonPnl.PerformLayout();
-            this.adTopPnl.ResumeLayout(false);
-            this.adTopPnl.PerformLayout();
+            this.ApTopPnl.ResumeLayout(false);
+            this.ApTopPnl.PerformLayout();
+            this.ADeducirTab.ResumeLayout(false);
             this.adMainPnl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.adDataGridView)).EndInit();
+            this.adTopPnl.ResumeLayout(false);
+            this.adTopPnl.PerformLayout();
+            this.adBottonPnl.ResumeLayout(false);
+            this.adBottonPnl.PerformLayout();
+            this.CtaCteTab.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.ccMainPnl.ResumeLayout(false);
+            this.ccBottonPnl.ResumeLayout(false);
+            this.ccBottonPnl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -891,5 +960,11 @@
         private System.Windows.Forms.Button adCascaraBtn;
         private System.Windows.Forms.CheckBox adAplicarRestoCb;
         private System.Windows.Forms.CheckBox adPorcentajeCb;
+        private System.Windows.Forms.ToolStripComboBox cboCliente;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Panel ccBottonPnl;
+        private System.Windows.Forms.Label ccCtaCteActualizadaFechaLbl;
+        private System.Windows.Forms.Panel ccMainPnl;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

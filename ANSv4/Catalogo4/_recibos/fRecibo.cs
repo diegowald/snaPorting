@@ -11,9 +11,13 @@ namespace Catalogo._recibos
 {
     public partial class fRecibo : Form
     {
+        private string strSQLCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Catalogo ANS\\datos\\catalogo.mdb;Persist Security Info=True;Password=video80min;User ID=inVent;Jet OLEDB:System database=C:\\Windows\\Help\\kbappcat.hlp";
+
         public fRecibo()
         {
             InitializeComponent();
+            //Catalogo.Funciones.util.CargarComboDR(cboCliente, "v_CtaCte", "id", "nombre", strSQLCon,"ALL","NONE",false,false);
+           
         }
 
 
