@@ -70,11 +70,12 @@
     </ApplicationDefinition>
     <Compile Include="util\adoModulo.cs" />
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
-    <Compile Include="util\emitter-receiver\Emisor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="util\emitter-receiver\IEmisor.cs" />
     <Compile Include="util\emitter-receiver\IReceptor.cs" />
     <Compile Include="util\ModINIs.cs" />
+    <Compile Include="_productos\DetalleProducto.xaml.cs">
+      <DependentUpon>DetalleProducto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="_productos\SearchFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,6 +104,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="_productos\DetalleProducto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="_recibos\frmRecibo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
