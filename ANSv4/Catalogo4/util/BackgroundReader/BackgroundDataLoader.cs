@@ -18,6 +18,8 @@ namespace Catalogo.util.BackgroundReader
         string sqlCommand;
         string strConnection;
 
+        private bool cancellationByNewExecution = false;
+
         public BackgroundDataLoader(JOB_TYPE jobType, string strConnection)
         {
             sqlCommand = "";
@@ -48,7 +50,9 @@ namespace Catalogo.util.BackgroundReader
             {
                 if (worker.IsBusy)
                 {
+                    cancellationByNewExecution = true;
                     worker.CancelAsync();
+                    return;
                 }
                 worker.RunWorkerAsync();
             }
@@ -74,6 +78,15 @@ namespace Catalogo.util.BackgroundReader
 
         void worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
+            if (e.Cancelled)
+            {
+                if (cancellationByNewExecution)
+                {
+                    cancellationByNewExecution = false;
+                    worker.RunWorkerAsync();
+                    return;
+                }
+            }
             if (onWorkFinishedHandler != null)
             {
                 onWorkFinishedHandler(dataTable);
