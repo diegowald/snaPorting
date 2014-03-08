@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="EnviarDevolucion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NroDevolucion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CodCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Fecha" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Observaciones" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Detalle" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarDevolucionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EnviarDevolucionResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EnviarDevolucionSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarDevolucion" />
+  </wsdl:message>
+  <wsdl:message name="EnviarDevolucionSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarDevolucionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DevolucionSoap">
+    <wsdl:operation name="EnviarDevolucion">
+      <wsdl:input message="tns:EnviarDevolucionSoapIn" />
+      <wsdl:output message="tns:EnviarDevolucionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DevolucionSoap" type="tns:DevolucionSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EnviarDevolucion">
+      <soap:operation soapAction="http://tempuri.org/EnviarDevolucion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DevolucionSoap12" type="tns:DevolucionSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EnviarDevolucion">
+      <soap12:operation soapAction="http://tempuri.org/EnviarDevolucion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Devolucion">
+    <wsdl:port name="DevolucionSoap" binding="tns:DevolucionSoap">
+      <soap:address location="http://190.3.78.12/wsCatalogo3/Devolucion.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DevolucionSoap12" binding="tns:DevolucionSoap12">
+      <soap12:address location="http://190.3.78.12/wsCatalogo3/Devolucion.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

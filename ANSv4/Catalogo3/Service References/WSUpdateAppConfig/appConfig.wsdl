@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ObtenerListaPrecioV2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Cuit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDAns" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerListaPrecioV2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerListaPrecioV2Result" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TenerQueEnviarInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TenerQueEnviarInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TenerQueEnviarInfoResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Cuit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RazonSocial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ApellidoNombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Domicilio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Telefono" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Ciudad" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDAns" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AppCaduca" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dbCaduca" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Pin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FechaUltimoAcceso" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Mensaje" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EnviarAuditoria" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Url" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Modem" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Version" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Build" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ListaPrecio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Auditor" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EnviarInfoResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerInfoDS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerInfoDSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerInfoDSResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerComandosDS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerComandosDSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerComandosDSResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerComandos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerComandosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerComandosResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SincronizacionAppConfigCompletada">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SincronizacionAppConfigCompletadaResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ObtenerListaPrecioV2SoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerListaPrecioV2" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaPrecioV2SoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerListaPrecioV2Response" />
+  </wsdl:message>
+  <wsdl:message name="TenerQueEnviarInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:TenerQueEnviarInfo" />
+  </wsdl:message>
+  <wsdl:message name="TenerQueEnviarInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:TenerQueEnviarInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EnviarInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarInfo" />
+  </wsdl:message>
+  <wsdl:message name="EnviarInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerInfoDSSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerInfoDS" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerInfoDSSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerInfoDSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerInfo" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerComandosDSSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerComandosDS" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerComandosDSSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerComandosDSResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerComandosSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerComandos" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerComandosSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerComandosResponse" />
+  </wsdl:message>
+  <wsdl:message name="SincronizacionAppConfigCompletadaSoapIn">
+    <wsdl:part name="parameters" element="tns:SincronizacionAppConfigCompletada" />
+  </wsdl:message>
+  <wsdl:message name="SincronizacionAppConfigCompletadaSoapOut">
+    <wsdl:part name="parameters" element="tns:SincronizacionAppConfigCompletadaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="appConfigSoap">
+    <wsdl:operation name="ObtenerListaPrecioV2">
+      <wsdl:input message="tns:ObtenerListaPrecioV2SoapIn" />
+      <wsdl:output message="tns:ObtenerListaPrecioV2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TenerQueEnviarInfo">
+      <wsdl:input message="tns:TenerQueEnviarInfoSoapIn" />
+      <wsdl:output message="tns:TenerQueEnviarInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviarInfo">
+      <wsdl:input message="tns:EnviarInfoSoapIn" />
+      <wsdl:output message="tns:EnviarInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerInfoDS">
+      <wsdl:input message="tns:ObtenerInfoDSSoapIn" />
+      <wsdl:output message="tns:ObtenerInfoDSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerInfo">
+      <wsdl:input message="tns:ObtenerInfoSoapIn" />
+      <wsdl:output message="tns:ObtenerInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComandosDS">
+      <wsdl:input message="tns:ObtenerComandosDSSoapIn" />
+      <wsdl:output message="tns:ObtenerComandosDSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComandos">
+      <wsdl:input message="tns:ObtenerComandosSoapIn" />
+      <wsdl:output message="tns:ObtenerComandosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SincronizacionAppConfigCompletada">
+      <wsdl:input message="tns:SincronizacionAppConfigCompletadaSoapIn" />
+      <wsdl:output message="tns:SincronizacionAppConfigCompletadaSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="appConfigSoap" type="tns:appConfigSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerListaPrecioV2">
+      <soap:operation soapAction="http://tempuri.org/ObtenerListaPrecioV2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TenerQueEnviarInfo">
+      <soap:operation soapAction="http://tempuri.org/TenerQueEnviarInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarInfo">
+      <soap:operation soapAction="http://tempuri.org/EnviarInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerInfoDS">
+      <soap:operation soapAction="http://tempuri.org/ObtenerInfoDS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerInfo">
+      <soap:operation soapAction="http://tempuri.org/ObtenerInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComandosDS">
+      <soap:operation soapAction="http://tempuri.org/ObtenerComandosDS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComandos">
+      <soap:operation soapAction="http://tempuri.org/ObtenerComandos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SincronizacionAppConfigCompletada">
+      <soap:operation soapAction="http://tempuri.org/SincronizacionAppConfigCompletada" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="appConfigSoap12" type="tns:appConfigSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerListaPrecioV2">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerListaPrecioV2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TenerQueEnviarInfo">
+      <soap12:operation soapAction="http://tempuri.org/TenerQueEnviarInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviarInfo">
+      <soap12:operation soapAction="http://tempuri.org/EnviarInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerInfoDS">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerInfoDS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerInfo">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComandosDS">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerComandosDS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerComandos">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerComandos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SincronizacionAppConfigCompletada">
+      <soap12:operation soapAction="http://tempuri.org/SincronizacionAppConfigCompletada" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="appConfig">
+    <wsdl:port name="appConfigSoap" binding="tns:appConfigSoap">
+      <soap:address location="http://190.3.78.12/wsCatalogo3/appConfig.asmx" />
+    </wsdl:port>
+    <wsdl:port name="appConfigSoap12" binding="tns:appConfigSoap12">
+      <soap12:address location="http://190.3.78.12/wsCatalogo3/appConfig.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

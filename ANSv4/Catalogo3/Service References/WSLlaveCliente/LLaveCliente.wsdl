@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ObtenerListaPrecio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Cuit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDAns" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerListaPrecioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerListaPrecioResult" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerEstadoActual">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Cuit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDAns" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerEstadoActualResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerEstadoActualResult" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerLLaveViajante">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdViajante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerLLaveViajanteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerLLaveViajanteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerLLaveCatalogo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Cuit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDAns" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDViajante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerLLaveCatalogoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ObtenerLLaveCatalogoResult" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ObtenerListaPrecioSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerListaPrecio" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerListaPrecioSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerListaPrecioResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerEstadoActualSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerEstadoActual" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerEstadoActualSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerEstadoActualResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerLLaveViajanteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerLLaveViajante" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerLLaveViajanteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerLLaveViajanteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerLLaveCatalogoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerLLaveCatalogo" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerLLaveCatalogoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerLLaveCatalogoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LLaveClienteSoap">
+    <wsdl:operation name="ObtenerListaPrecio">
+      <wsdl:input message="tns:ObtenerListaPrecioSoapIn" />
+      <wsdl:output message="tns:ObtenerListaPrecioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstadoActual">
+      <wsdl:input message="tns:ObtenerEstadoActualSoapIn" />
+      <wsdl:output message="tns:ObtenerEstadoActualSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerLLaveViajante">
+      <wsdl:input message="tns:ObtenerLLaveViajanteSoapIn" />
+      <wsdl:output message="tns:ObtenerLLaveViajanteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerLLaveCatalogo">
+      <wsdl:input message="tns:ObtenerLLaveCatalogoSoapIn" />
+      <wsdl:output message="tns:ObtenerLLaveCatalogoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LLaveClienteSoap" type="tns:LLaveClienteSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerListaPrecio">
+      <soap:operation soapAction="http://tempuri.org/ObtenerListaPrecio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstadoActual">
+      <soap:operation soapAction="http://tempuri.org/ObtenerEstadoActual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerLLaveViajante">
+      <soap:operation soapAction="http://tempuri.org/ObtenerLLaveViajante" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerLLaveCatalogo">
+      <soap:operation soapAction="http://tempuri.org/ObtenerLLaveCatalogo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LLaveClienteSoap12" type="tns:LLaveClienteSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerListaPrecio">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerListaPrecio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerEstadoActual">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerEstadoActual" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerLLaveViajante">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerLLaveViajante" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerLLaveCatalogo">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerLLaveCatalogo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LLaveCliente">
+    <wsdl:port name="LLaveClienteSoap" binding="tns:LLaveClienteSoap">
+      <soap:address location="http://190.3.78.12/wsCatalogo3/LLaveCliente.asmx" />
+    </wsdl:port>
+    <wsdl:port name="LLaveClienteSoap12" binding="tns:LLaveClienteSoap12">
+      <soap12:address location="http://190.3.78.12/wsCatalogo3/LLaveCliente.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
