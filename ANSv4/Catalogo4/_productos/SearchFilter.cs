@@ -7,10 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using Catalogo.util.emitter_receiver;
+
 
 namespace Catalogo._productos
 {
-    public partial class SearchFilter : UserControl
+    public partial class SearchFilter : UserControl, util.emitter_receiver.IEmisor<string>
     {
 
 
@@ -216,5 +218,22 @@ namespace Catalogo._productos
             };
         }
 
+        emisorHandler<string> _emisor;
+        public emisorHandler<string> emisor
+        {
+            get
+            {
+                return _emisor;
+            }
+            set
+            {
+                _emisor = value;
+            }
+        }
+
+        private void btnApply0_Click(object sender, EventArgs e)
+        {
+            this.emitir(filterString);
+        }
     }
 }

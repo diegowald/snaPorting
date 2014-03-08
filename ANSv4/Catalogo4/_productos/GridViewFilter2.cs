@@ -10,7 +10,7 @@ using System.Data.OleDb;
 
 namespace Catalogo._productos
 {
-    public partial class GridViewFilter2 : UserControl
+    public partial class GridViewFilter2 : UserControl, util.emitter_receiver.IReceptor<string>
     {
 
 
@@ -125,8 +125,7 @@ namespace Catalogo._productos
             // Load the DataGridView
             loadDataGridView();
             // Load the Combo Filters
-            SetFilters();
-
+          
             Cursor.Current = Cursors.Default;
         }
 
@@ -291,31 +290,31 @@ namespace Catalogo._productos
             dvProducts.RowFilter = filterString;
 
 
-            if (!(txtPorcentajeLinea.Text==""))
-                if  (Convert.ToDecimal("0"+txtPorcentajeLinea.Text) != 0)
-                {
-                    xAplicoPorcentajeLinea = true;
+            //if (!(txtPorcentajeLinea.Text==""))
+            //    if  (Convert.ToDecimal("0"+txtPorcentajeLinea.Text) != 0)
+            //    {
+            //        xAplicoPorcentajeLinea = true;
 
-                    foreach (DataRowView drv in dvProducts)
-                    {
-                        drv["Precio"] = (float)drv["PrecioLista"] + ((float)(drv["PrecioLista"]) * float.Parse(txtPorcentajeLinea.Text)) / 100;
-                    };
-                }
-                else
-                {
-                    if (xAplicoPorcentajeLinea)
-                    {
-                        xAplicoPorcentajeLinea = false;
-                        foreach (DataRowView drv in dvProducts)
-                        {
-                            drv["Precio"] = drv["PrecioLista"];
-                        };
-                    };
-                }
-            else
-            {
-                txtPorcentajeLinea.Text = "0";
-            };
+            //        foreach (DataRowView drv in dvProducts)
+            //        {
+            //            drv["Precio"] = (float)drv["PrecioLista"] + ((float)(drv["PrecioLista"]) * float.Parse(txtPorcentajeLinea.Text)) / 100;
+            //        };
+            //    }
+            //    else
+            //    {
+            //        if (xAplicoPorcentajeLinea)
+            //        {
+            //            xAplicoPorcentajeLinea = false;
+            //            foreach (DataRowView drv in dvProducts)
+            //            {
+            //                drv["Precio"] = drv["PrecioLista"];
+            //            };
+            //        };
+            //    }
+            //else
+            //{
+            //    txtPorcentajeLinea.Text = "0";
+            //};
 
 
             // Bind Datagrid view to the DataView
@@ -323,191 +322,35 @@ namespace Catalogo._productos
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
             // Show the counts in the toolstrip
-            showItemCounts();
+            //showItemCounts();
         }
 
-        private void SetFilters()
-        {
-            // Load the dropdowns
-            // Note: you will want to call this function any time you have added or deleted
-            //       rows in the datatable
+        //private void showItemCounts()
+        //{
 
-            FilterBuilder fb = new FilterBuilder();
-
-            if (cboLinea.Items.Count < 1)
-            {
-                fb.PopulateFilter(ref Filter_Linea, dtProducts, "Linea");
-                String[] filterProductArray = new String[Filter_Linea.Count];
-                Filter_Linea.Keys.CopyTo(filterProductArray, 0);
-                cboLinea.Items.Clear();
-                cboLinea.Items.AddRange(filterProductArray);
-                cboLinea.SelectedIndex = 0;
-            };
-
-            if (cboFamilia.Items.Count < 1)
-            {
-                fb.PopulateFilter(ref Filter_Familia, dtProducts, "Familia");
-                String[] filterCatagoryArray = new String[Filter_Familia.Count];
-                Filter_Familia.Keys.CopyTo(filterCatagoryArray, 0);
-                cboFamilia.Items.Clear();
-                cboFamilia.Items.AddRange(filterCatagoryArray);
-                cboFamilia.SelectedIndex = 0;
-            };
-
-            if (cboMarca.Items.Count < 1)
-            {
-                fb.PopulateFilter(ref Filter_Marca, dtProducts, "Marca");
-                String[] filterQuantityArray = new String[Filter_Marca.Count];
-                Filter_Marca.Keys.CopyTo(filterQuantityArray, 0);
-                cboMarca.Items.Clear();
-                cboMarca.Items.AddRange(filterQuantityArray);
-                cboMarca.SelectedIndex = 0;
-            };
-
-            cboOtros.SelectedIndex = 0;
-
-            //if (cboModelo.Items.Count < 1)
-            //{
-            //    fb.PopulateFilter(ref Filter_Modelo, dtProducts, "Modelo");
-            //    String[] filterPriceArray = new String[Filter_Modelo.Count];
-            //    Filter_Modelo.Keys.CopyTo(filterPriceArray, 0);
-            //    cboModelo.Items.Clear();
-            //    cboModelo.Items.AddRange(filterPriceArray);
-            //    cboModelo.SelectedIndex = 0;
-
-            //};
-
-        }
-
-        private void showItemCounts()
-        {
-
-            string _filterMsg = String.Format("#Prod. {0} de {1}", currentRowCount, dataRowCount);
-            string _totalMsg = String.Format("#Prod. {0}", dataRowCount);
-            if (dataRowCount != currentRowCount)
-            {
-                tslItems.Text = _filterMsg;
-                tslItems.Visible = true;
-            }
-            else
-            {
-                if (dataRowCount > 0)
-                {
-                    tslItems.Text = _totalMsg;
-                    tslItems.Visible = true;
-                }
-                else
-                {
-                    tslItems.Visible = false;
-                }
-            }
-        }
+        //    string _filterMsg = String.Format("#Prod. {0} de {1}", currentRowCount, dataRowCount);
+        //    string _totalMsg = String.Format("#Prod. {0}", dataRowCount);
+        //    if (dataRowCount != currentRowCount)
+        //    {
+        //        tslItems.Text = _filterMsg;
+        //        tslItems.Visible = true;
+        //    }
+        //    else
+        //    {
+        //        if (dataRowCount > 0)
+        //        {
+        //            tslItems.Text = _totalMsg;
+        //            tslItems.Visible = true;
+        //        }
+        //        else
+        //        {
+        //            tslItems.Visible = false;
+        //        }
+        //    }
+        //}
 
 
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            xCargarDataControl();           
-        }
-
-        private void btnClearFilters_Click(object sender, EventArgs e)
-        {
-
-            if (dtProducts != null && dtProducts.Rows.Count > 0)
-            {
-                filterString = string.Empty;
-
-                if (cboLinea.Items.Count > 0) cboLinea.SelectedIndex = 0;
-                if (cboFamilia.Items.Count > 0) cboFamilia.SelectedIndex = 0;
-                if (cboMarca.Items.Count > 0) cboMarca.SelectedIndex = 0;
-                if (cboModelo.Items.Count > 0) cboModelo.SelectedIndex = 0;
-
-                cboOtros.SelectedIndex = 0;
-
-                loadDataGridView();
-            }
-        }
-
-        // Apply the filters
-        private void btnApply_Click(object sender, EventArgs e)
-        {
-
-            Cursor.Current = Cursors.WaitCursor;
-
-            if (dtProducts != null && dtProducts.Rows.Count > 0)
-            {
-                filterString = string.Empty;
-                FilterBuilder fb = new FilterBuilder();
-
-                fb.ApplyFilter(ref filterString, "Linea", cboLinea.SelectedItem.ToString());
-                fb.ApplyFilter(ref filterString, "Familia", cboFamilia.SelectedItem.ToString());
-                fb.ApplyFilter(ref filterString, "Marca", cboMarca.SelectedItem.ToString());
-                fb.ApplyFilter(ref filterString, "Modelo", cboModelo.SelectedItem.ToString());
-
-                string discontinuedValue = string.Empty;
-                string controlValue = string.Empty;
-
-                if (cboOtros.SelectedItem.ToString() == "(todos)") { controlValue = null; }
-
-                if (cboOtros.SelectedItem.ToString() == "Ofertas") { controlValue = "O"; }
-
-                if (!string.IsNullOrEmpty(controlValue))
-                {
-                    fb.ApplyFilter(ref filterString, "Control", controlValue);
-                }
-
-                if (!string.IsNullOrEmpty(txtBuscar.Text))
-                {
-                    fb.ApplyFilter(ref filterString, "(txtBuscar)", txtBuscar.Text.ToUpper());
-                }
-
-                if (cboOtros.SelectedItem.ToString() == "Nuevos")
-                {
-                    fb.ApplyFilter(ref filterString, "Vigencia", "30");
-                }
-
-                fb = null;
-                loadDataGridView();
-            }
-
-            Cursor.Current = Cursors.Default;
-      
-        }
-
-        private void cboMarca_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-            if (cboMarca.SelectedItem != null)
-            {
-
-                FilterBuilder fb = new FilterBuilder();
-
-                if (cboMarca.SelectedItem.ToString() != "(todos)")
-                {
-
-                    fb.PopulateFilter(ref Filter_Modelo, dtProducts, "_mm" + cboMarca.SelectedItem.ToString());
-                    String[] filterPriceArray = new String[Filter_Modelo.Count];
-                    Filter_Modelo.Keys.CopyTo(filterPriceArray, 0);
-                    cboModelo.Items.Clear();
-                    cboModelo.Items.AddRange(filterPriceArray);
-                    cboModelo.SelectedIndex = 0;
-
-                }
-                else
-                {
-                    fb.PopulateFilter(ref Filter_Modelo, dtProducts, "Modelo");
-                    String[] filterPriceArray = new String[Filter_Modelo.Count];
-                    Filter_Modelo.Keys.CopyTo(filterPriceArray, 0);
-                    cboModelo.Items.Clear();
-                    cboModelo.Items.AddRange(filterPriceArray);
-                    cboModelo.SelectedIndex = 0;
-
-                };
-
-                fb = null;
-            };
-        }
-
+   
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             DataGridViewCell cell = null;
@@ -525,11 +368,12 @@ namespace Catalogo._productos
             }
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+
+
+        public void onRecibir(string dato)
         {
-
+            filterString = dato;
+            loadDataGridView();
         }
-
-
     }
 }

@@ -107,6 +107,7 @@
             this.btnApply0.Name = "btnApply0";
             this.btnApply0.Size = new System.Drawing.Size(23, 24);
             this.btnApply0.Text = "buscar";
+            this.btnApply0.Click += new System.EventHandler(this.btnApply0_Click);
             // 
             // toolStripSeparator1
             // 
@@ -188,7 +189,7 @@
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(23, 20);
             this.btnApply.Text = "buscar";
-
+            this.btnApply.Click += new System.EventHandler(this.btnApply0_Click);
             // 
             // toolStripSeparator2
             // 
@@ -205,7 +206,6 @@
             this.btnClearFilters.Name = "btnClearFilters";
             this.btnClearFilters.Size = new System.Drawing.Size(23, 20);
             this.btnClearFilters.Text = "ver todos";
-
             // 
             // toolStripSeparator3
             // 

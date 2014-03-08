@@ -50,8 +50,11 @@
                         <ad:DocumentContent Title="Productos" IsCloseable="True" IsFloatingAllowed="True" ScrollViewer.CanContentScroll="True" Visibility="Collapsed">
                             <Grid Name="grid2">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="40" />
                                     <RowDefinition  Height="*"/>
                                 </Grid.RowDefinitions>
+                                <Grid x:Name="searchArea" Grid.Row="0" />
+                                <Grid x:Name="productsArea" Grid.Row="1" />
                             </Grid>
                         </ad:DocumentContent>
                     </ad:DocumentPane>

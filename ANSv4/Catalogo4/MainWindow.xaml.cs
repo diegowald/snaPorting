@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AvalonDock;
+using Catalogo.util.emitter_receiver;
 
 namespace Catalogo
 {
@@ -27,7 +28,29 @@ namespace Catalogo
             System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
         }
 
-        private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
+        private Catalogo._productos.SearchFilter addSearchArea()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            // Create the MaskedTextBox control.
+            Catalogo._productos.SearchFilter filterControl = new _productos.SearchFilter();
+            filterControl.AutoScroll = true;
+            filterControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            filterControl.Location = new System.Drawing.Point(0, 0);
+            filterControl.Name = "searchFilter";
+            //filterControl.Size = new System.Drawing.Size(640, 480);
+            filterControl.TabIndex = 0;
+            //gridViewControl.Text = "Lista de Productos";
+
+            // Assign the MaskedTextBox control as the host control's child.
+            host.Child = filterControl;
+
+            this.searchArea.Children.Add(host);
+            return filterControl;
+        }
+
+        private Catalogo._productos.GridViewFilter2  addProductsArea()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
@@ -51,7 +74,19 @@ namespace Catalogo
             //this.grid1.Children.Add(host);
             //this.dockManager.Documents[0]. .DefaultElement.set  .Children.Add(host);
 
-            this.grid2.Children.Add(host);
+            //this.grid2.Children.Add(host);
+            this.productsArea.Children.Add(host);
+
+            return gridViewControl;
+        }
+
+        private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
+        {
+            Catalogo._productos.SearchFilter sf = addSearchArea();
+            Catalogo._productos.GridViewFilter2 gv = addProductsArea();
+
+            sf.attachReceptor(gv);
+
             this.sugerencias.Visibility = System.Windows.Visibility.Collapsed;
         }
 
