@@ -1,6 +1,6 @@
 ﻿namespace Catalogo._productos
 {
-    partial class GridViewFilter2
+    partial class SearchFilter
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GridViewFilter2));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchFilter));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.txtBuscar = new System.Windows.Forms.ToolStripTextBox();
             this.btnApply0 = new System.Windows.Forms.ToolStripButton();
@@ -54,12 +53,9 @@
             this.lblPorcentajeLinea = new System.Windows.Forms.ToolStripLabel();
             this.txtPorcentajeLinea = new System.Windows.Forms.ToolStripTextBox();
             this.tslItems = new System.Windows.Forms.ToolStripLabel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Semáforo = new System.Windows.Forms.DataGridViewButtonColumn();
             this.pnProductoDetalle = new System.Windows.Forms.Panel();
             this.lblProductoDetalle1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.pnProductoDetalle.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,7 +107,6 @@
             this.btnApply0.Name = "btnApply0";
             this.btnApply0.Size = new System.Drawing.Size(23, 24);
             this.btnApply0.Text = "buscar";
-            this.btnApply0.Click += new System.EventHandler(this.btnApply_Click);
             // 
             // toolStripSeparator1
             // 
@@ -193,7 +188,7 @@
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(23, 20);
             this.btnApply.Text = "buscar";
-            this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
+
             // 
             // toolStripSeparator2
             // 
@@ -210,7 +205,7 @@
             this.btnClearFilters.Name = "btnClearFilters";
             this.btnClearFilters.Size = new System.Drawing.Size(23, 20);
             this.btnClearFilters.Text = "ver todos";
-            this.btnClearFilters.Click += new System.EventHandler(this.btnClearFilters_Click);
+
             // 
             // toolStripSeparator3
             // 
@@ -255,35 +250,6 @@
             this.tslItems.Size = new System.Drawing.Size(51, 15);
             this.tslItems.Text = "#Prod. 0";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightYellow;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Semáforo});
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 27);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 4;
-            this.dataGridView1.Size = new System.Drawing.Size(682, 480);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // Semáforo
-            // 
-            this.Semáforo.HeaderText = "Semáforo";
-            this.Semáforo.Name = "Semáforo";
-            this.Semáforo.ReadOnly = true;
-            this.Semáforo.Text = "s";
-            this.Semáforo.ToolTipText = "ver existencia";
-            this.Semáforo.Width = 30;
-            // 
             // pnProductoDetalle
             // 
             this.pnProductoDetalle.Controls.Add(this.lblProductoDetalle1);
@@ -302,18 +268,16 @@
             this.lblProductoDetalle1.TabIndex = 0;
             this.lblProductoDetalle1.Text = "label1";
             // 
-            // GridViewFilter2
+            // SearchFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.pnProductoDetalle);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "GridViewFilter2";
+            this.Name = "SearchFilter";
             this.Size = new System.Drawing.Size(682, 547);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.pnProductoDetalle.ResumeLayout(false);
             this.pnProductoDetalle.PerformLayout();
             this.ResumeLayout(false);
@@ -337,7 +301,6 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel5;
         private System.Windows.Forms.ToolStripComboBox cboOtros;
         private System.Windows.Forms.ToolStripButton btnClearFilters;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ToolStripButton btnRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -350,6 +313,5 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripLabel lblPorcentajeLinea;
         private System.Windows.Forms.ToolStripTextBox txtPorcentajeLinea;
-        private System.Windows.Forms.DataGridViewButtonColumn Semáforo;
     }
 }
