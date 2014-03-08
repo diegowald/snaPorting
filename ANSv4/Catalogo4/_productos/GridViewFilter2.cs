@@ -51,8 +51,7 @@ namespace Catalogo._productos
         private DataTable dtProducts = new DataTable();
         private DataView dvProducts = new DataView();
         private DataTable useTable = new DataTable();
-        private bool xAplicoPorcentajeLinea = false;
- 
+       
         private string strComando = "SELECT " +
                "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
                "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +

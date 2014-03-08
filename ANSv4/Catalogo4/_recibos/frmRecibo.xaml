@@ -203,7 +203,7 @@
                         </WrapPanel>
                     </Grid>
                 </TabItem>
-                <TabItem Header="A Deducir">
+                <TabItem Header="A Deducir" Height="19.96" VerticalAlignment="Top">
                     <Grid x:Name="grReciboAdeducir"  Margin="20" IsEnabled="False">
                         <Grid.Resources>
                         </Grid.Resources>

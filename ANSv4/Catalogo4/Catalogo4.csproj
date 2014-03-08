@@ -90,6 +90,12 @@
       <DependentUpon>GridViewFilter2.cs</DependentUpon>
     </Compile>
     <Compile Include="_productos\FilterBuilder.cs" />
+    <Compile Include="_recibos\fRecibo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_recibos\fRecibo.Designer.cs">
+      <DependentUpon>fRecibo.cs</DependentUpon>
+    </Compile>
     <Compile Include="_recibos\frmRecibo.xaml.cs">
       <DependentUpon>frmRecibo.xaml</DependentUpon>
     </Compile>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\GridViewFilter2.resx">
       <DependentUpon>GridViewFilter2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_recibos\fRecibo.resx">
+      <DependentUpon>fRecibo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

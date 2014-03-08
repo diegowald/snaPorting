@@ -16,15 +16,17 @@ namespace Catalogo
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             // Create the startup window
-            MainWindow wnd = new MainWindow();
+            //MainWindow wnd = new MainWindow();
 
          //   _recibos.frmRecibo wnd = new _recibos.frmRecibo();
+            
+            _recibos.fRecibo wnd = new _recibos.fRecibo();
 
             // Do stuff here, e.g. to the window
-            wnd.Title = "Recibo para el cliente...";
+            //wnd.Title = "Recibo para el cliente...";
 
             // Show the window
-            wnd.Show();
+            wnd.ShowDialog();
         }
 
     }
