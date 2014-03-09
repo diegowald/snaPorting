@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fRecibo));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.cboCliente = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsBtnVer = new System.Windows.Forms.ToolStripButton();
             this.tsBtnConfirmar = new System.Windows.Forms.ToolStripButton();
             this.tsBtnIniciar = new System.Windows.Forms.ToolStripButton();
@@ -95,14 +97,12 @@
             this.adBottonPnl = new System.Windows.Forms.Panel();
             this.adTotalDeducirLbl = new System.Windows.Forms.Label();
             this.CtaCteTab = new System.Windows.Forms.TabPage();
+            this.ccBottonPnl = new System.Windows.Forms.Panel();
+            this.ccCtaCteActualizadaFechaLbl = new System.Windows.Forms.Label();
+            this.ccMainPnl = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.cboCliente = new System.Windows.Forms.ToolStripComboBox();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ccMainPnl = new System.Windows.Forms.Panel();
-            this.ccBottonPnl = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ccCtaCteActualizadaFechaLbl = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.ReciboTab.SuspendLayout();
             this.raTab.SuspendLayout();
@@ -123,10 +123,10 @@
             this.adTopPnl.SuspendLayout();
             this.adBottonPnl.SuspendLayout();
             this.CtaCteTab.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.ccMainPnl.SuspendLayout();
             this.ccBottonPnl.SuspendLayout();
+            this.ccMainPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -142,6 +142,17 @@
             this.toolStrip1.Size = new System.Drawing.Size(753, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // cboCliente
+            // 
+            this.cboCliente.Margin = new System.Windows.Forms.Padding(1, 0, 5, 0);
+            this.cboCliente.Name = "cboCliente";
+            this.cboCliente.Size = new System.Drawing.Size(221, 25);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // tsBtnVer
             // 
@@ -775,6 +786,45 @@
             this.CtaCteTab.Text = "Cta. Cte.";
             this.CtaCteTab.UseVisualStyleBackColor = true;
             // 
+            // ccBottonPnl
+            // 
+            this.ccBottonPnl.Controls.Add(this.ccCtaCteActualizadaFechaLbl);
+            this.ccBottonPnl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ccBottonPnl.Location = new System.Drawing.Point(3, 301);
+            this.ccBottonPnl.Name = "ccBottonPnl";
+            this.ccBottonPnl.Size = new System.Drawing.Size(739, 34);
+            this.ccBottonPnl.TabIndex = 1;
+            // 
+            // ccCtaCteActualizadaFechaLbl
+            // 
+            this.ccCtaCteActualizadaFechaLbl.AutoSize = true;
+            this.ccCtaCteActualizadaFechaLbl.Location = new System.Drawing.Point(5, 9);
+            this.ccCtaCteActualizadaFechaLbl.Name = "ccCtaCteActualizadaFechaLbl";
+            this.ccCtaCteActualizadaFechaLbl.Size = new System.Drawing.Size(128, 13);
+            this.ccCtaCteActualizadaFechaLbl.TabIndex = 0;
+            this.ccCtaCteActualizadaFechaLbl.Text = "Cta. Cte. actualizada al ...";
+            // 
+            // ccMainPnl
+            // 
+            this.ccMainPnl.Controls.Add(this.dataGridView1);
+            this.ccMainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ccMainPnl.Location = new System.Drawing.Point(3, 3);
+            this.ccMainPnl.Name = "ccMainPnl";
+            this.ccMainPnl.Size = new System.Drawing.Size(739, 332);
+            this.ccMainPnl.TabIndex = 0;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(739, 332);
+            this.dataGridView1.TabIndex = 0;
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -790,56 +840,6 @@
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // cboCliente
-            // 
-            this.cboCliente.Margin = new System.Windows.Forms.Padding(1, 0, 5, 0);
-            this.cboCliente.Name = "cboCliente";
-            this.cboCliente.Size = new System.Drawing.Size(221, 25);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // ccMainPnl
-            // 
-            this.ccMainPnl.Controls.Add(this.dataGridView1);
-            this.ccMainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ccMainPnl.Location = new System.Drawing.Point(3, 3);
-            this.ccMainPnl.Name = "ccMainPnl";
-            this.ccMainPnl.Size = new System.Drawing.Size(739, 332);
-            this.ccMainPnl.TabIndex = 0;
-            // 
-            // ccBottonPnl
-            // 
-            this.ccBottonPnl.Controls.Add(this.ccCtaCteActualizadaFechaLbl);
-            this.ccBottonPnl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ccBottonPnl.Location = new System.Drawing.Point(3, 301);
-            this.ccBottonPnl.Name = "ccBottonPnl";
-            this.ccBottonPnl.Size = new System.Drawing.Size(739, 34);
-            this.ccBottonPnl.TabIndex = 1;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(739, 332);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // ccCtaCteActualizadaFechaLbl
-            // 
-            this.ccCtaCteActualizadaFechaLbl.AutoSize = true;
-            this.ccCtaCteActualizadaFechaLbl.Location = new System.Drawing.Point(5, 9);
-            this.ccCtaCteActualizadaFechaLbl.Name = "ccCtaCteActualizadaFechaLbl";
-            this.ccCtaCteActualizadaFechaLbl.Size = new System.Drawing.Size(128, 13);
-            this.ccCtaCteActualizadaFechaLbl.TabIndex = 0;
-            this.ccCtaCteActualizadaFechaLbl.Text = "Cta. Cte. actualizada al ...";
             // 
             // fRecibo
             // 
@@ -879,12 +879,12 @@
             this.adBottonPnl.ResumeLayout(false);
             this.adBottonPnl.PerformLayout();
             this.CtaCteTab.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.ccMainPnl.ResumeLayout(false);
             this.ccBottonPnl.ResumeLayout(false);
             this.ccBottonPnl.PerformLayout();
+            this.ccMainPnl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

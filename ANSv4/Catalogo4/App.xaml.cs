@@ -20,7 +20,7 @@ namespace Catalogo
             wnd.ShowDialog();
             wnd.Close();
             Shutdown();
-            
+
             //_recibos.fRecibo wnd = new _recibos.fRecibo();
             //wnd.ShowDialog();
             //wnd.Close();

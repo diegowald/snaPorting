@@ -16,8 +16,9 @@ namespace Catalogo._recibos
         public fRecibo()
         {
             InitializeComponent();
-            //Catalogo.Funciones.util.CargarComboDR(cboCliente, "v_CtaCte", "id", "nombre", strSQLCon,"ALL","NONE",false,false);
            
+            Catalogo.Funciones.util.CargarCombo(ref cboCliente, "tblClientes", "RazonSocial", "ID", strSQLCon, "Activo<>1", "RazonSocial", false, false);
+
         }
 
 

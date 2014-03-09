@@ -140,11 +140,15 @@ namespace Catalogo
 
         private void btnReciboPage_Click(object sender, RoutedEventArgs e)
         {
-            _recibos.frmRecibo fRecibo = new _recibos.frmRecibo();
+            //_recibos.frmRecibo fRecibo = new _recibos.frmRecibo();
 
+            //fRecibo.ShowDialog();
+
+            _recibos.fRecibo fRecibo = new _recibos.fRecibo();
             fRecibo.ShowDialog();
+            fRecibo.Close();
+            fRecibo.Dispose();
 
-            
         }
 
     }
