@@ -243,9 +243,9 @@ namespace Catalogo.Funciones
 
                 System.IO.File.Delete(Catalogo.Global01.dstring);
 
-                string sDbFrom = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dbNewBakup + ";User Id=hpcd-rw;Password=data700mb;jet oledb:system database=" + Global01.sstring;
+                string sDbFrom = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + dbNewBakup +  Global01.up2014Ad + ";jet oledb:system database=" + Global01.sstring;
 
-                string sDbTo = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Catalogo.Global01.dstring + ";User Id=hpcd-rw;Password=data700mb;Jet oledb:engine type=5;jet oledb:system database=" + Global01.sstring;
+                string sDbTo = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Catalogo.Global01.dstring + Global01.up2014Ad + ";Jet oledb:engine type=5;jet oledb:system database=" + Global01.sstring;
 
                 JRO.CompactDatabase(sDbFrom,sDbTo);
 
