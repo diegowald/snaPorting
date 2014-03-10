@@ -74,6 +74,7 @@
     <Compile Include="util\emitter-receiver\IEmisor.cs" />
     <Compile Include="util\emitter-receiver\IReceptor.cs" />
     <Compile Include="util\ModINIs.cs" />
+    <Compile Include="util\Pair.cs" />
     <Compile Include="_productos\DetalleProducto.xaml.cs">
       <DependentUpon>DetalleProducto.xaml</DependentUpon>
     </Compile>
@@ -146,6 +147,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="util\modulos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CatalogoLibraryVB\CatalogoLibraryVB.vbproj">
+      <Project>{9dd8498e-39f8-4dbf-9737-d34a84117f56}</Project>
+      <Name>CatalogoLibraryVB</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
