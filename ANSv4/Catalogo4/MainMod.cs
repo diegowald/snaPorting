@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Catalogo
 {
-    static class Main
+    static class MainMod
     {
 
        private const string m_sMODULENAME_ = "MainMod";
