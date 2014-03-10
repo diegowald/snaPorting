@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AvalonDock;
-using Catalogo.util.emitter_receiver;
+using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo
 {
@@ -142,11 +142,15 @@ namespace Catalogo
 
         private void btnReciboPage_Click(object sender, RoutedEventArgs e)
         {
-            _recibos.frmRecibo fRecibo = new _recibos.frmRecibo();
+            //_recibos.frmRecibo fRecibo = new _recibos.frmRecibo();
 
+            //fRecibo.ShowDialog();
+
+            _recibos.fRecibo fRecibo = new _recibos.fRecibo();
             fRecibo.ShowDialog();
+            fRecibo.Close();
+            fRecibo.Dispose();
 
-            
         }
 
     }

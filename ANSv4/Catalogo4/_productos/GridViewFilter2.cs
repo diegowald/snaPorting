@@ -7,16 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
-using Catalogo.util.emitter_receiver;
+using Catalogo.Funciones.emitter_receiver;
 
 
 namespace Catalogo._productos
 {
     public partial class GridViewFilter2 : UserControl, 
-        util.emitter_receiver.IReceptor<string>,  // Para recibir el filtro de datos
-        util.emitter_receiver.IReceptor<float>, // Para recibir los porcentajes
-        util.emitter_receiver.IEmisor<DataGridViewRow>, // Para enviar el registro seleccionado
-        util.emitter_receiver.IEmisor2<util.Pair<int, int>> // Para enviar la cantidad de registros encontrados.
+        Funciones.emitter_receiver.IReceptor<string>,  // Para recibir el filtro de datos
+        Funciones.emitter_receiver.IReceptor<float>, // Para recibir los porcentajes
+        Funciones.emitter_receiver.IEmisor<DataGridViewRow>, // Para enviar el registro seleccionado
+        Funciones.emitter_receiver.IEmisor2<util.Pair<int, int>> // Para enviar la cantidad de registros encontrados.
     {
 
 
@@ -65,7 +65,7 @@ namespace Catalogo._productos
 
         private string strSQLCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Catalogo ANS\\datos\\catalogo.mdb;Persist Security Info=True;Password=video80min;User ID=inVent;Jet OLEDB:System database=C:\\Windows\\Help\\kbappcat.hlp";
 
-        private util.BackgroundReader.BackgroundDataLoader backgroundWorker;
+        private Funciones.BackgroundReader.BackgroundDataLoader backgroundWorker;
 
         private string filterString = string.Empty;
 
@@ -90,7 +90,7 @@ namespace Catalogo._productos
           
             InitializeComponent();
             
-            backgroundWorker = new util.BackgroundReader.BackgroundDataLoader(Catalogo.util.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
+            backgroundWorker = new Funciones.BackgroundReader.BackgroundDataLoader(Catalogo.Funciones.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
                 strSQLCon);
             backgroundWorker.onWorkFinishedHandler += dataReady;
             
@@ -323,7 +323,7 @@ namespace Catalogo._productos
             dataGridView1.DataSource = dvProducts;
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
-            this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
+            //this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
             // Show the counts in the toolstrip
             //showItemCounts();
         }
@@ -384,8 +384,8 @@ namespace Catalogo._productos
             loadDataGridView();
         }
 
-        private util.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
-        public util.emitter_receiver.emisorHandler<DataGridViewRow> emisor
+        private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
+        public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
         {
             get
             {

@@ -58,7 +58,7 @@ namespace Catalogo._productos
 
         private string strSQLCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Catalogo ANS\\datos\\catalogo.mdb;Persist Security Info=True;Password=video80min;User ID=inVent;Jet OLEDB:System database=C:\\Windows\\Help\\kbappcat.hlp";
 
-        private util.BackgroundReader.BackgroundDataLoader backgroundWorker;
+        private Funciones.BackgroundReader.BackgroundDataLoader backgroundWorker;
 
         private string filterString = string.Empty;
 
@@ -83,7 +83,7 @@ namespace Catalogo._productos
           
             InitializeComponent();
             
-            backgroundWorker = new util.BackgroundReader.BackgroundDataLoader(Catalogo.util.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
+            backgroundWorker = new util.BackgroundReader.BackgroundDataLoader(Funciones.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
                 strSQLCon);
             backgroundWorker.onWorkFinishedHandler += dataReady;
             
