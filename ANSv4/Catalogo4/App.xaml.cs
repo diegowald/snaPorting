@@ -15,25 +15,22 @@ namespace Catalogo
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+
+            Catalogo.MainMod.Main();
+
             // Create the startup window
-            //MainWindow wnd = new MainWindow();
-            //wnd.ShowDialog();
-            //wnd.Close();
-            //Shutdown();
-
-            Funciones.oleDbFunciones.CompactDatabase("catalogo.mdb");
-
-            Funciones.oleDbFunciones.CambiarLinks("ans.mdb");
-
-            Catalogo.Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexion);
-
-            _recibos.fRecibo wnd = new _recibos.fRecibo();
+            MainWindow wnd = new MainWindow();
             wnd.ShowDialog();
             wnd.Close();
-            wnd.Dispose();
             Shutdown();
 
-        }
+            //_recibos.fRecibo wnd = new _recibos.fRecibo();
+            //wnd.ShowDialog();
+            //wnd.Close();
+            //wnd.Dispose();
+            //Shutdown();
+
+        }        
 
     }
 }

@@ -27,7 +27,6 @@ namespace Catalogo._productos
                "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
                "FROM v_CatVehProdLin AS c";
 
-
         private Funciones.BackgroundReader.BackgroundDataLoader backgroundWorker;
 
         private string filterString = string.Empty;

@@ -11,7 +11,12 @@ namespace Catalogo
         public static void Main()
         {
             const string PROCNAME_ = "Main";
-       
+
+            Funciones.oleDbFunciones.CompactDatabase("catalogo.mdb");
+
+            Funciones.oleDbFunciones.CambiarLinks("ans.mdb");
+
+            Catalogo.Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexion);
 
         }
 
@@ -56,6 +61,7 @@ namespace Catalogo
 
 
         }
+      
 
     }
 }
