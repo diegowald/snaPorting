@@ -1,29 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-
-//using Microsoft.VisualBasic;
-//using System;
-//using System.Collections;
-//using System.Collections.Generic;
-//using System.Data;
-//using System.Diagnostics;
-//using System.Windows.Forms;
-
 
 namespace Catalogo.Funciones
 {
     public partial class frmErrorGuardian : Form
     {
+        public System.Windows.Forms.DialogResult ErrorGuardianUserReply;
 
-
-        //- ErrorGuardianSkipModule - Do not remove this line !
-        public long ErrorGuardianUserReply;
         private string BuildNumber;
 
         private string mModuloName;
@@ -92,11 +75,10 @@ namespace Catalogo.Funciones
             this.Close();
         }
 
-
-        string static_ErrLog_Separator;
-
         private void ErrLog(string sRep)
         {
+            string static_ErrLog_Separator;
+
             string fn = null;
 
             static_ErrLog_Separator = new String(' ', 78).Replace(" ", "-");

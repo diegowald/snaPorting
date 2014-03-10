@@ -71,10 +71,15 @@
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
     <Compile Include="util\emitter-receiver\IEmisor.cs" />
     <Compile Include="util\emitter-receiver\IReceptor.cs" />
+    <Compile Include="util\frmErrorGuardian.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="util\frmErrorGuardian.Designer.cs">
+      <DependentUpon>frmErrorGuardian.cs</DependentUpon>
+    </Compile>
     <Compile Include="util\ModINIs.cs" />
     <Compile Include="util\OleDbFunciones.cs" />
     <Compile Include="util\Util.cs" />
-    <Compile Include="util\xListItem.cs" />
     <Compile Include="_productos\DetalleProducto.xaml.cs">
       <DependentUpon>DetalleProducto.xaml</DependentUpon>
     </Compile>
@@ -138,6 +143,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="util\frmErrorGuardian.resx">
+      <DependentUpon>frmErrorGuardian.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\SearchFilter.resx">
       <DependentUpon>SearchFilter.cs</DependentUpon>

@@ -100,7 +100,7 @@
             this.ccBottonPnl = new System.Windows.Forms.Panel();
             this.ccCtaCteActualizadaFechaLbl = new System.Windows.Forms.Label();
             this.ccMainPnl = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ccDataGridView = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1.SuspendLayout();
@@ -125,7 +125,7 @@
             this.CtaCteTab.SuspendLayout();
             this.ccBottonPnl.SuspendLayout();
             this.ccMainPnl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ccDataGridView)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,6 +148,7 @@
             this.cboCliente.Margin = new System.Windows.Forms.Padding(1, 0, 5, 0);
             this.cboCliente.Name = "cboCliente";
             this.cboCliente.Size = new System.Drawing.Size(221, 25);
+            this.cboCliente.SelectedIndexChanged += new System.EventHandler(this.cboCliente_SelectedIndexChanged);
             // 
             // toolStripSeparator1
             // 
@@ -806,24 +807,24 @@
             // 
             // ccMainPnl
             // 
-            this.ccMainPnl.Controls.Add(this.dataGridView1);
+            this.ccMainPnl.Controls.Add(this.ccDataGridView);
             this.ccMainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ccMainPnl.Location = new System.Drawing.Point(3, 3);
             this.ccMainPnl.Name = "ccMainPnl";
             this.ccMainPnl.Size = new System.Drawing.Size(739, 332);
             this.ccMainPnl.TabIndex = 0;
             // 
-            // dataGridView1
+            // ccDataGridView
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(739, 332);
-            this.dataGridView1.TabIndex = 0;
+            this.ccDataGridView.AllowUserToAddRows = false;
+            this.ccDataGridView.AllowUserToDeleteRows = false;
+            this.ccDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ccDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ccDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.ccDataGridView.Name = "ccDataGridView";
+            this.ccDataGridView.ReadOnly = true;
+            this.ccDataGridView.Size = new System.Drawing.Size(739, 332);
+            this.ccDataGridView.TabIndex = 0;
             // 
             // statusStrip1
             // 
@@ -882,7 +883,7 @@
             this.ccBottonPnl.ResumeLayout(false);
             this.ccBottonPnl.PerformLayout();
             this.ccMainPnl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ccDataGridView)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -965,6 +966,6 @@
         private System.Windows.Forms.Panel ccBottonPnl;
         private System.Windows.Forms.Label ccCtaCteActualizadaFechaLbl;
         private System.Windows.Forms.Panel ccMainPnl;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView ccDataGridView;
     }
 }

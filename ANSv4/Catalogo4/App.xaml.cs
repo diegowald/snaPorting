@@ -13,19 +13,20 @@ namespace Catalogo
     public partial class App : Application
     {
 
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             // Create the startup window
-            MainWindow wnd = new MainWindow();
-            wnd.ShowDialog();
-            wnd.Close();
-            Shutdown();
-
-            //_recibos.fRecibo wnd = new _recibos.fRecibo();
+            //MainWindow wnd = new MainWindow();
             //wnd.ShowDialog();
             //wnd.Close();
-            //wnd.Dispose();
             //Shutdown();
+
+            _recibos.fRecibo wnd = new _recibos.fRecibo();
+            wnd.ShowDialog();
+            wnd.Close();
+            wnd.Dispose();
+            Shutdown();
 
 
  
