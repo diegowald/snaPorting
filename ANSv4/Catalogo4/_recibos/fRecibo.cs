@@ -17,7 +17,7 @@ namespace Catalogo._recibos
         {
             InitializeComponent();
            
-            Catalogo.Funciones.util.CargarCombo(ref cboCliente, "tblClientes", "RazonSocial", "ID", strSQLCon, "Activo<>1", "RazonSocial", false, false);
+            Catalogo.Funciones.util.CargarCombo(ref cboCliente, "tblClientes", "RazonSocial", "ID", strSQLCon, "Activo<>1", "RazonSocial", true, true);
 
         }
 

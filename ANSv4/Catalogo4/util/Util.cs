@@ -7,64 +7,75 @@ namespace Catalogo.Funciones
 {
     class util
     {
-        internal static void CargarCombo(ref System.Windows.Forms.ToolStripComboBox combo, string Tabla, string Campo1, string Campo2, string strConexion, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = false, bool Concatena = false)
+
+        //acá el combo debe ser System.Windows.Forms.ToolStripComboBox
+        internal static void CargarCombo(ref System.Windows.Forms.ToolStripComboBox combo, string Tabla, string Campo1, string Campo2, string strConexion, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = true, bool Concatena = false)
         {
             System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(strConexion);
 
-            //System.Data.OleDb.OleDbDataReader rdr = Catalogo.Funciones.oleDbFunciones.xGetDR(ref conn, Tabla,Condicion,Orden );
-            System.Data.OleDb.OleDbDataReader rdr = Catalogo.Funciones.oleDbFunciones.Comando(ref conn, " SELECT * FROM " + Tabla + " WHERE " + Condicion + " ORDER BY " + Orden);
-
+            System.Data.OleDb.OleDbDataReader rdr = Catalogo.Funciones.oleDbFunciones.xGetDr(ref conn, Tabla, Condicion, Orden);
+         
             Catalogo.Funciones.xListItemComboBox newListItem = new Catalogo.Funciones.xListItemComboBox();
-
-            newListItem = new Catalogo.Funciones.xListItemComboBox("- seleccione -", 0);
-
-            combo.Items.Add(newListItem);
+           
+            if (AceptaNulo)
+            {
+                newListItem = new Catalogo.Funciones.xListItemComboBox("- seleccione -", 0);
+                combo.Items.Add(newListItem);
+            }
 
             // Populate the Control 
             while (rdr.Read())
             {
-                newListItem = new Catalogo.Funciones.xListItemComboBox(rdr[Campo1].ToString(), int.Parse(rdr[Campo2].ToString()));
+                if (Concatena)
+                { newListItem = new Catalogo.Funciones.xListItemComboBox(rdr[Campo1].ToString() + " - (" + rdr[Campo2].ToString() + ")", int.Parse(rdr[Campo2].ToString())); }
+                else
+                    { newListItem = new Catalogo.Funciones.xListItemComboBox(rdr[Campo1].ToString(), int.Parse(rdr[Campo2].ToString())); };
+
                 combo.Items.Add(newListItem);
             }
 
+            combo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;           
             combo.SelectedIndex = 0;
 
         }
 
+        //acá el combo debe ser System.Windows.Forms.ComboBox
         internal static void CargarCombo(ref System.Windows.Forms.ComboBox combo, string Tabla, string Campo1, string Campo2, string strConexion, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = false, bool Concatena = false)
         {
             System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(strConexion);
 
-            System.Data.OleDb.OleDbDataReader rdr = Catalogo.Funciones.oleDbFunciones.xGetDR(ref conn, Tabla, Condicion, Orden);
+            System.Data.OleDb.OleDbDataReader rdr = Catalogo.Funciones.oleDbFunciones.xGetDr(ref conn, Tabla, Condicion, Orden);
 
             Catalogo.Funciones.xListItemComboBox newListItem = new Catalogo.Funciones.xListItemComboBox();
 
-            newListItem = new Catalogo.Funciones.xListItemComboBox("- seleccione -", 0);
-
-            combo.Items.Add(newListItem);
+            if (AceptaNulo)
+            {
+                newListItem = new Catalogo.Funciones.xListItemComboBox("- seleccione -", 0);
+                combo.Items.Add(newListItem);
+            }
 
             // Populate the Control 
             while (rdr.Read())
             {
-                newListItem = new Catalogo.Funciones.xListItemComboBox((string)(rdr[Campo1]), (int)(rdr[Campo2]));
+                if (Concatena)
+                { newListItem = new Catalogo.Funciones.xListItemComboBox(rdr[Campo1].ToString() + " - (" + rdr[Campo2].ToString() + ")", int.Parse(rdr[Campo2].ToString())); }
+                else
+                { newListItem = new Catalogo.Funciones.xListItemComboBox(rdr[Campo1].ToString(), int.Parse(rdr[Campo2].ToString())); };
+
                 combo.Items.Add(newListItem);
             }
 
+            combo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             combo.SelectedIndex = 0;
 
         }
 
-
-        internal static void CargaCombo2(ref System.Windows.Forms.ComboBox Combo, string Tabla, string Campo1, string Campo2, string strConexion, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = false, bool Concatena = false)
+        internal static void CargaCombo2(ref System.Windows.Forms.ComboBox combo, string Tabla, string Campo1, string Campo2, string strConexion, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = true, bool Concatena = false)
         {
            
-            System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(strConexion);
-            
+            System.Data.OleDb.OleDbConnection conn = new System.Data.OleDb.OleDbConnection(strConexion);            
             System.Data.DataSet ds = new System.Data.DataSet();
-
-            Combo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-
-            ds = Funciones.oleDbFunciones.xGetDS(ref conn, Tabla, Condicion, Orden);
+            ds = Funciones.oleDbFunciones.xGetDs(ref conn, Tabla, Condicion, Orden);           
 
             if (ds.Tables[Tabla].Rows.Count > 0)
             {
@@ -77,17 +88,19 @@ namespace Catalogo.Funciones
                     ds.Tables[Tabla].Rows.InsertAt(dr, 0);
                 }
 
-                Combo.DataSource = ds.Tables[Tabla];
+                combo.DataSource = ds.Tables[Tabla];
 
-                Combo.DisplayMember = Campo1;
+                combo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+
+                combo.DisplayMember = Campo1;
                 //CStr(Trim(Tabla) & "." & Trim(Campo1))
-                Combo.ValueMember = Campo2;
+                combo.ValueMember = Campo2;
                 //CStr(Trim(Tabla) & "." & Trim(Campo2))
 
                 //Combo.DataBindings.Add("SelectedValue", ds, CStr(Trim(Tabla) & "." & Trim(Campo2)))
                 //Combo.DataBindings.Add("Text", ds, CStr(Trim(Tabla) & "." & Trim(Campo1)))
 
-                Combo.SelectedIndex = 0;
+                combo.SelectedIndex = 0;
 
             }
 
