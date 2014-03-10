@@ -3,12 +3,12 @@ using System.Diagnostics;
 
 namespace Catalogo
 {
-    static class Main
+    static class MainMod
     {
 
        private const string m_sMODULENAME_ = "MainMod";
          
-        public static void main()
+        public static void Main()
         {
             const string PROCNAME_ = "Main";
        
@@ -58,5 +58,4 @@ namespace Catalogo
         }
 
     }
->>>>>>> d3b7e4beae8792ed1c915d1d833c87854f2ffc25
 }
