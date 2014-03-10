@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.VisualBasic;
 
 namespace Catalogo.Funciones
 {
     class util
     {
+
+        const string m_sMODULENAME_ = "util";
+
+
 
         internal static void BuscarIndiceEnCombo(ref System.Windows.Forms.ComboBox combo, string strBuscar, bool EsList)
         {
@@ -166,6 +171,17 @@ namespace Catalogo.Funciones
 
             LeerLVColumnas(ref MyListview1);
 
+        }
+
+        internal static long ErrorGuardianGlobalHandler(string m_sMODULENAME_, string PROCNAME_)
+        {
+            //throw new Exception("Part 1 must be numeric");
+     
+            //System.Windows.Forms.DialogResult ErrorGuardianUserReply;
+
+            long functionReturnValue = 0;
+
+            return functionReturnValue;
         }
     
     }

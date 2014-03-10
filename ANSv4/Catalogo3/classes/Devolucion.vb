@@ -6,7 +6,6 @@ Public Class Devolucion
     Private Const m_sMODULENAME_ As String = "clsDevolucion"
 
     Private Conexion1 As System.Data.OleDb.OleDbConnection '    Private Conexion As OleDbConnection
-
     Private mvarNroDevolucion As String 'copia local
     Private mvarF_Devolucion As Date 'copia local
     Private mvarIdCliente As Long 'copia local

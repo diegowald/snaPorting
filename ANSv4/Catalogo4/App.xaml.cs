@@ -13,7 +13,6 @@ namespace Catalogo
     public partial class App : Application
     {
 
-
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             // Create the startup window
@@ -22,14 +21,18 @@ namespace Catalogo
             //wnd.Close();
             //Shutdown();
 
+            Funciones.oleDbFunciones.CompactDatabase("catalogo.mdb");
+
+            Funciones.oleDbFunciones.CambiarLinks("ans.mdb");
+
+            Catalogo.Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexion);
+
             _recibos.fRecibo wnd = new _recibos.fRecibo();
             wnd.ShowDialog();
             wnd.Close();
             wnd.Dispose();
             Shutdown();
 
-
- 
         }
 
     }

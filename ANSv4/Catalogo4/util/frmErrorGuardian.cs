@@ -5,7 +5,7 @@ namespace Catalogo.Funciones
 {
     public partial class frmErrorGuardian : Form
     {
-        public System.Windows.Forms.DialogResult ErrorGuardianUserReply;
+        private System.Windows.Forms.DialogResult ErrorGuardianUserReply;
 
         private string BuildNumber;
 

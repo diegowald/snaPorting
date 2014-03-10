@@ -26,7 +26,6 @@ namespace Catalogo._productos
                "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
                "FROM v_CatVehProdLin AS c";
 
-        private string strSQLCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Catalogo ANS\\datos\\catalogo.mdb;Persist Security Info=True;Password=video80min;User ID=inVent;Jet OLEDB:System database=C:\\Windows\\Help\\kbappcat.hlp";
 
         private Funciones.BackgroundReader.BackgroundDataLoader backgroundWorker;
 
@@ -54,7 +53,7 @@ namespace Catalogo._productos
             InitializeComponent();
             
             backgroundWorker = new Funciones.BackgroundReader.BackgroundDataLoader(Catalogo.Funciones.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
-                strSQLCon);
+                Global01.strConexion);
             backgroundWorker.onWorkFinishedHandler += dataReady;
             
             xCargarDataControl();
