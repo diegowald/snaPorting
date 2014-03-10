@@ -105,7 +105,7 @@ namespace Catalogo.Funciones
 
             sql = "SELECT " + sAlcance + sCampos + " FROM " + Tabla + sCondicion + sOrden;
 
-            conexion.Open();
+            if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); };
             System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(sql, conexion);
 
             return cmd.ExecuteReader();
@@ -114,7 +114,7 @@ namespace Catalogo.Funciones
 
         internal static System.Data.OleDb.OleDbDataReader Comando(ref System.Data.OleDb.OleDbConnection conexion, string TextoComando)
         {
-            conexion.Open();
+            if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); };
             System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando,conexion);
 
             return cmd.ExecuteReader();
@@ -122,7 +122,8 @@ namespace Catalogo.Funciones
 
         internal static void ComandoIU(ref System.Data.OleDb.OleDbConnection conexion, string TextoComando)
         {
-            conexion.Open();            
+            if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); };
+                   
             System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando, conexion);
 
             cmd.ExecuteNonQuery();

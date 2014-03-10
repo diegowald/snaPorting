@@ -60,11 +60,9 @@ namespace Catalogo
             }
             //--- Fin de Pregunta -------------------------------
 
-            //--- Verifico si hay actualización de Emergencia de la MDB -----------
-                //Update MDB
+            //--- Verifico si hay actualización de Emergencia de la MDB - Update MDB ----------
                 if (Funciones.modINIs.ReadINI("UPDATE", "mdb")=="up201406")
                 {
-
                     System.IO.File.Copy(Global01.AppPath + "\\Datos\\Catalogo.mdb", Global01.AppPath + "\\Datos\\" + Global01.FileBak, false);
                     Application.DoEvents();
                     System.IO.File.Copy(Global01.AppPath + "\\Reportes\\Catalogo.mdb", Global01.AppPath + "\\Datos\\Catalogo.mdb", true);
@@ -72,13 +70,17 @@ namespace Catalogo
 
                     Funciones.updateMDB.Emergencia(Global01.FileBak);
                 }
-
             //--- termina update de emergencia ----------------------------------------------
-            Funciones.oleDbFunciones.CompactDatabase("catalogo.mdb");
 
+            //--- actualiza links tables ----------------------------------------------------
             Funciones.oleDbFunciones.CambiarLinks("ans.mdb");
 
-            Catalogo.Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
+            //--- compactar MDB--------------------------------------------------------------
+            Funciones.oleDbFunciones.CompactDatabase("catalogo.mdb");
+
+            
+
+            Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
 
         }
 

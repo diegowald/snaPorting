@@ -13,7 +13,7 @@ namespace Catalogo
        public static System.Data.OleDb.OleDbTransaction TranActiva = null;
        public static string AppPath = Funciones.modINIs.ReadINI("Datos", "Path", System.IO.Directory.GetCurrentDirectory());
        public static string PathAcrobat = Funciones.modINIs.ReadINI("Datos", "PathAcrobat", "");
-       public static string FileBak = "CopiaCata.001";
+       public static string FileBak = "CopiaCata_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mdb";
          
        public static string cstring = AppPath + "\\datos\\ans.mdb";        
        public static string dstring = AppPath + "\\datos\\catalogo.mdb";
