@@ -80,6 +80,7 @@
       <DependentUpon>frmErrorGuardian.cs</DependentUpon>
     </Compile>
     <Compile Include="util\ModINIs.cs" />
+    <Compile Include="util\Pair.cs" />
     <Compile Include="util\OleDbFunciones.cs" />
     <Compile Include="util\Util.cs" />
     <Compile Include="_productos\DetalleProducto.xaml.cs">
@@ -195,6 +196,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CatalogoLibraryVB\CatalogoLibraryVB.vbproj">
+      <Project>{9dd8498e-39f8-4dbf-9737-d34a84117f56}</Project>
+      <Name>CatalogoLibraryVB</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

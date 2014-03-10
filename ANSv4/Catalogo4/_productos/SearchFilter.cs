@@ -12,11 +12,12 @@ using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._productos
 {
-    public partial class SearchFilter : UserControl, Funciones.emitter_receiver.IEmisor<string>
+    public partial class SearchFilter : UserControl, 
+        Funciones.emitter_receiver.IEmisor<string>, // Para emitir la condicion de filtrado
+        Funciones.emitter_receiver.IEmisor2<float>, // Para emitir el porcentaje
+        Funciones.emitter_receiver.IReceptor<util.Pair<int, int>> // Para recibir la cantidad de registros encontrados
     {
 
-
-      
         private DataTable dtProducts = new DataTable();
         private DataView dvProducts = new DataView();
         private DataTable useTable = new DataTable();
@@ -30,9 +31,6 @@ namespace Catalogo._productos
         private Funciones.BackgroundReader.BackgroundDataLoader backgroundWorker;
 
         private string filterString = string.Empty;
-
-        private int currentRowCount = 0;
-        private int dataRowCount = 0;
 
         // Dropdown Filter Collections
         private System.Collections.Specialized.OrderedDictionary Filter_Linea =
@@ -151,7 +149,7 @@ namespace Catalogo._productos
 
         }
 
-        private void showItemCounts()
+        private void showItemCounts(int currentRowCount, int dataRowCount)
         {
 
             string _filterMsg = String.Format("#Prod. {0} de {1}", currentRowCount, dataRowCount);
@@ -217,18 +215,7 @@ namespace Catalogo._productos
             };
         }
 
-        emisorHandler<string> _emisor;
-        public emisorHandler<string> emisor
-        {
-            get
-            {
-                return _emisor;
-            }
-            set
-            {
-                _emisor = value;
-            }
-        }
+
 
         private void btnApply0_Click(object sender, EventArgs e)
         {
@@ -266,6 +253,7 @@ namespace Catalogo._productos
 
                 fb = null;
                 this.emitir(filterString);
+                this.emitir2(float.Parse(txtPorcentajeLinea.Text));
             }
         }
 
@@ -283,7 +271,39 @@ namespace Catalogo._productos
                 cboOtros.SelectedIndex = 0;
 
                 this.emitir(filterString);
+                this.emitir2(0);
             }
+        }
+
+        emisorHandler<string> _emisor;
+        public emisorHandler<string> emisor
+        {
+            get
+            {
+                return _emisor;
+            }
+            set
+            {
+                _emisor = value;
+            }
+        }
+
+        emisorHandler<float> _emisor2;
+        emisorHandler<float> IEmisor2<float>.emisor2
+        {
+            get
+            {
+                return _emisor2;
+            }
+            set
+            {
+                _emisor2 = value;
+            }
+        }
+
+        public void onRecibir(util.Pair<int, int> dato)
+        {
+            showItemCounts(dato.first, dato.second);
         }
     }
 }

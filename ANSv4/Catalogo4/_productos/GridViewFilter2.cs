@@ -12,7 +12,11 @@ using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._productos
 {
-    public partial class GridViewFilter2 : UserControl, Funciones.emitter_receiver.IReceptor<string>, Funciones.emitter_receiver.IEmisor<DataGridViewRow>
+    public partial class GridViewFilter2 : UserControl, 
+        Funciones.emitter_receiver.IReceptor<string>,  // Para recibir el filtro de datos
+        Funciones.emitter_receiver.IReceptor<float>, // Para recibir los porcentajes
+        Funciones.emitter_receiver.IEmisor<DataGridViewRow>, // Para enviar el registro seleccionado
+        Funciones.emitter_receiver.IEmisor2<util.Pair<int, int>> // Para enviar la cantidad de registros encontrados.
     {
 
 
@@ -51,11 +55,15 @@ namespace Catalogo._productos
         private DataTable dtProducts = new DataTable();
         private DataView dvProducts = new DataView();
         private DataTable useTable = new DataTable();
-       
+        private bool xAplicoPorcentajeLinea = false;
+        float porcentajeLinea;
+ 
         private string strComando = "SELECT " +
                "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
                "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
                "FROM v_CatVehProdLin AS c";
+
+        private string strSQLCon = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=C:\\Catalogo ANS\\datos\\catalogo.mdb;Persist Security Info=True;Password=video80min;User ID=inVent;Jet OLEDB:System database=C:\\Windows\\Help\\kbappcat.hlp";
 
         private Funciones.BackgroundReader.BackgroundDataLoader backgroundWorker;
 
@@ -83,7 +91,7 @@ namespace Catalogo._productos
             InitializeComponent();
             
             backgroundWorker = new Funciones.BackgroundReader.BackgroundDataLoader(Catalogo.Funciones.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
-                Global01.strConexion);
+                strSQLCon);
             backgroundWorker.onWorkFinishedHandler += dataReady;
             
             xCargarDataControl();
@@ -289,37 +297,33 @@ namespace Catalogo._productos
             dvProducts.RowFilter = filterString;
 
 
-            //if (!(txtPorcentajeLinea.Text==""))
-            //    if  (Convert.ToDecimal("0"+txtPorcentajeLinea.Text) != 0)
-            //    {
-            //        xAplicoPorcentajeLinea = true;
-
-            //        foreach (DataRowView drv in dvProducts)
-            //        {
-            //            drv["Precio"] = (float)drv["PrecioLista"] + ((float)(drv["PrecioLista"]) * float.Parse(txtPorcentajeLinea.Text)) / 100;
-            //        };
-            //    }
-            //    else
-            //    {
-            //        if (xAplicoPorcentajeLinea)
-            //        {
-            //            xAplicoPorcentajeLinea = false;
-            //            foreach (DataRowView drv in dvProducts)
-            //            {
-            //                drv["Precio"] = drv["PrecioLista"];
-            //            };
-            //        };
-            //    }
-            //else
-            //{
-            //    txtPorcentajeLinea.Text = "0";
-            //};
+            if (porcentajeLinea != 0)
+            {
+                xAplicoPorcentajeLinea = true;
+                float pct = 1 + porcentajeLinea / 100;
+                foreach (DataRowView drv in dvProducts)
+                {
+                    drv["Precio"] = (float)drv["PrecioLista"] * pct;
+                };
+            }
+            else
+            {
+                if (xAplicoPorcentajeLinea)
+                {
+                    xAplicoPorcentajeLinea = false;
+                    foreach (DataRowView drv in dvProducts)
+                    {
+                        drv["Precio"] = drv["PrecioLista"];
+                    };
+                };
+            }
 
 
             // Bind Datagrid view to the DataView
             dataGridView1.DataSource = dvProducts;
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
+            //this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
             // Show the counts in the toolstrip
             //showItemCounts();
         }
@@ -374,6 +378,12 @@ namespace Catalogo._productos
             loadDataGridView();
         }
 
+        public void onRecibir(float dato)
+        {
+            porcentajeLinea = dato;
+            loadDataGridView();
+        }
+
         private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
         public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
         {
@@ -386,5 +396,19 @@ namespace Catalogo._productos
                 _emisor = value;
             }
         }
+
+        private emisorHandler<util.Pair<int, int>> _emisor2;
+        public emisorHandler<util.Pair<int, int>> emisor2
+        {
+            get
+            {
+                return _emisor2;
+            }
+            set
+            {
+                _emisor2 = value;
+            }
+        }
+
     }
 }

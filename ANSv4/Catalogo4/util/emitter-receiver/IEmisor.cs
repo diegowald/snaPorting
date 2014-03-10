@@ -16,6 +16,22 @@ namespace Catalogo
                 emisorHandler<T> emisor {get; set;}
             }
 
+            public interface IEmisor2<T>
+            {
+                emisorHandler<T> emisor2 { get; set; }
+            }
+
+            public interface IEmisor3<T>
+            {
+                emisorHandler<T> emisor3 { get; set; }
+            }
+
+            public interface IEmisor4<T>
+            {
+                emisorHandler<T> emisor4 { get; set; }
+            }
+
+
             public static class emisorExtension
             {
                 public static void attachReceptor<T>(this IEmisor<T> baseEmisor, IReceptor<T> receptor)
@@ -30,6 +46,46 @@ namespace Catalogo
                         baseEmisor.emisor(dato);
                     }
                 }
+
+                public static void attachReceptor2<T>(this IEmisor2<T> baseEmisor, IReceptor<T> receptor)
+                {
+                    baseEmisor.emisor2 += receptor.onRecibir;
+                }
+
+                public static void emitir2<T>(this IEmisor2<T> baseEmisor, T dato)
+                {
+                    if (baseEmisor.emisor2 != null)
+                    {
+                        baseEmisor.emisor2(dato);
+                    }
+                }
+
+                public static void attachReceptor3<T>(this IEmisor3<T> baseEmisor, IReceptor<T> receptor)
+                {
+                    baseEmisor.emisor3 += receptor.onRecibir;
+                }
+
+                public static void emitir3<T>(this IEmisor3<T> baseEmisor, T dato)
+                {
+                    if (baseEmisor.emisor3 != null)
+                    {
+                        baseEmisor.emisor3(dato);
+                    }
+                }
+
+                public static void attachReceptor4<T>(this IEmisor4<T> baseEmisor, IReceptor<T> receptor)
+                {
+                    baseEmisor.emisor4 += receptor.onRecibir;
+                }
+
+                public static void emitir4<T>(this IEmisor4<T> baseEmisor, T dato)
+                {
+                    if (baseEmisor.emisor4 != null)
+                    {
+                        baseEmisor.emisor4(dato);
+                    }
+                }
+
             }
 
 /*            public abstract class EmisorUserControl<T>

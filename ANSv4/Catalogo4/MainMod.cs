@@ -1,14 +1,14 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 namespace Catalogo
 {
-    static class MainMod
+    static class Main
     {
 
        private const string m_sMODULENAME_ = "MainMod";
          
-        public static void Main()
+        public static void main()
         {
             const string PROCNAME_ = "Main";
        
@@ -58,4 +58,5 @@ namespace Catalogo
         }
 
     }
+>>>>>>> d3b7e4beae8792ed1c915d1d833c87854f2ffc25
 }

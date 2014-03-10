@@ -84,10 +84,12 @@ namespace Catalogo
         {
             Catalogo._productos.SearchFilter sf = addSearchArea();
             Catalogo._productos.GridViewFilter2 gv = addProductsArea();
-
+            
             sf.attachReceptor(gv);
+            sf.attachReceptor2(gv);
             gv.attachReceptor(productDetalle);
-
+            gv.attachReceptor2(sf);
+            
             this.sugerencias.Visibility = System.Windows.Visibility.Collapsed;
         }
 
