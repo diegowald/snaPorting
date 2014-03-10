@@ -71,6 +71,7 @@
     <Compile Include="Global01.cs" />
     <Compile Include="MainMod.cs" />
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
+    <Compile Include="util\updateMDB.cs" />
     <Compile Include="util\emitter-receiver\IEmisor.cs" />
     <Compile Include="util\emitter-receiver\IReceptor.cs" />
     <Compile Include="util\frmErrorGuardian.cs">
@@ -201,6 +202,9 @@
       <Project>{9dd8498e-39f8-4dbf-9737-d34a84117f56}</Project>
       <Name>CatalogoLibraryVB</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="forms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

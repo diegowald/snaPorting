@@ -134,11 +134,10 @@ namespace Catalogo.Funciones
 
             try
             {
-                string sCN = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Catalogo.Global01.dstring + ";User Id=hpcd-rw;Password=data700mb;jet oledb:system database=C:\\WINDOWS\\Help\\kbAppCat.hlp";
 
                 ADODB.Connection adoCN = new ADODB.Connection();
 
-                adoDbConectar(ref adoCN, sCN);
+                adoDbConectar(ref adoCN, Global01.strConexionAd);
 
                 ProcesarTablasLinks(ref adoCN, db);
                 adoDbDesconectar(ref adoCN);
@@ -262,8 +261,93 @@ namespace Catalogo.Funciones
             {
         
             }
-            return;
+      
         }
 
+
+        internal static void CambiarQuery(string pQueryNombre, string pQueryComando)
+        {
+            
+            const string PROCNAME_ = "CambiarQuery";
+
+            try
+            {
+              
+
+                ADODB.Connection adoCN = new ADODB.Connection();
+
+                adoDbConectar(ref adoCN, Global01.strConexionAd);
+
+                //-- acá va el codigo del cambio de la consulta -----
+                ADODB.Command adoCMD = new ADODB.Command();
+                ADOX.Catalog Adox_Cat = new ADOX.Catalog();
+
+                adoCMD.CommandText = pQueryComando;
+
+                Adox_Cat.ActiveConnection = adoCN;
+                Adox_Cat.Views.Delete(pQueryNombre);
+                Adox_Cat.Views.Append(pQueryNombre, adoCMD);
+
+                Adox_Cat = null;
+                adoCMD = null;
+                //-- fin cambio consulta ----------------------------
+
+                adoDbDesconectar(ref adoCN);
+                adoCN = null;
+            }
+            catch (System.IO.IOException e)
+            {
+                throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+
+            }
+
+            finally
+            {
+
+            }
+
+        }
+
+
+        internal static void Cambiar_usp(string pQueryNombre, string pQueryComando)
+        {
+            const string PROCNAME_ = "Cambiar_usp";
+            
+            try
+            {
+                ADODB.Connection adoCN = new ADODB.Connection();
+
+                adoDbConectar(ref adoCN, Global01.strConexionAd);
+
+                //-- acá va el codigo del cambio de la consulta -----
+                ADODB.Command adoCMD = new ADODB.Command();
+                ADOX.Catalog Adox_Cat = new ADOX.Catalog();
+
+                adoCMD.CommandText = pQueryComando;
+
+                Adox_Cat.ActiveConnection = adoCN;
+                Adox_Cat.Procedures.Delete(pQueryNombre);
+                Adox_Cat.Procedures.Append(pQueryNombre, adoCMD);
+
+                Adox_Cat = null;
+                adoCMD = null;
+                //-- fin cambio consulta ----------------------------
+
+                adoDbDesconectar(ref adoCN);
+                adoCN = null;
+            }
+            catch (System.IO.IOException e)
+            {
+                throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+
+            }
+
+            finally
+            {
+
+            }
+
+          }
+      
     }
 }

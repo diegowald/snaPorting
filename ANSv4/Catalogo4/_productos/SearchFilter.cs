@@ -50,7 +50,7 @@ namespace Catalogo._productos
             InitializeComponent();
             
             backgroundWorker = new Funciones.BackgroundReader.BackgroundDataLoader(Catalogo.Funciones.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
-                Global01.strConexion);
+                Global01.strConexionUs);
             backgroundWorker.onWorkFinishedHandler += dataReady;
             
             xCargarDataControl();
