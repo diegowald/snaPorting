@@ -96,7 +96,11 @@ Public Class Recibo
         End Get
     End Property
 
-    Public Sub Nuevo(Optional ByVal IDdeCliente As Long = 0)
+    Public Sub New(ByVal IDdeCliente As Long)
+        Nuevo(IDdeCliente)
+    End Sub
+
+    Private Sub Nuevo(Optional ByVal IDdeCliente As Long = 0)
 
         DetalleRecibo = Nothing
         AplicacionRecibo = Nothing

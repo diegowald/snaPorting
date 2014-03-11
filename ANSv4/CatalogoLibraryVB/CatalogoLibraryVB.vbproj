@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="modules\adoModulo.vb" />
     <Compile Include="modules\Enumerados.vb" />
+    <Compile Include="modules\Global01.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
