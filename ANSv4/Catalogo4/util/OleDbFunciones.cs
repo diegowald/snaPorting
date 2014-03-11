@@ -122,11 +122,42 @@ namespace Catalogo.Funciones
 
         internal static void ComandoIU(ref System.Data.OleDb.OleDbConnection conexion, string TextoComando)
         {
+            
+            const string PROCNAME_ = "ComandoIU";
+         
             if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); };
                    
             System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando, conexion);
 
-            cmd.ExecuteNonQuery();
+            if (Global01.TranActiva != null)
+            {
+                cmd.Transaction = Global01.TranActiva;
+                cmd.Transaction.Begin(); 
+            }
+            try 
+            {
+                cmd.ExecuteNonQuery();
+
+                if (cmd.Transaction != null)
+                {
+                    cmd.Transaction.Commit();
+                    cmd.Transaction  = null;
+                }
+            }
+            catch (Exception e)
+            {               
+               if (cmd.Transaction != null)
+                {
+                    cmd.Transaction.Rollback();
+                    cmd.Transaction  = null;
+                }
+                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+            }
+            finally
+            {
+
+            }
+
         }
 
         internal static void CambiarLinks(string db)

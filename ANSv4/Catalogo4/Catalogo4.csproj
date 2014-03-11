@@ -68,6 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="forms\Login.xaml.cs" />
+    <Compile Include="forms\Registration.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="forms\SplashScreen.cs" />
     <Compile Include="forms\SplashScreenForm.cs">
       <SubType>Form</SubType>
@@ -125,6 +129,14 @@
     <Compile Include="_recibos\ucRecibo.Designer.cs">
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </Compile>
+    <Page Include="forms\Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="forms\Registration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -223,10 +235,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="forms\logo.JPG" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\logo.JPG" />
+    <None Include="Resources\logo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
