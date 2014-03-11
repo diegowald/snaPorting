@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.fraFRAME1 = new System.Windows.Forms.GroupBox();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.lblProgress = new System.Windows.Forms.Label();
             this.lblNo = new System.Windows.Forms.Label();
             this.lblSI = new System.Windows.Forms.Label();
@@ -39,7 +40,6 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblProgressUpdate = new System.Windows.Forms.Label();
             this.lblUpdate = new System.Windows.Forms.Label();
-            this.lblVersion = new System.Windows.Forms.Label();
             this.fraFRAME1.SuspendLayout();
             this.fraFRAME2.SuspendLayout();
             this.SuspendLayout();
@@ -51,12 +51,21 @@
             this.fraFRAME1.Controls.Add(this.lblNo);
             this.fraFRAME1.Controls.Add(this.lblSI);
             this.fraFRAME1.Controls.Add(this.lblStep2);
-            this.fraFRAME1.Location = new System.Drawing.Point(14, 16);
+            this.fraFRAME1.Location = new System.Drawing.Point(13, 12);
             this.fraFRAME1.Name = "fraFRAME1";
             this.fraFRAME1.Size = new System.Drawing.Size(438, 140);
             this.fraFRAME1.TabIndex = 0;
             this.fraFRAME1.TabStop = false;
             this.fraFRAME1.Text = "Paso 1 de 2";
+            // 
+            // lblVersion
+            // 
+            this.lblVersion.AutoSize = true;
+            this.lblVersion.Location = new System.Drawing.Point(137, 58);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(52, 13);
+            this.lblVersion.TabIndex = 4;
+            this.lblVersion.Text = "lblVersion";
             // 
             // lblProgress
             // 
@@ -96,7 +105,7 @@
             // 
             // cmdCancel
             // 
-            this.cmdCancel.Location = new System.Drawing.Point(264, 307);
+            this.cmdCancel.Location = new System.Drawing.Point(295, 158);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(75, 23);
             this.cmdCancel.TabIndex = 1;
@@ -106,7 +115,7 @@
             // 
             // cmdNext
             // 
-            this.cmdNext.Location = new System.Drawing.Point(345, 307);
+            this.cmdNext.Location = new System.Drawing.Point(376, 158);
             this.cmdNext.Name = "cmdNext";
             this.cmdNext.Size = new System.Drawing.Size(75, 23);
             this.cmdNext.TabIndex = 2;
@@ -119,9 +128,9 @@
             this.fraFRAME2.Controls.Add(this.progressBar1);
             this.fraFRAME2.Controls.Add(this.lblProgressUpdate);
             this.fraFRAME2.Controls.Add(this.lblUpdate);
-            this.fraFRAME2.Location = new System.Drawing.Point(14, 162);
+            this.fraFRAME2.Location = new System.Drawing.Point(13, 12);
             this.fraFRAME2.Name = "fraFRAME2";
-            this.fraFRAME2.Size = new System.Drawing.Size(438, 116);
+            this.fraFRAME2.Size = new System.Drawing.Size(438, 140);
             this.fraFRAME2.TabIndex = 3;
             this.fraFRAME2.TabStop = false;
             this.fraFRAME2.Text = "Paso 2 de 2";
@@ -151,15 +160,6 @@
             this.lblUpdate.TabIndex = 0;
             this.lblUpdate.Text = "Descargando... $n";
             // 
-            // lblVersion
-            // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(137, 58);
-            this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(52, 13);
-            this.lblVersion.TabIndex = 4;
-            this.lblVersion.Text = "lblVersion";
-            // 
             // UpdateCtl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -169,7 +169,7 @@
             this.Controls.Add(this.cmdCancel);
             this.Controls.Add(this.fraFRAME1);
             this.Name = "UpdateCtl";
-            this.Size = new System.Drawing.Size(472, 351);
+            this.Size = new System.Drawing.Size(472, 197);
             this.fraFRAME1.ResumeLayout(false);
             this.fraFRAME1.PerformLayout();
             this.fraFRAME2.ResumeLayout(false);
