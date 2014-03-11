@@ -78,7 +78,7 @@ namespace Catalogo
             //--- compactar MDB--------------------------------------------------------------
             Funciones.oleDbFunciones.CompactDatabase("catalogo.mdb");
 
-            
+            //OJO verificar cuit<> 1 or len(cuit) < 11 or idans nulo
 
             Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
 

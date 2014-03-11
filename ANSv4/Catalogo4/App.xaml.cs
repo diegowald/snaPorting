@@ -19,9 +19,9 @@ namespace Catalogo
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 
-            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
-            splashthread.IsBackground = true;
-            splashthread.Start();
+            //Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            //splashthread.IsBackground = true;
+            //splashthread.Start();
 
             Catalogo.Login f = new Catalogo.Login();
 
