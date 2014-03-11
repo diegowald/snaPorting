@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AvalonDock;
 using Catalogo.Funciones.emitter_receiver;
+using System.Threading;
 
 namespace Catalogo
 {
@@ -21,10 +22,11 @@ namespace Catalogo
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         public MainWindow()
         {
-            InitializeComponent();
-            
+            this.Hide();
+            InitializeComponent();            
             System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
         }
 
@@ -81,9 +83,22 @@ namespace Catalogo
         }
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
-        {
+        {         
+            //Thread.Sleep(1000);
+            SplashScreen.UdpateStatusText("Cargando Filtros de Búsqueda!!!");
+
             Catalogo._productos.SearchFilter sf = addSearchArea();
+
+            SplashScreen.UdpateStatusTextWithStatus("Success Message", TypeOfMessage.Success);
+            //Thread.Sleep(500);
+
+            SplashScreen.UdpateStatusText("Cargando Lista de Productos!!!");
+            //Thread.Sleep(1000);
+
             Catalogo._productos.GridViewFilter2 gv = addProductsArea();
+            
+            SplashScreen.UdpateStatusText("Items Loaded..");
+            //Thread.Sleep(500);
             
             sf.attachReceptor(gv);
             sf.attachReceptor2(gv);
@@ -91,6 +106,11 @@ namespace Catalogo
             gv.attachReceptor2(sf);
             
             this.sugerencias.Visibility = System.Windows.Visibility.Collapsed;
+            
+            this.Show();
+            SplashScreen.CloseSplashScreen();
+            //this.Activate(); 
+
         }
 
         const string LayoutFileName = "SampleLayout.xml";
@@ -133,11 +153,11 @@ namespace Catalogo
         {
             this.toolsContent.ToggleAutoHide();
             this.detailsContent.ToggleAutoHide();
-//            if (_firstTimeLoad && !_isDataGridLoaded)
-  //          {
-    //            outputDockablePane.ToggleAutoHide();
-      //          _forcedToAutoHide = true;
-        //    }
+            //if (_firstTimeLoad && !_isDataGridLoaded)
+            //{
+            //    outputDockablePane.ToggleAutoHide();
+            //    _forcedToAutoHide = true;
+            //}
         }
 
         private void btnReciboPage_Click(object sender, RoutedEventArgs e)
