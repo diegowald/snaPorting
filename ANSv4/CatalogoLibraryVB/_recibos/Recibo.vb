@@ -219,60 +219,60 @@ ErrorHandler:
             Funciones.adoModulo.adoComandoIU(Conexion1, "DELETE FROM tblRecibo_Enc WHERE NroRecibo='09999-99999999'")
             mvarNroRecibo = "09999-99999999"
         Else
-            rec = Funciones.adoModulo.adoComando(Conexion1, "SELECT TOP 1 right(NroRecibo,8) AS NroRecibo FROM tblRecibo_Enc WHERE left(NroRecibo,5)=" & vg.NroUsuario & " ORDER BY NroRecibo DESC")
+            rec = Funciones.adoModulo.adoComando(Conexion1, "SELECT TOP 1 right(NroRecibo,8) AS NroRecibo FROM tblRecibo_Enc WHERE left(NroRecibo,5)=" & mvarIdCliente & " ORDER BY NroRecibo DESC")
             If Not rec.HasRows Then
-                mvarNroRecibo = Trim(vg.NroUsuario) & "-00000001"
+                mvarNroRecibo = Trim(mvarIdCliente) & "-00000001"
             Else
-                mvarNroRecibo = Trim(vg.NroUsuario) & "-" & Format(CLng(rec("nroRecibo") + 1), "00000000")
+                mvarNroRecibo = Trim(mvarIdCliente) & "-" & Format(CLng(rec("nroRecibo") + 1), "00000000")
             End If
             rec = Nothing
-            End If
+        End If
 
-            cmd.Parameters.Add("pNroRecibo", SqlDbType.VarChar, 14).Value = mvarNroRecibo
-            cmd.Parameters.Add("pF_Recibo", SqlDbType.Date).Value = mvarF_Recibo
-            cmd.Parameters.Add("pIdCliente", SqlDbType.Int).Value = mvarIdCliente
-            cmd.Parameters.Add("pBahia", SqlDbType.Bit).Value = mvarBahia
-            cmd.Parameters.Add("pTotal", SqlDbType.Float).Value = mvarTotal
-            cmd.Parameters.Add("pNroImpresion", SqlDbType.Int).Value = 0
-            cmd.Parameters.Add("pObservaciones", SqlDbType.VarChar, 200).Value = mvarObservaciones
-            cmd.Parameters.Add("pPercepciones", SqlDbType.Float).Value = mvarPercepciones
+        cmd.Parameters.Add("pNroRecibo", OleDb.OleDbType.VarChar, 14).Value = mvarNroRecibo
+        cmd.Parameters.Add("pF_Recibo", OleDb.OleDbType.Date).Value = mvarF_Recibo
+        cmd.Parameters.Add("pIdCliente", OleDb.OleDbType.Integer).Value = mvarIdCliente
+        cmd.Parameters.Add("pBahia", OleDb.OleDbType.Boolean).Value = mvarBahia
+        cmd.Parameters.Add("pTotal", OleDb.OleDbType.Single).Value = mvarTotal
+        cmd.Parameters.Add("pNroImpresion", OleDb.OleDbType.Integer).Value = 0
+        cmd.Parameters.Add("pObservaciones", OleDb.OleDbType.VarChar, 200).Value = mvarObservaciones
+        cmd.Parameters.Add("pPercepciones", OleDb.OleDbType.Single).Value = mvarPercepciones
 
-            cmd.Connection = Conexion1
-            cmd.CommandType = CommandType.StoredProcedure
-            cmd.CommandText = "usp_Recibo_Enc_add"
-            cmd.ExecuteNonQuery()
+        cmd.Connection = Conexion1
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandText = "usp_Recibo_Enc_add"
+        cmd.ExecuteNonQuery()
 
-            cmd = Nothing
+        cmd = Nothing
 
-            ' Ahora GUARDO los ITEMS de ESTE Recibo
-            Dim I As Integer
+        ' Ahora GUARDO los ITEMS de ESTE Recibo
+        Dim I As Integer
 
-            For I = 1 To DetalleRecibo.Count
-                GuardarItem(Renglon(I).TipoValor, _
-                            Renglon(I).Importe, _
-                            Renglon(I).F_EmiCheque, _
-                            Renglon(I).F_CobroCheque, _
-                            Renglon(I).N_Cheque, _
-                            Renglon(I).NrodeCuenta, _
-                            Renglon(I).Banco, _
-                            Renglon(I).Cpa, _
-                            Renglon(I).ChequePropio, _
-                            Renglon(I).T_Cambio)
-            Next I
+        For I = 1 To DetalleRecibo.Count
+            GuardarItem(Renglon(I).TipoValor, _
+                        Renglon(I).Importe, _
+                        Renglon(I).F_EmiCheque, _
+                        Renglon(I).F_CobroCheque, _
+                        Renglon(I).N_Cheque, _
+                        Renglon(I).NrodeCuenta, _
+                        Renglon(I).Banco, _
+                        Renglon(I).Cpa, _
+                        Renglon(I).ChequePropio, _
+                        Renglon(I).T_Cambio)
+        Next I
 
-            For I = 1 To AplicacionRecibo.Count
-                GuardarItemApli(RenglonApli(I).Concepto, _
-                                RenglonApli(I).Importe)
-            Next I
+        For I = 1 To AplicacionRecibo.Count
+            GuardarItemApli(RenglonApli(I).Concepto, _
+                            RenglonApli(I).Importe)
+        Next I
 
-            For I = 1 To DeducirRecibo.Count
-                GuardarItemDedu(RenglonDedu(I).Concepto, _
-                                RenglonDedu(I).Importe, _
-                                RenglonDedu(I).Porcentaje, _
-                                RenglonDedu(I).DeduAlResto)
-            Next I
+        For I = 1 To DeducirRecibo.Count
+            GuardarItemDedu(RenglonDedu(I).Concepto, _
+                            RenglonDedu(I).Importe, _
+                            RenglonDedu(I).Porcentaje, _
+                            RenglonDedu(I).DeduAlResto)
+        Next I
 
-            vg.NroImprimir = mvarNroRecibo
+        vg.NroImprimir = mvarNroRecibo
 
         ' Por POLITICA NUESTRA  -- >  SE BORRA
         If UCase(Origen) = "VER" Then
@@ -373,17 +373,17 @@ ErrorHandler:
 
         Dim cmd As New System.Data.OleDb.OleDbCommand
 
-        cmd.Parameters.Add("pNroRecibo", SqlDbType.VarChar, 14).Value = mvarNroRecibo
-        cmd.Parameters.Add("pTipoValor", SqlDbType.TinyInt).Value = TipoValor
-        cmd.Parameters.Add("pImporte", SqlDbType.Float).Value = Importe
-        cmd.Parameters.Add("pF_EmiCheque", SqlDbType.Date).Value = F_EmiCheque
-        cmd.Parameters.Add("pF_CobroCheque", SqlDbType.Date).Value = F_CobroCheque
-        cmd.Parameters.Add("pN_Cheque", SqlDbType.VarChar, 50).Value = N_Cheque
-        cmd.Parameters.Add("pN_Cuenta", SqlDbType.VarChar, 50).Value = NrodeCuenta
-        cmd.Parameters.Add("pIdBanco", SqlDbType.Int).Value = Banco
-        cmd.Parameters.Add("pCpa", SqlDbType.VarChar, 10).Value = Cpa
-        cmd.Parameters.Add("pChequePropio", SqlDbType.Bit).Value = ChequePropio
-        cmd.Parameters.Add("pT_Cambio", SqlDbType.Float).Value = T_Cambio
+        cmd.Parameters.Add("pNroRecibo", OleDb.OleDbType.VarChar, 14).Value = mvarNroRecibo
+        cmd.Parameters.Add("pTipoValor", OleDb.OleDbType.TinyInt).Value = TipoValor
+        cmd.Parameters.Add("pImporte", OleDb.OleDbType.Single).Value = Importe
+        cmd.Parameters.Add("pF_EmiCheque", OleDb.OleDbType.Date).Value = F_EmiCheque
+        cmd.Parameters.Add("pF_CobroCheque", OleDb.OleDbType.Date).Value = F_CobroCheque
+        cmd.Parameters.Add("pN_Cheque", OleDb.OleDbType.VarChar, 50).Value = N_Cheque
+        cmd.Parameters.Add("pN_Cuenta", OleDb.OleDbType.VarChar, 50).Value = NrodeCuenta
+        cmd.Parameters.Add("pIdBanco", OleDb.OleDbType.Integer).Value = Banco
+        cmd.Parameters.Add("pCpa", OleDb.OleDbType.VarChar, 10).Value = Cpa
+        cmd.Parameters.Add("pChequePropio", OleDb.OleDbType.Boolean).Value = ChequePropio
+        cmd.Parameters.Add("pT_Cambio", OleDb.OleDbType.Single).Value = T_Cambio
 
         cmd.Connection = Conexion1
         cmd.CommandType = CommandType.StoredProcedure
@@ -409,9 +409,9 @@ ErrorHandler:
 
         Dim cmd As New System.Data.OleDb.OleDbCommand
 
-        cmd.Parameters.Add("pNroRecibo", SqlDbType.VarChar, 14).Value = mvarNroRecibo
-        cmd.Parameters.Add("pConcepto", SqlDbType.VarChar, 50).Value = Concepto
-        cmd.Parameters.Add("pImporte", SqlDbType.Float).Value = Importe
+        cmd.Parameters.Add("pNroRecibo", OleDb.OleDbType.VarChar, 14).Value = mvarNroRecibo
+        cmd.Parameters.Add("pConcepto", OleDb.OleDbType.VarChar, 50).Value = Concepto
+        cmd.Parameters.Add("pImporte", OleDb.OleDbType.Single).Value = Importe
 
         cmd.Connection = Conexion1
         cmd.CommandType = CommandType.StoredProcedure
@@ -440,11 +440,11 @@ ErrorHandler:
 
         Dim cmd As New System.Data.OleDb.OleDbCommand
 
-        cmd.Parameters.Add("pNroRecibo", SqlDbType.VarChar, 14).Value = mvarNroRecibo
-        cmd.Parameters.Add("pConcepto", SqlDbType.VarChar, 50).Value = Concepto
-        cmd.Parameters.Add("pImporte", SqlDbType.Float).Value = Importe
-        cmd.Parameters.Add("pPorcentaje", SqlDbType.Bit).Value = Porcentaje
-        cmd.Parameters.Add("pDeduAlResto", SqlDbType.Bit).Value = DeduAlResto
+        cmd.Parameters.Add("pNroRecibo", OleDb.OleDbType.VarChar, 14).Value = mvarNroRecibo
+        cmd.Parameters.Add("pConcepto", OleDb.OleDbType.VarChar, 50).Value = Concepto
+        cmd.Parameters.Add("pImporte", OleDb.OleDbType.Single).Value = Importe
+        cmd.Parameters.Add("pPorcentaje", OleDb.OleDbType.Boolean).Value = Porcentaje
+        cmd.Parameters.Add("pDeduAlResto", OleDb.OleDbType.Boolean).Value = DeduAlResto
 
         cmd.Connection = Conexion1
         cmd.CommandType = CommandType.StoredProcedure

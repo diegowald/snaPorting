@@ -17,7 +17,7 @@ Public Class Auditor
             If Not (ValidarConexion()) Then Exit Sub
 
             On Error GoTo ErrorHandler
-            adoCMD.Parameters.Add("pDetalle", SqlDbType.VarChar, 128).Value = CStr(Objeto) & "|" & CStr(Accion) & "|" & Detalle
+            adoCMD.Parameters.Add("pDetalle", OleDb.OleDbType.VarChar, 128).Value = CStr(Objeto) & "|" & CStr(Accion) & "|" & Detalle
 
             adoCMD.Connection = Conexion1
             adoCMD.CommandType = CommandType.StoredProcedure

@@ -23,7 +23,7 @@ Namespace Funciones
 
             objAdapter = New OleDbDataAdapter(Tabla, conexion)
             objAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, SqlDbType.NChar, 400)).Value = Prm1
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, OleDb.OleDbType.Char, 400)).Value = Prm1
             objAdapter.Fill(objDs, "dataset")
 
             Return objDs
@@ -38,8 +38,8 @@ Namespace Funciones
             objAdapter = New OleDbDataAdapter(Tabla, conexion)
             objAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
 
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, SqlDbType.NVarChar, 100)).Value = Prm1
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, SqlDbType.TinyInt)).Value = Prm2
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, OleDb.OleDbType.VarChar, 100)).Value = Prm1
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, OleDb.OleDbType.TinyInt)).Value = Prm2
 
             objAdapter.Fill(objDs, "dataset")
 
@@ -59,10 +59,10 @@ Namespace Funciones
             objAdapter = New OleDbDataAdapter(Tabla, conexion)
             objAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
 
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, SqlDbType.NVarChar, 100)).Value = Prm1
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, SqlDbType.NVarChar, 100)).Value = Prm2
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm3, SqlDbType.NVarChar, 100)).Value = Prm3
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm4, SqlDbType.NVarChar, 100)).Value = Prm4
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, OleDb.OleDbType.VarChar, 100)).Value = Prm1
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, OleDb.OleDbType.VarChar, 100)).Value = Prm2
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm3, OleDb.OleDbType.VarChar, 100)).Value = Prm3
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm4, OleDb.OleDbType.VarChar, 100)).Value = Prm4
             objAdapter.Fill(objDs, "dataset")
 
             Return objDs
@@ -80,9 +80,9 @@ Namespace Funciones
             objAdapter = New OleDbDataAdapter(Tabla, conexion)
             objAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
 
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, SqlDbType.NVarChar, 100)).Value = Prm1
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, SqlDbType.NVarChar, 100)).Value = Prm2
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm3, SqlDbType.NVarChar, 100)).Value = Prm3
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, OleDb.OleDbType.VarChar, 100)).Value = Prm1
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, OleDb.OleDbType.VarChar, 100)).Value = Prm2
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm3, OleDb.OleDbType.VarChar, 100)).Value = Prm3
             objAdapter.Fill(objDs, "dataset")
 
             Return objDs
@@ -101,11 +101,11 @@ Namespace Funciones
             objAdapter = New OleDbDataAdapter(Tabla, conexion)
             objAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
 
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, SqlDbType.NVarChar, 100)).Value = Prm1
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, SqlDbType.NVarChar, 100)).Value = Prm2
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm3, SqlDbType.NVarChar, 100)).Value = Prm3
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm4, SqlDbType.NVarChar, 100)).Value = Prm4
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm5, SqlDbType.NVarChar, 100)).Value = Prm5
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, OleDb.OleDbType.VarChar, 100)).Value = Prm1
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, OleDb.OleDbType.VarChar, 100)).Value = Prm2
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm3, OleDb.OleDbType.VarChar, 100)).Value = Prm3
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm4, OleDb.OleDbType.VarChar, 100)).Value = Prm4
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm5, OleDb.OleDbType.VarChar, 100)).Value = Prm5
             objAdapter.Fill(objDs, "dataset")
 
             Return objDs
@@ -125,12 +125,12 @@ Namespace Funciones
             objAdapter = New OleDbDataAdapter(Tabla, conexion)
             objAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
 
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, SqlDbType.NVarChar, 100)).Value = Prm1
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, SqlDbType.NVarChar, 100)).Value = Prm2
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm3, SqlDbType.NVarChar, 100)).Value = Prm3
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm4, SqlDbType.NVarChar, 100)).Value = Prm4
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm5, SqlDbType.NVarChar, 100)).Value = Prm5
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm6, SqlDbType.NVarChar, 100)).Value = Prm6
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, OleDb.OleDbType.VarChar, 100)).Value = Prm1
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, OleDb.OleDbType.VarChar, 100)).Value = Prm2
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm3, OleDb.OleDbType.VarChar, 100)).Value = Prm3
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm4, OleDb.OleDbType.VarChar, 100)).Value = Prm4
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm5, OleDb.OleDbType.VarChar, 100)).Value = Prm5
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm6, OleDb.OleDbType.VarChar, 100)).Value = Prm6
             objAdapter.Fill(objDs, "dataset")
 
             Return objDs
@@ -151,13 +151,13 @@ Namespace Funciones
             objAdapter = New OleDbDataAdapter(Tabla, conexion)
             objAdapter.SelectCommand.CommandType = CommandType.StoredProcedure
 
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, SqlDbType.NVarChar, 100)).Value = Prm1
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, SqlDbType.NVarChar, 100)).Value = Prm2
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm3, SqlDbType.NVarChar, 100)).Value = Prm3
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm4, SqlDbType.NVarChar, 100)).Value = Prm4
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm5, SqlDbType.NVarChar, 100)).Value = Prm5
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm6, SqlDbType.NVarChar, 100)).Value = Prm6
-            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm7, SqlDbType.NVarChar, 100)).Value = Prm7
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm1, OleDb.OleDbType.VarChar, 100)).Value = Prm1
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm2, OleDb.OleDbType.VarChar, 100)).Value = Prm2
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm3, OleDb.OleDbType.VarChar, 100)).Value = Prm3
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm4, OleDb.OleDbType.VarChar, 100)).Value = Prm4
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm5, OleDb.OleDbType.VarChar, 100)).Value = Prm5
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm6, OleDb.OleDbType.VarChar, 100)).Value = Prm6
+            objAdapter.SelectCommand.Parameters.Add(New OleDbParameter(NomPrm7, OleDb.OleDbType.VarChar, 100)).Value = Prm7
             objAdapter.Fill(objDs, "dataset")
 
             Return objDs
