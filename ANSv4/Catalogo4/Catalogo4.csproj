@@ -71,6 +71,12 @@
     <Compile Include="Global01.cs" />
     <Compile Include="MainMod.cs" />
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
+    <Compile Include="util\UpdateCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="util\UpdateCtl.Designer.cs">
+      <DependentUpon>UpdateCtl.cs</DependentUpon>
+    </Compile>
     <Compile Include="util\updateMDB.cs" />
     <Compile Include="util\emitter-receiver\IEmisor.cs" />
     <Compile Include="util\emitter-receiver\IReceptor.cs" />
@@ -149,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="util\frmErrorGuardian.resx">
       <DependentUpon>frmErrorGuardian.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="util\UpdateCtl.resx">
+      <DependentUpon>UpdateCtl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\SearchFilter.resx">
       <DependentUpon>SearchFilter.cs</DependentUpon>
