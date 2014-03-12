@@ -50,18 +50,25 @@ namespace Catalogo._registro
 
         private static string TomarInfoWMI(ref WMIPair clave)
         {
-            const string PROCNAME_ = "TomarInfoWMI";
-
-            string functionReturnValue = null;
-
-            ManagementObjectSearcher MOS = new ManagementObjectSearcher("Select " + clave.second + " from " + clave.first);
-
-            foreach (ManagementObject MO in MOS.Get())
+            try
             {
-                functionReturnValue = MO[clave.second].ToString();
-            }
+                const string PROCNAME_ = "TomarInfoWMI";
 
-            return functionReturnValue;
+                string functionReturnValue = null;
+
+                ManagementObjectSearcher MOS = new ManagementObjectSearcher("Select " + clave.second + " from " + clave.first);
+
+                foreach (ManagementObject MO in MOS.Get())
+                {
+                    functionReturnValue = MO[clave.second].ToString();
+                }
+
+                return functionReturnValue;
+            }
+            catch 
+            {
+                return "";
+            }
         }
 
         public static string ObtenerCRC(ref string s)
