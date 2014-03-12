@@ -42,9 +42,9 @@ namespace Catalogo
        public static string NroUsuario;
        public static System.DateTime dbCaduca;
        public static System.DateTime appCaduca;
-       public static System.DateTime FechaUltimoAcceso;
        public static System.DateTime F_ActCatalogo;
        public static System.DateTime F_ActClientes;
+       public static System.DateTime F_UltimoAcceso;
 
        public static bool EnviarAuditoria;
        public static bool AuditarProceso;
@@ -57,6 +57,8 @@ namespace Catalogo
        public static byte ListaPrecio;
        public static float Dolar;
        public static float Euro;
-   
+
+       public static string Cuit;
+
     }
 }
