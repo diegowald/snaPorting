@@ -25,12 +25,12 @@ namespace Catalogo
 
             //Catalogo.Login f = new Catalogo.Login();
 
-           // Catalogo.MainMod.Main();
+            Catalogo.MainMod.Main();
 
             if (true) //(f.ShowDialog() == true)
             {
-            //MainWindow wnd = new new MainWindow();
-                Registration wnd = new Registration(); 
+            MainWindow wnd = new MainWindow();
+                //Registration wnd = new Registration(); 
                 wnd.ShowDialog();
                 wnd.Close();
 
