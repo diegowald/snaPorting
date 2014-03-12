@@ -146,14 +146,16 @@ namespace Catalogo
             if (Global01.IDMaquinaCRC == "no")
             {
                 Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(ref Global01.IDMaquina);
-                Funciones.modINIs.WriteINI("DATOS", "MachineId", "");
-                Funciones.modINIs.WriteINI("DATOS", "RegistrationKey","");
+                Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
+                Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
                 Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
             }
             else
             {
                 if (!Catalogo._registro.AppRegistro.ValidateMachineId(Global01.IDMaquinaCRC))
                 {
+                    Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
+                    Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");                   
                     MessageBox.Show("Código Guardado Adulterado. \r\n Se Genera Codigo de Registro Nuevo. \r\n Ahora la Aplicacion termina.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     miEnd();
                 }
@@ -176,46 +178,44 @@ namespace Catalogo
                         if (Global01.NoConn)
                         {
                             //No es necesario activar
-                        }
-                        else
-                        {
-                            //Interaction.MsgBox(, Constants.vbQuestion + Constants.vbYesNo, "Atención") == Constants.vbYes
-
-                            if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            {
-                                //ActivarApplicacion();
-                            }
-                        }
+                        };
                     }
                     else
                     {
-                        //-- Sin Registrar Sabor 2 -----------------------
-                        Funciones.modINIs.WriteINI("DATOS", "RegistrationKey", "");
-                        //if ((Splash != null))
-                        //{
-                        //    Splash.Hide();
-                        //    Splash = null;
-                        //}
-
-                        Cursor.Current = Cursors.Default;
-
-                        //- Registro del Programa -
-                        Registration fRegistro = new Registration();
-                        fRegistro.ShowDialog();
-
-                        //-- REGISTRO AUTOMATICO POR INTERNET --
-                        if (!Global01.RecienRegistrado)
+                        if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            miEnd();
-                        }
-                        else
-                        {
-                            goto AcaRegistro;
-                        }
-
-                        Cursor.Current = Cursors.WaitCursor;
-                    }
+                            //ActivarApplicacion();
+                        };
+                    };
                 }
+                else
+                {
+                    //-- Sin Registrar Sabor 2 -----------------------
+                    Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
+                    //if ((Splash != null))
+                    //{
+                    //    Splash.Hide();
+                    //    Splash = null;
+                    //}
+
+                    Cursor.Current = Cursors.Default;
+
+                    //- Registro del Programa -
+                    Registration fRegistro = new Registration();
+                    fRegistro.ShowDialog();
+
+                    //-- REGISTRO AUTOMATICO POR INTERNET --
+                    if (!Global01.RecienRegistrado)
+                    {
+                        miEnd();
+                    }
+                    else
+                    {
+                        goto AcaRegistro;
+                    }
+
+                    Cursor.Current = Cursors.WaitCursor;
+                 }
 
                 //Registrado OK
             }
