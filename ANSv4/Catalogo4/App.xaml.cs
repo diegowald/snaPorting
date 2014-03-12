@@ -23,7 +23,7 @@ namespace Catalogo
             //splashthread.IsBackground = true;
             //splashthread.Start();
 
-            Catalogo.Login f = new Catalogo.Login();
+            //Catalogo.Login f = new Catalogo.Login();
 
             Catalogo.MainMod.Main();
 
