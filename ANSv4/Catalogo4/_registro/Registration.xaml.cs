@@ -57,8 +57,46 @@ namespace Catalogo
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            if (textBoxEmail.Text.Length == 0)
+
+            bool vfirstname = false;
+            bool vlastname = false;
+            bool vRazonSocial = false;
+            bool vCuit = false;
+            bool vemail = false;
+            bool vNroCuenta = false;
+            bool vNroZona = false;
+            bool vpassword = false;
+
+            if (textBoxFirstName.Text.Length == 0)
             {
+                errormessage.Text = "ingresar un nombre";
+                textBoxFirstName.Focus();
+            }
+            else vfirstname = true;
+
+            if (textBoxLastName.Text.Length == 0)
+            {
+                errormessage.Text = "ingresar un apellido";
+                textBoxLastName.Focus();
+            }
+            else vlastname = true;
+
+            if (textBoxRazonSocial.Text.Length == 0)
+            {
+                errormessage.Text = "ingresar razón social";
+                textBoxRazonSocial.Focus();
+            }
+            else vRazonSocial = true;
+
+            if (textBoxCuit.Text.Length == 0)
+            {
+                errormessage.Text = "ingresar un cuit";
+                textBoxCuit.Focus();
+            }
+            else vCuit = true;
+
+            if (textBoxEmail.Text.Length == 0)
+            {                
                 errormessage.Text = "ingresar un email";
                 textBoxEmail.Focus();
             }
@@ -68,7 +106,40 @@ namespace Catalogo
                 textBoxEmail.Select(0, textBoxEmail.Text.Length);
                 textBoxEmail.Focus();
             }
-            else
+            else vemail = true;
+
+            if (textBoxNroCuenta.Text.Length == 0)
+            {
+                errormessage.Text = "ingresar un n° de cuenta";
+                textBoxNroCuenta.Focus();
+            }
+            else vNroCuenta = true;
+
+            if (textBoxNroZona.Text.Length == 0)
+            {
+                errormessage.Text = "ingresar un n° de zona";
+                textBoxNroZona.Focus();
+            }
+            else vNroZona = true;
+
+            if (passwordBox1.Password.Length == 0)
+            {
+                errormessage.Text = "ingrese Llave.";
+                passwordBox1.Focus();
+            }
+            else if (passwordBoxConfirm.Password.Length == 0)
+            {
+                errormessage.Text = "ingrese la llave nuevamente.";
+                passwordBoxConfirm.Focus();
+            }
+            else if (passwordBox1.Password != passwordBoxConfirm.Password)
+            {
+                errormessage.Text = "las llaves ingresadas no coinciden.";
+                passwordBoxConfirm.Focus();
+            }
+            else  vpassword = true;
+      
+            if ((vfirstname) && (vlastname) && (vRazonSocial) && (vCuit) && (vemail) && (vNroCuenta) && (vNroZona) && (vpassword))
             {
                 string firstname = textBoxFirstName.Text;
                 string lastname = textBoxLastName.Text;
@@ -79,46 +150,29 @@ namespace Catalogo
                 string NroZona = textBoxNroZona.Text;
                 string password = passwordBox1.Password;
 
-                if (passwordBox1.Password.Length == 0)
-                {
-                    errormessage.Text = "Ingrese Llave.";
-                    passwordBox1.Focus();
-                }
-                else if (passwordBoxConfirm.Password.Length == 0)
-                {
-                    errormessage.Text = "ingrese la llave nuevamente.";
-                    passwordBoxConfirm.Focus();
-                }
-                else if (passwordBox1.Password != passwordBoxConfirm.Password)
-                {
-                    errormessage.Text = "las llaves ingresadas no coinciden.";
-                    passwordBoxConfirm.Focus();
-                }
-                else
-                {
-                    errormessage.Text = "";
+                errormessage.Text = "";
   
-                    //SqlConnection con = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=TestDataBase;User ID=sa;Password=sqlserver223");
-                    //con.Open();
-                    //SqlCommand cmd = new SqlCommand("Insert into Registration (FirstName,LastName,Email,Password,Address) values('" + firstname + "','" + lastname + "','" + email + "','" + password + "','" + address + "')", con);
-                    //cmd.CommandType = CommandType.Text;
-                    //cmd.ExecuteNonQuery();
-                    //con.Close();
-                    //errormessage.Text = "You have Registered successfully.";
+                //SqlConnection con = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=TestDataBase;User ID=sa;Password=sqlserver223");
+                //con.Open();
+                //SqlCommand cmd = new SqlCommand("Insert into Registration (FirstName,LastName,Email,Password,Address) values('" + firstname + "','" + lastname + "','" + email + "','" + password + "','" + address + "')", con);
+                //cmd.CommandType = CommandType.Text;
+                //cmd.ExecuteNonQuery();
+                //con.Close();
+                //errormessage.Text = "You have Registered successfully.";
                     
-                    string xParam = passwordBox1.Password.ToString() + Global01.IDMaquinaCRC;
-                    Global01.NroUsuario = textBoxNroCuenta.Text.PadLeft(5,'0');
-                    Global01.LLaveViajante = textBoxNroZona.Text.PadLeft(5,'0') + textBoxNroCuenta.Text.PadLeft(5,'0') + textBoxCuit.Text.ToString().Replace("-", "") + Catalogo._registro.AppRegistro.ObtenerCRC(ref xParam);
-                    //zzzzziiiiiccccccccccc
-                    //123456789012345678901
-                    Funciones.modINIs.WriteINI("DATOS", "LLaveViajante", Global01.LLaveViajante);
-                    Global01.appCaduca = DateTime.Today.Date.AddDays(30);
-                    Global01.dbCaduca = DateTime.Today.Date.AddDays(21);
-                    Global01.RecienRegistrado = true;
+                string xParam = passwordBox1.Password.ToString() + Global01.IDMaquinaCRC;
+                Global01.NroUsuario = textBoxNroCuenta.Text.PadLeft(5,'0');
+                Global01.LLaveViajante = textBoxNroZona.Text.PadLeft(5,'0') + textBoxNroCuenta.Text.PadLeft(5,'0') + textBoxCuit.Text.ToString().Replace("-", "") + Catalogo._registro.AppRegistro.ObtenerCRC(ref xParam);
+                //zzzzziiiiiccccccccccc
+                //123456789012345678901
+                Funciones.modINIs.WriteINI("DATOS", "LLaveViajante", Global01.LLaveViajante);
+                Global01.appCaduca = DateTime.Today.Date.AddDays(30);
+                Global01.dbCaduca = DateTime.Today.Date.AddDays(21);
+                Global01.RecienRegistrado = true;
 
-                    Reset();
-                    Close();
-                }
+                Reset();
+                Close();
+       
             }
 
 
@@ -137,6 +191,11 @@ namespace Catalogo
             
             //MsgBox ("¡BIENVENIDO A NUESTRO CATALOGO!."), vbInformation, "REGISTRADO"
 
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

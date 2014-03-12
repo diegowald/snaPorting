@@ -43,16 +43,19 @@
             <TextBlock Height="23" HorizontalAlignment="Left" Margin="47,260,0,0" Name="textBlockConfirmPwd" Text="Confirmar Llave:" VerticalAlignment="Top" Width="110" TextAlignment="Right" />
 
 
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,20,0,0" Name="textBoxFirstName" VerticalAlignment="Top" Width="222" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,50,0,0" Name="textBoxLastName" VerticalAlignment="Top" Width="222" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,80,0,0" Name="textBoxRazonSocial" VerticalAlignment="Top" Width="222" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,110,0,0" Name="textBoxCuit" VerticalAlignment="Top" Width="222" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,140,0,0" Name="textBoxEmail" VerticalAlignment="Top" Width="222" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,170,0,0" Name="textBoxNroCuenta" VerticalAlignment="Top" Width="80" />
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,200,0,0" Name="textBoxNroZona" VerticalAlignment="Top" Width="80" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,20,0,0" Name="textBoxFirstName" VerticalAlignment="Top" Width="222" MaxLength="32"/>
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,50,0,0" Name="textBoxLastName" VerticalAlignment="Top" Width="222" MaxLength="32"/>
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,80,0,0" Name="textBoxRazonSocial" VerticalAlignment="Top" Width="222" MaxLength="64"/>
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,110,0,0" Name="textBoxCuit" VerticalAlignment="Top" Width="222" MaxLength="13" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,140,0,0" Name="textBoxEmail" VerticalAlignment="Top" Width="222" MaxLength="64"/>
 
-            <PasswordBox Height="23" HorizontalAlignment="Left" Margin="173,230,0,0" Name="passwordBox1" VerticalAlignment="Top" Width="100" />
-            <PasswordBox Height="23" HorizontalAlignment="Left" Margin="173,260,0,0" Name="passwordBoxConfirm" VerticalAlignment="Top" Width="100" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,170,0,0" Name="textBoxNroCuenta" VerticalAlignment="Top" Width="80" MaxLength="5" PreviewTextInput="NumberValidationTextBox">
+            </TextBox> 
+            
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,200,0,0" Name="textBoxNroZona" VerticalAlignment="Top" Width="80" MaxLength="5" />
+
+            <PasswordBox Height="23" HorizontalAlignment="Left" Margin="173,230,0,0" Name="passwordBox1" VerticalAlignment="Top" Width="100" MaxLength="32"/>
+            <PasswordBox Height="23" HorizontalAlignment="Left" Margin="173,260,0,0" Name="passwordBoxConfirm" VerticalAlignment="Top" Width="100" MaxLength="32"/>
 
             <Button Content="Registrar" Height="23" HorizontalAlignment="Left" Margin="100,310,0,0" Name="Submit" VerticalAlignment="Top" Width="70" Click="Submit_Click" />
             <Button Content="Resetear" Height="23" HorizontalAlignment="Left" Margin="180,310,0,0" Name="button2" VerticalAlignment="Top" Width="70" Click="button2_Click" />
