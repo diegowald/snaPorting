@@ -50,6 +50,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -69,7 +70,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="forms\Login.xaml.cs" />
-    <Compile Include="forms\Registration.xaml.cs">
+    <Compile Include="_registro\Registration.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="forms\SplashScreen.cs" />
@@ -82,19 +83,26 @@
     <Compile Include="Global01.cs" />
     <Compile Include="MainMod.cs" />
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
-    <Compile Include="util\UpdateCtl.cs">
+    <Compile Include="_registro\AppRegistro.cs" />
+    <Compile Include="_updateData\fDataUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_updateData\fDataUpdate.Designer.cs">
+      <DependentUpon>fDataUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_updateData\UpdateCtl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="util\UpdateCtl.Designer.cs">
+    <Compile Include="_updateData\UpdateCtl.Designer.cs">
       <DependentUpon>UpdateCtl.cs</DependentUpon>
     </Compile>
     <Compile Include="util\updateMDB.cs" />
     <Compile Include="util\emitter-receiver\IEmisor.cs" />
     <Compile Include="util\emitter-receiver\IReceptor.cs" />
-    <Compile Include="util\frmErrorGuardian.cs">
+    <Compile Include="forms\frmErrorGuardian.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="util\frmErrorGuardian.Designer.cs">
+    <Compile Include="forms\frmErrorGuardian.Designer.cs">
       <DependentUpon>frmErrorGuardian.cs</DependentUpon>
     </Compile>
     <Compile Include="util\ModINIs.cs" />
@@ -133,7 +141,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="forms\Registration.xaml">
+    <Page Include="_registro\Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -175,10 +183,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="util\frmErrorGuardian.resx">
+    <EmbeddedResource Include="_updateData\fDataUpdate.resx">
+      <DependentUpon>fDataUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmErrorGuardian.resx">
       <DependentUpon>frmErrorGuardian.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="util\UpdateCtl.resx">
+    <EmbeddedResource Include="_updateData\UpdateCtl.resx">
       <DependentUpon>UpdateCtl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\SearchFilter.resx">

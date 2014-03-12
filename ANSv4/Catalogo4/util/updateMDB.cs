@@ -67,7 +67,7 @@ namespace Catalogo.Funciones
                 oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaAuditor");
                 Application.DoEvents();
 
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaCatalogoBAK");
+                //oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaCatalogoBAK");
 
                 if (Global01.TranActiva != null)
                 {
