@@ -90,7 +90,7 @@ namespace Catalogo._registro
             finally
             {
             }
-            return functionReturnValue;
+            return functionReturnValue.ToUpper();
         }
 
         public static bool ValidateMachineId(string s)

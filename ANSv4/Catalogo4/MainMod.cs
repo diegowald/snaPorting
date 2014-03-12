@@ -35,7 +35,7 @@ namespace Catalogo
            Global01.IDMaquina = Catalogo._registro.AppRegistro.ObtenerIDMaquina();
            Global01.IDMaquinaCRC = Funciones.modINIs.ReadINI("DATOS", "MachineId","no");
            Global01.LLaveViajante = Funciones.modINIs.ReadINI("DATOS", "LlaveViajante","no");
-           Global01.IDMaquinaREG = "";
+           Global01.IDMaquinaREG = Funciones.modINIs.ReadINI("DATOS", "RegistrationKey","no");
            Global01.RecienRegistrado = false;
            Global01.AppActiva = false;
 
@@ -142,121 +142,101 @@ namespace Catalogo
             if (Global01.Conexion.State==ConnectionState.Open) { Global01.Conexion.Close(); };
             //--- Fin chequeo de Version --------
 
-            //--------------------------------------XX
-            if (Global01.IDMaquinaCRC == "no")
-            {
-                Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(ref Global01.IDMaquina);
-                Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
-                Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
-                Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
-            }
-            else
-            {
-                if (!Catalogo._registro.AppRegistro.ValidateMachineId(Global01.IDMaquinaCRC))
+           //- Registro y activación -------------XX
+    AcaRegistro:
+           if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+           {                                         
+               if (Global01.IDMaquinaCRC == "no")
                 {
+                    // Genera nueva Instalacion ID y va a Registro
+                    Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(ref Global01.IDMaquina);
                     Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
-                    Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");                   
-                    MessageBox.Show("Código Guardado Adulterado. \r\n Se Genera Codigo de Registro Nuevo. \r\n Ahora la Aplicacion termina.", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    miEnd();
-                }
-            }
-        
-       AcaRegistro:
-
-       // Valido Registracion si es que existe
-       Global01.IDMaquinaREG = Funciones.modINIs.ReadINI("DATOS", "RegistrationKey");
-
-        if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            {
-                //OJO! NO ESTA Registrado
-                if ((int)(Global01.miSABOR) >= 2)
-                {
-                    if (Global01.LLaveViajante=="no")
-                    {
-                        Global01.AppActiva = false;
-
-                        if (Global01.NoConn)
-                        {
-                            //No es necesario activar
-                        };
-                    }
-                    else
-                    {
-                        if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            //ActivarApplicacion();
-                        };
-                    };
-                }
-                else
-                {
-                    //-- Sin Registrar Sabor 2 -----------------------
                     Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
-                    //if ((Splash != null))
-                    //{
-                    //    Splash.Hide();
-                    //    Splash = null;
-                    //}
+                    Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
 
-                    Cursor.Current = Cursors.Default;
-
-                    //- Registro del Programa -
+                    // a registrar
                     Registration fRegistro = new Registration();
                     fRegistro.ShowDialog();
+                    fRegistro = null;
 
-                    //-- REGISTRO AUTOMATICO POR INTERNET --
                     if (!Global01.RecienRegistrado)
                     {
+                        Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
+                        Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
+                        Global01.IDMaquinaCRC = "no";                       
                         miEnd();
                     }
                     else
                     {
+                        MessageBox.Show("BIENVENDO A NUESTRO CATALOGO!.", "REGISTRADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        goto AcaRegistro;
+                    };
+                }
+                else
+                {
+                    if (!Catalogo._registro.AppRegistro.ValidateMachineId(Global01.IDMaquinaCRC))
+                    {
+                        Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
+                        Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
+                        Global01.IDMaquinaCRC = "no";
+                        MessageBox.Show("Código de registro adulterado \r\n Ahora debe registrar la aplicación nuevamente", "ERROR", MessageBoxButtons.OK,MessageBoxIcon.Warning);
                         goto AcaRegistro;
                     }
-
-                    Cursor.Current = Cursors.WaitCursor;
-                 }
-
-                //Registrado OK
+                    else
+                    {
+                        // App Registro OK - me fijo si está activada -
+                        if (Global01.LLaveViajante == "no")
+                        {
+                            Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
+                            Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
+                            Global01.IDMaquinaCRC = "no";
+                            MessageBox.Show("Código de registro adulterado \r\n Ahora debe registrar la aplicación nuevamente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            goto AcaRegistro;
+                        }
+                        else
+                        {
+                            if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                //ActivarApplicacion();
+                            };
+                        };
+                    };
+                };
             }
             else
             {
-                //OK ya esta registrado
-                if ((int)(Global01.miSABOR) >= 2)
-                {
-                    //- CHEQUEO POR UPDATE DEL CATALOGO -------------------------------------------'
-                    //if ((Splash != null))
-                    //{
-                    //    Splash.Visible = false;
-                    //}
-                    Cursor.Current = Cursors.Default;
+                // registrada y activa
+                Global01.AppActiva = true;
+            };       
+           //--------------------------------------XX
+           
+           if (Global01.AppActiva)
+           {
+               Catalogo.util.fDataUpdate fu = new Catalogo.util.fDataUpdate();
 
-                    Catalogo.util.fDataUpdate fu = new Catalogo.util.fDataUpdate();
+           VadeNuevo:
+               fu.SoloCatalogo = Convert.ToBoolean(Funciones.modINIs.ReadINI("DATOS", "SoloCatalogo", "false"));
+               fu.Url = Global01.URL_ANS;
+               fu.ShowDialog();
+               fu.Dispose();
 
-                VadeNuevo:
+               if (Global01.xError)
+               {
+                   Global01.xError = false;
 
-                    fu.SoloCatalogo = Convert.ToBoolean(Funciones.modINIs.ReadINI("DATOS", "SoloCatalogo", "false"));
-                    fu.Url = Global01.URL_ANS;
-                    fu.ShowDialog();
+                   if (MessageBox.Show("Error de Conexión al Servidor, ¿quiere intentar de nuevo?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                   {
+                       Global01.URL_ANS = Global01.URL_ANS2;
+                       goto VadeNuevo;
+                   }
+               }
+               fu = null;
+           };
 
-                    if (Global01.xError)
-                    {
-                        Global01.xError = false;
+            //- acá sigo con el código de main --
 
-                        if (MessageBox.Show("Error de Conexión al Servidor, ¿quiere intentar de nuevo?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            Global01.URL_ANS = Global01.URL_ANS2;
-                            goto VadeNuevo;
-                        }
-                    }
-                    fu = null;
 
-                    //Splash.Visible = true;
-                    Cursor.Current = Cursors.WaitCursor;
-                }
-            }
-            //--------------------------------------XX
-
+            //- fin código main -----------------
         }
 
         public static void miEnd()
