@@ -81,7 +81,8 @@ namespace Catalogo
             //OJO verificar cuit<> 1 or len(cuit) < 11 or idans nulo
 
             Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
-
+            preload.Preloader.instance.refresh();
+            System.Windows.Forms.MessageBox.Show("Hola");
         }
 
         public static void miEnd()

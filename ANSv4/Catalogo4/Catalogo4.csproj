@@ -81,6 +81,8 @@
     </Compile>
     <Compile Include="Global01.cs" />
     <Compile Include="MainMod.cs" />
+    <Compile Include="preload\Preloader.cs" />
+    <Compile Include="preload\ProductosPreloader.cs" />
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
     <Compile Include="util\UpdateCtl.cs">
       <SubType>UserControl</SubType>
@@ -237,6 +239,7 @@
   <ItemGroup>
     <None Include="Resources\logo.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

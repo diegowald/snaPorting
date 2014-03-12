@@ -27,8 +27,6 @@ namespace Catalogo._productos
                "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
                "FROM v_CatVehProdLin AS c";
 
-        private Funciones.BackgroundReader.BackgroundDataLoader backgroundWorker;
-
         private string filterString = string.Empty;
 
         // Dropdown Filter Collections
@@ -49,10 +47,8 @@ namespace Catalogo._productos
           
             InitializeComponent();
             
-            backgroundWorker = new Funciones.BackgroundReader.BackgroundDataLoader(Catalogo.Funciones.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
-                Global01.strConexionUs);
-            backgroundWorker.onWorkFinishedHandler += dataReady;
-            
+            preload.Preloader.instance.productos.onWorkFinished += dataReady;
+
             xCargarDataControl();
 
         }
@@ -80,7 +76,7 @@ namespace Catalogo._productos
 
             Cursor.Current = Cursors.WaitCursor;
 
-            backgroundWorker.executeQuery(strComando);
+            preload.Preloader.instance.productos.execute();
             
         }
 
