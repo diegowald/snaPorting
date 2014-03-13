@@ -167,6 +167,9 @@ namespace Catalogo._productos
             //dataGridView1.CellClick +=
             //    new DataGridViewCellEventHandler(dataGridView1_CellClick);
 
+            dataGridView1.Columns[(int)CCol.cSemaforo].Name = "Existencia";
+            dataGridView1.Columns[(int)CCol.cSemaforo].HeaderText = "Existencia";
+
             dataGridView1.Columns[(int)CCol.cCodigo].Name = "C_Producto";
             dataGridView1.Columns[(int)CCol.cCodigo].HeaderText = "Código";
             dataGridView1.Columns[(int)CCol.cCodigo].DataPropertyName = "C_Producto";
@@ -404,5 +407,25 @@ namespace Catalogo._productos
             }
         }
 
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == (int)CCol.cSemaforo)
+            {
+
+                DataGridViewCell cell = null;
+                foreach (DataGridViewCell selectedCell in dataGridView1.SelectedCells)
+                {
+                    cell = selectedCell;
+                    break;
+                }
+                if (cell != null)
+                {
+                    DataGridViewRow row = cell.OwningRow;
+                    Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto();
+                    string semaforo = existencia.getExistencia(row.Cells["C_Producto"].Value.ToString(), Global01.NroUsuario);
+                    System.Diagnostics.Debug.WriteLine(semaforo);
+                }
+            }
+        }
     }
 }
