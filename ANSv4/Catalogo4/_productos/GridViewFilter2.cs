@@ -393,18 +393,19 @@ namespace Catalogo._productos
                     Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
                     existencia.onCancelled += ExistenciaCancelled;
                     existencia.onFinished += ExistenciaFinished;
-                    existencia.getExistencia(row.Cells["C_Producto"].Value.ToString(), Global01.NroUsuario);
+                    existencia.getExistencia(row.Cells["C_Producto"].Value.ToString(), Global01.NroUsuario, cell);
                 }
             }
         }
 
-        private void ExistenciaCancelled()
+        private void ExistenciaCancelled(System.Windows.Forms.DataGridViewCell cell)
         {
             throw new NotImplementedException();
         }
 
-        private void ExistenciaFinished(string idProducto, string resultado)
+        private void ExistenciaFinished(string idProducto, string resultado, System.Windows.Forms.DataGridViewCell cell)
         {
+            cell.Style.BackColor = Color.Red;
             System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", idProducto, resultado));
         }
 

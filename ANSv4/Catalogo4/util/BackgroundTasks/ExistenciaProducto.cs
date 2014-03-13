@@ -14,31 +14,17 @@ namespace Catalogo.util.BackgroundTasks
 
         private string _idProducto;
         private string _idUsuario;
+        System.Windows.Forms.DataGridViewCell _cell;
 
         private string _semaforo;
 
-        public void getExistencia(string idProducto, string idUsuario)
+        public void getExistencia(string idProducto, string idUsuario, System.Windows.Forms.DataGridViewCell cell)
         {
             _idProducto = idProducto;
             _idUsuario = idUsuario;
+            _cell = cell;
             base.run();
         }
-
-       /* public string getExistencia(string idProducto, string idUsuario)
-        {
-            // Toda esta clase hay que hacerla para que funcione como un background worker.
-            CatalogoLibraryVB.IPPrivado ipPriv = new CatalogoLibraryVB.IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
-            // TODO: agregar la configuracion del proxy
-            string ipPrivado = ipPriv.GetIP();
-            string ipIntranet = ipPriv.GetIpIntranet();
-            string ipCatalogo = ipPriv.GetIPCatalogo();
-
-            CatalogoLibraryVB.VerExistencia existencia = new CatalogoLibraryVB.VerExistencia();
-            existencia.Inicializar(Global01.IDMaquina,  ipPrivado,ipIntranet, false, "");
-            string pSemaforo = "";
-            existencia.ExistenciaSemaforo(idProducto, ref pSemaforo);
-            return pSemaforo;
-        }*/
 
         public override void execute()
         {
@@ -55,8 +41,9 @@ namespace Catalogo.util.BackgroundTasks
             _semaforo = pSemaforo;
         }
 
-        public delegate void CancelledHandler();
-        public delegate void FinishedHandler(string idProducto, string resultado);
+
+        public delegate void CancelledHandler(System.Windows.Forms.DataGridViewCell cell);
+        public delegate void FinishedHandler(string idProducto, string resultado, System.Windows.Forms.DataGridViewCell cell);
 
         public CancelledHandler onCancelled;
         public FinishedHandler onFinished;
@@ -65,7 +52,7 @@ namespace Catalogo.util.BackgroundTasks
         {
             if (onCancelled != null)
             {
-                onCancelled();
+                onCancelled(_cell);
             }
         }
 
@@ -73,7 +60,7 @@ namespace Catalogo.util.BackgroundTasks
         {
             if (onFinished != null)
             {
-                onFinished(_idProducto, _semaforo);
+                onFinished(_idProducto, _semaforo, _cell);
             }
         }
 

@@ -144,7 +144,8 @@ namespace Catalogo
             if (Global01.Conexion.State == ConnectionState.Open) { Global01.Conexion.Close(); };
         //--- Fin chequeo de Version --------
 
-               //- Registro y activación -------------XX
+        
+            //- Registro y activación -------------XX
         AcaRegistro:
             if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
             {
@@ -315,7 +316,7 @@ namespace Catalogo
 
             //- fin código main -----------------
             preload.Preloader.instance.refresh();
-            System.Windows.Forms.MessageBox.Show("Hola");
+            System.Windows.Forms.MessageBox.Show("Aca estoy cargando los datos en segundo plano");
         }
         // - Fin Main ---
 
