@@ -29,8 +29,8 @@ namespace Catalogo
 
             if (true) //(f.ShowDialog() == true)
             {
-                MainWindow wnd = new MainWindow();
-                //Registration wnd = new Registration(); 
+                //MainWindow wnd = new MainWindow();
+                Registration wnd = new Registration(); 
                 wnd.ShowDialog();
                 wnd.Close();
 
