@@ -70,6 +70,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="forms\Login.xaml.cs" />
+    <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
+    <Compile Include="util\BackgroundTasks\ExistenciaProducto.cs" />
     <Compile Include="_registro\Registration.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

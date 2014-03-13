@@ -14,7 +14,7 @@ namespace Catalogo.util
 
         const string vclu = "_vclu.txt";
         private string tempFolder;
-        private string configFileURL;
+        private string _configFileURL;
         private string thisVer;
         private long step;
         private string name;
@@ -29,7 +29,20 @@ namespace Catalogo.util
         public delegate void ConexionErrorHandler(byte estado);
 
         public CloseRequestHandler CloseRequest;
-        public ConexionErrorHandler ConexionError; 
+        public ConexionErrorHandler ConexionError;
+
+
+        public string configFileURL
+        {
+            get
+            {
+                return _configFileURL;
+            }
+            set
+            {
+                _configFileURL = value;
+            }
+        }
 
         public UpdateCtl()
         {

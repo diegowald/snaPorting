@@ -20,10 +20,8 @@ namespace Catalogo.util
         public fDataUpdate()
         {
             InitializeComponent();
-        }
-
-        private void fDataUpdate_Load(object sender, EventArgs e)
-        {
+            
+            
             ucUpdateCtl = new UpdateCtl();
 
 
@@ -32,6 +30,11 @@ namespace Catalogo.util
             ucUpdateCtl.Location = new System.Drawing.Point(0, 0);
             ucUpdateCtl.Size = new System.Drawing.Size(681, 177);
             this.Controls.Add(ucUpdateCtl);
+        }
+
+        private void fDataUpdate_Load(object sender, EventArgs e)
+        {
+
         }
 
 
