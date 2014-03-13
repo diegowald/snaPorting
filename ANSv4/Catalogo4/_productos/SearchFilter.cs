@@ -12,7 +12,7 @@ using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._productos
 {
-    public partial class SearchFilter : UserControl, 
+    public partial class SearchFilter : UserControl,
         Funciones.emitter_receiver.IEmisor<string>, // Para emitir la condicion de filtrado
         Funciones.emitter_receiver.IEmisor2<float>, // Para emitir el porcentaje
         Funciones.emitter_receiver.IReceptor<util.Pair<int, int>> // Para recibir la cantidad de registros encontrados
@@ -22,10 +22,10 @@ namespace Catalogo._productos
         private DataView dvProducts = new DataView();
         private DataTable useTable = new DataTable();
    
-        private string strComando = "SELECT " +
-               "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto as Medidas, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
-               "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
-               "FROM v_CatVehProdLin AS c";
+        //private string strComando = "SELECT " +
+        //       "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto as Medidas, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
+        //       "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
+        //       "FROM v_CatVehProdLin AS c";
 
         private string filterString = string.Empty;
 
@@ -163,7 +163,7 @@ namespace Catalogo._productos
                 }
                 else
                 {
-                    tslItems.Visible = false;
+                    //tslItems.Visible = false;
                 }
             }
         }
@@ -171,7 +171,7 @@ namespace Catalogo._productos
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            xCargarDataControl();           
+            //xCargarDataControl();           
         }
 
 
