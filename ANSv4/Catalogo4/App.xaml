@@ -4,8 +4,9 @@
                 ShutdownMode="OnExplicitShutdown"                   
              Startup="Application_Startup">
     <Application.Resources>
-         
+
     </Application.Resources>
+    
 </Application>
 
 <!--DispatcherUnhandledException="Application_DispatcherUnhandledException"-->   
