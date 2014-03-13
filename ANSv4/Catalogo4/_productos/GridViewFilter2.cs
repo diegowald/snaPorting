@@ -12,7 +12,7 @@ using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._productos
 {
-    public partial class GridViewFilter2 : UserControl, 
+    public partial class GridViewFilter2 : UserControl,
         Funciones.emitter_receiver.IReceptor<string>,  // Para recibir el filtro de datos
         Funciones.emitter_receiver.IReceptor<float>, // Para recibir los porcentajes
         Funciones.emitter_receiver.IEmisor<DataGridViewRow>, // Para enviar el registro seleccionado
@@ -56,7 +56,7 @@ namespace Catalogo._productos
         private DataTable useTable = new DataTable();
         private bool xAplicoPorcentajeLinea = false;
         float porcentajeLinea;
- 
+
         //private string strComando = "SELECT " +
         //       "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
         //       "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
@@ -82,11 +82,11 @@ namespace Catalogo._productos
 
         public GridViewFilter2()
         {
-          
+
             InitializeComponent();
-            
+
             preload.Preloader.instance.productos.onWorkFinished += dataReady;
-            
+
             xCargarDataControl();
 
         }
@@ -115,7 +115,7 @@ namespace Catalogo._productos
             Cursor.Current = Cursors.WaitCursor;
 
             preload.Preloader.instance.productos.execute();
-            
+
         }
 
         void dataReady(System.Data.DataTable dataTable)
@@ -125,7 +125,7 @@ namespace Catalogo._productos
             // Load the DataGridView
             loadDataGridView();
             // Load the Combo Filters
-          
+
             Cursor.Current = Cursors.Default;
         }
 
@@ -134,7 +134,7 @@ namespace Catalogo._productos
             // If rows in grid already exist, clear them
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
-            
+
             // For this example, make it a read-only datagrid
             dataGridView1.ReadOnly = true;
             dataGridView1.AllowUserToAddRows = false;
@@ -390,11 +390,23 @@ namespace Catalogo._productos
                 if (cell != null)
                 {
                     DataGridViewRow row = cell.OwningRow;
-                    Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto();
-                    string semaforo = existencia.getExistencia(row.Cells["C_Producto"].Value.ToString(), Global01.NroUsuario);
-                    System.Diagnostics.Debug.WriteLine(semaforo);
+                    Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+                    existencia.onCancelled += ExistenciaCancelled;
+                    existencia.onFinished += ExistenciaFinished;
+                    existencia.getExistencia(row.Cells["C_Producto"].Value.ToString(), Global01.NroUsuario);
                 }
             }
         }
+
+        private void ExistenciaCancelled()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ExistenciaFinished(string idProducto, string resultado)
+        {
+            System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", idProducto, resultado));
+        }
+
     }
 }
