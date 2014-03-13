@@ -26,12 +26,16 @@ namespace Catalogo._productos
 
         public void onRecibir(System.Windows.Forms.DataGridViewRow dato)
         {
+            string s = "";
+
             if (dato != null)
             {
-                string s = dato.Cells["C_Producto"].Value.ToString() + " - " +
+                 s = dato.Cells["C_Producto"].Value.ToString() + " - " +
                     dato.Cells["N_Producto"].Value.ToString();
-                txtDetalle.NavigateToString(s);
             }
+
+            txtDetalle.NavigateToString(s);
+
         }
 
     }

@@ -19,7 +19,6 @@ namespace Catalogo._productos
         Funciones.emitter_receiver.IEmisor2<util.Pair<int, int>> // Para enviar la cantidad de registros encontrados.
     {
 
-
         private enum CCol
         {
             cSemaforo = 0,
@@ -58,10 +57,10 @@ namespace Catalogo._productos
         private bool xAplicoPorcentajeLinea = false;
         float porcentajeLinea;
  
-        private string strComando = "SELECT " +
-               "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
-               "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
-               "FROM v_CatVehProdLin AS c";
+        //private string strComando = "SELECT " +
+        //       "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
+        //       "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
+        //       "FROM v_CatVehProdLin AS c";
 
         private string filterString = string.Empty;
 
@@ -315,42 +314,14 @@ namespace Catalogo._productos
                 };
             }
 
-
             // Bind Datagrid view to the DataView
             dataGridView1.DataSource = dvProducts;
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
-            //this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
+            this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
             // Show the counts in the toolstrip
-            //showItemCounts();
         }
 
-        //private void showItemCounts()
-        //{
-
-        //    string _filterMsg = String.Format("#Prod. {0} de {1}", currentRowCount, dataRowCount);
-        //    string _totalMsg = String.Format("#Prod. {0}", dataRowCount);
-        //    if (dataRowCount != currentRowCount)
-        //    {
-        //        tslItems.Text = _filterMsg;
-        //        tslItems.Visible = true;
-        //    }
-        //    else
-        //    {
-        //        if (dataRowCount > 0)
-        //        {
-        //            tslItems.Text = _totalMsg;
-        //            tslItems.Visible = true;
-        //        }
-        //        else
-        //        {
-        //            tslItems.Visible = false;
-        //        }
-        //    }
-        //}
-
-
-   
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             DataGridViewCell cell = null;
@@ -366,8 +337,6 @@ namespace Catalogo._productos
                 // etc.
             }
         }
-
-
 
         public void onRecibir(string dato)
         {
