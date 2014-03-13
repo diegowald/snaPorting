@@ -192,10 +192,55 @@ namespace Catalogo
             //MsgBox ("¡BIENVENIDO A NUESTRO CATALOGO!."), vbInformation, "REGISTRADO"
 
         }
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+
+        private void textBoxCuit_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            //Regex(@"^\d{2}-{1}\d{8}-{1}\d{1}$"
+            Regex regex1 = new Regex(@"^dd-dddddddd-d+",System.Text.RegularExpressions.RegexOptions.Singleline);
+            e.Handled = regex1.IsMatch(e.Text);
         }
-    }
+
+        private void textBoxNroCuenta_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex2 = new Regex("[^0-9]+");
+            e.Handled = regex2.IsMatch(e.Text);
+        }
+
+        private void textBoxNroZona_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex3 = new Regex("[^0-9]+");
+            e.Handled = regex3.IsMatch(e.Text);
+        }
+
+
+        private bool validateCuit(string Cuit)
+        {
+            Regex rg = new Regex("[A-Z_a-z]");
+            Cuit = Cuit.Replace("-", "");
+            if (rg.IsMatch(Cuit))
+                return false;
+            if (Cuit.Length != 11)
+                return false;
+            char[] cuitArray = Cuit.ToCharArray();
+            double sum = 0;
+            int bint = 0;
+            int j = 7;
+            for (int i = 5, c = 0; c != 10; i--, c++)
+            {
+                if (i >= 2)
+                    sum += (Char.GetNumericValue(cuitArray[c]) * i);
+                else
+                    bint = 1;
+                if (bint == 1 && j >= 2)
+                {
+                    sum += (Char.GetNumericValue(cuitArray[c]) * j);
+                    j--;
+                }
+            }
+            if ((cuitArray.Length - (sum % 11)) == Char.GetNumericValue(cuitArray[cuitArray.Length - 1]))
+                return true;
+            return false;
+        }
+
+   }
 }

@@ -46,13 +46,12 @@
             <TextBox Height="23" HorizontalAlignment="Left" Margin="173,20,0,0" Name="textBoxFirstName" VerticalAlignment="Top" Width="222" MaxLength="32"/>
             <TextBox Height="23" HorizontalAlignment="Left" Margin="173,50,0,0" Name="textBoxLastName" VerticalAlignment="Top" Width="222" MaxLength="32"/>
             <TextBox Height="23" HorizontalAlignment="Left" Margin="173,80,0,0" Name="textBoxRazonSocial" VerticalAlignment="Top" Width="222" MaxLength="64"/>
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,110,0,0" Name="textBoxCuit" VerticalAlignment="Top" Width="222" MaxLength="13" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,110,0,0" Name="textBoxCuit" VerticalAlignment="Top" Width="222"  MaxLength="13" PreviewTextInput="textBoxCuit_PreviewTextInput"/>
             <TextBox Height="23" HorizontalAlignment="Left" Margin="173,140,0,0" Name="textBoxEmail" VerticalAlignment="Top" Width="222" MaxLength="64"/>
 
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,170,0,0" Name="textBoxNroCuenta" VerticalAlignment="Top" Width="80" MaxLength="5" PreviewTextInput="NumberValidationTextBox">
-            </TextBox> 
-            
-            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,200,0,0" Name="textBoxNroZona" VerticalAlignment="Top" Width="80" MaxLength="5" />
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,170,0,0" Name="textBoxNroCuenta" VerticalAlignment="Top" Width="80" MaxLength="5" PreviewTextInput="textBoxNroCuenta_PreviewTextInput"/>
+
+            <TextBox Height="23" HorizontalAlignment="Left" Margin="173,200,0,0" Name="textBoxNroZona" VerticalAlignment="Top" Width="80" MaxLength="5" PreviewTextInput="textBoxNroZona_PreviewTextInput" />
 
             <PasswordBox Height="23" HorizontalAlignment="Left" Margin="173,230,0,0" Name="passwordBox1" VerticalAlignment="Top" Width="100" MaxLength="32"/>
             <PasswordBox Height="23" HorizontalAlignment="Left" Margin="173,260,0,0" Name="passwordBoxConfirm" VerticalAlignment="Top" Width="100" MaxLength="32"/>
