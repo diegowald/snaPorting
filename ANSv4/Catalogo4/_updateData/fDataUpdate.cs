@@ -21,7 +21,9 @@ namespace Catalogo.util
         {
             InitializeComponent();
             
+            
             ucUpdateCtl = new UpdateCtl();
+
 
             ucUpdateCtl.AutoScroll = true;
             //ucUpdateCtl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -32,7 +34,7 @@ namespace Catalogo.util
 
         private void fDataUpdate_Load(object sender, EventArgs e)
         {
-            ucUpdateCtl.confi
+
         }
 
 
