@@ -59,6 +59,9 @@ namespace Catalogo
        public static float Euro;
 
        public static string Cuit;
+       public static string pin;
+       public static string RazonSocial;
+       public static string ApellidoNombre;
 
     }
 }

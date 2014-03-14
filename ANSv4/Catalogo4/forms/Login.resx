@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,23 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Nuevo_logo_Auto_nautica_blanco" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\recursos\Nuevo-logo-Auto-nautica-blanco.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Nuevo_logo_Auto_nautica_horizontal_blanco" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\recursos\Nuevo-logo-Auto-nautica-horizontal-blanco.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Nuevo_logo_Auto_nautica_horizontal_original" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\recursos\Nuevo-logo-Auto-nautica-horizontal-original.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Nuevo_logo_Auto_nautica_horizontal_rojo_y_blanco" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\recursos\Nuevo-logo-Auto-nautica-horizontal-rojo-y-blanco.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Nuevo_logo_Auto_nautica_original" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\recursos\Nuevo-logo-Auto-nautica-original.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Nuevo_logo_Auto_nautica_rojo_y_blanco" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\recursos\Nuevo-logo-Auto-nautica-rojo-y-blanco.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAEwAAABMCAYAAADHl1ErAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAGRSURBVHhe7dghSwRRFIbhRayCxWAzWEQsNoPZ5o8QLAoG
+        m2CwiM0mlkUwCf4BEQxmq9isIojYFIOo3wc75TDqnGER9s77wAuyy73DPezsyPYAAAAAAAAAAOi2abWh
+        LtS9eh3kv6/VnppXnTerztSn+mrQlVpQnbSl3lXdYH7Lw91VY6oTfNBjVTeMTKdqXBXvUNUNoOpZ3ahb
+        9TJ47aeOVNHWVN3BP5Q/dUsq3mr+nttXb6pu7boq0oR6UvHAj8qD+oufkg8qrveek6o4Byoe1rfcnGpq
+        RtXdpt67OP4kxYOuqqwVFffx3kVZVvGQl6otr437+RrF2FHxgJuqLa+N+22rYvjxHw+4qNryQyLuV9T3
+        2LmKB5xSbflfjbhfXxVj2APz2rifr1EMBpbEwJIYWAP+CcZPR+cfAuMBT1T1fjavjfv5GtX7vvbIuVPx
+        UP+Vrz1yGFgSA0tiYEkMLImBJTGwJAaWxMCSGFgSA0tiYEkMLImBJTGwJAaWxMCSGFgSA0tiYAAAAAAA
+        AAAADEuv9w2+sE4wowIh5AAAAABJRU5ErkJggg==
+</value>
   </data>
 </root>

@@ -25,14 +25,16 @@ namespace Catalogo
         public SplashScreenForm()
         {
             InitializeComponent();
+            
             this.label1.Parent = this.pictureBox1;
             this.label1.BackColor = Color.Transparent;
+            this.pictureBox1.BackColor = Color.Transparent;
             label1.ForeColor = Color.Green;
 
-            //this.progressBar1.Parent = this.pictureBox1;
+            this.progressBar1.Parent = this.pictureBox1;
             //this.progressBar1.BackColor = Color.Transparent;
 
-            progressBar1.Show();
+            //progressBar1.Show();
         }
 
         /// <summary>

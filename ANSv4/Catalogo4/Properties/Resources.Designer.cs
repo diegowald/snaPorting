@@ -63,9 +63,59 @@ namespace Catalogo.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap logo {
+        internal static System.Drawing.Bitmap Nuevo_logo_Auto_nautica_blanco {
             get {
-                object obj = ResourceManager.GetObject("logo", resourceCulture);
+                object obj = ResourceManager.GetObject("Nuevo_logo_Auto_nautica_blanco", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Nuevo_logo_Auto_nautica_horizontal_blanco {
+            get {
+                object obj = ResourceManager.GetObject("Nuevo_logo_Auto_nautica_horizontal_blanco", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Nuevo_logo_Auto_nautica_horizontal_original {
+            get {
+                object obj = ResourceManager.GetObject("Nuevo_logo_Auto_nautica_horizontal_original", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Nuevo_logo_Auto_nautica_horizontal_rojo_y_blanco {
+            get {
+                object obj = ResourceManager.GetObject("Nuevo_logo_Auto_nautica_horizontal_rojo_y_blanco", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Nuevo_logo_Auto_nautica_original {
+            get {
+                object obj = ResourceManager.GetObject("Nuevo_logo_Auto_nautica_original", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Nuevo_logo_Auto_nautica_rojo_y_blanco {
+            get {
+                object obj = ResourceManager.GetObject("Nuevo_logo_Auto_nautica_rojo_y_blanco", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
