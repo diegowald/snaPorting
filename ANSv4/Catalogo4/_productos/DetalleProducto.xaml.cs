@@ -34,7 +34,7 @@ namespace Catalogo._productos
                     dato.Cells["N_Producto"].Value.ToString();
             }
 
-            txtDetalle.NavigateToString(s);
+            txtDetalle.Content = s;
 
         }
 

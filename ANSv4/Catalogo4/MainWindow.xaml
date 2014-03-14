@@ -71,7 +71,7 @@
                             </ListBox>
                         </ad:DockableContent>
                         <ad:DockableContent x:Name="detailsContent" Title="Novedades" Visibility="Collapsed" DockableStyle="AutoHide" >
-                            <WebBrowser Name="detailsBrowser" Source="http://paradigmabb.no-ip.biz:8082/autonautica/" />
+                            <WebBrowser Name="detailsBrowser" Source="http://www.autonauticasur-r.com.ar" />
                         </ad:DockableContent>
                     </ad:DockablePane>
                 </ad:ResizingPanel>
