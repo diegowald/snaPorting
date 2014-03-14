@@ -393,7 +393,7 @@ namespace Catalogo._productos
                     Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
                     existencia.onCancelled += ExistenciaCancelled;
                     existencia.onFinished += ExistenciaFinished;
-                    existencia.getExistencia(row.Cells["C_Producto"].Value.ToString(), Global01.NroUsuario, cell);
+                    existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
                 }
             }
         }

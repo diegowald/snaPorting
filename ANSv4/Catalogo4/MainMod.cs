@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.OleDb;
+using System.Threading;
+
 
 namespace Catalogo
 {
@@ -21,7 +23,9 @@ namespace Catalogo
             Global01.Conexion = null;
             Global01.TranActiva = null;
 
-            Global01.AppPath = Funciones.modINIs.ReadINI("Datos", "Path", System.IO.Directory.GetCurrentDirectory());
+            //Global01.AppPath = Funciones.modINIs.ReadINI("Datos", "Path", System.IO.Directory.GetCurrentDirectory());
+            Global01.AppPath = Funciones.modINIs.ReadINI("Datos", "Path", "C:\\Catalogo ANS");
+
             Global01.PathAcrobat = Funciones.modINIs.ReadINI("Datos", "PathAcrobat", "");
             Global01.FileBak = "CopiaCata_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mdb";
 
@@ -198,14 +202,7 @@ namespace Catalogo
                         }
                         else
                         {
-                            if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            {
-                                //ActivarApplicacion();
-                                //Dim dlg As New frmConexionUpdate
-
-                                //dlg.modoUpdate = ActivarApp
-                                //dlg.Show vbModal
-                            };
+                            Global01.AppActiva = false;
                         };
                     };
                 };
@@ -216,6 +213,30 @@ namespace Catalogo
                 Global01.AppActiva = true;
             };
             //--------------------------------------XX
+
+            preload.Preloader.instance.refresh();
+            //System.Windows.Forms.MessageBox.Show("Aca estoy cargando los datos en segundo plano");
+
+            Catalogo.Login f = new Catalogo.Login();
+            f.ShowDialog();
+
+            if (!f.TodoBien)
+            {
+              miEnd(); 
+            }
+
+            if (!Global01.AppActiva)
+            {
+                if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    //ActivarApplicacion();
+                    //Dim dlg As New frmConexionUpdate
+
+                    //dlg.modoUpdate = ActivarApp
+                    //dlg.Show vbModal
+                };
+
+            };
 
             if (Global01.AppActiva)
             {
@@ -239,6 +260,10 @@ namespace Catalogo
                 }
                 fu = null;
             };
+
+            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            splashthread.IsBackground = true;
+            splashthread.Start();
 
             //- acá sigo con el código de main --
             dr = Funciones.oleDbFunciones.Comando(ref Global01.Conexion, "SELECT * FROM v_appConfig2");
@@ -314,9 +339,17 @@ namespace Catalogo
                 };
             };
 
-            //- fin código main -----------------
-            preload.Preloader.instance.refresh();
-            System.Windows.Forms.MessageBox.Show("Aca estoy cargando los datos en segundo plano");
+            //- sigo acá si falta algo más -----------------
+            //   Registration wnd = new Registration(); 
+            MainWindow wnd = new MainWindow();
+            wnd.ShowDialog();
+            wnd.Close();
+
+            //_recibos.fRecibo wnd = new _recibos.fRecibo();
+            //wnd.ShowDialog();
+            //wnd.Close();
+            //wnd.Dispose();
+
         }
         // - Fin Main ---
 

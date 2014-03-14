@@ -23,23 +23,8 @@ namespace Catalogo
             //splashthread.IsBackground = true;
             //splashthread.Start();
 
-            //Catalogo.Login f = new Catalogo.Login();
-
             Catalogo.MainMod.Main();
 
-            if (true) //(f.ShowDialog() == true)
-            {
-                //MainWindow wnd = new MainWindow();
-                Registration wnd = new Registration(); 
-                wnd.ShowDialog();
-                wnd.Close();
-
-                //_recibos.fRecibo wnd = new _recibos.fRecibo();
-                //wnd.ShowDialog();
-                //wnd.Close();
-                //wnd.Dispose();
-            }
-  
             Shutdown();
         }        
 

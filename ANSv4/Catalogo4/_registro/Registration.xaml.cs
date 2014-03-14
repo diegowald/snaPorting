@@ -175,7 +175,6 @@ namespace Catalogo
        
             }
 
-
             
             //adoModulo.adoConectar vg.Conexion, qstring
             
@@ -197,7 +196,7 @@ namespace Catalogo
         private void textBoxCuit_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
 
-            Regex regex2 = new Regex("-\d{3}$");
+            Regex regex2 = new Regex("-\\d{3}$");
             e.Handled = regex2.IsMatch(e.Text);
         }
 

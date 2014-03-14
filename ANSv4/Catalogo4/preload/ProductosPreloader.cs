@@ -36,7 +36,7 @@ namespace Catalogo.preload
         private void dataReady(System.Data.DataTable dataTable)
         {
             table = dataTable;
-            addDataColumn();
+     
             if (onWorkFinished != null)
             {
                 onWorkFinished(table);
@@ -58,13 +58,5 @@ namespace Catalogo.preload
             }
         }
 
-
-        private void addDataColumn()
-        {
-            if (!table.Columns.Contains("Existencia"))
-            {
-                table.Columns.Add("Existencia", typeof(string));
-            }
-        }
     }
 }

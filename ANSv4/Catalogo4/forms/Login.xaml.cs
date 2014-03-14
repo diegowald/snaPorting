@@ -27,6 +27,7 @@ namespace Catalogo
         public Login()
         {
             InitializeComponent();
+            TodoBien = false;
         }
         Registration registration = new Registration();
         //Welcome welcome = new Welcome();
@@ -62,6 +63,7 @@ namespace Catalogo
                     //welcome.TextBlockName.Text = username;//Sending value from one form to another form.
                     //welcome.Show();
                     Close();
+                    TodoBien = true;
                 }
                 else
                 {
@@ -73,9 +75,11 @@ namespace Catalogo
 
         private void buttonRegister_Click(object sender, RoutedEventArgs e)
         {
-            registration.Show();
+            registration.ShowDialog();
             Close();
         }
 
+
+        public bool TodoBien { get; set; }
     }
 }
