@@ -583,6 +583,8 @@ namespace Catalogo._productos
 
             // Initialize an ArrayList to store the values in their original
             // types. This enables the values to be sorted appropriately. 
+
+// DIEGO!!!! ACA SE ME CAE SEGUIDO PORQUE dtSource=NULL ---------------------------------------------------//
             ArrayList list = new ArrayList(dtSource.Rows.Count);
 
             // Retrieve each value and add it to the ArrayList if it isn't

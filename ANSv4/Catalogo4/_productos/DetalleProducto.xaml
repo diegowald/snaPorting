@@ -12,7 +12,7 @@
             <ColumnDefinition Width="60" />
         </Grid.ColumnDefinitions>
         <Image HorizontalAlignment="Left" Height="60"  VerticalAlignment="Top" Width="60" x:Name="imgIzquierda" Grid.Column="0"/>
-        <WebBrowser Name="txtDetalle" Grid.Column="1" Source="http://www.yahoo.com" />
+        <Label Name="txtDetalle" Grid.Column="1"  />
         <Image HorizontalAlignment="Left" Height="60"  VerticalAlignment="Top" Width="60" x:Name="imgDerecha" Grid.Column="2"/>
     </Grid>
 </UserControl>

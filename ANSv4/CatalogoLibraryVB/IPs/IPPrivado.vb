@@ -119,9 +119,8 @@ AtajarError:
         Conectado = True
         If Not WebServiceInicializado Then
             If Conectado Then
-                'Cliente = New WSCatalogo.InfoSoapClient("", "http://" & ipAddress & "/Catalogo/Info.asmx?wsdl")
                 Cliente = New CatalogoWS.Info()
-                ' DIEGO -> Implementar proxy!
+                Cliente.Url = "http://" & ipAddress & "/Catalogo/Info.asmx?wsdl"
                 If usaProxy Then
                     Cliente.Proxy = New System.Net.WebProxy(URLProxyServer)
                 End If

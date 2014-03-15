@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,19 +28,21 @@ namespace Catalogo.util.BackgroundTasks
 
         public override void execute()
         {
-            CatalogoLibraryVB.IPPrivado ipPriv = new CatalogoLibraryVB.IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
+            util.IPPrivado ipPriv = new util.IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
             // TODO: agregar la configuracion del proxy
-            string ipPrivado = ipPriv.GetIP();
-            string ipIntranet = ipPriv.GetIpIntranet();
-            string ipCatalogo = ipPriv.GetIPCatalogo();
+            string ipPrivado =  ipPriv.GetIP();
+            string ipIntranet =  ipPriv.GetIpIntranet();
+            string ipCatalogo =  ipPriv.GetIPCatalogo();
 
-            CatalogoLibraryVB.VerExistencia existencia = new CatalogoLibraryVB.VerExistencia();
-            existencia.Inicializar(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+            Catalogo._existencia.VerExistencia existencia = new Catalogo._existencia.VerExistencia();
+            existencia.Inicializar("3PRUEBA-CATALOGO-4", ipPrivado, ipIntranet, false, "");
+
+            //existencia.Inicializar(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+
             string pSemaforo = "";
             existencia.ExistenciaSemaforo(_idProducto, Global01.NroUsuario, ref pSemaforo);
             _semaforo = pSemaforo;
         }
-
 
         public delegate void CancelledHandler(System.Windows.Forms.DataGridViewCell cell);
         public delegate void FinishedHandler(string idProducto, string resultado, System.Windows.Forms.DataGridViewCell cell);

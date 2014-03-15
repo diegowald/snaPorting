@@ -175,7 +175,6 @@ namespace Catalogo
        
             }
 
-
             
             //adoModulo.adoConectar vg.Conexion, qstring
             
@@ -193,11 +192,12 @@ namespace Catalogo
 
         }
 
+
         private void textBoxCuit_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            //Regex(@"^\d{2}-{1}\d{8}-{1}\d{1}$"
-            Regex regex1 = new Regex(@"^dd-dddddddd-d+",System.Text.RegularExpressions.RegexOptions.Singleline);
-            e.Handled = regex1.IsMatch(e.Text);
+
+            Regex regex2 = new Regex("-\\d{3}$");
+            e.Handled = regex2.IsMatch(e.Text);
         }
 
         private void textBoxNroCuenta_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -208,8 +208,8 @@ namespace Catalogo
 
         private void textBoxNroZona_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            Regex regex3 = new Regex("[^0-9]+");
-            e.Handled = regex3.IsMatch(e.Text);
+            Regex regex2 = new Regex("[^0-9]+");
+            e.Handled = regex2.IsMatch(e.Text);
         }
 
 
@@ -241,6 +241,7 @@ namespace Catalogo
                 return true;
             return false;
         }
+
 
    }
 }

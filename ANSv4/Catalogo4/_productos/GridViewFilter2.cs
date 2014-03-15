@@ -51,11 +51,13 @@ namespace Catalogo._productos
             cVigencia = 27
         }
 
+        private bool dataGridIdle = false;
+
         private DataTable dtProducts = new DataTable();
         private DataView dvProducts = new DataView();
         private DataTable useTable = new DataTable();
         private bool xAplicoPorcentajeLinea = false;
-        float porcentajeLinea;
+        private float porcentajeLinea;
 
         //private string strComando = "SELECT " +
         //       "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
@@ -318,24 +320,36 @@ namespace Catalogo._productos
             dataGridView1.DataSource = dvProducts;
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
+            
+            dataGridIdle = true;
+
             this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
             // Show the counts in the toolstrip
-        }
 
+            dataGridView1.Rows[0].Selected = true;      
+        }
+       
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-            DataGridViewCell cell = null;
-            foreach (DataGridViewCell selectedCell in dataGridView1.SelectedCells)
+
+            if (dataGridIdle)
             {
-                cell = selectedCell;
-                break;
-            }
-            if (cell != null)
-            {
-                DataGridViewRow row = cell.OwningRow;
-                this.emitir(row);
-                // etc.
-            }
+                //DataGridViewRow row = dataGridView1.SelectedRows[0];
+                //this.emitir(row);
+                DataGridViewCell cell = null;
+                foreach (DataGridViewCell selectedCell in dataGridView1.SelectedCells)
+                {
+                    cell = selectedCell;
+                    break;
+                }
+                if (cell != null)
+                {
+                    DataGridViewRow row = cell.OwningRow;
+                    this.emitir(row);
+                    // etc.
+                }
+            };
+
         }
 
         public void onRecibir(string dato)
@@ -381,19 +395,15 @@ namespace Catalogo._productos
             if (e.ColumnIndex == (int)CCol.cSemaforo)
             {
 
-                DataGridViewCell cell = null;
-                foreach (DataGridViewCell selectedCell in dataGridView1.SelectedCells)
-                {
-                    cell = selectedCell;
-                    break;
-                }
-                if (cell != null)
+               DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
+
+               if (cell != null)
                 {
                     DataGridViewRow row = cell.OwningRow;
                     Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
                     existencia.onCancelled += ExistenciaCancelled;
                     existencia.onFinished += ExistenciaFinished;
-                    existencia.getExistencia(row.Cells["C_Producto"].Value.ToString(), Global01.NroUsuario, cell);
+                    existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
                 }
             }
         }
@@ -405,9 +415,41 @@ namespace Catalogo._productos
 
         private void ExistenciaFinished(string idProducto, string resultado, System.Windows.Forms.DataGridViewCell cell)
         {
-            cell.Style.BackColor = Color.Red;
-            System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", idProducto, resultado));
+
+
+          if (resultado.IndexOf(";") > 0)
+          {
+          
+              string[] stringSeparators = new string[] {";"};
+              string[] aResultado = resultado.Split(stringSeparators, StringSplitOptions.None);
+     
+              switch   (aResultado[0])
+              {
+                  case "r":
+                    cell.Style.BackColor = Color.Red;
+                    cell.ToolTipText= "NO Disponible";
+                    break;
+                  case "a":
+                    cell.Style.BackColor = Color.Yellow;
+                    cell.ToolTipText= "Disponibilidad Parcial \n valor de referencia (" + aResultado[1] + ") unidades";
+                    break;
+                  case "v":
+                    cell.Style.BackColor = Color.Green;
+                    cell.ToolTipText= "En Tránsito \n valor de referencia (" + aResultado[1] + ") unidades";
+                    break;
+                  case "VV":
+                    cell.Style.BackColor = Color.YellowGreen;
+                    cell.ToolTipText= "Disponible en 24 hs. \n valor de referencia (" + aResultado[1] + ") unidades";
+                    cell.Value= "x";
+                    break;
+              };
+
+            };
+
+            //System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", idProducto, resultado));
         }
+
+
 
     }
 }
