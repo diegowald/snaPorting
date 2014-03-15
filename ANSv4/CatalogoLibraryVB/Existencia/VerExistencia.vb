@@ -76,7 +76,7 @@ errhandler:
 
     End Sub
 
-    Public Sub ExistenciaSemaforo(ByVal pIdProducto As String, ByRef pSemaforo As String)
+    Public Sub ExistenciaSemaforo(ByVal pIdProducto As String, ByVal pNroUsuario As String, ByRef pSemaforo As String)
 
         Dim Cancel As Boolean
 
@@ -87,7 +87,7 @@ errhandler:
         End If
 
         If Not Cancel Then
-            pSemaforo = ObtenerSemaforo(Cancel, vg.NroUsuario, pIdProducto)
+            pSemaforo = ObtenerSemaforo(Cancel, pNroUsuario, pIdProducto)
         End If
 
     End Sub

@@ -73,6 +73,56 @@ Namespace My
                 Return CType(Me("CatalogoLibraryVB_CatalogoWS_Info"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wsCatalogo3/Pedidos.asmx")>  _
+        Public ReadOnly Property CatalogoLibraryVB_PedidosWS_Pedidos() As String
+            Get
+                Return CType(Me("CatalogoLibraryVB_PedidosWS_Pedidos"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wsCatalogo3/Recibos_v_303.asmx")>  _
+        Public ReadOnly Property CatalogoLibraryVB_RecibosWS_Recibos_v_303() As String
+            Get
+                Return CType(Me("CatalogoLibraryVB_RecibosWS_Recibos_v_303"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wsCatalogo3/Devolucion.asmx")>  _
+        Public ReadOnly Property CatalogoLibraryVB_DevolucionWS_Devolucion() As String
+            Get
+                Return CType(Me("CatalogoLibraryVB_DevolucionWS_Devolucion"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wsCatalogo3/InterDeposito.asmx")>  _
+        Public ReadOnly Property CatalogoLibraryVB_InterDepositoWS_InterDeposito() As String
+            Get
+                Return CType(Me("CatalogoLibraryVB_InterDepositoWS_InterDeposito"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wsCatalogo3/Rendicion.asmx")>  _
+        Public ReadOnly Property CatalogoLibraryVB_RendicionWS_Rendicion() As String
+            Get
+                Return CType(Me("CatalogoLibraryVB_RendicionWS_Rendicion"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

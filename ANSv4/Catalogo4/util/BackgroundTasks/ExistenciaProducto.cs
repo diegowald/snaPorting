@@ -37,7 +37,7 @@ namespace Catalogo.util.BackgroundTasks
             CatalogoLibraryVB.VerExistencia existencia = new CatalogoLibraryVB.VerExistencia();
             existencia.Inicializar(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
             string pSemaforo = "";
-            existencia.ExistenciaSemaforo(_idProducto, ref pSemaforo);
+            existencia.ExistenciaSemaforo(_idProducto, Global01.NroUsuario, ref pSemaforo);
             _semaforo = pSemaforo;
         }
 

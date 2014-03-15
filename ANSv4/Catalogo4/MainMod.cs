@@ -315,8 +315,8 @@ namespace Catalogo
             };
 
             //- fin código main -----------------
-            preload.Preloader.instance.refresh();
-            System.Windows.Forms.MessageBox.Show("Aca estoy cargando los datos en segundo plano");
+           // preload.Preloader.instance.refresh();
+            //System.Windows.Forms.MessageBox.Show("Aca estoy cargando los datos en segundo plano");
         }
         // - Fin Main ---
 
