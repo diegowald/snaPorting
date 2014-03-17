@@ -5,7 +5,7 @@ Public Class Recibo
     ' Define como se llama este modulo para el control de errores
     Private Const m_sMODULENAME_ As String = "clsRecibo"
 
-    Private Conexion1 As System.Data.OleDb.OleDbConnection
+    Private _Conexion1 As System.Data.OleDb.OleDbConnection
 
     Private mvarNroRecibo As String
     Private mvarF_Recibo As Date
@@ -135,14 +135,14 @@ Public Class Recibo
         On Error GoTo ErrorHandler
 
         Dim rec As System.Data.OleDb.OleDbDataReader
-        rec = Funciones.adoModulo.adoComando(Conexion1, "EXECUTE v_Recibo_Det " & NrodeRecibo)
+        rec = Funciones.adoModulo.adoComando(_Conexion1, "EXECUTE v_Recibo_Det " & NrodeRecibo)
         If rec.HasRows Then
             While rec.Read
                 ADDItem(rec("TipoValor"), rec("Importe"), rec("F_EmiCheque"), rec("F_CobroCheque"), _
                 rec("N_Cheque"), rec("NrodeCuenta"), rec("Banco"), rec("Cpa"), rec("ChequePropio"), _
                 rec("T_Cambio"))
             End While
-            rec = Funciones.adoModulo.adoComando(Conexion1, "EXECUTE v_Recibo_Enc " & NrodeRecibo)
+            rec = Funciones.adoModulo.adoComando(_Conexion1, "EXECUTE v_Recibo_Enc " & NrodeRecibo)
             If rec.HasRows Then
                 rec.Read()
                 mvarNroRecibo = NrodeRecibo
@@ -169,7 +169,7 @@ ErrorHandler:
 
     Public WriteOnly Property Conexion() As System.Data.OleDb.OleDbConnection
         Set(ByVal value As System.Data.OleDb.OleDbConnection)
-            Conexion1 = value
+            _Conexion1 = value
         End Set
     End Property
 
@@ -205,7 +205,7 @@ ErrorHandler:
     'diego     End Sub
 
     Private Function ValidarConexion() As Boolean
-        Return Not (Conexion1 Is Nothing)
+        Return Not (_Conexion1 Is Nothing)
     End Function
 
     Public Sub Guardar(Optional ByVal Origen As String = vbNullString)
@@ -220,10 +220,10 @@ ErrorHandler:
         If DetalleRecibo.Count < 1 Then Exit Sub
 
         If UCase(Origen) = "VER" Then
-            Funciones.adoModulo.adoComandoIU(Conexion1, "DELETE FROM tblRecibo_Enc WHERE NroRecibo='09999-99999999'")
+            Funciones.adoModulo.adoComandoIU(_Conexion1, "DELETE FROM tblRecibo_Enc WHERE NroRecibo='09999-99999999'")
             mvarNroRecibo = "09999-99999999"
         Else
-            rec = Funciones.adoModulo.adoComando(Conexion1, "SELECT TOP 1 right(NroRecibo,8) AS NroRecibo FROM tblRecibo_Enc WHERE left(NroRecibo,5)=" & mvarIdCliente & " ORDER BY NroRecibo DESC")
+            rec = Funciones.adoModulo.adoComando(_Conexion1, "SELECT TOP 1 right(NroRecibo,8) AS NroRecibo FROM tblRecibo_Enc WHERE left(NroRecibo,5)=" & mvarIdCliente & " ORDER BY NroRecibo DESC")
             If Not rec.HasRows Then
                 mvarNroRecibo = Trim(mvarIdCliente) & "-00000001"
             Else
@@ -237,11 +237,11 @@ ErrorHandler:
         cmd.Parameters.Add("pIdCliente", OleDb.OleDbType.Integer).Value = mvarIdCliente
         cmd.Parameters.Add("pBahia", OleDb.OleDbType.Boolean).Value = mvarBahia
         cmd.Parameters.Add("pTotal", OleDb.OleDbType.Single).Value = mvarTotal
-        cmd.Parameters.Add("pNroImpresion", OleDb.OleDbType.Integer).Value = 0
+        cmd.Parameters.Add("pNroImpresion", OleDb.OleDbType.Integer).Value = mvarNroImpresion
         cmd.Parameters.Add("pObservaciones", OleDb.OleDbType.VarChar, 200).Value = mvarObservaciones
         cmd.Parameters.Add("pPercepciones", OleDb.OleDbType.Single).Value = mvarPercepciones
 
-        cmd.Connection = Conexion1
+        cmd.Connection = _Conexion1
         cmd.CommandType = CommandType.StoredProcedure
         cmd.CommandText = "usp_Recibo_Enc_add"
         cmd.ExecuteNonQuery()
@@ -276,16 +276,15 @@ ErrorHandler:
                             RenglonDedu(I).DeduAlResto)
         Next I
 
-        vg.NroImprimir = mvarNroRecibo
-
         ' Por POLITICA NUESTRA  -- >  SE BORRA
         If UCase(Origen) = "VER" Then
             ' Actualizo Fecha de Transmicion para que no lo mande
-            Funciones.adoModulo.adoComandoIU(Conexion1, "EXEC usp_Recibo_Transmicion_Upd '" & mvarNroRecibo & "'")
+            Funciones.adoModulo.adoComandoIU(_Conexion1, "EXEC usp_Recibo_Transmicion_Upd '" & mvarNroRecibo & "'")
         Else
-            vg.auditor.Guardar(ObjetosAuditados.Recibo, AccionesAuditadas.EXITOSO, "cli:" & Format(mvarIdCliente, "000000") & " ped:" & mvarNroRecibo & " tot:" & Format(mvarTotal, "fixed"))
+            'pablo
+            'vg.auditor.Guardar(ObjetosAuditados.Recibo, AccionesAuditadas.EXITOSO, "cli:" & Format(mvarIdCliente, "000000") & " ped:" & mvarNroRecibo & " tot:" & Format(mvarTotal, "fixed"))
             Nuevo()
-            RaiseEvent GuardoOK(vg.NroImprimir)
+            RaiseEvent GuardoOK(mvarNroRecibo)
         End If
 
         Exit Sub
@@ -389,7 +388,7 @@ ErrorHandler:
         cmd.Parameters.Add("pChequePropio", OleDb.OleDbType.Boolean).Value = ChequePropio
         cmd.Parameters.Add("pT_Cambio", OleDb.OleDbType.Single).Value = T_Cambio
 
-        cmd.Connection = Conexion1
+        cmd.Connection = _Conexion1
         cmd.CommandType = CommandType.StoredProcedure
         cmd.CommandText = "usp_Recibo_Det_add"
         cmd.ExecuteNonQuery()
@@ -417,7 +416,7 @@ ErrorHandler:
         cmd.Parameters.Add("pConcepto", OleDb.OleDbType.VarChar, 50).Value = Concepto
         cmd.Parameters.Add("pImporte", OleDb.OleDbType.Single).Value = Importe
 
-        cmd.Connection = Conexion1
+        cmd.Connection = _Conexion1
         cmd.CommandType = CommandType.StoredProcedure
         cmd.CommandText = "usp_Recibo_App_add"
         cmd.ExecuteNonQuery()
@@ -450,7 +449,7 @@ ErrorHandler:
         cmd.Parameters.Add("pPorcentaje", OleDb.OleDbType.Boolean).Value = Porcentaje
         cmd.Parameters.Add("pDeduAlResto", OleDb.OleDbType.Boolean).Value = DeduAlResto
 
-        cmd.Connection = Conexion1
+        cmd.Connection = _Conexion1
         cmd.CommandType = CommandType.StoredProcedure
         cmd.CommandText = "usp_Recibo_Deducir_add"
         cmd.ExecuteNonQuery()

@@ -10,8 +10,6 @@ Public Class IPPrivado
     Private Cliente As CatalogoWS.Info
     Private WebServiceInicializado As Boolean
 
-    'Public Event SincronizarProductosProgress(ByVal Detalle As String, ByVal Avance As Single)
-
     Private m_MacAddress As String
 
     Public ReadOnly Property Inicializado() As Boolean
@@ -46,12 +44,6 @@ AtajarError:
         End If
 
     End Function
-
-    'Public Function GetIpIntranet() As String
-    '
-    '  GetIpIntranet = vg.URL_ANS2
-    '
-    'End Function
 
     Public Function GetIpIntranet() As String
 

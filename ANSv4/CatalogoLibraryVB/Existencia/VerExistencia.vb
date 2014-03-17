@@ -2,7 +2,6 @@
 
 Public Class VerExistencia
 
-
     ' Define como se llama este modulo para el control de errores
     Private Const m_sMODULENAME_ As String = "clsVerExistencia"
 
@@ -10,9 +9,9 @@ Public Class VerExistencia
 
     Private Cliente As VerExistenciaWS.VerExistencia
     Private WebServiceInicializado As Boolean
+
     Private m_MacAddress As String
     Private m_ipAddress As String
-
     Private m_UsaProxy As Boolean
     Private m_IPProxyServer As String
 
@@ -76,7 +75,7 @@ errhandler:
 
     End Sub
 
-    Public Sub ExistenciaSemaforo(ByVal pIdProducto As String, ByRef pSemaforo As String)
+    Public Sub ExistenciaSemaforo(ByVal pIdProducto As String, ByVal pNroUsuario As String, ByRef pSemaforo As String)
 
         Dim Cancel As Boolean
 
@@ -87,7 +86,7 @@ errhandler:
         End If
 
         If Not Cancel Then
-            pSemaforo = ObtenerSemaforo(Cancel, vg.NroUsuario, pIdProducto)
+            pSemaforo = ObtenerSemaforo(Cancel, pNroUsuario, pIdProducto)
         End If
 
     End Sub
