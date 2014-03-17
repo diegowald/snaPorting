@@ -32,8 +32,8 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="40" />
                                     <RowDefinition  Height="*"/>
-                                    <RowDefinition Height="100" />
-                                    <RowDefinition  Height="150"/>
+                                    <RowDefinition Height="80" />
+                                    <RowDefinition  Height="100"/>
                                 </Grid.RowDefinitions>
                                 <Grid x:Name="searchArea" Grid.Row="0" />
                                 <Grid x:Name="productsArea" Grid.Row="1" />

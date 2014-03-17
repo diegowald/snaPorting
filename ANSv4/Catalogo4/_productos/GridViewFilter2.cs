@@ -59,11 +59,6 @@ namespace Catalogo._productos
         private bool xAplicoPorcentajeLinea = false;
         private float porcentajeLinea;
 
-        //private string strComando = "SELECT " +
-        //       "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
-        //       "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
-        //       "FROM v_CatVehProdLin AS c";
-
         private string filterString = string.Empty;
 
         private int currentRowCount = 0;
@@ -93,31 +88,22 @@ namespace Catalogo._productos
 
         }
 
-        private static DataTable xGetData(string strConn, string sqlCommand)
-        {
+        //private static DataTable xGetData(string strConn, string sqlCommand)
+        //{
+        //    OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sqlCommand, strConn);
 
-            //DataSet oDS = new DataSet();
+        //    DataTable table = new DataTable("dtProducts");
+        //    table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+        //    dataAdapter.Fill(table);
 
-            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sqlCommand, strConn);
-
-            DataTable table = new DataTable("dtProducts");
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dataAdapter.Fill(table);
-
-            //dataAdapter.Fill(oDS, "dtProducts");
-
-            return table;
-
-        }
+        //    return table;
+        //}
 
 
         private void xCargarDataControl()
         {
-
             Cursor.Current = Cursors.WaitCursor;
-
             preload.Preloader.instance.productos.execute();
-
         }
 
         void dataReady(System.Data.DataTable dataTable)
@@ -155,19 +141,6 @@ namespace Catalogo._productos
             dataGridView1.ColumnCount = 28;
 
             //Add Columns
-
-            //DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-            //buttonColumn.HeaderText = "Semáforo";
-            //buttonColumn.Name = "Semáforo";
-            //buttonColumn.Text = "Semáforo";
-            ////buttonColumn.UseColumnTextForButtonValue = true;
-
-            //dataGridView1.Columns.Add(buttonColumn);
-
-            //// Add a CellClick handler to handle clicks in the button column.
-            //dataGridView1.CellClick +=
-            //    new DataGridViewCellEventHandler(dataGridView1_CellClick);
-
             dataGridView1.Columns[(int)CCol.cSemaforo].Name = "Existencia";
             dataGridView1.Columns[(int)CCol.cSemaforo].HeaderText = "Existencia";
 
@@ -187,7 +160,7 @@ namespace Catalogo._productos
             dataGridView1.Columns[(int)CCol.cMarca].HeaderText = "Marca";
             dataGridView1.Columns[(int)CCol.cMarca].DataPropertyName = "Marca";
 
-            dataGridView1.Columns[(int)CCol.cModelo].Name = "cModelo";
+            dataGridView1.Columns[(int)CCol.cModelo].Name = "Modelo";
             dataGridView1.Columns[(int)CCol.cModelo].HeaderText = "Modelo";
             dataGridView1.Columns[(int)CCol.cModelo].DataPropertyName = "Modelo";
 
@@ -203,9 +176,9 @@ namespace Catalogo._productos
             dataGridView1.Columns[(int)CCol.cAño].HeaderText = "Año";
             dataGridView1.Columns[(int)CCol.cAño].DataPropertyName = "Año";
 
-            dataGridView1.Columns[(int)CCol.cMedidas].Name = "O_Productos";
+            dataGridView1.Columns[(int)CCol.cMedidas].Name = "O_Producto";
             dataGridView1.Columns[(int)CCol.cMedidas].HeaderText = "Medidas";
-            dataGridView1.Columns[(int)CCol.cMedidas].DataPropertyName = "O_Productos";
+            dataGridView1.Columns[(int)CCol.cMedidas].DataPropertyName = "O_Producto";
 
             dataGridView1.Columns[(int)CCol.cReemplazaA].Name = "ReemplazaA";
             dataGridView1.Columns[(int)CCol.cReemplazaA].HeaderText = "Reemplaza A";
@@ -241,7 +214,7 @@ namespace Catalogo._productos
 
             dataGridView1.Columns[(int)CCol.cRotacion].Name = "Abc";
             dataGridView1.Columns[(int)CCol.cRotacion].HeaderText = "Rotación";
-            dataGridView1.Columns[(int)CCol.cRotacion].DataPropertyName = "Rotacion";
+            dataGridView1.Columns[(int)CCol.cRotacion].DataPropertyName = "Abc";
 
             dataGridView1.Columns[(int)CCol.cEvolucion].Name = "Alerta";
             dataGridView1.Columns[(int)CCol.cEvolucion].HeaderText = "Evolución";

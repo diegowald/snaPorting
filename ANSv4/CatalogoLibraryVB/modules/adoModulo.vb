@@ -46,6 +46,25 @@ Namespace Funciones
 
         End Function
 
+        Public Shared Function xGetDR(ByRef conexion As System.Data.OleDb.OleDbConnection, ByVal Tabla As String, ByVal Condicion As String, ByVal Orden As String) As OleDbDataReader
+
+            Dim cmd As New OleDbCommand
+
+            conexion.Open()
+
+            cmd.Connection = conexion
+            cmd.CommandText = "usp_getRS"
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@Tabla", Tabla)
+            cmd.Parameters.AddWithValue("@Condicion", Condicion)
+            cmd.Parameters.AddWithValue("@Orden", Orden)
+
+
+
+            Return cmd.ExecuteReader()
+
+        End Function
+
     End Class
 
 End Namespace

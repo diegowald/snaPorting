@@ -84,7 +84,6 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
-    <Compile Include="util\BackgroundTasks\EnvioMovimientos.cs" />
     <Compile Include="util\BackgroundTasks\ExistenciaProducto.cs" />
     <Compile Include="util\IPPrivado.cs" />
     <Compile Include="Web References\CatalogoWS\Reference.cs">
@@ -227,6 +226,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\SearchFilter.resx">
       <DependentUpon>SearchFilter.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\GridViewFilter2.resx">
       <DependentUpon>GridViewFilter2.cs</DependentUpon>
@@ -309,12 +309,6 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Catalogo_CatalogoWS_Info</CachedSettingsPropName>
     </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CatalogoLibraryVB\CatalogoLibraryVB.vbproj">
-      <Project>{9dd8498e-39f8-4dbf-9737-d34a84117f56}</Project>
-      <Name>CatalogoLibraryVB</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="recursos\Nuevo-logo-Auto-nautica-blanco.png" />

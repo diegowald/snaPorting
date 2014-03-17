@@ -7,12 +7,12 @@
              d:DesignHeight="60" d:DesignWidth="600">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="80" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="80" />
         </Grid.ColumnDefinitions>
-        <Image HorizontalAlignment="Left" Height="60"  VerticalAlignment="Top" Width="60" x:Name="imgIzquierda" Grid.Column="0"/>
-        <Label Name="txtDetalle" Grid.Column="1"  />
-        <Image HorizontalAlignment="Left" Height="60"  VerticalAlignment="Top" Width="60" x:Name="imgDerecha" Grid.Column="2"/>
+        <Image HorizontalAlignment="Left" VerticalAlignment="Top"  x:Name="imgIzquierda" Grid.Column="0" Stretch="Fill"/>
+        <TextBlock Margin="75,5,75,5" TextWrapping="Wrap" Name="txtDetalle" Grid.Column="1" />
+        <Image HorizontalAlignment="Left"  VerticalAlignment="Top"  x:Name="imgDerecha" Grid.Column="2" Stretch="UniformToFill"/>
     </Grid>
 </UserControl>
