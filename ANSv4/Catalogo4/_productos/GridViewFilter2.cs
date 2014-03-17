@@ -326,7 +326,8 @@ namespace Catalogo._productos
             this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
             // Show the counts in the toolstrip
 
-            dataGridView1.Rows[0].Selected = true;      
+            
+            //dataGridView1.Rows[0].Selected = true;      
         }
        
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)

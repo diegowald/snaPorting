@@ -97,6 +97,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="_existencia\VerExistencia.cs" />
+    <Compile Include="_pedidos\vtadev.xaml.cs">
+      <DependentUpon>vtadev.xaml</DependentUpon>
+    </Compile>
     <Compile Include="_registro\Registration.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -154,18 +157,16 @@
       <DependentUpon>GridViewFilter2.cs</DependentUpon>
     </Compile>
     <Compile Include="_productos\FilterBuilder.cs" />
-    <Compile Include="_recibos\fRecibo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="_recibos\fRecibo.Designer.cs">
-      <DependentUpon>fRecibo.cs</DependentUpon>
-    </Compile>
     <Compile Include="_recibos\ucRecibo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="_recibos\ucRecibo.Designer.cs">
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </Compile>
+    <Page Include="_pedidos\vtadev.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="_registro\Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -228,9 +229,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\GridViewFilter2.resx">
       <DependentUpon>GridViewFilter2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="_recibos\fRecibo.resx">
-      <DependentUpon>fRecibo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_recibos\ucRecibo.resx">
       <DependentUpon>ucRecibo.cs</DependentUpon>

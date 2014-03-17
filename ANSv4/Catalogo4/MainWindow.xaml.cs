@@ -27,7 +27,7 @@ namespace Catalogo
         {
             this.Hide();
             InitializeComponent();            
-            System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
+            //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
         }
 
         private Catalogo._productos.SearchFilter addSearchArea()
@@ -41,8 +41,9 @@ namespace Catalogo
             filterControl.Dock = System.Windows.Forms.DockStyle.Fill;
             filterControl.Location = new System.Drawing.Point(0, 0);
             filterControl.Name = "searchFilter";
+
             //filterControl.Size = new System.Drawing.Size(640, 480);
-            filterControl.TabIndex = 0;
+            //filterControl.TabIndex = 0;
             //gridViewControl.Text = "Lista de Productos";
 
             // Assign the MaskedTextBox control as the host control's child.
@@ -50,6 +51,26 @@ namespace Catalogo
 
             this.searchArea.Children.Add(host);
             return filterControl;
+        }
+
+        private Catalogo._recibos.ucRecibo addReciboArea()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            // Create the MaskedTextBox control.
+            Catalogo._recibos.ucRecibo xRecibo;
+            xRecibo = new Catalogo._recibos.ucRecibo() ;
+            xRecibo.AutoScroll = true;
+            xRecibo.Dock = System.Windows.Forms.DockStyle.Fill;
+            xRecibo.Location = new System.Drawing.Point(0, 0);
+            xRecibo.Name = "Recibos";
+
+
+            host.Child = xRecibo;
+            this.xRecibosArea.Children.Add(host);
+
+            return xRecibo;
         }
 
         private Catalogo._productos.GridViewFilter2  addProductsArea()
@@ -65,18 +86,10 @@ namespace Catalogo
             gridViewControl.Location = new System.Drawing.Point(0, 0);
             gridViewControl.Name = "GridViewProductos";
             gridViewControl.Size = new System.Drawing.Size(640, 480);
-            gridViewControl.TabIndex = 0;
-            gridViewControl.Text = "Lista de Productos";
+            //gridViewControl.TabIndex = 0;
+            //gridViewControl.Text = "Lista de Productos";
 
-            // Assign the MaskedTextBox control as the host control's child.
             host.Child = gridViewControl;
-
-            // Add the interop host control to the Grid 
-            // control's collection of child controltts. 
-            //this.grid1.Children.Add(host);
-            //this.dockManager.Documents[0]. .DefaultElement.set  .Children.Add(host);
-
-            //this.grid2.Children.Add(host);
             this.productsArea.Children.Add(host);
 
             return gridViewControl;
@@ -99,7 +112,9 @@ namespace Catalogo
             
             SplashScreen.UdpateStatusText("Items Loaded..");
             //Thread.Sleep(500);
-            
+
+            Catalogo._recibos.ucRecibo rec = addReciboArea();
+
             sf.attachReceptor(gv);
             sf.attachReceptor2(gv);
             gv.attachReceptor(productDetalle);
@@ -145,33 +160,15 @@ namespace Catalogo
 
         private void ChangeColor(object sender, RoutedEventArgs e)
         {
-
             ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString(((System.Windows.Controls.MenuItem)sender).Header.ToString()));
         }
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
             this.toolsContent.ToggleAutoHide();
-            this.detailsContent.ToggleAutoHide();
-            //if (_firstTimeLoad && !_isDataGridLoaded)
-            //{
-            //    outputDockablePane.ToggleAutoHide();
-            //    _forcedToAutoHide = true;
-            //}
+            //this.detailsContent.ToggleAutoHide();
         }
 
-        private void btnReciboPage_Click(object sender, RoutedEventArgs e)
-        {
-            //_recibos.frmRecibo fRecibo = new _recibos.frmRecibo();
-
-            //fRecibo.ShowDialog();
-
-            _recibos.fRecibo fRecibo = new _recibos.fRecibo();
-            fRecibo.ShowDialog();
-            fRecibo.Close();
-            fRecibo.Dispose();
-
-        }
 
     }
 }

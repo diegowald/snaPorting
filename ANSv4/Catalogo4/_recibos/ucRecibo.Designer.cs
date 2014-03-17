@@ -99,12 +99,14 @@ namespace Catalogo._recibos
             this.adBottonPnl = new System.Windows.Forms.Panel();
             this.adTotalDeducirLbl = new System.Windows.Forms.Label();
             this.CtaCteTab = new System.Windows.Forms.TabPage();
-            this.ccBottonPnl = new System.Windows.Forms.Panel();
-            this.ccCtaCteActualizadaFechaLbl = new System.Windows.Forms.Label();
             this.ccMainPnl = new System.Windows.Forms.Panel();
             this.ccDataGridView = new System.Windows.Forms.DataGridView();
+            this.ccBottonPnl = new System.Windows.Forms.Panel();
+            this.ccCtaCteActualizadaFechaLbl = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ClienteDat = new System.Windows.Forms.TabPage();
+            this.ClienteNov = new System.Windows.Forms.TabPage();
             this.toolStrip1.SuspendLayout();
             this.ReciboTab.SuspendLayout();
             this.raTab.SuspendLayout();
@@ -125,9 +127,9 @@ namespace Catalogo._recibos
             this.adTopPnl.SuspendLayout();
             this.adBottonPnl.SuspendLayout();
             this.CtaCteTab.SuspendLayout();
-            this.ccBottonPnl.SuspendLayout();
             this.ccMainPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ccDataGridView)).BeginInit();
+            this.ccBottonPnl.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -190,6 +192,8 @@ namespace Catalogo._recibos
             this.ReciboTab.Controls.Add(this.AplicacionTab);
             this.ReciboTab.Controls.Add(this.ADeducirTab);
             this.ReciboTab.Controls.Add(this.CtaCteTab);
+            this.ReciboTab.Controls.Add(this.ClienteDat);
+            this.ReciboTab.Controls.Add(this.ClienteNov);
             this.ReciboTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ReciboTab.Location = new System.Drawing.Point(0, 25);
             this.ReciboTab.Name = "ReciboTab";
@@ -793,24 +797,6 @@ namespace Catalogo._recibos
             this.CtaCteTab.Text = "Cta. Cte.";
             this.CtaCteTab.UseVisualStyleBackColor = true;
             // 
-            // ccBottonPnl
-            // 
-            this.ccBottonPnl.Controls.Add(this.ccCtaCteActualizadaFechaLbl);
-            this.ccBottonPnl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ccBottonPnl.Location = new System.Drawing.Point(3, 301);
-            this.ccBottonPnl.Name = "ccBottonPnl";
-            this.ccBottonPnl.Size = new System.Drawing.Size(739, 34);
-            this.ccBottonPnl.TabIndex = 1;
-            // 
-            // ccCtaCteActualizadaFechaLbl
-            // 
-            this.ccCtaCteActualizadaFechaLbl.AutoSize = true;
-            this.ccCtaCteActualizadaFechaLbl.Location = new System.Drawing.Point(5, 9);
-            this.ccCtaCteActualizadaFechaLbl.Name = "ccCtaCteActualizadaFechaLbl";
-            this.ccCtaCteActualizadaFechaLbl.Size = new System.Drawing.Size(128, 13);
-            this.ccCtaCteActualizadaFechaLbl.TabIndex = 0;
-            this.ccCtaCteActualizadaFechaLbl.Text = "Cta. Cte. actualizada al ...";
-            // 
             // ccMainPnl
             // 
             this.ccMainPnl.Controls.Add(this.ccDataGridView);
@@ -839,6 +825,24 @@ namespace Catalogo._recibos
             this.ccDataGridView.TabIndex = 0;
             this.ccDataGridView.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.ccDataGridView_ColumnAdded);
             // 
+            // ccBottonPnl
+            // 
+            this.ccBottonPnl.Controls.Add(this.ccCtaCteActualizadaFechaLbl);
+            this.ccBottonPnl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ccBottonPnl.Location = new System.Drawing.Point(3, 301);
+            this.ccBottonPnl.Name = "ccBottonPnl";
+            this.ccBottonPnl.Size = new System.Drawing.Size(739, 34);
+            this.ccBottonPnl.TabIndex = 1;
+            // 
+            // ccCtaCteActualizadaFechaLbl
+            // 
+            this.ccCtaCteActualizadaFechaLbl.AutoSize = true;
+            this.ccCtaCteActualizadaFechaLbl.Location = new System.Drawing.Point(5, 9);
+            this.ccCtaCteActualizadaFechaLbl.Name = "ccCtaCteActualizadaFechaLbl";
+            this.ccCtaCteActualizadaFechaLbl.Size = new System.Drawing.Size(128, 13);
+            this.ccCtaCteActualizadaFechaLbl.TabIndex = 0;
+            this.ccCtaCteActualizadaFechaLbl.Text = "Cta. Cte. actualizada al ...";
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -854,6 +858,25 @@ namespace Catalogo._recibos
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // ClienteDat
+            // 
+            this.ClienteDat.Location = new System.Drawing.Point(4, 22);
+            this.ClienteDat.Name = "ClienteDat";
+            this.ClienteDat.Padding = new System.Windows.Forms.Padding(3);
+            this.ClienteDat.Size = new System.Drawing.Size(745, 338);
+            this.ClienteDat.TabIndex = 5;
+            this.ClienteDat.Text = "Datos del Cliente";
+            this.ClienteDat.UseVisualStyleBackColor = true;
+            // 
+            // ClienteNov
+            // 
+            this.ClienteNov.Location = new System.Drawing.Point(4, 22);
+            this.ClienteNov.Name = "ClienteNov";
+            this.ClienteNov.Size = new System.Drawing.Size(745, 338);
+            this.ClienteNov.TabIndex = 6;
+            this.ClienteNov.Text = "Novedades";
+            this.ClienteNov.UseVisualStyleBackColor = true;
             // 
             // ucRecibo
             // 
@@ -892,10 +915,10 @@ namespace Catalogo._recibos
             this.adBottonPnl.ResumeLayout(false);
             this.adBottonPnl.PerformLayout();
             this.CtaCteTab.ResumeLayout(false);
-            this.ccBottonPnl.ResumeLayout(false);
-            this.ccBottonPnl.PerformLayout();
             this.ccMainPnl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ccDataGridView)).EndInit();
+            this.ccBottonPnl.ResumeLayout(false);
+            this.ccBottonPnl.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -978,5 +1001,7 @@ namespace Catalogo._recibos
         private System.Windows.Forms.Label ccCtaCteActualizadaFechaLbl;
         private System.Windows.Forms.Panel ccMainPnl;
         private System.Windows.Forms.DataGridView ccDataGridView;
+        private System.Windows.Forms.TabPage ClienteDat;
+        private System.Windows.Forms.TabPage ClienteNov;
     }
 }
