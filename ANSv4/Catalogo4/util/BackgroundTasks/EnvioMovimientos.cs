@@ -56,7 +56,7 @@ namespace Catalogo.util.BackgroundTasks
 
         private void enviarMovimientos()
         {
-            CatalogoLibraryVB.IPPrivado ipPriv;
+            IPPrivado ipPriv;
             string ipPrivado;
             string ipIntranet;
             bool fallaEnvioPedido = false;
@@ -72,13 +72,13 @@ namespace Catalogo.util.BackgroundTasks
             }
             else
             {
-                ipPriv = new CatalogoLibraryVB.IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
+                ipPriv = new IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
                 ipPrivado = ipPriv.GetIP();
                 ipIntranet = ipPriv.GetIpIntranet();
             }
 
-            CatalogoLibraryVB.Movimientos movimientos = new CatalogoLibraryVB.Movimientos(Global01.Conexion);
-            System.Data.OleDb.OleDbDataReader movs = movimientos.Leer(CatalogoLibraryVB.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, _idCliente);
+            _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, Global01.IDMaquina);
+            System.Data.OleDb.OleDbDataReader movs = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, _idCliente);
 
             if (movs.HasRows)
             {
@@ -90,12 +90,12 @@ namespace Catalogo.util.BackgroundTasks
                     {
                         case "NOTA DE VENTA":
                             {
-                                CatalogoLibraryVB.EnvioPedido envio = new CatalogoLibraryVB.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, _idCliente.ToString(), false, "");
+                                _pedidos.EnvioPedido envio = new _pedidos.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, _idCliente.ToString(), false, "");
                                 if (envio.Inicializado)
                                 {
-                                    envio.ObtenerDatos(Nro);
+                                    envio.obtenerDatos(Nro);
                                     //vg.auditor.guardar pedido, transmite, "P1 : " + movs["Nro"]
-                                    if (envio.EnviarPedido() != 0)
+                                    if (envio.enviarPedido() != 0)
                                     {
                                         fallaEnvioPedido = true;
                                         //vg.auditor.guardar pedido, fallo, "P1 " + movs["Nro"]
@@ -110,11 +110,11 @@ namespace Catalogo.util.BackgroundTasks
                             break;
                         case "RECIBO":
                             {
-                                CatalogoLibraryVB.EnvioRecibo envio = new CatalogoLibraryVB.EnvioRecibo(Global01.Conexion,
+                                _recibos.EnvioRecibo envio = new _recibos.EnvioRecibo(Global01.Conexion,
                                 Global01.URL_ANS, Global01.URL_ANS2, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
-                                    envio.ObtenerDatos(Nro);
+                                    envio.obtenerDatos(Nro);
                                     // vg.auditor.guardar Recibo, Transmite, "R1 " + movs["Nro"]
                                     if (envio.EnviarRecibo() != 0)
                                     {
@@ -134,7 +134,7 @@ namespace Catalogo.util.BackgroundTasks
                             break;
                         case "DEVOLUCION":
                             {
-                                CatalogoLibraryVB.EnvioDevolucion envio = new CatalogoLibraryVB.EnvioDevolucion(Global01.Conexion,
+                                _devolucion.EnvioDevolucion envio = new _devolucion.EnvioDevolucion(Global01.Conexion,
                                      Global01.URL_ANS, Global01.URL_ANS2, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
@@ -155,7 +155,7 @@ namespace Catalogo.util.BackgroundTasks
                             break;
                         case "INTERDEPOSITO":
                             {
-                                CatalogoLibraryVB.EnvioInterDeposito envio = new CatalogoLibraryVB.EnvioInterDeposito(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                _interdeposito.EnvioInterDeposito envio = new _interdeposito.EnvioInterDeposito(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
                                     envio.ObtenerDatos(Nro);
@@ -175,7 +175,7 @@ namespace Catalogo.util.BackgroundTasks
                             break;
                         case "RENDICION":
                             {
-                                CatalogoLibraryVB.EnvioRendicion envio = new CatalogoLibraryVB.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                _rendicion.EnvioRendicion envio = new _rendicion.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
                                     envio.ObtenerDatos(Nro);

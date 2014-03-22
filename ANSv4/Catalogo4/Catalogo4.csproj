@@ -153,8 +153,14 @@
     </Compile>
     <Compile Include="_appConfig\UpdateAppConfig.cs" />
     <Compile Include="_Application\ActivarAplicacion.cs" />
+    <Compile Include="_audit\EnvioAuditoria.cs" />
     <Compile Include="_clientes\UpdateClientes.cs" />
+    <Compile Include="_devolucion\EnvioDevolucion.cs" />
     <Compile Include="_existencia\VerExistencia.cs" />
+    <Compile Include="_interdeposito\EnvioInterDeposito.cs" />
+    <Compile Include="_movimientos\Movimientos.cs" />
+    <Compile Include="_pedidos\EnvioPedido.cs" />
+    <Compile Include="_recibos\EnvioRecibo.cs" />
     <Compile Include="_registro\Registration.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -171,6 +177,7 @@
     <Compile Include="preload\ProductosPreloader.cs" />
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
     <Compile Include="_registro\AppRegistro.cs" />
+    <Compile Include="_rendicion\EnvioRendicion.cs" />
     <Compile Include="_updateData\fDataUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
