@@ -8,6 +8,17 @@ namespace Catalogo.preload
     public class ProductosPreloader
     {
         /// Esta clase hace un preload de los productos.
+        /// 
+
+        private enum LOAD_STATUS
+        {
+            UNLOADED,
+            LOADING,
+            LOADED
+        }
+
+        private LOAD_STATUS _status;
+        private Object obj;
 
         private string strComando = "SELECT " +
        "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
@@ -29,14 +40,19 @@ namespace Catalogo.preload
             backgroundWorker = new Funciones.BackgroundReader.BackgroundDataLoader(Catalogo.Funciones.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
         Global01.strConexionUs);
             backgroundWorker.onWorkFinishedHandler += dataReady;
-
+            _status = LOAD_STATUS.UNLOADED;
+            obj = new Object();
             table = null;
             execute();
         }
 
         private void dataReady(System.Data.DataTable dataTable)
         {
-            table = dataTable;
+            lock (obj)
+            {
+                _status = LOAD_STATUS.LOADED;
+                table = dataTable;
+            }
      
             if (onWorkFinished != null)
             {
@@ -48,9 +64,30 @@ namespace Catalogo.preload
         {
             if (table == null)
             {
-                System.Diagnostics.Debug.WriteLine("CARGANDO PRODUCTO");
-
-                backgroundWorker.executeQuery(strComando);
+                if (_status == LOAD_STATUS.UNLOADED)
+                {
+                    lock (obj)
+                    {
+                        switch (_status)
+                        {
+                            case LOAD_STATUS.UNLOADED:
+                                {
+                                    _status = LOAD_STATUS.LOADING;
+                                    System.Diagnostics.Debug.WriteLine("CARGANDO PRODUCTO");
+                                    backgroundWorker.executeQuery(strComando);
+                                }
+                                break;
+                            case LOAD_STATUS.LOADED:
+                                System.Diagnostics.Debug.WriteLine("LOADED...");
+                                break;
+                            case LOAD_STATUS.LOADING:
+                                System.Diagnostics.Debug.WriteLine("LOADING...");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
             }
             else
             {
