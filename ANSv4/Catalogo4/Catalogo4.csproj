@@ -537,12 +537,6 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CatalogoLibraryVB\CatalogoLibraryVB.vbproj">
-      <Project>{9dd8498e-39f8-4dbf-9737-d34a84117f56}</Project>
-      <Name>CatalogoLibraryVB</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="recursos\Nuevo-logo-Auto-nautica-blanco.png" />
   </ItemGroup>
   <ItemGroup>
