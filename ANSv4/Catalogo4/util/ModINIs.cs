@@ -48,7 +48,7 @@ namespace Catalogo.Funciones
         public static string ReadINI(string SectionName, string KeyName, string DefaultValue = null)
         {
 
-            return INIRead(System.IO.Directory.GetCurrentDirectory() + "\\settings.ini", SectionName, KeyName, DefaultValue);
+            return INIRead(Global01.AppPath + "\\settings.ini", SectionName, KeyName, DefaultValue);
 
         }
 
@@ -79,7 +79,7 @@ namespace Catalogo.Funciones
 
         public static void WriteINI(string SectionName, string KeyName, string TheValue)
         {
-            WritePrivateProfileString(SectionName, KeyName, TheValue, System.IO.Directory.GetCurrentDirectory() + "\\settings.ini");
+            WritePrivateProfileString(SectionName, KeyName, TheValue, Global01.AppPath + "\\settings.ini");
 
         }
 
@@ -94,7 +94,7 @@ namespace Catalogo.Funciones
         public static void DeleteKeyINI(string SectionName, string KeyName)
         {
 
-            WritePrivateProfileString(SectionName, KeyName, null, System.IO.Directory.GetCurrentDirectory() + "\\settings.ini");
+            WritePrivateProfileString(SectionName, KeyName, null, Global01.AppPath + "\\settings.ini");
 
         }
 

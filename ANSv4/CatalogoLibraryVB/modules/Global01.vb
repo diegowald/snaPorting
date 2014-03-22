@@ -11,7 +11,6 @@
     ' VARIABLES GLOBALES
     Public Structure vAPP
 
-        Public miSABOR As LosSabores     ' = SABOR
 
         Public IDMaquina As String 'vg.misabor & obtenerCRC(WMI)
         Public IDMaquinaCRC As String 'obtenerCRC(vg.IDMaquina)

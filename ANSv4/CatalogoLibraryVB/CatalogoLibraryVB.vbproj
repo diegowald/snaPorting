@@ -45,8 +45,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -63,12 +61,8 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Existencia\VerExistencia.vb" />
-    <Compile Include="IPs\IPPrivado.vb" />
     <Compile Include="modules\adoModulo.vb" />
     <Compile Include="modules\Enumerados.vb" />
-    <Compile Include="modules\Global01.vb" />
-    <Compile Include="modules\util.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -84,41 +78,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Web References\CatalogoWS\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\DevolucionWS\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\InterDepositoWS\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\PedidosWS\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\RecibosWS\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\RendicionWS\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\VerExistenciaWS\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
     <Compile Include="_auditor\Auditor.vb" />
     <Compile Include="_devolucion\EnvioDevolucion.vb" />
     <Compile Include="_InterDeposito\EnvioInterDeposito.vb" />
@@ -126,7 +85,6 @@
     <Compile Include="_pedidos\EnvioPedido.vb" />
     <Compile Include="_recibos\AplicacionItem.vb" />
     <Compile Include="_recibos\DeducirItem.vb" />
-    <Compile Include="_recibos\EnvioRecibo.vb" />
     <Compile Include="_recibos\Recibo.vb" />
     <Compile Include="_recibos\ReciboItem.vb" />
     <Compile Include="_rendicion\EnvioRendicion.vb" />
@@ -140,7 +98,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -150,41 +107,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Web References\CatalogoWS\Info.wsdl" />
-    <None Include="Web References\CatalogoWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.vb</LastGenOutput>
-    </None>
-    <None Include="Web References\DevolucionWS\Devolucion.wsdl" />
-    <None Include="Web References\DevolucionWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.vb</LastGenOutput>
-    </None>
-    <None Include="Web References\InterDepositoWS\InterDeposito.wsdl" />
-    <None Include="Web References\InterDepositoWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.vb</LastGenOutput>
-    </None>
-    <None Include="Web References\PedidosWS\Pedidos.wsdl" />
-    <None Include="Web References\PedidosWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.vb</LastGenOutput>
-    </None>
-    <None Include="Web References\RecibosWS\Recibos_v_303.wsdl" />
-    <None Include="Web References\RecibosWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.vb</LastGenOutput>
-    </None>
-    <None Include="Web References\RendicionWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.vb</LastGenOutput>
-    </None>
-    <None Include="Web References\RendicionWS\Rendicion.wsdl" />
-    <None Include="Web References\VerExistenciaWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.vb</LastGenOutput>
-    </None>
-    <None Include="Web References\VerExistenciaWS\VerExistencia.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="ADODB">
@@ -215,91 +137,8 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo3/Devolucion.asmx%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\DevolucionWS\</RelPath>
-      <UpdateFromURL>http://190.3.78.12/wsCatalogo3/Devolucion.asmx%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>CatalogoLibraryVB_DevolucionWS_Devolucion</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo3/InterDeposito.asmx%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\InterDepositoWS\</RelPath>
-      <UpdateFromURL>http://190.3.78.12/wsCatalogo3/InterDeposito.asmx%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>CatalogoLibraryVB_InterDepositoWS_InterDeposito</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo3/Pedidos.asmx%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\PedidosWS\</RelPath>
-      <UpdateFromURL>http://190.3.78.12/wsCatalogo3/Pedidos.asmx%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>CatalogoLibraryVB_PedidosWS_Pedidos</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo3/Recibos_v_303.asmx%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\RecibosWS\</RelPath>
-      <UpdateFromURL>http://190.3.78.12/wsCatalogo3/Recibos_v_303.asmx%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>CatalogoLibraryVB_RecibosWS_Recibos_v_303</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo3/Rendicion.asmx%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\RendicionWS\</RelPath>
-      <UpdateFromURL>http://190.3.78.12/wsCatalogo3/Rendicion.asmx%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>CatalogoLibraryVB_RendicionWS_Rendicion</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://190.3.78.12/wsOracle/VerExistencia.asmx%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\VerExistenciaWS\</RelPath>
-      <UpdateFromURL>http://190.3.78.12/wsOracle/VerExistencia.asmx%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>CatalogoLibraryVB_VerExistencia_VerExistencia</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\CatalogoWS\</RelPath>
-      <UpdateFromURL>http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>MySettings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>CatalogoLibraryVB_CatalogoWS_Info</CachedSettingsPropName>
-    </WebReferenceUrl>
+    <Folder Include="Web References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

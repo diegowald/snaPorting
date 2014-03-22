@@ -56,7 +56,7 @@ namespace Catalogo.util.BackgroundTasks
 
         private void enviarMovimientos()
         {
-            IPPrivado ipPriv;
+            Catalogo.util.IPPrivado ipPriv;
             string ipPrivado;
             string ipIntranet;
             bool fallaEnvioPedido = false;
@@ -72,7 +72,7 @@ namespace Catalogo.util.BackgroundTasks
             }
             else
             {
-                ipPriv = new IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
+                ipPriv = new Catalogo.util.IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
                 ipPrivado = ipPriv.GetIP();
                 ipIntranet = ipPriv.GetIpIntranet();
             }

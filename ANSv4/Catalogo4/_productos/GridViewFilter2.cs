@@ -59,11 +59,6 @@ namespace Catalogo._productos
         private bool xAplicoPorcentajeLinea = false;
         private float porcentajeLinea;
 
-        //private string strComando = "SELECT " +
-        //       "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
-        //       "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
-        //       "FROM v_CatVehProdLin AS c";
-
         private string filterString = string.Empty;
 
         private int currentRowCount = 0;
@@ -85,54 +80,71 @@ namespace Catalogo._productos
         public GridViewFilter2()
         {
 
-            InitializeComponent();
-
+            InitializeComponent();          
             preload.Preloader.instance.productos.onWorkFinished += dataReady;
 
             xCargarDataControl();
 
         }
 
-        private static DataTable xGetData(string strConn, string sqlCommand)
+        public void onRecibir(string dato)
         {
-
-            //DataSet oDS = new DataSet();
-
-            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sqlCommand, strConn);
-
-            DataTable table = new DataTable("dtProducts");
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dataAdapter.Fill(table);
-
-            //dataAdapter.Fill(oDS, "dtProducts");
-
-            return table;
-
+            filterString = dato;
+            loadDataGridView();
         }
 
+        public void onRecibir(float dato)
+        {
+            porcentajeLinea = dato;
+            loadDataGridView();
+        }
+
+        private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
+        public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
+        {
+            get
+            {
+                return _emisor;
+            }
+            set
+            {
+                _emisor = value;
+            }
+        }
+
+        private emisorHandler<util.Pair<int, int>> _emisor2;
+        public emisorHandler<util.Pair<int, int>> emisor2
+        {
+            get
+            {
+                return _emisor2;
+            }
+            set
+            {
+                _emisor2 = value;
+            }
+        }
 
         private void xCargarDataControl()
         {
-
             Cursor.Current = Cursors.WaitCursor;
-
             preload.Preloader.instance.productos.execute();
-
         }
 
-        void dataReady(System.Data.DataTable dataTable)
+       private void dataReady(System.Data.DataTable dataTable)
         {
             dtProducts = dataTable;
 
-            // Load the DataGridView
+            // Load the DataGridView            
             loadDataGridView();
-            // Load the Combo Filters
-
             Cursor.Current = Cursors.Default;
         }
 
         private void loadDataGridView()
         {
+
+            dataGridIdle = false;
+
             // If rows in grid already exist, clear them
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
@@ -155,19 +167,6 @@ namespace Catalogo._productos
             dataGridView1.ColumnCount = 28;
 
             //Add Columns
-
-            //DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-            //buttonColumn.HeaderText = "Semáforo";
-            //buttonColumn.Name = "Semáforo";
-            //buttonColumn.Text = "Semáforo";
-            ////buttonColumn.UseColumnTextForButtonValue = true;
-
-            //dataGridView1.Columns.Add(buttonColumn);
-
-            //// Add a CellClick handler to handle clicks in the button column.
-            //dataGridView1.CellClick +=
-            //    new DataGridViewCellEventHandler(dataGridView1_CellClick);
-
             dataGridView1.Columns[(int)CCol.cSemaforo].Name = "Existencia";
             dataGridView1.Columns[(int)CCol.cSemaforo].HeaderText = "Existencia";
 
@@ -187,7 +186,7 @@ namespace Catalogo._productos
             dataGridView1.Columns[(int)CCol.cMarca].HeaderText = "Marca";
             dataGridView1.Columns[(int)CCol.cMarca].DataPropertyName = "Marca";
 
-            dataGridView1.Columns[(int)CCol.cModelo].Name = "cModelo";
+            dataGridView1.Columns[(int)CCol.cModelo].Name = "Modelo";
             dataGridView1.Columns[(int)CCol.cModelo].HeaderText = "Modelo";
             dataGridView1.Columns[(int)CCol.cModelo].DataPropertyName = "Modelo";
 
@@ -203,9 +202,9 @@ namespace Catalogo._productos
             dataGridView1.Columns[(int)CCol.cAño].HeaderText = "Año";
             dataGridView1.Columns[(int)CCol.cAño].DataPropertyName = "Año";
 
-            dataGridView1.Columns[(int)CCol.cMedidas].Name = "O_Productos";
+            dataGridView1.Columns[(int)CCol.cMedidas].Name = "O_Producto";
             dataGridView1.Columns[(int)CCol.cMedidas].HeaderText = "Medidas";
-            dataGridView1.Columns[(int)CCol.cMedidas].DataPropertyName = "O_Productos";
+            dataGridView1.Columns[(int)CCol.cMedidas].DataPropertyName = "O_Producto";
 
             dataGridView1.Columns[(int)CCol.cReemplazaA].Name = "ReemplazaA";
             dataGridView1.Columns[(int)CCol.cReemplazaA].HeaderText = "Reemplaza A";
@@ -241,7 +240,7 @@ namespace Catalogo._productos
 
             dataGridView1.Columns[(int)CCol.cRotacion].Name = "Abc";
             dataGridView1.Columns[(int)CCol.cRotacion].HeaderText = "Rotación";
-            dataGridView1.Columns[(int)CCol.cRotacion].DataPropertyName = "Rotacion";
+            dataGridView1.Columns[(int)CCol.cRotacion].DataPropertyName = "Abc";
 
             dataGridView1.Columns[(int)CCol.cEvolucion].Name = "Alerta";
             dataGridView1.Columns[(int)CCol.cEvolucion].HeaderText = "Evolución";
@@ -294,7 +293,6 @@ namespace Catalogo._productos
             // Filter the dataview
             dvProducts.RowFilter = filterString;
 
-
             if (porcentajeLinea != 0)
             {
                 xAplicoPorcentajeLinea = true;
@@ -320,22 +318,29 @@ namespace Catalogo._productos
             dataGridView1.DataSource = dvProducts;
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
-            
+
             dataGridIdle = true;
 
-            this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
             // Show the counts in the toolstrip
+            this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
 
-            dataGridView1.Rows[0].Selected = true;      
+            dataGridView1.Rows[0].Selected = true;
+
+            DataGridViewCell cell = dataGridView1[0, 0];
+            if (cell != null)
+            {
+                DataGridViewRow row = cell.OwningRow;
+                this.emitir(row);
+            };
+          
         }
+
        
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
 
             if (dataGridIdle)
             {
-                //DataGridViewRow row = dataGridView1.SelectedRows[0];
-                //this.emitir(row);
                 DataGridViewCell cell = null;
                 foreach (DataGridViewCell selectedCell in dataGridView1.SelectedCells)
                 {
@@ -350,44 +355,6 @@ namespace Catalogo._productos
                 }
             };
 
-        }
-
-        public void onRecibir(string dato)
-        {
-            filterString = dato;
-            loadDataGridView();
-        }
-
-        public void onRecibir(float dato)
-        {
-            porcentajeLinea = dato;
-            loadDataGridView();
-        }
-
-        private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
-        public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
-        {
-            get
-            {
-                return _emisor;
-            }
-            set
-            {
-                _emisor = value;
-            }
-        }
-
-        private emisorHandler<util.Pair<int, int>> _emisor2;
-        public emisorHandler<util.Pair<int, int>> emisor2
-        {
-            get
-            {
-                return _emisor2;
-            }
-            set
-            {
-                _emisor2 = value;
-            }
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -448,6 +415,7 @@ namespace Catalogo._productos
 
             //System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", idProducto, resultado));
         }
+
 
 
 

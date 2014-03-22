@@ -5,7 +5,8 @@ Public Class Auditor
     ' Define como se llama este modulo para el control de errores
     Private Const m_sMODULENAME_ As String = "clsAuditor"
 
-    Private Conexion1 As System.Data.OleDb.OleDbConnection
+    Private _Conexion1 As System.Data.OleDb.OleDbConnection
+    Private _AuditarProceso As Boolean
 
     Public Sub Guardar(ByVal Objeto As Enumerados.ObjetosAuditados, _
                        ByVal Accion As AccionesAuditadas, _
@@ -13,13 +14,13 @@ Public Class Auditor
 
         Dim adoCMD As New System.Data.OleDb.OleDbCommand
 
-        If vg.AuditarProceso Then
+        If _AuditarProceso Then
             If Not (ValidarConexion()) Then Exit Sub
 
             On Error GoTo ErrorHandler
             adoCMD.Parameters.Add("pDetalle", OleDb.OleDbType.VarChar, 128).Value = CStr(Objeto) & "|" & CStr(Accion) & "|" & Detalle
 
-            adoCMD.Connection = Conexion1
+            adoCMD.Connection = _Conexion1
             adoCMD.CommandType = CommandType.StoredProcedure
             adoCMD.CommandText = "usp_Auditor_add"
             adoCMD.ExecuteNonQuery()
@@ -37,12 +38,18 @@ ErrorHandler:
 
     Public WriteOnly Property Conexion() As System.Data.OleDb.OleDbConnection
         Set(ByVal value As System.Data.OleDb.OleDbConnection)
-            Conexion1 = value
+            _Conexion1 = value
+        End Set
+    End Property
+
+    Public WriteOnly Property AuditarProceso() As Boolean
+        Set(ByVal value As Boolean)
+            _AuditarProceso = value
         End Set
     End Property
 
     Private Function ValidarConexion() As Boolean
-        Return Not (Conexion1 Is Nothing)
+        Return Not (_Conexion1 Is Nothing)
     End Function
 
 

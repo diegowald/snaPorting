@@ -22,11 +22,6 @@ namespace Catalogo._productos
         private DataView dvProducts = new DataView();
         private DataTable useTable = new DataTable();
    
-        //private string strComando = "SELECT " +
-        //       "mid(c.C_Producto,5) as C_Producto, c.Linea, c.Precio, c.PrecioOferta, c.Precio as PrecioLista, c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto as Medidas, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
-        //       "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
-        //       "FROM v_CatVehProdLin AS c";
-
         private string filterString = string.Empty;
 
         // Dropdown Filter Collections
@@ -53,36 +48,18 @@ namespace Catalogo._productos
 
         }
 
-        private static DataTable xGetData(string strConn, string sqlCommand)
-        {
-
-            //DataSet oDS = new DataSet();
-
-            OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sqlCommand, strConn);
-
-            DataTable table = new DataTable("dtProducts");
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            dataAdapter.Fill(table);
-
-            //dataAdapter.Fill(oDS, "dtProducts");
-
-            return table;
-
-        }
-
 
         private void xCargarDataControl()
         {
-
             Cursor.Current = Cursors.WaitCursor;
-
-            preload.Preloader.instance.productos.execute();
-            
+            preload.Preloader.instance.productos.execute();          
         }
 
-        void dataReady(System.Data.DataTable dataTable)
+        private void dataReady(System.Data.DataTable dataTable)
         {
             dtProducts = dataTable;
+            
+            showItemCounts(dtProducts.Rows.Count, dtProducts.Rows.Count);
 
             // Load the Combo Filters
             SetFilters();
@@ -131,22 +108,10 @@ namespace Catalogo._productos
 
             cboOtros.SelectedIndex = 0;
 
-            //if (cboModelo.Items.Count < 1)
-            //{
-            //    fb.PopulateFilter(ref Filter_Modelo, dtProducts, "Modelo");
-            //    String[] filterPriceArray = new String[Filter_Modelo.Count];
-            //    Filter_Modelo.Keys.CopyTo(filterPriceArray, 0);
-            //    cboModelo.Items.Clear();
-            //    cboModelo.Items.AddRange(filterPriceArray);
-            //    cboModelo.SelectedIndex = 0;
-
-            //};
-
         }
 
         private void showItemCounts(int currentRowCount, int dataRowCount)
         {
-
             string _filterMsg = String.Format("#Prod. {0} de {1}", currentRowCount, dataRowCount);
             string _totalMsg = String.Format("#Prod. {0}", dataRowCount);
             if (dataRowCount != currentRowCount)
@@ -177,8 +142,6 @@ namespace Catalogo._productos
 
         private void cboMarca_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-
             if (cboMarca.SelectedItem != null)
             {
 
@@ -209,7 +172,6 @@ namespace Catalogo._productos
                 fb = null;
             };
         }
-
 
 
         private void btnApply0_Click(object sender, EventArgs e)

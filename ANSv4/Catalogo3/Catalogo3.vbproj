@@ -183,6 +183,7 @@
     <Compile Include="modules\Ping.vb" />
     <Compile Include="modules\updateMDB.vb" />
     <Compile Include="modules\util.vb" />
+    <Compile Include="modules\ImageFromHtml.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

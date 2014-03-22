@@ -5,8 +5,6 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Catalogo3", "Catalogo3\Cata
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalogo4", "Catalogo4\Catalogo4.csproj", "{16CFB9A2-4507-44B2-BAA9-0B5D3E349083}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CatalogoLibraryVB", "CatalogoLibraryVB\CatalogoLibraryVB.vbproj", "{9DD8498E-39F8-4DBF-9737-D34A84117F56}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,10 +19,6 @@ Global
 		{16CFB9A2-4507-44B2-BAA9-0B5D3E349083}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16CFB9A2-4507-44B2-BAA9-0B5D3E349083}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16CFB9A2-4507-44B2-BAA9-0B5D3E349083}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DD8498E-39F8-4DBF-9737-D34A84117F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DD8498E-39F8-4DBF-9737-D34A84117F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DD8498E-39F8-4DBF-9737-D34A84117F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DD8498E-39F8-4DBF-9737-D34A84117F56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

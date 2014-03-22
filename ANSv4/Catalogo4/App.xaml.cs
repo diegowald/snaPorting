@@ -19,11 +19,20 @@ namespace Catalogo
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 
-            //Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
-            //splashthread.IsBackground = true;
-            //splashthread.Start();
+            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            splashthread.IsBackground = true;
+            splashthread.Start();
 
             Catalogo.MainMod.Main();
+
+            MainWindow wnd = new MainWindow();
+  
+            //_recibos.fRecibo wnd = new _recibos.fRecibo();
+            //SplashScreen.CloseSplashScreen();
+
+            wnd.ShowDialog();
+            wnd.Close();
+            //wnd.Dispose();
 
             Shutdown();
         }        

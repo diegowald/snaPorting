@@ -37,10 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AvalonDock">
-      <HintPath>..\..\AvalonDock.dll</HintPath>
+      <HintPath>..\..\AvalonDock_DLLs_NET35\AvalonDock.dll</HintPath>
     </Reference>
     <Reference Include="AvalonDock.Themes">
-      <HintPath>..\..\AvalonDock.Themes.dll</HintPath>
+      <HintPath>..\..\AvalonDock_DLLs_NET35\AvalonDock.Themes.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
