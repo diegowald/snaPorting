@@ -10,17 +10,46 @@ using System.Windows.Forms;
 
 namespace Catalogo._recibos
 {
+
     public partial class ucRecibo : UserControl
     {
-        private const string m_sMODULENAME_ = "ucRecibo";
+
+        //public System.Data.OleDb.OleDbConnection Conexion
+        //{
+        //    set { oConexion = value; }
+        //}
+
+        //public System.Data.OleDb.OleDbConnection Conexion
+        //{
+        //    get
+        //    {
+        //        throw new System.NotImplementedException();
+        //    }
+        //    set
+        //    {
+        //        oConexion = value;
+        //    }
+        //}
 
         public ucRecibo()
         {
             InitializeComponent();
+
+            Catalogo.Funciones.util.CargaCombo(ref Global01.Conexion , ref cboCliente, "tblClientes", "RazonSocial", "ID", "Activo<>1", "RazonSocial", true, true);
+
+        }
+
+
+        // diable Ordenar columna para todo el grid
+        private void ccDataGridView_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+ 
             if (cboCliente.SelectedIndex > 0)
             {
                 toolStripStatusLabel1.Text = "Recibo para el cliente: " + this.cboCliente.Text.ToString() + " (" + this.cboCliente.ComboBox.SelectedValue + ")";
@@ -48,6 +77,7 @@ namespace Catalogo._recibos
             CliDObservacionesTxt.Text = "";
             CliDRazonSocialTxt.Text = "";
             CliDTelefonoTxt.Text = "";
+            CliDTitularTxt.Text = "";
         }
 
         private void CargarCtaCte()
@@ -73,6 +103,7 @@ namespace Catalogo._recibos
                 }
 
                 //ItemX.SubItems["1"].Text  = dr["Comprobante"].ToString();
+
                 ItemX.SubItems.Add(dr["Comprobante"].ToString());
                 ItemX.SubItems.Add(dr["Importe"].ToString());
                 ItemX.SubItems.Add(dr["Saldo"].ToString());
@@ -111,7 +142,9 @@ namespace Catalogo._recibos
 
         private void CargarClienteDatos()
         {
+
             CliDCuitTxt.Text = "";
+
             CliDDomicilioTxt.Text = "";
             CliDEmailTxt.Text = "";
             CliDLocalidadTxt.Text = "";
@@ -119,6 +152,7 @@ namespace Catalogo._recibos
             CliDObservacionesTxt.Text = "";
             CliDRazonSocialTxt.Text = "";
             CliDTelefonoTxt.Text = "";
+            CliDTitularTxt.Text = "";
 
             OleDbDataReader dr = null;
             dr = Funciones.oleDbFunciones.Comando(ref Global01.Conexion, "SELECT * FROM tblClientes WHERE ID=" + cboCliente.ComboBox.SelectedValue.ToString());
@@ -134,6 +168,7 @@ namespace Catalogo._recibos
                 CliDObservacionesTxt.Text = dr["observaciones"].ToString();
                 CliDRazonSocialTxt.Text = dr["razonsocial"].ToString();
                 CliDTelefonoTxt.Text = dr["telefono"].ToString();
+                //CliDTitularTxt.Text = dr["titular"].ToString();
             };
   
         }
@@ -143,7 +178,7 @@ namespace Catalogo._recibos
             //mandar mail
         }
 
-        private void cvAgregarBtn_Click(object sender, EventArgs e)
+        private void cvAceptarBtn_Click(object sender, EventArgs e)
         {
             if (datosvalidos("recibo"))
             {
@@ -157,32 +192,21 @@ namespace Catalogo._recibos
                     }
                     else 
                     {
-                      ItemX =  new ListViewItem(cvTipoValorCbo.Text);
-                      ralistView.Tag = "add";
+                      ItemX =  new ListViewItem(cvTipoValorCbo.SelectedItem.ToString());
                     };
                 }
                 else 
                 {
-                   ItemX =  new ListViewItem(cvTipoValorCbo.Text);
+                   ItemX =  new ListViewItem(cvTipoValorCbo.SelectedItem.ToString());
                 };
 
-                ////alternate row color
-                //if (ralistView.Items.Count % 2 == 0)
-                //{
-                //ItemX.BackColor = Color.White;
-                //}
-                //else
-                //{
-                //    ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
-                //}
-
                 ItemX.Tag = "";
-                ItemX.SubItems.Add(string.Format("{0:N2}",float.Parse(cvImporteTxt.Text))); 
+                ItemX.SubItems.Add(cvImporteTxt.Text); //1
                 ItemX.SubItems.Add(cvFecEmiDt.Text); 
                 ItemX.SubItems.Add(cvFecCobroDt.Text); 
                 ItemX.SubItems.Add(cvNroChequeTxt.Text); 
                 ItemX.SubItems.Add(cvNroCuentaTxt.Text);
-                ItemX.SubItems.Add(((cvBancoCbo.SelectedIndex<=0) ? "" : cvBancoCbo.Text)); 
+                ItemX.SubItems.Add(((cvBancoCbo.SelectedIndex<=0) ? "" : cvBancoCbo.SelectedItem.ToString())); 
                 ItemX.SubItems.Add(cvCpaTxt.Text);
                 ItemX.SubItems.Add(cvDeTerceroCb.Text);
                 ItemX.SubItems.Add(cvABahiaCb.Text);
@@ -190,15 +214,12 @@ namespace Catalogo._recibos
                 ItemX.SubItems.Add(((cvBancoCbo.SelectedIndex <= 0) ? "0" : cvBancoCbo.SelectedValue.ToString())); 
                 ItemX.SubItems.Add(cvTipoCambioTxt.Text); 
 
-
-                ralistView.Items.Add(ItemX);
-
-                Funciones.util.AutoSizeLVColumnas(ref ralistView);
-
-                LimpiarIngresosValores();
-
+                ralistView.Items.Add(ItemX);           
+        
+                ralistView.Tag = "add";
+        
                 TotalRecibo();
-                rTabsRecibo.SelectedIndex = 0;
+                rTabsRecibo.TabIndex = 0;
             };
         }
 
@@ -251,11 +272,11 @@ namespace Catalogo._recibos
 
           if (cvTipoValorCbo.SelectedIndex==1) 
           {  //Cheque
-              if (cvBancoCbo.SelectedIndex <= 0 | cvNroCuentaTxt.Text.Trim().Length == 0 | cvNroChequeTxt.Text.Trim().Length == 0)                      
+            if (cvTipoValorCbo.SelectedIndex<=0 | cvNroCuentaTxt.Text.Trim().Length==0 | cvNroChequeTxt.Text.Trim().Length==0)                      
             {
                MessageBox.Show("Ingrese Datos del Cheque", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                wDatosValidos = false;
-               cvBancoCbo.Focus();
+               cvTipoValorCbo.Focus();
             };
           }
           else if (cvTipoValorCbo.SelectedIndex>=5) 
@@ -307,9 +328,11 @@ namespace Catalogo._recibos
     //}
         
             return wDatosValidos;
+        
+
         }
 
-        private void cvTipoValorCbo_SelectedIndexChanged(object sender, EventArgs e)
+        private void cvTipoValorCbo_Click(object sender, EventArgs e)
         {            
             if (cvTipoValorCbo.SelectedIndex==1)
             {   //Cheque
@@ -364,7 +387,7 @@ namespace Catalogo._recibos
                 cvBancoCbo.Enabled = false;
                 cvCpaTxt.Enabled = false;
                 cvTipoCambioTxt.Enabled = false;
-            };
+            }
 
             cvTipoCambioTxt.Text = "";
             cvDivisasLbl.Text = "";
@@ -377,22 +400,20 @@ namespace Catalogo._recibos
             else if (s.IndexOf("euro") > 0)
             {
                 cvTipoCambioTxt.Text = Global01.Euro.ToString();
-            };
+            }
 
         }
 
         private void cvCancelarBtn_Click(object sender, EventArgs e)
         {
-               LimpiarIngresosValores();
+               LimpiarIngresosRecibo();
+               rTabsRecibo.TabIndex = 0;
         }
 
-        private void LimpiarIngresosValores()
+        private void LimpiarIngresosRecibo()
         {
-
-            ralistView.Tag = "add";
-
             cvTipoValorCbo.SelectedIndex  = 0;
-            cvImporteTxt.Text = "0,00";
+            cvImporteTxt.Text = "0.00";
             cvTipoCambioTxt.Text = "";
             cvDivisasLbl.Text = "";
             cvFecEmiDt.Value = DateTime.Today.Date;
@@ -413,23 +434,33 @@ namespace Catalogo._recibos
                 if (tsBtnIniciar.Tag.ToString() == "INICIAR")
                 {
                     //vg.auditor.Guardar Recibo, INICIA
+
                     //Limpio Listados
                     TotalRecibo();
                     TotalADeducir();
                     TotalApli();
+
+                    raObservacionesTxt.Text = "";
+                    cclistView.Items.Clear();
+                    aplistView.Items.Clear();
+                    adlistView.Items.Clear();
+
                     AbrirRecibo();
                     HabilitarRecibo();
-                    rTabsRecibo.SelectedIndex = 3;
-                    rTabsRecibo.Visible = true;
                 }
                 else
                 {
                     if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Recibo?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         // vg.auditor.Guardar Recibo, CANCELA
-                        rTabsRecibo.Visible = false;
-                        cboCliente.SelectedIndex = 0;
-                        CerrarRecibo();                        
+                        // Limpio Listados
+                        raObservacionesTxt.Text = "";
+                        cclistView.Items.Clear();
+                        aplistView.Items.Clear();
+                        adlistView.Items.Clear();
+
+                        CerrarRecibo();
+                        rTabsRecibo.SelectedIndex = 1;
                         InhabilitarRecibo();
                     };
                 };
@@ -443,180 +474,42 @@ namespace Catalogo._recibos
 
         }
 
+        private void TotalRecibo()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void InhabilitarRecibo()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CerrarRecibo()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void HabilitarRecibo()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AbrirRecibo()
+        {
+            throw new NotImplementedException();
+        }
+
         private void TotalApli()
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void TotalADeducir()
-        {
-            //throw new NotImplementedException();
-        }
-
-        private void ucRecibo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //if (Char.IsControl(e.KeyChar) && e.KeyChar != ((char)Keys.C | (char)Keys.ControlKey))
-
-            if (Char.IsControl(e.KeyChar) && e.KeyChar==((char)Keys.D))
-            {   //CTRL + D
-                if (tsBtnIniciar.Tag.ToString() == "CANCELAR")
-                {
-                    VerDetalleRecibo();
-                    e.Handled = true;
-                };
-            };
-        }
-
-        private void VerDetalleRecibo()
         {
             throw new NotImplementedException();
         }
 
 
-        private void cvFecEmiDt_Leave(object sender, EventArgs e)
-        {
-            if (cvTipoValorCbo.SelectedIndex  >= 5)
-            {
-                cvFecCobroDt.Value = cvFecEmiDt.Value;
-            }
-        }
+    }
 
-        private void ralistView_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (ralistView.SelectedItems != null)
-            {
-                if (e.KeyCode == Keys.Delete)
-                {  //DEL
-                    ralistView.Items.Remove(ralistView.SelectedItems[0]);
-                    TotalRecibo();
-                    e.Handled = true;
-                }
-            }
-        }
-
-        private void ucRecibo_Load(object sender, EventArgs e)
-        {
-            ccActualizadaFechaLbl.Text = "Cta. Cte. actualizada al " + Global01.F_ActClientes.ToString("dd/MM/yyyy hh:mm");
-
-            if (!Global01.AppActiva) 
-            {
-                this.Dispose();
-            };
-
-
-            if (Funciones.modINIs.ReadINI("DATOS","EsGerente","0")=="1")
-            {
-                Catalogo.Funciones.util.CargaCombo(ref Global01.Conexion , ref cboCliente, "tblClientes", "RazonSocial", "ID", "Activo<>1", "RazonSocial", true, true);
-            }
-            else 
-            {
-                Catalogo.Funciones.util.CargaCombo(ref Global01.Conexion , ref cboCliente, "tblClientes", "RazonSocial", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString() , "RazonSocial", true, true);
-            }
-
-            Catalogo.Funciones.util.CargaCombo(ref Global01.Conexion , ref cvTipoValorCbo, "v_TipoValor", "D_valor", "IDvalor","ALL","IDvalor",true,false,"NONE");
-            Catalogo.Funciones.util.CargaCombo(ref Global01.Conexion , ref cvBancoCbo, "tblBancos", "Banco", "ID","Activo=0","Format([ID],'000') & ' - ' & tblBancos.Nombre",true,false,"Format([ID],'000') & ' - ' & tblBancos.Nombre AS Banco, ID");            
-
-        }
-
-        private void CerrarRecibo()
-        {    
-            tsBtnIniciar.Text = "Iniciar";
-            tsBtnIniciar.Tag = "INICIAR";
-            tsBtnIniciar.ToolTipText = "INICIAR Recibo Nuevo";
-            raObservacionesTxt.Text = "";
-            aplistView.Items.Clear();
-            adlistView.Items.Clear();
-            //cboEnvios_Click();
-        }
-
-        private void AbrirRecibo()
-        {
-            tsBtnIniciar.Text = "CANCELAR";
-            tsBtnIniciar.Tag = "CANCELAR";
-            tsBtnIniciar.ToolTipText = "CANCELAR éste Recibo";
-            raObservacionesTxt.Text = "";
-            aplistView.Items.Clear();
-            adlistView.Items.Clear();
-        }
-
-        private void HabilitarRecibo()
-        {
-            adPnlTop.Enabled = true;
-            adPnlMain.Enabled = true;
-            apPnlTop.Enabled = true;
-            apPnlMain.Enabled = true;
-            tsBtnConfirmar.Enabled = true;
-            tsBtnVer.Enabled = true;
-            ralistView.Enabled = true;
-            aplistView.Enabled = true;
-            adlistView.Enabled = true;
-            raPnlBotton.Enabled = true;
-            cboCliente.Enabled = false;
-        }
-
-        private void InhabilitarRecibo()
-        {
-            adPnlTop.Enabled = false;
-            adPnlMain.Enabled = false;
-            apPnlTop.Enabled = false;
-            apPnlMain.Enabled = false;
-            tsBtnConfirmar.Enabled = false;
-            tsBtnVer.Enabled = false;
-            ralistView.Enabled = false;
-            aplistView.Enabled = false;
-            adlistView.Enabled = false;
-            raPnlBotton.Enabled = false;
-            cboCliente.Enabled = true;
-        }
-
-
-        private void TotalRecibo()
-        {
-
-            float Aux = 0;
-
-            if (ralistView.Items.Count < 1)
-            {
-                raImporteTotalLbl.Text = string.Format("{0:N2}", "0,00");
-                return;
-            }
-
-            for (int i=0; i<ralistView.Items.Count; i++)
-            {
-
-                if (ralistView.Items[i].SubItems[10].Text=="3" | ralistView.Items[i].SubItems[10].Text=="4")
-                {
-                    Aux = Aux + (float.Parse(ralistView.Items[i].SubItems[1].Text) * float.Parse(ralistView.Items[i].SubItems[12].Text));
-                }
-                else
-                {
-                    Aux = Aux + float.Parse(ralistView.Items[i].SubItems[1].Text);
-                    // sumatoria de subtotal
-                }
-
-            }
-
-            raImporteTotalLbl.Text = string.Format("{0:N2}", Aux);
-        }
-
-        private void cvImporteTxt_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-            if (e.KeyChar == '.') { e.KeyChar = ','; };
-
-            if  (e.KeyChar == ',' && (sender as TextBox).Text.ToString().IndexOf(',') > 0)
-            {               
-                e.Handled = true;
-            }
-            else
-            {
-                if (!Char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '\b')
-                {
-                    e.Handled = true;
-                };
-            };
-
-        }
-
-    } //fin clase
-} //fin namespace
+}

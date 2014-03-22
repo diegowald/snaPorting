@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
         Height="600" Width="1280"
-        ResizeMode="CanResize" 
-        Title="Catálogo Dígital de Productos - Auto Náutica Sur s.r.l. - v4.0" Loaded="Window_Loaded_1" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="LOGO-ANS-48X48.ico">
+        WindowStyle="ThreeDBorderWindow"
+        ResizeMode="CanResize"
+        Title="Catálogo Dígital de Productos - Auto Náutica Sur s.r.l. - v4.0" Loaded="Window_Loaded_1">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
@@ -28,60 +29,29 @@
                 <ad:ResizingPanel Orientation="Horizontal">
                     <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0">
 
-                        <ad:DocumentContent Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
+                        <ad:DocumentContent Title="Productos" IsCloseable="False" IsFloatingAllowed="False">
                             <Grid Name="grProductos">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30" />
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="120" />
-                                    <RowDefinition Height="200" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="200"/>
                                 </Grid.RowDefinitions>
 
-                                <Grid x:Name="searchArea"   Grid.Row="0"  />
+                                <Grid x:Name="searchArea" Grid.Row="0"  />
                                 <Grid x:Name="productsArea" Grid.Row="1" />
                                 <_productos:DetalleProducto Grid.Row="2" x:Name="productDetalle" />
 
-
-                                        <ad:DocumentPane  ShowHeader="True" SelectedIndex="0" Grid.Row="3">
-
-                                            <ad:DocumentContent Title="Nota de Venta" IsCloseable="False" IsFloatingAllowed="False">
-                                                <ListView>
-                                                    <ListView.View>
-                                                        <GridView>
-                                                            <GridView.Columns>
-                                                                <GridViewColumn Header="Comprar"/>
-                                                                <GridViewColumn Header="Ver"/>
-                                                                <GridViewColumn Header="Confirmar"/>
-                                                                <GridViewColumn Header="Nuevo"/>
-                                                            </GridView.Columns>
-                                                        </GridView>
-                                                    </ListView.View>
-                                                </ListView>
-                                            </ad:DocumentContent>
-                                            <ad:DocumentContent Title="Devoluciones" IsCloseable="False" IsFloatingAllowed="False">
-                                            </ad:DocumentContent>
-
-                                </ad:DocumentPane>
-
-                                
-                            </Grid>
-                        </ad:DocumentContent>
-
-                        <ad:DocumentContent Title="Notas de Venta" IsCloseable="False" IsFloatingAllowed="False">
-                            <Grid Name="grNotaVenta">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition  Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid x:Name="xNotaVentaArea" Grid.Row="0" />
-                            </Grid>
-                        </ad:DocumentContent>
-                        
-                        <ad:DocumentContent Title="Devoluciones" IsCloseable="False" IsFloatingAllowed="False">
-                            <Grid Name="grDevoluciones">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition  Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid x:Name="xDevolucionesArea" Grid.Row="0" />
+                                <ad:DockablePane x:Name="dpVentasDev" ad:ResizingPanel.ResizeHeight="200" SelectedIndex="0" Visibility="Visible"  Grid.Row="3" ShowHeader="False" ShowTabs="False" >
+                                    <ad:DockableContent Title="Nota de Venta / Devoluciones" x:Name="dcVentasDev" >
+                                    <ad:DocumentPane  ShowHeader="True" SelectedIndex="0">
+                                        <ad:DocumentContent Title="Nota de Venta" IsCloseable="False" IsFloatingAllowed="False">
+                                        </ad:DocumentContent>
+                                        <ad:DocumentContent Title="Devoluciones" IsCloseable="False" IsFloatingAllowed="False">
+                                        </ad:DocumentContent>
+                                    </ad:DocumentPane>
+                                    </ad:DockableContent>
+                                </ad:DockablePane>
                             </Grid>
                         </ad:DocumentContent>
 

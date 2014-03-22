@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.OleDb;
-using System.Threading;
+//using System.Threading;
 
 namespace Catalogo
 {
@@ -17,9 +17,9 @@ namespace Catalogo
             const string PROCNAME_ = "Main";
 
             //--splash form
-            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
-            splashthread.IsBackground = true;
-            splashthread.Start();
+            //Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            //splashthread.IsBackground = true;
+            //splashthread.Start();
 
             inicializaGlobales();
 
@@ -44,7 +44,7 @@ namespace Catalogo
 
             load_header();
 
-            valida_appLogin();
+            //valida_appLogin();
 
             if (!Global01.AppActiva)
             {
@@ -59,16 +59,16 @@ namespace Catalogo
             }
             else
             {
-                update_productos();
+                //update_productos();
             };
 
             //- ACA ESTA LA PAPA ----------------------
             //- Run mi APP MainWindow -----------------
                         
             //   Registration wnd = new Registration(); 
-            MainWindow wnd = new MainWindow();
-            wnd.ShowDialog();
-            wnd.Close();
+            //MainWindow wnd = new MainWindow();
+            //wnd.ShowDialog();
+            //wnd.Close();
 
 
             // para pruebas------------------------------------
@@ -76,7 +76,7 @@ namespace Catalogo
             //wnd.ShowDialog();
             //wnd.Close();
             //wnd.Dispose();
-
+         //   miEnd();
             // - Fin Main ---
         }
 
@@ -94,9 +94,7 @@ namespace Catalogo
             {
                 dr.Read();
 
-                //If Mid(dr[appCVersion, 1, 3) <> Application.ProductVersion.Substring(1, 3) Then
-                //acá pablo
-                if (false)
+                if (dr["appCVersion"].ToString().Substring(1,3)!=Global01.VersionApp.Substring(3,3))
                 {
                     MessageBox.Show("INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     miEnd();
@@ -155,7 +153,7 @@ namespace Catalogo
                 Funciones.oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC usp_UltimoAcceso_upd");
             };
 
-            if (Int32.Parse(Global01.NroUsuario.ToString()) <= 0 || Int64.Parse(Global01.Cuit.ToString()) <= 1)
+            if (Int32.Parse(Global01.NroUsuario.ToString()) <= 0 | Int64.Parse(Global01.Cuit.ToString()) <= 1)
             {
                 MessageBox.Show("Error en nº de Cuenta ó Cuit, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
@@ -329,11 +327,11 @@ namespace Catalogo
         {
             Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
             Global01.NoConn = false;
+            Global01.VersionApp = (int)(Global01.miSABOR) + ".3.2.0";
 
             Global01.Conexion = null;
             Global01.TranActiva = null;
 
-            //Global01.AppPath = Funciones.modINIs.ReadINI("Datos", "Path", System.IO.Directory.GetCurrentDirectory());
             Global01.AppPath = Funciones.modINIs.ReadINI("Datos", "Path", "C:\\Catalogo ANS");
 
             Global01.PathAcrobat = Funciones.modINIs.ReadINI("Datos", "PathAcrobat", "");
@@ -343,8 +341,8 @@ namespace Catalogo
             Global01.dstring = Global01.AppPath + "\\datos\\catalogo.mdb";
             Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
 
-            Global01.strConexionUs = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Us + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
-            Global01.strConexionAd = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Ad + ";jet oledb:system database=" + Global01.sstring;
+            Global01.strConexionUs = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Us + ";Jet OLEDB:System database=" + Global01.sstring;
+            Global01.strConexionAd = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Ad + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
 
             Global01.IDMaquina = Catalogo._registro.AppRegistro.ObtenerIDMaquina();
             Global01.IDMaquinaCRC = Funciones.modINIs.ReadINI("DATOS", "MachineId", "no");

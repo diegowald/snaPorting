@@ -45,11 +45,20 @@ namespace Catalogo.Funciones
         }
 
         //acá el combo debe ser System.Windows.Forms.ComboBox
-        internal static void CargaCombo(ref System.Data.OleDb.OleDbConnection conexion, ref System.Windows.Forms.ComboBox combo, string Tabla, string Campo1, string Campo2, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = false, bool Concatena = false)
+        internal static void CargaCombo(ref System.Data.OleDb.OleDbConnection conexion, ref System.Windows.Forms.ComboBox combo, string Tabla, string Campo1, string Campo2, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = false, bool Concatena = false, string OtrosCampos = "NONE")
         {
             combo.Enabled = false;
 
-            System.Data.DataTable dt = Catalogo.Funciones.oleDbFunciones.xGetDt(ref conexion, Tabla, Condicion, Orden, Campo1 + "," + Campo2);
+            System.Data.DataTable dt = null;
+
+            if (OtrosCampos == "NONE")
+            {
+                dt = Catalogo.Funciones.oleDbFunciones.xGetDt(ref conexion, Tabla, Condicion, Orden, Campo1 + "," + Campo2);
+            }
+            else
+            {
+                dt = Catalogo.Funciones.oleDbFunciones.xGetDt(ref conexion, Tabla, Condicion, Orden, OtrosCampos);
+            };
 
             if (AceptaNulo)
             {
@@ -68,12 +77,40 @@ namespace Catalogo.Funciones
             combo.Enabled = true;
         }
 
+        internal static void AutoSizeLVColumnas(ref System.Windows.Forms.ListView MyListview1)
+        {
+
+            float wAnchoCol = 0;
+
+            for (int i = 0; i < MyListview1.Columns.Count; i++)
+            {
+                if (MyListview1.Columns[i].Text.ToLower() == "fecha" | MyListview1.Columns[i].Text.Substring(1,2).ToLower() == "f." )
+                {
+                    MyListview1.Columns[i].Width = 75;
+                }
+                else
+                {
+                    if (MyListview1.Columns[i].Width > 1)
+                    {
+                        wAnchoCol = MyListview1.Columns[i].Width;
+                        MyListview1.AutoResizeColumn(i, System.Windows.Forms.ColumnHeaderAutoResizeStyle.ColumnContent);
+
+                        if (MyListview1.Columns[i].Width < wAnchoCol)
+                        {
+                            MyListview1.AutoResizeColumn(i, System.Windows.Forms.ColumnHeaderAutoResizeStyle.HeaderSize);
+                        };
+                    };
+                };               
+            };
+
+        }
+
         internal static void GrabarLVColumnas(ref System.Windows.Forms.ListView MyListview1)
         {
 
             foreach (System.Windows.Forms.ColumnHeader lvwcolumn in MyListview1.Columns)
             {
-                Funciones.modINIs.INIWrite(System.IO.Directory.GetCurrentDirectory() + "\\" + "setting.ini", MyListview1.Name, lvwcolumn.Text, Convert.ToString(lvwcolumn.Width));
+                Funciones.modINIs.INIWrite(Global01.AppPath + "\\" + "setting.ini", MyListview1.Name, lvwcolumn.Text, Convert.ToString(lvwcolumn.Width));
             }
 
         }
@@ -85,7 +122,7 @@ namespace Catalogo.Funciones
 
             foreach (System.Windows.Forms.ColumnHeader lvwcolumn in MyListview1.Columns)
             {
-                i = Convert.ToInt32(Funciones.modINIs.INIRead(System.IO.Directory.GetCurrentDirectory() + "\\" + "setting.ini", MyListview1.Name, lvwcolumn.Text, "0"));
+                i = Convert.ToInt32(Funciones.modINIs.INIRead(Global01.AppPath + "\\" + "setting.ini", MyListview1.Name, lvwcolumn.Text, "0"));
                 if (i > 0)
                 {
                     lvwcolumn.Width = i;

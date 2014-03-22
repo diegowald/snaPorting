@@ -19,6 +19,8 @@ namespace Catalogo._productos
     /// </summary>
     public partial class DetalleProducto : UserControl, Funciones.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>
     {
+        string _Destino = "";
+
         public DetalleProducto()
         {
             InitializeComponent();
@@ -70,12 +72,70 @@ namespace Catalogo._productos
                 txtDetalle.Inlines.Add(new Run("  Rotación: ") { FontWeight = FontWeights.Bold });
                 txtDetalle.Inlines.Add(new Run(dato.Cells["Abc"].Value.ToString()) { Foreground = Brushes.Blue });
 
-                imgIzquierda.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/imagenes/lineas/" + dato.Cells["linea"].Value.ToString() + ".png"));
-                imgDerecha.Source = new BitmapImage(new Uri("pack://siteoforigin:,,,/imagenes/lineas/" + dato.Cells["linea"].Value.ToString() + ".png"));
-       
-            }
-          
+                string ImgLineaDefault = Global01.AppPath + "\\imagenes\\default.jpg";
+                string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
 
+                if (dato.Cells["linea"].Value.ToString().Length > 0)
+                {
+                    string ImgLinea = Global01.AppPath + "\\imagenes\\lineas\\" + dato.Cells["linea"].Value.ToString() + ".png";
+                    string ImgProductoWeb = "http://" + Global01.URL_ANS + "/IMAGENES/" + dato.Cells["linea"].Value.ToString() + "/ARTICULOS/" + dato.Cells["c_producto"].Value.ToString().Replace("/", " ") + ".jpg";                    
+                    string ImgProducto = Global01.AppPath + "\\imagenes\\" + dato.Cells["linea"].Value.ToString() + "\\Articulos\\" + dato.Cells["c_producto"].Value.ToString().Replace("/", " ") + ".jpg";
+
+                    if (System.IO.File.Exists(ImgLinea))
+                    {
+                        imgIzquierda.Source = new BitmapImage(new Uri(ImgLinea, UriKind.Absolute));
+                    }
+                    else
+                    {
+                        imgIzquierda.Source = new BitmapImage(new Uri(ImgLineaDefault, UriKind.Absolute));
+                    };
+
+                    if (System.IO.File.Exists(ImgProducto))
+                    {
+                        imgDerecha.Source = new BitmapImage(new Uri(ImgProducto, UriKind.Absolute));
+                    }
+                    else 
+                    {
+                        imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
+
+                        if (Funciones.modINIs.ReadINI("DATOS","chkImagenUpdate", "1")=="1")
+                        {                            
+                            descargarImagen(ImgProductoWeb, ImgProducto);
+                        }
+
+                    };
+                }
+                else
+                {
+                    imgIzquierda.Source = new BitmapImage(new Uri(ImgLineaDefault, UriKind.Absolute));
+                };
+
+            };
+
+        }
+
+        private void descargarImagen(string Origen, string Destino)
+        {
+            System.Net.WebClient ImgWeb = new System.Net.WebClient();
+            ImgWeb.DownloadFileCompleted += ImgWeb_DownloadFileCompleted;
+
+           try 
+            {
+                _Destino = Destino;
+                //ImgWeb.DownloadFile(Origen, Destino);
+                ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
+
+            }
+            catch (Exception e)
+            {               
+                     throw new Exception(e.Message.ToString() );
+            };
+            
+        }
+
+        void ImgWeb_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
         }
 
     }

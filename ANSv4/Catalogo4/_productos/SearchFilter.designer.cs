@@ -53,10 +53,7 @@
             this.lblPorcentajeLinea = new System.Windows.Forms.ToolStripLabel();
             this.txtPorcentajeLinea = new System.Windows.Forms.ToolStripTextBox();
             this.tslItems = new System.Windows.Forms.ToolStripLabel();
-            this.pnProductoDetalle = new System.Windows.Forms.Panel();
-            this.lblProductoDetalle1 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
-            this.pnProductoDetalle.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -251,36 +248,15 @@
             this.tslItems.Size = new System.Drawing.Size(51, 15);
             this.tslItems.Text = "#Prod. 0";
             // 
-            // pnProductoDetalle
-            // 
-            this.pnProductoDetalle.Controls.Add(this.lblProductoDetalle1);
-            this.pnProductoDetalle.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnProductoDetalle.Location = new System.Drawing.Point(0, 507);
-            this.pnProductoDetalle.Name = "pnProductoDetalle";
-            this.pnProductoDetalle.Size = new System.Drawing.Size(682, 40);
-            this.pnProductoDetalle.TabIndex = 3;
-            // 
-            // lblProductoDetalle1
-            // 
-            this.lblProductoDetalle1.AutoSize = true;
-            this.lblProductoDetalle1.Location = new System.Drawing.Point(291, 13);
-            this.lblProductoDetalle1.Name = "lblProductoDetalle1";
-            this.lblProductoDetalle1.Size = new System.Drawing.Size(35, 13);
-            this.lblProductoDetalle1.TabIndex = 0;
-            this.lblProductoDetalle1.Text = "label1";
-            // 
             // SearchFilter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.pnProductoDetalle);
             this.Controls.Add(this.toolStrip1);
             this.Name = "SearchFilter";
-            this.Size = new System.Drawing.Size(682, 547);
+            this.Size = new System.Drawing.Size(682, 30);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.pnProductoDetalle.ResumeLayout(false);
-            this.pnProductoDetalle.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,8 +283,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton btnApply;
-        private System.Windows.Forms.Panel pnProductoDetalle;
-        private System.Windows.Forms.Label lblProductoDetalle1;
         private System.Windows.Forms.ToolStripButton btnApply0;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;

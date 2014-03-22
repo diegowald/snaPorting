@@ -25,6 +25,7 @@ namespace Catalogo.preload
 
         public ProductosPreloader()
         {
+            
             backgroundWorker = new Funciones.BackgroundReader.BackgroundDataLoader(Catalogo.Funciones.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
         Global01.strConexionUs);
             backgroundWorker.onWorkFinishedHandler += dataReady;
@@ -47,6 +48,8 @@ namespace Catalogo.preload
         {
             if (table == null)
             {
+                System.Diagnostics.Debug.WriteLine("CARGANDO PRODUCTO");
+
                 backgroundWorker.executeQuery(strComando);
             }
             else

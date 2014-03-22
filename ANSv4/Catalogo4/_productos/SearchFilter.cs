@@ -48,17 +48,6 @@ namespace Catalogo._productos
 
         }
 
-        //private static DataTable xGetData(string strConn, string sqlCommand)
-        //{
-        //    OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sqlCommand, strConn);
-
-        //    DataTable table = new DataTable("dtProducts");
-        //    table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-        //    dataAdapter.Fill(table);
-
-        //    return table;
-        //}
-
 
         private void xCargarDataControl()
         {
@@ -66,7 +55,7 @@ namespace Catalogo._productos
             preload.Preloader.instance.productos.execute();          
         }
 
-        void dataReady(System.Data.DataTable dataTable)
+        private void dataReady(System.Data.DataTable dataTable)
         {
             dtProducts = dataTable;
             

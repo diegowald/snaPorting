@@ -80,25 +80,50 @@ namespace Catalogo._productos
         public GridViewFilter2()
         {
 
-            InitializeComponent();
-
+            InitializeComponent();          
             preload.Preloader.instance.productos.onWorkFinished += dataReady;
 
             xCargarDataControl();
 
         }
 
-        //private static DataTable xGetData(string strConn, string sqlCommand)
-        //{
-        //    OleDbDataAdapter dataAdapter = new OleDbDataAdapter(sqlCommand, strConn);
+        public void onRecibir(string dato)
+        {
+            filterString = dato;
+            loadDataGridView();
+        }
 
-        //    DataTable table = new DataTable("dtProducts");
-        //    table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-        //    dataAdapter.Fill(table);
+        public void onRecibir(float dato)
+        {
+            porcentajeLinea = dato;
+            loadDataGridView();
+        }
 
-        //    return table;
-        //}
+        private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
+        public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
+        {
+            get
+            {
+                return _emisor;
+            }
+            set
+            {
+                _emisor = value;
+            }
+        }
 
+        private emisorHandler<util.Pair<int, int>> _emisor2;
+        public emisorHandler<util.Pair<int, int>> emisor2
+        {
+            get
+            {
+                return _emisor2;
+            }
+            set
+            {
+                _emisor2 = value;
+            }
+        }
 
         private void xCargarDataControl()
         {
@@ -106,19 +131,20 @@ namespace Catalogo._productos
             preload.Preloader.instance.productos.execute();
         }
 
-        void dataReady(System.Data.DataTable dataTable)
+       private void dataReady(System.Data.DataTable dataTable)
         {
             dtProducts = dataTable;
 
-            // Load the DataGridView
+            // Load the DataGridView            
             loadDataGridView();
-            // Load the Combo Filters
-
             Cursor.Current = Cursors.Default;
         }
 
         private void loadDataGridView()
         {
+
+            dataGridIdle = false;
+
             // If rows in grid already exist, clear them
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
@@ -267,7 +293,6 @@ namespace Catalogo._productos
             // Filter the dataview
             dvProducts.RowFilter = filterString;
 
-
             if (porcentajeLinea != 0)
             {
                 xAplicoPorcentajeLinea = true;
@@ -293,23 +318,29 @@ namespace Catalogo._productos
             dataGridView1.DataSource = dvProducts;
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
-            
+
             dataGridIdle = true;
 
-            this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
             // Show the counts in the toolstrip
+            this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
 
-            
-            //dataGridView1.Rows[0].Selected = true;      
+            dataGridView1.Rows[0].Selected = true;
+
+            DataGridViewCell cell = dataGridView1[0, 0];
+            if (cell != null)
+            {
+                DataGridViewRow row = cell.OwningRow;
+                this.emitir(row);
+            };
+          
         }
+
        
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
 
             if (dataGridIdle)
             {
-                //DataGridViewRow row = dataGridView1.SelectedRows[0];
-                //this.emitir(row);
                 DataGridViewCell cell = null;
                 foreach (DataGridViewCell selectedCell in dataGridView1.SelectedCells)
                 {
@@ -324,44 +355,6 @@ namespace Catalogo._productos
                 }
             };
 
-        }
-
-        public void onRecibir(string dato)
-        {
-            filterString = dato;
-            loadDataGridView();
-        }
-
-        public void onRecibir(float dato)
-        {
-            porcentajeLinea = dato;
-            loadDataGridView();
-        }
-
-        private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
-        public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
-        {
-            get
-            {
-                return _emisor;
-            }
-            set
-            {
-                _emisor = value;
-            }
-        }
-
-        private emisorHandler<util.Pair<int, int>> _emisor2;
-        public emisorHandler<util.Pair<int, int>> emisor2
-        {
-            get
-            {
-                return _emisor2;
-            }
-            set
-            {
-                _emisor2 = value;
-            }
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -422,6 +415,7 @@ namespace Catalogo._productos
 
             //System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", idProducto, resultado));
         }
+
 
 
 

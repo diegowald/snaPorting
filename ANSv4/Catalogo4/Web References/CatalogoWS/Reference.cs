@@ -284,7 +284,7 @@ namespace Catalogo.CatalogoWS {
         
         private bool IsLocalFileSystemWebService(string url) {
             if (((url == null) 
-                        || (url == string.Empty))) {
+                        | (url == string.Empty))) {
                 return false;
             }
             System.Uri wsUri = new System.Uri(url);

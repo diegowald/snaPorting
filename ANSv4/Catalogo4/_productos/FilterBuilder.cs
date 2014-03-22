@@ -96,7 +96,7 @@ namespace Catalogo._productos
                 value = Convert.ToString(item[columnName]).Trim();
 
                 // Skip empty values, but note that they are present. 
-                if (value == null || value == DBNull.Value || value.ToString() == String.Empty)
+                if (value == null | value == DBNull.Value | value.ToString() == String.Empty)
                 {
                     containsBlanks = true;
                     continue;
@@ -598,7 +598,7 @@ namespace Catalogo._productos
                 value = Convert.ToString(item[xColumnName]).Trim();
 
                 // Skip empty values, but note that they are present. 
-                if (value == null || value == DBNull.Value || value.ToString() == String.Empty)
+                if (value == null | value == DBNull.Value | value.ToString() == String.Empty)
                 {
                     containsBlanks = true;
                     continue;

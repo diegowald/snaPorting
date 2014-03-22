@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AvalonDock;
 using Catalogo.Funciones.emitter_receiver;
-//using System.Threading;
+using System.Threading;
 
 namespace Catalogo
 {
@@ -28,7 +28,6 @@ namespace Catalogo
             this.Hide();
             InitializeComponent();            
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
-            ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
         }
 
         private Catalogo._productos.SearchFilter addSearchArea()
@@ -39,7 +38,7 @@ namespace Catalogo
             // Create the MaskedTextBox control.
             Catalogo._productos.SearchFilter filterControl = new _productos.SearchFilter();
             filterControl.AutoScroll = true;
-            filterControl.Dock = System.Windows.Forms.DockStyle.Top;
+            filterControl.Dock = System.Windows.Forms.DockStyle.Fill;
             filterControl.Location = new System.Drawing.Point(0, 0);
             filterControl.Name = "searchFilter";
 
@@ -54,44 +53,6 @@ namespace Catalogo
             return filterControl;
         }
 
-        private Catalogo._pedidos.ucPedido addPedidoArea()
-        {
-            // Create the interop host control.
-            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
-
-            // Create the MaskedTextBox control.
-            Catalogo._pedidos.ucPedido xPedido;
-            xPedido = new Catalogo._pedidos.ucPedido();
-            //xNotaVenta.AutoScroll = true;
-            xPedido.Dock = System.Windows.Forms.DockStyle.Fill;
-            xPedido.Location = new System.Drawing.Point(0, 0);
-            xPedido.Name = "Notas de Venta";
-
-            host.Child = xPedido;
-            this.xNotaVentaArea.Children.Add(host);
-
-            return xPedido;
-        }
-
-        private Catalogo._devoluciones.ucDevolucion addDevolucionArea()
-        {
-            // Create the interop host control.
-            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
-
-            // Create the MaskedTextBox control.
-            Catalogo._devoluciones.ucDevolucion xDevolucion;
-            xDevolucion = new Catalogo._devoluciones.ucDevolucion();
-            //xNotaVenta.AutoScroll = true;
-            xDevolucion.Dock = System.Windows.Forms.DockStyle.Fill;
-            xDevolucion.Location = new System.Drawing.Point(0, 0);
-            xDevolucion.Name = "Devoluciones";
-
-            host.Child = xDevolucion;
-            this.xDevolucionesArea.Children.Add(host);
-
-            return xDevolucion;
-        }
-
         private Catalogo._recibos.ucRecibo addReciboArea()
         {
             // Create the interop host control.
@@ -104,6 +65,7 @@ namespace Catalogo
             xRecibo.Dock = System.Windows.Forms.DockStyle.Fill;
             xRecibo.Location = new System.Drawing.Point(0, 0);
             xRecibo.Name = "Recibos";
+
 
             host.Child = xRecibo;
             this.xRecibosArea.Children.Add(host);
@@ -120,7 +82,7 @@ namespace Catalogo
             Catalogo._productos.GridViewFilter2 gridViewControl;
             gridViewControl = new Catalogo._productos.GridViewFilter2();
             //gridViewControl.AutoScroll = true;
-            gridViewControl.Dock = System.Windows.Forms.DockStyle.Top;
+            gridViewControl.Dock = System.Windows.Forms.DockStyle.Fill;
             gridViewControl.Location = new System.Drawing.Point(0, 0);
             gridViewControl.Name = "GridViewProductos";
             //gridViewControl.Size = new System.Drawing.Size(640, 480);
@@ -135,19 +97,26 @@ namespace Catalogo
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {         
+            //Thread.Sleep(1000);
+            SplashScreen.UdpateStatusText("Cargando Filtros de Búsqueda!!!");
+
             Catalogo._productos.SearchFilter sf = addSearchArea();
+
+            //SplashScreen.UdpateStatusTextWithStatus("Success Message", TypeOfMessage.Success);
+            //Thread.Sleep(500);
+
+            SplashScreen.UdpateStatusText("Cargando Lista de Productos!!!");
+            //Thread.Sleep(1000);
 
             Catalogo._productos.GridViewFilter2 gv = addProductsArea();
             
+            SplashScreen.UdpateStatusText("Items Loaded..");
+            //Thread.Sleep(500);
+
             Catalogo._recibos.ucRecibo rec = addReciboArea();
-
-            Catalogo._pedidos.ucPedido ped = addPedidoArea();
-
-            Catalogo._devoluciones.ucDevolucion dev = addDevolucionArea();
 
             sf.attachReceptor(gv);
             sf.attachReceptor2(gv);
-
             gv.attachReceptor(productDetalle);
             gv.attachReceptor2(sf);
             

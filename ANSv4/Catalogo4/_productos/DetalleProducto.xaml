@@ -4,15 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="60" d:DesignWidth="600">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+             d:DesignHeight="80" d:DesignWidth="600">
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Image HorizontalAlignment="Left" VerticalAlignment="Top"  x:Name="imgIzquierda" Grid.Column="0" Stretch="Fill"/>
-        <TextBlock Margin="75,5,75,5" TextWrapping="Wrap" Name="txtDetalle" Grid.Column="1" />
-        <Image HorizontalAlignment="Left"  VerticalAlignment="Top"  x:Name="imgDerecha" Grid.Column="2" Stretch="UniformToFill"/>
+        <Image Margin="25,5,0,5" HorizontalAlignment="Left" VerticalAlignment="Center"  x:Name="imgIzquierda" Grid.Column="0" Stretch="UniformToFill"/>
+        <TextBlock Margin="0,5,0,5" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Name="txtDetalle" Grid.Column="1" />
+        <Image Margin="0,5,25,5" HorizontalAlignment="Right"  VerticalAlignment="Center"   x:Name="imgDerecha" Grid.Column="2" Stretch="UniformToFill"/>
     </Grid>
+    
 </UserControl>

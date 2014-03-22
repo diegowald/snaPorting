@@ -14,6 +14,7 @@ namespace Catalogo
             Supervisor = 4
         }
 
+       public static string VersionApp;
        public static TiposDeCatalogo miSABOR;
 
        public const string up2014Ad = ";User Id=hpcd-rw;Password=data700mb";
