@@ -40,7 +40,6 @@ namespace Catalogo
 
             // Carga tabla de Productos en Segundo Plano
             preload.Preloader.instance.refresh();
-            //System.Windows.Forms.MessageBox.Show("Aca estoy cargando los datos en segundo plano");
 
             load_header();
 
@@ -84,7 +83,7 @@ namespace Catalogo
         {
             //- acá sigo con el código de main --
             OleDbDataReader dr = null;
-            dr = Funciones.oleDbFunciones.Comando(ref Global01.Conexion, "SELECT * FROM v_appConfig2");
+            dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_appConfig2");
             if (!dr.HasRows)
             {
                 MessageBox.Show("Aplicación NO inicializada! (error=Version y Tipo), Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -150,7 +149,7 @@ namespace Catalogo
             }
             else
             {
-                Funciones.oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC usp_UltimoAcceso_upd");
+                Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_UltimoAcceso_upd");
             };
 
             if (Int32.Parse(Global01.NroUsuario.ToString()) <= 0 | Int64.Parse(Global01.Cuit.ToString()) <= 1)

@@ -127,7 +127,7 @@ namespace Catalogo._clientes
                 //            RaiseEvent SincronizarClientesProgress("Sincronizando Clientes ...", 30, Cancel)
             }
 
-            Catalogo.Funciones.oleDbFunciones.ComandoIU(ref conexion, "DELETE FROM tblClientes");
+            Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "DELETE FROM tblClientes");
 
             if (!cancel)
             {
@@ -169,7 +169,7 @@ namespace Catalogo._clientes
                 //                vg.TranActiva = Nothing
                 //            End If
 
-                Catalogo.Funciones.oleDbFunciones.ComandoIU(ref conexion, "EXEC usp_appConfig_FActClientes_Upd");
+                Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_appConfig_FActClientes_Upd");
                 //            RaiseEvent SincronizarClientesProgress("Sincronización de Clientes Finalizada", 100, Cancel)
             }
             return;

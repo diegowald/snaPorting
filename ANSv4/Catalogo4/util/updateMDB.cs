@@ -30,44 +30,44 @@ namespace Catalogo.Funciones
 
             try
             {
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaAppConfig");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaAppConfig");
 
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaPedidoEnc");
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaPedidoDet");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaPedidoEnc");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaPedidoDet");
 
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaDevolucionEnc");
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaDevolucionDet");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaDevolucionEnc");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaDevolucionDet");
                 Application.DoEvents();
 
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaReciboEnc");
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaReciboDet");
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaReciboApp");
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaReciboDed");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaReciboEnc");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaReciboDet");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaReciboApp");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaReciboDed");
                 Application.DoEvents();
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaRendicion");
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaRendicionValores");
-                Application.DoEvents();
-
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexatblLineasPorcentaje");
-
-
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaClientes");
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaCtaCte");
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaClientesNovedades");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaRendicion");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaRendicionValores");
                 Application.DoEvents();
 
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaInterDeposito");
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaInterDeposito_Fac");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexatblLineasPorcentaje");
+
+
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaClientes");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaCtaCte");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaClientesNovedades");
                 Application.DoEvents();
 
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xIDsCatalogoBAK_Pedidos_Anexa");
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xIDsCatalogoBAK_Devolucion_Anexa");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaInterDeposito");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaInterDeposito_Fac");
                 Application.DoEvents();
 
-                oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaAuditor");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xIDsCatalogoBAK_Pedidos_Anexa");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xIDsCatalogoBAK_Devolucion_Anexa");
                 Application.DoEvents();
 
-                //oleDbFunciones.ComandoIU(ref Global01.Conexion, "EXEC xAnexaCatalogoBAK");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaAuditor");
+                Application.DoEvents();
+
+                //oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaCatalogoBAK");
 
                 if (Global01.TranActiva != null)
                 {
@@ -91,7 +91,7 @@ namespace Catalogo.Funciones
             System.IO.File.Delete(Global01.AppPath + "\\Reportes\\Catalogo.mdb");
             System.IO.File.Delete(Global01.AppPath + "\\up201406.exe");
 
-            oleDbFunciones.Desconectar(ref Global01.Conexion);
+            oleDbFunciones.Desconectar(Global01.Conexion);
 
             Cursor.Current = Cursors.Default;
 

@@ -11,7 +11,22 @@ namespace Catalogo.Funciones
 
         const string m_sMODULENAME_ = "util";
 
+        internal static void EsImporte(object sender, ref System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '.') { e.KeyChar = ','; };
 
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.ToString().IndexOf(',') > 0)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                if (!Char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '\b')
+                {
+                    e.Handled = true;
+                };
+            };
+        }
 
         internal static void BuscarIndiceEnCombo(ref System.Windows.Forms.ComboBox combo, string strBuscar, bool EsList)
         {
@@ -21,11 +36,11 @@ namespace Catalogo.Funciones
         }
 
         //acá el combo debe ser System.Windows.Forms.ToolStripComboBox
-        internal static void CargaCombo(ref System.Data.OleDb.OleDbConnection conexion, ref System.Windows.Forms.ToolStripComboBox combo, string Tabla, string Campo1, string Campo2, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = true, bool Concatena = false)
+        internal static void CargaCombo(System.Data.OleDb.OleDbConnection conexion, ref System.Windows.Forms.ToolStripComboBox combo, string Tabla, string Campo1, string Campo2, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = true, bool Concatena = false)
         {
             combo.Enabled = false;
 
-            System.Data.DataTable  dt = Catalogo.Funciones.oleDbFunciones.xGetDt(ref conexion, Tabla, Condicion, Orden, Campo1 + "," + Campo2);
+            System.Data.DataTable  dt = Catalogo.Funciones.oleDbFunciones.xGetDt(conexion, Tabla, Condicion, Orden, Campo1 + "," + Campo2);
            
             if (AceptaNulo)
             {
@@ -45,7 +60,7 @@ namespace Catalogo.Funciones
         }
 
         //acá el combo debe ser System.Windows.Forms.ComboBox
-        internal static void CargaCombo(ref System.Data.OleDb.OleDbConnection conexion, ref System.Windows.Forms.ComboBox combo, string Tabla, string Campo1, string Campo2, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = false, bool Concatena = false, string OtrosCampos = "NONE")
+        internal static void CargaCombo(System.Data.OleDb.OleDbConnection conexion, ref System.Windows.Forms.ComboBox combo, string Tabla, string Campo1, string Campo2, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = false, bool Concatena = false, string OtrosCampos = "NONE")
         {
             combo.Enabled = false;
 
@@ -53,18 +68,25 @@ namespace Catalogo.Funciones
 
             if (OtrosCampos == "NONE")
             {
-                dt = Catalogo.Funciones.oleDbFunciones.xGetDt(ref conexion, Tabla, Condicion, Orden, Campo1 + "," + Campo2);
+                dt = Catalogo.Funciones.oleDbFunciones.xGetDt(conexion, Tabla, Condicion, Orden, Campo1 + "," + Campo2);
             }
             else
             {
-                dt = Catalogo.Funciones.oleDbFunciones.xGetDt(ref conexion, Tabla, Condicion, Orden, OtrosCampos);
+                dt = Catalogo.Funciones.oleDbFunciones.xGetDt(conexion, Tabla, Condicion, Orden, OtrosCampos);
             };
 
             if (AceptaNulo)
             {
                 System.Data.DataRow dr = dt.NewRow();
                 dr[1] = 0;
-                dr[0] = "- seleccione -";
+                if (Tabla=="v_Deposito")
+                {
+                    dr[0] = "- DEP -";
+                }
+                else
+                {
+                    dr[0] = "- seleccione -";
+                };
                 dt.Rows.InsertAt(dr, 0);
             }
 

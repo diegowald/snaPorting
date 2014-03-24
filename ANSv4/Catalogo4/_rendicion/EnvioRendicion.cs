@@ -55,9 +55,9 @@ namespace Catalogo._rendicion
             System.Data.OleDb.OleDbDataReader RenValores = null;
             System.Data.OleDb.OleDbDataReader RenRecibos = null;
 
-            Ren = Funciones.oleDbFunciones.Comando(ref Conexion1, "SELECT * FROM v_Rendicion WHERE Nro='" + NroRendicion + "'");
-            RenValores = Funciones.oleDbFunciones.Comando(ref Conexion1, "SELECT * FROM  v_RendicionValores1 WHERE Nro='" + NroRendicion + "'");
-            RenRecibos = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXECUTE v_Rendicion_Recibos_rpt '" + NroRendicion.Substring(NroRendicion.Length - 8) + "'");
+            Ren = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT * FROM v_Rendicion WHERE Nro='" + NroRendicion + "'");
+            RenValores = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT * FROM  v_RendicionValores1 WHERE Nro='" + NroRendicion + "'");
+            RenRecibos = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Rendicion_Recibos_rpt '" + NroRendicion.Substring(NroRendicion.Length - 8) + "'");
 
             m_NroRendicion = NroRendicion;
             m_IdViajante = String.Format("000000", Ren["IDCliente"].ToString().Trim());

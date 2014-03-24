@@ -293,7 +293,7 @@ namespace Catalogo._Application
                     if (wListaPrecio > 0)
                     {
                         Global01.ListaPrecio = wListaPrecio;
-                        Funciones.oleDbFunciones.ComandoIU(ref Global01.Conexion, "UPDATE AppConfig SET ListaPrecio=" + Global01.ListaPrecio.ToString());
+                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE AppConfig SET ListaPrecio=" + Global01.ListaPrecio.ToString());
                     }
                 }
             }

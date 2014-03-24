@@ -52,10 +52,10 @@ public class EnvioRecibo
 	{
 		DatosObtenidos = false;
 
-		System.Data.OleDb.OleDbDataReader Enc = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXEC v_Recibo_Enc '" + nroRecibo + "'");
-		System.Data.OleDb.OleDbDataReader Det = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXEC v_Recibo_Det '" + nroRecibo + "'");
-		System.Data.OleDb.OleDbDataReader Fac = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXEC v_Recibo_App '" + nroRecibo + "'");
-		System.Data.OleDb.OleDbDataReader nCre = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXEC v_Recibo_Deducir_Normal '" + nroRecibo + "'");
+		System.Data.OleDb.OleDbDataReader Enc = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_Enc '" + nroRecibo + "'");
+		System.Data.OleDb.OleDbDataReader Det = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_Det '" + nroRecibo + "'");
+		System.Data.OleDb.OleDbDataReader Fac = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_App '" + nroRecibo + "'");
+		System.Data.OleDb.OleDbDataReader nCre = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_Deducir_Normal '" + nroRecibo + "'");
 
 		_NroRecibo = nroRecibo;
 		_CodCliente = String.Format("000000", Enc["IDCliente"].ToString().Trim());

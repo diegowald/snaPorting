@@ -17,7 +17,7 @@ namespace Catalogo._devoluciones
         {
             InitializeComponent();
 
-            Catalogo.Funciones.util.CargaCombo(ref Global01.Conexion , ref cboCliente, "tblClientes", "RazonSocial", "ID", "Activo<>1", "RazonSocial", true, true);
+            Catalogo.Funciones.util.CargaCombo(Global01.Conexion , ref cboCliente, "tblClientes", "RazonSocial", "ID", "Activo<>1", "RazonSocial", true, true);
 
         }
 
@@ -30,7 +30,7 @@ namespace Catalogo._devoluciones
             if (cboCliente.SelectedIndex > 0)
             {
                 toolStripStatusLabel1.Text  = "Devolución para el cliente: " + this.cboCliente.Text.ToString() + " (" + this.cboCliente.ComboBox.SelectedValue + ")";
-                this.DevAntDataGridView.DataSource = Catalogo.Funciones.oleDbFunciones.xGetDt(ref Global01.Conexion, "v_CtaCte", "IDCliente=" + cboCliente.ComboBox.SelectedValue.ToString(), "Orden, Fecha");
+                this.DevAntDataGridView.DataSource = Catalogo.Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "v_CtaCte", "IDCliente=" + cboCliente.ComboBox.SelectedValue.ToString(), "Orden, Fecha");
             }
             else
             {

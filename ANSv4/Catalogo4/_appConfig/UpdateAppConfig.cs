@@ -144,7 +144,7 @@ namespace Catalogo._appConfig
             {
                 if (tenerQueEnviarInfo())
                 {
-                    System.Data.OleDb.OleDbDataReader reader = Funciones.oleDbFunciones.Comando(ref conexion, "SELECT TOP 1 * FROM v_appConfig2");
+                    System.Data.OleDb.OleDbDataReader reader = Funciones.oleDbFunciones.Comando(conexion, "SELECT TOP 1 * FROM v_appConfig2");
 
                     string auditarProceso;
                     string enviarAuditoria;
@@ -260,25 +260,25 @@ namespace Catalogo._appConfig
                                 switch (tipo)
                                 {
                                     case "N": // Numerico
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE ansConfig SET " + row["Campo"].ToString().Trim() + "=" + row["valor"].ToString().Trim());
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE ansConfig SET " + row["Campo"].ToString().Trim() + "=" + row["valor"].ToString().Trim());
                                         break;
                                     case "C": // Char
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE ansConfig SET " + row["Campo"].ToString().Trim() + "='" + row["valor"].ToString().Trim() + "'");
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE ansConfig SET " + row["Campo"].ToString().Trim() + "='" + row["valor"].ToString().Trim() + "'");
                                         break;
                                     case "R": // Real
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE ansConfig SET " + row["Campo"].ToString().Trim() + "='" + row["valor"].ToString().Trim() + "'");
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE ansConfig SET " + row["Campo"].ToString().Trim() + "='" + row["valor"].ToString().Trim() + "'");
                                         break;
                                     case "D": // Date
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE ansConfig SET " + row["Campo"].ToString().Trim() + "=#" + row["valor"].ToString().Substring(0, 10) + "#");
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE ansConfig SET " + row["Campo"].ToString().Trim() + "=#" + row["valor"].ToString().Substring(0, 10) + "#");
                                         break;
                                     case "X": // Nulo
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE ansConfig SET " + row["Campo"].ToString() + "=''");
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE ansConfig SET " + row["Campo"].ToString() + "=''");
                                         break;
                                     case "Y":
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE ansConfig SET ListaPrecio=" + row["valor"].ToString());
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE ansConfig SET ListaPrecio=" + row["valor"].ToString());
                                         if (row["valor"].ToString().Trim() == "2")
                                         {
-                                            Funciones.oleDbFunciones.ComandoIU(ref conexion, "EXEC usp_Precio_upd");
+                                            Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_Precio_upd");
                                         }
                                         break;
                                 }
@@ -288,32 +288,32 @@ namespace Catalogo._appConfig
                                 switch (row["Tipo"].ToString().Trim())
                                 {
                                     case "N": // Numerico
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE AppConfig SET " + row["Campo"].ToString().Trim() + "=" + row["valor"].ToString());
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE AppConfig SET " + row["Campo"].ToString().Trim() + "=" + row["valor"].ToString());
                                         break;
                                     case "C": // Char
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE AppConfig SET " + row["Campo"].ToString().Trim() + "='" + row["valor"].ToString() + "'");
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE AppConfig SET " + row["Campo"].ToString().Trim() + "='" + row["valor"].ToString() + "'");
                                         break;
                                     case "R": // Real
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE AppConfig SET " + row["Campo"].ToString().Trim() + "='" + row["valor"].ToString() + "'");
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE AppConfig SET " + row["Campo"].ToString().Trim() + "='" + row["valor"].ToString() + "'");
                                         break;
                                     case "D": // Date
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE AppConfig SET " + row["Campo"].ToString().Trim() + "=#" + row["valor"].ToString().Substring(0, 10) + "#");
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE AppConfig SET " + row["Campo"].ToString().Trim() + "=#" + row["valor"].ToString().Substring(0, 10) + "#");
                                         break;
                                     case "X": // Nulo
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE AppConfig SET " + row["Campo"].ToString() + "=''");
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE AppConfig SET " + row["Campo"].ToString() + "=''");
                                         break;
                                     case "Y":
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "UPDATE AppConfig SET ListaPrecio=" + row["valor"].ToString());
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "UPDATE AppConfig SET ListaPrecio=" + row["valor"].ToString());
                                         if (row["valor"].ToString().Trim() == "2")
                                         {
-                                            Funciones.oleDbFunciones.ComandoIU(ref conexion, "EXEC usp_Precio_upd");
+                                            Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_Precio_upd");
                                         }
                                         break;
                                     case "W": // cambia el nro del ultimo Pedido,Recibo,Devolucion
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "EXECUTE " + row["Campo"].ToString().Trim() + " '" + row["valor"].ToString().Trim() + "'");
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "EXECUTE " + row["Campo"].ToString().Trim() + " '" + row["valor"].ToString().Trim() + "'");
                                         break;
                                     case "V": // ejecuta cualquier consulta de la db SIN parametros
-                                        Funciones.oleDbFunciones.ComandoIU(ref conexion, "EXECUTE " + row["campo"].ToString().Trim());
+                                        Funciones.oleDbFunciones.ComandoIU(conexion, "EXECUTE " + row["campo"].ToString().Trim());
                                         break;
                                 }
                             }
@@ -405,7 +405,7 @@ namespace Catalogo._appConfig
                                     }
                                     break;
                                 case "db":
-                                    Funciones.oleDbFunciones.ComandoIU(ref conexion, row["Comando"].ToString().Substring(4));
+                                    Funciones.oleDbFunciones.ComandoIU(conexion, row["Comando"].ToString().Substring(4));
                                     break;
                                 default:
                                     break;

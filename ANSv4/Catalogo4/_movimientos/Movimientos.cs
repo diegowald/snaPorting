@@ -38,13 +38,13 @@ namespace Catalogo._movimientos
             switch (queMostrar)
             {
                 case DATOS_MOSTRAR.TODOS:
-                    return Funciones.oleDbFunciones.xGetDr(ref Conexion1, "v_Movimientos", "left(Nro,5)='" + IDCliente + "' " + wCond2, "IDcliente, Origen, Fecha DESC");
+                    return Funciones.oleDbFunciones.xGetDr(Conexion1, "v_Movimientos", "left(Nro,5)='" + IDCliente + "' " + wCond2, "IDcliente, Origen, Fecha DESC");
                     break;
                 case DATOS_MOSTRAR.ENVIADOS:
-                    return Funciones.oleDbFunciones.xGetDr(ref Conexion1, "v_Movimientos", "left(Nro,5)='" + IDCliente + "' and not (F_Transmicion is null)" + wCond2, "IDcliente, Origen, Fecha DESC");
+                    return Funciones.oleDbFunciones.xGetDr(Conexion1, "v_Movimientos", "left(Nro,5)='" + IDCliente + "' and not (F_Transmicion is null)" + wCond2, "IDcliente, Origen, Fecha DESC");
                     break;
                 case DATOS_MOSTRAR.NO_ENVIADOS:
-                    return Funciones.oleDbFunciones.xGetDr(ref Conexion1, "v_Movimientos", "left(Nro,5)='" + IDCliente + "' and F_Transmicion is null" + wCond2, "IDcliente, Origen, Fecha DESC");
+                    return Funciones.oleDbFunciones.xGetDr(Conexion1, "v_Movimientos", "left(Nro,5)='" + IDCliente + "' and F_Transmicion is null" + wCond2, "IDcliente, Origen, Fecha DESC");
                     break;
                 default:
                     return null;
@@ -60,7 +60,7 @@ namespace Catalogo._movimientos
                 return false;
             }
 
-            System.Data.OleDb.OleDbDataReader rec = Funciones.oleDbFunciones.Comando(ref Conexion1, "SELECT Count(*) AS Cantidad FROM UnionPedidoRecibo WHERE (F_Transmicion is null) and left(Nro,5)='" + _IDMaquina + "'");
+            System.Data.OleDb.OleDbDataReader rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT Count(*) AS Cantidad FROM UnionPedidoRecibo WHERE (F_Transmicion is null) and left(Nro,5)='" + _IDMaquina + "'");
 
             if (rec.HasRows)
             {
@@ -79,7 +79,7 @@ namespace Catalogo._movimientos
                 return false;
             }
 
-            System.Data.OleDb.OleDbDataReader rec = Funciones.oleDbFunciones.Comando(ref Conexion1, "SELECT Count(*) AS Cantidad FROM UnionPedidoRecibo WHERE UnionPedidoRecibo.IdCliente=" + IDCLiente.ToString() + " and (f_Transmicion is NULL) and left(Nro,5)='" + _IDMaquina + "'");
+            System.Data.OleDb.OleDbDataReader rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT Count(*) AS Cantidad FROM UnionPedidoRecibo WHERE UnionPedidoRecibo.IdCliente=" + IDCLiente.ToString() + " and (f_Transmicion is NULL) and left(Nro,5)='" + _IDMaquina + "'");
             if (rec.HasRows)
             {
                 return (int)rec["cantidad"] > 0;

@@ -169,6 +169,12 @@
     <Compile Include="_interdeposito\EnvioInterDeposito.cs" />
     <Compile Include="_movimientos\Movimientos.cs" />
     <Compile Include="_pedidos\EnvioPedido.cs" />
+    <Compile Include="_pedidos\fPedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_pedidos\fPedido.Designer.cs">
+      <DependentUpon>fPedido.cs</DependentUpon>
+    </Compile>
     <Compile Include="_pedidos\ucPedido.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -296,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_devoluciones\ucDevolucion.resx">
       <DependentUpon>ucDevolucion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_pedidos\fPedido.resx">
+      <DependentUpon>fPedido.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_pedidos\ucPedido.resx">
       <DependentUpon>ucPedido.cs</DependentUpon>

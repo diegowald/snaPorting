@@ -48,8 +48,8 @@ namespace Catalogo._devolucion
 		System.Data.OleDb.OleDbDataReader Enc = null;
 		System.Data.OleDb.OleDbDataReader Det = null;
 
-		Enc = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXECUTE v_Devolucion_Enc '" + NroDevolucion + "'");
-		Det = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXECUTE v_Devolucion_Det '" + NroDevolucion + "'");
+		Enc = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Devolucion_Enc '" + NroDevolucion + "'");
+		Det = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Devolucion_Det '" + NroDevolucion + "'");
 
 		m_NroDevolucion = NroDevolucion;
 		m_CodCliente = String.Format("000000", Enc["IDCliente"].ToString().Trim());

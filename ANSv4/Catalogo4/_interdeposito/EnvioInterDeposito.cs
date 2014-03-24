@@ -50,8 +50,8 @@ namespace Catalogo._interdeposito
             System.Data.OleDb.OleDbDataReader I = null;
             System.Data.OleDb.OleDbDataReader Ifacturas = null;
 
-            I = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXECUTE v_InterDeposito_rpt '" + NroInterDeposito + "'");
-            Ifacturas = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXECUTE v_InterDepositoFacturas '" + NroInterDeposito + "'");
+            I = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_InterDeposito_rpt '" + NroInterDeposito + "'");
+            Ifacturas = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_InterDepositoFacturas '" + NroInterDeposito + "'");
 
             m_NroInterDeposito = NroInterDeposito;
             m_CodCliente = String.Format("000000", I["IDCliente"].ToString().Trim());

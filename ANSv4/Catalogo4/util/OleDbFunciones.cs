@@ -19,18 +19,18 @@ namespace Catalogo.Funciones
             return conn;
         }
 
-        internal static void Conectar(ref System.Data.OleDb.OleDbConnection ObjetoDeConexion, string CadenaDeConexion)
+        internal static void Conectar(System.Data.OleDb.OleDbConnection ObjetoDeConexion, string CadenaDeConexion)
         {
             ObjetoDeConexion.ConnectionString = CadenaDeConexion;
             ObjetoDeConexion.Open();
         }
 
-        internal static void Desconectar(ref System.Data.OleDb.OleDbConnection ObjetoDeConexion)
+        internal static void Desconectar(System.Data.OleDb.OleDbConnection ObjetoDeConexion)
         {
             ObjetoDeConexion.Close();
         }
 
-        internal static System.Data.DataSet xGetDs(ref System.Data.OleDb.OleDbConnection conexion, string Tabla, string Condicion = "ALL", string Orden = "NONE", string Campos = "*", string Alcance = "")
+        internal static System.Data.DataSet xGetDs(System.Data.OleDb.OleDbConnection conexion, string Tabla, string Condicion = "ALL", string Orden = "NONE", string Campos = "*", string Alcance = "")
         {
             string sql = null;
             string sCondicion = "";
@@ -57,7 +57,7 @@ namespace Catalogo.Funciones
             return ObjDS;
         }
 
-        internal static System.Data.DataTable xGetDt(ref System.Data.OleDb.OleDbConnection conexion, string Tabla, string Condicion = "ALL", string Orden = "NONE", string Campos = "*", string Alcance = "")
+        internal static System.Data.DataTable xGetDt(System.Data.OleDb.OleDbConnection conexion, string Tabla, string Condicion = "ALL", string Orden = "NONE", string Campos = "*", string Alcance = "")
         {
             string sql = null;
             string sCondicion = "";
@@ -85,7 +85,7 @@ namespace Catalogo.Funciones
             return table;
         }
 
-        internal static System.Data.OleDb.OleDbDataReader xGetDr(ref System.Data.OleDb.OleDbConnection conexion, string Tabla, string Condicion = "ALL", string Orden = "NONE", string Campos = "*", string Alcance = "")
+        internal static System.Data.OleDb.OleDbDataReader xGetDr(System.Data.OleDb.OleDbConnection conexion, string Tabla, string Condicion = "ALL", string Orden = "NONE", string Campos = "*", string Alcance = "")
         {
 
             string sql = null;
@@ -112,7 +112,7 @@ namespace Catalogo.Funciones
 
         }
 
-        internal static System.Data.OleDb.OleDbDataReader Comando(ref System.Data.OleDb.OleDbConnection conexion, string TextoComando)
+        internal static System.Data.OleDb.OleDbDataReader Comando(System.Data.OleDb.OleDbConnection conexion, string TextoComando)
         {
             if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); };
             System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando,conexion);
@@ -120,7 +120,7 @@ namespace Catalogo.Funciones
             return cmd.ExecuteReader();
         }
 
-        internal static void ComandoIU(ref System.Data.OleDb.OleDbConnection conexion, string TextoComando)
+        internal static void ComandoIU(System.Data.OleDb.OleDbConnection conexion, string TextoComando)
         {
             
             const string PROCNAME_ = "ComandoIU";
@@ -164,10 +164,10 @@ namespace Catalogo.Funciones
 
                 ADODB.Connection adoCN = new ADODB.Connection();
 
-                adoDbConectar(ref adoCN, Global01.strConexionAd);
+                adoDbConectar(adoCN, Global01.strConexionAd);
 
-                ProcesarTablasLinks(ref adoCN, db);
-                adoDbDesconectar(ref adoCN);
+                ProcesarTablasLinks(adoCN, db);
+                adoDbDesconectar(adoCN);
                 adoCN = null;
 
             }
@@ -198,7 +198,7 @@ namespace Catalogo.Funciones
         }
 
 
-        private static void ProcesarTablasLinks(ref ADODB.Connection Conexion, string db)
+        private static void ProcesarTablasLinks(ADODB.Connection Conexion, string db)
         {
 	     
 	        const string PROCNAME_ = "ProcesarTablasLinks";
@@ -241,7 +241,7 @@ namespace Catalogo.Funciones
             }
         }
 
-        private static void adoDbConectar(ref ADODB.Connection ObjetoDeConexion, string CadenaDeConexion)
+        private static void adoDbConectar(ADODB.Connection ObjetoDeConexion, string CadenaDeConexion)
         {
             ObjetoDeConexion.ConnectionString = CadenaDeConexion;
             ObjetoDeConexion.ConnectionTimeout = 30;
@@ -249,7 +249,7 @@ namespace Catalogo.Funciones
         }
 
 
-        private static void adoDbDesconectar(ref ADODB.Connection ObjetoDeConexion)
+        private static void adoDbDesconectar(ADODB.Connection ObjetoDeConexion)
         {
             ObjetoDeConexion.Close();
         }
@@ -303,7 +303,7 @@ namespace Catalogo.Funciones
 
                 ADODB.Connection adoCN = new ADODB.Connection();
 
-                adoDbConectar(ref adoCN, Global01.strConexionAd);
+                adoDbConectar(adoCN, Global01.strConexionAd);
 
                 //-- acá va el codigo del cambio de la consulta -----
                 ADODB.Command adoCMD = new ADODB.Command();
@@ -319,7 +319,7 @@ namespace Catalogo.Funciones
                 adoCMD = null;
                 //-- fin cambio consulta ----------------------------
 
-                adoDbDesconectar(ref adoCN);
+                adoDbDesconectar(adoCN);
                 adoCN = null;
             }
             catch (System.IO.IOException e)
@@ -344,7 +344,7 @@ namespace Catalogo.Funciones
             {
                 ADODB.Connection adoCN = new ADODB.Connection();
 
-                adoDbConectar(ref adoCN, Global01.strConexionAd);
+                adoDbConectar(adoCN, Global01.strConexionAd);
 
                 //-- acá va el codigo del cambio de la consulta -----
                 ADODB.Command adoCMD = new ADODB.Command();
@@ -360,7 +360,7 @@ namespace Catalogo.Funciones
                 adoCMD = null;
                 //-- fin cambio consulta ----------------------------
 
-                adoDbDesconectar(ref adoCN);
+                adoDbDesconectar(adoCN);
                 adoCN = null;
             }
             catch (System.IO.IOException e)

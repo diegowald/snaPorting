@@ -59,7 +59,7 @@ namespace Catalogo
             {
                 if (txtPIN.Text.Trim().ToUpper()==Global01.pin.ToString().ToUpper())
                 {
-                    Funciones.oleDbFunciones.ComandoIU(ref Global01.Conexion, "UPDATE appConfig SET PIN='" + txtPIN.Text.Trim().ToUpper() +"'");
+                    Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE appConfig SET PIN='" + txtPIN.Text.Trim().ToUpper() +"'");
                     TodoBien = true;
                     Close();
                 }

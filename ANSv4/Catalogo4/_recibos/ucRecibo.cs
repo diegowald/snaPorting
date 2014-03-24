@@ -13,25 +13,32 @@ namespace Catalogo._recibos
     public partial class ucRecibo : UserControl
     {
         private const string m_sMODULENAME_ = "ucRecibo";
+        ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
 
         public ucRecibo()
         {
             InitializeComponent();
+            _ToolTip.SetToolTip(btnIniciar, "INICIAR Recibo Nuevo");
+            _ToolTip.SetToolTip(btnImprimir, "Graba e Imprime el Recibo ...");
+            _ToolTip.SetToolTip(btnVer, "ver ...");
+
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboCliente.SelectedIndex > 0)
             {
-                toolStripStatusLabel1.Text = "Recibo para el cliente: " + this.cboCliente.Text.ToString() + " (" + this.cboCliente.ComboBox.SelectedValue + ")";
+                toolStripStatusLabel1.Text = "Recibo para el cliente: " + this.cboCliente.Text.ToString() + " (" + this.cboCliente.SelectedValue + ")";
                 CargarCtaCte();                
                 CargarClienteNovedades();                
                 CargarClienteDatos();
+                btnIniciar.Enabled = true;
             }
             else 
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Recibo para el cliente ..."; }
                 LimpiarClienteDatos();
+                btnIniciar.Enabled = false;
             };
         }
 
@@ -52,7 +59,7 @@ namespace Catalogo._recibos
 
         private void CargarCtaCte()
         {
-            DataTable dt =  Catalogo.Funciones.oleDbFunciones.xGetDt(ref Global01.Conexion, "v_CtaCte", "IDCliente=" + cboCliente.ComboBox.SelectedValue.ToString(), "Orden, Fecha");
+            DataTable dt =  Catalogo.Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "v_CtaCte", "IDCliente=" + cboCliente.SelectedValue.ToString(), "Orden, Fecha");
             
             cclistView.Visible = false;
             cclistView.Items.Clear();
@@ -106,7 +113,7 @@ namespace Catalogo._recibos
 
         private void CargarClienteNovedades()
         {
-            this.CliNDataGridView.DataSource = Catalogo.Funciones.oleDbFunciones.xGetDt(ref Global01.Conexion, "tblClientesNovedades", "IDCliente=" + cboCliente.ComboBox.SelectedValue.ToString(), "F_Carga");
+            this.CliNDataGridView.DataSource = Catalogo.Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "tblClientesNovedades", "IDCliente=" + cboCliente.SelectedValue.ToString(), "F_Carga");
         }
 
         private void CargarClienteDatos()
@@ -121,7 +128,7 @@ namespace Catalogo._recibos
             CliDTelefonoTxt.Text = "";
 
             OleDbDataReader dr = null;
-            dr = Funciones.oleDbFunciones.Comando(ref Global01.Conexion, "SELECT * FROM tblClientes WHERE ID=" + cboCliente.ComboBox.SelectedValue.ToString());
+            dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM tblClientes WHERE ID=" + cboCliente.SelectedValue.ToString());
             if (dr.HasRows)
             {
                 dr.Read();
@@ -388,7 +395,6 @@ namespace Catalogo._recibos
 
         private void LimpiarIngresosValores()
         {
-
             ralistView.Tag = "add";
 
             cvTipoValorCbo.SelectedIndex  = 0;
@@ -405,12 +411,12 @@ namespace Catalogo._recibos
             cvABahiaCb.Checked = false;
         }
 
-        private void tsBtnIniciar_Click(object sender, EventArgs e)
+        private void btnIniciar_Click(object sender, EventArgs e)
         {
 
             if (cboCliente.SelectedIndex > 0)
             {
-                if (tsBtnIniciar.Tag.ToString() == "INICIAR")
+                if (btnIniciar.Tag.ToString() == "INICIAR")
                 {
                     //vg.auditor.Guardar Recibo, INICIA
                     //Limpio Listados
@@ -459,7 +465,7 @@ namespace Catalogo._recibos
 
             if (Char.IsControl(e.KeyChar) && e.KeyChar==((char)Keys.D))
             {   //CTRL + D
-                if (tsBtnIniciar.Tag.ToString() == "CANCELAR")
+                if (btnIniciar.Tag.ToString() == "CANCELAR")
                 {
                     VerDetalleRecibo();
                     e.Handled = true;
@@ -503,26 +509,26 @@ namespace Catalogo._recibos
                 this.Dispose();
             };
 
-
-            if (Funciones.modINIs.ReadINI("DATOS","EsGerente","0")=="1")
+            if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
-                Catalogo.Funciones.util.CargaCombo(ref Global01.Conexion , ref cboCliente, "tblClientes", "RazonSocial", "ID", "Activo<>1", "RazonSocial", true, true);
+                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
             }
-            else 
+            else
             {
-                Catalogo.Funciones.util.CargaCombo(ref Global01.Conexion , ref cboCliente, "tblClientes", "RazonSocial", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString() , "RazonSocial", true, true);
+                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString(), "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
             }
 
-            Catalogo.Funciones.util.CargaCombo(ref Global01.Conexion , ref cvTipoValorCbo, "v_TipoValor", "D_valor", "IDvalor","ALL","IDvalor",true,false,"NONE");
-            Catalogo.Funciones.util.CargaCombo(ref Global01.Conexion , ref cvBancoCbo, "tblBancos", "Banco", "ID","Activo=0","Format([ID],'000') & ' - ' & tblBancos.Nombre",true,false,"Format([ID],'000') & ' - ' & tblBancos.Nombre AS Banco, ID");            
+            Catalogo.Funciones.util.CargaCombo(Global01.Conexion , ref cvTipoValorCbo, "v_TipoValor", "D_valor", "IDvalor","ALL","IDvalor",true,false,"NONE");
+            Catalogo.Funciones.util.CargaCombo(Global01.Conexion , ref cvBancoCbo, "tblBancos", "Banco", "ID","Activo=0","Format([ID],'000') & ' - ' & tblBancos.Nombre",true,false,"Format([ID],'000') & ' - ' & tblBancos.Nombre AS Banco, ID");            
 
         }
 
         private void CerrarRecibo()
         {    
-            tsBtnIniciar.Text = "Iniciar";
-            tsBtnIniciar.Tag = "INICIAR";
-            tsBtnIniciar.ToolTipText = "INICIAR Recibo Nuevo";
+            btnIniciar.Text = "Iniciar";
+            btnIniciar.Tag = "INICIAR";
+            
+            _ToolTip.SetToolTip(btnIniciar, "INICIAR Recibo Nuevo");
             raObservacionesTxt.Text = "";
             aplistView.Items.Clear();
             adlistView.Items.Clear();
@@ -531,9 +537,9 @@ namespace Catalogo._recibos
 
         private void AbrirRecibo()
         {
-            tsBtnIniciar.Text = "CANCELAR";
-            tsBtnIniciar.Tag = "CANCELAR";
-            tsBtnIniciar.ToolTipText = "CANCELAR éste Recibo";
+            btnIniciar.Text = "CANCELAR";
+            btnIniciar.Tag = "CANCELAR";
+            _ToolTip.SetToolTip(btnIniciar, "CANCELAR éste Recibo");
             raObservacionesTxt.Text = "";
             aplistView.Items.Clear();
             adlistView.Items.Clear();
@@ -545,8 +551,8 @@ namespace Catalogo._recibos
             adPnlMain.Enabled = true;
             apPnlTop.Enabled = true;
             apPnlMain.Enabled = true;
-            tsBtnConfirmar.Enabled = true;
-            tsBtnVer.Enabled = true;
+            btnImprimir.Enabled = true;
+            btnVer.Enabled = true;
             ralistView.Enabled = true;
             aplistView.Enabled = true;
             adlistView.Enabled = true;
@@ -560,8 +566,8 @@ namespace Catalogo._recibos
             adPnlMain.Enabled = false;
             apPnlTop.Enabled = false;
             apPnlMain.Enabled = false;
-            tsBtnConfirmar.Enabled = false;
-            tsBtnVer.Enabled = false;
+            btnImprimir.Enabled = false;
+            btnVer.Enabled = false;
             ralistView.Enabled = false;
             aplistView.Enabled = false;
             adlistView.Enabled = false;
@@ -601,22 +607,14 @@ namespace Catalogo._recibos
 
         private void cvImporteTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
+             Funciones.util.EsImporte(sender, ref e);
+        }
 
-            if (e.KeyChar == '.') { e.KeyChar = ','; };
-
-            if  (e.KeyChar == ',' && (sender as TextBox).Text.ToString().IndexOf(',') > 0)
-            {               
-                e.Handled = true;
-            }
-            else
-            {
-                if (!Char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '\b')
-                {
-                    e.Handled = true;
-                };
-            };
+        private void apAgregarBtn_Click(object sender, EventArgs e)
+        {
 
         }
+
 
     } //fin clase
 } //fin namespace

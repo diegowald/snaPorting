@@ -164,7 +164,7 @@ namespace Catalogo.util.BackgroundTasks
                     //        vg.TranActiva = True
                     //  End If
 
-                    System.Data.OleDb.OleDbDataReader reader = Catalogo.Funciones.oleDbFunciones.Comando(ref Global01.Conexion,
+                    System.Data.OleDb.OleDbDataReader reader = Catalogo.Funciones.oleDbFunciones.Comando(Global01.Conexion,
                         "SELECT * FROM tblAuditor WHERE F_Transmision is null");
 
                     List<string> Fechas = new List<string>();
@@ -183,7 +183,7 @@ namespace Catalogo.util.BackgroundTasks
                             {
                                 foreach (long ID in IDs)
                                 {
-                                    Funciones.oleDbFunciones.Comando(ref Global01.Conexion, "EXEC usp_Auditor_Transmision_Upd " + ID.ToString());
+                                    Funciones.oleDbFunciones.Comando(Global01.Conexion, "EXEC usp_Auditor_Transmision_Upd " + ID.ToString());
                                 }
                             }
                             Fechas.Clear();
@@ -199,7 +199,7 @@ namespace Catalogo.util.BackgroundTasks
                         {
                             foreach (long ID in IDs)
                             {
-                                Funciones.oleDbFunciones.Comando(ref Global01.Conexion, "EXEC usp_Auditor_Transmision_Upd " + ID.ToString());
+                                Funciones.oleDbFunciones.Comando(Global01.Conexion, "EXEC usp_Auditor_Transmision_Upd " + ID.ToString());
                             }
                         }
                     }

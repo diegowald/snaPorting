@@ -47,8 +47,8 @@ namespace Catalogo._pedidos
         {
             DatosObtenidos = false;
 
-            System.Data.OleDb.OleDbDataReader enc = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXECUTE v_Pedido_Enc '" + NroPedido + "'");
-            System.Data.OleDb.OleDbDataReader det = Funciones.oleDbFunciones.Comando(ref Conexion1, "EXECUTE v_Pedido_Det '" + NroPedido + "'");
+            System.Data.OleDb.OleDbDataReader enc = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Pedido_Enc '" + NroPedido + "'");
+            System.Data.OleDb.OleDbDataReader det = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Pedido_Det '" + NroPedido + "'");
 
             _NroPedido = NroPedido;
             _CodCliente = ((int)enc["IDCliente"]).ToString("000000");
@@ -95,7 +95,7 @@ namespace Catalogo._pedidos
 
                 if (resultado == 0)
                 {
-                    Funciones.oleDbFunciones.ComandoIU(ref Conexion1, "EXEC usp_Pedido_Transmicion_Upd '" + _NroPedido + "'");
+                    Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Pedido_Transmicion_Upd '" + _NroPedido + "'");
                     //                If Not vg.TranActiva Is Nothing Then
                     //                    vg.TranActiva.Commit()
                     //                    vg.TranActiva = Nothing
