@@ -34,7 +34,7 @@
             // vcUPDATECTL1
             // 
             this.vcUPDATECTL1.configFileURL = null;
-            this.vcUPDATECTL1.Location = new System.Drawing.Point(-2, -2);
+            this.vcUPDATECTL1.Location = new System.Drawing.Point(0, 1);
             this.vcUPDATECTL1.Name = "vcUPDATECTL1";
             this.vcUPDATECTL1.Size = new System.Drawing.Size(460, 196);
             this.vcUPDATECTL1.TabIndex = 0;
@@ -48,7 +48,9 @@
             this.Controls.Add(this.vcUPDATECTL1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "fDataUpdate";
-            this.Text = "fDataUpdate";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Actualización del Catálogo Dígital de Productos";
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }

@@ -48,15 +48,11 @@ namespace Catalogo.util
         {
             InitializeComponent();
 
-            tempFolder = Environment.GetEnvironmentVariable("TEMP");
-            if (tempFolder.Length == 0)
-            {
-                tempFolder = /*vg.Path +*/ "/Reportes/";
-            }
-            step = 0;
-            //desktop = vg.Path + "/Reportes/";
-            //thisVer = vg.MinBuild;
+            tempFolder = Global01.AppPath + "\\Reportes\\";            
+            desktop = Global01.AppPath + "\\Reportes\\";
+            thisVer = Global01.MiBuild.ToString();
             successFile = "";
+            step = 0;
         }
 
         private void cmdCancel_Click(object sender, EventArgs e)
@@ -69,7 +65,7 @@ namespace Catalogo.util
 
         private void cmdNext_Click(object sender, EventArgs e)
         {
-            long x;
+            //long x;
             cmdCancel.Focus();
             cmdNext.Enabled = false;
             step++;
@@ -114,7 +110,7 @@ namespace Catalogo.util
             if (downloadingFile.EndsWith(vclu))
             {
                 getConfigValues();
-                lblVersion.Text = String.Format("Version actual: {0}. Version disponible: {1}", thisVer, webVer);
+                lblVersion.Text = String.Format("Version actual: {0}. Version disponible: {1}.", thisVer, webVer);
                 if (thisVer.CompareTo(webVer) > 0)
                 {
                     cmdCancel.Focus();
@@ -170,6 +166,7 @@ namespace Catalogo.util
                             break;
                     }
                 }
+                file.Close();
                 System.IO.File.Delete(tempFolder + vclu);
             }
             catch
@@ -187,7 +184,7 @@ namespace Catalogo.util
                 }
                 else
                 {
-                    lblProgressUpdate.Text = String.Format("{0} MB de {1} MB descargados", e.BytesReceived / 1000000, e.TotalBytesToReceive / 1000000);
+                    lblProgressUpdate.Text = String.Format("{0} MB de {1} MB descargados.", e.BytesReceived / 1000000, e.TotalBytesToReceive / 1000000);
                 }
                 progressBar1.Minimum = 0;
                 progressBar1.Maximum = (int)e.TotalBytesToReceive;

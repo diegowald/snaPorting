@@ -63,6 +63,7 @@ namespace Catalogo
                     util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateCuentas, false);
                     updater.run();
                 }
+
                 update_productos();
             };
 

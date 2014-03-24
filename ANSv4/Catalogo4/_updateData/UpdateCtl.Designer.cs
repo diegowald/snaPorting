@@ -60,39 +60,39 @@
             // 
             // lblVersion
             // 
-            this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(137, 58);
+            this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVersion.Location = new System.Drawing.Point(25, 71);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(52, 13);
+            this.lblVersion.Size = new System.Drawing.Size(360, 16);
             this.lblVersion.TabIndex = 4;
-            this.lblVersion.Text = "lblVersion";
             // 
             // lblProgress
             // 
-            this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(16, 58);
+            this.lblProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProgress.Location = new System.Drawing.Point(25, 71);
             this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(58, 13);
+            this.lblProgress.Size = new System.Drawing.Size(360, 16);
             this.lblProgress.TabIndex = 3;
-            this.lblProgress.Text = "lblProgress";
             // 
             // lblNo
             // 
             this.lblNo.AutoSize = true;
-            this.lblNo.Location = new System.Drawing.Point(19, 114);
+            this.lblNo.Location = new System.Drawing.Point(19, 94);
             this.lblNo.Name = "lblNo";
             this.lblNo.Size = new System.Drawing.Size(306, 13);
             this.lblNo.TabIndex = 2;
             this.lblNo.Text = "NO hay actualizaciones dispoibles. click en Cancelar para Salir.";
+            this.lblNo.Visible = false;
             // 
             // lblSI
             // 
-            this.lblSI.Location = new System.Drawing.Point(19, 81);
+            this.lblSI.Location = new System.Drawing.Point(19, 94);
             this.lblSI.Name = "lblSI";
             this.lblSI.Size = new System.Drawing.Size(375, 33);
             this.lblSI.TabIndex = 1;
-            this.lblSI.Text = "Hay na nueva version dispoible, click en Continuar para descargarla o click en Ca" +
-    "ncelar para salir.";
+            this.lblSI.Text = "Hay una nueva version dispoible, click en Continuar para descargarla o click en C" +
+    "ancelar para salir.";
+            this.lblSI.Visible = false;
             // 
             // lblStep2
             // 
@@ -134,18 +134,19 @@
             this.fraFRAME2.TabIndex = 3;
             this.fraFRAME2.TabStop = false;
             this.fraFRAME2.Text = "Paso 2 de 2";
+            this.fraFRAME2.Visible = false;
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(13, 87);
+            this.progressBar1.Location = new System.Drawing.Point(13, 104);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(274, 23);
+            this.progressBar1.Size = new System.Drawing.Size(300, 23);
             this.progressBar1.TabIndex = 2;
             // 
             // lblProgressUpdate
             // 
             this.lblProgressUpdate.AutoSize = true;
-            this.lblProgressUpdate.Location = new System.Drawing.Point(10, 49);
+            this.lblProgressUpdate.Location = new System.Drawing.Point(15, 81);
             this.lblProgressUpdate.Name = "lblProgressUpdate";
             this.lblProgressUpdate.Size = new System.Drawing.Size(87, 13);
             this.lblProgressUpdate.TabIndex = 1;
@@ -154,7 +155,7 @@
             // lblUpdate
             // 
             this.lblUpdate.AutoSize = true;
-            this.lblUpdate.Location = new System.Drawing.Point(7, 20);
+            this.lblUpdate.Location = new System.Drawing.Point(15, 20);
             this.lblUpdate.Name = "lblUpdate";
             this.lblUpdate.Size = new System.Drawing.Size(95, 13);
             this.lblUpdate.TabIndex = 0;
@@ -164,12 +165,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.fraFRAME2);
             this.Controls.Add(this.cmdNext);
             this.Controls.Add(this.cmdCancel);
+            this.Controls.Add(this.fraFRAME2);
             this.Controls.Add(this.fraFRAME1);
             this.Name = "UpdateCtl";
-            this.Size = new System.Drawing.Size(472, 197);
+            this.Size = new System.Drawing.Size(461, 189);
             this.fraFRAME1.ResumeLayout(false);
             this.fraFRAME1.PerformLayout();
             this.fraFRAME2.ResumeLayout(false);

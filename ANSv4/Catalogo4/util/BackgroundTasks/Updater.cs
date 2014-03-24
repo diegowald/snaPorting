@@ -175,7 +175,7 @@ namespace Catalogo.util.BackgroundTasks
                     {
                         Fechas.Add(((DateTime)reader["Fecha"]).ToString("dd/MM/yyyy hh:mm:ss"));
                         Descripciones.Add(reader["Detalle"].ToString());
-                        IDs.Add((long)reader["ID"]);
+                        IDs.Add(Int32.Parse(reader["ID"].ToString()));
 
                         if (Fechas.Count == 10)
                         {
