@@ -168,6 +168,7 @@
     <Compile Include="_existencia\VerExistencia.cs" />
     <Compile Include="_interdeposito\EnvioInterDeposito.cs" />
     <Compile Include="_movimientos\Movimientos.cs" />
+    <Compile Include="_pedidos\PedidosHelper.cs" />
     <Compile Include="_pedidos\EnvioPedido.cs" />
     <Compile Include="_pedidos\fPedido.cs">
       <SubType>Form</SubType>

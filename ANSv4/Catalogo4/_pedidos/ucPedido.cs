@@ -10,7 +10,10 @@ using System.Windows.Forms;
 namespace Catalogo._pedidos
 {
 
-    public partial class ucPedido : UserControl, Funciones.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>
+    public partial class ucPedido : UserControl, 
+        Funciones.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>, // Para recibir el producto seleccionado
+        Funciones.emitter_receiver.IReceptor<_pedidos.PedidosHelper.Acciones> // Para recibir acciones al pedido desde la grilla de productos.
+
     {
 
         private const string m_sMODULENAME_ = "ucPedido";
@@ -186,5 +189,27 @@ namespace Catalogo._pedidos
         {
             System.Diagnostics.Debug.WriteLine(infoSeleccionada.Cells["linea"].Value.ToString() + " - " + infoSeleccionada.Cells["C_Producto"].Value.ToString());
         }
+
+        public void onRecibir(PedidosHelper.Acciones dato)
+        {
+            switch (dato)
+            {
+                case PedidosHelper.Acciones.COMPRAR:
+                    System.Diagnostics.Debug.WriteLine("compra");
+                    break;
+                case PedidosHelper.Acciones.INCREMENTAR:
+                    System.Diagnostics.Debug.WriteLine("+");
+                    nvCantidadTxt.Value++;
+                    break;
+                case PedidosHelper.Acciones.DECREMENTAR:
+                    System.Diagnostics.Debug.WriteLine("-");
+                    nvCantidadTxt.Value--;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
     } //fin clase
 } //fin namespace

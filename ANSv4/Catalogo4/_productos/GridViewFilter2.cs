@@ -16,7 +16,8 @@ namespace Catalogo._productos
         Funciones.emitter_receiver.IReceptor<string>,  // Para recibir el filtro de datos
         Funciones.emitter_receiver.IReceptor<float>, // Para recibir los porcentajes
         Funciones.emitter_receiver.IEmisor<DataGridViewRow>, // Para enviar el registro seleccionado
-        Funciones.emitter_receiver.IEmisor2<util.Pair<int, int>> // Para enviar la cantidad de registros encontrados.
+        Funciones.emitter_receiver.IEmisor2<util.Pair<int, int>>, // Para enviar la cantidad de registros encontrados.
+        Funciones.emitter_receiver.IEmisor3<_pedidos.PedidosHelper.Acciones> // Para enviar acciones al pedido desde la grilla de productos.
     {
 
         private enum CCol
@@ -416,8 +417,40 @@ namespace Catalogo._productos
             //System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", idProducto, resultado));
         }
 
+        private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case '+':
+                    this.emitir3(_pedidos.PedidosHelper.Acciones.INCREMENTAR);
+                    break;
+                case '-':
+                    this.emitir3(_pedidos.PedidosHelper.Acciones.DECREMENTAR);
+                    break;
+                case (char)Keys.Enter:
+                    this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);
+                    break;
+                default:
+                    break;
+            }
+        }
 
+        private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        {
+            this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);
+        }
 
-
+        emisorHandler<_pedidos.PedidosHelper.Acciones> _emisor3;
+        public emisorHandler<_pedidos.PedidosHelper.Acciones> emisor3
+        {
+            get
+            {
+                return _emisor3;
+            }
+            set
+            {
+                _emisor3 = value;
+            }
+        }
     }
 }
