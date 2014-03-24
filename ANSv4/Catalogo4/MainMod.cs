@@ -43,13 +43,13 @@ namespace Catalogo
 
             load_header();
 
-            //valida_appLogin();
+            valida_appLogin();
 
             if (!Global01.AppActiva)
             {
                 if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    //ActivarApplicacion();
+                    ActivarApplicacion();
                     //Dim dlg As New frmConexionUpdate
 
                     //dlg.modoUpdate = ActivarApp
@@ -58,6 +58,11 @@ namespace Catalogo
             }
             else
             {
+                if (Global01.ActualizarClientes)
+                {
+                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateCuentas, false);
+                    updater.run();
+                }
                 //update_productos();
             };
 
@@ -77,6 +82,14 @@ namespace Catalogo
             //wnd.Dispose();
          //   miEnd();
             // - Fin Main ---
+        }
+
+        private static void ActivarApplicacion()
+        {
+            util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
+                util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, 
+                util.BackgroundTasks.Updater.UpdateType.ActivarApp, false);
+            updater.run();
         }
 
         private static void load_header()

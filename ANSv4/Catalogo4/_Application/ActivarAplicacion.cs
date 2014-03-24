@@ -49,7 +49,7 @@ namespace Catalogo._Application
                     if (conectado)
                     {
                         cliente = new LLaveClienteWS.LLaveCliente();
-                        cliente.Url = "http://" + ipAddress + "/wsCatalogo3/LLaveCliente.asmx?wsdl";
+                        cliente.Url = "http://" + ipAddress + "/wsCatalogo4/LLaveCliente.asmx?wsdl";
                         if (usaProxy)
                         {
                             cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
@@ -71,7 +71,7 @@ namespace Catalogo._Application
                 //        If Err.Number = -2147024809 Then
                 // Intento con el ip interno
                 cliente = new LLaveClienteWS.LLaveCliente();
-                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo3/LLaveCliente.asmx?wsdl";
+                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/LLaveCliente.asmx?wsdl";
                 if (usaProxy)
                 {
                     cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);

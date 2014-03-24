@@ -69,10 +69,10 @@
   </wsdl:binding>
   <wsdl:service name="Rendicion">
     <wsdl:port name="RendicionSoap" binding="tns:RendicionSoap">
-      <soap:address location="http://190.3.78.12/wsCatalogo3/Rendicion.asmx" />
+      <soap:address location="http://190.3.78.12/wsCatalogo4/Rendicion.asmx" />
     </wsdl:port>
     <wsdl:port name="RendicionSoap12" binding="tns:RendicionSoap12">
-      <soap12:address location="http://190.3.78.12/wsCatalogo3/Rendicion.asmx" />
+      <soap12:address location="http://190.3.78.12/wsCatalogo4/Rendicion.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

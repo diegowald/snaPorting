@@ -32,13 +32,9 @@ namespace Catalogo.UpdateClientesWS {
         
         private System.Threading.SendOrPostCallback GetTodosLosClientes_CantidadOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GetTodosLosClientes_DatosOperationCompleted;
-        
         private System.Threading.SendOrPostCallback GetTodosLosClientes_Datos_RegistrosOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetTodasLasCtasCtes_CantidadOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GetTodasLasCtasCtes_DatosOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetTodasLasCtasCtes_Datos_RegistrosOperationCompleted;
         
@@ -88,16 +84,10 @@ namespace Catalogo.UpdateClientesWS {
         public event GetTodosLosClientes_CantidadCompletedEventHandler GetTodosLosClientes_CantidadCompleted;
         
         /// <remarks/>
-        public event GetTodosLosClientes_DatosCompletedEventHandler GetTodosLosClientes_DatosCompleted;
-        
-        /// <remarks/>
         public event GetTodosLosClientes_Datos_RegistrosCompletedEventHandler GetTodosLosClientes_Datos_RegistrosCompleted;
         
         /// <remarks/>
         public event GetTodasLasCtasCtes_CantidadCompletedEventHandler GetTodasLasCtasCtes_CantidadCompleted;
-        
-        /// <remarks/>
-        public event GetTodasLasCtasCtes_DatosCompletedEventHandler GetTodasLasCtasCtes_DatosCompleted;
         
         /// <remarks/>
         public event GetTodasLasCtasCtes_Datos_RegistrosCompletedEventHandler GetTodasLasCtasCtes_Datos_RegistrosCompleted;
@@ -134,37 +124,6 @@ namespace Catalogo.UpdateClientesWS {
             if ((this.GetTodosLosClientes_CantidadCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetTodosLosClientes_CantidadCompleted(this, new GetTodosLosClientes_CantidadCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetTodosLosClientes_Datos", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetTodosLosClientes_Datos(string MacAddress, long LastID) {
-            object[] results = this.Invoke("GetTodosLosClientes_Datos", new object[] {
-                        MacAddress,
-                        LastID});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetTodosLosClientes_DatosAsync(string MacAddress, long LastID) {
-            this.GetTodosLosClientes_DatosAsync(MacAddress, LastID, null);
-        }
-        
-        /// <remarks/>
-        public void GetTodosLosClientes_DatosAsync(string MacAddress, long LastID, object userState) {
-            if ((this.GetTodosLosClientes_DatosOperationCompleted == null)) {
-                this.GetTodosLosClientes_DatosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTodosLosClientes_DatosOperationCompleted);
-            }
-            this.InvokeAsync("GetTodosLosClientes_Datos", new object[] {
-                        MacAddress,
-                        LastID}, this.GetTodosLosClientes_DatosOperationCompleted, userState);
-        }
-        
-        private void OnGetTodosLosClientes_DatosOperationCompleted(object arg) {
-            if ((this.GetTodosLosClientes_DatosCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetTodosLosClientes_DatosCompleted(this, new GetTodosLosClientes_DatosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -225,37 +184,6 @@ namespace Catalogo.UpdateClientesWS {
             if ((this.GetTodasLasCtasCtes_CantidadCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.GetTodasLasCtasCtes_CantidadCompleted(this, new GetTodasLasCtasCtes_CantidadCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/GetTodasLasCtasCtes_Datos", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string GetTodasLasCtasCtes_Datos(string MacAddress, long LastID) {
-            object[] results = this.Invoke("GetTodasLasCtasCtes_Datos", new object[] {
-                        MacAddress,
-                        LastID});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetTodasLasCtasCtes_DatosAsync(string MacAddress, long LastID) {
-            this.GetTodasLasCtasCtes_DatosAsync(MacAddress, LastID, null);
-        }
-        
-        /// <remarks/>
-        public void GetTodasLasCtasCtes_DatosAsync(string MacAddress, long LastID, object userState) {
-            if ((this.GetTodasLasCtasCtes_DatosOperationCompleted == null)) {
-                this.GetTodasLasCtasCtes_DatosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTodasLasCtasCtes_DatosOperationCompleted);
-            }
-            this.InvokeAsync("GetTodasLasCtasCtes_Datos", new object[] {
-                        MacAddress,
-                        LastID}, this.GetTodasLasCtasCtes_DatosOperationCompleted, userState);
-        }
-        
-        private void OnGetTodasLasCtasCtes_DatosOperationCompleted(object arg) {
-            if ((this.GetTodasLasCtasCtes_DatosCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetTodasLasCtasCtes_DatosCompleted(this, new GetTodasLasCtasCtes_DatosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -393,32 +321,6 @@ namespace Catalogo.UpdateClientesWS {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void GetTodosLosClientes_DatosCompletedEventHandler(object sender, GetTodosLosClientes_DatosCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetTodosLosClientes_DatosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetTodosLosClientes_DatosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
     public delegate void GetTodosLosClientes_Datos_RegistrosCompletedEventHandler(object sender, GetTodosLosClientes_Datos_RegistrosCompletedEventArgs e);
     
     /// <remarks/>
@@ -465,32 +367,6 @@ namespace Catalogo.UpdateClientesWS {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((long)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    public delegate void GetTodasLasCtasCtes_DatosCompletedEventHandler(object sender, GetTodasLasCtasCtes_DatosCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.17929")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetTodasLasCtasCtes_DatosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetTodasLasCtasCtes_DatosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
             }
         }
     }

@@ -145,7 +145,7 @@ namespace Catalogo._devolucion
                     if (!WebServiceInicializado)
                     {
                         Cliente = new DevolucionWS.Devolucion();
-                        Cliente.Url = "http://" + ipAddress + "/wsCatalogo3/Devolucion.asmx?wsdl";
+                        Cliente.Url = "http://" + ipAddress + "/wsCatalogo4/Devolucion.asmx?wsdl";
                         if (usaProxy)
                         {
                             Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
@@ -167,7 +167,7 @@ namespace Catalogo._devolucion
                 {
                     // Intento con el ip interno
                     Cliente = new DevolucionWS.Devolucion();
-                    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo3/Devolucion.asmx?wsdl";
+                    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Devolucion.asmx?wsdl";
                     if (usaProxy)
                     {
                         Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);

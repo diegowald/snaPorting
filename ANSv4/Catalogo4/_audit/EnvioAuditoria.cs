@@ -51,7 +51,7 @@ namespace Catalogo._audit
                     if (conectado)
                     {
                         cliente = new AuditWS.audit_v_304();
-                        cliente.Url = "http://" + ipAddress + "/wsCatalogo3/audit_v_304.asmx?wsdl";
+                        cliente.Url = "http://" + ipAddress + "/wsCatalogo4/audit_v_304.asmx?wsdl";
                         if (usaProxy)
                         {
                             cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
@@ -71,7 +71,7 @@ namespace Catalogo._audit
                 //If Err.Number = -2147024809 Then
                 // Intento con el ip interno
                 cliente = new AuditWS.audit_v_304();
-                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo3/audit_v_304.asmx?wsdl";
+                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/audit_v_304.asmx?wsdl";
                 if (usaProxy)
                 {
                     cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);

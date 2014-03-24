@@ -133,6 +133,28 @@ namespace Catalogo
             return gridViewControl;
         }
 
+        private Catalogo._novedades.ucNovedades addNovedadesArea()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            // Create the MaskedTextBox control.
+            Catalogo._novedades.ucNovedades novedadesControl = new _novedades.ucNovedades();
+
+            //gridViewControl.AutoScroll = true;
+            novedadesControl.Dock = System.Windows.Forms.DockStyle.Top;
+            novedadesControl.Location = new System.Drawing.Point(0, 0);
+            novedadesControl.Name = "Novedades";
+            //gridViewControl.Size = new System.Drawing.Size(640, 480);
+            //gridViewControl.TabIndex = 0;
+            //gridViewControl.Text = "Lista de Productos";
+
+            host.Child = novedadesControl;
+            this.grNovedades.Children.Add(host);
+
+            return novedadesControl;
+        }
+
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {         
             Catalogo._productos.SearchFilter sf = addSearchArea();
@@ -144,6 +166,9 @@ namespace Catalogo
             Catalogo._pedidos.ucPedido ped = addPedidoArea();
 
             Catalogo._devoluciones.ucDevolucion dev = addDevolucionArea();
+
+            Catalogo._novedades.ucNovedades nov = addNovedadesArea();
+
 
             sf.attachReceptor(gv);
             sf.attachReceptor2(gv);

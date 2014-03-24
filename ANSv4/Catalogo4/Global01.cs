@@ -46,6 +46,7 @@ namespace Catalogo
        public static System.DateTime F_ActCatalogo;
        public static System.DateTime F_ActClientes;
        public static System.DateTime F_UltimoAcceso;
+       public static bool ActualizarClientes;
 
        public static bool EnviarAuditoria;
        public static bool AuditarProceso;

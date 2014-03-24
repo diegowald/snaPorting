@@ -58,7 +58,7 @@ namespace Catalogo._appConfig
                     if (conectado)
                     {
                         cliente = new AppConfigWS.appConfig();
-                        cliente.Url = "http://" + ipAddress + "/wsCatalogo3/appConfig.asmx?wsdl";
+                        cliente.Url = "http://" + ipAddress + "/wsCatalogo4/appConfig.asmx?wsdl";
                         if (usaProxy)
                         {
                             cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
@@ -78,7 +78,7 @@ namespace Catalogo._appConfig
                 //        If Err.Number = -2147024809 Then
                 //            ' Intento con el ip interno
                 cliente = new AppConfigWS.appConfig();
-                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo3/appConfig.asmx?wsdl";
+                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/appConfig.asmx?wsdl";
                 if (usaProxy)
                 {
                     cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);

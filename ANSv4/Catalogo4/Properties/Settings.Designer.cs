@@ -46,7 +46,7 @@ namespace Catalogo.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wsCatalogo3/UpdateClientes.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wsCatalogo4/UpdateClientes.asmx")]
         public string Catalogo_UpdateClientesWS_UpdateClientes {
             get {
                 return ((string)(this["Catalogo_UpdateClientesWS_UpdateClientes"]));

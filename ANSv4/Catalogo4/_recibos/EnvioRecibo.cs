@@ -223,7 +223,7 @@ public class EnvioRecibo
                 if (!webServiceInicializado)
                 {
                     cliente = new RecibosWS.Recibos_v_303();
-                    cliente.Url = "http://" + ipAddress + "/wsCatalogo3/Recibos_v_303.asmx?wsdl";
+                    cliente.Url = "http://" + ipAddress + "/wsCatalogo4/Recibos_v_303.asmx?wsdl";
                     if (usaProxy)
                     {
                         cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
@@ -245,7 +245,7 @@ public class EnvioRecibo
             {
                 // Intento con el ip interno
                 cliente = new RecibosWS.Recibos_v_303();
-                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo3/Recibos_v_303.asmx?wsdl";
+                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Recibos_v_303.asmx?wsdl";
                 if (usaProxy)
                 {
                     cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);

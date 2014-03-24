@@ -61,10 +61,10 @@
   </wsdl:binding>
   <wsdl:service name="Devolucion">
     <wsdl:port name="DevolucionSoap" binding="tns:DevolucionSoap">
-      <soap:address location="http://190.3.78.12/wsCatalogo3/Devolucion.asmx" />
+      <soap:address location="http://190.3.78.12/wsCatalogo4/Devolucion.asmx" />
     </wsdl:port>
     <wsdl:port name="DevolucionSoap12" binding="tns:DevolucionSoap12">
-      <soap12:address location="http://190.3.78.12/wsCatalogo3/Devolucion.asmx" />
+      <soap12:address location="http://190.3.78.12/wsCatalogo4/Devolucion.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

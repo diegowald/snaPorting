@@ -16,21 +16,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="GetTodosLosClientes_Datos">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="LastID" type="s:long" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetTodosLosClientes_DatosResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetTodosLosClientes_DatosResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="GetTodosLosClientes_Datos_Registros">
         <s:complexType>
           <s:sequence>
@@ -64,21 +49,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="1" maxOccurs="1" name="GetTodasLasCtasCtes_CantidadResult" type="s:long" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetTodasLasCtasCtes_Datos">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="LastID" type="s:long" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="GetTodasLasCtasCtes_DatosResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetTodasLasCtasCtes_DatosResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -132,12 +102,6 @@
   <wsdl:message name="GetTodosLosClientes_CantidadSoapOut">
     <wsdl:part name="parameters" element="tns:GetTodosLosClientes_CantidadResponse" />
   </wsdl:message>
-  <wsdl:message name="GetTodosLosClientes_DatosSoapIn">
-    <wsdl:part name="parameters" element="tns:GetTodosLosClientes_Datos" />
-  </wsdl:message>
-  <wsdl:message name="GetTodosLosClientes_DatosSoapOut">
-    <wsdl:part name="parameters" element="tns:GetTodosLosClientes_DatosResponse" />
-  </wsdl:message>
   <wsdl:message name="GetTodosLosClientes_Datos_RegistrosSoapIn">
     <wsdl:part name="parameters" element="tns:GetTodosLosClientes_Datos_Registros" />
   </wsdl:message>
@@ -149,12 +113,6 @@
   </wsdl:message>
   <wsdl:message name="GetTodasLasCtasCtes_CantidadSoapOut">
     <wsdl:part name="parameters" element="tns:GetTodasLasCtasCtes_CantidadResponse" />
-  </wsdl:message>
-  <wsdl:message name="GetTodasLasCtasCtes_DatosSoapIn">
-    <wsdl:part name="parameters" element="tns:GetTodasLasCtasCtes_Datos" />
-  </wsdl:message>
-  <wsdl:message name="GetTodasLasCtasCtes_DatosSoapOut">
-    <wsdl:part name="parameters" element="tns:GetTodasLasCtasCtes_DatosResponse" />
   </wsdl:message>
   <wsdl:message name="GetTodasLasCtasCtes_Datos_RegistrosSoapIn">
     <wsdl:part name="parameters" element="tns:GetTodasLasCtasCtes_Datos_Registros" />
@@ -179,10 +137,6 @@
       <wsdl:input message="tns:GetTodosLosClientes_CantidadSoapIn" />
       <wsdl:output message="tns:GetTodosLosClientes_CantidadSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetTodosLosClientes_Datos">
-      <wsdl:input message="tns:GetTodosLosClientes_DatosSoapIn" />
-      <wsdl:output message="tns:GetTodosLosClientes_DatosSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="GetTodosLosClientes_Datos_Registros">
       <wsdl:input message="tns:GetTodosLosClientes_Datos_RegistrosSoapIn" />
       <wsdl:output message="tns:GetTodosLosClientes_Datos_RegistrosSoapOut" />
@@ -190,10 +144,6 @@
     <wsdl:operation name="GetTodasLasCtasCtes_Cantidad">
       <wsdl:input message="tns:GetTodasLasCtasCtes_CantidadSoapIn" />
       <wsdl:output message="tns:GetTodasLasCtasCtes_CantidadSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="GetTodasLasCtasCtes_Datos">
-      <wsdl:input message="tns:GetTodasLasCtasCtes_DatosSoapIn" />
-      <wsdl:output message="tns:GetTodasLasCtasCtes_DatosSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetTodasLasCtasCtes_Datos_Registros">
       <wsdl:input message="tns:GetTodasLasCtasCtes_Datos_RegistrosSoapIn" />
@@ -219,15 +169,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetTodosLosClientes_Datos">
-      <soap:operation soapAction="http://tempuri.org/GetTodosLosClientes_Datos" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetTodosLosClientes_Datos_Registros">
       <soap:operation soapAction="http://tempuri.org/GetTodosLosClientes_Datos_Registros" style="document" />
       <wsdl:input>
@@ -239,15 +180,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetTodasLasCtasCtes_Cantidad">
       <soap:operation soapAction="http://tempuri.org/GetTodasLasCtasCtes_Cantidad" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetTodasLasCtasCtes_Datos">
-      <soap:operation soapAction="http://tempuri.org/GetTodasLasCtasCtes_Datos" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -294,15 +226,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetTodosLosClientes_Datos">
-      <soap12:operation soapAction="http://tempuri.org/GetTodosLosClientes_Datos" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetTodosLosClientes_Datos_Registros">
       <soap12:operation soapAction="http://tempuri.org/GetTodosLosClientes_Datos_Registros" style="document" />
       <wsdl:input>
@@ -314,15 +237,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetTodasLasCtasCtes_Cantidad">
       <soap12:operation soapAction="http://tempuri.org/GetTodasLasCtasCtes_Cantidad" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetTodasLasCtasCtes_Datos">
-      <soap12:operation soapAction="http://tempuri.org/GetTodasLasCtasCtes_Datos" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -360,10 +274,10 @@
   </wsdl:binding>
   <wsdl:service name="UpdateClientes">
     <wsdl:port name="UpdateClientesSoap" binding="tns:UpdateClientesSoap">
-      <soap:address location="http://190.3.78.12/wsCatalogo3/UpdateClientes.asmx" />
+      <soap:address location="http://190.3.78.12/wsCatalogo4/UpdateClientes.asmx" />
     </wsdl:port>
     <wsdl:port name="UpdateClientesSoap12" binding="tns:UpdateClientesSoap12">
-      <soap12:address location="http://190.3.78.12/wsCatalogo3/UpdateClientes.asmx" />
+      <soap12:address location="http://190.3.78.12/wsCatalogo4/UpdateClientes.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

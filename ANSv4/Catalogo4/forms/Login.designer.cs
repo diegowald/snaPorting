@@ -93,6 +93,7 @@
             this.chkActualizarClientes.TabIndex = 4;
             this.chkActualizarClientes.Text = "actualizar clientes";
             this.chkActualizarClientes.UseVisualStyleBackColor = true;
+            this.chkActualizarClientes.CheckedChanged += new System.EventHandler(this.chkActualizarClientes_CheckedChanged);
             // 
             // btnIngresar
             // 

@@ -9,7 +9,7 @@
       <Value Profile="(Default)">http://190.3.78.12/wsOracle/VerExistencia.asmx</Value>
     </Setting>
     <Setting Name="Catalogo_UpdateClientesWS_UpdateClientes" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://190.3.78.12/wsCatalogo3/UpdateClientes.asmx</Value>
+      <Value Profile="(Default)">http://190.3.78.12/wsCatalogo4/UpdateClientes.asmx</Value>
     </Setting>
     <Setting Name="Catalogo_AppConfigWS_appConfig" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://190.3.78.12/wsCatalogo3/appConfig.asmx</Value>

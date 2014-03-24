@@ -382,10 +382,10 @@
   </wsdl:binding>
   <wsdl:service name="appConfig">
     <wsdl:port name="appConfigSoap" binding="tns:appConfigSoap">
-      <soap:address location="http://190.3.78.12/wsCatalogo3/appConfig.asmx" />
+      <soap:address location="http://190.3.78.12/wsCatalogo4/appConfig.asmx" />
     </wsdl:port>
     <wsdl:port name="appConfigSoap12" binding="tns:appConfigSoap12">
-      <soap12:address location="http://190.3.78.12/wsCatalogo3/appConfig.asmx" />
+      <soap12:address location="http://190.3.78.12/wsCatalogo4/appConfig.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

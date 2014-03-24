@@ -143,7 +143,7 @@ namespace Catalogo._interdeposito
                     if (!WebServiceInicializado)
                     {
                         Cliente = new InterDepositoWS.InterDeposito();
-                        Cliente.Url = "http://" + ipAddress + "/wsCatalogo3/InterDeposito.asmx?wsdl";
+                        Cliente.Url = "http://" + ipAddress + "/wsCatalogo4/InterDeposito.asmx?wsdl";
                         if (usaProxy)
                         {
                             Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
@@ -165,7 +165,7 @@ namespace Catalogo._interdeposito
                 //	if (Err().Number == -2147024809) {
                 // Intento con el ip interno
                 Cliente = new InterDepositoWS.InterDeposito();
-                Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo3/InterDeposito.asmx?wsdl";
+                Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/InterDeposito.asmx?wsdl";
                 if (usaProxy)
                 {
                     Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);

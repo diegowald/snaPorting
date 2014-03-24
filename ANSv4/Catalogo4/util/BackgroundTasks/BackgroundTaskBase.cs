@@ -49,7 +49,7 @@ namespace Catalogo.util.BackgroundTasks
             else
             {
                 worker_DoWork(null, null);
-                worker_RunWorkerCompleted(null, null);
+                worker_RunWorkerCompleted(null, new System.ComponentModel.RunWorkerCompletedEventArgs(null, null, false));
             }
         }
 

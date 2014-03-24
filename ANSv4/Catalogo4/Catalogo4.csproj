@@ -68,6 +68,7 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -87,6 +88,7 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
+    <Compile Include="util\BackgroundTasks\ChequeoNovedades.cs" />
     <Compile Include="util\BackgroundTasks\EnvioMovimientos.cs" />
     <Compile Include="util\BackgroundTasks\EnvioUpdate.cs" />
     <Compile Include="util\BackgroundTasks\ExistenciaProducto.cs" />
@@ -168,6 +170,12 @@
     <Compile Include="_existencia\VerExistencia.cs" />
     <Compile Include="_interdeposito\EnvioInterDeposito.cs" />
     <Compile Include="_movimientos\Movimientos.cs" />
+    <Compile Include="_novedades\ucNovedades.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_novedades\ucNovedades.Designer.cs">
+      <DependentUpon>ucNovedades.cs</DependentUpon>
+    </Compile>
     <Compile Include="_pedidos\PedidosHelper.cs" />
     <Compile Include="_pedidos\EnvioPedido.cs" />
     <Compile Include="_pedidos\fPedido.cs">
@@ -303,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_devoluciones\ucDevolucion.resx">
       <DependentUpon>ucDevolucion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_novedades\ucNovedades.resx">
+      <DependentUpon>ucNovedades.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_pedidos\fPedido.resx">
       <DependentUpon>fPedido.cs</DependentUpon>
@@ -533,10 +544,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Catalogo_RendicionWS_Rendicion</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo3/UpdateClientes.asmx%3fwsdl">
+    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/UpdateClientes.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\UpdateClientesWS\</RelPath>
-      <UpdateFromURL>http://190.3.78.12/wsCatalogo3/UpdateClientes.asmx%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://190.3.78.12/wsCatalogo4/UpdateClientes.asmx%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

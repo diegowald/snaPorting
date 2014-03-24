@@ -66,10 +66,10 @@
   </wsdl:binding>
   <wsdl:service name="InterDeposito">
     <wsdl:port name="InterDepositoSoap" binding="tns:InterDepositoSoap">
-      <soap:address location="http://190.3.78.12/wsCatalogo3/InterDeposito.asmx" />
+      <soap:address location="http://190.3.78.12/wsCatalogo4/InterDeposito.asmx" />
     </wsdl:port>
     <wsdl:port name="InterDepositoSoap12" binding="tns:InterDepositoSoap12">
-      <soap12:address location="http://190.3.78.12/wsCatalogo3/InterDeposito.asmx" />
+      <soap12:address location="http://190.3.78.12/wsCatalogo4/InterDeposito.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

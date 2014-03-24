@@ -189,10 +189,10 @@
   </wsdl:binding>
   <wsdl:service name="LLaveCliente">
     <wsdl:port name="LLaveClienteSoap" binding="tns:LLaveClienteSoap">
-      <soap:address location="http://190.3.78.12/wsCatalogo3/LLaveCliente.asmx" />
+      <soap:address location="http://190.3.78.12/wsCatalogo4/LLaveCliente.asmx" />
     </wsdl:port>
     <wsdl:port name="LLaveClienteSoap12" binding="tns:LLaveClienteSoap12">
-      <soap12:address location="http://190.3.78.12/wsCatalogo3/LLaveCliente.asmx" />
+      <soap12:address location="http://190.3.78.12/wsCatalogo4/LLaveCliente.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -184,7 +184,7 @@ namespace Catalogo._rendicion
                     if (!WebServiceInicializado)
                     {
                         Cliente = new RendicionWS.Rendicion();
-                        Cliente.Url = "http://" + ipAddress + "/wsCatalogo3/Rendicion.asmx?wsdl";
+                        Cliente.Url = "http://" + ipAddress + "/wsCatalogo4/Rendicion.asmx?wsdl";
                         if (usaProxy)
                         {
                             Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
@@ -207,7 +207,7 @@ namespace Catalogo._rendicion
                 {
                     // Intento con el ip interno
                     Cliente = new RendicionWS.Rendicion();
-                    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo3/Rendicion.asmx?wsdl";
+                    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Rendicion.asmx?wsdl";
                     if (usaProxy)
                     {
                         Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);

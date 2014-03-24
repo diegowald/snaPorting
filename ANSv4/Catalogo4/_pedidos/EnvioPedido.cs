@@ -137,7 +137,7 @@ namespace Catalogo._pedidos
                     if (!webServiceInicializado)
                     {
                         cliente = new PedidosWS.Pedidos();
-                        cliente.Url = "http://" + ipAddress + "/wsCatalogo3/Pedidos.asmx?wsdl";
+                        cliente.Url = "http://" + ipAddress + "/wsCatalogo4/Pedidos.asmx?wsdl";
                         if (usaProxy)
                         {
                             cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
@@ -158,7 +158,7 @@ namespace Catalogo._pedidos
                 //If Err.Number = -2147024809 Then
                 // Intento con el ip interno
                 cliente = new PedidosWS.Pedidos();
-                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo3/Pedidos.asmx?wsdl";
+                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Pedidos.asmx?wsdl";
                 if (usaProxy)
                 {
                     cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);

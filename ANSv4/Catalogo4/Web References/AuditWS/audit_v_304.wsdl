@@ -59,10 +59,10 @@
   </wsdl:binding>
   <wsdl:service name="audit_v_304">
     <wsdl:port name="audit_v_304Soap" binding="tns:audit_v_304Soap">
-      <soap:address location="http://190.3.78.12/wsCatalogo3/audit_v_304.asmx" />
+      <soap:address location="http://190.3.78.12/wsCatalogo4/audit_v_304.asmx" />
     </wsdl:port>
     <wsdl:port name="audit_v_304Soap12" binding="tns:audit_v_304Soap12">
-      <soap12:address location="http://190.3.78.12/wsCatalogo3/audit_v_304.asmx" />
+      <soap12:address location="http://190.3.78.12/wsCatalogo4/audit_v_304.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

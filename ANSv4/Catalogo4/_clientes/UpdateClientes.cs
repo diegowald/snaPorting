@@ -49,7 +49,7 @@ namespace Catalogo._clientes
                 if (conectado)
                 {
                     cliente = new UpdateClientesWS.UpdateClientes();
-                    cliente.Url = "http://" + ipAddress + "/wsCatalogo3/UpdateClientes.asmx?wsdl";
+                    cliente.Url = "http://" + ipAddress + "/wsCatalogo4/UpdateClientes.asmx?wsdl";
                     if (usaProxy)
                     {
                         cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
@@ -67,7 +67,7 @@ namespace Catalogo._clientes
 //errhandler:
 //        If Err.Number = -2147024809 Then
 //            ' Intento con el ip interno
-//            Cliente = New WSUpdateClientes.UpdateClientesSoapClient("", "http://" & ipAddressIntranet & "/wsCatalogo3/UpdateClientes.asmx?wsdl")
+//            Cliente = New WSUpdateClientes.UpdateClientesSoapClient("", "http://" & ipAddressIntranet & "/wsCatalogo4/UpdateClientes.asmx?wsdl")
 //            If Trim(Funciones.modINIs.ReadINI("datos", "proxy")) = "1" Then
 //                '                    Cliente.ConnectorProperty("ProxyServer") = Funciones.modINIs.ReadINI("datos", "proxyserver")
 //            End If
@@ -299,7 +299,8 @@ namespace Catalogo._clientes
             while (restanImportar>0)
             {
             //    'diego     'RaiseEvent SincronizarClientesProgress("Sincronizando Clientes ...", (CantidadAImportar - RestanImportar) / CantidadAImportar * 100, Cancel)
-                string s = cliente.GetTodosLosClientes_Datos(_MacAddress, lastID);
+                System.Data.DataSet ds = cliente.GetTodosLosClientes_Datos_Registros(_MacAddress, lastID);
+/*                string s = cliente.GetTodosLosClientes_Datos(_MacAddress, lastID);
                 
                 System.IO.MemoryStream stream = new System.IO.MemoryStream();
                 System.IO.StreamWriter writer = new System.IO.StreamWriter(stream);
@@ -317,7 +318,7 @@ namespace Catalogo._clientes
 
                 ADODB.Recordset rs = new ADODB.Recordset();
                 rs.Open(fileName, "Provider=MSPersist;", ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockReadOnly);
-
+*/
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     restanImportar-=ds.Tables[0].Rows.Count;
@@ -379,8 +380,8 @@ namespace Catalogo._clientes
             while (RestanImportar>0)
             {
             //    '            ' RaiseEvent SincronizarClientesProgress("Sincronizando Clientes ...", (CantidadAImportar - RestanImportar) / CantidadAImportar * 100, Cancel)
-
-                string s= cliente.GetTodasLasCtasCtes_Datos(_MacAddress, lastId);
+                System.Data.DataSet ds = cliente.GetTodasLasCtasCtes_Datos_Registros(_MacAddress, lastId);
+/*                string s= cliente.GetTodasLasCtasCtes_Datos(_MacAddress, lastId);
                                 System.IO.MemoryStream stream = new System.IO.MemoryStream();
                 System.IO.StreamWriter writer = new System.IO.StreamWriter(stream);
                 writer.Write(s);
@@ -389,7 +390,7 @@ namespace Catalogo._clientes
 
                 System.Data.DataSet ds = new System.Data.DataSet();
                 ds.ReadXml(stream);
-
+*/
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     RestanImportar-=ds.Tables[0].Rows.Count;
@@ -402,17 +403,17 @@ namespace Catalogo._clientes
                         try
                         {
                             CtaCte_Add(conexion,
-                                (int)row["IdCliente"],
+                                int.Parse(row["IdCliente"].ToString()),
                                 (DateTime)row["F_Comprobante"],
                                 row["T_Comprobante"].ToString(),
                                 row["N_Comprobante"].ToString(),
-                                row["Det_Comprobante"].ToString(),
-                                (float)row["Importe"] / 100,
-                                (float)row["Saldo"] / 100,
-                                (float)row["ImpOferta"] / 100,
+                                DBNull.Value.Equals(row["Det_Comprobante"]) ? "" : row["Det_Comprobante"].ToString(), 
+                                int.Parse(row["Importe"].ToString()) / 100,
+                                int.Parse(row["Saldo"].ToString()) / 100,
+                                int.Parse(row["ImpOferta"].ToString()) / 100,
                                 row["TextoOferta"].ToString(),
                                 (byte)row["Vencida"],
-                                (float)row["ImpPercep"] / 100,
+                                int.Parse(row["ImpPercep"].ToString()) / 100,
                                 (byte)row["EsContado"]);
                             CantidadImportada++;
                             if (CantidadImportada % 31 == 0)
@@ -428,7 +429,7 @@ namespace Catalogo._clientes
                         {
                             // catch'em all. Ver la manera de corregir esto...
                         }
-                        lastId = (long)row["ID"];
+                        lastId = long.Parse(row["ID"].ToString());
                     }
                 }
             }

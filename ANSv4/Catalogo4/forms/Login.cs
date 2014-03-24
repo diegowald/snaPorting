@@ -131,6 +131,11 @@ namespace Catalogo
 
         }
 
+        private void chkActualizarClientes_CheckedChanged(object sender, EventArgs e)
+        {
+            Global01.ActualizarClientes = chkActualizarClientes.Checked;
+        }
+
         //private void fLogin_Paint(object sender, PaintEventArgs e)
         //{
 

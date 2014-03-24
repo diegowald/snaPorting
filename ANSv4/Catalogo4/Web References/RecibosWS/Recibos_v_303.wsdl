@@ -113,10 +113,10 @@
   </wsdl:binding>
   <wsdl:service name="Recibos_v_303">
     <wsdl:port name="Recibos_v_303Soap" binding="tns:Recibos_v_303Soap">
-      <soap:address location="http://190.3.78.12/wsCatalogo3/Recibos_v_303.asmx" />
+      <soap:address location="http://190.3.78.12/wsCatalogo4/Recibos_v_303.asmx" />
     </wsdl:port>
     <wsdl:port name="Recibos_v_303Soap12" binding="tns:Recibos_v_303Soap12">
-      <soap12:address location="http://190.3.78.12/wsCatalogo3/Recibos_v_303.asmx" />
+      <soap12:address location="http://190.3.78.12/wsCatalogo4/Recibos_v_303.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
