@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.vcUPDATECTL1 = new Catalogo.util.UpdateCtl();
             this.SuspendLayout();
+            // 
+            // vcUPDATECTL1
+            // 
+            this.vcUPDATECTL1.configFileURL = null;
+            this.vcUPDATECTL1.Location = new System.Drawing.Point(-2, -2);
+            this.vcUPDATECTL1.Name = "vcUPDATECTL1";
+            this.vcUPDATECTL1.Size = new System.Drawing.Size(460, 196);
+            this.vcUPDATECTL1.TabIndex = 0;
+            this.vcUPDATECTL1.Load += new System.EventHandler(this.vcUPDATECTL1_Load);
             // 
             // fDataUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 272);
+            this.ClientSize = new System.Drawing.Size(459, 194);
+            this.Controls.Add(this.vcUPDATECTL1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "fDataUpdate";
             this.Text = "fDataUpdate";
             this.ResumeLayout(false);
@@ -42,5 +54,7 @@
         }
 
         #endregion
+
+        private UpdateCtl vcUPDATECTL1;
     }
 }
