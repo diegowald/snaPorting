@@ -25,15 +25,15 @@ namespace Catalogo
 
             Catalogo.MainMod.Main();
 
-            //MainWindow wnd = new MainWindow();
+            MainWindow wnd = new MainWindow();
 
             //_recibos.fRecibo wnd = new _recibos.fRecibo();
-            _pedidos.fPedido wnd = new _pedidos.fPedido();
+            //_pedidos.fPedido wnd = new _pedidos.fPedido();
             //SplashScreen.CloseSplashScreen();
 
             wnd.ShowDialog();
             wnd.Close();
-            wnd.Dispose();
+            //wnd.Dispose();
 
             Shutdown();
         }        

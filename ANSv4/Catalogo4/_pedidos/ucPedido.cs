@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Catalogo._pedidos
 {
 
-    public partial class ucPedido : UserControl
+    public partial class ucPedido : UserControl, Funciones.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>
     {
 
         private const string m_sMODULENAME_ = "ucPedido";
@@ -176,5 +176,15 @@ namespace Catalogo._pedidos
             nvImporteTotalLbl.Text = string.Format("{0:N2}", Aux);
         }
 
+        System.Windows.Forms.DataGridViewRow infoSeleccionada;
+        public void onRecibir(DataGridViewRow dato)
+        {
+            infoSeleccionada = dato;
+        }
+
+        private void nvComprarBtn_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine(infoSeleccionada.Cells["linea"].Value.ToString() + " - " + infoSeleccionada.Cells["C_Producto"].Value.ToString());
+        }
     } //fin clase
 } //fin namespace

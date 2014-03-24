@@ -149,6 +149,7 @@ namespace Catalogo
             sf.attachReceptor2(gv);
 
             gv.attachReceptor(productDetalle);
+            gv.attachReceptor(ped);
             gv.attachReceptor2(sf);
             
             //this.sugerencias.Visibility = System.Windows.Visibility.Collapsed;

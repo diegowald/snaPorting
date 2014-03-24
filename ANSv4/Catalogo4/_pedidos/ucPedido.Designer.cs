@@ -247,6 +247,7 @@ namespace Catalogo._pedidos
             this.nvComprarBtn.TabIndex = 38;
             this.nvComprarBtn.Text = "Comprar";
             this.nvComprarBtn.UseVisualStyleBackColor = false;
+            this.nvComprarBtn.Click += new System.EventHandler(this.nvComprarBtn_Click);
             // 
             // nvObservacionesTxt
             // 
