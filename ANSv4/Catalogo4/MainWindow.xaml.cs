@@ -63,9 +63,9 @@ namespace Catalogo
             Catalogo._pedidos.ucPedido xPedido;
             xPedido = new Catalogo._pedidos.ucPedido();
             //xNotaVenta.AutoScroll = true;
-            xPedido.Dock = System.Windows.Forms.DockStyle.Fill;
-            xPedido.Location = new System.Drawing.Point(0, 0);
-            xPedido.Name = "Notas de Venta";
+            //xPedido.Dock = System.Windows.Forms.DockStyle.Fill;
+            //xPedido.Location = new System.Drawing.Point(0, 0);
+            //xPedido.Name = "Notas de Venta";
 
             host.Child = xPedido;
             this.xNotaVentaArea.Children.Add(host);
@@ -73,24 +73,24 @@ namespace Catalogo
             return xPedido;
         }
 
-        private Catalogo._devoluciones.ucDevolucion addDevolucionArea()
-        {
-            // Create the interop host control.
-            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+        //private Catalogo._devoluciones.ucDevolucion addDevolucionArea()
+        //{
+        //    // Create the interop host control.
+        //    System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
-            // Create the MaskedTextBox control.
-            Catalogo._devoluciones.ucDevolucion xDevolucion;
-            xDevolucion = new Catalogo._devoluciones.ucDevolucion();
-            //xNotaVenta.AutoScroll = true;
-            xDevolucion.Dock = System.Windows.Forms.DockStyle.Fill;
-            xDevolucion.Location = new System.Drawing.Point(0, 0);
-            xDevolucion.Name = "Devoluciones";
+        //    // Create the MaskedTextBox control.
+        //    Catalogo._devoluciones.ucDevolucion xDevolucion;
+        //    xDevolucion = new Catalogo._devoluciones.ucDevolucion();
+        //    //xNotaVenta.AutoScroll = true;
+        //    xDevolucion.Dock = System.Windows.Forms.DockStyle.Fill;
+        //    xDevolucion.Location = new System.Drawing.Point(0, 0);
+        //    xDevolucion.Name = "Devoluciones";
 
-            host.Child = xDevolucion;
-            this.xDevolucionesArea.Children.Add(host);
+        //    host.Child = xDevolucion;
+        //    this.xDevolucionesArea.Children.Add(host);
 
-            return xDevolucion;
-        }
+        //    return xDevolucion;
+        //}
 
         private Catalogo._recibos.ucRecibo addReciboArea()
         {
@@ -165,9 +165,9 @@ namespace Catalogo
 
             Catalogo._pedidos.ucPedido ped = addPedidoArea();
 
-            Catalogo._devoluciones.ucDevolucion dev = addDevolucionArea();
+            //Catalogo._devoluciones.ucDevolucion dev = addDevolucionArea();
 
-            Catalogo._novedades.ucNovedades nov = addNovedadesArea();
+            //Catalogo._novedades.ucNovedades nov = addNovedadesArea();
 
 
             sf.attachReceptor(gv);

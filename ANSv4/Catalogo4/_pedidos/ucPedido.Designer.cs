@@ -81,26 +81,27 @@ namespace Catalogo._pedidos
             // 
             // PedidoTab
             // 
-            this.PedidoTab.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.PedidoTab.Alignment = System.Windows.Forms.TabAlignment.Right;
             this.PedidoTab.Controls.Add(this.nvActTab);
             this.PedidoTab.Controls.Add(this.nvAntTab);
             this.PedidoTab.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PedidoTab.Location = new System.Drawing.Point(0, 32);
+            this.PedidoTab.Multiline = true;
             this.PedidoTab.Name = "PedidoTab";
             this.PedidoTab.SelectedIndex = 0;
-            this.PedidoTab.Size = new System.Drawing.Size(753, 357);
-            this.PedidoTab.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.PedidoTab.Size = new System.Drawing.Size(887, 357);
             this.PedidoTab.TabIndex = 1;
             this.PedidoTab.Visible = false;
             // 
             // nvActTab
             // 
+            this.nvActTab.AutoScroll = true;
             this.nvActTab.Controls.Add(this.PnlMain);
             this.nvActTab.Controls.Add(this.PnlTop);
-            this.nvActTab.Location = new System.Drawing.Point(4, 25);
+            this.nvActTab.Location = new System.Drawing.Point(4, 4);
             this.nvActTab.Name = "nvActTab";
             this.nvActTab.Padding = new System.Windows.Forms.Padding(3);
-            this.nvActTab.Size = new System.Drawing.Size(745, 328);
+            this.nvActTab.Size = new System.Drawing.Size(860, 349);
             this.nvActTab.TabIndex = 0;
             this.nvActTab.Text = "Nota de Venta";
             this.nvActTab.UseVisualStyleBackColor = true;
@@ -109,9 +110,9 @@ namespace Catalogo._pedidos
             // 
             this.PnlMain.Controls.Add(this.nvlistView);
             this.PnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PnlMain.Location = new System.Drawing.Point(3, 74);
+            this.PnlMain.Location = new System.Drawing.Point(3, 49);
             this.PnlMain.Name = "PnlMain";
-            this.PnlMain.Size = new System.Drawing.Size(739, 251);
+            this.PnlMain.Size = new System.Drawing.Size(854, 297);
             this.PnlMain.TabIndex = 1;
             // 
             // nvlistView
@@ -139,7 +140,7 @@ namespace Catalogo._pedidos
             this.nvlistView.Location = new System.Drawing.Point(0, 0);
             this.nvlistView.MultiSelect = false;
             this.nvlistView.Name = "nvlistView";
-            this.nvlistView.Size = new System.Drawing.Size(739, 251);
+            this.nvlistView.Size = new System.Drawing.Size(854, 297);
             this.nvlistView.TabIndex = 4;
             this.nvlistView.Tag = "none";
             this.nvlistView.UseCompatibleStateImageBehavior = false;
@@ -211,12 +212,11 @@ namespace Catalogo._pedidos
             this.PnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.PnlTop.Location = new System.Drawing.Point(3, 3);
             this.PnlTop.Name = "PnlTop";
-            this.PnlTop.Size = new System.Drawing.Size(739, 71);
+            this.PnlTop.Size = new System.Drawing.Size(854, 46);
             this.PnlTop.TabIndex = 0;
             // 
             // nvTransporteBuscarBtn
             // 
-            this.nvTransporteBuscarBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nvTransporteBuscarBtn.BackColor = System.Drawing.Color.Red;
             this.nvTransporteBuscarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.nvTransporteBuscarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -224,7 +224,7 @@ namespace Catalogo._pedidos
             this.nvTransporteBuscarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nvTransporteBuscarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nvTransporteBuscarBtn.ForeColor = System.Drawing.Color.White;
-            this.nvTransporteBuscarBtn.Location = new System.Drawing.Point(710, 13);
+            this.nvTransporteBuscarBtn.Location = new System.Drawing.Point(505, 17);
             this.nvTransporteBuscarBtn.Name = "nvTransporteBuscarBtn";
             this.nvTransporteBuscarBtn.Size = new System.Drawing.Size(26, 23);
             this.nvTransporteBuscarBtn.TabIndex = 39;
@@ -233,7 +233,6 @@ namespace Catalogo._pedidos
             // 
             // nvComprarBtn
             // 
-            this.nvComprarBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nvComprarBtn.BackColor = System.Drawing.Color.Red;
             this.nvComprarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.nvComprarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -241,7 +240,7 @@ namespace Catalogo._pedidos
             this.nvComprarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nvComprarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nvComprarBtn.ForeColor = System.Drawing.Color.White;
-            this.nvComprarBtn.Location = new System.Drawing.Point(60, 13);
+            this.nvComprarBtn.Location = new System.Drawing.Point(60, 17);
             this.nvComprarBtn.Name = "nvComprarBtn";
             this.nvComprarBtn.Size = new System.Drawing.Size(75, 23);
             this.nvComprarBtn.TabIndex = 38;
@@ -251,16 +250,16 @@ namespace Catalogo._pedidos
             // 
             // nvObservacionesTxt
             // 
-            this.nvObservacionesTxt.Location = new System.Drawing.Point(365, 46);
+            this.nvObservacionesTxt.Location = new System.Drawing.Point(537, 18);
             this.nvObservacionesTxt.MaxLength = 80;
             this.nvObservacionesTxt.Name = "nvObservacionesTxt";
-            this.nvObservacionesTxt.Size = new System.Drawing.Size(371, 20);
+            this.nvObservacionesTxt.Size = new System.Drawing.Size(322, 20);
             this.nvObservacionesTxt.TabIndex = 37;
             // 
             // raObservacionesLbl
             // 
             this.raObservacionesLbl.AutoSize = true;
-            this.raObservacionesLbl.Location = new System.Drawing.Point(281, 49);
+            this.raObservacionesLbl.Location = new System.Drawing.Point(534, 2);
             this.raObservacionesLbl.Name = "raObservacionesLbl";
             this.raObservacionesLbl.Size = new System.Drawing.Size(78, 13);
             this.raObservacionesLbl.TabIndex = 35;
@@ -269,7 +268,7 @@ namespace Catalogo._pedidos
             // nvImporteTotalLbl
             // 
             this.nvImporteTotalLbl.AutoSize = true;
-            this.nvImporteTotalLbl.Location = new System.Drawing.Point(237, 21);
+            this.nvImporteTotalLbl.Location = new System.Drawing.Point(78, 2);
             this.nvImporteTotalLbl.Name = "nvImporteTotalLbl";
             this.nvImporteTotalLbl.Size = new System.Drawing.Size(122, 13);
             this.nvImporteTotalLbl.TabIndex = 36;
@@ -277,7 +276,7 @@ namespace Catalogo._pedidos
             // 
             // nvCantidadTxt
             // 
-            this.nvCantidadTxt.Location = new System.Drawing.Point(8, 17);
+            this.nvCantidadTxt.Location = new System.Drawing.Point(8, 18);
             this.nvCantidadTxt.Maximum = new decimal(new int[] {
             500,
             0,
@@ -302,15 +301,15 @@ namespace Catalogo._pedidos
             this.nvTransporteCbo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.nvTransporteCbo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.nvTransporteCbo.FormattingEnabled = true;
-            this.nvTransporteCbo.Location = new System.Drawing.Point(448, 17);
+            this.nvTransporteCbo.Location = new System.Drawing.Point(286, 18);
             this.nvTransporteCbo.Name = "nvTransporteCbo";
-            this.nvTransporteCbo.Size = new System.Drawing.Size(256, 21);
+            this.nvTransporteCbo.Size = new System.Drawing.Size(214, 21);
             this.nvTransporteCbo.TabIndex = 32;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(445, 1);
+            this.label1.Location = new System.Drawing.Point(283, 2);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 31;
@@ -319,7 +318,7 @@ namespace Catalogo._pedidos
             // nvDepositoCbo
             // 
             this.nvDepositoCbo.FormattingEnabled = true;
-            this.nvDepositoCbo.Location = new System.Drawing.Point(365, 17);
+            this.nvDepositoCbo.Location = new System.Drawing.Point(203, 18);
             this.nvDepositoCbo.Name = "nvDepositoCbo";
             this.nvDepositoCbo.Size = new System.Drawing.Size(77, 21);
             this.nvDepositoCbo.TabIndex = 30;
@@ -327,7 +326,7 @@ namespace Catalogo._pedidos
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(368, 1);
+            this.label4.Location = new System.Drawing.Point(206, 2);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 29;
@@ -336,7 +335,7 @@ namespace Catalogo._pedidos
             // nvSimilarChk
             // 
             this.nvSimilarChk.AutoSize = true;
-            this.nvSimilarChk.Location = new System.Drawing.Point(8, 49);
+            this.nvSimilarChk.Location = new System.Drawing.Point(141, 20);
             this.nvSimilarChk.Name = "nvSimilarChk";
             this.nvSimilarChk.Size = new System.Drawing.Size(56, 17);
             this.nvSimilarChk.TabIndex = 28;
@@ -346,7 +345,7 @@ namespace Catalogo._pedidos
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(5, 1);
+            this.label13.Location = new System.Drawing.Point(5, 2);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(49, 13);
             this.label13.TabIndex = 22;
@@ -355,10 +354,10 @@ namespace Catalogo._pedidos
             // nvAntTab
             // 
             this.nvAntTab.Controls.Add(this.PedidoAnterioresDataGridView);
-            this.nvAntTab.Location = new System.Drawing.Point(4, 25);
+            this.nvAntTab.Location = new System.Drawing.Point(4, 4);
             this.nvAntTab.Name = "nvAntTab";
             this.nvAntTab.Padding = new System.Windows.Forms.Padding(3);
-            this.nvAntTab.Size = new System.Drawing.Size(745, 328);
+            this.nvAntTab.Size = new System.Drawing.Size(860, 349);
             this.nvAntTab.TabIndex = 4;
             this.nvAntTab.Text = "Anteriores";
             this.nvAntTab.UseVisualStyleBackColor = true;
@@ -377,7 +376,7 @@ namespace Catalogo._pedidos
             this.PedidoAnterioresDataGridView.ReadOnly = true;
             this.PedidoAnterioresDataGridView.RowHeadersWidth = 4;
             this.PedidoAnterioresDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.PedidoAnterioresDataGridView.Size = new System.Drawing.Size(739, 322);
+            this.PedidoAnterioresDataGridView.Size = new System.Drawing.Size(854, 343);
             this.PedidoAnterioresDataGridView.TabIndex = 1;
             // 
             // statusStrip1
@@ -386,7 +385,7 @@ namespace Catalogo._pedidos
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 389);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(753, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(887, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -405,7 +404,7 @@ namespace Catalogo._pedidos
             this.ucPecPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.ucPecPnlTop.Location = new System.Drawing.Point(0, 0);
             this.ucPecPnlTop.Name = "ucPecPnlTop";
-            this.ucPecPnlTop.Size = new System.Drawing.Size(753, 32);
+            this.ucPecPnlTop.Size = new System.Drawing.Size(887, 32);
             this.ucPecPnlTop.TabIndex = 4;
             // 
             // cboCliente
@@ -416,7 +415,7 @@ namespace Catalogo._pedidos
             this.cboCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCliente.FormattingEnabled = true;
-            this.cboCliente.Location = new System.Drawing.Point(378, 5);
+            this.cboCliente.Location = new System.Drawing.Point(512, 5);
             this.cboCliente.MaxDropDownItems = 16;
             this.cboCliente.Name = "cboCliente";
             this.cboCliente.Size = new System.Drawing.Size(368, 23);
@@ -481,7 +480,7 @@ namespace Catalogo._pedidos
             this.Controls.Add(this.ucPecPnlTop);
             this.Controls.Add(this.statusStrip1);
             this.Name = "ucPedido";
-            this.Size = new System.Drawing.Size(753, 411);
+            this.Size = new System.Drawing.Size(887, 411);
             this.Load += new System.EventHandler(this.ucPedido_Load);
             this.PedidoTab.ResumeLayout(false);
             this.nvActTab.ResumeLayout(false);

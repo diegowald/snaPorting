@@ -147,6 +147,7 @@ namespace Catalogo._pedidos
             btnVer.Enabled = true;
             nvlistView.Enabled = true;
             cboCliente.Enabled = false;
+
         }
 
         private void InhabilitarPedido()
@@ -173,21 +174,23 @@ namespace Catalogo._pedidos
 
             for (int i = 0; i < nvlistView.Items.Count; i++)
             {
-                Aux = Aux + float.Parse(nvlistView.Items[i].SubItems[1].Text);
+                Aux = Aux + float.Parse(nvlistView.Items[i].SubItems[4].Text.ToString());
             }
 
             nvImporteTotalLbl.Text = string.Format("{0:N2}", Aux);
         }
 
-        System.Windows.Forms.DataGridViewRow infoSeleccionada;
+        System.Windows.Forms.DataGridViewRow ProductoSeleccionado = null;
+
         public void onRecibir(DataGridViewRow dato)
         {
-            infoSeleccionada = dato;
+            ProductoSeleccionado = dato;
         }
 
         private void nvComprarBtn_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(infoSeleccionada.Cells["linea"].Value.ToString() + " - " + infoSeleccionada.Cells["C_Producto"].Value.ToString());
+            System.Diagnostics.Debug.WriteLine(ProductoSeleccionado.Cells["linea"].Value.ToString() + " - " + ProductoSeleccionado.Cells["C_Producto"].Value.ToString());
+            cmdProductoAgregar();
         }
 
         public void onRecibir(PedidosHelper.Acciones dato)
@@ -196,6 +199,7 @@ namespace Catalogo._pedidos
             {
                 case PedidosHelper.Acciones.COMPRAR:
                     System.Diagnostics.Debug.WriteLine("compra");
+                    cmdProductoAgregar();
                     break;
                 case PedidosHelper.Acciones.INCREMENTAR:
                     System.Diagnostics.Debug.WriteLine("+");
@@ -210,6 +214,101 @@ namespace Catalogo._pedidos
             }
         }
 
+        private void cmdProductoAgregar()
+        {
+      
+            bool existe = false;
+    
+            if (ProductoSeleccionado!=null) 
+            {
+    
+                if (ProductoSeleccionado.Cells["suspendido"].Value.ToString() == "1") {
+                    MessageBox.Show("El Artículo está suspendido momentáneamente", "atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+        
+                //if (m.EsEnterCantidad < 1) {
+                if (nvCantidadTxt.Value  < Decimal.Parse(ProductoSeleccionado.Cells["OfertaCantidad"].Value.ToString())) 
+                {
+                    MessageBox.Show("Mínimo de oferta: " + ProductoSeleccionado.Cells["OfertaCantidad"].Value.ToString() + " unidades", "atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //m.EsEnterCantidad = m.EsEnterCantidad + 1
+                    //return;
+                }
+                //}
+        
+                int ii = 0;
+                for (int i=0;i < nvlistView.Items.Count; i++)
+                {
+                    // si los codigo de producto son iguales
+                    if (nvlistView.Items[i].SubItems[9].Text.ToString().Trim().ToUpper()==ProductoSeleccionado.Cells["CodigoAns"].Value.ToString().Trim().ToUpper())
+                    {
+                        existe = true;                        
+                        nvlistView.Items[i].Selected = true;
+                        ii = i;
+                        break;
+                    };
+                }
+       
+                if (existe) 
+                {
+                   if ((Decimal.Parse(nvlistView.Items[ii].SubItems[3].Text.ToString()) + nvCantidadTxt.Value) < 1000) 
+                   {
+                       nvlistView.Items[ii].SubItems[3].Text  = (Decimal.Parse(nvlistView.Items[ii].SubItems[3].Text.ToString()) + nvCantidadTxt.Value).ToString() ;
+                       nvlistView.Items[ii].SubItems[4].Text = (float.Parse(nvlistView.Items[ii].SubItems[3].Text.ToString()) * float.Parse(ProductoSeleccionado.Cells["PrecioLista"].Value.ToString())).ToString();
+                   }
+                   nvlistView.Items[ii].SubItems[5].Text = nvSimilarChk.ToString();
+                   nvlistView.Items[ii].SubItems[6].Text  = nvDepositoCbo.SelectedValue.ToString();
+                }
+                else
+                {
+                    ListViewItem ItemX =  new ListViewItem(ProductoSeleccionado.Cells["C_Producto"].Value.ToString());
+                    ////alternate row color
+                    if (nvlistView.Items.Count % 2 == 0)
+                    {
+                    ItemX.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                    }
+
+                    ItemX.SubItems.Add(ProductoSeleccionado.Cells["N_Producto"].Value.ToString());
+                    ItemX.SubItems.Add(ProductoSeleccionado.Cells["PrecioLista"].Value.ToString());
+                    ItemX.SubItems.Add(nvCantidadTxt.Value.ToString());
+                    float pTotal = float.Parse(nvCantidadTxt.Value.ToString()) * float.Parse(ProductoSeleccionado.Cells["PrecioLista"].Value.ToString());
+                    ItemX.SubItems.Add(pTotal.ToString());
+                    ItemX.SubItems.Add(nvSimilarChk.ToString());
+                    ItemX.SubItems.Add(nvDepositoCbo.SelectedValue.ToString());
+                    ItemX.SubItems.Add((ProductoSeleccionado.Cells["Control"].Value.ToString()=="O" ? "1" : "0")); // ¿ es oferta ?
+                    ItemX.SubItems.Add(ProductoSeleccionado.Cells["ID"].Value.ToString());
+                    ItemX.SubItems.Add(ProductoSeleccionado.Cells["CodigoAns"].Value.ToString());                   
+                    ItemX.SubItems.Add(nvObservacionesTxt.Text);
+                    
+                    nvlistView.Items.Add(ItemX);     
+                    Funciones.util.AutoSizeLVColumnas(ref nvlistView);       
+                };
+
+                //miModulo.PedidoBkp CLng(m.IdCliente), _
+                //                   CStr(m.ItemX.SubItems(9)), _
+                //                   CStr(m.ItemX.SubItems(1)), _
+                //                   CSng(m.ItemX.SubItems(2)), _
+                //                   CInt(m.ItemX.SubItems(3)), _
+                //                   CSng(m.ItemX.SubItems(4)), _
+                //                   CByte(m.ItemX.SubItems(5)), _
+                //                   CByte(m.ItemX.SubItems(6)), _
+                //                   CByte(m.ItemX.SubItems(7)), _
+                //                   CStr(m.ItemX.SubItems(8)), _
+                //                   CStr(m.ItemX.Text), _
+                //                   CStr(m.ItemX.SubItems(10)), _
+                //                   Existe
+
+                //nvlistView.SelectedItems[0].Selected = false;
+
+                TotalPedido();
+        
+                nvCantidadTxt.Value = 1;
+            }
+        }
 
     } //fin clase
 } //fin namespace

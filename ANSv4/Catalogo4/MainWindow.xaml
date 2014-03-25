@@ -33,58 +33,15 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30" />
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="120" />
-                                    <RowDefinition Height="200" />
+                                    <RowDefinition Height="120" />                                   
                                 </Grid.RowDefinitions>
 
                                 <Grid x:Name="searchArea"   Grid.Row="0"  />
                                 <Grid x:Name="productsArea" Grid.Row="1" />
                                 <_productos:DetalleProducto Grid.Row="2" x:Name="productDetalle" />
-
-
-                                        <ad:DocumentPane  ShowHeader="True" SelectedIndex="0" Grid.Row="3">
-
-                                            <ad:DocumentContent Title="Nota de Venta" IsCloseable="False" IsFloatingAllowed="False">
-                                                <ListView>
-                                                    <ListView.View>
-                                                        <GridView>
-                                                            <GridView.Columns>
-                                                                <GridViewColumn Header="Comprar"/>
-                                                                <GridViewColumn Header="Ver"/>
-                                                                <GridViewColumn Header="Confirmar"/>
-                                                                <GridViewColumn Header="Nuevo"/>
-                                                            </GridView.Columns>
-                                                        </GridView>
-                                                    </ListView.View>
-                                                </ListView>
-                                            </ad:DocumentContent>
-                                            <ad:DocumentContent Title="Devoluciones" IsCloseable="False" IsFloatingAllowed="False">
-                                            </ad:DocumentContent>
-
-                                </ad:DocumentPane>
-
-                                
-                            </Grid>
-                        </ad:DocumentContent>
-
-                        <ad:DocumentContent Title="Notas de Venta" IsCloseable="False" IsFloatingAllowed="False">
-                            <Grid Name="grNotaVenta">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition  Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid x:Name="xNotaVentaArea" Grid.Row="0" />
                             </Grid>
                         </ad:DocumentContent>
                         
-                        <ad:DocumentContent Title="Devoluciones" IsCloseable="False" IsFloatingAllowed="False">
-                            <Grid Name="grDevoluciones">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition  Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid x:Name="xDevolucionesArea" Grid.Row="0" />
-                            </Grid>
-                        </ad:DocumentContent>
-
                         <ad:DocumentContent Title="Recibos" IsCloseable="False" IsFloatingAllowed="False">
                             <Grid Name="grRecibos">
                                 <Grid.RowDefinitions>
@@ -155,6 +112,19 @@
                     </ad:DockablePane>
 
                 </ad:ResizingPanel>
+                
+                <ad:DockablePane x:Name="misTabsAcciones" ad:ResizingPanel.ResizeHeight="250" SelectedIndex="0" Visibility="Visible">
+                    <ad:DockableContent Title="Nota de Venta" x:Name="xxxxNotaVentaArea">
+                        <Grid Name="grNotaVenta">
+                            <Grid.RowDefinitions>
+                                <RowDefinition  Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="xNotaVentaArea" Grid.Row="0" />
+                        </Grid>
+                    </ad:DockableContent>
+                    <ad:DockableContent Title="Devoluciones" x:Name="devoluciones"></ad:DockableContent>
+                </ad:DockablePane>
+                
             </ad:ResizingPanel>
         </ad:DockingManager>
 

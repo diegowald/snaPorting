@@ -106,7 +106,7 @@ namespace Catalogo.Funciones
 
             for (int i = 0; i < MyListview1.Columns.Count; i++)
             {
-                if (MyListview1.Columns[i].Text.ToLower() == "fecha" | MyListview1.Columns[i].Text.Substring(1,2).ToLower() == "f." )
+                if (MyListview1.Columns[i].Text.ToString().Length > 2 && (MyListview1.Columns[i].Text.ToString().ToLower() == "fecha" | MyListview1.Columns[i].Text.ToString().Substring(1,2).ToLower() == "f." ))
                 {
                     MyListview1.Columns[i].Width = 75;
                 }

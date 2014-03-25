@@ -37,7 +37,8 @@ namespace Catalogo.util.BackgroundTasks
                 _semaforo = pSemaforo;
                 */
 
-                System.Threading.Thread.Sleep(10 * 1000); 
+                // min x seg X milisegundos 
+                System.Threading.Thread.Sleep(10 * 60 * 1000); 
             }
         }
 
