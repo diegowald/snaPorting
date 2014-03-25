@@ -77,8 +77,8 @@ namespace Catalogo.util.BackgroundTasks
                 ipIntranet = ipPriv.GetIpIntranet();
             }
 
-            _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, Global01.IDMaquina);
-            System.Data.OleDb.OleDbDataReader movs = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, _idCliente);
+            _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, _idCliente);
+            System.Data.OleDb.OleDbDataReader movs = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS);
 
             if (movs.HasRows)
             {

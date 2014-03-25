@@ -69,7 +69,7 @@
                             </Grid>
                         </ad:DocumentContent>
 
-                        <ad:DocumentContent Title="Enviados" IsCloseable="False" IsFloatingAllowed="False">
+                        <ad:DocumentContent Title="Bandeja de Enviados" IsCloseable="False" IsFloatingAllowed="False">
                             <Grid Name="grEnviados">
                                 <Grid.RowDefinitions>
                                     <RowDefinition  Height="*"/>

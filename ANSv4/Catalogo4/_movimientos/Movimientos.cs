@@ -15,36 +15,34 @@ namespace Catalogo._movimientos
             NO_ENVIADOS
         };
 
-        private System.Data.OleDb.OleDbConnection Conexion1;
-        private string _IDMaquina;
+        private System.Data.OleDb.OleDbConnection _conexion;
+        private string _idCliente;
 
-        public Movimientos(System.Data.OleDb.OleDbConnection conexion, string IDMaquina)
+        public Movimientos(System.Data.OleDb.OleDbConnection conexion, int IdCliente)
         {
-            Conexion1 = conexion;
-            _IDMaquina = IDMaquina;
+            _conexion = conexion;
+            _idCliente = IdCliente.ToString().PadLeft(5,'0');
         }
 
-        public System.Data.OleDb.OleDbDataReader Leer(DATOS_MOSTRAR queMostrar, long IDCliente)
+        public System.Data.OleDb.OleDbDataReader Leer(DATOS_MOSTRAR queMostrar)
         {
             if (!validarConexion())
             {
                 return null;
             }
 
-            string wCond2 = (IDCliente > 0 ?
-                " and IDcliente=" + IDCliente.ToString()
-                : "");
+            string wCond2 = (int.Parse(_idCliente) > 0 ? " and IdCliente=" + _idCliente : "");
 
             switch (queMostrar)
             {
                 case DATOS_MOSTRAR.TODOS:
-                    return Funciones.oleDbFunciones.xGetDr(Conexion1, "v_Movimientos", "left(Nro,5)='" + IDCliente + "' " + wCond2, "IDcliente, Origen, Fecha DESC");
+                    return Funciones.oleDbFunciones.xGetDr(_conexion, "v_Movimientos", "left(Nro,5)='" + _idCliente + "' " + wCond2, "IDcliente, Origen, Fecha DESC");
                     break;
                 case DATOS_MOSTRAR.ENVIADOS:
-                    return Funciones.oleDbFunciones.xGetDr(Conexion1, "v_Movimientos", "left(Nro,5)='" + IDCliente + "' and not (F_Transmicion is null)" + wCond2, "IDcliente, Origen, Fecha DESC");
+                    return Funciones.oleDbFunciones.xGetDr(_conexion, "v_Movimientos", "left(Nro,5)='" + _idCliente + "' and not (F_Transmicion is null)" + wCond2, "IDcliente, Origen, Fecha DESC");
                     break;
                 case DATOS_MOSTRAR.NO_ENVIADOS:
-                    return Funciones.oleDbFunciones.xGetDr(Conexion1, "v_Movimientos", "left(Nro,5)='" + IDCliente + "' and F_Transmicion is null" + wCond2, "IDcliente, Origen, Fecha DESC");
+                    return Funciones.oleDbFunciones.xGetDr(_conexion, "v_Movimientos", "left(Nro,5)='" + _idCliente + "' and F_Transmicion is null" + wCond2, "IDcliente, Origen, Fecha DESC");
                     break;
                 default:
                     return null;
@@ -60,7 +58,7 @@ namespace Catalogo._movimientos
                 return false;
             }
 
-            System.Data.OleDb.OleDbDataReader rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT Count(*) AS Cantidad FROM UnionPedidoRecibo WHERE (F_Transmicion is null) and left(Nro,5)='" + _IDMaquina + "'");
+            System.Data.OleDb.OleDbDataReader rec = Funciones.oleDbFunciones.Comando(_conexion, "SELECT Count(*) AS Cantidad FROM UnionPedidoRecibo WHERE (F_Transmicion is null) and left(Nro,5)='" + _idCliente + "'");
 
             if (rec.HasRows)
             {
@@ -70,7 +68,7 @@ namespace Catalogo._movimientos
             return false;
         }
 
-        public bool preguntoAlCerrarVisista(long IDCLiente)
+        public bool preguntoAlCerrarVisista()
         {
             // Devuelvo true si es que HAY PENDIENTE para ESTE cliente.
 
@@ -79,7 +77,7 @@ namespace Catalogo._movimientos
                 return false;
             }
 
-            System.Data.OleDb.OleDbDataReader rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT Count(*) AS Cantidad FROM UnionPedidoRecibo WHERE UnionPedidoRecibo.IdCliente=" + IDCLiente.ToString() + " and (f_Transmicion is NULL) and left(Nro,5)='" + _IDMaquina + "'");
+            System.Data.OleDb.OleDbDataReader rec = Funciones.oleDbFunciones.Comando(_conexion, "SELECT Count(*) AS Cantidad FROM UnionPedidoRecibo WHERE UnionPedidoRecibo.IdCliente=" + _idCliente + " and (f_Transmicion is NULL) and left(Nro,5)='" + _idCliente + "'");
             if (rec.HasRows)
             {
                 return (int)rec["cantidad"] > 0;
@@ -89,7 +87,7 @@ namespace Catalogo._movimientos
 
         private bool validarConexion()
         {
-            return Conexion1 != null;
+            return _conexion != null;
         }
     }
 }
