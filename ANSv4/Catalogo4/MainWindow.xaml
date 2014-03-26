@@ -26,7 +26,7 @@
         <ad:DockingManager x:Name="dockManager" Grid.Row="1" IsAnimationEnabled="True" >
             <ad:ResizingPanel Orientation="Vertical">
                 <ad:ResizingPanel Orientation="Horizontal">
-                    <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0">
+                    <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0" SelectionChanged="DocumentPane_SelectionChanged_1">
 
                         <ad:DocumentContent Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
                             <Grid Name="grProductos">
@@ -112,8 +112,7 @@
                     </ad:DockablePane>
 
                 </ad:ResizingPanel>
-                
-                <ad:DockablePane x:Name="misTabsAcciones" ad:ResizingPanel.ResizeHeight="250" SelectedIndex="0" Visibility="Visible">
+                <ad:DockablePane ad:ResizingPanel.ResizeHeight="250" SelectedIndex="0" Visibility="Visible">
                     <ad:DockableContent Title="Nota de Venta" x:Name="xxxxNotaVentaArea">
                         <Grid Name="grNotaVenta">
                             <Grid.RowDefinitions>
@@ -124,7 +123,6 @@
                     </ad:DockableContent>
                     <ad:DockableContent Title="Devoluciones" x:Name="devoluciones"></ad:DockableContent>
                 </ad:DockablePane>
-                
             </ad:ResizingPanel>
         </ad:DockingManager>
 

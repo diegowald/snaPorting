@@ -192,6 +192,36 @@ namespace Catalogo
             //this.ContentSugerencias.ToggleAutoHide();
         }
 
+        private void DocumentPane_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine((e.AddedItems[0] as AvalonDock.DocumentContent).Title);
+            bool mostrarParteInferior = (e.AddedItems[0] as AvalonDock.DocumentContent).Title == "Productos";
+            //misTabsAcciones.Visible = PieVisible;
+            if (mostrarParteInferior)
+            {
+                if (devoluciones != null)
+                {
+                    devoluciones.Show();
+                }
+                if (xxxxNotaVentaArea != null)
+                {
+                    xxxxNotaVentaArea.Show();
+                }
+            }
+            else
+            {
+                if (devoluciones != null)
+                {
+                    devoluciones.Hide();
+                }
+                if (xxxxNotaVentaArea != null)
+                {
+                    xxxxNotaVentaArea.Hide();
+                }
+            }
+        }
+
+
 
         //const string LayoutFileName = "SampleLayout.xml";
 
