@@ -86,16 +86,17 @@ namespace Catalogo._Application
         }
 
 
-        private string obtenerLlaveViajante(string ZonaVianajante)
+        private string obtenerLlaveViajante(string ZonaViajante)
         {
             string llaveViajante = string.Empty;
 
             if (util.SimplePing.ping(_ipAddress, 5000))
             {
-                string s = cliente.ObtenerLLaveViajante(ZonaVianajante);
+                string s = cliente.ObtenerLLaveViajante(ZonaViajante);
                 if (s.Trim().Length > 0)
                 {
-                    llaveViajante = ZonaVianajante + Global01.NroUsuario + Global01.Cuit + util.Registro.obtenerCRC(s + Global01.IDMaquinaCRC);
+                    string xParam = s + Global01.IDMaquinaCRC;
+                    llaveViajante = ZonaViajante + Global01.NroUsuario + Global01.Cuit + _registro.AppRegistro.ObtenerCRC(ref xParam);
                 }
             }
             return llaveViajante;
@@ -135,7 +136,7 @@ namespace Catalogo._Application
 
                 wLLaveViajante = obtenerLlaveViajante(wZonaviajante);
 
-                if (util.Registro.validateLlaveViajante(wLLaveViajante))
+                if (_registro.AppRegistro.ValidateLLaveViajante(wLLaveViajante))
                 {
                     estado = obtenerEstado(ref cancel, Global01.Cuit,
                         Global01.NroUsuario, wZonaviajante, Global01.IDMaquina);
@@ -168,7 +169,9 @@ namespace Catalogo._Application
                         case 9: // Por Aca Bien
                             sResultado = "Registro Exitoso, copie los datos obtenidos en la PC del Cliente";
                         //    '                    DeleteKeyINI("DATOS", "LLaveViajante")
-                            Global01.IDMaquinaREG = util.Registro.obtenerCRC(Global01.IDMaquina + Global01.IDMaquinaCRC);
+                            
+                           string xParam = Global01.IDMaquina + Global01.IDMaquinaCRC;
+                           Global01.IDMaquinaREG = _registro.AppRegistro.ObtenerCRC(ref xParam);
 
                         //    '                    WriteINI("DATOS", "RegistrationKey", vg.IDMaquinaREG)
 

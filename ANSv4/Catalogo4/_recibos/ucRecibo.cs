@@ -205,7 +205,7 @@ namespace Catalogo._recibos
                 LimpiarIngresosValores();
 
                 TotalRecibo();
-                rTabsRecibo.SelectedIndex = 0;
+                //rTabsRecibo.SelectedIndex = 0;
             };
         }
 
@@ -468,7 +468,6 @@ namespace Catalogo._recibos
                 if (btnIniciar.Tag.ToString() == "CANCELAR")
                 {
                     VerDetalleRecibo();
-                    e.Handled = true;
                 };
             };
         }
@@ -495,7 +494,6 @@ namespace Catalogo._recibos
                 {  //DEL
                     ralistView.Items.Remove(ralistView.SelectedItems[0]);
                     TotalRecibo();
-                    e.Handled = true;
                 }
             }
         }
@@ -575,7 +573,6 @@ namespace Catalogo._recibos
             cboCliente.Enabled = true;
         }
 
-
         private void TotalRecibo()
         {
 
@@ -609,12 +606,6 @@ namespace Catalogo._recibos
         {
              Funciones.util.EsImporte(sender, ref e);
         }
-
-        private void apAgregarBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
     } //fin clase
 } //fin namespace

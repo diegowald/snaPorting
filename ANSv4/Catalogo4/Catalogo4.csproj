@@ -37,7 +37,7 @@
     <StartupObject>Catalogo.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>LOGO-ANS-48X48.ico</ApplicationIcon>
+    <ApplicationIcon>recursos\LOGO-ANS-48X48.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -88,14 +88,13 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
-    <Compile Include="util\BackgroundTasks\ChequeoNovedades.cs" />
-    <Compile Include="util\BackgroundTasks\EnvioMovimientos.cs" />
+    <Compile Include="util\SimplePing.cs" />
+    <Compile Include="_novedades\ChequeoNovedades.cs" />
+    <Compile Include="_movimientos\EnvioMovimientos.cs" />
     <Compile Include="util\BackgroundTasks\EnvioUpdate.cs" />
-    <Compile Include="util\BackgroundTasks\ExistenciaProducto.cs" />
+    <Compile Include="_existencia\ExistenciaProducto.cs" />
     <Compile Include="util\BackgroundTasks\Updater.cs" />
     <Compile Include="util\IPPrivado.cs" />
-    <Compile Include="util\Registro.cs" />
-    <Compile Include="util\SimplePing.cs" />
     <Compile Include="Web References\AppConfigWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -156,9 +155,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="_appConfig\UpdateAppConfig.cs" />
-    <Compile Include="_Application\ActivarAplicacion.cs" />
-    <Compile Include="_audit\EnvioAuditoria.cs" />
+    <Compile Include="_application\UpdateAppConfig.cs" />
+    <Compile Include="_registro\ActivarAplicacion.cs" />
+    <Compile Include="_auditor\EnvioAuditoria.cs" />
     <Compile Include="_clientes\UpdateClientes.cs" />
     <Compile Include="_devoluciones\ucDevolucion.cs">
       <SubType>UserControl</SubType>
@@ -166,7 +165,7 @@
     <Compile Include="_devoluciones\ucDevolucion.Designer.cs">
       <DependentUpon>ucDevolucion.cs</DependentUpon>
     </Compile>
-    <Compile Include="_devolucion\EnvioDevolucion.cs" />
+    <Compile Include="_devoluciones\EnvioDevolucion.cs" />
     <Compile Include="_existencia\VerExistencia.cs" />
     <Compile Include="_interdeposito\EnvioInterDeposito.cs" />
     <Compile Include="_movimientos\Movimientos.cs" />
@@ -207,7 +206,7 @@
     <Compile Include="preload\ProductosPreloader.cs" />
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
     <Compile Include="_registro\AppRegistro.cs" />
-    <Compile Include="_rendicion\EnvioRendicion.cs" />
+    <Compile Include="_rendiciones\EnvioRendicion.cs" />
     <Compile Include="_updateData\fDataUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,7 +219,7 @@
     <Compile Include="_updateData\UpdateCtl.Designer.cs">
       <DependentUpon>UpdateCtl.cs</DependentUpon>
     </Compile>
-    <Compile Include="util\updateMDB.cs" />
+    <Compile Include="_updateData\updateMDB.cs" />
     <Compile Include="util\emitter-receiver\IEmisor.cs" />
     <Compile Include="util\emitter-receiver\IReceptor.cs" />
     <Compile Include="forms\frmErrorGuardian.cs">
@@ -597,7 +596,7 @@
     <None Include="recursos\Nuevo-logo-Auto-nautica-rojo-y-blanco.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="LOGO-ANS-48X48.ico" />
+    <Resource Include="recursos\LOGO-ANS-48X48.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

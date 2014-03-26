@@ -47,7 +47,6 @@ namespace Catalogo._pedidos
             this.nvCodigoAnsLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nvObservacionesLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PnlTop = new System.Windows.Forms.Panel();
-            this.nvEsOfertaChk = new System.Windows.Forms.CheckBox();
             this.nvTransporteBuscarBtn = new System.Windows.Forms.Button();
             this.nvComprarBtn = new System.Windows.Forms.Button();
             this.nvObservacionesTxt = new System.Windows.Forms.TextBox();
@@ -104,16 +103,16 @@ namespace Catalogo._pedidos
             this.nvActTab.Padding = new System.Windows.Forms.Padding(3);
             this.nvActTab.Size = new System.Drawing.Size(860, 349);
             this.nvActTab.TabIndex = 0;
-            this.nvActTab.Text = "Pedido";
+            this.nvActTab.Text = "Nota de Venta";
             this.nvActTab.UseVisualStyleBackColor = true;
             // 
             // PnlMain
             // 
             this.PnlMain.Controls.Add(this.nvlistView);
-            this.PnlMain.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PnlMain.Location = new System.Drawing.Point(3, 43);
+            this.PnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PnlMain.Location = new System.Drawing.Point(3, 49);
             this.PnlMain.Name = "PnlMain";
-            this.PnlMain.Size = new System.Drawing.Size(854, 303);
+            this.PnlMain.Size = new System.Drawing.Size(854, 297);
             this.PnlMain.TabIndex = 1;
             // 
             // nvlistView
@@ -141,12 +140,11 @@ namespace Catalogo._pedidos
             this.nvlistView.Location = new System.Drawing.Point(0, 0);
             this.nvlistView.MultiSelect = false;
             this.nvlistView.Name = "nvlistView";
-            this.nvlistView.Size = new System.Drawing.Size(854, 303);
+            this.nvlistView.Size = new System.Drawing.Size(854, 297);
             this.nvlistView.TabIndex = 4;
             this.nvlistView.Tag = "none";
             this.nvlistView.UseCompatibleStateImageBehavior = false;
             this.nvlistView.View = System.Windows.Forms.View.Details;
-            this.nvlistView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nvlistView_KeyDown);
             // 
             // nvCodigoLv
             // 
@@ -155,7 +153,6 @@ namespace Catalogo._pedidos
             // nvNombreLv
             // 
             this.nvNombreLv.Text = "Nombre";
-            this.nvNombreLv.Width = 100;
             // 
             // nvPrecioU
             // 
@@ -197,11 +194,9 @@ namespace Catalogo._pedidos
             // nvObservacionesLv
             // 
             this.nvObservacionesLv.Text = "Observaciones";
-            this.nvObservacionesLv.Width = 300;
             // 
             // PnlTop
             // 
-            this.PnlTop.Controls.Add(this.nvEsOfertaChk);
             this.PnlTop.Controls.Add(this.nvTransporteBuscarBtn);
             this.PnlTop.Controls.Add(this.nvComprarBtn);
             this.PnlTop.Controls.Add(this.nvObservacionesTxt);
@@ -214,25 +209,15 @@ namespace Catalogo._pedidos
             this.PnlTop.Controls.Add(this.label4);
             this.PnlTop.Controls.Add(this.nvSimilarChk);
             this.PnlTop.Controls.Add(this.label13);
+            this.PnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.PnlTop.Location = new System.Drawing.Point(3, 3);
             this.PnlTop.Name = "PnlTop";
-            this.PnlTop.Size = new System.Drawing.Size(854, 42);
+            this.PnlTop.Size = new System.Drawing.Size(854, 46);
             this.PnlTop.TabIndex = 0;
-            // 
-            // nvEsOfertaChk
-            // 
-            this.nvEsOfertaChk.AutoSize = true;
-            this.nvEsOfertaChk.Enabled = false;
-            this.nvEsOfertaChk.Location = new System.Drawing.Point(127, 23);
-            this.nvEsOfertaChk.Name = "nvEsOfertaChk";
-            this.nvEsOfertaChk.Size = new System.Drawing.Size(70, 17);
-            this.nvEsOfertaChk.TabIndex = 40;
-            this.nvEsOfertaChk.Text = "Es Oferta";
-            this.nvEsOfertaChk.UseVisualStyleBackColor = true;
             // 
             // nvTransporteBuscarBtn
             // 
-            this.nvTransporteBuscarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.nvTransporteBuscarBtn.BackColor = System.Drawing.Color.Red;
             this.nvTransporteBuscarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.nvTransporteBuscarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.nvTransporteBuscarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
@@ -248,7 +233,7 @@ namespace Catalogo._pedidos
             // 
             // nvComprarBtn
             // 
-            this.nvComprarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.nvComprarBtn.BackColor = System.Drawing.Color.Red;
             this.nvComprarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.nvComprarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.nvComprarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
@@ -257,7 +242,7 @@ namespace Catalogo._pedidos
             this.nvComprarBtn.ForeColor = System.Drawing.Color.White;
             this.nvComprarBtn.Location = new System.Drawing.Point(60, 17);
             this.nvComprarBtn.Name = "nvComprarBtn";
-            this.nvComprarBtn.Size = new System.Drawing.Size(57, 23);
+            this.nvComprarBtn.Size = new System.Drawing.Size(75, 23);
             this.nvComprarBtn.TabIndex = 38;
             this.nvComprarBtn.Text = "Comprar";
             this.nvComprarBtn.UseVisualStyleBackColor = false;
@@ -283,7 +268,7 @@ namespace Catalogo._pedidos
             // nvImporteTotalLbl
             // 
             this.nvImporteTotalLbl.AutoSize = true;
-            this.nvImporteTotalLbl.Location = new System.Drawing.Point(729, 2);
+            this.nvImporteTotalLbl.Location = new System.Drawing.Point(78, 2);
             this.nvImporteTotalLbl.Name = "nvImporteTotalLbl";
             this.nvImporteTotalLbl.Size = new System.Drawing.Size(122, 13);
             this.nvImporteTotalLbl.TabIndex = 36;
@@ -350,7 +335,7 @@ namespace Catalogo._pedidos
             // nvSimilarChk
             // 
             this.nvSimilarChk.AutoSize = true;
-            this.nvSimilarChk.Location = new System.Drawing.Point(127, 6);
+            this.nvSimilarChk.Location = new System.Drawing.Point(141, 20);
             this.nvSimilarChk.Name = "nvSimilarChk";
             this.nvSimilarChk.Size = new System.Drawing.Size(56, 17);
             this.nvSimilarChk.TabIndex = 28;
@@ -439,7 +424,7 @@ namespace Catalogo._pedidos
             // 
             // btnIniciar
             // 
-            this.btnIniciar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnIniciar.BackColor = System.Drawing.Color.Red;
             this.btnIniciar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnIniciar.Enabled = false;
             this.btnIniciar.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -457,7 +442,7 @@ namespace Catalogo._pedidos
             // 
             // btnImprimir
             // 
-            this.btnImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnImprimir.BackColor = System.Drawing.Color.Red;
             this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnImprimir.Enabled = false;
             this.btnImprimir.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -473,7 +458,7 @@ namespace Catalogo._pedidos
             // 
             // btnVer
             // 
-            this.btnVer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnVer.BackColor = System.Drawing.Color.Red;
             this.btnVer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnVer.Enabled = false;
             this.btnVer.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -552,6 +537,5 @@ namespace Catalogo._pedidos
         private System.Windows.Forms.ColumnHeader nvCodigoAnsLv;
         private System.Windows.Forms.ColumnHeader nvObservacionesLv;
         private System.Windows.Forms.Button nvTransporteBuscarBtn;
-        private System.Windows.Forms.CheckBox nvEsOfertaChk;
     }
 }
