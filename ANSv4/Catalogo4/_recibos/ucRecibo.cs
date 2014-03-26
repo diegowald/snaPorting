@@ -46,7 +46,7 @@ namespace Catalogo._recibos
         {
             if (cboCliente.SelectedIndex > 0)
             {
-                toolStripStatusLabel1.Text = "Recibo para el cliente: " + this.cboCliente.Text.ToString() + " (" + this.cboCliente.SelectedValue + ")";
+                toolStripStatusLabel1.Text = "Recibo para el cliente: " + this.cboCliente.Text.ToString();
                 CargarCtaCte();                
                 CargarClienteNovedades();                
                 CargarClienteDatos();

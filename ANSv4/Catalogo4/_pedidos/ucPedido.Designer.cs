@@ -486,6 +486,7 @@ namespace Catalogo._pedidos
             this.btnVer.TabIndex = 0;
             this.btnVer.Text = "Ver";
             this.btnVer.UseVisualStyleBackColor = false;
+            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
             // 
             // ucPedido
             // 

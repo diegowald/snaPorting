@@ -49,7 +49,7 @@ namespace Catalogo._pedidos
         {
             if (cboCliente.SelectedIndex > 0)
             {
-                toolStripStatusLabel1.Text = "Nota de Venta para el cliente: " + this.cboCliente.Text.ToString() + " (" + this.cboCliente.SelectedValue + ")";
+                toolStripStatusLabel1.Text = "Nota de Venta para el cliente: " + this.cboCliente.Text.ToString();
                 btnIniciar.Enabled = true;
             }
             else
@@ -366,10 +366,28 @@ namespace Catalogo._pedidos
         
         private void nvlistView_KeyDown(object sender, KeyEventArgs e)
         {
+    
             if (nvlistView.SelectedItems != null)
             {
-                if (e.KeyCode == Keys.Delete)
+                bool wEntro = false;
+               
+                if (e.KeyCode==Keys.O && e.Modifiers==Keys.Control)
+                {    //Observaciones del Item
+
+                    string wItemObservaciones = nvlistView.SelectedItems[0].SubItems[10].Text;
+                    if (Funciones.util.InputBox(" (Presione Cancelar para quitar la Observación)  ", "Observaciones para el Item", 80, ref wItemObservaciones) == DialogResult.OK)
+                    {
+                        nvlistView.SelectedItems[0].SubItems[10].Text = wItemObservaciones;
+                    }
+                    else
+                    { // Apreto Cancelar
+                        nvlistView.SelectedItems[0].SubItems[10].Text = "";
+                    };
+                    wEntro = true;
+                }
+                else if (e.KeyCode == Keys.Delete)
                 {  //DEL
+                    Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblPedido_Bkp WHERE IdCatalogo='" + nvlistView.SelectedItems[0].SubItems[8].Text.ToString() + "'");
                     nvlistView.Items.Remove(nvlistView.SelectedItems[0]);
                     TotalPedido();
                 }
@@ -379,7 +397,7 @@ namespace Catalogo._pedidos
                     {
                         nvlistView.SelectedItems[0].SubItems[3].Text = (Decimal.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) + 1).ToString();
                         nvlistView.SelectedItems[0].SubItems[4].Text = (float.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) * float.Parse(nvlistView.SelectedItems[0].SubItems[2].Text.ToString())).ToString();
-                        TotalPedido();
+                        wEntro = true;
                     };
                 }
                 else if (e.KeyValue.ToString() == "189")
@@ -388,9 +406,29 @@ namespace Catalogo._pedidos
                     {
                         nvlistView.SelectedItems[0].SubItems[3].Text = (Decimal.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) - 1).ToString();
                         nvlistView.SelectedItems[0].SubItems[4].Text = (float.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) * float.Parse(nvlistView.SelectedItems[0].SubItems[2].Text.ToString())).ToString();
-                        TotalPedido();
+                        wEntro = true;
                     }
                 };
+
+                if (wEntro) 
+                {
+                    Pedido_bkp(Global01.Conexion,
+                                Int32.Parse(cboCliente.SelectedValue.ToString()), 
+                                nvlistView.SelectedItems[0].SubItems[9].Text,
+                                nvlistView.SelectedItems[0].SubItems[1].Text,
+                                float.Parse(nvlistView.SelectedItems[0].SubItems[2].Text.ToString()),
+                                Int16.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()),
+                                float.Parse(nvlistView.SelectedItems[0].SubItems[4].Text.ToString()),
+                                short.Parse(nvlistView.SelectedItems[0].SubItems[5].Text.ToString()),
+                                short.Parse(nvlistView.SelectedItems[0].SubItems[6].Text.ToString()),
+                                short.Parse(nvlistView.SelectedItems[0].SubItems[7].Text.ToString()),
+                                nvlistView.SelectedItems[0].SubItems[8].Text,                                
+                                nvlistView.SelectedItems[0].Text,
+                                nvlistView.SelectedItems[0].SubItems[10].Text,
+                                true);                         
+                    TotalPedido();
+                }
+    
             };
         }
 
@@ -470,6 +508,47 @@ namespace Catalogo._pedidos
                 //            ' quite el índice o vuelva a definir el índice para permitir entradas duplicadas e inténtelo de nuevo.
 
             }
+        }
+
+        private void btnVer_Click(object sender, EventArgs e)
+        {
+
+            const string PROCNAME_  = "btnVer_Click";
+    
+            Cursor.Current = Cursors.WaitCursor;
+    
+            if (nvlistView.Items.Count>0) 
+            {
+
+                if ((int)Global01.miSABOR==2) 
+                {// Catalogo para cliente
+                  _IdCliente = Global01.NroUsuario;
+                }
+    
+                _pedidos.
+    elpedido.Nuevo m.IdCliente
+    elpedido.NroImpresion = 0
+     
+    For m.I = 1 To lvPedido.ListItems.Count
+      elpedido.ADDItem CStr(lvPedido.ListItems(m.I).ListSubItems(8)), _
+                       CInt(lvPedido.ListItems(m.I).ListSubItems(3)), _
+                       CBool(lvPedido.ListItems(m.I).ListSubItems(5)), _
+                       CBool(chkEsOfertaBahia.value), _
+                       CBool(lvPedido.ListItems(m.I).ListSubItems(7)), _
+                       CByte(lvPedido.ListItems(m.I).ListSubItems(6)), _
+                       CSng(lvPedido.ListItems(m.I).ListSubItems(2)), _
+                       CStr(lvPedido.ListItems(m.I).ListSubItems(10))
+                       
+    Next m.I
+      
+    elpedido.Guardar "VER"
+    Pedido_Imprimir vg.NroImprimir
+    vg.NroImprimir = ""
+    
+  End If
+  
+  Cursor.Current = Cursors.Default;
+
         }
 
 
