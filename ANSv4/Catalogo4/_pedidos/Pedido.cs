@@ -54,9 +54,10 @@ namespace Catalogo._pedidos
         }
 
         // FUNDAMENTAL PARA QUE TE DE LOS NOMBRES
+        //Pablo
         public PedidoItem Renglon(int Numero)
         {
-            return DetallePedido["_" + Numero];
+            return DetallePedido["_" + Numero.ToString()];
         }
 
         public System.Data.OleDb.OleDbConnection Conexion
@@ -113,13 +114,13 @@ namespace Catalogo._pedidos
             }
             else
             {
-                if (Strings.Len(Strings.Trim(vg.NroPDR)) > 0)
+                if (Strings.Len(Strings.Trim(Global01.NroPDR)) > 0)
                 {
-                    Funciones.oleDbFunciones.ComandoIU(Conexion1, "DELETE FROM tblPedido_Enc WHERE NroPedido='" + vg.NroPDR + "'");
-                    vg.NroPDR = "";
+                    Funciones.oleDbFunciones.ComandoIU(Conexion1, "DELETE FROM tblPedido_Enc WHERE NroPedido='" + Global01.NroPDR + "'");
+                    Global01.NroPDR = "";
                 }
 
-                rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT TOP 1 right(NroPedido,8) AS NroPedido FROM tblPedido_Enc WHERE left(NroPedido,5)=" + vg.NroUsuario + " ORDER BY NroPedido DESC");
+                rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT TOP 1 right(NroPedido,8) AS NroPedido FROM tblPedido_Enc WHERE left(NroPedido,5)=" + Global01.NroUsuario + " ORDER BY NroPedido DESC");
                 if (!rec.HasRows)
                 {
                     // ES UN CLIENTE
@@ -174,7 +175,7 @@ namespace Catalogo._pedidos
                 wTotal = wTotal + (Renglon(I).cantidad * Renglon(I).Precio);
             }
 
-            vg.NroImprimir = mvarNroPedido;
+            Global01.NroImprimir = mvarNroPedido;
 
             // Por POLITICA NUESTRA  -- >  SE BORRA
             if (Strings.UCase(Origen) == "VER")
@@ -187,12 +188,11 @@ namespace Catalogo._pedidos
                 Nuevo();
                 if (GuardoOK != null)
                 {
-                    GuardoOK(Globa01.NroImprimir);
+                    GuardoOK(Global01.NroImprimir);
                 }
             } 
 
         }
-
 
         public void ADDItem(string IDCatalogo, int cantidad, bool Similar, bool Bahia, bool Oferta, byte Deposito, float Precio, string Observaciones)
         {

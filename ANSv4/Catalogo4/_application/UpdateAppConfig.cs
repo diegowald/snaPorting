@@ -231,17 +231,7 @@ namespace Catalogo._appConfig
                 cancel = true;
                 return;
             }
-
-            string s = cliente.ObtenerInfo(_macAddress);
-
-            System.IO.MemoryStream stream = new System.IO.MemoryStream();
-            System.IO.StreamWriter writer = new System.IO.StreamWriter(stream);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-
-            System.Data.DataSet ds = new System.Data.DataSet();
-            ds.ReadXml(stream);
+            System.Data.DataSet ds = cliente.ObtenerInfoDS(_macAddress);
 
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -343,16 +333,8 @@ namespace Catalogo._appConfig
             string[] sComando;
             long code;
             long I;
-            string s = cliente.ObtenerComandos(_macAddress);
 
-            System.IO.MemoryStream stream = new System.IO.MemoryStream();
-            System.IO.StreamWriter writer = new System.IO.StreamWriter(stream);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-
-            System.Data.DataSet ds = new System.Data.DataSet();
-            ds.ReadXml(stream);
+            System.Data.DataSet ds = cliente.ObtenerComandosDS(_macAddress);
 
             if (ds.Tables[0].Rows.Count > 0)
             {

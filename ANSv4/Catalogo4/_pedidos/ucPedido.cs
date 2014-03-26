@@ -513,44 +513,44 @@ namespace Catalogo._pedidos
         private void btnVer_Click(object sender, EventArgs e)
         {
 
-            const string PROCNAME_  = "btnVer_Click";
-    
+            const string PROCNAME_ = "btnVer_Click";
+
             Cursor.Current = Cursors.WaitCursor;
-    
-            if (nvlistView.Items.Count>0) 
+
+            if (nvlistView.Items.Count > 0)
             {
 
-                if ((int)Global01.miSABOR==2) 
-                {// Catalogo para cliente
-                  _IdCliente = Global01.NroUsuario;
-                }
-    
-                _pedidos.
-    elpedido.Nuevo m.IdCliente
-    elpedido.NroImpresion = 0
-     
-    For m.I = 1 To lvPedido.ListItems.Count
-      elpedido.ADDItem CStr(lvPedido.ListItems(m.I).ListSubItems(8)), _
-                       CInt(lvPedido.ListItems(m.I).ListSubItems(3)), _
-                       CBool(lvPedido.ListItems(m.I).ListSubItems(5)), _
-                       CBool(chkEsOfertaBahia.value), _
-                       CBool(lvPedido.ListItems(m.I).ListSubItems(7)), _
-                       CByte(lvPedido.ListItems(m.I).ListSubItems(6)), _
-                       CSng(lvPedido.ListItems(m.I).ListSubItems(2)), _
-                       CStr(lvPedido.ListItems(m.I).ListSubItems(10))
-                       
-    Next m.I
-      
-    elpedido.Guardar "VER"
-    Pedido_Imprimir vg.NroImprimir
-    vg.NroImprimir = ""
-    
-  End If
-  
-  Cursor.Current = Cursors.Default;
+                //              if ((int)Global01.miSABOR==2) 
+                //              {// Catalogo para cliente
+                //                _IdCliente = Global01.NroUsuario;
+                //              }
 
+                //              _pedidos.
+                //  elpedido.Nuevo m.IdCliente
+                //  elpedido.NroImpresion = 0
+
+                //  For m.I = 1 To lvPedido.ListItems.Count
+                //    elpedido.ADDItem CStr(lvPedido.ListItems(m.I).ListSubItems(8)), _
+                //                     CInt(lvPedido.ListItems(m.I).ListSubItems(3)), _
+                //                     CBool(lvPedido.ListItems(m.I).ListSubItems(5)), _
+                //                     CBool(chkEsOfertaBahia.value), _
+                //                     CBool(lvPedido.ListItems(m.I).ListSubItems(7)), _
+                //                     CByte(lvPedido.ListItems(m.I).ListSubItems(6)), _
+                //                     CSng(lvPedido.ListItems(m.I).ListSubItems(2)), _
+                //                     CStr(lvPedido.ListItems(m.I).ListSubItems(10))
+
+                //  Next m.I
+
+                //  elpedido.Guardar "VER"
+                //  Pedido_Imprimir vg.NroImprimir
+                //  vg.NroImprimir = ""
+
+                //End If
+
+                Cursor.Current = Cursors.Default;
+
+            }
         }
-
 
     } //fin clase
 } //fin namespace

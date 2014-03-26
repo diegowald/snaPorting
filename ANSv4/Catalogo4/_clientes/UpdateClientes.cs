@@ -300,25 +300,7 @@ namespace Catalogo._clientes
             {
             //    'diego     'RaiseEvent SincronizarClientesProgress("Sincronizando Clientes ...", (CantidadAImportar - RestanImportar) / CantidadAImportar * 100, Cancel)
                 System.Data.DataSet ds = cliente.GetTodosLosClientes_Datos_Registros(_MacAddress, lastID);
-/*                string s = cliente.GetTodosLosClientes_Datos(_MacAddress, lastID);
-                
-                System.IO.MemoryStream stream = new System.IO.MemoryStream();
-                System.IO.StreamWriter writer = new System.IO.StreamWriter(stream);
-                writer.Write(s);
-                writer.Flush();
-                stream.Position=0;
-
-                System.Data.DataSet ds = new System.Data.DataSet();
-                ds.ReadXml(stream);
-
-
-                string fileName = System.IO.Path.GetTempFileName();
-                System.IO.File.WriteAllText(fileName, s);
-
-
-                ADODB.Recordset rs = new ADODB.Recordset();
-                rs.Open(fileName, "Provider=MSPersist;", ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockReadOnly);
-*/
+  
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     restanImportar-=ds.Tables[0].Rows.Count;
@@ -381,16 +363,7 @@ namespace Catalogo._clientes
             {
             //    '            ' RaiseEvent SincronizarClientesProgress("Sincronizando Clientes ...", (CantidadAImportar - RestanImportar) / CantidadAImportar * 100, Cancel)
                 System.Data.DataSet ds = cliente.GetTodasLasCtasCtes_Datos_Registros(_MacAddress, lastId);
-/*                string s= cliente.GetTodasLasCtasCtes_Datos(_MacAddress, lastId);
-                                System.IO.MemoryStream stream = new System.IO.MemoryStream();
-                System.IO.StreamWriter writer = new System.IO.StreamWriter(stream);
-                writer.Write(s);
-                writer.Flush();
-                stream.Position=0;
-
-                System.Data.DataSet ds = new System.Data.DataSet();
-                ds.ReadXml(stream);
-*/
+  
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     RestanImportar-=ds.Tables[0].Rows.Count;
