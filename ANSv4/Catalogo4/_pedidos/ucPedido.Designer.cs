@@ -496,7 +496,6 @@ namespace Catalogo._pedidos
             this.Controls.Add(this.statusStrip1);
             this.Name = "ucPedido";
             this.Size = new System.Drawing.Size(887, 411);
-            this.Load += new System.EventHandler(this.ucPedido_Load);
             this.PedidoTab.ResumeLayout(false);
             this.nvActTab.ResumeLayout(false);
             this.PnlMain.ResumeLayout(false);

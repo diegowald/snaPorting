@@ -34,11 +34,11 @@ namespace Catalogo.util
             {
                 Cursor.Current = Cursors.WaitCursor;
 
-                //ShellAndWait(DownloadedFile, "");
+                ShellAndWait(DownloadedFile, "");
 
-                System.Diagnostics.Process.Start(DownloadedFile, "").WaitForExit();
+                //System.Diagnostics.Process.Start(DownloadedFile, "").WaitForExit();
                
-                System.IO.File.Delete(DownloadedFile);
+                //System.IO.File.Delete(DownloadedFile);
 
                 Cursor.Current = Cursors.Default;
             }
