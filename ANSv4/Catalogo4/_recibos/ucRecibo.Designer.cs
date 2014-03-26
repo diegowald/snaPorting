@@ -1507,7 +1507,6 @@ namespace Catalogo._recibos
             this.Controls.Add(this.statusStrip1);
             this.Name = "ucRecibo";
             this.Size = new System.Drawing.Size(640, 480);
-            this.Load += new System.EventHandler(this.ucRecibo_Load);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ucRecibo_KeyPress);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();

@@ -21,6 +21,24 @@ namespace Catalogo._recibos
             _ToolTip.SetToolTip(btnIniciar, "INICIAR Recibo Nuevo");
             _ToolTip.SetToolTip(btnImprimir, "Graba e Imprime el Recibo ...");
             _ToolTip.SetToolTip(btnVer, "ver ...");
+            ccActualizadaFechaLbl.Text = "Cta. Cte. actualizada al " + Global01.F_ActClientes.ToString("dd/MM/yyyy hh:mm");
+
+            if (!Global01.AppActiva)
+            {
+                this.Dispose();
+            };
+
+            if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
+            {
+                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
+            }
+            else
+            {
+                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString(), "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
+            }
+
+            Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cvTipoValorCbo, "v_TipoValor", "D_valor", "IDvalor", "ALL", "IDvalor", true, false, "NONE");
+            Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cvBancoCbo, "tblBancos", "Banco", "ID", "Activo=0", "Format([ID],'000') & ' - ' & tblBancos.Nombre", true, false, "Format([ID],'000') & ' - ' & tblBancos.Nombre AS Banco, ID");            
 
         }
 
@@ -496,29 +514,6 @@ namespace Catalogo._recibos
                     TotalRecibo();
                 }
             }
-        }
-
-        private void ucRecibo_Load(object sender, EventArgs e)
-        {
-            ccActualizadaFechaLbl.Text = "Cta. Cte. actualizada al " + Global01.F_ActClientes.ToString("dd/MM/yyyy hh:mm");
-
-            if (!Global01.AppActiva) 
-            {
-                this.Dispose();
-            };
-
-            if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
-            }
-            else
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString(), "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
-            }
-
-            Catalogo.Funciones.util.CargaCombo(Global01.Conexion , ref cvTipoValorCbo, "v_TipoValor", "D_valor", "IDvalor","ALL","IDvalor",true,false,"NONE");
-            Catalogo.Funciones.util.CargaCombo(Global01.Conexion , ref cvBancoCbo, "tblBancos", "Banco", "ID","Activo=0","Format([ID],'000') & ' - ' & tblBancos.Nombre",true,false,"Format([ID],'000') & ' - ' & tblBancos.Nombre AS Banco, ID");            
-
         }
 
         private void CerrarRecibo()

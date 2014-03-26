@@ -25,6 +25,24 @@ namespace Catalogo._pedidos
             _ToolTip.SetToolTip(btnIniciar, "INICIAR Nota de Venta");
             _ToolTip.SetToolTip(btnImprimir, "Graba e Imprime Nota de Venta ...");
             _ToolTip.SetToolTip(btnVer, "ver ...");
+
+            if (!Global01.AppActiva)
+            {
+                this.Dispose();
+            };
+
+            if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
+            {
+                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
+            }
+            else
+            {
+                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString(), "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
+            }
+
+            Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref nvTransporteCbo, "ansTransportes", "Nombre", "ID", "Activo=1", "Nombre", true, false, "NONE");
+            Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref nvDepositoCbo, "v_Deposito", "D_Dep", "IdDep", "ALL", "D_Dep", true, false, "NONE");
+
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
@@ -80,14 +98,10 @@ namespace Catalogo._pedidos
                                 {
                                     ListViewItem ItemX = new ListViewItem(dr["CodigoCorto"].ToString());
                                     ////alternate row color
-                                    if (nvlistView.Items.Count % 2 == 0)
-                                    {
-                                        ItemX.BackColor = Color.White;
-                                    }
-                                    else
+                                    if (nvlistView.Items.Count % 2 != 0)
                                     {
                                         ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
-                                    };
+                                    }
 
                                     ItemX.SubItems.Add(dr["Descrip"].ToString());          //01
                                     ItemX.SubItems.Add(dr["Precio"].ToString());           //02
@@ -101,8 +115,8 @@ namespace Catalogo._pedidos
                                     ItemX.SubItems.Add(dr["Observaciones"].ToString());    //10
 
                                     nvlistView.Items.Add(ItemX);
-                                    Funciones.util.AutoSizeLVColumnas(ref nvlistView);
-                                };                       
+                                };
+                                Funciones.util.AutoSizeLVColumnas(ref nvlistView);
                             }
                             else
                             {
@@ -113,7 +127,7 @@ namespace Catalogo._pedidos
 
                         dr = null;
      
-                        nvlistView.Items.Clear();
+                       // nvlistView.Items.Clear();
                         TotalPedido();
                         IniciarPedido();
                         HabilitarPedido();
@@ -162,26 +176,6 @@ namespace Catalogo._pedidos
                     //VerDetallePedido();                  
                 };
             };
-        }
-
-        private void ucPedido_Load(object sender, EventArgs e)
-        {
-            if (!Global01.AppActiva)
-            {
-                this.Dispose();
-            };
-
-            if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true,"Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
-            }
-            else
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString(), "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
-            }
-
-            Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref nvTransporteCbo, "ansTransportes", "Nombre", "ID", "Activo=1", "Nombre", true, false, "NONE");
-            Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref nvDepositoCbo, "v_Deposito", "D_Dep", "IdDep", "ALL", "D_Dep", true, false, "NONE");
         }
 
         private void CerrarPedido()
@@ -314,18 +308,14 @@ namespace Catalogo._pedidos
                             nvlistView.Items[ii].SubItems[3].Text = (Decimal.Parse(nvlistView.Items[ii].SubItems[3].Text.ToString()) + nvCantidadTxt.Value).ToString();
                             nvlistView.Items[ii].SubItems[4].Text = (float.Parse(nvlistView.Items[ii].SubItems[3].Text.ToString()) * float.Parse(ProductoSeleccionado.Cells["PrecioLista"].Value.ToString())).ToString();
                         }
-                        nvlistView.Items[ii].SubItems[5].Text = nvSimilarChk.ToString();
+                        nvlistView.Items[ii].SubItems[5].Text = (nvSimilarChk.Checked ? "1" : "0");
                         nvlistView.Items[ii].SubItems[6].Text = nvDepositoCbo.SelectedValue.ToString();
                     }
                     else
                     {
                         ListViewItem ItemX = new ListViewItem(ProductoSeleccionado.Cells["C_Producto"].Value.ToString());
                         ////alternate row color
-                        if (nvlistView.Items.Count % 2 == 0)
-                        {
-                            ItemX.BackColor = Color.White;
-                        }
-                        else
+                        if (nvlistView.Items.Count % 2 != 0)
                         {
                             ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
                         }
@@ -343,25 +333,27 @@ namespace Catalogo._pedidos
                         ItemX.SubItems.Add(nvObservacionesTxt.Text);                                    //10
 
                         nvlistView.Items.Add(ItemX);
+                        nvlistView.Items[ItemX.Index].Selected = true;
                         Funciones.util.AutoSizeLVColumnas(ref nvlistView);
+
                     };
 
                     Pedido_bkp(Global01.Conexion,
                                 Int32.Parse(cboCliente.SelectedValue.ToString()), 
-                                nvlistView.Items[ii].SubItems[9].Text,
-                                nvlistView.Items[ii].SubItems[1].Text,
-                                float.Parse(nvlistView.Items[ii].SubItems[2].Text.ToString()),
-                                Int16.Parse(nvlistView.Items[ii].SubItems[3].Text.ToString()),
-                                float.Parse(nvlistView.Items[ii].SubItems[4].Text.ToString()),
-                                short.Parse(nvlistView.Items[ii].SubItems[5].Text.ToString()),
-                                short.Parse(nvlistView.Items[ii].SubItems[6].Text.ToString()),
-                                short.Parse(nvlistView.Items[ii].SubItems[7].Text.ToString()),
-                                nvlistView.Items[ii].SubItems[8].Text,                                
-                                nvlistView.Items[ii].Text,
-                                nvlistView.Items[ii].SubItems[10].Text,
+                                nvlistView.SelectedItems[0].SubItems[9].Text,
+                                nvlistView.SelectedItems[0].SubItems[1].Text,
+                                float.Parse(nvlistView.SelectedItems[0].SubItems[2].Text.ToString()),
+                                Int16.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()),
+                                float.Parse(nvlistView.SelectedItems[0].SubItems[4].Text.ToString()),
+                                short.Parse(nvlistView.SelectedItems[0].SubItems[5].Text.ToString()),
+                                short.Parse(nvlistView.SelectedItems[0].SubItems[6].Text.ToString()),
+                                short.Parse(nvlistView.SelectedItems[0].SubItems[7].Text.ToString()),
+                                nvlistView.SelectedItems[0].SubItems[8].Text,                                
+                                nvlistView.SelectedItems[0].Text,
+                                nvlistView.SelectedItems[0].SubItems[10].Text,
                                 existe);
 
-                    nvlistView.Items[ii].Selected = false;
+                    nvlistView.SelectedItems[0].Selected = false;
 
                     nvEsOfertaChk.Checked = false;
                     nvSimilarChk.Checked = false;

@@ -32,6 +32,10 @@ namespace Catalogo
             //SplashScreen.CloseSplashScreen();
 
             wnd.ShowDialog();
+            
+            Global01.Conexion.Close();
+            Global01.Conexion = null;
+
             wnd.Close();
             //wnd.Dispose();
 
