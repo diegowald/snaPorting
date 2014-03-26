@@ -16,7 +16,8 @@ namespace Catalogo.util
 
         public fDataUpdate()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            vcUPDATECTL1.CloseRequest += vcUPDATECTL1_CloseRequest;
         }
 
         private void vcUPDATECTL1_Load(object sender, EventArgs e)
