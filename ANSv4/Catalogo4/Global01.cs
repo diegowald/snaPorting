@@ -65,7 +65,5 @@ namespace Catalogo
        public static string RazonSocial;
        public static string ApellidoNombre;
 
-       public static string NroImprimir;
-
     }
 }
