@@ -89,6 +89,8 @@
     </Compile>
     <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
     <Compile Include="util\SimplePing.cs" />
+    <Compile Include="_devoluciones\Devolucion.cs" />
+    <Compile Include="_devoluciones\DevolucionItem.cs" />
     <Compile Include="_novedades\ChequeoNovedades.cs" />
     <Compile Include="_movimientos\EnvioMovimientos.cs" />
     <Compile Include="util\BackgroundTasks\EnvioUpdate.cs" />
