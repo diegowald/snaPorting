@@ -100,9 +100,6 @@ namespace Catalogo._pedidos
             if (!(ValidarConexion()))
                 return;
 
-            // ERROR: Not supported in C#: OnErrorStatement
-
-
             System.Data.OleDb.OleDbDataReader rec = null;
             System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand();
 
@@ -113,7 +110,6 @@ namespace Catalogo._pedidos
             {
                 Funciones.oleDbFunciones.ComandoIU(Conexion1, "DELETE FROM tblPedido_Enc WHERE NroPedido='09999-99999999'");
                 mvarNroPedido = "09999-99999999";
-
             }
             else
             {
@@ -141,23 +137,23 @@ namespace Catalogo._pedidos
                     // ES UN CLIENTE
                     if ((int)Global01.miSABOR==2)
                     {
-                        mvarNroPedido = Strings.Trim(Global01.NroUsuario) + "-C" + rec["NroPedido"].ToString() Strings.Format(Convert.ToInt64(Strings.Right(rec["NroPedido"], 7)) + 1, "0000000");
+                        mvarNroPedido = Strings.Trim(Global01.NroUsuario) + "-C" + (Int16.Parse(rec["NroPedido"].ToString().Substring(rec["NroPedido"].ToString().Trim().Length - 7)) + 1).ToString().PadLeft(7,'0');
                     }
                     else
                     {
-                        mvarNroPedido = Strings.Trim(Global01.NroUsuario) + "-" + Strings.Format(Convert.ToInt64(Strings.Right(rec["NroPedido"], 7)) + 1, "00000000");
+                        mvarNroPedido = Strings.Trim(Global01.NroUsuario) + "-" + (Int16.Parse(rec["NroPedido"].ToString().Substring(rec["NroPedido"].ToString().Trim().Length - 7)) + 1).ToString().PadLeft(8, '0');
                     }
                 }
                 rec = null;
 
             }
 
-            cmd.Parameters.Add("pNroPedido", SqlDbType.VarChar, 14).Value = mvarNroPedido;
-            cmd.Parameters.Add("pF_Pedido", SqlDbType.Date).Value = mvarF_Pedido;
-            cmd.Parameters.Add("pIdCliente", SqlDbType.Int).Value = mvarIdCliente;
-            cmd.Parameters.Add("pNroImpresion", SqlDbType.Int).Value = 0;
-            cmd.Parameters.Add("pObservaciones", SqlDbType.VarChar, 128).Value = mvarObservaciones;
-            cmd.Parameters.Add("pTransporte", SqlDbType.VarChar, 128).Value = mvarTransporte;
+            cmd.Parameters.Add("pNroPedido", System.Data.OleDb.OleDbType.VarChar, 14).Value = mvarNroPedido;
+            cmd.Parameters.Add("pF_Pedido", System.Data.OleDb.OleDbType.Date).Value = mvarF_Pedido;
+            cmd.Parameters.Add("pIdCliente", System.Data.OleDb.OleDbType.Integer).Value = mvarIdCliente;
+            cmd.Parameters.Add("pNroImpresion", System.Data.OleDb.OleDbType.Integer).Value = 0;
+            cmd.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 128).Value = mvarObservaciones;
+            cmd.Parameters.Add("pTransporte", System.Data.OleDb.OleDbType.VarChar, 128).Value = mvarTransporte;
 
             cmd.Connection = Conexion1;
             cmd.CommandType = CommandType.StoredProcedure;
@@ -183,8 +179,7 @@ namespace Catalogo._pedidos
             // Por POLITICA NUESTRA  -- >  SE BORRA
             if (Strings.UCase(Origen) == "VER")
             {
-                // Actualizo Fecha de Transmicion para que no lo mande
-                //diego             adoModulo.adoComandoIU(vg.Conexion, "EXEC usp_Pedido_Transmicion_Upd '" & mvarNroPedido & "'")
+               Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Pedido_Transmicion_Upd '" + mvarNroPedido + "'");
             }
             else
             {
@@ -192,17 +187,9 @@ namespace Catalogo._pedidos
                 Nuevo();
                 if (GuardoOK != null)
                 {
-                    GuardoOK(vg.NroImprimir);
+                    GuardoOK(Globa01.NroImprimir);
                 }
-            }
-
-            return;
-        ErrorHandler:
-
-
-            //diego         adoREC = Nothing
-            cmd = null;
-            Err().Raise(Err().Number, Err().Source, Err().Description);
+            } 
 
         }
 
@@ -234,21 +221,18 @@ namespace Catalogo._pedidos
             if (!(ValidarConexion()))
                 return;
 
-            // ERROR: Not supported in C#: OnErrorStatement
-
-
             System.Data.OleDb.OleDbDataReader rec = null;
             System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand();
 
-            cmd.Parameters.Add("pNroPedido", SqlDbType.VarChar, 14).Value = mvarNroPedido;
-            cmd.Parameters.Add("pIdCatalogo", SqlDbType.VarChar, 38).Value = IDCatalogo;
-            cmd.Parameters.Add("pCantidad", SqlDbType.Int).Value = cantidad;
+            cmd.Parameters.Add("pNroPedido", System.Data.OleDb.OleDbType.VarChar, 14).Value = mvarNroPedido;
+            cmd.Parameters.Add("pIdCatalogo", System.Data.OleDb.OleDbType.VarChar, 38).Value = IDCatalogo;
+            cmd.Parameters.Add("pCantidad", System.Data.OleDb.OleDbType.Integer).Value = cantidad;
             cmd.Parameters.Add("pSimilar", SqlDbType.Bit).Value = Similar;
             cmd.Parameters.Add("pOferta", SqlDbType.Bit).Value = Oferta;
             cmd.Parameters.Add("pBahia", SqlDbType.Bit).Value = Bahia;
-            cmd.Parameters.Add("pDeposito", SqlDbType.TinyInt).Value = Deposito;
-            cmd.Parameters.Add("pPrecio", SqlDbType.Float).Value = Precio;
-            cmd.Parameters.Add("pObservaciones", SqlDbType.VarChar, 80).Value = Observaciones;
+            cmd.Parameters.Add("pDeposito", System.Data.OleDb.OleDbType.TinyInt).Value = Deposito;
+            cmd.Parameters.Add("pPrecio", System.Data.OleDb.OleDbType.Single ).Value = Precio;
+            cmd.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 80).Value = Observaciones;
 
             cmd.Connection = Conexion1;
             cmd.CommandType = CommandType.StoredProcedure;
@@ -266,14 +250,7 @@ namespace Catalogo._pedidos
             }
             rec = null;
             cmd = null;
-            return;
-        ErrorHandler:
-
-
-            rec = null;
-            cmd = null;
-            Err().Raise(Err().Number, Err().Source, Err().Description);
-
+     
         }
 
 
