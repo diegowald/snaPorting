@@ -8,42 +8,35 @@ namespace Catalogo._devoluciones
     public class Devolucion
     {
 
-        //    Private Conexion As OleDbConnection
         private System.Data.OleDb.OleDbConnection Conexion1;
-        //copia local
         private string mvarNroDevolucion;
-        //copia local
         private System.DateTime mvarF_Devolucion;
-        //copia local
-        private long mvarIdCliente;
-        //copia local
+        private  int  mvarIdCliente;
         private byte mvarNroImpresion;
-        //copia local
         private string mvarObservaciones;
 
-
         private System.Collections.Generic.Dictionary<string, DevolucionItem> DetalleDevolucion;
+
         public event GuardoOKEventHandler GuardoOK;
         public delegate void GuardoOKEventHandler(string NroDevolucion);
 
-        private string _NroUsuario;
-
-        public Devolucion(string NroUsuario, long IDDeCliente)
+        public Devolucion(string NroUsuario,  int  IDDeCliente)
         {
             Nuevo(IDDeCliente);
         }
+
         public string Observaciones
         {
             get { return mvarObservaciones; }
             set { mvarObservaciones = value; }
         }
 
-        public long CantidadItems
+        public  int  CantidadItems
         {
             get { return DetalleDevolucion.Count; }
         }
 
-        protected void Nuevo(long IDdeCliente = 0)
+        protected void Nuevo( int  IDdeCliente = 0)
         {
             DetalleDevolucion = new Dictionary<string, DevolucionItem>();
             mvarNroDevolucion = "";
@@ -69,7 +62,7 @@ namespace Catalogo._devoluciones
             set { mvarNroImpresion = value; }
         }
 
-        public long IdCliente
+        public  int  IdCliente
         {
             get { return mvarIdCliente; }
         }
@@ -109,17 +102,17 @@ namespace Catalogo._devoluciones
             }
             else
             {
-                rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT TOP 1 right(NroDevolucion,8) AS NroDevolucion FROM tblDevolucion_Enc WHERE left(NroDevolucion,5)=" + _NroUsuario + " ORDER BY NroDevolucion DESC");
+                rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT TOP 1 right(NroDevolucion,8) AS NroDevolucion FROM tblDevolucion_Enc WHERE left(NroDevolucion,5)=" + Global01.NroUsuario + " ORDER BY NroDevolucion DESC");
                 if (!rec.HasRows)
                 {
                     // ES UN CLIENTE
                     if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente)
                     {
-                        mvarNroDevolucion = _NroUsuario.Trim() + "-C0000001";
+                        mvarNroDevolucion = Global01.NroUsuario.Trim() + "-C0000001";
                     }
                     else
                     {
-                        mvarNroDevolucion = _NroUsuario.Trim() + "-00000001";
+                        mvarNroDevolucion = Global01.NroUsuario.Trim() + "-00000001";
                     }
                 }
                 else
@@ -127,11 +120,11 @@ namespace Catalogo._devoluciones
                     // ES UN CLIENTE
                     if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente)
                     {
-                        mvarNroDevolucion = _NroUsuario.Trim() + "-C" + String.Format("0000000", int.Parse(rec["NroDevolucion"].ToString().Substring(rec["NroDevolucion"].ToString().Length - 7) + 1));
+                        mvarNroDevolucion = Global01.NroUsuario.Trim() + "-C" + String.Format("0000000", int.Parse(rec["NroDevolucion"].ToString().Substring(rec["NroDevolucion"].ToString().Length - 7) + 1));
                     }
                     else
                     {
-                        mvarNroDevolucion = _NroUsuario.Trim() + "-" + String.Format("00000000", int.Parse(rec["NroDevolucion"].ToString().Substring(rec["NroDevolucion"].ToString().Length - 7) + 1));
+                        mvarNroDevolucion = Global01.NroUsuario.Trim() + "-" + String.Format("00000000", int.Parse(rec["NroDevolucion"].ToString().Substring(rec["NroDevolucion"].ToString().Length - 7) + 1));
                     }
                 }
                 rec = null;
@@ -236,6 +229,9 @@ namespace Catalogo._devoluciones
             {
                 Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_CambiaCodigoCatalogoBak '" + IDCatalogo + "'");
             }
+            rec = null;
+            adoCMD = null;
+
         }
     }
 }

@@ -7,6 +7,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 
 namespace Catalogo._pedidos
 {
@@ -520,36 +522,116 @@ namespace Catalogo._pedidos
             if (nvlistView.Items.Count > 0)
             {
 
-                //              if ((int)Global01.miSABOR==2) 
-                //              {// Catalogo para cliente
-                //                _IdCliente = Global01.NroUsuario;
-                //              }
+                bool wSimilar;
+                bool wOferta;
 
-                //              _pedidos.
-                //  elpedido.Nuevo m.IdCliente
-                //  elpedido.NroImpresion = 0
+                Catalogo._pedidos.Pedido ped = new Catalogo._pedidos.Pedido(Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
 
-                //  For m.I = 1 To lvPedido.ListItems.Count
-                //    elpedido.ADDItem CStr(lvPedido.ListItems(m.I).ListSubItems(8)), _
-                //                     CInt(lvPedido.ListItems(m.I).ListSubItems(3)), _
-                //                     CBool(lvPedido.ListItems(m.I).ListSubItems(5)), _
-                //                     CBool(chkEsOfertaBahia.value), _
-                //                     CBool(lvPedido.ListItems(m.I).ListSubItems(7)), _
-                //                     CByte(lvPedido.ListItems(m.I).ListSubItems(6)), _
-                //                     CSng(lvPedido.ListItems(m.I).ListSubItems(2)), _
-                //                     CStr(lvPedido.ListItems(m.I).ListSubItems(10))
+                ped.Conexion = Global01.Conexion;
+                ped.NroImpresion = 0;
+                for (int i = 0; i < nvlistView.Items.Count; i++)
+                {
+                    wSimilar = (nvlistView.Items[i].SubItems[5].Text.ToString()=="1" ? (bool)(true) : (bool)(false));
+                    wOferta = (nvlistView.Items[i].SubItems[7].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
 
-                //  Next m.I
+                    ped.ADDItem(nvlistView.Items[i].SubItems[8].Text.ToString(),
+                                float.Parse(nvlistView.Items[i].SubItems[2].Text.ToString()),      
+                                Int16.Parse(nvlistView.Items[i].SubItems[3].Text.ToString()),
+                                wSimilar,
+                                byte.Parse(nvlistView.Items[i].SubItems[6].Text.ToString()),
+                                wOferta,
+                                nvlistView.Items[i].SubItems[10].Text.ToString());
+                };
 
-                //  elpedido.Guardar "VER"
-                //  Pedido_Imprimir vg.NroImprimir
-                //  vg.NroImprimir = ""
-
-                //End If
+                ped.Guardar("VER");
+                Pedido_Imprimir(Global01.NroImprimir);
+                Global01.NroImprimir = "";
 
                 Cursor.Current = Cursors.Default;
 
+            };
+
+        }
+
+        private void Pedido_Imprimir(string NroPedido)
+        {
+  
+            string sReporte = "";
+            bool  wRptPdf = false;
+
+            if ((int)Global01.miSABOR >= 3) 
+            {
+                sReporte = Global01.AppPath + "\\Reportes4\\Pedido_Enc3.rpt";
             }
+            else
+            {
+                sReporte = Global01.AppPath + "\\Reportes\\Pedido_Enc2.rpt";
+            };
+
+
+            ReportDocument oReport = new ReportDocument();
+            oReport.Load(sReporte);
+
+            //oReport.TiTle = "P - " + NroPedido;
+
+            if (Funciones.modINIs.ReadINI("DATOS", "RptPdf", "0") == "1") 
+            { 
+                wRptPdf = true;
+                //oReport.ExportOptions.ExportDestinationType = CrystalDecisions.Shared.ExportDestinationType.DiskFile;
+                //oReport.ExportOptions.ExportFormatType =  CrystalDecisions.Shared.ExportFormatType.PortableDocFormat; 
+                
+                //oReport.ExportOptions.PDFExportAllPages = true;
+                
+                oReport.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath  + "\\pdf\\P" + NroPedido + ".pdf");            
+            };
+
+
+            TableLogOnInfo logOnInfo = new TableLogOnInfo();
+            int i = 0;
+            // Loop through every table in the report.
+            for (i=0;i == oReport.Database.Tables.Count - 1;i++)
+            {
+               // Set the connection information for the current table.
+               logOnInfo.ConnectionInfo.ServerName = Global01.Conexion.ConnectionString;
+               logOnInfo.ConnectionInfo.DatabaseName = Global01.Conexion.Database;
+               logOnInfo.ConnectionInfo.UserID = "inVent";
+               logOnInfo.ConnectionInfo.Password = "video80min";
+               oReport.Database.Tables[i].ApplyLogOnInfo(logOnInfo);               
+            }         
+           
+  //Set crCONN = Report.Database.Tables(1).ConnectionProperties
+  //  Report.Database.Tables(1).DllName = "crdb_dao.dll"
+  //  crCONN.DeleteAll
+  //  crCONN.Add "Database Name", pgp(dstring, 2)
+  //  crCONN.Add "Session UserID", pgp(u2String, 2)
+  //  crCONN.Add "Session Password", pgp(c2String, 2)
+  //  crCONN.Add "System Database Path", pgp(sstring, 2)
+
+            ParameterDiscreteValue crParameterDiscreteValue = new ParameterDiscreteValue();
+            crParameterDiscreteValue.Value = NroPedido ;
+
+            ParameterValues crParameterValues = new ParameterValues();
+            crParameterValues.Clear();
+            crParameterValues.Add(crParameterDiscreteValue);
+ 
+            if (wRptPdf)
+            {
+                oReport.Export();
+               // 'Dim X As Long
+               // 'X = Shell(vg.PathAcrobat & "\acrord32.exe " & LCase(vg.Path & "\pdf\P" & pNroPedido & ".pdf"), vbNormalFocus)
+               //ShellExecute 0&, "open", LCase(vg.Path & "\pdf\P" & pNroPedido & ".pdf"), "", "", vbNormalFocus
+
+            }
+            else
+            {
+                fReporte f = new fReporte();
+                f.Text =  "Nota de Venta n° " + NroPedido;
+                f.oRpt = oReport;
+                f.ShowDialog();
+                f.Dispose();
+                f = null;
+            };            
+
         }
 
     } //fin clase
