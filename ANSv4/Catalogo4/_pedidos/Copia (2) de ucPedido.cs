@@ -75,8 +75,7 @@ namespace Catalogo._pedidos
                 {
                     if (btnIniciar.Tag.ToString() == "INICIAR")
                     {
-                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                            auditoria.Auditor.AccionesAuditadas.INICIA, "");                            
+                        //vg.auditor.Guardar Pedido, INICIA
                         nvlistView.Items.Clear();
 
                         OleDbDataReader dr = null;
@@ -145,9 +144,8 @@ namespace Catalogo._pedidos
                     else
                     {
                         if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Pedido?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                                 auditoria.Auditor.AccionesAuditadas.CANCELA, "");
+                        {                           
+                            // vg.auditor.Guardar Pedido, CANCELA
                             PedidoTab.Visible = false;
                             nvlistView.Items.Clear();
                             TotalPedido();                            
@@ -564,18 +562,15 @@ namespace Catalogo._pedidos
 
             if ((int)Global01.miSABOR >= 3) 
             {
-                sReporte = Global01.AppPath + "\\Reportes4\\Pedido_Enc3a.rpt";
+                sReporte = Global01.AppPath + "\\Reportes\\Pedido_Enc3.rpt";
             }
             else
             {
-                sReporte = Global01.AppPath + "\\Reportes4\\Pedido_Enc2.rpt";
+                sReporte = Global01.AppPath + "\\Reportes\\Pedido_Enc2.rpt";
             };
 
             ReportDocument oReport = new ReportDocument();
-
-            //oReport.Load(sReporte);
-
-           oReport = ChangeConnectionInfo();
+            oReport.Load(sReporte);            
 
             //oReport.TiTle = "P - " + NroPedido;
 
@@ -591,6 +586,94 @@ namespace Catalogo._pedidos
             };
 
 
+            //Set crCONN = Report.Database.Tables(1).ConnectionProperties
+            //  Report.Database.Tables(1).DllName = "crdb_dao.dll"
+            //  crCONN.DeleteAll
+            //  crCONN.Add "Database Name", pgp(dstring, 2)
+            //  crCONN.Add "Session UserID", pgp(u2String, 2)
+            //  crCONN.Add "Session Password", pgp(c2String, 2)
+            //  crCONN.Add "System Database Path", pgp(sstring, 2)
+
+
+
+            //// create logon properties
+            //DbConnectionAttributes connectionAttributes = new DbConnectionAttributes();
+            //connectionAttributes.Collection.Set("Database DLL", "crdb_dao.dll");
+            //connectionAttributes.Collection.Set("Database Name", Global01.dstring);
+            //connectionAttributes.Collection.Set("Database Type", "Access");
+            //connectionAttributes.Collection.Set("Secure Logon", "True");
+            //connectionAttributes.Collection.Set("Session UserID", "inVent");
+            //connectionAttributes.Collection.Set("Session Password", "video80min");
+            //connectionAttributes.Collection.Set("System Database Path", Global01.sstring);    
+
+            //CrystalDecisions.Shared.ConnectionInfo ConnInfo = new ConnectionInfo();
+            ////ConnInfo.Type = ConnectionInfoType.DBFile;
+            ////ConnInfo.ServerName = "Access/Excel (DAO)";
+            ////ConnInfo.DatabaseName = Global01.dstring;
+            ////ConnInfo.UserID = "inVent";
+            ////ConnInfo.Password = "video80min";
+            ////ConnInfo.AllowCustomConnection = false;
+            ////ConnInfo.IntegratedSecurity = false;
+
+            ////ConnInfo.Attributes.Collection.Clear();
+            //ConnInfo.Attributes.Collection.Set("Database DLL", "crdb_dao.dll");
+            //ConnInfo.Attributes.Collection.Set("Database Name", Global01.dstring);
+            //ConnInfo.Attributes.Collection.Set("Database Type", "Access");
+            ////ConnInfo.Attributes.Collection.Set("Secure Logon", "True");
+            //ConnInfo.Attributes.Collection.Set("Session UserID", "inVent");
+            //ConnInfo.Attributes.Collection.Set("Session Password", "video80min");
+            //ConnInfo.Attributes.Collection.Set("System Database Path", Global01.sstring);
+
+            //TableLogOnInfo logOnInfo = new TableLogOnInfo();  //default(TableLogOnInfo);
+            
+            //logOnInfo.ConnectionInfo.ServerName = "Access/Excel ((DAO))";
+            //logOnInfo.ConnectionInfo.DatabaseName = Global01.dstring;
+            //logOnInfo.ConnectionInfo.UserID = "inVent";
+            //logOnInfo.ConnectionInfo.Password = "video80min";
+
+
+            //int i = 0;
+            //// Loop through every table in the report.
+            //for (i = 0; i == oReport.Database.Tables.Count - 1; i++)
+            //{
+            //    oReport.Database.Tables[i].LogOnInfo.ConnectionInfo = ConnInfo;
+            //    //oReport.Database.Tables[i].ApplyLogOnInfo(logOnInfo);
+            //}
+
+            //foreach (Table CTable in oReport.Database.Tables)
+            //{
+            //    CTable.LogOnInfo.ConnectionInfo = ConnInfo;
+            //    logOnInfo = CTable.LogOnInfo;
+            //    logOnInfo.ReportName = oReport.Name;
+            //    logOnInfo.TableName = CTable.Name;
+            //    CTable.ApplyLogOnInfo(logOnInfo);
+            //}
+//---------------------------------------------------------
+
+            //TableLogOnInfo logOnInfo = new TableLogOnInfo();
+            //int i = 0;
+            //// Loop through every table in the report.
+            //for (i = 0; i == oReport.Database.Tables.Count - 1; i++)
+            //{
+
+
+            //    //logOnInfo.ConnectionInfo.ServerName = Global01.dstring;
+            //    //logOnInfo.ConnectionInfo.DatabaseName = Global01.dstring;
+            //    //logOnInfo.ConnectionInfo.UserID = "inVent";
+            //    //logOnInfo.ConnectionInfo.Password = "video80min";
+            //    logOnInfo.ConnectionInfo.LogonProperties.Add(new NameValuePair2 { Name = "LogonProperties", Value = connectionAttributes });
+
+            //    // CLEAR and SET NEW attributes for the given table
+            //    logOnInfo.ConnectionInfo.Attributes.Collection.Clear();
+            //    logOnInfo.ConnectionInfo.Attributes.Collection.Add(new NameValuePair2 { Name = "Database DLL", Value = "crdb_dao.dll" });
+            //    //logOnInfo.ConnectionInfo.Attributes.Collection.Add(new NameValuePair2 { Name = "QE_DatabaseName", Value = Global01.dstring });
+            //    logOnInfo.ConnectionInfo.Attributes.Collection.Add(new NameValuePair2 { Name = "QE_DatabaseType", Value = "Access" });
+            //    logOnInfo.ConnectionInfo.Attributes.Collection.Add(new NameValuePair2 { Name = "QE_LogonProperties", Value = connectionAttributes });
+
+            //    oReport.Database.Tables[i].ApplyLogOnInfo(logOnInfo);
+
+
+            //}         
 
             oReport.SetParameterValue("pNroPedido", NroPedido);
 
@@ -615,78 +698,75 @@ namespace Catalogo._pedidos
         }
 
 
+        private ReportDocument ChangeConnectionInfo()
+        {
+            ReportDocument boReportDocument = new ReportDocument();
+            //**EDIT** Change the path and report name to the report you want to change.
+            boReportDocument.Load(@"c:\reports\yourreport.rpt", OpenReportMethod.OpenReportByTempCopy);
 
-private ReportDocument ChangeConnectionInfo()
-{
+            //Create a new Stored Procedure Table to replace the reports current table.
+            CrystalDecisions.ReportAppServer.DataDefModel.Procedure boTable =
+            new CrystalDecisions.ReportAppServer.DataDefModel.Procedure();
 
-    string sReporte = Global01.AppPath + "\\Reportes4\\Pedido_Enc3a.rpt";
+            //boMainPropertyBag: These hold the attributes of the tables ConnectionInfo object
+            PropertyBag boMainPropertyBag = new PropertyBag();
+            //boInnerPropertyBag: These hold the attributes for the QE_LogonProperties
+            //In the main property bag (boMainPropertyBag)
+            PropertyBag boInnerPropertyBag = new PropertyBag();
 
-ReportDocument boReportDocument = new ReportDocument();
-//**EDIT** Change the path and report name to the report you want to change.
-boReportDocument.Load(sReporte, OpenReportMethod.OpenReportByTempCopy);
+            //Set the attributes for the boInnerPropertyBag
+            boInnerPropertyBag.Add("Database Name", @"C:\Catalogo ANS\Datos\catalogo.mdb");
+            boInnerPropertyBag.Add("Database Type", "Access");
+            boInnerPropertyBag.Add("Session UserID", "inVent");
+            boInnerPropertyBag.Add("System Database Path", @"C:\WINDOWS\Help\kbAppCat.hlp");
 
-//Create a new Stored Procedure Table to replace the reports current table.
-CrystalDecisions.ReportAppServer.DataDefModel.Procedure boTable = 
-new CrystalDecisions.ReportAppServer.DataDefModel.Procedure();
-  
-//boMainPropertyBag: These hold the attributes of the tables ConnectionInfo object
-PropertyBag boMainPropertyBag = new PropertyBag();
-//boInnerPropertyBag: These hold the attributes for the QE_LogonProperties
-//In the main property bag (boMainPropertyBag)
-PropertyBag boInnerPropertyBag = new PropertyBag();
-  
-//Set the attributes for the boInnerPropertyBag
-boInnerPropertyBag.Add("Database Name", @"C:\Catalogo ANS\Datos\catalogo.mdb");
-boInnerPropertyBag.Add("Database Type", "Access");
-boInnerPropertyBag.Add("Session UserID", "inVent");
-boInnerPropertyBag.Add("System Database Path", @"C:\Windows\Help\kbappcat.hlp");
-  
-//Set the attributes for the boMainPropertyBag
-boMainPropertyBag.Add("Database DLL", "crdb_dao.dll");
-boMainPropertyBag.Add("QE_DatabaseName", @"C:\Catalogo ANS\Datos\catalogo.mdb");
-boMainPropertyBag.Add("QE_DatabaseType", "");
-//Add the QE_LogonProperties we set in the boInnerPropertyBag Object
-boMainPropertyBag.Add("QE_LogonProperties", boInnerPropertyBag);
-boMainPropertyBag.Add("QE_ServerDescription", @"C:\Catalogo ANS\Datos\catalogo.mdb");
-boMainPropertyBag.Add("QE_SQLDB", "False");
-boMainPropertyBag.Add("SSO Enabled", "False");
+            //Set the attributes for the boMainPropertyBag
+            boMainPropertyBag.Add("Database DLL", "crdb_dao.dll");
+            boMainPropertyBag.Add("QE_DatabaseName", @"C:\Catalogo ANS\Datos\catalogo.mdb");
+            boMainPropertyBag.Add("QE_DatabaseType", "");
+            //Add the QE_LogonProperties we set in the boInnerPropertyBag Object
+            boMainPropertyBag.Add("QE_LogonProperties", boInnerPropertyBag);
+            boMainPropertyBag.Add("QE_ServerDescription", @"C:\Catalogo ANS\Datos\catalogo.mdb");
+            boMainPropertyBag.Add("QE_SQLDB", "False");
+            boMainPropertyBag.Add("SSO Enabled", "False");
 
-//Create a new ConnectionInfo object
-CrystalDecisions.ReportAppServer.DataDefModel.ConnectionInfo boConnectionInfo = 
-new CrystalDecisions.ReportAppServer.DataDefModel.ConnectionInfo();
-//Pass the database properties to a connection info object
-boConnectionInfo.Attributes = boMainPropertyBag;
-//Set the connection kind
-boConnectionInfo.Kind = CrConnectionInfoKindEnum.crConnectionInfoKindCRQE;
-//**EDIT** Set the User Name and Password if required.
-boConnectionInfo.UserName = "inVent";
-boConnectionInfo.Password = "video80min";
-//Pass the connection information to the table
-boTable.ConnectionInfo = boConnectionInfo;
+            //Create a new ConnectionInfo object
+            CrystalDecisions.ReportAppServer.DataDefModel.ConnectionInfo boConnectionInfo =
+            new CrystalDecisions.ReportAppServer.DataDefModel.ConnectionInfo();
+            //Pass the database properties to a connection info object
+            boConnectionInfo.Attributes = boMainPropertyBag;
+            //Set the connection kind
+            boConnectionInfo.Kind = CrConnectionInfoKindEnum.crConnectionInfoKindCRQE;
+            //**EDIT** Set the User Name and Password if required.
+            boConnectionInfo.UserName = "UserName";
+            boConnectionInfo.Password = "Password";
+            //Pass the connection information to the table
+            boTable.ConnectionInfo = boConnectionInfo;
 
-//Get the Database Tables Collection for your report
-CrystalDecisions.ReportAppServer.DataDefModel.Tables boTables;
-boTables = boReportDocument.ReportClientDocument.DatabaseController.Database.Tables;
+            //Get the Database Tables Collection for your report
+            CrystalDecisions.ReportAppServer.DataDefModel.Tables boTables;
+            boTables = boReportDocument.ReportClientDocument.DatabaseController.Database.Tables;
 
-//For each table in the report:
-// - Set the Table Name properties.
-// - Set the table location in the report to use the new modified table
-boTable.Name = "v_Pedido_Enc";
-boTable.QualifiedName = "v_Pedido_Enc";
-boTable.Alias = "v_Pedido_Enc";
+            //For each table in the report:
+            // - Set the Table Name properties.
+            // - Set the table location in the report to use the new modified table
+            boTable.Name = "v_Pedido_Enc";
+            boTable.QualifiedName = "v_Pedido_Enc";
+            boTable.Alias = "v_Pedido_Enc";
 
-boReportDocument.ReportClientDocument.DatabaseController.SetTableLocation(boTables[0], boTable);
+            boReportDocument.ReportClientDocument.DatabaseController.SetTableLocation(boTables[0], boTable);
 
-//Verify the database after adding substituting the new table.
-//To ensure that the table updates properly when adding Command tables or Stored Procedures.
-boReportDocument.VerifyDatabase();
+            //Verify the database after adding substituting the new table.
+            //To ensure that the table updates properly when adding Command tables or Stored Procedures.
+            boReportDocument.VerifyDatabase();
 
-//**EDIT** Set the value for the Stored Procedure parameters.
-boReportDocument.SetParameterValue("[pNroPedido]", "09999-99999999");
-boReportDocument.SetParameterValue("[pNroPedido]", "09999-99999999");
+            //**EDIT** Set the value for the Stored Procedure parameters.
+            boReportDocument.SetParameterValue("pNroPedido", "Parameter Value");
+            boReportDocument.SetParameterValue("pNroPedido", "Parameter Value");
 
-return boReportDocument;
-}
+            return boReportDocument;
+        }
+
 
     } //fin clase
 } //fin namespace

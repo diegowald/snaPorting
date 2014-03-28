@@ -7,15 +7,22 @@ namespace Catalogo
     public partial class fReporte : Form
     {
 
-        public ReportDocument oRpt = null;
+        public ReportDocument oRpt=null;
  
         public fReporte()
         {
             InitializeComponent();
 
-            crViewer1.ReportSource = oRpt;
-            crViewer1.Refresh();
         }
+
+        private void fReporte_Load(object sender, EventArgs e)
+        {
+            crViewer1.ReportSource = oRpt;
+            //crViewer1.LogOnInfo.Add(oRpt.Database.Tables[0].LogOnInfo);
+            crViewer1.Refresh();
+
+        }
+
 
    //     private void fReporte_Load(object sender, EventArgs e)
    //     {

@@ -39,8 +39,18 @@
             this.crViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.crViewer1.Location = new System.Drawing.Point(0, 0);
             this.crViewer1.Name = "crViewer1";
+            this.crViewer1.ReuseParameterValuesOnRefresh = true;
+            this.crViewer1.ShowCopyButton = false;
+            this.crViewer1.ShowGotoPageButton = false;
+            this.crViewer1.ShowGroupTreeButton = false;
+            this.crViewer1.ShowLogo = false;
+            this.crViewer1.ShowPageNavigateButtons = false;
+            this.crViewer1.ShowParameterPanelButton = false;
+            this.crViewer1.ShowRefreshButton = false;
+            this.crViewer1.ShowTextSearchButton = false;
             this.crViewer1.Size = new System.Drawing.Size(679, 441);
             this.crViewer1.TabIndex = 0;
+            this.crViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
             // fReporte
             // 
@@ -50,6 +60,7 @@
             this.Controls.Add(this.crViewer1);
             this.Name = "fReporte";
             this.Text = "fReporte";
+            this.Load += new System.EventHandler(this.fReporte_Load);
             this.ResumeLayout(false);
 
         }
