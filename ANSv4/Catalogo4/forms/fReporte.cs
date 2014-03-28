@@ -17,9 +17,50 @@ namespace Catalogo
 
         private void fReporte_Load(object sender, EventArgs e)
         {
+
+            //if (Right(miReport.ReportTitle, 14) == "09999-99999999")
             crViewer1.ReportSource = oRpt;
-            //crViewer1.LogOnInfo.Add(oRpt.Database.Tables[0].LogOnInfo);
             crViewer1.Refresh();
+
+        }
+
+        private void btnVerPDF_Click(object sender, EventArgs e)
+        {
+
+            //           if (Funciones.modINIs.ReadINI("DATOS", "RptPdf", "0") == "1")
+            //{
+
+            //    oReport.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath + "\\pdf\\P" + NroPedido + ".pdf");
+ 
+            //    System.Diagnostics.Process.Start(Global01.AppPath + "\\pdf\\P" + NroPedido + ".pdf");
+
+            //    if (odsPedidos1.Tables[0].Rows[0]["EMAIL"].ToString().Trim().Length > 0)
+            //    {
+            //        CrystalDecisions.Shared.ExportOptions ExpOpts = new CrystalDecisions.Shared.ExportOptions();
+            //        CrystalDecisions.Shared.HTMLFormatOptions htmlopts = new CrystalDecisions.Shared.HTMLFormatOptions();
+            //        CrystalDecisions.Shared.MicrosoftMailDestinationOptions MailOpts = new CrystalDecisions.Shared.MicrosoftMailDestinationOptions();
+
+            //        ExpOpts = oReport.ExportOptions;
+            //        ExpOpts.ExportDestinationType = CrystalDecisions.Shared.ExportDestinationType.MicrosoftMail;
+            //        ExpOpts.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.RichText;
+
+            //        MailOpts.MailToList = "pbrugnie@hotmail.com"; //odsPedidos1.Tables[0].Rows[0]["EMAIL"].ToString()
+            //        MailOpts.MailSubject = "auto náutica sur - nota de venta n° " + NroPedido;
+            //        MailOpts.MailCCList = odsPedidos1.Tables[0].Rows[0]["RAZONSONSOCIAL"].ToString();
+            //        MailOpts.UserName = "intldwilliams";
+            //        MailOpts.Password = "yourpassword";
+            //        ExpOpts.DestinationOptions = MailOpts;
+            //        oReport.Export(ExpOpts);
+            //    }
+
+            //}
+            //else
+            //{
+
+        }
+
+        private void btnEnviarMail_Click(object sender, EventArgs e)
+        {
 
         }
 

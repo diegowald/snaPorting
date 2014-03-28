@@ -165,7 +165,13 @@ namespace Catalogo._recibos
 
         private void CliDPnlMain_DoubleClick(object sender, EventArgs e)
         {
-            //mandar mail
+            if (CliDEmailTxt.Text.Trim().Length > 0)
+            {
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            proc.StartInfo.FileName = "mailto:" + CliDEmailTxt.Text.Trim() + "?subject=" + "auto náutica sur - OdN n° " + Global01.NroUsuario.ToString() + "&body=" + "mi estimado...";
+            proc.Start();
+            };
+
         }
 
         private void cvAgregarBtn_Click(object sender, EventArgs e)
@@ -600,6 +606,11 @@ namespace Catalogo._recibos
         private void cvImporteTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
              Funciones.util.EsImporte(sender, ref e);
+        }
+
+        private void CliDPnlMain_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
     } //fin clase

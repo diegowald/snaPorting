@@ -53,6 +53,7 @@ namespace Catalogo._recibos
             this.CliNPnlMain = new System.Windows.Forms.Panel();
             this.CliNDataGridView = new System.Windows.Forms.DataGridView();
             this.CliNPnlTop = new System.Windows.Forms.Panel();
+            this.CliNAgregarBtn = new System.Windows.Forms.Button();
             this.CliNFechaDtp = new System.Windows.Forms.DateTimePicker();
             this.label13 = new System.Windows.Forms.Label();
             this.CliNNovedadTxt = new System.Windows.Forms.TextBox();
@@ -84,6 +85,8 @@ namespace Catalogo._recibos
             this.adPnlMain = new System.Windows.Forms.Panel();
             this.adlistView = new System.Windows.Forms.ListView();
             this.adPnlTop = new System.Windows.Forms.Panel();
+            this.adCascaraBtn = new System.Windows.Forms.Button();
+            this.adAgregarBtn = new System.Windows.Forms.Button();
             this.adAplicarRestoCb = new System.Windows.Forms.CheckBox();
             this.adPorcentajeCb = new System.Windows.Forms.CheckBox();
             this.adImporteTxt = new System.Windows.Forms.TextBox();
@@ -99,6 +102,7 @@ namespace Catalogo._recibos
             this.apPnlMain = new System.Windows.Forms.Panel();
             this.aplistView = new System.Windows.Forms.ListView();
             this.apPnlTop = new System.Windows.Forms.Panel();
+            this.apAgregarBtn = new System.Windows.Forms.Button();
             this.apPercepcionTxt = new System.Windows.Forms.TextBox();
             this.apImporteTxt = new System.Windows.Forms.TextBox();
             this.apConceptoTxt = new System.Windows.Forms.TextBox();
@@ -155,10 +159,6 @@ namespace Catalogo._recibos
             this.btnIniciar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnVer = new System.Windows.Forms.Button();
-            this.apAgregarBtn = new System.Windows.Forms.Button();
-            this.adAgregarBtn = new System.Windows.Forms.Button();
-            this.adCascaraBtn = new System.Windows.Forms.Button();
-            this.CliNAgregarBtn = new System.Windows.Forms.Button();
             ccFechaLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ccComprobanteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ccImporteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -341,6 +341,22 @@ namespace Catalogo._recibos
             this.CliNPnlTop.Size = new System.Drawing.Size(632, 53);
             this.CliNPnlTop.TabIndex = 5;
             // 
+            // CliNAgregarBtn
+            // 
+            this.CliNAgregarBtn.BackColor = System.Drawing.Color.Red;
+            this.CliNAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.CliNAgregarBtn.Enabled = false;
+            this.CliNAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.CliNAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.CliNAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CliNAgregarBtn.ForeColor = System.Drawing.Color.White;
+            this.CliNAgregarBtn.Location = new System.Drawing.Point(554, 18);
+            this.CliNAgregarBtn.Name = "CliNAgregarBtn";
+            this.CliNAgregarBtn.Size = new System.Drawing.Size(75, 26);
+            this.CliNAgregarBtn.TabIndex = 18;
+            this.CliNAgregarBtn.Text = "Agregar";
+            this.CliNAgregarBtn.UseVisualStyleBackColor = false;
+            // 
             // CliNFechaDtp
             // 
             this.CliNFechaDtp.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -413,6 +429,7 @@ namespace Catalogo._recibos
             this.CliDPnlMain.Name = "CliDPnlMain";
             this.CliDPnlMain.Size = new System.Drawing.Size(626, 396);
             this.CliDPnlMain.TabIndex = 1;
+            this.CliDPnlMain.Paint += new System.Windows.Forms.PaintEventHandler(this.CliDPnlMain_Paint);
             this.CliDPnlMain.DoubleClick += new System.EventHandler(this.CliDPnlMain_DoubleClick);
             // 
             // CliDDomicilioTxt
@@ -698,6 +715,38 @@ namespace Catalogo._recibos
             this.adPnlTop.Size = new System.Drawing.Size(626, 53);
             this.adPnlTop.TabIndex = 4;
             // 
+            // adCascaraBtn
+            // 
+            this.adCascaraBtn.BackColor = System.Drawing.Color.Red;
+            this.adCascaraBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.adCascaraBtn.Enabled = false;
+            this.adCascaraBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.adCascaraBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.adCascaraBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.adCascaraBtn.ForeColor = System.Drawing.Color.White;
+            this.adCascaraBtn.Location = new System.Drawing.Point(548, 23);
+            this.adCascaraBtn.Name = "adCascaraBtn";
+            this.adCascaraBtn.Size = new System.Drawing.Size(75, 26);
+            this.adCascaraBtn.TabIndex = 22;
+            this.adCascaraBtn.Text = "Cascara";
+            this.adCascaraBtn.UseVisualStyleBackColor = false;
+            // 
+            // adAgregarBtn
+            // 
+            this.adAgregarBtn.BackColor = System.Drawing.Color.Red;
+            this.adAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.adAgregarBtn.Enabled = false;
+            this.adAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.adAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.adAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.adAgregarBtn.ForeColor = System.Drawing.Color.White;
+            this.adAgregarBtn.Location = new System.Drawing.Point(467, 23);
+            this.adAgregarBtn.Name = "adAgregarBtn";
+            this.adAgregarBtn.Size = new System.Drawing.Size(75, 26);
+            this.adAgregarBtn.TabIndex = 21;
+            this.adAgregarBtn.Text = "Agregar";
+            this.adAgregarBtn.UseVisualStyleBackColor = false;
+            // 
             // adAplicarRestoCb
             // 
             this.adAplicarRestoCb.AutoSize = true;
@@ -854,6 +903,22 @@ namespace Catalogo._recibos
             this.apPnlTop.Name = "apPnlTop";
             this.apPnlTop.Size = new System.Drawing.Size(626, 53);
             this.apPnlTop.TabIndex = 0;
+            // 
+            // apAgregarBtn
+            // 
+            this.apAgregarBtn.BackColor = System.Drawing.Color.Red;
+            this.apAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.apAgregarBtn.Enabled = false;
+            this.apAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.apAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.apAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.apAgregarBtn.ForeColor = System.Drawing.Color.White;
+            this.apAgregarBtn.Location = new System.Drawing.Point(531, 18);
+            this.apAgregarBtn.Name = "apAgregarBtn";
+            this.apAgregarBtn.Size = new System.Drawing.Size(75, 26);
+            this.apAgregarBtn.TabIndex = 6;
+            this.apAgregarBtn.Text = "Agregar";
+            this.apAgregarBtn.UseVisualStyleBackColor = false;
             // 
             // apPercepcionTxt
             // 
@@ -1433,70 +1498,6 @@ namespace Catalogo._recibos
             this.btnVer.TabIndex = 0;
             this.btnVer.Text = "Ver";
             this.btnVer.UseVisualStyleBackColor = false;
-            // 
-            // apAgregarBtn
-            // 
-            this.apAgregarBtn.BackColor = System.Drawing.Color.Red;
-            this.apAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.apAgregarBtn.Enabled = false;
-            this.apAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.apAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.apAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.apAgregarBtn.ForeColor = System.Drawing.Color.White;
-            this.apAgregarBtn.Location = new System.Drawing.Point(531, 18);
-            this.apAgregarBtn.Name = "apAgregarBtn";
-            this.apAgregarBtn.Size = new System.Drawing.Size(75, 26);
-            this.apAgregarBtn.TabIndex = 6;
-            this.apAgregarBtn.Text = "Agregar";
-            this.apAgregarBtn.UseVisualStyleBackColor = false;
-            // 
-            // adAgregarBtn
-            // 
-            this.adAgregarBtn.BackColor = System.Drawing.Color.Red;
-            this.adAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.adAgregarBtn.Enabled = false;
-            this.adAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.adAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.adAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.adAgregarBtn.ForeColor = System.Drawing.Color.White;
-            this.adAgregarBtn.Location = new System.Drawing.Point(467, 23);
-            this.adAgregarBtn.Name = "adAgregarBtn";
-            this.adAgregarBtn.Size = new System.Drawing.Size(75, 26);
-            this.adAgregarBtn.TabIndex = 21;
-            this.adAgregarBtn.Text = "Agregar";
-            this.adAgregarBtn.UseVisualStyleBackColor = false;
-            // 
-            // adCascaraBtn
-            // 
-            this.adCascaraBtn.BackColor = System.Drawing.Color.Red;
-            this.adCascaraBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.adCascaraBtn.Enabled = false;
-            this.adCascaraBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.adCascaraBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.adCascaraBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.adCascaraBtn.ForeColor = System.Drawing.Color.White;
-            this.adCascaraBtn.Location = new System.Drawing.Point(548, 23);
-            this.adCascaraBtn.Name = "adCascaraBtn";
-            this.adCascaraBtn.Size = new System.Drawing.Size(75, 26);
-            this.adCascaraBtn.TabIndex = 22;
-            this.adCascaraBtn.Text = "Cascara";
-            this.adCascaraBtn.UseVisualStyleBackColor = false;
-            // 
-            // CliNAgregarBtn
-            // 
-            this.CliNAgregarBtn.BackColor = System.Drawing.Color.Red;
-            this.CliNAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.CliNAgregarBtn.Enabled = false;
-            this.CliNAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.CliNAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.CliNAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CliNAgregarBtn.ForeColor = System.Drawing.Color.White;
-            this.CliNAgregarBtn.Location = new System.Drawing.Point(554, 18);
-            this.CliNAgregarBtn.Name = "CliNAgregarBtn";
-            this.CliNAgregarBtn.Size = new System.Drawing.Size(75, 26);
-            this.CliNAgregarBtn.TabIndex = 18;
-            this.CliNAgregarBtn.Text = "Agregar";
-            this.CliNAgregarBtn.UseVisualStyleBackColor = false;
             // 
             // ucRecibo
             // 
