@@ -48,7 +48,8 @@ namespace Catalogo.Funciones
             sRep = "Ignorar Pulsado...";
 
             //On Error Resume Next
-            //vg.Auditor.Guardar ErrordePrograma, EXITOSO, sRep
+            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.ErrordePrograma,
+                 auditoria.Auditor.AccionesAuditadas.EXITOSO, sRep);
             //On Error GoTo 0
 
             ErrLog(sRep);
@@ -66,7 +67,8 @@ namespace Catalogo.Funciones
             sRep = "Reintentar Pulsado...";
 
             //On Error Resume Next
-            //vg.Auditor.Guardar ErrordePrograma, EXITOSO, sRep
+            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.ErrordePrograma,
+                 auditoria.Auditor.AccionesAuditadas.EXITOSO, sRep);
             //On Error GoTo 0
 
             ErrLog(sRep);

@@ -174,7 +174,8 @@ namespace Catalogo._pedidos
             }
             else
             {
-                //vg.auditor.Guardar(ObjetosAuditados.Pedido, AccionesAuditadas.EXITOSO, "cli:" + Strings.Format(mvarIdCliente, "000000") + " ped:" + mvarNroPedido + " tot:" + Strings.Format(wTotal, "fixed"));
+                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
+                     auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " ped:" + mvarNroPedido + " tot:" + String.Format("fixed", wTotal));
                 Nuevo();
                 if (GuardoOK != null)
                 {

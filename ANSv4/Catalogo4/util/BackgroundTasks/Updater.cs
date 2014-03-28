@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo.util.BackgroundTasks
 {
-    public class Updater : BackgroundTaskBase
+    public class Updater : BackgroundTaskBase,
+        Funciones.emitter_receiver.IReceptor<util.Pair<string, int>> // Para recibir mensajes de Clientes
     {
         public enum UpdateType
         {
@@ -58,6 +60,7 @@ namespace Catalogo.util.BackgroundTasks
                     {
                         Catalogo._clientes.UpdateClientes envio = new _clientes.UpdateClientes(Global01.Conexion,
                             Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+                        envio.attachReceptor(this);
                         if (envio.inicializado)
                         {
                             envio.sincronizarClientes();
@@ -224,5 +227,11 @@ namespace Catalogo.util.BackgroundTasks
                 '-------- ErrorGuardian End ----------*/
             }
         }
+
+        public void onRecibir(Pair<string, int> dato)
+        {
+            notifications.NotificationCenter.instance.notificar(dato.first, dato.second);
+        }
+
     }
 }

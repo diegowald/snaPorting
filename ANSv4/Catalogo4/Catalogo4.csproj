@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="auditoria\Auditor.cs" />
     <Compile Include="forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +100,7 @@
     <Compile Include="forms\Login.designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="notifications\NotificationCenter.cs" />
     <Compile Include="reportes\CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -113,6 +115,7 @@
     </Compile>
     <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
     <Compile Include="util\SimplePing.cs" />
+    <Compile Include="util\singleton.cs" />
     <Compile Include="_devoluciones\Devolucion.cs" />
     <Compile Include="_devoluciones\DevolucionItem.cs" />
     <Compile Include="_novedades\ChequeoNovedades.cs" />
@@ -644,6 +647,7 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

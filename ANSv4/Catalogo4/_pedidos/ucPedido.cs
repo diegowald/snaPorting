@@ -74,7 +74,8 @@ namespace Catalogo._pedidos
                 {
                     if (btnIniciar.Tag.ToString() == "INICIAR")
                     {
-                        //vg.auditor.Guardar Pedido, INICIA
+                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
+                            auditoria.Auditor.AccionesAuditadas.INICIA, "");                            
                         nvlistView.Items.Clear();
 
                         OleDbDataReader dr = null;
@@ -143,8 +144,9 @@ namespace Catalogo._pedidos
                     else
                     {
                         if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Pedido?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {                           
-                            // vg.auditor.Guardar Pedido, CANCELA
+                        {
+                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
+                                 auditoria.Auditor.AccionesAuditadas.CANCELA, "");
                             PedidoTab.Visible = false;
                             nvlistView.Items.Clear();
                             TotalPedido();                            
