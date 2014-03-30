@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using System.Drawing;
+using CrystalDecisions.CrystalReports.Engine;
 
 namespace Catalogo.Funciones
 {
@@ -288,6 +289,47 @@ namespace Catalogo.Funciones
             value = textBox.Text;
             return dialogResult;
         }
-    
+
+        // internal static void sendmail()
+        //{
+        //    try
+        //    {
+        //        SmtpMail.SmtpServer.Insert(0, "your hostname");
+        //        MailMessage Msg = new MailMessage();
+        //        Msg.To = "to address here";
+        //        Msg.From = "from address here";
+        //        Msg.Subject = "Crystal Report Attachment ";
+        //        Msg.Body = "Crystal Report Attachment ";
+        //        Msg.Attachments.Add(new MailAttachment(pdfFile));
+        //        System.Web.Mail.SmtpMail.Send(Msg);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.ToString());
+        //    }
+        //}
+
+        //protected void ExportAndEmail(ReportDocument crystalReport)
+        //{
+
+        //    using (MailMessage mm = new MailMessage("sender@gmail.com", "receiver@gmail.com"))
+        //    {
+        //        mm.Subject = "Crystal Report PDF example";
+        //        mm.Body = "Crystal Report PDF example";
+        //        mm.Attachments.Add(new Attachment(crystalReport.ExportToStream(ExportFormatType.PortableDocFormat), "Report.pdf"));
+        //        mm.IsBodyHtml = true;
+        //        SmtpClient smtp = new SmtpClient();
+        //        smtp.Host = "smtp.gmail.com";
+        //        NetworkCredential credential = new NetworkCredential();
+        //        credential.UserName = "sender@gmail.com";
+        //        credential.Password = "xxxxx";
+        //        smtp.UseDefaultCredentials = true;
+        //        smtp.Credentials = credential;
+        //        smtp.Port = 587;
+        //        smtp.EnableSsl = true;
+        //        smtp.Send(mm);
+        //    }
+        //}
+
     }
 }

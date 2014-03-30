@@ -30,7 +30,7 @@ namespace Catalogo._pedidos
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PedidoTab = new System.Windows.Forms.TabControl();
             this.nvActTab = new System.Windows.Forms.TabPage();
             this.PnlMain = new System.Windows.Forms.Panel();
@@ -381,8 +381,8 @@ namespace Catalogo._pedidos
             // 
             this.PedidoAnterioresDataGridView.AllowUserToAddRows = false;
             this.PedidoAnterioresDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.PedidoAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.PedidoAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.PedidoAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PedidoAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PedidoAnterioresDataGridView.Location = new System.Drawing.Point(3, 3);
@@ -492,6 +492,7 @@ namespace Catalogo._pedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.PedidoTab);
             this.Controls.Add(this.ucPecPnlTop);
             this.Controls.Add(this.statusStrip1);

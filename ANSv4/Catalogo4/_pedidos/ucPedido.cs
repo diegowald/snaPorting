@@ -7,9 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using CrystalDecisions.ReportAppServer.DataDefModel;
 using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
 
 namespace Catalogo._pedidos
 {
@@ -357,8 +355,8 @@ namespace Catalogo._pedidos
                                 nvlistView.SelectedItems[0].Text,
                                 nvlistView.SelectedItems[0].SubItems[10].Text,
                                 existe);
-
-                    nvlistView.SelectedItems[0].Selected = false;
+                    
+                    nvlistView.SelectedItems.Clear();
 
                     nvEsOfertaChk.Checked = false;
                     nvSimilarChk.Checked = false;
@@ -394,6 +392,8 @@ namespace Catalogo._pedidos
                 {  //DEL
                     Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblPedido_Bkp WHERE IdCatalogo='" + nvlistView.SelectedItems[0].SubItems[8].Text.ToString() + "'");
                     nvlistView.Items.Remove(nvlistView.SelectedItems[0]);
+
+                    nvlistView.SelectedItems.Clear(); 
                     TotalPedido();
                 }
                 else if (e.KeyValue.ToString()  == "187")
@@ -520,7 +520,7 @@ namespace Catalogo._pedidos
 
             const string PROCNAME_ = "btnVer_Click";
 
-            //Cursor.Current = Cursors.WaitCursor;
+            Cursor.Current = Cursors.WaitCursor;
 
             if (nvlistView.Items.Count > 0)
             {
@@ -547,10 +547,12 @@ namespace Catalogo._pedidos
                 };
 
                 ped.Guardar("VER");
+                Cursor.Current = Cursors.Default;
+
                 Pedido_Imprimir(Global01.NroImprimir);
                 Global01.NroImprimir = "";
 
-                //Cursor.Current = Cursors.Default;
+               
 
             };
 
@@ -558,13 +560,12 @@ namespace Catalogo._pedidos
 
         private void Pedido_Imprimir(string NroPedido)
         {
-  
-            string sReporte = "";
-            bool  wRptPdf = false;
 
-            if ((int)Global01.miSABOR >= 3) 
+            string sReporte = "";
+
+            if ((int)Global01.miSABOR >= 3)
             {
-                sReporte = Global01.AppPath + "\\Reportes4\\Pedido_Enc3a.rpt";
+                sReporte = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\reportes\Pedido_Enc4.rpt";
             }
             else
             {
@@ -573,120 +574,38 @@ namespace Catalogo._pedidos
 
             ReportDocument oReport = new ReportDocument();
 
-            //oReport.Load(sReporte);
+            oReport.Load(sReporte);
 
-           oReport = ChangeConnectionInfo();
+            OleDbDataAdapter objAdapterEnc = new OleDbDataAdapter("EXEC v_Pedido_Enc '" + NroPedido + "'", Global01.Conexion);
+            OleDbDataAdapter objAdapterDet = new OleDbDataAdapter("EXEC v_Pedido_Det '" + NroPedido + "'", Global01.Conexion);
 
-            //oReport.TiTle = "P - " + NroPedido;
+            System.Data.DataSet odsPedidos1 = new System.Data.DataSet();
+            objAdapterEnc.Fill(odsPedidos1, "v_Pedido_Enc_0");
+            objAdapterDet.Fill(odsPedidos1, "v_Pedido_Det_0");
 
-            if (Funciones.modINIs.ReadINI("DATOS", "RptPdf", "0") == "1") 
-            { 
-                wRptPdf = true;
-                //oReport.ExportOptions.ExportDestinationType = CrystalDecisions.Shared.ExportDestinationType.DiskFile;
-                //oReport.ExportOptions.ExportFormatType =  CrystalDecisions.Shared.ExportFormatType.PortableDocFormat; 
-                
-                //oReport.ExportOptions.PDFExportAllPages = true;
-                
-                oReport.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath  + "\\pdf\\P" + NroPedido + ".pdf");            
-            };
-
-
-
-            oReport.SetParameterValue("pNroPedido", NroPedido);
-
-        if (wRptPdf)
+            if (odsPedidos1.Tables[0].Rows.Count == 0)
             {
-                oReport.Export();
-               // 'Dim X As Long
-               // 'X = Shell(vg.PathAcrobat & "\acrord32.exe " & LCase(vg.Path & "\pdf\P" & pNroPedido & ".pdf"), vbNormalFocus)
-               //ShellExecute 0&, "open", LCase(vg.Path & "\pdf\P" & pNroPedido & ".pdf"), "", "", vbNormalFocus
-
+                MessageBox.Show("Registro INEXISTENTE", "Impresión de Pedidos",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                return;
             }
-            else
-            {
-                fReporte f = new fReporte();
-                f.Text =  "Nota de Venta n° " + NroPedido;
-                f.oRpt = oReport;
-                f.ShowDialog();
-                f.Dispose();
-                f = null;
-            };            
+
+            oReport.SetDataSource(odsPedidos1);
+            
+            //oReport.TiTle = "P - " + NroPedido;
+ 
+            fReporte f = new fReporte();
+            f.Text = "Nota de Venta n° " + NroPedido;
+            f.oRpt = oReport;
+            f.ShowDialog();
+            f.Dispose();
+            f = null;
+       
+            objAdapterEnc = null;
+            objAdapterDet = null;
+            odsPedidos1 = null;
+            oReport.Dispose();
 
         }
-
-
-
-private ReportDocument ChangeConnectionInfo()
-{
-
-    string sReporte = Global01.AppPath + "\\Reportes4\\Pedido_Enc3a.rpt";
-
-ReportDocument boReportDocument = new ReportDocument();
-//**EDIT** Change the path and report name to the report you want to change.
-boReportDocument.Load(sReporte, OpenReportMethod.OpenReportByTempCopy);
-
-//Create a new Stored Procedure Table to replace the reports current table.
-CrystalDecisions.ReportAppServer.DataDefModel.Procedure boTable = 
-new CrystalDecisions.ReportAppServer.DataDefModel.Procedure();
-  
-//boMainPropertyBag: These hold the attributes of the tables ConnectionInfo object
-PropertyBag boMainPropertyBag = new PropertyBag();
-//boInnerPropertyBag: These hold the attributes for the QE_LogonProperties
-//In the main property bag (boMainPropertyBag)
-PropertyBag boInnerPropertyBag = new PropertyBag();
-  
-//Set the attributes for the boInnerPropertyBag
-boInnerPropertyBag.Add("Database Name", @"C:\Catalogo ANS\Datos\catalogo.mdb");
-boInnerPropertyBag.Add("Database Type", "Access");
-boInnerPropertyBag.Add("Session UserID", "inVent");
-boInnerPropertyBag.Add("System Database Path", @"C:\Windows\Help\kbappcat.hlp");
-  
-//Set the attributes for the boMainPropertyBag
-boMainPropertyBag.Add("Database DLL", "crdb_dao.dll");
-boMainPropertyBag.Add("QE_DatabaseName", @"C:\Catalogo ANS\Datos\catalogo.mdb");
-boMainPropertyBag.Add("QE_DatabaseType", "");
-//Add the QE_LogonProperties we set in the boInnerPropertyBag Object
-boMainPropertyBag.Add("QE_LogonProperties", boInnerPropertyBag);
-boMainPropertyBag.Add("QE_ServerDescription", @"C:\Catalogo ANS\Datos\catalogo.mdb");
-boMainPropertyBag.Add("QE_SQLDB", "False");
-boMainPropertyBag.Add("SSO Enabled", "False");
-
-//Create a new ConnectionInfo object
-CrystalDecisions.ReportAppServer.DataDefModel.ConnectionInfo boConnectionInfo = 
-new CrystalDecisions.ReportAppServer.DataDefModel.ConnectionInfo();
-//Pass the database properties to a connection info object
-boConnectionInfo.Attributes = boMainPropertyBag;
-//Set the connection kind
-boConnectionInfo.Kind = CrConnectionInfoKindEnum.crConnectionInfoKindCRQE;
-//**EDIT** Set the User Name and Password if required.
-boConnectionInfo.UserName = "inVent";
-boConnectionInfo.Password = "video80min";
-//Pass the connection information to the table
-boTable.ConnectionInfo = boConnectionInfo;
-
-//Get the Database Tables Collection for your report
-CrystalDecisions.ReportAppServer.DataDefModel.Tables boTables;
-boTables = boReportDocument.ReportClientDocument.DatabaseController.Database.Tables;
-
-//For each table in the report:
-// - Set the Table Name properties.
-// - Set the table location in the report to use the new modified table
-boTable.Name = "v_Pedido_Enc";
-boTable.QualifiedName = "v_Pedido_Enc";
-boTable.Alias = "v_Pedido_Enc";
-
-boReportDocument.ReportClientDocument.DatabaseController.SetTableLocation(boTables[0], boTable);
-
-//Verify the database after adding substituting the new table.
-//To ensure that the table updates properly when adding Command tables or Stored Procedures.
-boReportDocument.VerifyDatabase();
-
-//**EDIT** Set the value for the Stored Procedure parameters.
-boReportDocument.SetParameterValue("[pNroPedido]", "09999-99999999");
-boReportDocument.SetParameterValue("[pNroPedido]", "09999-99999999");
-
-return boReportDocument;
-}
 
     } //fin clase
 } //fin namespace
