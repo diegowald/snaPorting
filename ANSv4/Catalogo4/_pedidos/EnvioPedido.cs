@@ -86,27 +86,29 @@ namespace Catalogo._pedidos
 
             if (!cancel)
             {
-
-                //            If vg.TranActiva Is Nothing Then
-                //                vg.TranActiva = vg.Conexion.BeginTransaction
-                //            End If
+                if (Global01.TranActiva == null)
+                {
+                    Global01.TranActiva = Conexion1.BeginTransaction();
+                }
 
                 resultado = cliente.EnviarPedido7(_MacAddress, _NroPedido, _CodCliente, _Fecha, _Observaciones, _Transporte, _Detalle);
 
                 if (resultado == 0)
                 {
                     Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Pedido_Transmicion_Upd '" + _NroPedido + "'");
-                    //                If Not vg.TranActiva Is Nothing Then
-                    //                    vg.TranActiva.Commit()
-                    //                    vg.TranActiva = Nothing
-                    //                End If
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Commit();
+                        Global01.TranActiva = null;
+                    }
                 }
                 else
                 {
-                    //              If Not vg.TranActiva Is Nothing Then
-                    //                vg.TranActiva.Commit()
-                    //              vg.TranActiva = Nothing
-                    //        End If
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Rollback();
+                        Global01.TranActiva = null;
+                    }
                 }
 
                 return resultado;

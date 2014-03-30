@@ -157,15 +157,15 @@ namespace Catalogo.util.BackgroundTasks
                     //  Hide
                     return;
                 }
+
                 Catalogo._audit.EnvioAuditoria envAudit = new _audit.EnvioAuditoria(Global01.IDMaquina,
                     Global01.URL_ANS, Global01.URL_ANS2, false, "");
                 if (envAudit.Inicializado)
                 {
-
-                    //  If vg.TranActiva = False Then
-                    //        vg.Conexion.BeginTrans
-                    //        vg.TranActiva = True
-                    //  End If
+                    if (Global01.TranActiva == null)
+                    {
+                        Global01.TranActiva = Global01.Conexion.BeginTransaction();
+                    }
 
                     System.Data.OleDb.OleDbDataReader reader = Catalogo.Funciones.oleDbFunciones.Comando(Global01.Conexion,
                         "SELECT * FROM tblAuditor WHERE F_Transmision is null");
@@ -206,11 +206,11 @@ namespace Catalogo.util.BackgroundTasks
                             }
                         }
                     }
-                    /*  If vg.TranActiva = True Then
-                          vg.Conexion.CommitTrans
-                          vg.TranActiva = False
-                      End If*/
-
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Commit();
+                        Global01.TranActiva = null;
+                    }
                 }
             }
             catch
@@ -225,6 +225,11 @@ namespace Catalogo.util.BackgroundTasks
                       Resume Next
                   End Select
                 '-------- ErrorGuardian End ----------*/
+                if (Global01.TranActiva != null)
+                {
+                    Global01.TranActiva.Rollback();
+                    Global01.TranActiva = null;
+                }
             }
         }
 

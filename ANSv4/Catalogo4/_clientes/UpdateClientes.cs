@@ -108,82 +108,90 @@ namespace Catalogo._clientes
 
         public void sincronizarClientes()
         {
-            //        On Error GoTo ErrorHandler
-
-            bool cancel = false;
-
-            //        If vg.TranActiva Is Nothing Then
-            //            vg.TranActiva = vg.Conexion.BeginTransaction
-            //        End If
-
-            this.emitir(new util.Pair<string,int>("Sincronizando Clientes ...", 0));///, Cancel)
-
-            if (!webServiceInicializado)
+            try
             {
-                cancel = true;
-            }
 
-            if (!cancel)
+                bool cancel = false;
+
+                if (Global01.TranActiva == null)
+                {
+                    Global01.TranActiva = conexion.BeginTransaction();
+                }
+
+                this.emitir(new util.Pair<string, int>("Sincronizando Clientes ...", 0));///, Cancel)
+
+                if (!webServiceInicializado)
+                {
+                    cancel = true;
+                }
+
+                if (!cancel)
+                {
+                    this.emitir(new util.Pair<string, int>("Sincronizando Clientes ...", 30));//, Cancel)
+                }
+
+                Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "DELETE FROM tblClientes");
+
+                if (!cancel)
+                {
+                    sincronizarTodosLosClientes(ref cancel);
+                }
+
+                if (!cancel)
+                {
+                    this.emitir(new util.Pair<string, int>("Sincronizando Cuentas Corrientes", 60));///, Cancel)
+                }
+
+                if (!cancel)
+                {
+                    SincronizarTodasLasCtasCtes(ref cancel);
+                }
+
+                if (!cancel)
+                {
+                    this.emitir(new util.Pair<string, int>("Finalizando Sincronización de Clientes", 90));//, Cancel)
+                }
+
+                if (!cancel)
+                {
+                    sincroClientesCompletada(ref cancel);
+                }
+
+                if (cancel)
+                {
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Rollback();
+                        Global01.TranActiva = null;
+                    }
+                    this.emitir(new util.Pair<string, int>("Sincronización de Clientes con Errores", 100));///, Cancel)
+                }
+                else
+                {
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Commit();
+                        Global01.TranActiva = null;
+                    }
+
+                    Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_appConfig_FActClientes_Upd");
+                    this.emitir(new util.Pair<string, int>("Sincronización de Clientes Finalizada", 100));///, Cancel)
+                }
+            }
+            catch
             {
-                this.emitir(new util.Pair<string,int>("Sincronizando Clientes ...", 30));//, Cancel)
+                //ErrorHandler:
+                if (Global01.TranActiva != null)
+                {
+                    Global01.TranActiva.Rollback();
+                    Global01.TranActiva = null;
+                }
+                throw;
             }
-
-            Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "DELETE FROM tblClientes");
-
-            if (!cancel)
+            finally
             {
-                sincronizarTodosLosClientes(ref cancel);
+                Global01.TranActiva = null;
             }
-
-            if (!cancel)
-            {
-                this.emitir(new util.Pair<string,int>("Sincronizando Cuentas Corrientes", 60));///, Cancel)
-            }
-
-            if (!cancel)
-            {
-                SincronizarTodasLasCtasCtes(ref cancel);
-            }
-
-            if (!cancel)
-            {
-                this.emitir(new util.Pair<string,int>("Finalizando Sincronización de Clientes", 90));//, Cancel)
-            }
-
-            if (!cancel)
-            {
-                sincroClientesCompletada(ref cancel);
-            }
-
-            if (cancel)
-            {
-                //            If Not (vg.TranActiva Is Nothing) Then
-                //                vg.TranActiva.Rollback()
-                //                vg.TranActiva = Nothing
-                //            End If
-                this.emitir(new util.Pair<string,int>("Sincronización de Clientes con Errores", 100));///, Cancel)
-            }
-            else
-            {
-                //            If Not (vg.TranActiva Is Nothing) Then
-                //                vg.TranActiva.Commit()
-                //                vg.TranActiva = Nothing
-                //            End If
-
-                Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_appConfig_FActClientes_Upd");
-                this.emitir(new util.Pair<string,int>("Sincronización de Clientes Finalizada", 100));///, Cancel)
-            }
-            return;
-
-            //ErrorHandler:
-            //        If Not (vg.TranActiva Is Nothing) Then
-            //            vg.TranActiva.Rollback()
-            //            vg.TranActiva = Nothing
-            //        End If
-
-            //        Err.Raise(Err.Number, Err.Source, Err.Description)
-
-            //    End Sub
         }
 
         private void Clientes_Add(System.Data.OleDb.OleDbConnection Conexion,

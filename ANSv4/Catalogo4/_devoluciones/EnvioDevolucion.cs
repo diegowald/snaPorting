@@ -96,30 +96,29 @@ namespace Catalogo._devolucion
 
             if (!Cancel)
             {
-            //    if ((vg.TranActiva != null))
-              //  {
-                //    vg.TranActiva.Rollback();
-              //      vg.TranActiva = null;
-                //}
+                if (Global01.TranActiva == null)
+                {
+                    Global01.TranActiva = Conexion1.BeginTransaction();
+                }
 
                 resultado = Cliente.EnviarDevolucion(m_MacAddress, m_NroDevolucion, m_CodCliente, m_Fecha, m_Observaciones, m_Detalle);
 
                 if (resultado == 0)
                 {
-                    //                adoModulo.adoComandoIU(vg.Conexion, "EXEC usp_Devolucion_Transmicion_Upd '" & m_NroDevolucion & "'")
-//                    if ((vg.TranActiva != null))
-//                    {
-//                        vg.TranActiva.Commit();
-//                        vg.TranActiva = null;
-//                    }
+                    Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Devolucion_Transmicion_Upd '" + m_NroDevolucion + "'");
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Commit();
+                        Global01.TranActiva = null;
+                    }
                 }
                 else
                 {
-//                    if ((vg.TranActiva != null))
-//                    {
-//                        vg.TranActiva.Rollback();
-//                        vg.TranActiva = null;
-//                   }
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Rollback();
+                        Global01.TranActiva = null;
+                    }
                 }
 
                 return resultado;

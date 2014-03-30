@@ -403,11 +403,11 @@ namespace Catalogo._appConfig
 
             if (wSalir)
             {
-                //    '        If wSalir Then
-                //    '            If vg.TranActiva Then
-                //    '                vg.Conexion.CommitTrans()
-                //    '                vg.TranActiva = False
-                //    '            End If
+                if (Global01.TranActiva != null)
+                {
+                    Global01.TranActiva.Commit();
+                    Global01.TranActiva = null;
+                }
                 //    '            MsgBox("Se han efectuado modificaciones en la aplicación," & vbCrLf & "ésta de cerrará, luego re-ingrese nuevamente", vbCritical, "Atención")
                 //    '            mainMod.miEND()
             }
