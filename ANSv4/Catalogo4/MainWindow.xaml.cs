@@ -33,6 +33,13 @@ namespace Catalogo
 
         private Catalogo._productos.SearchFilter addSearchArea()
         {
+            Catalogo._productos.SearchFilter filterControl = new _productos.SearchFilter();
+            new util.WFHostOverlay(searchArea, filterControl);
+            return filterControl;
+        }
+
+        private Catalogo._productos.SearchFilter addSearchAreaObsolete()
+        {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
@@ -55,6 +62,13 @@ namespace Catalogo
         }
 
         private Catalogo._pedidos.ucPedido addPedidoArea()
+        {
+            Catalogo._pedidos.ucPedido pedido = new _pedidos.ucPedido();
+            new util.WFHostOverlay(xNotaVentaArea, pedido);
+            return pedido;
+        }
+
+        private Catalogo._pedidos.ucPedido addPedidoAreaObsolete()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
@@ -94,6 +108,14 @@ namespace Catalogo
 
         private Catalogo._recibos.ucRecibo addReciboArea()
         {
+            Catalogo._recibos.ucRecibo xRecibo = new _recibos.ucRecibo();
+            //new util.WFHostOverlay(xRecibosArea, xRecibo);
+            new util.WFHostOverlay(grRecibos, xRecibo);
+            return xRecibo;
+        }
+
+        private Catalogo._recibos.ucRecibo addReciboAreaObsolete()
+        {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
@@ -111,7 +133,14 @@ namespace Catalogo
             return xRecibo;
         }
 
-        private Catalogo._productos.GridViewFilter2  addProductsArea()
+        private Catalogo._productos.GridViewFilter2 addProductsArea()
+        {
+            Catalogo._productos.GridViewFilter2 grid = new _productos.GridViewFilter2();
+            new util.WFHostOverlay(productsArea, grid);
+            return grid;
+        }
+
+        private Catalogo._productos.GridViewFilter2  addProductsAreaObsolete()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
@@ -135,6 +164,13 @@ namespace Catalogo
 
         private Catalogo._novedades.ucNovedades addNovedadesArea()
         {
+            Catalogo._novedades.ucNovedades novedades = new _novedades.ucNovedades();
+            new util.WFHostOverlay(grNovedades, novedades);
+            return novedades;
+        }
+
+        private Catalogo._novedades.ucNovedades addNovedadesAreaObsolete()
+        {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
@@ -157,6 +193,8 @@ namespace Catalogo
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {         
+            // La version correcta es la que termina en Obsolete.
+            // La version actual es la que permite la transparencia. Considero que su funcionamiento es pesimo.
             Catalogo._productos.SearchFilter sf = addSearchArea();
 
             Catalogo._productos.GridViewFilter2 gv = addProductsArea();
