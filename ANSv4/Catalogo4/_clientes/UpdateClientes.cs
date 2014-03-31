@@ -1,8 +1,9 @@
 ﻿using System;
+using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._clientes
 {
-    class UpdateClientes
+    class UpdateClientes : Funciones.emitter_receiver.IEmisor<util.Pair<string, int>>
     {
         // Define como se llama este modulo para el control de errores
 
@@ -107,82 +108,90 @@ namespace Catalogo._clientes
 
         public void sincronizarClientes()
         {
-            //        On Error GoTo ErrorHandler
-
-            bool cancel = false;
-
-            //        If vg.TranActiva Is Nothing Then
-            //            vg.TranActiva = vg.Conexion.BeginTransaction
-            //        End If
-
-            //        RaiseEvent SincronizarClientesProgress("Sincronizando Clientes ...", 0, Cancel)
-
-            if (!webServiceInicializado)
+            try
             {
-                cancel = true;
-            }
 
-            if (!cancel)
+                bool cancel = false;
+
+                if (Global01.TranActiva == null)
+                {
+                    Global01.TranActiva = conexion.BeginTransaction();
+                }
+
+                this.emitir(new util.Pair<string, int>("Sincronizando Clientes ...", 0));///, Cancel)
+
+                if (!webServiceInicializado)
+                {
+                    cancel = true;
+                }
+
+                if (!cancel)
+                {
+                    this.emitir(new util.Pair<string, int>("Sincronizando Clientes ...", 30));//, Cancel)
+                }
+
+                Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "DELETE FROM tblClientes");
+
+                if (!cancel)
+                {
+                    sincronizarTodosLosClientes(ref cancel);
+                }
+
+                if (!cancel)
+                {
+                    this.emitir(new util.Pair<string, int>("Sincronizando Cuentas Corrientes", 60));///, Cancel)
+                }
+
+                if (!cancel)
+                {
+                    SincronizarTodasLasCtasCtes(ref cancel);
+                }
+
+                if (!cancel)
+                {
+                    this.emitir(new util.Pair<string, int>("Finalizando Sincronización de Clientes", 90));//, Cancel)
+                }
+
+                if (!cancel)
+                {
+                    sincroClientesCompletada(ref cancel);
+                }
+
+                if (cancel)
+                {
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Rollback();
+                        Global01.TranActiva = null;
+                    }
+                    this.emitir(new util.Pair<string, int>("Sincronización de Clientes con Errores", 100));///, Cancel)
+                }
+                else
+                {
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Commit();
+                        Global01.TranActiva = null;
+                    }
+
+                    Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_appConfig_FActClientes_Upd");
+                    this.emitir(new util.Pair<string, int>("Sincronización de Clientes Finalizada", 100));///, Cancel)
+                }
+            }
+            catch
             {
-                //            RaiseEvent SincronizarClientesProgress("Sincronizando Clientes ...", 30, Cancel)
+                //ErrorHandler:
+                if (Global01.TranActiva != null)
+                {
+                    Global01.TranActiva.Rollback();
+                    Global01.TranActiva = null;
+                }
+                throw;
             }
-
-            Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "DELETE FROM tblClientes");
-
-            if (!cancel)
+            finally
             {
-                sincronizarTodosLosClientes(ref cancel);
+                Global01.TranActiva = null;
             }
-
-            if (!cancel)
-            {
-                //RaiseEvent SincronizarClientesProgress("Sincronizando Cuentas Corrientes", 60, Cancel)
-            }
-
-            if (!cancel)
-            {
-                SincronizarTodasLasCtasCtes(ref cancel);
-            }
-
-            if (!cancel)
-            {
-                //            RaiseEvent SincronizarClientesProgress("Finalizando Sincronización de Clientes", 90, Cancel)
-            }
-
-            if (!cancel)
-            {
-                sincroClientesCompletada(ref cancel);
-            }
-
-            if (cancel)
-            {
-                //            If Not (vg.TranActiva Is Nothing) Then
-                //                vg.TranActiva.Rollback()
-                //                vg.TranActiva = Nothing
-                //            End If
-                //            RaiseEvent SincronizarClientesProgress("Sincronización de Clientes con Errores", 100, Cancel)
-            }
-            else
-            {
-                //            If Not (vg.TranActiva Is Nothing) Then
-                //                vg.TranActiva.Commit()
-                //                vg.TranActiva = Nothing
-                //            End If
-
-                Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_appConfig_FActClientes_Upd");
-                //            RaiseEvent SincronizarClientesProgress("Sincronización de Clientes Finalizada", 100, Cancel)
-            }
-            return;
-
-            //ErrorHandler:
-            //        If Not (vg.TranActiva Is Nothing) Then
-            //            vg.TranActiva.Rollback()
-            //            vg.TranActiva = Nothing
-            //        End If
-
-            //        Err.Raise(Err.Number, Err.Source, Err.Description)
-
-            //    End Sub
         }
 
         private void Clientes_Add(System.Data.OleDb.OleDbConnection Conexion,
@@ -279,9 +288,9 @@ namespace Catalogo._clientes
                 return;
             }
 
-            //    'diego    'RaiseEvent SincronizarClientesProgress("Sincronizando Clientes ...", 40, Cancel)
+            this.emitir(new util.Pair<string,int>("Sincronizando Clientes ...", 40));//, Cancel)
 
-            //    'diego        RaiseEvent SincronizarClientesProgresoParcial("Importando Mis Clientes", 0, Cancel)
+            this.emitir(new util.Pair<string,int>("Importando Mis Clientes", 0));///, Cancel)
 
             //    'diego        If Cancel Then
             //    'diego            Exit Sub
@@ -298,7 +307,7 @@ namespace Catalogo._clientes
 
             while (restanImportar>0)
             {
-            //    'diego     'RaiseEvent SincronizarClientesProgress("Sincronizando Clientes ...", (CantidadAImportar - RestanImportar) / CantidadAImportar * 100, Cancel)
+                this.emitir(new util.Pair<string,int>("Sincronizando Clientes ...", (int) ((int)cantidadAImportar - restanImportar) / (int)cantidadAImportar * 100));//, Cancel)
                 System.Data.DataSet ds = cliente.GetTodosLosClientes_Datos_Registros(_MacAddress, lastID);
   
                 if (ds.Tables[0].Rows.Count > 0)
@@ -321,7 +330,7 @@ namespace Catalogo._clientes
                             cantImportada++;
                             if (cantImportada % 31 == 0)
                             {
-                                //    'diego                  RaiseEvent SincronizarClientesProgresoParcial("Importando Mis Clientes", I / cantImportada * 100, Cancel)
+                                this.emitir(new util.Pair<string,int>("Importando Mis Clientes", (int)cantImportada));//, Cancel)
                                 if (cancel)
                                 {
                                     return;
@@ -344,9 +353,9 @@ namespace Catalogo._clientes
                 cancel = true;
                 return;
             }
-            //    '        'RaiseEvent SincronizarClientesProgress("Sincronizando de Clientes ...", 60, Cancel)
+            this.emitir(new util.Pair<string,int>("Sincronizando de Clientes ...", 60));//, Cancel)
 
-            //    '        RaiseEvent SincronizarClientesProgresoParcial("Importando Cuentas Corrientes", 0, Cancel)
+            this.emitir(new util.Pair<string,int>("Importando Cuentas Corrientes", 0));//, Cancel)
 
             if (cancel)
             {
@@ -361,7 +370,7 @@ namespace Catalogo._clientes
 
             while (RestanImportar>0)
             {
-            //    '            ' RaiseEvent SincronizarClientesProgress("Sincronizando Clientes ...", (CantidadAImportar - RestanImportar) / CantidadAImportar * 100, Cancel)
+                this.emitir(new util.Pair<string,int>("Sincronizando Clientes ...",(int) ((int)CantidadAImportar - RestanImportar) / (int)CantidadAImportar * 100));//, Cancel)
                 System.Data.DataSet ds = cliente.GetTodasLasCtasCtes_Datos_Registros(_MacAddress, lastId);
   
                 if (ds.Tables[0].Rows.Count > 0)
@@ -391,7 +400,7 @@ namespace Catalogo._clientes
                             CantidadImportada++;
                             if (CantidadImportada % 31 == 0)
                             {
-                                //    '                        RaiseEvent SincronizarClientesProgresoParcial("Importando Cuentas Corrientes", CantidadImportada / CantidadAImportar * 100, Cancel)
+                                this.emitir(new util.Pair<string,int>("Importando Cuentas Corrientes", (int)CantidadImportada / (int)CantidadAImportar * 100));//, Cancel)
                                 if (cancel)
                                 {
                                     return;
@@ -405,6 +414,19 @@ namespace Catalogo._clientes
                         lastId = long.Parse(row["ID"].ToString());
                     }
                 }
+            }
+        }
+
+        private emisorHandler<util.Pair<string, int>> _emisor;
+        public emisorHandler<util.Pair<string, int>> emisor
+        {
+            get
+            {
+                return _emisor;
+            }
+            set
+            {
+                _emisor = value;
             }
         }
     }

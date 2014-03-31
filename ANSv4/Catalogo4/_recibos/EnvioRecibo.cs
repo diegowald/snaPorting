@@ -174,29 +174,29 @@ public class EnvioRecibo
 
         if (!Cancel)
         {
-//            if (vg.TranActiva == null)
-//            {
-//                vg.TranActiva = vg.Conexion.BeginTransaction;
-//            }
+            if (Global01.TranActiva == null)
+            {
+                Global01.TranActiva = Conexion1.BeginTransaction();
+            }
 
             resultado = cliente.EnviarRecibo317(_MacAddress, _NroRecibo, _CodCliente, _Fecha, _Bahia, _Total, _Detalle, _Facturas, _NotasCredito);
 
             if (resultado == 0)
             {
-                //               adoModulo.adoComandoIU(vg.Conexion, "EXEC usp_Recibo_Transmicion_Upd '" & m_NroRecibo & "'")
-//                if ((vg.TranActiva != null))
-//                {
-//                    vg.TranActiva.Commit();
-//                    vg.TranActiva = null;
-//                }
+                Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Recibo_Transmicion_Upd '" + _NroRecibo + "'");
+                if (Global01.TranActiva != null)
+                {
+                    Global01.TranActiva.Commit();
+                    Global01.TranActiva = null;
+                }
             }
             else
             {
- //               if ((vg.TranActiva != null))
- //               {
- //                   vg.TranActiva.Rollback();
- //                   vg.TranActiva = null;
- //               }
+               if ((Global01.TranActiva != null))
+                {
+                    Global01.TranActiva.Rollback();
+                    Global01.TranActiva = null;
+                }
             }
 
             return resultado;

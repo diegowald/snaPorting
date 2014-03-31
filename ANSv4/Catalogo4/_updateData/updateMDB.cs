@@ -25,7 +25,7 @@ namespace Catalogo.Funciones
 
             if (Global01.TranActiva==null)
             {
-                //Global01.TranActiva = Global01.Conexion.BeginTransaction();
+                Global01.TranActiva = Global01.Conexion.BeginTransaction();
             }
 
             try
@@ -79,7 +79,7 @@ namespace Catalogo.Funciones
 
                 if (Global01.TranActiva != null)
                 {
-                    //Global01.TranActiva.Rollback();
+                    Global01.TranActiva.Rollback();
                 }
                 //throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }

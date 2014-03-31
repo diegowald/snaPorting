@@ -133,9 +133,10 @@ namespace Catalogo._rendicion
 
             if (!Cancel)
             {
-                //if (vg.TranActiva == null) {
-                //	vg.TranActiva = vg.Conexion.BeginTransaction;
-                //}
+                if (Global01.TranActiva == null)
+                {
+                    Global01.TranActiva = Conexion1.BeginTransaction();
+                }
 
                 resultado = Cliente.EnviarRendicion(m_MacAddress, m_NroRendicion, m_IdViajante, m_F_Rendicion, m_Observaciones,
                     m_Efectivo.ToString(), m_Dolares.ToString(), m_Euros.ToString(),
@@ -144,18 +145,20 @@ namespace Catalogo._rendicion
 
                 if (resultado == 0)
                 {
-                    //                adoModulo.adoComandoIU(vg.Conexion, "EXEC usp_Rendicion_Transmicion_Upd '" & Right(m_NroRendicion, 8) & "'")
-                    //				if ((vg.TranActiva != null)) {
-                    //					vg.TranActiva.Commit();
-                    //					vg.TranActiva = null;
-                    //				}
+                    Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Rendicion_Transmicion_Upd '" + m_NroRendicion.Substring(m_NroRendicion.Length - 8) + "'");
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Commit();
+                        Global01.TranActiva = null;
+                    }
                 }
                 else
                 {
-                    //				if ((vg.TranActiva != null)) {
-                    //					vg.TranActiva.Rollback();
-                    //					vg.TranActiva = null;
-                    //				}
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Rollback();
+                        Global01.TranActiva = null;
+                    }
                 }
 
                 return resultado;

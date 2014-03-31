@@ -442,7 +442,8 @@ namespace Catalogo._recibos
             {
                 if (btnIniciar.Tag.ToString() == "INICIAR")
                 {
-                    //vg.auditor.Guardar Recibo, INICIA
+                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
+                         auditoria.Auditor.AccionesAuditadas.INICIA);
                     //Limpio Listados
                     TotalRecibo();
                     TotalADeducir();
@@ -456,7 +457,8 @@ namespace Catalogo._recibos
                 {
                     if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Recibo?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        // vg.auditor.Guardar Recibo, CANCELA
+                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
+                             auditoria.Auditor.AccionesAuditadas.CANCELA);
                         rTabsRecibo.Visible = false;
                         cboCliente.SelectedIndex = 0;
                         CerrarRecibo();                        

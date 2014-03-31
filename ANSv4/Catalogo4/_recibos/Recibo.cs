@@ -268,8 +268,8 @@ namespace Catalogo._recibos
             }
             else
             {
-                // TODO: completar auditoria
-                //vg.auditor.Guardar(ObjetosAuditados.Recibo, AccionesAuditadas.EXITOSO, "cli:" + Strings.Format(mvarIdCliente, "000000") + " ped:" + mvarNroRecibo + " tot:" + Strings.Format(mvarTotal, "fixed"));
+                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
+                     auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " ped:" + mvarNroRecibo + " tot:" + String.Format("fixed", mvarTotal));
                 Nuevo();
                 if (GuardoOK != null)
                 {

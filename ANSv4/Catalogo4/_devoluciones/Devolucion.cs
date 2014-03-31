@@ -162,8 +162,8 @@ namespace Catalogo._devoluciones
             }
             else
             {
-                // TODO: implementar auditoria
-                //vg.auditor.Guardar(ObjetosAuditados.Devoluciones, AccionesAuditadas.EXITOSO, "cli:" + Strings.Format(mvarIdCliente, "000000") + " ped:" + mvarNroDevolucion + " tot:");
+                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones,
+                     auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " ped:" + mvarNroDevolucion + " tot:");
                 Nuevo();
                 if (GuardoOK != null)
                 {

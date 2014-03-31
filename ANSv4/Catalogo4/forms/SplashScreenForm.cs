@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Catalogo
 {
-    public partial class SplashScreenForm : Form
+    public partial class SplashScreenForm : Form, Catalogo.Funciones.emitter_receiver.IReceptor<util.Pair<string, int>>
     {
         delegate void StringParameterDelegate(string Text);
         delegate void StringParameterWithStatusDelegate(string Text, TypeOfMessage tom);
@@ -22,7 +22,7 @@ namespace Catalogo
         /// <summary>
         /// Base constructor
         /// </summary>
-        public SplashScreenForm()
+        public SplashScreenForm() 
         {
             InitializeComponent();
             
@@ -124,6 +124,11 @@ namespace Catalogo
         {
             if (CloseSplashScreenFlag == false)
                 e.Cancel = true;
+        }
+
+        public void onRecibir(util.Pair<string, int> dato)
+        {
+            this.UdpateStatusText(dato.first + ": " + dato.second.ToString() + "%");
         }
     }
 }
