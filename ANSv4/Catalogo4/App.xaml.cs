@@ -18,28 +18,28 @@ namespace Catalogo
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+                Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+                splashthread.IsBackground = true;
+                splashthread.Start();
 
-            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
-            splashthread.IsBackground = true;
-            splashthread.Start();
+                Catalogo.MainMod.Main();
 
-            Catalogo.MainMod.Main();
+                MainWindow wnd = new MainWindow();
 
-            MainWindow wnd = new MainWindow();
+                //_recibos.fRecibo wnd = new _recibos.fRecibo();
+                //_pedidos.fPedido wnd = new _pedidos.fPedido();
+                //SplashScreen.CloseSplashScreen();
 
-            //_recibos.fRecibo wnd = new _recibos.fRecibo();
-            //_pedidos.fPedido wnd = new _pedidos.fPedido();
-            //SplashScreen.CloseSplashScreen();
+                wnd.ShowDialog();
 
-            wnd.ShowDialog();
-            
-            Global01.Conexion.Close();
-            Global01.Conexion = null;
+                Global01.Conexion.Close();
+                Global01.Conexion = null;
 
-            wnd.Close();
-            //wnd.Dispose();
+                wnd.Close();
+                //wnd.Dispose();
 
-            Shutdown();
+                Shutdown();
+
         }        
 
     }

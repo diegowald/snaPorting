@@ -68,12 +68,14 @@ namespace Catalogo.Funciones.BackgroundReader
 
         void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("INICIO CARGA PRODUCTOS");
             System.Data.OleDb.OleDbDataAdapter dataAdapter = new System.Data.OleDb.OleDbDataAdapter(sqlCommand, strConnection);
 
             System.Data.DataTable table = new System.Data.DataTable("dtProducts");
             table.Locale = System.Globalization.CultureInfo.InvariantCulture;
             dataAdapter.Fill(table);
             dataTable = table;
+            System.Diagnostics.Debug.WriteLine("FIN CARGA PRODUCTOS");
         }
 
         void worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)

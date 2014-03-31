@@ -7,7 +7,7 @@ using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo.util.BackgroundTasks
 {
     public class Updater : BackgroundTaskBase,
-        Funciones.emitter_receiver.IReceptor<util.Pair<string, int>> // Para recibir mensajes de Clientes
+        Funciones.emitter_receiver.IReceptor<util.Pair<string, float>> // Para recibir mensajes de Clientes
     {
         public enum UpdateType
         {
@@ -233,7 +233,7 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
-        public void onRecibir(Pair<string, int> dato)
+        public void onRecibir(Pair<string, float> dato)
         {
             notifications.NotificationCenter.instance.notificar(dato.first, dato.second);
         }

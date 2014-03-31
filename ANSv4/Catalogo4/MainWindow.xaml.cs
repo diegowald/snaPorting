@@ -31,14 +31,14 @@ namespace Catalogo
             ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
         }
 
-        private Catalogo._productos.SearchFilter addSearchArea()
+        /*private Catalogo._productos.SearchFilter addSearchArea()
         {
             Catalogo._productos.SearchFilter filterControl = new _productos.SearchFilter();
             new util.WFHostOverlay(searchArea, filterControl);
             return filterControl;
-        }
+        }*/
 
-        private Catalogo._productos.SearchFilter addSearchAreaObsolete()
+        private Catalogo._productos.SearchFilter addSearchArea()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
@@ -61,14 +61,14 @@ namespace Catalogo
             return filterControl;
         }
 
-        private Catalogo._pedidos.ucPedido addPedidoArea()
+        /*private Catalogo._pedidos.ucPedido addPedidoArea()
         {
             Catalogo._pedidos.ucPedido pedido = new _pedidos.ucPedido();
             new util.WFHostOverlay(xNotaVentaArea, pedido);
             return pedido;
-        }
+        }*/
 
-        private Catalogo._pedidos.ucPedido addPedidoAreaObsolete()
+        private Catalogo._pedidos.ucPedido addPedidoArea()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
@@ -106,15 +106,15 @@ namespace Catalogo
         //    return xDevolucion;
         //}
 
-        private Catalogo._recibos.ucRecibo addReciboArea()
+        /*private Catalogo._recibos.ucRecibo addReciboArea()
         {
             Catalogo._recibos.ucRecibo xRecibo = new _recibos.ucRecibo();
             //new util.WFHostOverlay(xRecibosArea, xRecibo);
             new util.WFHostOverlay(grRecibos, xRecibo);
             return xRecibo;
-        }
+        }*/
 
-        private Catalogo._recibos.ucRecibo addReciboAreaObsolete()
+        private Catalogo._recibos.ucRecibo addReciboArea()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
@@ -133,14 +133,14 @@ namespace Catalogo
             return xRecibo;
         }
 
-        private Catalogo._productos.GridViewFilter2 addProductsArea()
+        /*private Catalogo._productos.GridViewFilter2 addProductsArea()
         {
             Catalogo._productos.GridViewFilter2 grid = new _productos.GridViewFilter2();
             new util.WFHostOverlay(productsArea, grid);
             return grid;
-        }
+        }*/
 
-        private Catalogo._productos.GridViewFilter2  addProductsAreaObsolete()
+        private Catalogo._productos.GridViewFilter2  addProductsArea()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
@@ -162,14 +162,14 @@ namespace Catalogo
             return gridViewControl;
         }
 
-        private Catalogo._novedades.ucNovedades addNovedadesArea()
+/*        private Catalogo._novedades.ucNovedades addNovedadesArea()
         {
             Catalogo._novedades.ucNovedades novedades = new _novedades.ucNovedades();
             new util.WFHostOverlay(grNovedades, novedades);
             return novedades;
-        }
+        }*/
 
-        private Catalogo._novedades.ucNovedades addNovedadesAreaObsolete()
+        private Catalogo._novedades.ucNovedades addNovedadesArea()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
