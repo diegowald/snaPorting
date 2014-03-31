@@ -30,7 +30,8 @@ namespace Catalogo._pedidos
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucPedido));
             this.PedidoTab = new System.Windows.Forms.TabControl();
             this.nvActTab = new System.Windows.Forms.TabPage();
             this.PnlMain = new System.Windows.Forms.Panel();
@@ -64,7 +65,7 @@ namespace Catalogo._pedidos
             this.PedidoAnterioresDataGridView = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ucPecPnlTop = new System.Windows.Forms.Panel();
+            this.ucPnlTop = new System.Windows.Forms.Panel();
             this.cboCliente = new System.Windows.Forms.ComboBox();
             this.btnIniciar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
@@ -77,7 +78,7 @@ namespace Catalogo._pedidos
             this.nvAntTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PedidoAnterioresDataGridView)).BeginInit();
             this.statusStrip1.SuspendLayout();
-            this.ucPecPnlTop.SuspendLayout();
+            this.ucPnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // PedidoTab
@@ -232,32 +233,34 @@ namespace Catalogo._pedidos
             // 
             // nvTransporteBuscarBtn
             // 
-            this.nvTransporteBuscarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.nvTransporteBuscarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.nvTransporteBuscarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.nvTransporteBuscarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.nvTransporteBuscarBtn.FlatAppearance.BorderSize = 2;
             this.nvTransporteBuscarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.nvTransporteBuscarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nvTransporteBuscarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nvTransporteBuscarBtn.ForeColor = System.Drawing.Color.White;
             this.nvTransporteBuscarBtn.Location = new System.Drawing.Point(505, 17);
             this.nvTransporteBuscarBtn.Name = "nvTransporteBuscarBtn";
-            this.nvTransporteBuscarBtn.Size = new System.Drawing.Size(26, 23);
+            this.nvTransporteBuscarBtn.Size = new System.Drawing.Size(30, 23);
             this.nvTransporteBuscarBtn.TabIndex = 39;
             this.nvTransporteBuscarBtn.Text = "...";
             this.nvTransporteBuscarBtn.UseVisualStyleBackColor = false;
             // 
             // nvComprarBtn
             // 
-            this.nvComprarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.nvComprarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.nvComprarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.nvComprarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.nvComprarBtn.FlatAppearance.BorderSize = 2;
             this.nvComprarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.nvComprarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nvComprarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nvComprarBtn.ForeColor = System.Drawing.Color.White;
-            this.nvComprarBtn.Location = new System.Drawing.Point(60, 17);
+            this.nvComprarBtn.Location = new System.Drawing.Point(60, 14);
             this.nvComprarBtn.Name = "nvComprarBtn";
-            this.nvComprarBtn.Size = new System.Drawing.Size(57, 23);
+            this.nvComprarBtn.Size = new System.Drawing.Size(60, 25);
             this.nvComprarBtn.TabIndex = 38;
             this.nvComprarBtn.Text = "Comprar";
             this.nvComprarBtn.UseVisualStyleBackColor = false;
@@ -268,7 +271,7 @@ namespace Catalogo._pedidos
             this.nvObservacionesTxt.Location = new System.Drawing.Point(537, 18);
             this.nvObservacionesTxt.MaxLength = 80;
             this.nvObservacionesTxt.Name = "nvObservacionesTxt";
-            this.nvObservacionesTxt.Size = new System.Drawing.Size(322, 20);
+            this.nvObservacionesTxt.Size = new System.Drawing.Size(318, 20);
             this.nvObservacionesTxt.TabIndex = 37;
             // 
             // raObservacionesLbl
@@ -381,8 +384,8 @@ namespace Catalogo._pedidos
             // 
             this.PedidoAnterioresDataGridView.AllowUserToAddRows = false;
             this.PedidoAnterioresDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.PedidoAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.PedidoAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.PedidoAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PedidoAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PedidoAnterioresDataGridView.Location = new System.Drawing.Point(3, 3);
@@ -410,17 +413,20 @@ namespace Catalogo._pedidos
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(22, 17);
             this.toolStripStatusLabel1.Text = ". . .";
             // 
-            // ucPecPnlTop
+            // ucPnlTop
             // 
-            this.ucPecPnlTop.Controls.Add(this.cboCliente);
-            this.ucPecPnlTop.Controls.Add(this.btnIniciar);
-            this.ucPecPnlTop.Controls.Add(this.btnImprimir);
-            this.ucPecPnlTop.Controls.Add(this.btnVer);
-            this.ucPecPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ucPecPnlTop.Location = new System.Drawing.Point(0, 0);
-            this.ucPecPnlTop.Name = "ucPecPnlTop";
-            this.ucPecPnlTop.Size = new System.Drawing.Size(887, 32);
-            this.ucPecPnlTop.TabIndex = 4;
+            this.ucPnlTop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ucPnlTop.BackgroundImage")));
+            this.ucPnlTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ucPnlTop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ucPnlTop.Controls.Add(this.cboCliente);
+            this.ucPnlTop.Controls.Add(this.btnIniciar);
+            this.ucPnlTop.Controls.Add(this.btnImprimir);
+            this.ucPnlTop.Controls.Add(this.btnVer);
+            this.ucPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucPnlTop.Location = new System.Drawing.Point(0, 0);
+            this.ucPnlTop.Name = "ucPnlTop";
+            this.ucPnlTop.Size = new System.Drawing.Size(887, 32);
+            this.ucPnlTop.TabIndex = 4;
             // 
             // cboCliente
             // 
@@ -430,7 +436,7 @@ namespace Catalogo._pedidos
             this.cboCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCliente.FormattingEnabled = true;
-            this.cboCliente.Location = new System.Drawing.Point(512, 5);
+            this.cboCliente.Location = new System.Drawing.Point(510, 5);
             this.cboCliente.MaxDropDownItems = 16;
             this.cboCliente.Name = "cboCliente";
             this.cboCliente.Size = new System.Drawing.Size(368, 23);
@@ -439,10 +445,11 @@ namespace Catalogo._pedidos
             // 
             // btnIniciar
             // 
-            this.btnIniciar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnIniciar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.btnIniciar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnIniciar.Enabled = false;
             this.btnIniciar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnIniciar.FlatAppearance.BorderSize = 2;
             this.btnIniciar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.btnIniciar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnIniciar.ForeColor = System.Drawing.Color.White;
@@ -457,10 +464,11 @@ namespace Catalogo._pedidos
             // 
             // btnImprimir
             // 
-            this.btnImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnImprimir.Enabled = false;
             this.btnImprimir.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnImprimir.FlatAppearance.BorderSize = 2;
             this.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImprimir.ForeColor = System.Drawing.Color.White;
@@ -473,10 +481,11 @@ namespace Catalogo._pedidos
             // 
             // btnVer
             // 
-            this.btnVer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnVer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.btnVer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnVer.Enabled = false;
             this.btnVer.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnVer.FlatAppearance.BorderSize = 2;
             this.btnVer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.btnVer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVer.ForeColor = System.Drawing.Color.White;
@@ -492,9 +501,9 @@ namespace Catalogo._pedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Controls.Add(this.PedidoTab);
-            this.Controls.Add(this.ucPecPnlTop);
+            this.Controls.Add(this.ucPnlTop);
             this.Controls.Add(this.statusStrip1);
             this.Name = "ucPedido";
             this.Size = new System.Drawing.Size(887, 411);
@@ -508,7 +517,7 @@ namespace Catalogo._pedidos
             ((System.ComponentModel.ISupportInitialize)(this.PedidoAnterioresDataGridView)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.ucPecPnlTop.ResumeLayout(false);
+            this.ucPnlTop.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -533,7 +542,7 @@ namespace Catalogo._pedidos
         private System.Windows.Forms.TextBox nvObservacionesTxt;
         private System.Windows.Forms.Label raObservacionesLbl;
         private System.Windows.Forms.Label nvImporteTotalLbl;
-        private System.Windows.Forms.Panel ucPecPnlTop;
+        private System.Windows.Forms.Panel ucPnlTop;
         private System.Windows.Forms.ComboBox cboCliente;
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.Button btnImprimir;

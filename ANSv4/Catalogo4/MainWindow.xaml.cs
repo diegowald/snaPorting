@@ -199,24 +199,24 @@ namespace Catalogo
             //misTabsAcciones.Visible = PieVisible;
             if (mostrarParteInferior)
             {
-                if (devoluciones != null)
+                if (xDevolucionesAreaDockC != null)
                 {
-                    devoluciones.Show();
+                    xDevolucionesAreaDockC.Show();
                 }
-                if (xxxxNotaVentaArea != null)
+                if (xNotaVentaAreaDockC != null)
                 {
-                    xxxxNotaVentaArea.Show();
+                    xNotaVentaAreaDockC.Show();
                 }
             }
             else
             {
-                if (devoluciones != null)
+                if (xDevolucionesAreaDockC != null)
                 {
-                    devoluciones.Hide();
+                    xDevolucionesAreaDockC.Hide();
                 }
-                if (xxxxNotaVentaArea != null)
+                if (xNotaVentaAreaDockC != null)
                 {
-                    xxxxNotaVentaArea.Hide();
+                    xNotaVentaAreaDockC.Hide();
                 }
             }
         }
