@@ -143,10 +143,8 @@ namespace Catalogo.Funciones
                 //}
             }
             catch (Exception e)
-            {               
-
-                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-
+            {
+                throw e;
             }
             finally
             {

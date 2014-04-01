@@ -77,26 +77,16 @@ namespace Catalogo._registro
 
             string functionReturnValue = null;
 
-            try
-            {
-                System.Security.Cryptography.MD5 m = System.Security.Cryptography.MD5.Create();
-                byte[] data = m.ComputeHash(System.Text.Encoding.UTF8.GetBytes(s));
+            System.Security.Cryptography.MD5 m = System.Security.Cryptography.MD5.Create();
+            byte[] data = m.ComputeHash(System.Text.Encoding.UTF8.GetBytes(s));
 
-                System.Text.StringBuilder sBuilder = new System.Text.StringBuilder();
-                foreach (byte b_loopVariable in data)
-                {
-                    sBuilder.Append(b_loopVariable.ToString("x2"));
-                }
+            System.Text.StringBuilder sBuilder = new System.Text.StringBuilder();
+            foreach (byte b_loopVariable in data)
+            {
+                sBuilder.Append(b_loopVariable.ToString("x2"));
+            }
 
-                functionReturnValue = sBuilder.ToString();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-            }
-            finally
-            {
-            }
+            functionReturnValue = sBuilder.ToString();
             return functionReturnValue.ToUpper();
         }
 
@@ -119,24 +109,14 @@ namespace Catalogo._registro
 
             bool functionReturnValue = false;
 
-            try
+            if (s.Trim().Length == 0)
             {
-                if (s.Trim().Length == 0)
-                {
-                    functionReturnValue = false;
-                }
-                else
-                {
-                    string xParam = Global01.IDMaquina.ToString() + Global01.IDMaquinaCRC.ToString();
-                    functionReturnValue = s == ObtenerCRC(ref xParam);
-                }
+                functionReturnValue = false;
             }
-            catch (Exception e)
+            else
             {
-                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-            }
-            finally
-            {
+                string xParam = Global01.IDMaquina.ToString() + Global01.IDMaquinaCRC.ToString();
+                functionReturnValue = s == ObtenerCRC(ref xParam);
             }
 
             return functionReturnValue;

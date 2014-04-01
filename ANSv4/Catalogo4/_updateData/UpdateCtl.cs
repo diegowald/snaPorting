@@ -141,38 +141,33 @@ namespace Catalogo.util
 
         private void getConfigValues()
         {
-            try
+            System.IO.StreamReader file = new System.IO.StreamReader(tempFolder + vclu);
+            name = "";
+            webVer = "";
+            updateURL = "";
+            for (int lineNo = 1; lineNo <= 3; lineNo++)
             {
-                System.IO.StreamReader file = new System.IO.StreamReader(tempFolder + vclu);
-                name = "";
-                webVer = "";
-                updateURL = "";
-                for (int lineNo = 1; lineNo <= 3; lineNo++)
+                string line = file.ReadLine();
+                switch (lineNo)
                 {
-                    string line = file.ReadLine();
-                    switch (lineNo)
-                    {
-                        case 1:
-                            name = line;
-                            break;
-                        case 2:
-                            webVer = line;
-                            break;
-                        case 3:
-                        default:
-                            updateURL = line;
-                            int spos = updateURL.LastIndexOf('/');
-                            outFile = updateURL.Substring(spos);
-                            break;
-                    }
+                    case 1:
+                        name = line;
+                        break;
+                    case 2:
+                        webVer = line;
+                        break;
+                    case 3:
+                    default:
+                        updateURL = line;
+                        int spos = updateURL.LastIndexOf('/');
+                        outFile = updateURL.Substring(spos + 1);
+                        break;
                 }
-                file.Close();
-                System.IO.File.Delete(tempFolder + vclu);
             }
-            catch
-            {
-            }
+            file.Close();
+            System.IO.File.Delete(tempFolder + vclu);
         }
+
 
         void client_DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
         {

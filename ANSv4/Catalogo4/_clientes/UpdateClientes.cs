@@ -234,21 +234,23 @@ namespace Catalogo._clientes
             catch (System.Data.OleDb.OleDbException ex)
             {
                 //ErrorHandler:
-
-                //        If Err.Number = -2147467259 Then
-                //            ' El registro está duplicado... debo borrar el registro e intentar nuevamente
-                //            ' El error dice así:
-                //            ' Los cambios solicitados en la tabla no se realizaron correctamente
-                //            '  porque crearían valores duplicados en el índice, clave principal o relación.
-                //            ' Cambie los datos en el campo o los campos que contienen datos duplicados,
-                //            ' quite el índice o vuelva a definir el índice para permitir entradas duplicadas e inténtelo de nuevo.
-                //            'diego            adoModulo.adoComandoIU(vg.Conexion, "DELETE FROM tblClientes WHERE ID = " & CStr(ID))
-                //            Err.Clear()
-                //            Resume
-                //        End If
-
-                //        cmd = Nothing
-                //        Err.Raise(Err.Number, Err.Source, Err.Description)
+                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147467259)
+                {
+                    //        If Err.Number = -2147467259 Then
+                    //            ' El registro está duplicado... debo borrar el registro e intentar nuevamente
+                    //            ' El error dice así:
+                    //            ' Los cambios solicitados en la tabla no se realizaron correctamente
+                    //            '  porque crearían valores duplicados en el índice, clave principal o relación.
+                    //            ' Cambie los datos en el campo o los campos que contienen datos duplicados,
+                    //            ' quite el índice o vuelva a definir el índice para permitir entradas duplicadas e inténtelo de nuevo.
+                    Funciones.oleDbFunciones.ComandoIU(Conexion, "DELETE FROM tblClientes WHERE ID = " + ID.ToString());
+                    Clientes_Add(Conexion, ID, RazonSocial, Cuit, Email, IDViajante, Domicilio,
+                        Ciudad, Telefono, Observaciones, Activo, F_Actualizacion, Cascara);
+                    //            Err.Clear()
+                    //            Resume
+                    //        End If
+                }
+                throw ex;
             }
         }
 

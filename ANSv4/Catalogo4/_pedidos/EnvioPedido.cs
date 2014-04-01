@@ -157,21 +157,25 @@ namespace Catalogo._pedidos
             }
             catch
             {
-                //If Err.Number = -2147024809 Then
-                // Intento con el ip interno
-                cliente = new PedidosWS.Pedidos();
-                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Pedidos.asmx?wsdl";
-                if (usaProxy)
+                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
                 {
-                    cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
-                }
+                    //If Err.Number = -2147024809 Then
+                    // Intento con el ip interno
+                    cliente = new PedidosWS.Pedidos();
+                    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Pedidos.asmx?wsdl";
+                    if (usaProxy)
+                    {
+                        cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                    }
 
-                _MacAddress = MacAddress;
-                _ip = ipAddressIntranet;
-                webServiceInicializado = true;
-                //        Else
-                //          Err.Raise(Err.Number, Err.Source, Err.Description)
-                //    End If
+                    _MacAddress = MacAddress;
+                    _ip = ipAddressIntranet;
+                    webServiceInicializado = true;
+                }
+                else
+                {
+                    throw;
+                }
             }
         }
 

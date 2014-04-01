@@ -67,21 +67,24 @@ namespace Catalogo._Application
             }
             catch
             {
-                //errhandler:
-                //        If Err.Number = -2147024809 Then
-                // Intento con el ip interno
-                cliente = new LLaveClienteWS.LLaveCliente();
-                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/LLaveCliente.asmx?wsdl";
-                if (usaProxy)
+                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
                 {
-                    cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                    //        If Err.Number = -2147024809 Then
+                    // Intento con el ip interno
+                    cliente = new LLaveClienteWS.LLaveCliente();
+                    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/LLaveCliente.asmx?wsdl";
+                    if (usaProxy)
+                    {
+                        cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                    }
+                    _MacAddress = MacAddress;
+                    webServiceInicializado = true;
+                    _ipAddress = ipAddressIntranet;
                 }
-                _MacAddress = MacAddress;
-                webServiceInicializado = true;
-                _ipAddress = ipAddressIntranet;
-                //        Else
-                //            Err.Raise(Err.Number, Err.Source, Err.Description)
-                //        End If
+                else
+                {
+                    throw;
+                }
             }
         }
 

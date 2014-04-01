@@ -205,7 +205,7 @@ namespace Catalogo._rendicion
             }
             catch
             {
-
+                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
                 //            if (Err().Number == -2147024809)
                 {
                     // Intento con el ip interno
@@ -220,11 +220,10 @@ namespace Catalogo._rendicion
                     m_ip = ipAddressIntranet;
                     WebServiceInicializado = true;
                 }
-                //else
-                //{
-                //    Err().Raise(Err().Number, Err().Source, Err().Description);
-                //}
-
+                else
+                {
+                    throw;
+                }
             }
         }
 

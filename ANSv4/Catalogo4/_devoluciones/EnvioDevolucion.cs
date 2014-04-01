@@ -163,6 +163,7 @@ namespace Catalogo._devolucion
             catch
             {
                 //            if (Err().Number == -2147024809)
+                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
                 {
                     // Intento con el ip interno
                     Cliente = new DevolucionWS.Devolucion();
@@ -176,10 +177,10 @@ namespace Catalogo._devolucion
                     m_ip = ipAddressIntranet;
                     WebServiceInicializado = true;
                 }
-                //          else
-                //          {
-                //              Err().Raise(Err().Number, Err().Source, Err().Description);
-                //          }
+                else
+                {
+                    throw;
+                }
             }
         }
 
