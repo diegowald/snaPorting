@@ -35,9 +35,14 @@
             this.labelCopyright = new System.Windows.Forms.Label();
             this.labelCompanyName = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.okButton = new System.Windows.Forms.Button();
+            this.btnRetry = new System.Windows.Forms.Button();
+            this.btnIgnore = new System.Windows.Forms.Button();
+            this.btnAbort = new System.Windows.Forms.Button();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel
@@ -51,7 +56,7 @@
             this.tableLayoutPanel.Controls.Add(this.labelCopyright, 1, 2);
             this.tableLayoutPanel.Controls.Add(this.labelCompanyName, 1, 3);
             this.tableLayoutPanel.Controls.Add(this.textBoxDescription, 1, 4);
-            this.tableLayoutPanel.Controls.Add(this.okButton, 1, 5);
+            this.tableLayoutPanel.Controls.Add(this.flowLayoutPanel1, 1, 5);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(9, 9);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -62,6 +67,7 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(417, 265);
             this.tableLayoutPanel.TabIndex = 0;
             // 
@@ -139,15 +145,57 @@
             this.textBoxDescription.TabStop = false;
             this.textBoxDescription.Text = "Description";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.okButton);
+            this.flowLayoutPanel1.Controls.Add(this.btnAbort);
+            this.flowLayoutPanel1.Controls.Add(this.btnRetry);
+            this.flowLayoutPanel1.Controls.Add(this.btnIgnore);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(140, 239);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(274, 23);
+            this.flowLayoutPanel1.TabIndex = 25;
+            // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(339, 239);
+            this.okButton.Location = new System.Drawing.Point(3, 3);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 24;
             this.okButton.Text = "&OK";
+            // 
+            // btnRetry
+            // 
+            this.btnRetry.DialogResult = System.Windows.Forms.DialogResult.Retry;
+            this.btnRetry.Location = new System.Drawing.Point(165, 3);
+            this.btnRetry.Name = "btnRetry";
+            this.btnRetry.Size = new System.Drawing.Size(75, 23);
+            this.btnRetry.TabIndex = 25;
+            this.btnRetry.Text = "&Retry";
+            this.btnRetry.UseVisualStyleBackColor = true;
+            // 
+            // btnIgnore
+            // 
+            this.btnIgnore.DialogResult = System.Windows.Forms.DialogResult.Ignore;
+            this.btnIgnore.Location = new System.Drawing.Point(3, 32);
+            this.btnIgnore.Name = "btnIgnore";
+            this.btnIgnore.Size = new System.Drawing.Size(75, 23);
+            this.btnIgnore.TabIndex = 26;
+            this.btnIgnore.Text = "&Ignore";
+            this.btnIgnore.UseVisualStyleBackColor = true;
+            // 
+            // btnAbort
+            // 
+            this.btnAbort.DialogResult = System.Windows.Forms.DialogResult.Abort;
+            this.btnAbort.Location = new System.Drawing.Point(84, 3);
+            this.btnAbort.Name = "btnAbort";
+            this.btnAbort.Size = new System.Drawing.Size(75, 23);
+            this.btnAbort.TabIndex = 27;
+            this.btnAbort.Text = "&Abort";
+            this.btnAbort.UseVisualStyleBackColor = true;
             // 
             // ErrorHandler
             // 
@@ -168,6 +216,7 @@
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -182,5 +231,9 @@
         private System.Windows.Forms.Label labelCompanyName;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnRetry;
+        private System.Windows.Forms.Button btnIgnore;
+        private System.Windows.Forms.Button btnAbort;
     }
 }

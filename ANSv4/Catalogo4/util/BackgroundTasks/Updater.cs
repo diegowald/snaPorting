@@ -213,22 +213,25 @@ namespace Catalogo.util.BackgroundTasks
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
-                /*ErrorGuardianLocalHandler:
-                  Select Case ErrorGuardianGlobalHandler(m_sMODULENAME_, PROCNAME_)
-                  Case vbAbort
-                      Err.Raise Err.Number
-                  Case vbRetry
-                      Resume
-                  Case vbIgnore
-                      Resume Next
-                  End Select
-                '-------- ErrorGuardian End ----------*/
                 if (Global01.TranActiva != null)
                 {
                     Global01.TranActiva.Rollback();
                     Global01.TranActiva = null;
+                }
+
+                switch (Funciones.util.ErrorGuardianGlobalHandler(e, errorHandling.ErrorHandler.errorType.RetryAble))
+                {
+                    case System.Windows.Forms.DialogResult.Abort:
+                        throw e;
+                        break;
+                    case System.Windows.Forms.DialogResult.Retry:
+                        enviarAuditoria2EnBloques();
+                        break;
+                    case System.Windows.Forms.DialogResult.Ignore:
+                    default:
+                        break;
                 }
             }
         }

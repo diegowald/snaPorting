@@ -235,16 +235,14 @@ namespace Catalogo.Funciones
 
         }
 
-        internal static long ErrorGuardianGlobalHandler(string m_sMODULENAME_, string PROCNAME_, Exception ex)
+        internal static DialogResult ErrorGuardianGlobalHandler(Exception ex, Catalogo.util.errorHandling.ErrorHandler.errorType errType)
         {
             //throw new Exception("Part 1 must be numeric");
-            Catalogo.util.errorHandling.ErrorHandler errorHandler = new Catalogo.util.errorHandling.ErrorHandler(ex);
-            errorHandler.ShowDialog();
-            //System.Windows.Forms.DialogResult ErrorGuardianUserReply;
-
+            Catalogo.util.errorHandling.ErrorHandler errorHandler = new Catalogo.util.errorHandling.ErrorHandler(ex, errType);
+            return errorHandler.ShowDialog();
+/*            //System.Windows.Forms.DialogResult ErrorGuardianUserReply;
             long functionReturnValue = 0;
-
-            return functionReturnValue;
+            return functionReturnValue;*/
         }
 
         public static DialogResult InputBox(string title, string promptText, int MaxLength, ref string value)

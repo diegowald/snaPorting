@@ -10,8 +10,6 @@ namespace Catalogo.Funciones
     class oleDbFunciones
     {
 
-        const string m_sMODULENAME_ = "oleDbFunciones";
-
         internal static System.Data.OleDb.OleDbConnection GetConn(string strConexion)
         {
             System.Data.OleDb.OleDbConnection conn = default(System.Data.OleDb.OleDbConnection);
@@ -122,8 +120,6 @@ namespace Catalogo.Funciones
 
         internal static void ComandoIU(System.Data.OleDb.OleDbConnection conexion, string TextoComando)
         {
-            
-            const string PROCNAME_ = "ComandoIU";
          
             if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); };
                    
@@ -155,8 +151,6 @@ namespace Catalogo.Funciones
 
         internal static void CambiarLinks(string db)
         {
-            const string PROCNAME_ = "CambiarLinks";
-
             try
             {
 
@@ -171,23 +165,17 @@ namespace Catalogo.Funciones
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-
-                switch (util.ErrorGuardianGlobalHandler(m_sMODULENAME_, PROCNAME_, e))
+                switch (util.ErrorGuardianGlobalHandler(e, Catalogo.util.errorHandling.ErrorHandler.errorType.RetryAble))
                 {
-                    case 1:
-                        //Constants.vbRetry:
-                        // ERROR: Not supported in C#: ResumeStatement
-
+                    case  System.Windows.Forms.DialogResult.Retry:
+                        CambiarLinks(db);
                         break;
-                    case 2:
-                        //Constants.vbIgnore:
-                        // ERROR: Not supported in C#: ResumeStatement
-
+                    case  System.Windows.Forms.DialogResult.Ignore:
+                        break;
+                    default:
                         break;
                 }
             }
-
             finally
             {
 
@@ -199,8 +187,6 @@ namespace Catalogo.Funciones
         private static void ProcesarTablasLinks(ADODB.Connection Conexion, string db)
         {
 	     
-	        const string PROCNAME_ = "ProcesarTablasLinks";
-
             try
             {
 	            ADOX.Catalog Adox_Cat = null;
@@ -230,7 +216,7 @@ namespace Catalogo.Funciones
             }
             catch (System.IO.IOException e)
             {
-                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                throw e;
             }
 
             finally
@@ -256,8 +242,6 @@ namespace Catalogo.Funciones
         public static void CompactDatabase(string dataBase)
         {
 
-            const string PROCNAME_ = "CompactDatabase";
-
             try
             {
                 JRO.JetEngine JRO = new JRO.JetEngine();
@@ -278,10 +262,8 @@ namespace Catalogo.Funciones
             }
             catch (System.IO.IOException e)
             {
-                throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-               
+                throw e;
             }
-
             finally
             {
         
@@ -293,8 +275,6 @@ namespace Catalogo.Funciones
         internal static void CambiarQuery(string pQueryNombre, string pQueryComando)
         {
             
-            const string PROCNAME_ = "CambiarQuery";
-
             try
             {
               
@@ -322,7 +302,7 @@ namespace Catalogo.Funciones
             }
             catch (System.IO.IOException e)
             {
-                throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                throw e;
 
             }
 
@@ -336,8 +316,6 @@ namespace Catalogo.Funciones
 
         internal static void Cambiar_usp(string pQueryNombre, string pQueryComando)
         {
-            const string PROCNAME_ = "Cambiar_usp";
-            
             try
             {
                 ADODB.Connection adoCN = new ADODB.Connection();
@@ -363,15 +341,19 @@ namespace Catalogo.Funciones
             }
             catch (System.IO.IOException e)
             {
-                throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-
+                switch (util.ErrorGuardianGlobalHandler(e, Catalogo.util.errorHandling.ErrorHandler.errorType.RetryAble))
+                {
+                    case System.Windows.Forms.DialogResult.Retry:
+                        Cambiar_usp(pQueryNombre, pQueryComando);
+                        break;
+                    default:
+                        // Ignore
+                        break;
+                }
             }
-
             finally
             {
-
             }
-
           }
       
     }

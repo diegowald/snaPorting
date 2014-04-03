@@ -518,7 +518,6 @@ namespace Catalogo._pedidos
         private void btnVer_Click(object sender, EventArgs e)
         {
 
-            const string PROCNAME_ = "btnVer_Click";
 
             Cursor.Current = Cursors.WaitCursor;
 
