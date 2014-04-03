@@ -120,6 +120,12 @@
     <Compile Include="util\errorHandling\ErrorHandler.Designer.cs">
       <DependentUpon>ErrorHandler.cs</DependentUpon>
     </Compile>
+    <Compile Include="util\FlashControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="util\FlashControl.Designer.cs">
+      <DependentUpon>FlashControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="util\SimplePing.cs" />
     <Compile Include="util\singleton.cs" />
     <Compile Include="util\WFHostOverlay.xaml.cs">
@@ -378,6 +384,9 @@
     <EmbeddedResource Include="util\errorHandling\ErrorHandler.resx">
       <DependentUpon>ErrorHandler.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="util\FlashControl.resx">
+      <DependentUpon>FlashControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="_devoluciones\ucDevolucion.resx">
       <DependentUpon>ucDevolucion.cs</DependentUpon>
     </EmbeddedResource>
@@ -499,10 +508,27 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+    <COMReference Include="AxShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
     <COMReference Include="JRO">
       <Guid>{AC3B8B4C-B6CA-11D1-9F31-00C04FC29D52}</Guid>
       <VersionMajor>2</VersionMajor>
       <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="ShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>

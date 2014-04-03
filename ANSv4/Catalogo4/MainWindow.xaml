@@ -98,7 +98,7 @@
                     <ColumnDefinition Width="100" />
                 </Grid.ColumnDefinitions>
                 <Image Name="topLogo" Source="pack://siteoforigin:,,,/recursos/Nuevo-logo-Auto-nautica-original.png" Grid.Column="0" Margin="10,-13.433,1059.015,0" Grid.ColumnSpan="2" />
-                <Image Name="topBanner" Source="pack://siteoforigin:,,,/recursos/Nuevo-logo-Auto-nautica-horizontal-original.png" Grid.Column="1" Margin="17.985,0,37.313,0" />
+                <Grid Name="topBanner" Grid.Column="1" /><!--<Image Name="topBanner" Source="pack://siteoforigin:,,,/recursos/Nuevo-logo-Auto-nautica-horizontal-original.png" Grid.Column="1" Margin="17.985,0,37.313,0" />-->
                 <Image Name="topRedesSociales" Source="http://paradigmabb.no-ip.biz:8082/autonautica/img/cotizacion-redes.png" Grid.Column="1" Grid.ColumnSpan="2" Margin="1057.522,-13.433,10,0" />
             </Grid>
 

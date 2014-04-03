@@ -235,10 +235,11 @@ namespace Catalogo.Funciones
 
         }
 
-        internal static long ErrorGuardianGlobalHandler(string m_sMODULENAME_, string PROCNAME_)
+        internal static long ErrorGuardianGlobalHandler(string m_sMODULENAME_, string PROCNAME_, Exception ex)
         {
             //throw new Exception("Part 1 must be numeric");
-     
+            Catalogo.util.errorHandling.ErrorHandler errorHandler = new Catalogo.util.errorHandling.ErrorHandler(ex);
+            errorHandler.ShowDialog();
             //System.Windows.Forms.DialogResult ErrorGuardianUserReply;
 
             long functionReturnValue = 0;
