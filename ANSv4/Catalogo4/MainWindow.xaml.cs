@@ -225,31 +225,42 @@ namespace Catalogo
 
         private void DocumentPane_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            //System.Diagnostics.Debug.WriteLine((e.AddedItems[0] as AvalonDock.DocumentContent).Title);
-            bool mostrarParteInferior = (e.AddedItems[0] as AvalonDock.DocumentContent).Title == "Productos";
+            ////System.Diagnostics.Debug.WriteLine((e.AddedItems[0] as AvalonDock.DocumentContent).Title);
+            //bool mostrarParteInferior = (e.AddedItems[0] as AvalonDock.DocumentContent).Title == "Productos";
 
-            if (mostrarParteInferior)
-            {
-                if (xDevolucionesAreaDockC != null)
-                {
-                    xDevolucionesAreaDockC.Show();
-                }
-                if (xNotaVentaAreaDockC != null)
-                {
-                    xNotaVentaAreaDockC.Show();
-                }
-            }
-            else
-            {
-                if (xDevolucionesAreaDockC != null)
-                {
-                    xDevolucionesAreaDockC.Hide();
-                }
-                if (xNotaVentaAreaDockC != null)
-                {
-                    xNotaVentaAreaDockC.Hide();
-                }
-            }
+            //if (mostrarParteInferior)
+            //{
+            //    if (xVtaDevDockP != null)
+            //    {
+            //        //xVtaDevDockP.Visibility = System.Windows.Visibility.Visible;
+            //    };
+
+            //    if (xDevolucionesAreaDockC != null)
+            //    {
+            //        xDevolucionesAreaDockC.Show();
+            //    }
+            //    if (xNotaVentaAreaDockC != null)
+            //    {
+            //        xNotaVentaAreaDockC.Show();
+            //    }
+            //}
+            //else
+            //{
+            //    if (xVtaDevDockP != null)
+            //    {
+            //        //xVtaDevDockP.Visibility = System.Windows.Visibility.Collapsed;
+            //    };                
+                
+
+            //    if (xDevolucionesAreaDockC != null)
+            //    {
+            //        xDevolucionesAreaDockC.Hide();
+            //    }
+            //    if (xNotaVentaAreaDockC != null)
+            //    {
+            //        xNotaVentaAreaDockC.Hide();
+            //    }
+            //}
         }
 
 
