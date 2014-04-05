@@ -9,7 +9,7 @@
         WindowState="Normal"         
         x:Name="CatalogoMainWindow"
         BorderThickness="0"
-        ResizeMode="CanResizeWithGrip" Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="True" WindowStyle="None">
+        ResizeMode="CanResizeWithGrip" Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None">
 
     <Border Grid.Row="0" x:Name="LayoutRoot" 
           Background="White"  BorderBrush="#E31C19" BorderThickness="2"
@@ -118,7 +118,7 @@
                                     </Grid.RowDefinitions>
 
                                     <Grid x:Name="searchArea"   Grid.Row="0"  />
-                                    <Grid x:Name="productsArea" Grid.Row="1" Height="120" />
+                                    <Grid x:Name="productsArea" Grid.Row="1" />
                                     <GridSplitter Grid.Row="2" ResizeDirection="Rows" Height="3" ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                     <_productos:DetalleProducto Grid.Row="3" x:Name="productDetalle" />
                                 </Grid>
