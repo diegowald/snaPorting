@@ -43,7 +43,7 @@ namespace Catalogo
             flash.Dock = System.Windows.Forms.DockStyle.Top;
             flash.Location = new System.Drawing.Point(0, 0);
             flash.Name = "flash";
-      ///      flash.file = "http://samples.mplayerhq.hu/SWF/962_fws.swf";
+            flash.file = "http://samples.mplayerhq.hu/SWF/962_fws.swf";
             //filterControl.Size = new System.Drawing.Size(640, 480);
             //filterControl.TabIndex = 0;
             //gridViewControl.Text = "Lista de Productos";

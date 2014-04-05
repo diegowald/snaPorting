@@ -26,8 +26,6 @@ namespace Catalogo.util.errorHandling
             this.labelCompanyName.Text = AssemblyCompany;
             ///this.textBoxDescription.Text = AssemblyDescription;
             this.textBoxDescription.Text = ex.Message;
-            this.lblClass.Text =String.Format("Clase: {0}", ex.Source);
-            this.lblMethod.Text = String.Format("Method: {0}", ex.TargetSite.Name);
             switch (errType)
             {
                 case errorType.RetryAble:
