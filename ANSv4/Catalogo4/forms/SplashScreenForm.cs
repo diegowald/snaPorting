@@ -8,16 +8,22 @@ using System.Windows.Forms;
 using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo
 {
-    public partial class SplashScreenForm : Form, Catalogo.Funciones.emitter_receiver.IReceptor<util.Pair<string, float>>
+    public partial class SplashScreenForm : Form, 
+        Catalogo.Funciones.emitter_receiver.IReceptor<util.Pair<string, float>>,
+        Catalogo.Funciones.emitter_receiver.ICancellableReceiver
     {
         delegate void StringParameterDelegate(string Text);
         delegate void StringParameterWithStatusDelegate(string Text, TypeOfMessage tom);
         delegate void SplashShowCloseDelegate();
+        delegate void RecepcionDelegate(util.Pair<string, float> dato);
+        delegate void RequestShowCancelButtonDelegate();
 
         /// <summary>
         /// To ensure splash screen is closed using the API and not by keyboard or any other things
         /// </summary>
         bool CloseSplashScreenFlag = false;
+
+        bool doCancel = false;
 
         /// <summary>
         /// Base constructor
@@ -36,6 +42,8 @@ namespace Catalogo
 
             //progressBar1.Show();
             notifications.NotificationCenter.instance.attachReceptor(this);
+            notifications.NotificationCenter.instance.attachCancellableReceptor(this);
+            btnCancel.Hide();
         }
 
         /// <summary>
@@ -129,7 +137,49 @@ namespace Catalogo
 
         public void onRecibir(util.Pair<string, float> dato)
         {
-            this.UdpateStatusText(dato.first + ": " + dato.second.ToString() + "%");
+            if (InvokeRequired)
+            {
+                // We're not in the UI thread, so we need to call BeginInvoke
+                BeginInvoke(new RecepcionDelegate(onRecibir), new object[] { dato });
+                return;
+            }
+
+            if (dato.second != -1)
+            {
+                progressBar1.Show();
+                progressBar1.Minimum = 0;
+                progressBar1.Maximum = 100;
+                progressBar1.Value = (int)dato.second;
+            }
+            else
+            {
+                progressBar1.Hide();
+            }
+            //this.UdpateStatusText(dato.first + ": " + dato.second.ToString() + "%");
+            this.UdpateStatusText(dato.first);
+        }
+
+        private void showCancelButton()
+        {
+            btnCancel.Show();
+        }
+
+        public void onRequestCancel(ref bool cancel)
+        {
+            cancel = doCancel;
+            if (InvokeRequired)
+            {
+                // We're not in the UI thread, so we need to call BeginInvoke
+                BeginInvoke(new RequestShowCancelButtonDelegate(showCancelButton), new object[] { });
+                return;
+            }
+            btnCancel.Show();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            doCancel = true;
+            btnCancel.Hide();
         }
     }
 }

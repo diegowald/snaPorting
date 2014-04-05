@@ -30,7 +30,9 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,25 +63,48 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.UseWaitCursor = true;
             // 
+            // progressBar2
+            // 
+            this.progressBar2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.progressBar2.Location = new System.Drawing.Point(0, 245);
+            this.progressBar2.MarqueeAnimationSpeed = 50;
+            this.progressBar2.Name = "progressBar2";
+            this.progressBar2.Size = new System.Drawing.Size(362, 12);
+            this.progressBar2.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar2.TabIndex = 0;
+            this.progressBar2.Visible = false;
+            // 
             // progressBar1
             // 
             this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(0, 209);
+            this.progressBar1.Location = new System.Drawing.Point(0, 233);
             this.progressBar1.MarqueeAnimationSpeed = 50;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(362, 12);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar1.TabIndex = 0;
+            this.progressBar1.TabIndex = 3;
             this.progressBar1.Visible = false;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(144, 199);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 4;
+            this.btnCancel.Text = "Cancelar";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // SplashScreenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 221);
+            this.ClientSize = new System.Drawing.Size(362, 257);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.progressBar2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SplashScreenForm";
             this.Opacity = 0.6D;
@@ -98,6 +123,8 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

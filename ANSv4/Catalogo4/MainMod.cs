@@ -225,7 +225,8 @@ namespace Catalogo
  
             //- Registro y activación -------------XX
         AcaRegistro:
-            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -286,7 +287,7 @@ namespace Catalogo
                 // registrada y activa
                 Global01.AppActiva = true;
                 ///// BORRAR ESTA LINEA!!!!!!!
-                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
             };
             //--------------------------------------XX
 

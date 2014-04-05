@@ -3,7 +3,8 @@ using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._clientes
 {
-    class UpdateClientes : Funciones.emitter_receiver.IEmisor<util.Pair<string, float>>
+    class UpdateClientes : Funciones.emitter_receiver.IEmisor<util.Pair<string, float>>,
+        Funciones.emitter_receiver.ICancellableEmitter
     {
         // Define como se llama este modulo para el control de errores
 
@@ -128,6 +129,7 @@ namespace Catalogo._clientes
                 if (!cancel)
                 {
                     this.emitir(new util.Pair<string, float>("Sincronizando Clientes ...", 30));//, Cancel)
+                    this.requestCancel(ref cancel);
                 }
 
                 Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "DELETE FROM tblClientes");
@@ -140,21 +142,25 @@ namespace Catalogo._clientes
                 if (!cancel)
                 {
                     this.emitir(new util.Pair<string, float>("Sincronizando Cuentas Corrientes", 60));///, Cancel)
+                    this.requestCancel(ref cancel);                                                                                                      ///this.requestCancel(ref cancel);
                 }
 
                 if (!cancel)
                 {
                     SincronizarTodasLasCtasCtes(ref cancel);
+                    this.requestCancel(ref cancel);
                 }
 
                 if (!cancel)
                 {
                     this.emitir(new util.Pair<string, float>("Finalizando Sincronización de Clientes", 90));//, Cancel)
+                    this.requestCancel(ref cancel);
                 }
 
                 if (!cancel)
                 {
                     sincroClientesCompletada(ref cancel);
+                    this.requestCancel(ref cancel);
                 }
 
                 if (cancel)
@@ -165,6 +171,7 @@ namespace Catalogo._clientes
                         Global01.TranActiva = null;
                     }
                     this.emitir(new util.Pair<string, float>("Sincronización de Clientes con Errores", 100));///, Cancel)
+                    this.requestCancel(ref cancel);
                 }
                 else
                 {
@@ -299,13 +306,14 @@ namespace Catalogo._clientes
             }
 
             this.emitir(new util.Pair<string,float>("Sincronizando Clientes ...", 40));//, Cancel)
+            this.requestCancel(ref cancel);
 
             this.emitir(new util.Pair<string,float>("Importando Mis Clientes", 0));///, Cancel)
-
-            //    'diego        If Cancel Then
-            //    'diego            Exit Sub
-            //    'diego End If
-
+            this.requestCancel(ref cancel);
+            if (cancel)
+            {
+                return;
+            }
 
             // Obtengo la cantidad de modificaciones a importar
             long cantidadAImportar = cliente.GetTodosLosClientes_Cantidad(_MacAddress);
@@ -341,6 +349,7 @@ namespace Catalogo._clientes
                             if (cantImportada % 31 == 0)
                             {
                                 this.emitir(new util.Pair<string, float>("Sincronizando Clientes ...", ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100));//, Cancel)
+                                this.requestCancel(ref cancel);
                                 if (cancel)
                                 {
                                     return;
@@ -364,9 +373,10 @@ namespace Catalogo._clientes
                 return;
             }
             this.emitir(new util.Pair<string,float>("Sincronizando de Clientes ...", 60));//, Cancel)
+            this.requestCancel(ref cancel);
 
             this.emitir(new util.Pair<string,float>("Importando Cuentas Corrientes", 0));//, Cancel)
-
+            this.requestCancel(ref cancel);
             if (cancel)
             {
                 return;
@@ -411,6 +421,7 @@ namespace Catalogo._clientes
                             if (CantidadImportada % 31 == 0)
                             {
                                 this.emitir(new util.Pair<string, float>("Importando Cuentas Corrientes", (float)CantidadImportada / CantidadAImportar * 100));//, Cancel)
+                                this.requestCancel(ref cancel);
                                 if (cancel)
                                 {
                                     return;
@@ -420,6 +431,7 @@ namespace Catalogo._clientes
                         catch
                         {
                             // catch'em all. Ver la manera de corregir esto...
+                            throw;
                         }
                         lastId = long.Parse(row["ID"].ToString());
                     }
@@ -432,5 +444,12 @@ namespace Catalogo._clientes
             get;
             set;
         }
+
+        public Funciones.emitter_receiver.onRequestCancel requestCancel
+        {
+            get;
+            set;
+        }
+
     }
 }

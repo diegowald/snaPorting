@@ -7,7 +7,9 @@ using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo.util.BackgroundTasks
 {
     public class Updater : BackgroundTaskBase,
-        Funciones.emitter_receiver.IReceptor<util.Pair<string, float>> // Para recibir mensajes de Clientes
+        Funciones.emitter_receiver.IReceptor<util.Pair<string, float>>, // Para recibir mensajes de Clientes
+        Funciones.emitter_receiver.ICancellableEmitter, // Para chequear si es necesario cancelar
+        Funciones.emitter_receiver.ICancellableReceiver // Para recibir notificaciones de recepcion de cancelacion
     {
         public enum UpdateType
         {
@@ -61,6 +63,7 @@ namespace Catalogo.util.BackgroundTasks
                         Catalogo._clientes.UpdateClientes envio = new _clientes.UpdateClientes(Global01.Conexion,
                             Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
                         envio.attachReceptor(this);
+                        envio.attachCancellableReceptor(this);
                         if (envio.inicializado)
                         {
                             envio.sincronizarClientes();
@@ -119,12 +122,11 @@ namespace Catalogo.util.BackgroundTasks
 
         public override void cancelled()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override void finished()
         {
-            throw new NotImplementedException();
             //System.Windows.Forms.MessageBox.Show("hasta acá todo va bien");
         }
 
@@ -239,5 +241,16 @@ namespace Catalogo.util.BackgroundTasks
             notifications.NotificationCenter.instance.notificar(dato.first, dato.second);
         }
 
+
+        public Funciones.emitter_receiver.onRequestCancel requestCancel
+        {
+            get;
+            set;
+        }
+
+        public void onRequestCancel(ref bool cancel)
+        {
+            notifications.NotificationCenter.instance.requestCancel(ref cancel);
+        }
     }
 }

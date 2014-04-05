@@ -183,11 +183,8 @@
                         </ad:DockablePane>
 
                     </ad:ResizingPanel>
-                    <ad:DockablePane x:Name="xVtaDevDockP" ad:ResizingPanel.ResizeHeight="250" SelectedIndex="0" Visibility="Visible" >
-                        <ad:DockablePane.BindingGroup>
-                            <BindingGroup/>
-                        </ad:DockablePane.BindingGroup>
-                        <ad:DockableContent Title="Nota de Venta" x:Name="xNotaVentaAreaDockC">
+                    <ad:DocumentPane x:Name="xVtaDevDockP" ad:ResizingPanel.ResizeHeight="250" SelectedIndex="0" Visibility="Visible">
+                        <ad:DockableContent Title="Nota de Venta" x:Name="xNotaVentaAreaDockC" IsCloseable="False">
                             <Grid Name="grNotaVenta">
                                 <Grid.RowDefinitions>
                                     <RowDefinition  Height="*"/>
@@ -195,7 +192,7 @@
                                 <Grid x:Name="xNotaVentaArea" Grid.Row="0" />
                             </Grid>
                         </ad:DockableContent>
-                        <ad:DockableContent Title="Devoluciones" x:Name="xDevolucionesAreaDockC">
+                        <ad:DockableContent Title="Devoluciones" x:Name="xDevolucionesAreaDockC" IsCloseable="False">
                             <Grid Name="grDevoluciones">
                                 <Grid.RowDefinitions>
                                     <RowDefinition  Height="*"/>
@@ -203,7 +200,7 @@
                                 <Grid x:Name="xDevolucionArea" Grid.Row="0" />
                             </Grid>                            
                         </ad:DockableContent>
-                    </ad:DockablePane>
+                    </ad:DocumentPane>
                 </ad:ResizingPanel>
             </ad:DockingManager>
 
