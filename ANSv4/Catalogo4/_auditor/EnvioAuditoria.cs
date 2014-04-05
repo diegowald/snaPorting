@@ -68,25 +68,21 @@ namespace Catalogo._audit
             }
             catch
             {
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                //If Err.Number = -2147024809 Then
+                // Intento con el ip interno
+                cliente = new AuditWS.audit_v_304();
+                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/audit_v_304.asmx?wsdl";
+                if (usaProxy)
                 {
-                    //If Err.Number = -2147024809 Then
-                    // Intento con el ip interno
-                    cliente = new AuditWS.audit_v_304();
-                    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/audit_v_304.asmx?wsdl";
-                    if (usaProxy)
-                    {
-                        cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
-                    }
+                    cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                }
 
-                    _MacAddress = MacAddress;
-                    webServiceInicializado = true;
-                    _ipAddress = ipAddressIntranet;
-                }
-                else
-                {
-                    throw;
-                }
+                _MacAddress = MacAddress;
+                webServiceInicializado = true;
+                _ipAddress = ipAddressIntranet;
+                //   Else
+                //       Err.Raise(Err.Number, Err.Source, Err.Description)
+                //   End If
             }
         }
 

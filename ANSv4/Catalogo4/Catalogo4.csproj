@@ -114,12 +114,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
-    <Compile Include="util\errorHandling\ErrorHandler.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="util\errorHandling\ErrorHandler.Designer.cs">
-      <DependentUpon>ErrorHandler.cs</DependentUpon>
-    </Compile>
     <Compile Include="util\SimplePing.cs" />
     <Compile Include="util\singleton.cs" />
     <Compile Include="util\WFHostOverlay.xaml.cs">
@@ -374,9 +368,6 @@
     <EmbeddedResource Include="reportes\Pedido_Enc4.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Pedido_Enc4.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="util\errorHandling\ErrorHandler.resx">
-      <DependentUpon>ErrorHandler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_devoluciones\ucDevolucion.resx">
       <DependentUpon>ucDevolucion.cs</DependentUpon>

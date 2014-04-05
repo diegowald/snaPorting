@@ -75,24 +75,20 @@ namespace Catalogo._appConfig
             }
             catch (Exception ex)
             {
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                //        If Err.Number = -2147024809 Then
+                //            ' Intento con el ip interno
+                cliente = new AppConfigWS.appConfig();
+                cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/appConfig.asmx?wsdl";
+                if (usaProxy)
                 {
-                    //        If Err.Number = -2147024809 Then
-                    //            ' Intento con el ip interno
-                    cliente = new AppConfigWS.appConfig();
-                    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/appConfig.asmx?wsdl";
-                    if (usaProxy)
-                    {
-                        cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
-                    }
-                    _macAddress = MacAddress;
-                    webServiceInicializado = true;
-                    _ipAddress = ipAddressIntranet;
+                    cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
                 }
-                else
-                {
-                    throw ex;
-                }
+                _macAddress = MacAddress;
+                webServiceInicializado = true;
+                _ipAddress = ipAddressIntranet;
+                //        Else
+                //            Err.Raise(Err.Number, Err.Source, Err.Description)
+                //        End If
             }
         }
 

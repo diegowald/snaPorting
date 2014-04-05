@@ -241,7 +241,6 @@ public class EnvioRecibo
         }
         catch
         {
-            if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
             //        if (Err().Number == -2147024809)
             {
                 // Intento con el ip interno
@@ -256,10 +255,10 @@ public class EnvioRecibo
                 webServiceInicializado = true;
                 _ip = ipAddressIntranet;
             }
-            else
-            {
-                throw;
-            }
+            //      else
+            //      {
+            //          Err().Raise(Err().Number, Err().Source, Err().Description);
+            //      }
         }
     }
 }
