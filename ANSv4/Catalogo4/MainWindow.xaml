@@ -6,104 +6,93 @@
         Title="Catálogo Dígital de Productos - Auto Náutica Sur s.r.l. - v4.0" 
         Loaded="Window_Loaded_1" 
         WindowStartupLocation="CenterScreen" 
-        WindowState="Normal"         
+        WindowState="Normal"        
         x:Name="CatalogoMainWindow"
         BorderThickness="0"
-        ResizeMode="CanResizeWithGrip" Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None">
+        ResizeMode="CanResize"  Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFE31C19">
 
     <Border Grid.Row="0" x:Name="LayoutRoot" 
-          Background="White"  BorderBrush="#E31C19" BorderThickness="2"
-          MouseLeftButtonDown="Title_MouseLeftButtonDown" CornerRadius="0">
-
-        <Grid>
+          Background="White" BorderBrush="#E31C19" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">
+           
+            <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
                 <RowDefinition Height="90"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <Grid  x:Name="HeaderGrid" VerticalAlignment="Top" Grid.Row="0">
-                <Grid                
-                x:Name="DragableArea"
-                Background="White"/>
-
-                <StackPanel
-                Orientation="Horizontal"
-                Margin="0,5,5,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Background="White">
-               
-                <Button Content="2" BorderBrush="White"
-                x:Name="ChangeViewButton"
-                FontFamily="Webdings"                        
-                FontSize="12"
-                Width="25"
-                Height="25"
-                Margin="15,0,0,0"                        
-                Background="White"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                HorizontalAlignment="Right" Click="ChangeViewButton_Click"
-                />
-
-                <Button Content="0" BorderBrush="White"
-                x:Name="MinimizeButton"
-                FontFamily="Webdings"                        
-                FontSize="12"
-                Width="25"
-                Height="25"
-                Margin="1,0,0,0"                
-                Background="White"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                HorizontalAlignment="Right" Click="MinimizeButton_Click"
-                />
-
-                <Button Content="1" BorderBrush="White"
-                x:Name="MaximizeButton"
-                FontFamily="Webdings"                        
-                FontSize="12"
-                Width="25"
-                Height="25"
-                Margin="1,0,0,0"                
-                Background="White"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                HorizontalAlignment="Right" Click="MaximizeButton_Click"
-                />
-
-                <Button Content="r" BorderBrush="White"
-                x:Name="CloseButton"                            
-                FontFamily="Webdings"                        
-                FontSize="12"
-                Width="25"
-                Height="25"
-                Margin="1,0,0,0"                        
-                Background="White"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center"
-                HorizontalAlignment="Right"
-                Click="Exit"
-                />
-
-                </StackPanel>
-            </Grid>
-
-            <Grid Name="header" Visibility="Visible" Grid.Row="1">
+            <Grid Name="header" Visibility="Visible" Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
-                <Image Name="topLogo" Source="pack://siteoforigin:,,,/recursos/Nuevo-logo-Auto-nautica-original.png" Grid.Column="0" Margin="10,-13.433,1059.015,0" Grid.ColumnSpan="2" />
+                <Image Name="topLogo" Grid.Column="0" Source="recursos/Nuevo-logo-Auto-nautica-original.png"  Stretch="None" Width="150" Height="150" Margin="1"/>                                
+                <Image Name="topBanner" Source="recursos/top1.png" Grid.Column="1" Stretch="Fill"/>
+                <!--
+                <Grid Name="topBanner" Grid.Column="1" />
                 <Image Name="topBanner" Source="pack://siteoforigin:,,,/recursos/Nuevo-logo-Auto-nautica-horizontal-original.png" Grid.Column="1" Margin="17.985,0,37.313,0" />
-                <Image Name="topRedesSociales" Source="http://paradigmabb.no-ip.biz:8082/autonautica/img/cotizacion-redes.png" Grid.Column="1" Grid.ColumnSpan="2" Margin="1057.522,-13.433,10,0" />
+                -->
+                <WrapPanel  Orientation="Vertical"   HorizontalAlignment="Right" Grid.Column="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Button Content="2" BorderBrush="White" 
+                    x:Name="ChangeViewButton"
+                    FontFamily="Webdings"                        
+                    FontSize="12"
+                    Width="25"
+                    Height="25"
+                    Margin="15,0,0,0"                        
+                    Background="White"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    HorizontalAlignment="Right" Click="ChangeViewButton_Click"
+                    />
+
+                    <Button Content="0" BorderBrush="White"
+                    x:Name="MinimizeButton"
+                    FontFamily="Webdings"                        
+                    FontSize="12"
+                    Width="25"
+                    Height="25"
+                    Margin="1,0,0,0"                
+                    Background="White"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    HorizontalAlignment="Right" Click="MinimizeButton_Click"
+                    />
+
+                    <Button Content="1" BorderBrush="White"
+                    x:Name="MaximizeButton"
+                    FontFamily="Webdings"                        
+                    FontSize="12"
+                    Width="25"
+                    Height="25"
+                    Margin="1,0,0,0"                
+                    Background="White"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    HorizontalAlignment="Right" Click="MaximizeButton_Click"
+                    />
+
+                    <Button Content="r" BorderBrush="White"
+                    x:Name="CloseButton"                            
+                    FontFamily="Webdings"                        
+                    FontSize="12"
+                    Width="25"
+                    Height="25"
+                    Margin="1,0,0,0"                        
+                    Background="White"
+                    HorizontalContentAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Click="Exit"
+                    />
+                </StackPanel>
+                <Image Name="topRedesSociales" VerticalAlignment="Bottom"  Source="recursos/cotizacion-redes.png" Margin="0,30,3,0" Width="164"/>                    
+                </WrapPanel>
             </Grid>
 
-
-            <ad:DockingManager x:Name="dockManager" Grid.Row="2" IsAnimationEnabled="True" >
+            <ad:DockingManager x:Name="dockManager" Grid.Row="1" IsAnimationEnabled="True" >
                 <ad:ResizingPanel Orientation="Vertical">
                     <ad:ResizingPanel Orientation="Horizontal">
                         <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0" SelectionChanged="DocumentPane_SelectionChanged_1">
@@ -113,14 +102,14 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="120" />
+                                        <RowDefinition Height="3"/>
+                                        <RowDefinition Height="90" />
                                     </Grid.RowDefinitions>
 
                                     <Grid x:Name="searchArea"   Grid.Row="0"  />
-                                    <Grid x:Name="productsArea" Grid.Row="1" />
-                                    <GridSplitter Grid.Row="2" ResizeDirection="Rows" Height="3" ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                    <_productos:DetalleProducto Grid.Row="3" x:Name="productDetalle" />
+                                    <Grid x:Name="productsArea" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                                    <GridSplitter Grid.Row="2" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch"/>
+                                    <_productos:DetalleProducto Grid.Row="3" x:Name="productDetalle"/>
                                 </Grid>
                             </ad:DocumentContent>
 
@@ -151,6 +140,15 @@
                                 </Grid>
                             </ad:DocumentContent>
 
+                            <ad:DocumentContent Title="Bandeja de Enviados" IsCloseable="False" IsFloatingAllowed="False">
+                                <Grid Name="grMovimientos">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition  Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid x:Name="xMovimientosArea" Grid.Row="0" />
+                                </Grid>
+                            </ad:DocumentContent>
+                            
                             <ad:DocumentContent Title="Novedades en Línea" IsCloseable="False" IsFloatingAllowed="False">
                                 <Grid Name="grNovedades">
                                     <Grid.RowDefinitions>
@@ -185,7 +183,10 @@
                         </ad:DockablePane>
 
                     </ad:ResizingPanel>
-                    <ad:DockablePane x:Name="xVtaDevDockP" ad:ResizingPanel.ResizeHeight="250" SelectedIndex="0" Visibility="Visible" Background="#CFD1D2" >
+                    <ad:DockablePane x:Name="xVtaDevDockP" ad:ResizingPanel.ResizeHeight="250" SelectedIndex="0" Visibility="Visible" >
+                        <ad:DockablePane.BindingGroup>
+                            <BindingGroup/>
+                        </ad:DockablePane.BindingGroup>
                         <ad:DockableContent Title="Nota de Venta" x:Name="xNotaVentaAreaDockC">
                             <Grid Name="grNotaVenta">
                                 <Grid.RowDefinitions>
@@ -194,14 +195,21 @@
                                 <Grid x:Name="xNotaVentaArea" Grid.Row="0" />
                             </Grid>
                         </ad:DockableContent>
-                        <ad:DockableContent Title="Devoluciones" x:Name="xDevolucionesAreaDockC"></ad:DockableContent>
+                        <ad:DockableContent Title="Devoluciones" x:Name="xDevolucionesAreaDockC">
+                            <Grid Name="grDevoluciones">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition  Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid x:Name="xDevolucionArea" Grid.Row="0" />
+                            </Grid>                            
+                        </ad:DockableContent>
                     </ad:DockablePane>
                 </ad:ResizingPanel>
             </ad:DockingManager>
 
-            <StatusBar Grid.Row="3">
+            <StatusBar Grid.Row="2">
                 <StatusBarItem Name="StatusBar2" Content="Catálogo Dígital de Productos - v4.0" HorizontalAlignment="Left" Margin="5,0,0,0" />
-                <StatusBarItem Name="StatusBar1" Content="2014 © Todos los derechos reservados por Auto Náutica Sur S.R.L." HorizontalAlignment="Right" Margin="5,0" />               
+                <StatusBarItem Name="StatusBar1" Content="2014 © Todos los derechos reservados por Auto Náutica Sur S.R.L." HorizontalAlignment="Right" Margin="5,0" />
             </StatusBar>
         </Grid>
 

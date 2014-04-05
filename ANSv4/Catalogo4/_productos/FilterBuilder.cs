@@ -387,7 +387,7 @@ namespace Catalogo._productos
                
 	        if (!string.IsNullOrEmpty(txtBuscar)) {
 		        int iTemp = PalabrasClave.GetUpperBound(0);
-                for (i = 0; i <= iTemp; i++){
+                for (i = 0; i < iTemp; i++){
                     if (!string.IsNullOrEmpty(PalabrasClave[i]))
                     {
                         if (!string.IsNullOrEmpty(sqlWhere))

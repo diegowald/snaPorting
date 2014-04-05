@@ -8,7 +8,11 @@ namespace Catalogo
     {
 
         public ReportDocument oRpt=null;
- 
+        public string DocumentoNro = "";
+        public string EmailTO = "";
+        public string EmailAsunto = "";
+        public string RazonSocial = "";
+        
         public fReporte()
         {
             InitializeComponent();
@@ -17,56 +21,68 @@ namespace Catalogo
 
         private void fReporte_Load(object sender, EventArgs e)
         {
+            if (DocumentoNro.Substring(DocumentoNro.ToString().Trim().Length - 8) == "99999999")
+            {
+                btnVerPDF.Enabled = true;
+                btnEnviarMail.Enabled = true;
+                crViewer1.ShowPrintButton = false;
+            }
+            else
+            {
+                btnVerPDF.Enabled = true;
+                btnEnviarMail.Enabled = true;
+                crViewer1.ShowPrintButton = true;
+            };
 
-            //if (Right(miReport.ReportTitle, 14) == "09999-99999999")
             crViewer1.ReportSource = oRpt;
             crViewer1.Refresh();
-
         }
 
         private void btnVerPDF_Click(object sender, EventArgs e)
         {
-
-            //           if (Funciones.modINIs.ReadINI("DATOS", "RptPdf", "0") == "1")
-            //{
-
-            //    oReport.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath + "\\pdf\\P" + NroPedido + ".pdf");
- 
-            //    System.Diagnostics.Process.Start(Global01.AppPath + "\\pdf\\P" + NroPedido + ".pdf");
-
-            //    if (odsPedidos1.Tables[0].Rows[0]["EMAIL"].ToString().Trim().Length > 0)
-            //    {
-            //        CrystalDecisions.Shared.ExportOptions ExpOpts = new CrystalDecisions.Shared.ExportOptions();
-            //        CrystalDecisions.Shared.HTMLFormatOptions htmlopts = new CrystalDecisions.Shared.HTMLFormatOptions();
-            //        CrystalDecisions.Shared.MicrosoftMailDestinationOptions MailOpts = new CrystalDecisions.Shared.MicrosoftMailDestinationOptions();
-
-            //        ExpOpts = oReport.ExportOptions;
-            //        ExpOpts.ExportDestinationType = CrystalDecisions.Shared.ExportDestinationType.MicrosoftMail;
-            //        ExpOpts.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.RichText;
-
-            //        MailOpts.MailToList = "pbrugnie@hotmail.com"; //odsPedidos1.Tables[0].Rows[0]["EMAIL"].ToString()
-            //        MailOpts.MailSubject = "auto náutica sur - nota de venta n° " + NroPedido;
-            //        MailOpts.MailCCList = odsPedidos1.Tables[0].Rows[0]["RAZONSONSOCIAL"].ToString();
-            //        MailOpts.UserName = "intldwilliams";
-            //        MailOpts.Password = "yourpassword";
-            //        ExpOpts.DestinationOptions = MailOpts;
-            //        oReport.Export(ExpOpts);
-            //    }
-
-            //}
-            //else
-            //{
-
+            try
+            {
+                oRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+                System.Diagnostics.Process.Start(Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+            }               
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void btnEnviarMail_Click(object sender, EventArgs e)
         {
+            try
+            {
+                oRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
 
+                System.Diagnostics.Process.Start(Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+
+                if (EmailTO.Trim().Length > 0)
+                {
+                    CrystalDecisions.Shared.ExportOptions ExpOpts = new CrystalDecisions.Shared.ExportOptions();
+                    CrystalDecisions.Shared.MicrosoftMailDestinationOptions MailOpts = new CrystalDecisions.Shared.MicrosoftMailDestinationOptions();
+
+                    ExpOpts = oRpt.ExportOptions;
+                    ExpOpts.ExportDestinationType = CrystalDecisions.Shared.ExportDestinationType.MicrosoftMail;
+                    ExpOpts.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat;
+
+                    MailOpts.MailMessage = EmailAsunto.ToString();
+                    MailOpts.MailToList = EmailTO.ToString();
+                    MailOpts.MailSubject = EmailAsunto.ToString();
+                    MailOpts.MailCCList = RazonSocial.ToString();
+                    MailOpts.UserName = "intldwilliams";
+                    MailOpts.Password = "yourpassword";
+                    ExpOpts.DestinationOptions = MailOpts;
+                    oRpt.Export(ExpOpts);
+                }            
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
-
-
-   //     private void fReporte_Load(object sender, EventArgs e)
-   //     {
 
         
    //Cursor.Current = Cursors.WaitCursor;

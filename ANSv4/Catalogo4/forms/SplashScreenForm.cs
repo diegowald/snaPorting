@@ -5,10 +5,10 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-
+using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo
 {
-    public partial class SplashScreenForm : Form, Catalogo.Funciones.emitter_receiver.IReceptor<util.Pair<string, int>>
+    public partial class SplashScreenForm : Form, Catalogo.Funciones.emitter_receiver.IReceptor<util.Pair<string, float>>
     {
         delegate void StringParameterDelegate(string Text);
         delegate void StringParameterWithStatusDelegate(string Text, TypeOfMessage tom);
@@ -35,6 +35,7 @@ namespace Catalogo
             //this.progressBar1.BackColor = Color.Transparent;
 
             //progressBar1.Show();
+            notifications.NotificationCenter.instance.attachReceptor(this);
         }
 
         /// <summary>
@@ -126,7 +127,7 @@ namespace Catalogo
                 e.Cancel = true;
         }
 
-        public void onRecibir(util.Pair<string, int> dato)
+        public void onRecibir(util.Pair<string, float> dato)
         {
             this.UdpateStatusText(dato.first + ": " + dato.second.ToString() + "%");
         }

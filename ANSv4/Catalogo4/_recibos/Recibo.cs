@@ -9,10 +9,10 @@ namespace Catalogo._recibos
     {
         // Define como se llama este modulo para el control de errores
 
-        private System.Data.OleDb.OleDbConnection Conexion1;
+        private System.Data.OleDb.OleDbConnection mvarConexion;
         private string mvarNroRecibo;
         private System.DateTime mvarF_Recibo;
-        private long mvarIdCliente;
+        private int mvarIdCliente;
         private bool mvarBahia;
         private float mvarTotal;
         private float mvarPercepciones;
@@ -35,11 +35,23 @@ namespace Catalogo._recibos
         public event GuardoOKEventHandler GuardoOK;
         public delegate void GuardoOKEventHandler(string nroRecibo);
 
-        private string _NroUsuario;
-        public Recibo(string NroUsuario, long IDDeCliente = 0)
+        public Recibo(System.Data.OleDb.OleDbConnection conexion, string NroUsuario, int IDDeCliente)
         {
-            _NroUsuario = NroUsuario;
-            Nuevo(IDDeCliente);
+            Nuevo(conexion, IDDeCliente);
+        }
+
+        protected void Nuevo(System.Data.OleDb.OleDbConnection conexion, int IDdeCliente = 0)
+        {
+            DetalleRecibo = new Dictionary<string, ReciboItem>();
+            AplicacionRecibo = new Dictionary<string, AplicacionItem>();
+            DeducirRecibo = new Dictionary<string, DeducirItem>();
+
+            mvarNroRecibo = "";
+            mvarF_Recibo = System.DateTime.Today;
+            mvarConexion = conexion;
+
+            if (IDdeCliente > 0)
+                mvarIdCliente = IDdeCliente;
         }
 
         public string Observaciones
@@ -50,14 +62,12 @@ namespace Catalogo._recibos
 
         public System.DateTime F_Transmision
         {
-
             get { return mvarF_Transmicion; }
             set { mvarF_Transmicion = value; }
         }
 
         public bool Bahia
         {
-
             get { return mvarBahia; }
             set { mvarBahia = value; }
         }
@@ -74,32 +84,19 @@ namespace Catalogo._recibos
             set { mvarPercepciones = value; }
         }
 
-        public long CantidadItemsDedu
+        public int CantidadItemsDedu
         {
             get { return DeducirRecibo.Count; }
         }
 
-        public long CantidadItemsApli
+        public int CantidadItemsApli
         {
             get { return AplicacionRecibo.Count; }
         }
 
-        public long CantidadItems
+        public int CantidadItems
         {
             get { return DetalleRecibo.Count; }
-        }
-
-
-        protected void Nuevo(long IDdeCliente = 0)
-        {
-            DetalleRecibo = new Dictionary<string, ReciboItem>();
-            AplicacionRecibo = new Dictionary<string, AplicacionItem>();
-            DeducirRecibo = new Dictionary<string, DeducirItem>();
-
-            mvarNroRecibo = "";
-            mvarF_Recibo = System.DateTime.Today;
-            if (IDdeCliente > 0)
-                mvarIdCliente = IDdeCliente;
         }
 
         // FUNDAMENTAL PARA QUE TE DE LOS NOMBRES
@@ -118,14 +115,13 @@ namespace Catalogo._recibos
             return DetalleRecibo["_" + Numero];
         }
 
-
-        public void Leer(long NrodeRecibo)
+        public void Leer(string NrodeRecibo)
         {
             if (!(ValidarConexion()))
                 return;
 
             System.Data.OleDb.OleDbDataReader rec = null;
-            rec = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Recibo_Det " + NrodeRecibo);
+            rec = Funciones.oleDbFunciones.Comando(mvarConexion, "EXECUTE v_Recibo_Det " + NrodeRecibo);
             if (rec.HasRows)
             {
                 while (rec.Read())
@@ -141,13 +137,13 @@ namespace Catalogo._recibos
                         (bool) rec["ChequePropio"],
                         (float) rec["T_Cambio"]);
                 }
-                rec = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Recibo_Enc " + NrodeRecibo);
+                rec = Funciones.oleDbFunciones.Comando(mvarConexion, "EXECUTE v_Recibo_Enc " + NrodeRecibo);
                 if (rec.HasRows)
                 {
                     rec.Read();
                     mvarNroRecibo = NrodeRecibo.ToString();
                     mvarF_Recibo = (DateTime) rec["F_Recibo"];
-                    mvarIdCliente = (long) rec["IdCliente"];
+                    mvarIdCliente = (int) rec["IdCliente"];
                     mvarBahia = (bool) rec["Bahia"];
                     mvarTotal = (float) rec["Total"];
                     mvarNroImpresion = (byte) rec["NroImpresion"];
@@ -160,18 +156,13 @@ namespace Catalogo._recibos
 
         public System.Data.OleDb.OleDbConnection Conexion
         {
-            set { Conexion1 = value; }
+            set { mvarConexion = value; }
         }
 
         public byte NroImpresion
         {
             get { return mvarNroImpresion; }
             set { mvarNroImpresion = value; }
-        }
-
-        public long IdCliente
-        {
-            get { return mvarIdCliente; }
         }
 
         public System.DateTime F_Recibo
@@ -190,9 +181,8 @@ namespace Catalogo._recibos
 
         private bool ValidarConexion()
         {
-            return (Conexion1 != null);
+            return (mvarConexion != null);
         }
-
 
         public void Guardar(string Origen)
         {
@@ -207,20 +197,21 @@ namespace Catalogo._recibos
 
             if (Origen.ToUpper() == "VER")
             {
-                Funciones.oleDbFunciones.ComandoIU(Conexion1, "DELETE FROM tblRecibo_Enc WHERE NroRecibo='09999-99999999'");
+                Funciones.oleDbFunciones.ComandoIU(mvarConexion, "DELETE FROM tblRecibo_Enc WHERE NroRecibo='09999-99999999'");
                 mvarNroRecibo = "09999-99999999";
             }
             else
             {
-                rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT TOP 1 right(NroRecibo,8) AS NroRecibo FROM tblRecibo_Enc WHERE left(NroRecibo,5)=" + _NroUsuario + " ORDER BY NroRecibo DESC");
+                rec = Funciones.oleDbFunciones.Comando(mvarConexion, "SELECT TOP 1 right(NroRecibo,8) AS NroRecibo FROM tblRecibo_Enc WHERE left(NroRecibo,5)=" + Global01.NroUsuario.Trim() + " ORDER BY NroRecibo DESC");
                 if (!rec.HasRows)
                 {
-                    mvarNroRecibo = _NroUsuario.Trim() + "-00000001";
+                    mvarNroRecibo = Global01.NroUsuario.Trim() + "-00000001";
                 }
                 else
                 {
-                    mvarNroRecibo = _NroUsuario.Trim() + "-" + String.Format("00000000", (int) rec["nroRecibo"] + 1);
-                }
+                    rec.Read();
+                    mvarNroRecibo = Global01.NroUsuario.Trim() + "-" + (int.Parse(rec["NroRecibo"].ToString().Substring(rec["NroRecibo"].ToString().Length - 8)) + 1).ToString().PadLeft(8, '0');
+                };
                 rec = null;
             }
 
@@ -233,7 +224,7 @@ namespace Catalogo._recibos
             cmd.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 200).Value = mvarObservaciones;
             cmd.Parameters.Add("pPercepciones", System.Data.OleDb.OleDbType.Single).Value = mvarPercepciones;
 
-            cmd.Connection = Conexion1;
+            cmd.Connection = mvarConexion;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "usp_Recibo_Enc_add";
             cmd.ExecuteNonQuery();
@@ -264,13 +255,13 @@ namespace Catalogo._recibos
             if (Origen.ToUpper() == "VER")
             {
                 // Actualizo Fecha de Transmicion para que no lo mande
-                Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Recibo_Transmicion_Upd '" + mvarNroRecibo + "'");
+                Funciones.oleDbFunciones.ComandoIU(mvarConexion, "EXEC usp_Recibo_Transmicion_Upd '" + mvarNroRecibo + "'");
             }
             else
             {
                 auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
-                     auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " ped:" + mvarNroRecibo + " tot:" + String.Format("fixed", mvarTotal));
-                Nuevo();
+                     auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " rec:" + mvarNroRecibo + " tot:" + String.Format("fixed", mvarTotal));
+                //Nuevo();
                 if (GuardoOK != null)
                 {
                     GuardoOK(Global01.NroImprimir);
@@ -298,7 +289,6 @@ namespace Catalogo._recibos
             DetalleRecibo["_" + (DetalleRecibo.Count + 1).ToString()] = mvarItem;
         }
 
-
         public void ADDItemDedu(string Concepto, float Importe, bool Porcentaje, bool DeduAlResto)
         {
             DeducirItem mvarItemDedu = new DeducirItem();
@@ -310,7 +300,6 @@ namespace Catalogo._recibos
             DeducirRecibo["_" + (DeducirRecibo.Count + 1).ToString()] = mvarItemDedu;
         }
 
-
         public void ADDItemApli(string Concepto, float Importe)
         {
             AplicacionItem mvarItemApli = new AplicacionItem();
@@ -320,7 +309,6 @@ namespace Catalogo._recibos
 
             AplicacionRecibo["_" + (AplicacionRecibo.Count + 1).ToString()] = mvarItemApli;
         }
-
 
         private void GuardarItem(byte TipoValor, float Importe, System.DateTime F_EmiCheque, System.DateTime F_CobroCheque, string N_Cheque, string NrodeCuenta, int Banco, string Cpa, bool ChequePropio, float T_Cambio)
         {
@@ -341,12 +329,11 @@ namespace Catalogo._recibos
             cmd.Parameters.Add("pChequePropio", System.Data.OleDb.OleDbType.Boolean).Value = ChequePropio;
             cmd.Parameters.Add("pT_Cambio", System.Data.OleDb.OleDbType.Single).Value = T_Cambio;
 
-            cmd.Connection = Conexion1;
+            cmd.Connection = mvarConexion;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "usp_Recibo_Det_add";
             cmd.ExecuteNonQuery();
         }
-
 
         private void GuardarItemApli(string Concepto, float Importe)
         {
@@ -359,12 +346,11 @@ namespace Catalogo._recibos
             cmd.Parameters.Add("pConcepto", System.Data.OleDb.OleDbType.VarChar, 50).Value = Concepto;
             cmd.Parameters.Add("pImporte", System.Data.OleDb.OleDbType.Single).Value = Importe;
 
-            cmd.Connection = Conexion1;
+            cmd.Connection = mvarConexion;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "usp_Recibo_App_add";
             cmd.ExecuteNonQuery();
         }
-
 
         private void GuardarItemDedu(string Concepto, float Importe, bool Porcentaje, bool DeduAlResto)
         {
@@ -379,7 +365,7 @@ namespace Catalogo._recibos
             cmd.Parameters.Add("pPorcentaje", System.Data.OleDb.OleDbType.Boolean).Value = Porcentaje;
             cmd.Parameters.Add("pDeduAlResto", System.Data.OleDb.OleDbType.Boolean).Value = DeduAlResto;
 
-            cmd.Connection = Conexion1;
+            cmd.Connection = mvarConexion;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "usp_Recibo_Deducir_add";
             cmd.ExecuteNonQuery();

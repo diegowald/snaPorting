@@ -109,7 +109,7 @@ namespace Catalogo.Funciones
 
             for (int i = 0; i < MyListview1.Columns.Count; i++)
             {
-                if (MyListview1.Columns[i].Text.ToString().Length > 2 && (MyListview1.Columns[i].Text.ToString().ToLower() == "fecha" | MyListview1.Columns[i].Text.ToString().Substring(1,2).ToLower() == "f." ))
+                if (MyListview1.Columns[i].Text.ToString().Length > 2 && (MyListview1.Columns[i].Text.ToString().ToLower() == "fecha" | MyListview1.Columns[i].Text.ToString().Substring(0,2).ToLower() == "f." ))
                 {
                     MyListview1.Columns[i].Width = 75;
                 }
@@ -166,7 +166,7 @@ namespace Catalogo.Funciones
 
             MyListview1.Clear();
 
-            for (shtCntr = 0; shtCntr <= Convert.ToInt16(MyData.FieldCount - 1); shtCntr++)
+            for (shtCntr = 0; shtCntr < Convert.ToInt16(MyData.FieldCount); shtCntr++)
             {
                 lvwColumn = new System.Windows.Forms.ColumnHeader();
 
@@ -198,7 +198,7 @@ namespace Catalogo.Funciones
 
                 itmListItem.Text = strTest;
 
-                for (shtCntr = 1; shtCntr <= Convert.ToInt16(MyData.FieldCount - 1); shtCntr++)
+                for (shtCntr = 0; shtCntr < Convert.ToInt16(MyData.FieldCount); shtCntr++)
                 {
                     if (MyData.IsDBNull(shtCntr))
                     {

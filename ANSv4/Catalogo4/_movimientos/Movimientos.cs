@@ -24,31 +24,34 @@ namespace Catalogo._movimientos
             _idCliente = IdCliente.ToString().PadLeft(5,'0');
         }
 
-        public System.Data.OleDb.OleDbDataReader Leer(DATOS_MOSTRAR queMostrar)
+        public System.Data.OleDb.OleDbDataReader Leer(DATOS_MOSTRAR queMostrar, string Origen)
         {
+            
             if (!validarConexion())
             {
                 return null;
             }
 
-            string wCond2 = (int.Parse(_idCliente) > 0 ? " and IdCliente=" + _idCliente : "");
+            System.Data.OleDb.OleDbDataReader dr = null;
+            string wCond2 = (int.Parse(_idCliente) > 0 ? " and IdCliente=" + _idCliente : " ");
+            string wCond3 = ((Origen.Trim()!="(todos)") ? " and UCase(mid(Origen,1,4))='" + Origen.Substring(0,4).ToUpper() + "' " : " ");
 
             switch (queMostrar)
             {
                 case DATOS_MOSTRAR.TODOS:
-                    return Funciones.oleDbFunciones.xGetDr(_conexion, "v_Movimientos", "left(Nro,5)='" + _idCliente + "' " + wCond2, "IDcliente, Origen, Fecha DESC");
+                    dr =  Funciones.oleDbFunciones.xGetDr(_conexion, "v_Movimientos", "left(Nro,5)='" + Global01.NroUsuario  + "' " + wCond2 + wCond3, "IDcliente, Origen, Fecha DESC");
                     break;
                 case DATOS_MOSTRAR.ENVIADOS:
-                    return Funciones.oleDbFunciones.xGetDr(_conexion, "v_Movimientos", "left(Nro,5)='" + _idCliente + "' and not (F_Transmicion is null)" + wCond2, "IDcliente, Origen, Fecha DESC");
+                    dr = Funciones.oleDbFunciones.xGetDr(_conexion, "v_Movimientos", "left(Nro,5)='" + Global01.NroUsuario + "' and not (F_Transmicion is null)" + wCond2 + wCond3, "IDcliente, Origen, Fecha DESC");
                     break;
                 case DATOS_MOSTRAR.NO_ENVIADOS:
-                    return Funciones.oleDbFunciones.xGetDr(_conexion, "v_Movimientos", "left(Nro,5)='" + _idCliente + "' and F_Transmicion is null" + wCond2, "IDcliente, Origen, Fecha DESC");
+                    dr = Funciones.oleDbFunciones.xGetDr(_conexion, "v_Movimientos", "left(Nro,5)='" + Global01.NroUsuario + "' and F_Transmicion is null" + wCond2 + wCond3, "IDcliente, Origen, Fecha DESC");
                     break;
-                default:
-                    return null;
             }
-        }
+            
+            return dr;
 
+        }
 
         public bool preguntoAlSalir()
         {

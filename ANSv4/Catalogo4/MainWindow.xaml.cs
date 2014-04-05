@@ -13,7 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AvalonDock;
 using Catalogo.Funciones.emitter_receiver;
-//using System.Threading;
+using System.Threading;
+
 
 namespace Catalogo
 {
@@ -28,7 +29,31 @@ namespace Catalogo
             this.Hide();
             InitializeComponent();            
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
-            ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
+            //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
+            ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+        }
+
+        private void addFlashPlayer()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            // Create the MaskedTextBox control.
+            Catalogo.util.FlashControl flash = new util.FlashControl();
+            //ShockwaveFlashObjects.ShockwaveFlashClass flash = new ShockwaveFlashObjects.ShockwaveFlashClass();
+            flash.AutoScroll = true;
+            flash.Dock = System.Windows.Forms.DockStyle.Top;
+            flash.Location = new System.Drawing.Point(0, 0);
+            flash.Name = "flash";
+            flash.file = "http://samples.mplayerhq.hu/SWF/962_fws.swf";
+            //filterControl.Size = new System.Drawing.Size(640, 480);
+            //filterControl.TabIndex = 0;
+            //gridViewControl.Text = "Lista de Productos";
+            flash.play();
+            // Assign the MaskedTextBox control as the host control's child.
+            host.Child = flash;
+
+            //this.topBanner.Children.Add(host);
         }
 
         private Catalogo._productos.SearchFilter addSearchArea()
@@ -36,16 +61,12 @@ namespace Catalogo
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
-            // Create the MaskedTextBox control.
             Catalogo._productos.SearchFilter filterControl = new _productos.SearchFilter();
-            filterControl.AutoScroll = true;
-            filterControl.Dock = System.Windows.Forms.DockStyle.Top;
+            filterControl.AutoScroll = false;
             filterControl.Location = new System.Drawing.Point(0, 0);
+            filterControl.Dock = System.Windows.Forms.DockStyle.Top;       
             filterControl.Name = "searchFilter";
-
-            //filterControl.Size = new System.Drawing.Size(640, 480);
-            //filterControl.TabIndex = 0;
-            //gridViewControl.Text = "Lista de Productos";
+          //filterControl.Size = new System.Drawing.Size(640, 480);
 
             // Assign the MaskedTextBox control as the host control's child.
             host.Child = filterControl;
@@ -62,9 +83,9 @@ namespace Catalogo
             // Create the MaskedTextBox control.
             Catalogo._pedidos.ucPedido xPedido;
             xPedido = new Catalogo._pedidos.ucPedido();
-            //xNotaVenta.AutoScroll = true;
-            //xPedido.Dock = System.Windows.Forms.DockStyle.Fill;
+            //xPedido.AutoScroll = false;
             //xPedido.Location = new System.Drawing.Point(0, 0);
+            //xPedido.Dock = System.Windows.Forms.DockStyle.Fill;
             //xPedido.Name = "Notas de Venta";
 
             host.Child = xPedido;
@@ -73,36 +94,53 @@ namespace Catalogo
             return xPedido;
         }
 
-        //private Catalogo._devoluciones.ucDevolucion addDevolucionArea()
-        //{
-        //    // Create the interop host control.
-        //    System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+        private Catalogo._devoluciones.ucDevolucion addDevolucionArea()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
-        //    // Create the MaskedTextBox control.
-        //    Catalogo._devoluciones.ucDevolucion xDevolucion;
-        //    xDevolucion = new Catalogo._devoluciones.ucDevolucion();
-        //    //xNotaVenta.AutoScroll = true;
-        //    xDevolucion.Dock = System.Windows.Forms.DockStyle.Fill;
-        //    xDevolucion.Location = new System.Drawing.Point(0, 0);
-        //    xDevolucion.Name = "Devoluciones";
+            // Create the MaskedTextBox control.
+            Catalogo._devoluciones.ucDevolucion xDevolucion;
+            xDevolucion = new Catalogo._devoluciones.ucDevolucion();
+            //xDevolucion.AutoScroll = false;
+            //xDevolucion.Location = new System.Drawing.Point(0, 0);
+            //xDevolucion.Dock = System.Windows.Forms.DockStyle.Fill;
+            //xDevolucion.Name = "Devoluciones";
 
-        //    host.Child = xDevolucion;
-        //    this.xDevolucionesArea.Children.Add(host);
+            host.Child = xDevolucion;
+            this.xDevolucionArea.Children.Add(host);
 
-        //    return xDevolucion;
-        //}
+            return xDevolucion;
+        }
+
+        private Catalogo._movimientos.ucMovimientos addMovimientosArea()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            Catalogo._movimientos.ucMovimientos xMovimientos;
+            xMovimientos = new Catalogo._movimientos.ucMovimientos();
+            xMovimientos.AutoScroll = false;
+            xMovimientos.Location = new System.Drawing.Point(0, 0);
+            xMovimientos.Dock = System.Windows.Forms.DockStyle.Fill;
+            xMovimientos.Name = "Movimientos";
+
+            host.Child = xMovimientos;
+            this.xMovimientosArea.Children.Add(host);
+
+            return xMovimientos;
+        }
 
         private Catalogo._recibos.ucRecibo addReciboArea()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
-            // Create the MaskedTextBox control.
             Catalogo._recibos.ucRecibo xRecibo;
             xRecibo = new Catalogo._recibos.ucRecibo() ;
-            //xRecibo.AutoScroll = true;
-            xRecibo.Dock = System.Windows.Forms.DockStyle.Fill;
+            xRecibo.AutoScroll = false;
             xRecibo.Location = new System.Drawing.Point(0, 0);
+            xRecibo.Dock = System.Windows.Forms.DockStyle.Fill;            
             xRecibo.Name = "Recibos";
 
             host.Child = xRecibo;
@@ -116,16 +154,12 @@ namespace Catalogo
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
-            // Create the MaskedTextBox control.
             Catalogo._productos.GridViewFilter2 gridViewControl;
             gridViewControl = new Catalogo._productos.GridViewFilter2();
-            //gridViewControl.AutoScroll = true;
-            gridViewControl.Dock = System.Windows.Forms.DockStyle.Top;
-            gridViewControl.Location = new System.Drawing.Point(0, 0);
+            gridViewControl.AutoScroll = false;
+            gridViewControl.Location = new System.Drawing.Point(0, 0);            
+            gridViewControl.Dock = System.Windows.Forms.DockStyle.Fill;            
             gridViewControl.Name = "GridViewProductos";
-            //gridViewControl.Size = new System.Drawing.Size(640, 480);
-            //gridViewControl.TabIndex = 0;
-            //gridViewControl.Text = "Lista de Productos";
 
             host.Child = gridViewControl;
             this.productsArea.Children.Add(host);
@@ -145,9 +179,6 @@ namespace Catalogo
             novedadesControl.Dock = System.Windows.Forms.DockStyle.Top;
             novedadesControl.Location = new System.Drawing.Point(0, 0);
             novedadesControl.Name = "Novedades";
-            //gridViewControl.Size = new System.Drawing.Size(640, 480);
-            //gridViewControl.TabIndex = 0;
-            //gridViewControl.Text = "Lista de Productos";
 
             host.Child = novedadesControl;
             this.grNovedades.Children.Add(host);
@@ -156,47 +187,47 @@ namespace Catalogo
         }
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
-        {         
-            Catalogo._productos.SearchFilter sf = addSearchArea();
+        {
 
-            Catalogo._productos.GridViewFilter2 gv = addProductsArea();
-            
             Catalogo._recibos.ucRecibo rec = addReciboArea();
+            Catalogo._movimientos.ucMovimientos mov = addMovimientosArea();
+            ////Catalogo._novedades.ucNovedades nov = addNovedadesArea();
 
+            Catalogo._productos.SearchFilter sf = addSearchArea();
+            Catalogo._productos.GridViewFilter2 gv = addProductsArea();
             Catalogo._pedidos.ucPedido ped = addPedidoArea();
+            Catalogo._devoluciones.ucDevolucion dev = addDevolucionArea();
 
-            //Catalogo._devoluciones.ucDevolucion dev = addDevolucionArea();
-
-            //Catalogo._novedades.ucNovedades nov = addNovedadesArea();
-
+            //addFlashPlayer();
 
             sf.attachReceptor(gv);
             sf.attachReceptor2(gv);
 
             gv.attachReceptor(productDetalle);
             gv.attachReceptor(ped);
+            gv.attachReceptor(dev);
             gv.attachReceptor2(sf);
             gv.attachReceptor3(ped);
-            
-            //this.sugerencias.Visibility = System.Windows.Visibility.Collapsed;
-            
+            gv.attachReceptor3(dev);
+
+            ped.attachReceptor(rec);
+            rec.attachReceptor(ped);
+
             this.Show();
             SplashScreen.CloseSplashScreen();
-            //this.Activate(); 
 
         }
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
             this.ContentMenu.ToggleAutoHide();
-            //this.ContentSugerencias.ToggleAutoHide();
         }
 
         private void DocumentPane_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine((e.AddedItems[0] as AvalonDock.DocumentContent).Title);
+            //System.Diagnostics.Debug.WriteLine((e.AddedItems[0] as AvalonDock.DocumentContent).Title);
             bool mostrarParteInferior = (e.AddedItems[0] as AvalonDock.DocumentContent).Title == "Productos";
-            //misTabsAcciones.Visible = PieVisible;
+
             if (mostrarParteInferior)
             {
                 if (xDevolucionesAreaDockC != null)
@@ -259,7 +290,7 @@ namespace Catalogo
         //}
 
 
-       private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
+        private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
         {
             if (eventArgs.ChangedButton == MouseButton.Left)
             {
@@ -269,7 +300,14 @@ namespace Catalogo
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+
+            if (Global01.Conexion != null)
+            {
+                Global01.Conexion.Close();
+                Global01.Conexion = null;
+            }
+
+            MainMod.miEnd();
         }
 
         private void ChangeViewButton_Click(object sender, RoutedEventArgs e)

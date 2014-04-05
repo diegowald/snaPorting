@@ -84,25 +84,25 @@
             this.tslItems});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(682, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1118, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // txtBuscar
             // 
-            this.txtBuscar.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(141, 27);
             // 
             // btnApply0
             // 
+            this.btnApply0.AutoSize = false;
             this.btnApply0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnApply0.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnApply0.Image = ((System.Drawing.Image)(resources.GetObject("btnApply0.Image")));
             this.btnApply0.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnApply0.Name = "btnApply0";
-            this.btnApply0.Size = new System.Drawing.Size(23, 24);
+            this.btnApply0.Size = new System.Drawing.Size(24, 24);
             this.btnApply0.Text = "buscar";
             this.btnApply0.Click += new System.EventHandler(this.btnApply0_Click);
             // 
@@ -148,18 +148,18 @@
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(48, 15);
+            this.toolStripLabel3.Size = new System.Drawing.Size(48, 24);
             this.toolStripLabel3.Text = "Modelo";
             // 
             // cboModelo
             // 
             this.cboModelo.Name = "cboModelo";
-            this.cboModelo.Size = new System.Drawing.Size(95, 23);
+            this.cboModelo.Size = new System.Drawing.Size(95, 27);
             // 
             // toolStripLabel5
             // 
             this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(36, 15);
+            this.toolStripLabel5.Size = new System.Drawing.Size(36, 24);
             this.toolStripLabel5.Text = "Otros";
             // 
             // cboOtros
@@ -169,13 +169,13 @@
             "Ofertas",
             "Nuevos"});
             this.cboOtros.Name = "cboOtros";
-            this.cboOtros.Size = new System.Drawing.Size(80, 23);
+            this.cboOtros.Size = new System.Drawing.Size(80, 27);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.ForeColor = System.Drawing.SystemColors.Control;
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
             // 
             // btnApply
             // 
@@ -184,7 +184,7 @@
             this.btnApply.Image = ((System.Drawing.Image)(resources.GetObject("btnApply.Image")));
             this.btnApply.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(23, 20);
+            this.btnApply.Size = new System.Drawing.Size(23, 24);
             this.btnApply.Text = "buscar";
             this.btnApply.Click += new System.EventHandler(this.btnApply0_Click);
             // 
@@ -192,7 +192,7 @@
             // 
             this.toolStripSeparator2.ForeColor = System.Drawing.SystemColors.Control;
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // btnClearFilters
             // 
@@ -201,7 +201,7 @@
             this.btnClearFilters.Image = ((System.Drawing.Image)(resources.GetObject("btnClearFilters.Image")));
             this.btnClearFilters.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnClearFilters.Name = "btnClearFilters";
-            this.btnClearFilters.Size = new System.Drawing.Size(23, 20);
+            this.btnClearFilters.Size = new System.Drawing.Size(23, 24);
             this.btnClearFilters.Text = "ver todos";
             this.btnClearFilters.Click += new System.EventHandler(this.btnClearFilters_Click);
             // 
@@ -209,7 +209,7 @@
             // 
             this.toolStripSeparator3.ForeColor = System.Drawing.SystemColors.Control;
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
             // 
             // btnRefresh
             // 
@@ -218,19 +218,19 @@
             this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
             this.btnRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(23, 20);
+            this.btnRefresh.Size = new System.Drawing.Size(23, 24);
             this.btnRefresh.Text = "actualizar";
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 27);
             // 
             // lblPorcentajeLinea
             // 
             this.lblPorcentajeLinea.Name = "lblPorcentajeLinea";
-            this.lblPorcentajeLinea.Size = new System.Drawing.Size(23, 15);
+            this.lblPorcentajeLinea.Size = new System.Drawing.Size(23, 24);
             this.lblPorcentajeLinea.Text = " % ";
             // 
             // txtPorcentajeLinea
@@ -245,7 +245,7 @@
             // 
             this.tslItems.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tslItems.Name = "tslItems";
-            this.tslItems.Size = new System.Drawing.Size(51, 15);
+            this.tslItems.Size = new System.Drawing.Size(51, 24);
             this.tslItems.Text = "#Prod. 0";
             // 
             // SearchFilter
@@ -255,7 +255,7 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.toolStrip1);
             this.Name = "SearchFilter";
-            this.Size = new System.Drawing.Size(682, 30);
+            this.Size = new System.Drawing.Size(1118, 30);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);

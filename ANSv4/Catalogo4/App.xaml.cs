@@ -26,18 +26,15 @@ namespace Catalogo
             Catalogo.MainMod.Main();
 
             MainWindow wnd = new MainWindow();
-
-            //_recibos.fRecibo wnd = new _recibos.fRecibo();
-            //_pedidos.fPedido wnd = new _pedidos.fPedido();
-            //SplashScreen.CloseSplashScreen();
-
             wnd.ShowDialog();
-            
-            Global01.Conexion.Close();
-            Global01.Conexion = null;
 
+            if (Global01.Conexion != null)
+            {
+                Global01.Conexion.Close();
+                Global01.Conexion = null;
+            }
             wnd.Close();
-            //wnd.Dispose();
+
 
             Shutdown();
         }        

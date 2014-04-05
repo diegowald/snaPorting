@@ -40,6 +40,8 @@ namespace Catalogo
        public static bool RecienRegistrado;
        public static bool AppActiva;
 
+       public static string OperacionActivada;
+       public static string NroDocumentoAbierto;
        public static string NroUsuario;
        public static System.DateTime dbCaduca;
        public static System.DateTime appCaduca;

@@ -317,6 +317,8 @@ namespace Catalogo._productos
 
             // Bind Datagrid view to the DataView
             dataGridView1.DataSource = dvProducts;
+            dataGridView1.Refresh();
+
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
 
@@ -336,7 +338,7 @@ namespace Catalogo._productos
           
         }
 
-       
+
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
 
@@ -452,5 +454,6 @@ namespace Catalogo._productos
                 _emisor3 = value;
             }
         }
+
     }
 }

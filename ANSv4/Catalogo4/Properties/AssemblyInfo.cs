@@ -7,11 +7,11 @@ using System.Windows;
 // La información general sobre un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos atributos para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("Catalogo")]
+[assembly: AssemblyTitle("Catálogo Dígital de Productos")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Catalogo")]
+[assembly: AssemblyCompany("Auto Náutica Sur S.R.L.")]
+[assembly: AssemblyProduct("Catálogo Dígital de Productos")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

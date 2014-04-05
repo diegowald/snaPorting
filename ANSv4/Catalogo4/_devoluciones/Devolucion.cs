@@ -7,8 +7,9 @@ namespace Catalogo._devoluciones
 {
     public class Devolucion
     {
+        private const string m_sMODULENAME_ = "clsDevolucion";
 
-        private System.Data.OleDb.OleDbConnection Conexion1;
+        private System.Data.OleDb.OleDbConnection mvarConexion;
         private string mvarNroDevolucion;
         private System.DateTime mvarF_Devolucion;
         private  int  mvarIdCliente;
@@ -20,10 +21,21 @@ namespace Catalogo._devoluciones
         public event GuardoOKEventHandler GuardoOK;
         public delegate void GuardoOKEventHandler(string NroDevolucion);
 
-        public Devolucion(string NroUsuario,  int  IDDeCliente)
+        public Devolucion(System.Data.OleDb.OleDbConnection conexion, string NroUsuario, int IDDeCliente)
         {
-            Nuevo(IDDeCliente);
+            Nuevo(conexion, IDDeCliente);
         }
+
+       protected void Nuevo(System.Data.OleDb.OleDbConnection conexion, int IDdeCliente = 0)
+       {
+           DetalleDevolucion = new Dictionary<string, DevolucionItem>();
+           mvarNroDevolucion = "";
+           mvarF_Devolucion = System.DateTime.Today;
+           mvarConexion = conexion;
+
+           if (IDdeCliente > 0)
+               mvarIdCliente = IDdeCliente;
+       }
 
         public string Observaciones
         {
@@ -36,15 +48,6 @@ namespace Catalogo._devoluciones
             get { return DetalleDevolucion.Count; }
         }
 
-        protected void Nuevo( int  IDdeCliente = 0)
-        {
-            DetalleDevolucion = new Dictionary<string, DevolucionItem>();
-            mvarNroDevolucion = "";
-            mvarF_Devolucion = System.DateTime.Today;
-            if (IDdeCliente > 0)
-                mvarIdCliente = IDdeCliente;
-        }
-
         // FUNDAMENTAL PARA QUE TE DE LOS NOMBRES
         public DevolucionItem Renglon(int Numero)
         {
@@ -53,7 +56,7 @@ namespace Catalogo._devoluciones
 
         public System.Data.OleDb.OleDbConnection Conexion
         {
-            set { Conexion1 = value; }
+            set { mvarConexion = value; }
         }
 
         public byte NroImpresion
@@ -62,10 +65,10 @@ namespace Catalogo._devoluciones
             set { mvarNroImpresion = value; }
         }
 
-        public  int  IdCliente
-        {
-            get { return mvarIdCliente; }
-        }
+        //public  int  IdCliente
+        //{
+        //    get { return mvarIdCliente; }
+        //}
 
         public System.DateTime F_Devolucion
         {
@@ -79,15 +82,13 @@ namespace Catalogo._devoluciones
 
         private bool ValidarConexion()
         {
-            return (Conexion1 != null);
+            return (mvarConexion != null);
         }
-
 
         public void Guardar(string Origen)
         {
             if (!(ValidarConexion()))
                 return;
-
 
             System.Data.OleDb.OleDbDataReader rec = null;
             System.Data.OleDb.OleDbCommand adoCMD = new System.Data.OleDb.OleDbCommand();
@@ -97,12 +98,12 @@ namespace Catalogo._devoluciones
 
             if (Origen.ToUpper() == "VER")
             {
-                Funciones.oleDbFunciones.ComandoIU(Conexion1, "DELETE FROM tblDevolucion_Enc WHERE NroDevolucion='09999-99999999'");
+                Funciones.oleDbFunciones.ComandoIU(mvarConexion, "DELETE FROM tblDevolucion_Enc WHERE NroDevolucion='09999-99999999'");
                 mvarNroDevolucion = "09999-99999999";
             }
             else
             {
-                rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT TOP 1 right(NroDevolucion,8) AS NroDevolucion FROM tblDevolucion_Enc WHERE left(NroDevolucion,5)=" + Global01.NroUsuario + " ORDER BY NroDevolucion DESC");
+                rec = Funciones.oleDbFunciones.Comando(mvarConexion, "SELECT TOP 1 right(NroDevolucion,8) AS NroDevolucion FROM tblDevolucion_Enc WHERE left(NroDevolucion,5)=" + Global01.NroUsuario + " ORDER BY NroDevolucion DESC");
                 if (!rec.HasRows)
                 {
                     // ES UN CLIENTE
@@ -117,15 +118,16 @@ namespace Catalogo._devoluciones
                 }
                 else
                 {
+                    rec.Read();
                     // ES UN CLIENTE
                     if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente)
                     {
-                        mvarNroDevolucion = Global01.NroUsuario.Trim() + "-C" + String.Format("0000000", int.Parse(rec["NroDevolucion"].ToString().Substring(rec["NroDevolucion"].ToString().Length - 7) + 1));
+                        mvarNroDevolucion = Global01.NroUsuario.Trim() + "-C" + (int.Parse(rec["NroDevolucion"].ToString().Substring(rec["NroDevolucion"].ToString().Length - 7)) + 1).ToString().PadLeft(7, '0');
                     }
                     else
                     {
-                        mvarNroDevolucion = Global01.NroUsuario.Trim() + "-" + String.Format("00000000", int.Parse(rec["NroDevolucion"].ToString().Substring(rec["NroDevolucion"].ToString().Length - 7) + 1));
-                    }
+                        mvarNroDevolucion = Global01.NroUsuario.Trim() + "-" + (int.Parse(rec["NroDevolucion"].ToString().Substring(rec["NroDevolucion"].ToString().Length - 8)) + 1).ToString().PadLeft(8, '0');
+                    };                  
                 }
                 rec = null;
             }
@@ -136,7 +138,7 @@ namespace Catalogo._devoluciones
             adoCMD.Parameters.Add("pNroImpresion", System.Data.OleDb.OleDbType.Integer).Value = 0;
             adoCMD.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 200).Value = mvarObservaciones;
 
-            adoCMD.Connection = Conexion1;
+            adoCMD.Connection = mvarConexion;
             adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
             adoCMD.CommandText = "usp_Devolucion_Enc_add";
             adoCMD.ExecuteNonQuery();
@@ -158,20 +160,18 @@ namespace Catalogo._devoluciones
             if (Origen.ToUpper() == "VER")
             {
                 // Actualizo Fecha de Transmicion para que no lo mande
-                Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Devolucion_Transmicion_Upd '" + mvarNroDevolucion + "'");
+                Funciones.oleDbFunciones.ComandoIU(mvarConexion, "EXEC usp_Devolucion_Transmicion_Upd '" + mvarNroDevolucion + "'");
             }
             else
             {
-                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones,
-                     auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " ped:" + mvarNroDevolucion + " tot:");
-                Nuevo();
+                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones, auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " dev:" + mvarNroDevolucion + " tot:");
+                //Nuevo();
                 if (GuardoOK != null)
                 {
                     GuardoOK(Global01.NroImprimir);
                 }
             }
         }
-
 
         public void ADDItem(string IDCatalogo, int cantidad, byte Deposito, string Factura, byte TipoDev, string Vehiculo, string Modelo, string Motor, string KM, string Observaciones)
         {
@@ -194,7 +194,6 @@ namespace Catalogo._devoluciones
 
         }
 
-
         private void GuardarItem(string IDCatalogo, int cantidad, byte Deposito, string Factura, byte TipoDev, string Vehiculo, string Modelo, string Motor, string KM, string Observaciones)
         {
             if (!(ValidarConexion()))
@@ -215,19 +214,19 @@ namespace Catalogo._devoluciones
             adoCMD.Parameters.Add("pKm", System.Data.OleDb.OleDbType.VarChar, 10).Value = KM;
             adoCMD.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 128).Value = Observaciones;
 
-            adoCMD.Connection = Conexion1;
+            adoCMD.Connection = mvarConexion;
             adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
             adoCMD.CommandText = "usp_Devolucion_Det_add";
             adoCMD.ExecuteNonQuery();
 
-            rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT ID FROM CatalogoBAK WHERE ID='" + IDCatalogo + "'");
+            rec = Funciones.oleDbFunciones.Comando(mvarConexion, "SELECT ID FROM CatalogoBAK WHERE ID='" + IDCatalogo + "'");
             if (!rec.HasRows)
             {
-                Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_AnexaItemCatalogoBak '" + IDCatalogo + "'");
+                Funciones.oleDbFunciones.ComandoIU(mvarConexion, "EXEC usp_AnexaItemCatalogoBak '" + IDCatalogo + "'");
             }
             else
             {
-                Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_CambiaCodigoCatalogoBak '" + IDCatalogo + "'");
+                Funciones.oleDbFunciones.ComandoIU(mvarConexion, "EXEC usp_CambiaCodigoCatalogoBak '" + IDCatalogo + "'");
             }
             rec = null;
             adoCMD = null;

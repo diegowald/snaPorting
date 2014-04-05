@@ -122,7 +122,7 @@ namespace Catalogo._Application
 
             if (!cancel)
             {
-                string wZonaviajante = Global01.LLaveViajante.Substring(1, 5);
+                string wZonaviajante = Global01.LLaveViajante.Substring(0, 5);
                 string wLLaveViajante;
                 //    '        Dim wZonaViajante As String
                 //    '        Dim wLlaveViajante As String

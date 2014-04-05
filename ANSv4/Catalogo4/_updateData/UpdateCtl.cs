@@ -31,7 +31,6 @@ namespace Catalogo.util
         public CloseRequestHandler CloseRequest;
         public ConexionErrorHandler ConexionError;
 
-
         public string configFileURL
         {
             get
@@ -76,8 +75,15 @@ namespace Catalogo.util
                 if (configFileURL.Length > 0)
                 {
                     Cursor.Current = Cursors.WaitCursor;
+
                     BeginDownload(configFileURL, tempFolder + vclu);
+
+                    //System.Net.WebClient txtVersionFile = new System.Net.WebClient();
+                    //txtVersionFile.DownloadFileCompleted += txtVersionFile_DownloadFileCompleted;
+                    //txtVersionFile.DownloadFile(configFileURL, tempFolder + vclu);
+
                     Cursor.Current = Cursors.Default;
+
                 }
                 else
                 {
@@ -95,6 +101,26 @@ namespace Catalogo.util
             }
         }
 
+        //private void txtVersionFile_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        //{
+        //    if (downloadingFile.EndsWith(vclu))
+        //    {
+        //        getConfigValues();
+        //        lblVersion.Text = String.Format("Version actual: {0}. Version disponible: {1}.", thisVer, webVer);
+        //        if (thisVer.CompareTo(webVer) > 0)
+        //        {
+        //            cmdCancel.Focus();
+        //            cmdNext.Enabled = false;
+        //        }
+        //        else
+        //        {
+        //            lblSI.Visible = true;
+        //            cmdNext.Enabled = true;
+        //            cmdNext.Focus();
+        //        }
+        //    }
+        //}
+
         private string downloadingFile;
         private void BeginDownload(string URL, string saveFile)
         {
@@ -111,10 +137,16 @@ namespace Catalogo.util
             {
                 getConfigValues();
                 lblVersion.Text = String.Format("Version actual: {0}. Version disponible: {1}.", thisVer, webVer);
-                if (thisVer.CompareTo(webVer) > 0)
+                if (thisVer.CompareTo(webVer) >= 0)
                 {
-                    cmdCancel.Focus();
+                   lblStep2.Visible = false;
+                    lblNo.Visible = true;
+                    cmdCancel.Left = cmdNext.Left + 10 ;
+
+                    cmdCancel.Text = "Continuar";
                     cmdNext.Enabled = false;
+                    cmdNext.Visible = false;
+                    cmdCancel.Focus();
                 }
                 else
                 {
@@ -162,7 +194,7 @@ namespace Catalogo.util
                         default:
                             updateURL = line;
                             int spos = updateURL.LastIndexOf('/');
-                            outFile = updateURL.Substring(spos);
+                            outFile = updateURL.Substring(spos+1);
                             break;
                     }
                 }

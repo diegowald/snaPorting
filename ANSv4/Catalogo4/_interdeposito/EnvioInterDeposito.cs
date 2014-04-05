@@ -164,21 +164,25 @@ namespace Catalogo._interdeposito
             }
             catch
             {
-                //	if (Err().Number == -2147024809) {
-                // Intento con el ip interno
-                Cliente = new InterDepositoWS.InterDeposito();
-                Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/InterDeposito.asmx?wsdl";
-                if (usaProxy)
+                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
                 {
-                    Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
-                }
+                    //	if (Err().Number == -2147024809) {
+                    // Intento con el ip interno
+                    Cliente = new InterDepositoWS.InterDeposito();
+                    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/InterDeposito.asmx?wsdl";
+                    if (usaProxy)
+                    {
+                        Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                    }
 
-                m_MacAddress = MacAddress;
-                m_ip = ipAddressIntranet;
-                WebServiceInicializado = true;
-                //	} else {
-                //		Err().Raise(Err().Number, Err().Source, Err().Description);
-                //	}
+                    m_MacAddress = MacAddress;
+                    m_ip = ipAddressIntranet;
+                    WebServiceInicializado = true;
+                }
+                else
+                {
+                    throw;
+                }
             }
         }
 

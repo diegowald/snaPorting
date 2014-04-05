@@ -72,6 +72,7 @@
             // 
             this.btnEnviarMail.BackColor = System.Drawing.Color.Red;
             this.btnEnviarMail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnEnviarMail.Enabled = false;
             this.btnEnviarMail.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnEnviarMail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.btnEnviarMail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -88,6 +89,7 @@
             // 
             this.btnVerPDF.BackColor = System.Drawing.Color.Red;
             this.btnVerPDF.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnVerPDF.Enabled = false;
             this.btnVerPDF.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnVerPDF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.btnVerPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

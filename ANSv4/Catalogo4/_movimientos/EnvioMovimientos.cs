@@ -78,7 +78,7 @@ namespace Catalogo.util.BackgroundTasks
             }
 
             _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, _idCliente);
-            System.Data.OleDb.OleDbDataReader movs = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS);
+            System.Data.OleDb.OleDbDataReader movs = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "");
 
             if (movs.HasRows)
             {
@@ -90,7 +90,7 @@ namespace Catalogo.util.BackgroundTasks
                     {
                         case "NOTA DE VENTA":
                             {
-                                _pedidos.EnvioPedido envio = new _pedidos.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, _idCliente.ToString(), false, "");
+                                _devoluciones.EnvioPedido envio = new _devoluciones.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, _idCliente.ToString(), false, "");
                                 if (envio.Inicializado)
                                 {
                                     envio.obtenerDatos(Nro);

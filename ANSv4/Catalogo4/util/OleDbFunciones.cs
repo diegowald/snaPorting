@@ -280,7 +280,7 @@ namespace Catalogo.Funciones
             }
             catch (System.IO.IOException e)
             {
-                throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                //throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
                
             }
 

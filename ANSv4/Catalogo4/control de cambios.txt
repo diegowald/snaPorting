@@ -1,0 +1,4 @@
+1) en catalogo.mdb
+
+agregar v_Pedido_Enc_0 v_Pedido_Det_0 v_Devoluciones_Enc_0 v_Devoluciones_Det_0
+(son iguales a las originales sin "_0" pero SIN parametros

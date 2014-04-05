@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Catalogo._pedidos
+namespace Catalogo._devoluciones
 {
     public class Pedido
     {
-
         private const string m_sMODULENAME_ = "clsPedido";
-        private System.Data.OleDb.OleDbConnection Conexion1;
-
         private string mvarNroPedido;
         private System.DateTime mvarF_Pedido;
         private int mvarIdCliente;
         private byte mvarNroImpresion;
         private string mvarObservaciones;
         private string mvarTransporte;
-
+        private System.Data.OleDb.OleDbConnection mvarConexion;
         private System.Collections.Generic.Dictionary<string, PedidoItem> DetallePedido;
         
         public event GuardoOKEventHandler GuardoOK;
@@ -40,16 +37,18 @@ namespace Catalogo._pedidos
             get { return DetallePedido.Count; }
         }
 
-       public Pedido(string NroUsuario, int IDDeCliente)
+       public Pedido(System.Data.OleDb.OleDbConnection conexion, string NroUsuario, int IDDeCliente)
         {
-            Nuevo(IDDeCliente);
+            Nuevo(conexion, IDDeCliente);
         }
 
-       protected void Nuevo(int IDdeCliente = 0)
+       protected void Nuevo(System.Data.OleDb.OleDbConnection conexion, int IDdeCliente = 0)
        {
            DetallePedido = new Dictionary<string, PedidoItem>();
            mvarNroPedido = "";
            mvarF_Pedido = System.DateTime.Today;
+           mvarConexion = conexion;
+
            if (IDdeCliente > 0)
                mvarIdCliente = IDdeCliente;
        }
@@ -62,7 +61,7 @@ namespace Catalogo._pedidos
 
         public System.Data.OleDb.OleDbConnection Conexion
         {
-            set { Conexion1 = value; }
+            set { mvarConexion = value; }
         }
 
         public byte NroImpresion
@@ -70,11 +69,6 @@ namespace Catalogo._pedidos
             get { return mvarNroImpresion; }
             set { mvarNroImpresion = value; }
         }
-
-        //public int IdCliente
-        //{
-        //    get { return mvarIdCliente; }
-        //}
 
         public System.DateTime F_Pedido
         {
@@ -88,9 +82,8 @@ namespace Catalogo._pedidos
 
         private bool ValidarConexion()
         {
-            return (Conexion1 != null);
+            return (mvarConexion != null);
         }
-
 
         public void Guardar(string Origen)
         {
@@ -105,12 +98,18 @@ namespace Catalogo._pedidos
 
             if (Origen.ToUpper() == "VER")
             {
-                Funciones.oleDbFunciones.ComandoIU(Conexion1, "DELETE FROM tblPedido_Enc WHERE NroPedido='09999-99999999'");
+                Funciones.oleDbFunciones.ComandoIU(mvarConexion, "DELETE FROM tblPedido_Enc WHERE NroPedido='09999-99999999'");
                 mvarNroPedido = "09999-99999999";
             }
             else
             {
-                rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT TOP 1 right(NroPedido,8) AS NroPedido FROM tblPedido_Enc WHERE left(NroPedido,5)=" + Global01.NroUsuario + " ORDER BY NroPedido DESC");
+                if (Global01.NroDocumentoAbierto.Trim().Length>0)
+                {
+                    Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblPedido_Enc WHERE NroPedido='" + Global01.NroDocumentoAbierto + "'");
+                    Global01.NroDocumentoAbierto = "";
+                }
+
+                rec = Funciones.oleDbFunciones.Comando(mvarConexion, "SELECT TOP 1 right(NroPedido,8) AS NroPedido FROM tblPedido_Enc WHERE left(NroPedido,5)=" + Global01.NroUsuario + " ORDER BY NroPedido DESC");
                 if (!rec.HasRows)
                 {
                     // ES UN CLIENTE
@@ -125,15 +124,16 @@ namespace Catalogo._pedidos
                 }
                 else
                 {
+                    rec.Read();
                     // ES UN CLIENTE
                     if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente)
                     {
-                        mvarNroPedido = Global01.NroUsuario.Trim() + "-C" + String.Format("0000000", int.Parse(rec["NroPedido"].ToString().Substring(rec["NroPedido"].ToString().Length - 7) + 1));
+                        mvarNroPedido = Global01.NroUsuario.Trim() + "-C" + (int.Parse(rec["NroPedido"].ToString().Substring(rec["NroPedido"].ToString().Length - 7)) + 1).ToString().PadLeft(7, '0');
                     }
                     else
                     {
-                        mvarNroPedido = Global01.NroUsuario.Trim() + "-" + String.Format("00000000", int.Parse(rec["NroPedido"].ToString().Substring(rec["NroPedido"].ToString().Length - 7) + 1));
-                    }
+                        mvarNroPedido = Global01.NroUsuario.Trim() + "-" + (int.Parse(rec["NroPedido"].ToString().Substring(rec["NroPedido"].ToString().Length - 8)) + 1).ToString().PadLeft(8,'0');
+                    };
                 }
                 rec = null;
 
@@ -146,7 +146,7 @@ namespace Catalogo._pedidos
             cmd.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 128).Value = " "; // mvarObservaciones;
             cmd.Parameters.Add("pTransporte", System.Data.OleDb.OleDbType.VarChar, 128).Value = " "; // mvarTransporte;
 
-            cmd.Connection = Conexion1;
+            cmd.Connection = mvarConexion;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "usp_Pedido_Enc_add";
             cmd.ExecuteNonQuery();
@@ -170,13 +170,12 @@ namespace Catalogo._pedidos
             // Por POLITICA NUESTRA  -- >  SE BORRA
             if (Origen.ToUpper() == "VER")
             {
-               Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Pedido_Transmicion_Upd '" + mvarNroPedido + "'");
+               Funciones.oleDbFunciones.ComandoIU(mvarConexion, "EXEC usp_Pedido_Transmicion_Upd '" + mvarNroPedido + "'");
             }
             else
             {
-                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                     auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " ped:" + mvarNroPedido + " tot:" + String.Format("fixed", wTotal));
-                Nuevo();
+                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido, auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " ped:" + mvarNroPedido + " tot:" + String.Format("fixed", wTotal));
+                //Nuevo();
                 if (GuardoOK != null)
                 {
                     GuardoOK(Global01.NroImprimir);
@@ -207,7 +206,6 @@ namespace Catalogo._pedidos
 
         }
 
-
         private void GuardarItem(string IDCatalogo, int cantidad, bool Similar, bool Bahia, bool Oferta, byte Deposito, float Precio, string Observaciones)
         {
             if (!(ValidarConexion()))
@@ -226,19 +224,19 @@ namespace Catalogo._pedidos
             cmd.Parameters.Add("pPrecio", System.Data.OleDb.OleDbType.Single ).Value = Precio;
             cmd.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 80).Value = Observaciones;
 
-            cmd.Connection = Conexion1;
+            cmd.Connection = mvarConexion;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "usp_Pedido_Det_add";
             cmd.ExecuteNonQuery();
 
-            rec = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT ID FROM CatalogoBAK WHERE ID='" + IDCatalogo + "'");
+            rec = Funciones.oleDbFunciones.Comando(mvarConexion, "SELECT ID FROM CatalogoBAK WHERE ID='" + IDCatalogo + "'");
             if (!rec.HasRows)
             {
-                Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_AnexaItemCatalogoBak '" + IDCatalogo + "'");
+                Funciones.oleDbFunciones.ComandoIU(mvarConexion, "EXEC usp_AnexaItemCatalogoBak '" + IDCatalogo + "'");
             }
             else
             {
-                Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_CambiaCodigoCatalogoBak '" + IDCatalogo + "'");
+                Funciones.oleDbFunciones.ComandoIU(mvarConexion, "EXEC usp_CambiaCodigoCatalogoBak '" + IDCatalogo + "'");
             }
             rec = null;
             cmd = null;

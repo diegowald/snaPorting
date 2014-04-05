@@ -6,14 +6,14 @@ using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo.notifications
 {
-    public class NotificationCenter : Catalogo.util.singleton<NotificationCenter>, Funciones.emitter_receiver.IEmisor<util.Pair<string, int>>
+    public class NotificationCenter : Catalogo.util.singleton<NotificationCenter>, Funciones.emitter_receiver.IEmisor<util.Pair<string, float>>
     {
-        public void notificar(string mensaje, int porcentaje)
+        public void notificar(string mensaje, float porcentaje)
         {
-            this.emitir(new util.Pair<string,int>(mensaje, porcentaje));
+            this.emitir(new util.Pair<string,float>(mensaje, porcentaje));
         }
 
-        public Funciones.emitter_receiver.emisorHandler<util.Pair<string, int>> emisor
+        public Funciones.emitter_receiver.emisorHandler<util.Pair<string, float>> emisor
         {
             get;
             set;

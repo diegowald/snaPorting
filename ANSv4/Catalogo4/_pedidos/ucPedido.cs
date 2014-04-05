@@ -8,13 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
+using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._pedidos
 {
-    public partial class ucPedido : UserControl, 
+    public partial class ucPedido : UserControl,
         Funciones.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>, // Para recibir el producto seleccionado
-        Funciones.emitter_receiver.IReceptor<_pedidos.PedidosHelper.Acciones> // Para recibir acciones al pedido desde la grilla de productos.
-
+        Funciones.emitter_receiver.IReceptor<_pedidos.PedidosHelper.Acciones>, // Para recibir acciones al pedido desde la grilla de productos.
+        Funciones.emitter_receiver.IEmisor<int>, // Para enviar el indice del cliente seleccionado en el combo
+        Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
     {
         private const string m_sMODULENAME_ = "ucPedido";
         ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
@@ -47,25 +49,72 @@ namespace Catalogo._pedidos
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {           
+            paEnviosCbo.SelectedIndex = -1;
+
             if (cboCliente.SelectedIndex > 0)
             {
                 toolStripStatusLabel1.Text = "Nota de Venta para el cliente: " + this.cboCliente.Text.ToString();
                 btnIniciar.Enabled = true;
+                paEnviosCbo.SelectedIndex = 2;
             }
             else
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Pedido para el cliente ..."; }
                 btnIniciar.Enabled = false;
             };
+            //paEnviosCbo_SelectedIndexChanged(null, null);
+            this.emitir(cboCliente.SelectedIndex);
+        }
+        
+        private void paEnviosCbo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ObtenerMovimientos();
+        }
+
+        private void ObtenerMovimientos()
+        {
+            paDataGridView.Visible = false;
+
+            _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(cboCliente.SelectedValue.ToString()));
+            System.Data.OleDb.OleDbDataReader dr = null;
+
+            if (paEnviosCbo.SelectedIndex == 0)
+            {
+                dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.TODOS, "NOTA DE VENTA");
+            }
+            else if (paEnviosCbo.SelectedIndex == 1)
+            {
+                dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.ENVIADOS, "NOTA DE VENTA");
+            }
+            else if (paEnviosCbo.SelectedIndex == 2)
+            {
+                dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "NOTA DE VENTA");
+            }
+
+            if (dr != null)
+            {
+                if (dr.HasRows)
+                {
+                    DataTable dt = new DataTable();
+
+                    dt.Load(dr);
+                    paDataGridView.AutoGenerateColumns = true;
+                    paDataGridView.DataSource = dt;
+                    paDataGridView.Refresh();
+                    paDataGridView.Visible = true;
+                    paDataGridView.ClearSelection();
+                }
+            }
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
 
-            if ("HayDevolucionActiva" == "CANCELAR" )
+            if (Global01.OperacionActivada == "DEVOLUCION" )
             {
                 MessageBox.Show("Debe cerrar la DEVOLUCION para comenzar la VENTA", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
             else
             {
@@ -82,10 +131,15 @@ namespace Catalogo._pedidos
                         if (Funciones.modINIs.ReadINI("DATOS", "PedidoNE", "1") == "1")
                         {
                             _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(cboCliente.SelectedValue.ToString()));
-                            dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS);
+                            dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS,"NOTA DE VENTA");
                             if (dr.HasRows)
                             {
-                                MessageBox.Show("Hay un pedido pendiente de envio, sugerimos: \n Ir a pedidos no enviados abrirlo y continuar con el mismo", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show("Hay un pedido pendiente de envio, sugerimos: \n Ir a pedidos anteriores (no enviados) abrirlo y continuar con el mismo", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                paEnviosCbo.SelectedIndex = 2;
+                                PedidoTab.SelectedIndex = 1;                                
+                                nvAntTab.Select();
+                                PedidoTab.Visible = true;
+                                
                                 return;
                             } ;                   
                         }
@@ -144,8 +198,7 @@ namespace Catalogo._pedidos
                     {
                         if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Pedido?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                                 auditoria.Auditor.AccionesAuditadas.CANCELA, "");
+                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido, auditoria.Auditor.AccionesAuditadas.CANCELA, "");
                             PedidoTab.Visible = false;
                             nvlistView.Items.Clear();
                             TotalPedido();                            
@@ -183,16 +236,18 @@ namespace Catalogo._pedidos
 
         private void CerrarPedido()
         {
+            Global01.OperacionActivada = "nada";
             btnIniciar.Text = "Iniciar";
             btnIniciar.Tag = "INICIAR";
 
             _ToolTip.SetToolTip(btnIniciar, "INICIAR Pedido Nuevo");
             nvObservacionesTxt.Text = "";
-            //cboEnvios_Click();
+            ObtenerMovimientos();
         }
 
         private void IniciarPedido()
         {
+            Global01.OperacionActivada = "PEDIDO";
             btnIniciar.Text = "CANCELAR";
             btnIniciar.Tag = "CANCELAR";
             _ToolTip.SetToolTip(btnIniciar, "CANCELAR éste Pedido");
@@ -201,8 +256,8 @@ namespace Catalogo._pedidos
 
         private void HabilitarPedido()
         {
-            PnlTop.Enabled = true;
-            PnlMain.Enabled = true;
+            nvPnlTop.Enabled = true;
+            nvPnlMain.Enabled = true;
             btnImprimir.Enabled = true;
             btnVer.Enabled = true;
             nvlistView.Enabled = true;
@@ -211,8 +266,8 @@ namespace Catalogo._pedidos
 
         private void InhabilitarPedido()
         {
-            PnlTop.Enabled = false;
-            PnlMain.Enabled = false;
+            nvPnlTop.Enabled = false;
+            nvPnlMain.Enabled = false;
             btnImprimir.Enabled = false;
             btnVer.Enabled = false;
             nvlistView.Enabled = false;
@@ -247,17 +302,17 @@ namespace Catalogo._pedidos
             cmdProductoAgregar();
         }
 
-        public void onRecibir(PedidosHelper.Acciones dato)
+        public void onRecibir(_pedidos.PedidosHelper.Acciones dato)
         {
             switch (dato)
             {
-                case PedidosHelper.Acciones.COMPRAR:
+                case _pedidos.PedidosHelper.Acciones.COMPRAR:
                     cmdProductoAgregar();
                     break;
-                case PedidosHelper.Acciones.INCREMENTAR:
+                case _pedidos.PedidosHelper.Acciones.INCREMENTAR:
                     nvCantidadTxt.Value++;
                     break;
-                case PedidosHelper.Acciones.DECREMENTAR:
+                case _pedidos.PedidosHelper.Acciones.DECREMENTAR:
                     nvCantidadTxt.Value--;
                     break;
                 default:
@@ -515,6 +570,54 @@ namespace Catalogo._pedidos
             }
         }
 
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+           const string PROCNAME_ = "btnImprimir_Click";
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            if (nvlistView.Items.Count > 0)
+            {
+                InhabilitarPedido();
+
+                bool wSimilar;
+                bool wOferta;
+
+                Catalogo._devoluciones.Pedido ped = new Catalogo._devoluciones.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+                ped.NroImpresion = 0;
+                for (int i = 0; i < nvlistView.Items.Count; i++)
+                {
+                    wSimilar = (nvlistView.Items[i].SubItems[5].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
+                    wOferta = (nvlistView.Items[i].SubItems[7].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
+
+                    ped.ADDItem(nvlistView.Items[i].SubItems[8].Text.ToString(),
+                                float.Parse(nvlistView.Items[i].SubItems[2].Text.ToString()),
+                                Int16.Parse(nvlistView.Items[i].SubItems[3].Text.ToString()),
+                                wSimilar,
+                                byte.Parse(nvlistView.Items[i].SubItems[6].Text.ToString()),
+                                wOferta,
+                                nvlistView.Items[i].SubItems[10].Text.ToString());
+                };
+
+                ped.Guardar("grabar");
+
+                Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblPedido_Bkp");
+                Cursor.Current = Cursors.Default;
+                
+                Pedido_Imprimir(Global01.NroImprimir);
+                Global01.NroImprimir = "";
+                
+                CerrarPedido();
+                nvlistView.Items.Clear();
+                TotalPedido();
+                nvSimilarChk.Checked = false;
+                nvEsOfertaChk.Checked = false;
+                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));  
+
+            };
+
+        }
+
         private void btnVer_Click(object sender, EventArgs e)
         {
 
@@ -528,9 +631,7 @@ namespace Catalogo._pedidos
                 bool wSimilar;
                 bool wOferta;
 
-                Catalogo._pedidos.Pedido ped = new Catalogo._pedidos.Pedido(Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
-
-                ped.Conexion = Global01.Conexion;
+                Catalogo._devoluciones.Pedido ped = new Catalogo._devoluciones.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
                 ped.NroImpresion = 0;
                 for (int i = 0; i < nvlistView.Items.Count; i++)
                 {
@@ -552,13 +653,11 @@ namespace Catalogo._pedidos
                 Pedido_Imprimir(Global01.NroImprimir);
                 Global01.NroImprimir = "";
 
-               
-
             };
 
         }
 
-        private void Pedido_Imprimir(string NroPedido)
+        public static void Pedido_Imprimir(string NroPedido)
         {
 
             string sReporte = "";
@@ -595,6 +694,11 @@ namespace Catalogo._pedidos
  
             fReporte f = new fReporte();
             f.Text = "Nota de Venta n° " + NroPedido;
+            f.DocumentoNro = "P" + NroPedido;
+            f.EmailTO = odsPedidos1.Tables[0].Rows[0]["Email"].ToString();
+            f.EmailTO = "juanpablobrugniere@speedy.com.ar";
+            f.RazonSocial = odsPedidos1.Tables[0].Rows[0]["RazonSocial"].ToString();
+            f.EmailAsunto = "auto náutica sur - nota de venta n° " + NroPedido;
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();
@@ -605,6 +709,202 @@ namespace Catalogo._pedidos
             odsPedidos1 = null;
             oReport.Dispose();
 
+        }
+
+        private void paDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Global01.AppActiva)
+            {     
+               DataGridViewCell cell = paDataGridView[e.ColumnIndex, e.RowIndex];
+               if (cell != null)
+                {
+                    DataGridViewRow row = cell.OwningRow;
+                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="NOTA")
+                    {
+                        Pedido_Imprimir(row.Cells["Nro"].Value.ToString());
+                    };
+                };
+            };
+        }
+
+        private void paDataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Global01.AppActiva)
+            {               
+               //[CTRL + M] ' Marcado de Pedidos, Recibos y Devoluciones como enviadas en forma manual
+               if (e.KeyCode==Keys.M && e.Modifiers==Keys.Control)
+               {
+                    if (paEnviosCbo.Text.ToString().ToUpper()== "NO ENVIADOS")
+                    {
+                        if (paDataGridView.SelectedRows != null) 
+                        {
+                            if (MessageBox.Show("CUIDADO!! a los Items marcados NO podrá enviarlos electrónicamente, ¿Está Seguro?", "Marcando como: ENVIADO EN FORMA MANUAL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)                                                       
+                            {
+                                foreach (DataGridViewRow row in paDataGridView.SelectedRows)
+                                {
+                                    if (row.Cells["Origen"].Value.ToString().Substring(0,4).ToUpper()=="NOTA") 
+                                    {
+                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Pedido_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblPedido_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroPedido='" + row.Cells["Nro"].Value.ToString() + "'");
+                                    }
+                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="DEVO") 
+                                    {
+                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Devolucion_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblDevolucion_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroDevolucion='" + row.Cells["Nro"].Value.ToString() + "'");
+                                    }
+                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="RECI") 
+                                    {
+                                        MessageBox.Show("opción no disponible para recibos", "atención",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                                        //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Recibo_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                        //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblRecibo_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroRecibo='" + row.Cells["Nro"].Value.ToString() + "'");
+                                    }
+                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="INTE") 
+                                    {
+                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_InterDeposito_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                        //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblInterDepotito SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroInterDeposito='" & row.Cells["Nro"].Value.ToString() + "'");
+                                    }
+                                    //paDataGridView.Rows.Remove(row);
+                                    paDataGridView.ClearSelection();
+                                }
+                                ObtenerMovimientos(); 
+                            }
+                        }
+                    }
+                }
+                else if (e.KeyCode==Keys.A && e.Modifiers==Keys.Control)
+                {     
+                    if (paEnviosCbo.Text.ToString().ToUpper()== "NO ENVIADOS")
+                    {
+                        if (paDataGridView.SelectedRows != null)
+                        {
+                            foreach (DataGridViewRow row in paDataGridView.SelectedRows)
+                            {
+                                if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="NOTA")
+                                {
+                                    if (MessageBox.Show("¿ Desea abrir el pedido n° " + row.Cells["Nro"].Value.ToString() + " ?", "Abriendo pedido no enviado ...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                    {
+                                        if (cboCliente.SelectedValue.ToString() == row.Cells["IDCliente"].Value.ToString())
+                                        {
+                                            if (btnIniciar.Tag.ToString() == "INICIAR")
+                                            {
+                                                AbrirPedido("pedido", row.Cells["Nro"].Value.ToString(), Int16.Parse(row.Cells["IdCliente"].Value.ToString()));
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("CUIDADO!! Debe cerrar el pedido ACTUAL", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                            };
+                                        };
+                                    };
+                                };
+                                paDataGridView.ClearSelection();
+                            };
+                        }        
+                    }
+                }
+            }
+        }
+
+
+        private void AbrirPedido(string EstadoActual, string NroPedido, int IdCliente)
+        {
+            System.Data.OleDb.OleDbDataReader dr = Funciones.oleDbFunciones.Comando(Global01.Conexion , "EXECUTE v_Pedido_Det_Hist '" + NroPedido + "'");
+
+            if (dr.HasRows )
+            {
+                //If (vg.miSABOR > 2) And (EstadoActual = "todo") Then
+                //  cboCliente.ListIndex = BuscarIndiceEnCombo(cboCliente, CStr(IdCliente), False)
+                //  If cboCliente.ListIndex <= 0 Then
+                //      MsgBox "El Cliente YA no existe, seleccione primero en la lista desplegable", vbInformation, "Atención"
+                //      Exit Sub
+                //  Else
+                //    cmdVISITA_Click
+                //  End If
+                //End If
+                
+                nvlistView.Items.Clear();
+                string wC_Producto;
+                int wDisCont = 0;
+
+                while (dr.Read())
+                {
+                    if (DBNull.Value.Equals(dr["C_Producto"]))
+                    {
+                        wC_Producto = "?";
+                    }
+                    else
+                    {
+                        wC_Producto = dr["C_Producto"].ToString().Substring(5);
+                    }
+
+                    ListViewItem ItemX = new ListViewItem(wC_Producto); //dr["CodigoCorto"].ToString()
+                    ////alternate row color
+                    if (nvlistView.Items.Count % 2 != 0)
+                    {
+                        ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                    }
+
+                    ItemX.SubItems.Add(dr["N_Producto"].ToString());          //01
+                    ItemX.SubItems.Add(dr["PUnit"].ToString());           //02
+                    ItemX.SubItems.Add(dr["Cantidad"].ToString());         //03
+                    ItemX.SubItems.Add(dr["SubTotal"].ToString());         //04
+                    ItemX.SubItems.Add(dr["miSimilar"].ToString());          //05
+                    ItemX.SubItems.Add(dr["Deposito"].ToString());         //06
+                    ItemX.SubItems.Add(dr["miOferta"].ToString());           //07
+                    ItemX.SubItems.Add(dr["IdCatalogo"].ToString());       //08
+                    ItemX.SubItems.Add(dr["C_Producto"].ToString());           //09
+                    ItemX.SubItems.Add(dr["Observaciones"].ToString());    //10
+       
+                    nvDepositoCbo.SelectedValue = Int16.Parse(dr["Deposito"].ToString());
+
+                    if (dr["DisCont"].ToString()=="1" | wC_Producto=="?")
+                    {
+                        ItemX.SubItems[1].ForeColor = Color.Red;
+                        ItemX.SubItems[1].Font = new Font(nvlistView.Font, FontStyle.Bold);
+                        wDisCont = wDisCont + 1;
+                    }
+                    nvlistView.Items.Add(ItemX);
+                };
+                Funciones.util.AutoSizeLVColumnas(ref nvlistView);
+                
+                Global01.NroDocumentoAbierto = NroPedido;
+
+                TotalPedido();
+                IniciarPedido();
+                HabilitarPedido();
+
+                nvSimilarChk.Checked = false;
+                nvEsOfertaChk.Checked = false;
+                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
+                PedidoTab.SelectedIndex = 0;
+                PedidoTab.Visible = true;
+
+                if (wDisCont > 0)
+                {
+                    MessageBox.Show("CUIDADO!!, Hay Códigos Discontinuados", "atención",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                };
+
+            }
+
+            dr = null;
+        }
+
+        private void nvlistView_DoubleClick(object sender, EventArgs e)
+        {
+             nvlistView.SelectedItems[0].SubItems[5].Text = (nvSimilarChk.Checked ? "1" : "0");
+             nvlistView.SelectedItems[0].SubItems[6].Text = nvDepositoCbo.SelectedValue.ToString();
+        }
+
+
+
+        public Funciones.emitter_receiver.emisorHandler<int> emisor
+        {
+            get;
+            set;
+        }
+
+        public void onRecibir(int dato)
+        {
+            cboCliente.SelectedIndex = dato;
         }
 
     } //fin clase

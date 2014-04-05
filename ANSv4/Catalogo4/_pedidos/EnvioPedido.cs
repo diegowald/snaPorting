@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Catalogo._pedidos
+namespace Catalogo._devoluciones
 {
     public class EnvioPedido
     {

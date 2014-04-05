@@ -143,7 +143,7 @@ public class EnvioRecibo
 		//        'Notas de Credito
 		if (nCre.HasRows) {
 			while (nCre.Read()) {
-				if (nCre["Concepto"].ToString().Substring(0, 4) == "CRE-") 
+                if (nCre["Concepto"].ToString().Substring(0, 4).ToUpper() == "CRE-") 
                 {
 					_NotasCredito += nCre["Concepto"] + ",";
 					_NotasCredito += String.Format("00000000000000000", (float) nCre["TotaldeduN"] * 100) + ";";

@@ -166,9 +166,8 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
       
 End Sub
 
-Private Sub lvEstado_DblClick()
+Private Sub lvEstado_DblClick(KeyAscii As Integer)
 
-    On Error Resume Next
     
   If cmdRecibo.Tag = "CANCELAR" Then
       

@@ -31,7 +31,7 @@ namespace Catalogo
             Funciones.oleDbFunciones.CambiarLinks("ans.mdb");
 
             //--- compactar MDB--------------------------------------------------------------
-            // Funciones.oleDbFunciones.CompactDatabase("catalogo.mdb");
+            Funciones.oleDbFunciones.CompactDatabase("catalogo.mdb");
 
             //-- Instancia la Conexión y un DataReader Global a la Rutina Main --
             Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
@@ -39,11 +39,11 @@ namespace Catalogo
             valida_appRegistro();
 
             // Carga tabla de Productos en Segundo Plano
-           // preload.Preloader.instance.refresh();
+            preload.Preloader.instance.refresh();
 
             load_header();
 
-            //valida_appLogin();
+            valida_appLogin();
 
             if (!Global01.AppActiva)
             {
@@ -59,7 +59,7 @@ namespace Catalogo
             else
             {
                 if (Global01.ActualizarClientes)
-                {
+                {   
                     util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateCuentas, false);
                     updater.run();
                 }
@@ -88,8 +88,8 @@ namespace Catalogo
         private static void ActivarApplicacion()
         {
             util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
-                util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, 
-                util.BackgroundTasks.Updater.UpdateType.ActivarApp, false);
+               util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+               util.BackgroundTasks.Updater.UpdateType.ActivarApp, false);
             updater.run();
         }
 
@@ -141,7 +141,7 @@ namespace Catalogo
 
             }
             dr = null;
-            if (Global01.Conexion.State == ConnectionState.Open) { Global01.Conexion.Close(); };
+            //if (Global01.Conexion.State == ConnectionState.Open) { Global01.Conexion.Close(); };
 
         }
 
@@ -225,8 +225,7 @@ namespace Catalogo
  
             //- Registro y activación -------------XX
         AcaRegistro:
-           // if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            if (false)
+            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -287,7 +286,7 @@ namespace Catalogo
                 // registrada y activa
                 Global01.AppActiva = true;
                 ///// BORRAR ESTA LINEA!!!!!!!
-                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
             };
             //--------------------------------------XX
 
@@ -357,7 +356,7 @@ namespace Catalogo
             Global01.dstring = Global01.AppPath + "\\datos\\catalogo.mdb";
             Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
 
-            Global01.strConexionUs = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Us + ";Jet OLEDB:System database=" + Global01.sstring;
+            Global01.strConexionUs = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Us + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
             Global01.strConexionAd = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Ad + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
 
             Global01.IDMaquina = Catalogo._registro.AppRegistro.ObtenerIDMaquina();
@@ -367,6 +366,8 @@ namespace Catalogo
             Global01.RecienRegistrado = false;
             Global01.AppActiva = false;
 
+            Global01.OperacionActivada = "nada";
+            Global01.NroDocumentoAbierto = "";
             Global01.NroUsuario = "0";
             Global01.Cuit = "0";
             Global01.pin = "";

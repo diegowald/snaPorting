@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
+
 
 namespace Catalogo.util
 {
@@ -18,12 +20,18 @@ namespace Catalogo.util
         {
             InitializeComponent(); 
             vcUPDATECTL1.CloseRequest += vcUPDATECTL1_CloseRequest;
+            vcUPDATECTL1.ConexionError += vcUPDATECTL1.ConexionError;
         }
 
-        private void vcUPDATECTL1_Load(object sender, EventArgs e)
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void fDataUpdate_Load(object sender, EventArgs e)
         {
             string wArchivoTxt = "update3Z1";
-      
+
             vcUPDATECTL1.configFileURL = "http://" + Url + "/descargas320/" + wArchivoTxt + ".txt";
         }
 
@@ -33,12 +41,32 @@ namespace Catalogo.util
             if (DownloadedFile != "") //'they did download an update
             {
                 Cursor.Current = Cursors.WaitCursor;
+              
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = DownloadedFile; 
+                //+" -d" + Global01.AppPath.ToString() 
 
-                ShellAndWait(DownloadedFile, "");
+                startInfo.CreateNoWindow = false;
+                startInfo.UseShellExecute = false;
+                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
-                //System.Diagnostics.Process.Start(DownloadedFile, "").WaitForExit();
-               
-                //System.IO.File.Delete(DownloadedFile);
+                try
+                {
+                    //Process.Start(startInfo);
+
+                    // Start the process with the info we specified.
+                    // Call WaitForExit and then the using statement will close.
+                    using (Process exeProcess = Process.Start(startInfo))
+                    {
+                        exeProcess.WaitForExit();
+                    }
+                }
+                catch
+                {
+                    // Log error.
+                }
+
+                System.IO.File.Delete(DownloadedFile);
 
                 Cursor.Current = Cursors.Default;
             }
@@ -47,28 +75,12 @@ namespace Catalogo.util
     
         }
 
-         private void vcUPDATECTL1_ConexionError(short Estado)
-         {
+        private void vcUPDATECTL1_ConexionError(short Estado)
+        {
             Global01.xError = true;
     
             this.Close();
-         }
-
-
-    //place this somewhere in your code:
-    private void ShellAndWait(string myFileName, string myArguments)
-    {
-        //Create a new process info structure.
-        System.Diagnostics.ProcessStartInfo myProcessInfo = new System.Diagnostics.ProcessStartInfo();
-        //Set the file name member of the process info structure.
-        myProcessInfo.FileName = myFileName;
-        myProcessInfo.Arguments = myArguments;
-
-        //Start the process but wait for the process to end
-        System.Diagnostics.Process myProcess = System.Diagnostics.Process.Start(myProcessInfo);
-        myProcess.WaitForExit();
-    }
-
+        }
 
     }
 }

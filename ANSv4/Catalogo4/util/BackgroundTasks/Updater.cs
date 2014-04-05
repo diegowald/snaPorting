@@ -7,7 +7,7 @@ using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo.util.BackgroundTasks
 {
     public class Updater : BackgroundTaskBase,
-        Funciones.emitter_receiver.IReceptor<util.Pair<string, int>> // Para recibir mensajes de Clientes
+        Funciones.emitter_receiver.IReceptor<util.Pair<string, float>> // Para recibir mensajes de Clientes
     {
         public enum UpdateType
         {
@@ -125,6 +125,7 @@ namespace Catalogo.util.BackgroundTasks
         public override void finished()
         {
             throw new NotImplementedException();
+            //System.Windows.Forms.MessageBox.Show("hasta acá todo va bien");
         }
 
         public Updater(JOB_TYPE jobType, UpdateType modo, bool usarSettingsIni)
@@ -233,7 +234,7 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
-        public void onRecibir(Pair<string, int> dato)
+        public void onRecibir(Pair<string, float> dato)
         {
             notifications.NotificationCenter.instance.notificar(dato.first, dato.second);
         }
