@@ -32,8 +32,8 @@
             this.lblVersion = new System.Windows.Forms.Label();
             this.lblProgress = new System.Windows.Forms.Label();
             this.lblNo = new System.Windows.Forms.Label();
-            this.lblSI = new System.Windows.Forms.Label();
             this.lblStep2 = new System.Windows.Forms.Label();
+            this.lblSI = new System.Windows.Forms.Label();
             this.cmdCancel = new System.Windows.Forms.Button();
             this.cmdNext = new System.Windows.Forms.Button();
             this.fraFRAME2 = new System.Windows.Forms.GroupBox();
@@ -46,6 +46,7 @@
             // 
             // fraFRAME1
             // 
+            this.fraFRAME1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.fraFRAME1.Controls.Add(this.lblVersion);
             this.fraFRAME1.Controls.Add(this.lblProgress);
             this.fraFRAME1.Controls.Add(this.lblNo);
@@ -84,6 +85,15 @@
             this.lblNo.Text = "NO hay actualizaciones disponibles. click en Continuar para ingresar.";
             this.lblNo.Visible = false;
             // 
+            // lblStep2
+            // 
+            this.lblStep2.Location = new System.Drawing.Point(16, 27);
+            this.lblStep2.Name = "lblStep2";
+            this.lblStep2.Size = new System.Drawing.Size(416, 44);
+            this.lblStep2.TabIndex = 0;
+            this.lblStep2.Text = "Presione click en Continuar para conectar al servidor y verificar actualizaciones" +
+    " disponibles...";
+            // 
             // lblSI
             // 
             this.lblSI.Location = new System.Drawing.Point(19, 94);
@@ -93,15 +103,6 @@
             this.lblSI.Text = "Hay una nueva versión disponible, click en Continuar para descargarla o click en " +
     "Cancelar para salir.";
             this.lblSI.Visible = false;
-            // 
-            // lblStep2
-            // 
-            this.lblStep2.Location = new System.Drawing.Point(16, 27);
-            this.lblStep2.Name = "lblStep2";
-            this.lblStep2.Size = new System.Drawing.Size(416, 44);
-            this.lblStep2.TabIndex = 0;
-            this.lblStep2.Text = "Presione click en Continuar para conectar al servidor y verificar actualizaciones" +
-    " disponibles...";
             // 
             // cmdCancel
             // 

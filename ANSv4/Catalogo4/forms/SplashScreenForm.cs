@@ -33,8 +33,8 @@ namespace Catalogo
             InitializeComponent();
             
             //this.label1.Parent = this.pictureBox1;
-            this.label1.BackColor = Color.Transparent;
-            this.pictureBox1.BackColor = Color.Transparent;
+            //this.label1.BackColor = Color.Transparent;
+            //this.pictureBox1.BackColor = Color.Transparent;
             //label1.ForeColor = Color.Green;
 
             //this.progressBar1.Parent = this.pictureBox1;
@@ -89,7 +89,7 @@ namespace Catalogo
                 return;
             }
             // Must be on the UI thread if we've got this far
-            label1.ForeColor = Color.Green;
+            label1.ForeColor = Color.Black;
             label1.Text = Text;
         }
 
@@ -117,7 +117,7 @@ namespace Catalogo
                     label1.ForeColor = Color.Yellow;
                     break;
                 case TypeOfMessage.Success:
-                    label1.ForeColor = Color.Green;
+                    label1.ForeColor = Color.Black;
                     break;
             }
             label1.Text = Text;
@@ -176,7 +176,8 @@ namespace Catalogo
             btnCancel.Show();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+    
+        private void btnCancelar_Click(object sender, EventArgs e)
         {
             doCancel = true;
             btnCancel.Hide();
