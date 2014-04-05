@@ -39,7 +39,7 @@ namespace Catalogo
             valida_appRegistro();
 
             // Carga tabla de Productos en Segundo Plano
-            preload.Preloader.instance.refresh();
+           // preload.Preloader.instance.refresh();
 
             load_header();
 

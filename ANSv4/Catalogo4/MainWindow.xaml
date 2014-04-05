@@ -9,7 +9,7 @@
         WindowState="Normal"         
         x:Name="CatalogoMainWindow"
         BorderThickness="0"
-        ResizeMode="CanResizeWithGrip" Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None">
+        ResizeMode="CanResizeWithGrip" Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="True" WindowStyle="None">
 
     <Border Grid.Row="0" x:Name="LayoutRoot" 
           Background="White"  BorderBrush="#E31C19" BorderThickness="2"

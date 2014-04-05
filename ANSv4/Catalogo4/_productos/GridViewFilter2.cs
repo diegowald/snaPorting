@@ -290,7 +290,6 @@ namespace Catalogo._productos
             // Save the row count in the original datatable
             dataRowCount = dtProducts.Rows.Count;
             // Create a dataview of the datatable
-            System.Diagnostics.Debug.WriteLine("INICIO DATABIND");
             dvProducts.Table = dtProducts;
             // Filter the dataview
             dvProducts.RowFilter = filterString;
@@ -318,7 +317,6 @@ namespace Catalogo._productos
 
             // Bind Datagrid view to the DataView
             dataGridView1.DataSource = dvProducts;
-            System.Diagnostics.Debug.WriteLine("FIN DATABIND");
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
 

@@ -3,7 +3,7 @@ using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._clientes
 {
-    class UpdateClientes : Funciones.emitter_receiver.IEmisor<util.Pair<string, float>>
+    class UpdateClientes : Funciones.emitter_receiver.IEmisor<util.Pair<string, int>>
     {
         // Define como se llama este modulo para el control de errores
 
@@ -118,7 +118,7 @@ namespace Catalogo._clientes
                     Global01.TranActiva = conexion.BeginTransaction();
                 }
 
-                this.emitir(new util.Pair<string, float>("Sincronizando Clientes ...", 0));///, Cancel)
+                this.emitir(new util.Pair<string, int>("Sincronizando Clientes ...", 0));///, Cancel)
 
                 if (!webServiceInicializado)
                 {
@@ -127,7 +127,7 @@ namespace Catalogo._clientes
 
                 if (!cancel)
                 {
-                    this.emitir(new util.Pair<string, float>("Sincronizando Clientes ...", 30));//, Cancel)
+                    this.emitir(new util.Pair<string, int>("Sincronizando Clientes ...", 30));//, Cancel)
                 }
 
                 Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "DELETE FROM tblClientes");
@@ -139,7 +139,7 @@ namespace Catalogo._clientes
 
                 if (!cancel)
                 {
-                    this.emitir(new util.Pair<string, float>("Sincronizando Cuentas Corrientes", 60));///, Cancel)
+                    this.emitir(new util.Pair<string, int>("Sincronizando Cuentas Corrientes", 60));///, Cancel)
                 }
 
                 if (!cancel)
@@ -149,7 +149,7 @@ namespace Catalogo._clientes
 
                 if (!cancel)
                 {
-                    this.emitir(new util.Pair<string, float>("Finalizando Sincronización de Clientes", 90));//, Cancel)
+                    this.emitir(new util.Pair<string, int>("Finalizando Sincronización de Clientes", 90));//, Cancel)
                 }
 
                 if (!cancel)
@@ -164,7 +164,7 @@ namespace Catalogo._clientes
                         Global01.TranActiva.Rollback();
                         Global01.TranActiva = null;
                     }
-                    this.emitir(new util.Pair<string, float>("Sincronización de Clientes con Errores", 100));///, Cancel)
+                    this.emitir(new util.Pair<string, int>("Sincronización de Clientes con Errores", 100));///, Cancel)
                 }
                 else
                 {
@@ -175,7 +175,7 @@ namespace Catalogo._clientes
                     }
 
                     Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_appConfig_FActClientes_Upd");
-                    this.emitir(new util.Pair<string, float>("Sincronización de Clientes Finalizada", 100));///, Cancel)
+                    this.emitir(new util.Pair<string, int>("Sincronización de Clientes Finalizada", 100));///, Cancel)
                 }
             }
             catch
@@ -296,9 +296,9 @@ namespace Catalogo._clientes
                 return;
             }
 
-            this.emitir(new util.Pair<string,float>("Sincronizando Clientes ...", 40));//, Cancel)
+            this.emitir(new util.Pair<string,int>("Sincronizando Clientes ...", 40));//, Cancel)
 
-            this.emitir(new util.Pair<string,float>("Importando Mis Clientes", 0));///, Cancel)
+            this.emitir(new util.Pair<string,int>("Importando Mis Clientes", 0));///, Cancel)
 
             //    'diego        If Cancel Then
             //    'diego            Exit Sub
@@ -315,7 +315,7 @@ namespace Catalogo._clientes
 
             while (restanImportar>0)
             {
-                this.emitir(new util.Pair<string,float>("Sincronizando Clientes ...", ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100));//, Cancel)
+                this.emitir(new util.Pair<string,int>("Sincronizando Clientes ...", (int) ((int)cantidadAImportar - restanImportar) / (int)cantidadAImportar * 100));//, Cancel)
                 System.Data.DataSet ds = cliente.GetTodosLosClientes_Datos_Registros(_MacAddress, lastID);
   
                 if (ds.Tables[0].Rows.Count > 0)
@@ -338,7 +338,7 @@ namespace Catalogo._clientes
                             cantImportada++;
                             if (cantImportada % 31 == 0)
                             {
-                                this.emitir(new util.Pair<string, float>("Sincronizando Clientes ...", ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100));//, Cancel)
+                                this.emitir(new util.Pair<string,int>("Importando Mis Clientes", (int)cantImportada));//, Cancel)
                                 if (cancel)
                                 {
                                     return;
@@ -361,9 +361,9 @@ namespace Catalogo._clientes
                 cancel = true;
                 return;
             }
-            this.emitir(new util.Pair<string,float>("Sincronizando de Clientes ...", 60));//, Cancel)
+            this.emitir(new util.Pair<string,int>("Sincronizando de Clientes ...", 60));//, Cancel)
 
-            this.emitir(new util.Pair<string,float>("Importando Cuentas Corrientes", 0));//, Cancel)
+            this.emitir(new util.Pair<string,int>("Importando Cuentas Corrientes", 0));//, Cancel)
 
             if (cancel)
             {
@@ -378,7 +378,7 @@ namespace Catalogo._clientes
 
             while (RestanImportar>0)
             {
-                this.emitir(new util.Pair<string,float>("Sincronizando Clientes ...", ((float)CantidadAImportar - RestanImportar) / CantidadAImportar * 100));//, Cancel)
+                this.emitir(new util.Pair<string,int>("Sincronizando Clientes ...",(int) ((int)CantidadAImportar - RestanImportar) / (int)CantidadAImportar * 100));//, Cancel)
                 System.Data.DataSet ds = cliente.GetTodasLasCtasCtes_Datos_Registros(_MacAddress, lastId);
   
                 if (ds.Tables[0].Rows.Count > 0)
@@ -408,7 +408,7 @@ namespace Catalogo._clientes
                             CantidadImportada++;
                             if (CantidadImportada % 31 == 0)
                             {
-                                this.emitir(new util.Pair<string, float>("Importando Cuentas Corrientes", (float)CantidadImportada / CantidadAImportar * 100));//, Cancel)
+                                this.emitir(new util.Pair<string,int>("Importando Cuentas Corrientes", (int)CantidadImportada / (int)CantidadAImportar * 100));//, Cancel)
                                 if (cancel)
                                 {
                                     return;
@@ -425,10 +425,17 @@ namespace Catalogo._clientes
             }
         }
 
-        public emisorHandler<util.Pair<string, float>> emisor
+        private emisorHandler<util.Pair<string, int>> _emisor;
+        public emisorHandler<util.Pair<string, int>> emisor
         {
-            get;
-            set;
+            get
+            {
+                return _emisor;
+            }
+            set
+            {
+                _emisor = value;
+            }
         }
     }
 }
