@@ -173,7 +173,7 @@ namespace Catalogo.Funciones
             {
                 throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
 
-                switch (util.ErrorGuardianGlobalHandler(m_sMODULENAME_, PROCNAME_, e))
+                switch (util.ErrorGuardianGlobalHandler(m_sMODULENAME_, PROCNAME_))
                 {
                     case 1:
                         //Constants.vbRetry:

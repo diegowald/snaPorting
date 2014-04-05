@@ -31,29 +31,6 @@ namespace Catalogo
             ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
         }
 
-        private void addFlashPlayer()
-        {
-            // Create the interop host control.
-            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
-
-            // Create the MaskedTextBox control.
-            Catalogo.util.FlashControl flash = new util.FlashControl();
-//            ShockwaveFlashObjects.ShockwaveFlashClass flash = new ShockwaveFlashObjects.ShockwaveFlashClass();
-            flash.AutoScroll = true;
-            flash.Dock = System.Windows.Forms.DockStyle.Top;
-            flash.Location = new System.Drawing.Point(0, 0);
-            flash.Name = "flash";
-            flash.file = "http://samples.mplayerhq.hu/SWF/962_fws.swf";
-            //filterControl.Size = new System.Drawing.Size(640, 480);
-            //filterControl.TabIndex = 0;
-            //gridViewControl.Text = "Lista de Productos";
-            flash.play();
-            // Assign the MaskedTextBox control as the host control's child.
-            host.Child = flash;
-
-            this.topBanner.Children.Add(host);
-        }
-
         /*private Catalogo._productos.SearchFilter addSearchArea()
         {
             Catalogo._productos.SearchFilter filterControl = new _productos.SearchFilter();
@@ -230,7 +207,6 @@ namespace Catalogo
 
             //Catalogo._novedades.ucNovedades nov = addNovedadesArea();
 
-            addFlashPlayer();
 
             sf.attachReceptor(gv);
             sf.attachReceptor2(gv);
