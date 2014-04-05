@@ -211,7 +211,16 @@ namespace Catalogo
             gv.attachReceptor3(dev);
 
             ped.attachReceptor(rec);
+            ped.attachReceptor(dev);
+            ped.attachReceptor(mov); 
+
             rec.attachReceptor(ped);
+            rec.attachReceptor(dev);
+            rec.attachReceptor(mov); 
+
+            dev.attachReceptor(ped);
+            dev.attachReceptor(dev);
+            dev.attachReceptor(mov); 
 
             this.Show();
             SplashScreen.CloseSplashScreen();

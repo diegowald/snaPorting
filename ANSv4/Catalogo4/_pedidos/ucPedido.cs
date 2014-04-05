@@ -894,8 +894,6 @@ namespace Catalogo._pedidos
              nvlistView.SelectedItems[0].SubItems[6].Text = nvDepositoCbo.SelectedValue.ToString();
         }
 
-
-
         public Funciones.emitter_receiver.emisorHandler<int> emisor
         {
             get;
@@ -904,7 +902,8 @@ namespace Catalogo._pedidos
 
         public void onRecibir(int dato)
         {
-            cboCliente.SelectedIndex = dato;
+            if (btnIniciar.Tag.ToString() == "INICIAR")            
+                cboCliente.SelectedIndex = dato;
         }
 
     } //fin clase

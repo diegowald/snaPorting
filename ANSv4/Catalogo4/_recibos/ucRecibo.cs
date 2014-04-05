@@ -1505,7 +1505,8 @@ namespace Catalogo._recibos
 
         public void onRecibir(int dato)
         {
-            cboCliente.SelectedIndex = dato;
+            if (btnIniciar.Tag.ToString() == "INICIAR")
+                cboCliente.SelectedIndex = dato;
         }
 
     } //fin clase
