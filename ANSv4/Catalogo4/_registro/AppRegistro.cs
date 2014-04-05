@@ -16,6 +16,8 @@ namespace Catalogo._registro
 
         public static string ObtenerIDMaquina()
         {
+            const string PROCNAME_ = "ObtenerIDMaquina";
+
             string functionReturnValue = null;
 
             string[] varSerial = new string[5];
@@ -50,6 +52,8 @@ namespace Catalogo._registro
         {
             try
             {
+                const string PROCNAME_ = "TomarInfoWMI";
+
                 string functionReturnValue = null;
 
                 ManagementObjectSearcher MOS = new ManagementObjectSearcher("Select " + clave.second + " from " + clave.first);
@@ -69,6 +73,8 @@ namespace Catalogo._registro
 
         public static string ObtenerCRC(ref string s)
         {
+            const string PROCNAME_ = "ObtenerCRC";
+
             string functionReturnValue = null;
 
             System.Security.Cryptography.MD5 m = System.Security.Cryptography.MD5.Create();
@@ -99,6 +105,8 @@ namespace Catalogo._registro
 
         public static bool ValidateRegistration(string s)
         {
+            const string PROCNAME_ = "ValidateRegistration";
+
             bool functionReturnValue = false;
 
             if (s.Trim().Length == 0)

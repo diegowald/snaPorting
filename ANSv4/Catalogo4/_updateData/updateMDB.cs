@@ -7,8 +7,12 @@ namespace Catalogo.Funciones
     class updateMDB
     {
 
+        const string m_sMODULENAME_ = "updateMDB";
+
         internal static void Emergencia(string db)
         {
+            const string PROCNAME_ = "Emergencia";
+
             Cursor.Current = Cursors.WaitCursor;
 
             Funciones.modINIs.DeleteKeyINI("UPDATE", "mdb");
@@ -78,6 +82,7 @@ namespace Catalogo.Funciones
                     Global01.TranActiva.Rollback();
                 }
                 throw e;
+                //throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
             finally
             {

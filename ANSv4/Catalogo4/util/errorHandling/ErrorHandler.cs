@@ -10,13 +10,7 @@ namespace Catalogo.util.errorHandling
 {
     partial class ErrorHandler : Form
     {
-        public enum errorType
-        {
-            RetryAble,
-            NonRetryAble
-        }
-
-        public ErrorHandler(Exception ex, errorType errType)
+        public ErrorHandler(Exception ex)
         {
             InitializeComponent();
             this.Text = String.Format("About {0}", AssemblyTitle);
@@ -26,22 +20,6 @@ namespace Catalogo.util.errorHandling
             this.labelCompanyName.Text = AssemblyCompany;
             ///this.textBoxDescription.Text = AssemblyDescription;
             this.textBoxDescription.Text = ex.Message;
-            switch (errType)
-            {
-                case errorType.RetryAble:
-                    this.btnIgnore.Visible = true;
-                    this.btnRetry.Visible = true;
-                    this.okButton.Visible = false;
-                    this.btnAbort.Visible = true;
-                    break;
-                case errorType.NonRetryAble:
-                default:
-                    this.btnIgnore.Visible = false;
-                    this.btnRetry.Visible = false;
-                    this.btnAbort.Visible = false;
-                    this.okButton.Visible = true;
-                    break;
-            }
         }
 
         #region Assembly Attribute Accessors

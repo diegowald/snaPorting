@@ -14,6 +14,8 @@ namespace Catalogo
 
         public static void Main()
         {
+            const string PROCNAME_ = "Main";
+
             //--splash form
             //Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
             //splashthread.IsBackground = true;
