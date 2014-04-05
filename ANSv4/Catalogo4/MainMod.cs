@@ -43,7 +43,7 @@ namespace Catalogo
 
             load_header();
 
-            valida_appLogin();
+            //valida_appLogin();
 
             if (!Global01.AppActiva)
             {

@@ -223,10 +223,6 @@ namespace Catalogo._clientes
                 cmd.Connection = Conexion;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.CommandText = "usp_Clientes_add";
-                if (Global01.TranActiva != null)
-                {
-                    cmd.Transaction = Global01.TranActiva;
-                }
                 cmd.ExecuteNonQuery();
 
                 cmd = null;
@@ -278,10 +274,6 @@ namespace Catalogo._clientes
             cmd.Connection = Conexion;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "usp_CtaCte_add";
-            if (Global01.TranActiva != null)
-            {
-                cmd.Transaction = Global01.TranActiva;
-            }
             cmd.ExecuteNonQuery();
 
             cmd = null;
