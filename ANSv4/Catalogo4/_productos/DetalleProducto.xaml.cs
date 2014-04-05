@@ -90,7 +90,14 @@ namespace Catalogo._productos
                         imgIzquierda.Source = new BitmapImage(new Uri(ImgLineaDefault, UriKind.Absolute));
                     };
 
+                    bool imgProductoExists = false;
                     if (System.IO.File.Exists(ImgProducto))
+                    {
+                        System.IO.FileInfo fi = new System.IO.FileInfo(ImgProducto);
+                        imgProductoExists = fi.Length > 0;
+                    }
+
+                    if (imgProductoExists)
                     {
                         imgDerecha.Source = new BitmapImage(new Uri(ImgProducto, UriKind.Absolute));
                     }
@@ -98,7 +105,7 @@ namespace Catalogo._productos
                     {
                         imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
 
-                        if (Funciones.modINIs.ReadINI("DATOS","chkImagenUpdate", "0")=="1")
+                        if (Funciones.modINIs.ReadINI("DATOS","chkImagenUpdate", "1")=="1")
                         {                            
                             descargarImagen(ImgProductoWeb, ImgProducto);
                         }
@@ -135,7 +142,14 @@ namespace Catalogo._productos
 
         void ImgWeb_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
-            imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
+            try
+            {
+                imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
         }
 
     }

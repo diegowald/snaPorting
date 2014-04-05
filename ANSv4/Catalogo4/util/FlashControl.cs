@@ -31,9 +31,16 @@ namespace Catalogo.util
 
         public void play()
         {
-            if (axShockwaveFlash1.Movie.Length != 0)
+            try
             {
-                axShockwaveFlash1.Play();
+                if (axShockwaveFlash1.Movie.Length != 0)
+                {
+                    axShockwaveFlash1.Play();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
             }
         }
 
