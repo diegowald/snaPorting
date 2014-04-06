@@ -24,20 +24,28 @@ namespace Catalogo
             splashthread.Start();
 
             Catalogo.MainMod.Main();
+<<<<<<< HEAD
 
             mwClientes wnd = new mwClientes();
             //mwViajantes wnd = new mwViajantes();
+=======
+            Application.Current.Exit += Current_Exit;
+            MainWindow wnd = new MainWindow();
+>>>>>>> 8571054b4f4f12d784631e95c45860d3b0524931
             wnd.ShowDialog();
-
+            
             if (Global01.Conexion != null)
             {
                 Global01.Conexion.Close();
                 Global01.Conexion = null;
             }
-            wnd.Close();
-
-
+            MainMod.miEnd();
             Shutdown();
+        }
+
+        void Current_Exit(object sender, ExitEventArgs e)
+        {
+            throw new NotImplementedException();
         }        
 
     }
