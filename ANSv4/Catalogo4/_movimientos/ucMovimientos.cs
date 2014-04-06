@@ -7,10 +7,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._movimientos
 {
-    public partial class ucMovimientos : UserControl
+    public partial class ucMovimientos : UserControl,
+        Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
      {
        
         private const string m_sMODULENAME_ = "ucMovimientos";
@@ -249,6 +251,17 @@ namespace Catalogo._movimientos
                     }
                 }
             }
+        }
+     
+        public Funciones.emitter_receiver.emisorHandler<int> emisor
+        {
+            get;
+            set;
+        }
+
+        public void onRecibir(int dato)
+        {
+           cboCliente.SelectedIndex = dato;
         }
 
     } //fin clase

@@ -8,12 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CrystalDecisions.CrystalReports.Engine;
+using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._devoluciones
 {
     public partial class ucDevolucion : UserControl, 
         Funciones.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>, // Para recibir el producto seleccionado
-        Funciones.emitter_receiver.IReceptor<_pedidos.PedidosHelper.Acciones> // Para recibir acciones a la Devolucion desde la grilla de productos.
+        Funciones.emitter_receiver.IReceptor<_pedidos.PedidosHelper.Acciones>,// Para recibir acciones a la Devolucion desde la grilla de productos.
+        Funciones.emitter_receiver.IEmisor<int>, // Para enviar el indice del cliente seleccionado en el combo
+        Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
 
     {
         private const string m_sMODULENAME_ = "ucDevolucion";
@@ -77,6 +80,7 @@ namespace Catalogo._devoluciones
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Devolución para el cliente ..."; }
                 btnIniciar.Enabled = false;
             };
+            this.emitir(cboCliente.SelectedIndex);
 
         }
         
@@ -850,6 +854,18 @@ namespace Catalogo._devoluciones
                     };
                 };
             };
+        }
+
+        public Funciones.emitter_receiver.emisorHandler<int> emisor
+        {
+            get;
+            set;
+        }
+
+        public void onRecibir(int dato)
+        {
+            if (btnIniciar.Tag.ToString() == "INICIAR")            
+                cboCliente.SelectedIndex = dato;
         }
 
     } //fin clase

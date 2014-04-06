@@ -46,7 +46,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(2);
-            this.panel1.Size = new System.Drawing.Size(459, 207);
+            this.panel1.Size = new System.Drawing.Size(459, 222);
             this.panel1.TabIndex = 0;
             // 
             // vcUPDATECTL1
@@ -58,7 +58,8 @@
             this.vcUPDATECTL1.Location = new System.Drawing.Point(2, 28);
             this.vcUPDATECTL1.Margin = new System.Windows.Forms.Padding(0);
             this.vcUPDATECTL1.Name = "vcUPDATECTL1";
-            this.vcUPDATECTL1.Size = new System.Drawing.Size(455, 177);
+            this.vcUPDATECTL1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.vcUPDATECTL1.Size = new System.Drawing.Size(455, 192);
             this.vcUPDATECTL1.TabIndex = 4;
             // 
             // TopPnl
@@ -75,6 +76,7 @@
             // btnCerrar
             // 
             this.btnCerrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCerrar.FlatAppearance.BorderSize = 0;
             this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrar.Font = new System.Drawing.Font("Webdings", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
@@ -91,7 +93,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(459, 207);
+            this.CancelButton = this.btnCerrar;
+            this.ClientSize = new System.Drawing.Size(459, 222);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
