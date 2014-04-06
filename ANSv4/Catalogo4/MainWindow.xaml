@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"        
         x:Name="CatalogoMainWindow"
         BorderThickness="0"
-        ResizeMode="CanResize"  Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFE31C19" Closing="CatalogoMainWindow_Closing">
+        ResizeMode="CanResize"  Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFE31C19" >
 
     <Border Grid.Row="0" x:Name="LayoutRoot" 
           Background="White" BorderBrush="#E31C19" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">

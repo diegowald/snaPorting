@@ -23,7 +23,12 @@ namespace Catalogo
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+
+        private Catalogo._productos.SearchFilter sf = null;
+        private Catalogo._productos.GridViewFilter2 gv = null;
+        private Catalogo._pedidos.ucPedido ped = null;
+        private Catalogo._devoluciones.ucDevolucion dev = null;
+
         public MainWindow()
         {
             this.Hide();
@@ -31,7 +36,9 @@ namespace Catalogo
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
             ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+            this.Closing += MainWindow_Closing;
         }
+
 
         private void addFlashPlayer()
         {
@@ -193,10 +200,10 @@ namespace Catalogo
             Catalogo._movimientos.ucMovimientos mov = addMovimientosArea();
             ////Catalogo._novedades.ucNovedades nov = addNovedadesArea();
 
-            Catalogo._productos.SearchFilter sf = addSearchArea();
-            Catalogo._productos.GridViewFilter2 gv = addProductsArea();
-            Catalogo._pedidos.ucPedido ped = addPedidoArea();
-            Catalogo._devoluciones.ucDevolucion dev = addDevolucionArea();
+            sf = addSearchArea();
+            gv = addProductsArea();
+            ped = addPedidoArea();
+            dev = addDevolucionArea();
 
             //addFlashPlayer();
 
@@ -320,14 +327,7 @@ namespace Catalogo
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-
-            if (Global01.Conexion != null)
-            {
-                Global01.Conexion.Close();
-                Global01.Conexion = null;
-            }
-
-            MainMod.miEnd();
+            Close();
         }
 
         private void ChangeViewButton_Click(object sender, RoutedEventArgs e)
@@ -345,7 +345,8 @@ namespace Catalogo
             WindowState = WindowState.Maximized;
         }
 
-        private void CatalogoMainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+
+        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
             //    On Error GoTo ErrorGuardianLocalHandler
@@ -362,38 +363,64 @@ namespace Catalogo
 
             //  #If Sabor = 3 Or Sabor = 4 Then
 
-            //      If cmdVISITA.Tag <> "INICIAR Visita" Then
-            //        Call MsgBox("Antes de salir debe cerrar VISITA", vbExclamation, "Atención")
-            //        Cancel = True
-            //        Exit Sub
-            //      End If
+            if (Global01.OperacionActivada == "PEDIDO")
+            {
+                //      If cmdVISITA.Tag <> "INICIAR Visita" Then
+                System.Windows.Forms.MessageBox.Show("Antes de salir debe cerrar VISITA", "Atención",
+                    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
+                e.Cancel = true;
+                return;
+            }
 
-            //      If LosMovimientos.PreguntoAlSalir Then
-            //          ' Si hay movimientos pendientes pregunto si quiere enviarlos
+            if (ped.IDClienteSeleccionado != -1)
+            {
+                _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, ped.IDClienteSeleccionado);
+                if (movimientos.preguntoAlSalir())
+                {
+                    //          ' Si hay movimientos pendientes pregunto si quiere enviarlos
+                    System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show("Tiene movimientos que aun no ha enviado. ¿QUIERE ENVIARLOS AHORA?", "ENVIO DE MOVIMIENTOS", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question);
+                    switch (result)
+                    {
+                        case System.Windows.Forms.DialogResult.Yes:
+                            {
+                                //if (ProbarConexion())
+                                if (true)
+                                {
+                                    Catalogo.util.BackgroundTasks.EnvioMovimientos movs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+                                        0, false, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET);
+                                    movs.run();
+                                    //                  Dim dlg As frmConexionEnvio
+                                    //                  Set dlg = New frmConexionEnvio
+                                    //                  dlg.ModoTransmision = TRANSMITIR_RECORDSET
+                                    //                  dlg.IdCliente = 0
+                                    //                  dlg.Show vbModal, Me
+                                    //                  Set dlg = Nothing
+                                }
+                                else
+                                {
+                                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Comunicaciones,
+                                         auditoria.Auditor.AccionesAuditadas.FALLO, "Probar Conexion, TRANSMITIR_RECORDSET " + ped.IDClienteSeleccionado.ToString());
+                                }
+                            }
+                            break;
+                        case System.Windows.Forms.DialogResult.No:
+                            {
+                                if (Global01.miSABOR != Global01.TiposDeCatalogo.Invitado &&
+                                    Global01.miSABOR != Global01.TiposDeCatalogo.Cliente &&
+                                    Funciones.modINIs.ReadINI("DATOS", "EEA", "1") == "1")
+                                {
 
-            //        Select Case MsgBox("Tiene movimientos que aun no ha enviado. ¿QUIERE ENVIARLOS AHORA?", vbYesNo Or vbQuestion Or vbSystemModal Or vbDefaultButton1, "ENVIO DE MOVIMIENTOS")
-            //            Case vbYes
-            //              If ProbarConexion Then
-            //                  Dim dlg As frmConexionEnvio
-            //                  Set dlg = New frmConexionEnvio
-            //                  dlg.ModoTransmision = TRANSMITIR_RECORDSET
-            //                  dlg.IdCliente = 0
-            //                  dlg.Show vbModal, Me
-            //                  Set dlg = Nothing
-            //              Else
-            //                  vg.auditor.Guardar Comunicaciones, FALLO, "Probar Conexion, TRANSMITIR_RECORDSET" & cboCliente.List(cboCliente.ListIndex)
-            //              End If
-            //            Case vbNo
-            //                If vg.miSABOR > 2 And ReadINI("DATOS", "EEA", "1") = 1 Then
-            //                    If Len(Trim(Dir(vg.Path & "\monitorE.exe"))) > 0 Then
-            //                        Shell vg.Path & "\monitorE.exe", vbHide
-            //                    End If
-            //                End If
-            //        End Select
-
-            //      End If ' Not (m.adoREC = EOF) And Not (m.adoREC = BOF)
-            //      
-            //  #End If
+                                    //                    If Len(Trim(Dir(vg.Path & "\monitorE.exe"))) > 0 Then
+                                    //                        Shell vg.Path & "\monitorE.exe", vbHide
+                                    //                    End If
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
 
             //  With Me
             //    If .WindowState <> vbMinimized Then
@@ -413,7 +440,8 @@ namespace Catalogo
             //  End With 'Me
 
             //  Set fExistencia = Nothing
-
+            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Programa,
+                auditoria.Auditor.AccionesAuditadas.TERMINA, "se cierra la aplicacion");
             //  Select Case UnloadMode
             //    Case vbFormControlMenu
             //        '0 El usuario eligió el comando Cerrar del menú Control del formulario.
@@ -451,6 +479,7 @@ namespace Catalogo
             //    End If
             //'-------- ErrorGuardian End ----------
         }
+
 
     }
 }

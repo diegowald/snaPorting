@@ -24,19 +24,22 @@ namespace Catalogo
             splashthread.Start();
 
             Catalogo.MainMod.Main();
-
+            Application.Current.Exit += Current_Exit;
             MainWindow wnd = new MainWindow();
             wnd.ShowDialog();
-
+            
             if (Global01.Conexion != null)
             {
                 Global01.Conexion.Close();
                 Global01.Conexion = null;
             }
-            wnd.Close();
-
-
+            MainMod.miEnd();
             Shutdown();
+        }
+
+        void Current_Exit(object sender, ExitEventArgs e)
+        {
+            throw new NotImplementedException();
         }        
 
     }

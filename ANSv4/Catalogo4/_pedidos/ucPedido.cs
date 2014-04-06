@@ -906,5 +906,13 @@ namespace Catalogo._pedidos
                 cboCliente.SelectedIndex = dato;
         }
 
+        public int IDClienteSeleccionado
+        {
+            get
+            {
+                return (int)cboCliente.SelectedValue;
+            }
+        }
+
     } //fin clase
 } //fin namespace
