@@ -23,29 +23,22 @@ namespace Catalogo
     /// </summary>
     public partial class mwViajantes : Window
     {
-<<<<<<< HEAD:ANSv4/Catalogo4/mwViajantes.xaml.cs
-        
-        public mwViajantes()
-=======
-
+  
         private Catalogo._productos.SearchFilter sf = null;
         private Catalogo._productos.GridViewFilter2 gv = null;
         private Catalogo._pedidos.ucPedido ped = null;
         private Catalogo._devoluciones.ucDevolucion dev = null;
-
-        public MainWindow()
->>>>>>> 8571054b4f4f12d784631e95c45860d3b0524931:ANSv4/Catalogo4/MainWindow.xaml.cs
+    
+        public mwViajantes()
         {
             this.Hide();
             InitializeComponent();            
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
             ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-            this.Closing += MainWindow_Closing;
-        }
+            this.Closing += mwViajantes_Closing;
+    }
 
-<<<<<<< HEAD:ANSv4/Catalogo4/mwViajantes.xaml.cs
-=======
 
         private void addFlashPlayer()
         {
@@ -70,7 +63,6 @@ namespace Catalogo
             //this.topBanner.Children.Add(host);
         }
 
->>>>>>> 8571054b4f4f12d784631e95c45860d3b0524931:ANSv4/Catalogo4/MainWindow.xaml.cs
         private Catalogo._productos.SearchFilter addSearchArea()
         {
             // Create the interop host control.
@@ -275,7 +267,7 @@ namespace Catalogo
         }
 
 
-        void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        void mwViajantes_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
             //    On Error GoTo ErrorGuardianLocalHandler
