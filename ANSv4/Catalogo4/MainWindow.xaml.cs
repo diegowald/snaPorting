@@ -325,5 +325,112 @@ namespace Catalogo
             WindowState = WindowState.Maximized;
         }
 
+        private void CatalogoMainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+            //    On Error GoTo ErrorGuardianLocalHandler
+
+            if (Funciones.modINIs.ReadINI("DATOS", "ConfirmaSalida", "1") == "1")
+            {
+                if (System.Windows.Forms.MessageBox.Show("Saliendo del Catálogo... ¿Está seguro?", "Cerrando la Aplicación", System.Windows.Forms.MessageBoxButtons.YesNo)
+                    == System.Windows.Forms.DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+            }
+
+            //  #If Sabor = 3 Or Sabor = 4 Then
+
+            //      If cmdVISITA.Tag <> "INICIAR Visita" Then
+            //        Call MsgBox("Antes de salir debe cerrar VISITA", vbExclamation, "Atención")
+            //        Cancel = True
+            //        Exit Sub
+            //      End If
+
+            //      If LosMovimientos.PreguntoAlSalir Then
+            //          ' Si hay movimientos pendientes pregunto si quiere enviarlos
+
+            //        Select Case MsgBox("Tiene movimientos que aun no ha enviado. ¿QUIERE ENVIARLOS AHORA?", vbYesNo Or vbQuestion Or vbSystemModal Or vbDefaultButton1, "ENVIO DE MOVIMIENTOS")
+            //            Case vbYes
+            //              If ProbarConexion Then
+            //                  Dim dlg As frmConexionEnvio
+            //                  Set dlg = New frmConexionEnvio
+            //                  dlg.ModoTransmision = TRANSMITIR_RECORDSET
+            //                  dlg.IdCliente = 0
+            //                  dlg.Show vbModal, Me
+            //                  Set dlg = Nothing
+            //              Else
+            //                  vg.auditor.Guardar Comunicaciones, FALLO, "Probar Conexion, TRANSMITIR_RECORDSET" & cboCliente.List(cboCliente.ListIndex)
+            //              End If
+            //            Case vbNo
+            //                If vg.miSABOR > 2 And ReadINI("DATOS", "EEA", "1") = 1 Then
+            //                    If Len(Trim(Dir(vg.Path & "\monitorE.exe"))) > 0 Then
+            //                        Shell vg.Path & "\monitorE.exe", vbHide
+            //                    End If
+            //                End If
+            //        End Select
+
+            //      End If ' Not (m.adoREC = EOF) And Not (m.adoREC = BOF)
+            //      
+            //  #End If
+
+            //  With Me
+            //    If .WindowState <> vbMinimized Then
+            //      GuardarFormatoForm Me
+            //      WriteINI "Preferencias", "picHorizontal", picHorizontal.Top
+            //                    
+            //      GrabarLVColumnas Me.lvBuscar
+            //      GrabarLVColumnas Me.lvEstado
+            //      GrabarLVColumnas Me.lvMovimientos
+            //      GrabarLVColumnas Me.lvPedido
+            //      GrabarLVColumnas Me.lvDevolucion1
+            //      GrabarLVColumnas Me.lvDevolucion2
+            //      GrabarLVColumnas Me.lvValores
+            //      GrabarLVColumnas Me.lvAplicacion
+            //      GrabarLVColumnas Me.lvADeducir
+            //    End If
+            //  End With 'Me
+
+            //  Set fExistencia = Nothing
+
+            //  Select Case UnloadMode
+            //    Case vbFormControlMenu
+            //        '0 El usuario eligió el comando Cerrar del menú Control del formulario.
+            //        vg.auditor.Guardar Programa, TERMINA, "eligió el comando Cerrar"
+            //    Case vbFormCode
+            //        '1 Se invocó la instrucción Unload desde el código.
+            //        vg.auditor.Guardar Programa, TERMINA, "instrucción Unload"
+            //    Case vbAppWindows
+            //        '2 La sesión actual del entorno operativo Microsoft Windows está finalizando.
+            //        vg.auditor.Guardar Programa, TERMINA, "Microsoft Windows está finalizando"
+            //    Case vbAppTaskManager
+            //        '3 El Administrador de tareas de Microsoft Windows está cerrando la aplicación.
+            //        vg.auditor.Guardar Programa, TERMINA, "vbAppTaskManager"
+            //    Case vbFormMDIForm
+            //        '4 Un formulario MDI secundario se está cerrando porque el formulario MDI también se está cerrando.
+            //        vg.auditor.Guardar Programa, TERMINA, "vbFormMDIForm"
+            //    Case vbFormOwner
+            //        '5 Un formulario se está cerrando por que su formulario propietario se está cerrando
+            //        vg.auditor.Guardar Programa, TERMINA, "vbFormOwner"
+            // End Select
+
+            //'-------- ErrorGuardian Begin --------
+            //Exit Sub
+            //
+            //ErrorGuardianLocalHandler:
+            //    If Err.Number = 53 Then ' el archivo de VersionAnterior NO EXISTE
+            //        Resume Next
+            //    Else
+            //        Select Case ErrorGuardianGlobalHandler(m_sMODULENAME_, PROCNAME_)
+            //            Case vbRetry
+            //                Resume
+            //            Case vbIgnore
+            //                Resume Next
+            //        End Select
+            //    End If
+            //'-------- ErrorGuardian End ----------
+        }
+
     }
 }
