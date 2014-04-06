@@ -508,51 +508,28 @@ namespace Catalogo._devoluciones
         {
             string sReporte = "";
 
-            if ((int)Global01.miSABOR >= 3)
-            {
-                sReporte = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\reportes\Devolucion_Enc4.rpt";
-            }
-            else
-            {
-                sReporte = Global01.AppPath + "\\Reportes4\\Devolucion_Enc2.rpt";
-            };
-
+            sReporte = Global01.AppPath + "\\Reportes\\Devolucion_Enc3.rpt";
+       
             ReportDocument oReport = new ReportDocument();
 
             oReport.Load(sReporte);
+            Funciones.util.ChangeReportConnectionInfo(ref oReport);
 
-            OleDbDataAdapter objAdapterEnc = new OleDbDataAdapter("EXEC v_Devolucion_Enc '" + NroDevolucion + "'", Global01.Conexion);
-            OleDbDataAdapter objAdapterDet = new OleDbDataAdapter("EXEC v_Devolucion_Det '" + NroDevolucion + "'", Global01.Conexion);
+            oReport.SetParameterValue("pNroDevolucion", NroDevolucion);
 
-            System.Data.DataSet odsDevoluciones1 = new System.Data.DataSet();
-            objAdapterEnc.Fill(odsDevoluciones1, "v_Devolucion_Enc_0");
-            objAdapterDet.Fill(odsDevoluciones1, "v_Devolucion_Det_0");
+            //oReport.TiTle = "P - " + NroPedido;
 
-            if (odsDevoluciones1.Tables[0].Rows.Count == 0)
-            {
-                MessageBox.Show("Registro INEXISTENTE", "Impresión de Devoluciones",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            oReport.SetDataSource(odsDevoluciones1);
-            
-            //oReport.TiTle = "P - " + NroDevolucion;
- 
             fReporte f = new fReporte();
-            f.Text = "Devolución n° " + NroDevolucion;
+            f.Text = "Nota de Devolución n° " + NroDevolucion;
             f.DocumentoNro = "D" + NroDevolucion;
-            f.EmailTO = odsDevoluciones1.Tables[0].Rows[0]["Email"].ToString();
+            //f.EmailTO = odsPedidos1.Tables[0].Rows[0]["Email"].ToString();
             f.EmailTO = "juanpablobrugniere@speedy.com.ar";
-            f.RazonSocial = odsDevoluciones1.Tables[0].Rows[0]["RazonSocial"].ToString();
-            f.EmailAsunto = "auto náutica sur - devolución n° " + NroDevolucion;
+            //f.RazonSocial = odsPedidos1.Tables[0].Rows[0]["RazonSocial"].ToString();
+            f.EmailAsunto = "auto náutica sur - nota de devolución n° " + NroDevolucion;
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();
             f = null;
-       
-            objAdapterEnc = null;
-            objAdapterDet = null;
-            odsDevoluciones1 = null;
             oReport.Dispose();
 
         }

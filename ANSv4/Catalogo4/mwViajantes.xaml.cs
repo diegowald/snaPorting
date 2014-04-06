@@ -21,39 +21,16 @@ namespace Catalogo
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class mwViajantes : Window
     {
         
-        public MainWindow()
+        public mwViajantes()
         {
             this.Hide();
             InitializeComponent();            
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
             ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-        }
-
-        private void addFlashPlayer()
-        {
-            // Create the interop host control.
-            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
-
-            // Create the MaskedTextBox control.
-            Catalogo.util.FlashControl flash = new util.FlashControl();
-            //ShockwaveFlashObjects.ShockwaveFlashClass flash = new ShockwaveFlashObjects.ShockwaveFlashClass();
-            flash.AutoScroll = true;
-            flash.Dock = System.Windows.Forms.DockStyle.Top;
-            flash.Location = new System.Drawing.Point(0, 0);
-            flash.Name = "flash";
-            flash.file = "http://samples.mplayerhq.hu/SWF/962_fws.swf";
-            //filterControl.Size = new System.Drawing.Size(640, 480);
-            //filterControl.TabIndex = 0;
-            //gridViewControl.Text = "Lista de Productos";
-            flash.play();
-            // Assign the MaskedTextBox control as the host control's child.
-            host.Child = flash;
-
-            //this.topBanner.Children.Add(host);
         }
 
         private Catalogo._productos.SearchFilter addSearchArea()
@@ -198,8 +175,6 @@ namespace Catalogo
             Catalogo._pedidos.ucPedido ped = addPedidoArea();
             Catalogo._devoluciones.ucDevolucion dev = addDevolucionArea();
 
-            //addFlashPlayer();
-
             sf.attachReceptor(gv);
             sf.attachReceptor2(gv);
 
@@ -232,84 +207,7 @@ namespace Catalogo
             this.ContentMenu.ToggleAutoHide();
         }
 
-        private void DocumentPane_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-            ////System.Diagnostics.Debug.WriteLine((e.AddedItems[0] as AvalonDock.DocumentContent).Title);
-            //bool mostrarParteInferior = (e.AddedItems[0] as AvalonDock.DocumentContent).Title == "Productos";
-
-            //if (mostrarParteInferior)
-            //{
-            //    if (xVtaDevDockP != null)
-            //    {
-            //        //xVtaDevDockP.Visibility = System.Windows.Visibility.Visible;
-            //    };
-
-            //    if (xDevolucionesAreaDockC != null)
-            //    {
-            //        xDevolucionesAreaDockC.Show();
-            //    }
-            //    if (xNotaVentaAreaDockC != null)
-            //    {
-            //        xNotaVentaAreaDockC.Show();
-            //    }
-            //}
-            //else
-            //{
-            //    if (xVtaDevDockP != null)
-            //    {
-            //        //xVtaDevDockP.Visibility = System.Windows.Visibility.Collapsed;
-            //    };                
-                
-
-            //    if (xDevolucionesAreaDockC != null)
-            //    {
-            //        xDevolucionesAreaDockC.Hide();
-            //    }
-            //    if (xNotaVentaAreaDockC != null)
-            //    {
-            //        xNotaVentaAreaDockC.Hide();
-            //    }
-            //}
-        }
-
-
-
-        //const string LayoutFileName = "SampleLayout.xml";
-
-        //private void SaveLayout(object sender, RoutedEventArgs e)
-        //{
-        //    dockManager.SaveLayout(LayoutFileName);
-        //}
-
-        //private void RestoreLayout(object sender, RoutedEventArgs e)
-        //{
-        //    if (System.IO.File.Exists(LayoutFileName))
-        //        dockManager.RestoreLayout(LayoutFileName);
-        //}
-
-        //private void SetDefaultTheme(object sender, RoutedEventArgs e)
-        //{
-        //    ThemeFactory.ResetTheme();
-        //}
-
-        //private void ChangeCustomTheme(object sender, RoutedEventArgs e)
-        //{
-        //    string uri = (string)((System.Windows.Controls.MenuItem)sender).Tag;
-        //    ThemeFactory.ChangeTheme(new Uri(uri, UriKind.RelativeOrAbsolute));
-        //}
-
-        //private void ChangeStandardTheme(object sender, RoutedEventArgs e)
-        //{
-        //    string name = (string)((System.Windows.Controls.MenuItem)sender).Tag;
-        //    ThemeFactory.ChangeTheme(name);
-        //}
-
-        //private void ChangeColor(object sender, RoutedEventArgs e)
-        //{
-        //    ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString(((System.Windows.Controls.MenuItem)sender).Header.ToString()));
-        //}
-
-
+   
         private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
         {
             if (eventArgs.ChangedButton == MouseButton.Left)

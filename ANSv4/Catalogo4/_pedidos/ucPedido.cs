@@ -659,56 +659,39 @@ namespace Catalogo._pedidos
 
         public static void Pedido_Imprimir(string NroPedido)
         {
-
             string sReporte = "";
 
             if ((int)Global01.miSABOR >= 3)
             {
-                sReporte = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\reportes\Pedido_Enc4.rpt";
+                //sReporte = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\reportes\Pedido_Enc4.rpt";
+               sReporte = Global01.AppPath + "\\Reportes\\Pedido_Enc3.rpt";
             }
             else
             {
-                sReporte = Global01.AppPath + "\\Reportes4\\Pedido_Enc2.rpt";
+                sReporte = Global01.AppPath + "\\Reportes\\Pedido_Enc2.rpt";
             };
-
+            
             ReportDocument oReport = new ReportDocument();
 
             oReport.Load(sReporte);
+            Funciones.util.ChangeReportConnectionInfo(ref oReport);
 
-            OleDbDataAdapter objAdapterEnc = new OleDbDataAdapter("EXEC v_Pedido_Enc '" + NroPedido + "'", Global01.Conexion);
-            OleDbDataAdapter objAdapterDet = new OleDbDataAdapter("EXEC v_Pedido_Det '" + NroPedido + "'", Global01.Conexion);
-
-            System.Data.DataSet odsPedidos1 = new System.Data.DataSet();
-            objAdapterEnc.Fill(odsPedidos1, "v_Pedido_Enc_0");
-            objAdapterDet.Fill(odsPedidos1, "v_Pedido_Det_0");
-
-            if (odsPedidos1.Tables[0].Rows.Count == 0)
-            {
-                MessageBox.Show("Registro INEXISTENTE", "Impresión de Pedidos",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-                return;
-            }
-
-            oReport.SetDataSource(odsPedidos1);
+            oReport.SetParameterValue("pNroPedido", NroPedido);
             
             //oReport.TiTle = "P - " + NroPedido;
  
             fReporte f = new fReporte();
             f.Text = "Nota de Venta n° " + NroPedido;
             f.DocumentoNro = "P" + NroPedido;
-            f.EmailTO = odsPedidos1.Tables[0].Rows[0]["Email"].ToString();
+            //f.EmailTO = odsPedidos1.Tables[0].Rows[0]["Email"].ToString();
             f.EmailTO = "juanpablobrugniere@speedy.com.ar";
-            f.RazonSocial = odsPedidos1.Tables[0].Rows[0]["RazonSocial"].ToString();
+            //f.RazonSocial = odsPedidos1.Tables[0].Rows[0]["RazonSocial"].ToString();
             f.EmailAsunto = "auto náutica sur - nota de venta n° " + NroPedido;
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();
             f = null;
-       
-            objAdapterEnc = null;
-            objAdapterDet = null;
-            odsPedidos1 = null;
             oReport.Dispose();
-
         }
 
         private void paDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

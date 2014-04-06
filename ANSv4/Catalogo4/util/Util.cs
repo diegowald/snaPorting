@@ -5,7 +5,9 @@ using System.Text;
 using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using System.Drawing;
+using CrystalDecisions.ReportAppServer.DataDefModel;
 using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 
 namespace Catalogo.Funciones
 {
@@ -288,6 +290,71 @@ namespace Catalogo.Funciones
             DialogResult dialogResult = form.ShowDialog();
             value = textBox.Text;
             return dialogResult;
+        }
+
+        internal static void ChangeReportConnectionInfo(ref ReportDocument boReportDocument)
+        {
+
+            PropertyBag boMainPropertyBag = new PropertyBag();
+            PropertyBag boInnerPropertyBag = new PropertyBag();
+            
+            //Set the attributes for the boInnerPropertyBag
+            boInnerPropertyBag.Add("Database Name", Global01.dstring.ToString());
+            boInnerPropertyBag.Add("Database Type", "Access");
+            boInnerPropertyBag.Add("Session UserID", "inVent");
+            boInnerPropertyBag.Add("Session Password", "video80min");
+            boInnerPropertyBag.Add("System Database Path", Global01.sstring.ToString());
+
+            //Set the attributes for the boMainPropertyBag
+            boMainPropertyBag.Add("Database DLL", "crdb_dao.dll");
+            boMainPropertyBag.Add("QE_DatabaseName", Global01.dstring.ToString());
+            boMainPropertyBag.Add("QE_DatabaseType", "");
+
+            //Add the QE_LogonProperties we set in the boInnerPropertyBag Object
+            boMainPropertyBag.Add("QE_LogonProperties", boInnerPropertyBag);
+            boMainPropertyBag.Add("QE_ServerDescription", Global01.dstring.ToString());
+            boMainPropertyBag.Add("QE_SQLDB", "False");
+            boMainPropertyBag.Add("SSO Enabled", "False");
+
+            //Create a new ConnectionInfo object
+            CrystalDecisions.ReportAppServer.DataDefModel.ConnectionInfo boConnectionInfo =
+            new CrystalDecisions.ReportAppServer.DataDefModel.ConnectionInfo();
+            //Pass the database properties to a connection info object
+            boConnectionInfo.Attributes = boMainPropertyBag;
+            //Set the connection kind
+            boConnectionInfo.Kind = CrConnectionInfoKindEnum.crConnectionInfoKindCRQE;
+
+            //boConnectionInfo.UserName = "inVent";
+            //boConnectionInfo.Password = "video80min";
+
+            foreach (CrystalDecisions.ReportAppServer.DataDefModel.Table table in boReportDocument.ReportClientDocument.DatabaseController.Database.Tables)
+            {
+                CrystalDecisions.ReportAppServer.DataDefModel.Procedure boTable = new CrystalDecisions.ReportAppServer.DataDefModel.Procedure();
+
+                boTable.ConnectionInfo = boConnectionInfo;
+                boTable.Name = table.Name;
+                boTable.QualifiedName = table.Name;
+                boTable.Alias = table.Name;
+
+                boReportDocument.ReportClientDocument.DatabaseController.SetTableLocation(table, boTable);
+            }
+
+            foreach (ReportDocument subreport in boReportDocument.Subreports)
+            {
+                foreach (CrystalDecisions.ReportAppServer.DataDefModel.Table table in boReportDocument.ReportClientDocument.SubreportController.GetSubreportDatabase(subreport.Name).Tables)
+                {
+                    CrystalDecisions.ReportAppServer.DataDefModel.Procedure newTable = new CrystalDecisions.ReportAppServer.DataDefModel.Procedure();
+
+                    newTable.ConnectionInfo = boConnectionInfo;
+                    newTable.Name = subreport.Database.Tables[0].Name;
+                    newTable.Alias = subreport.Database.Tables[0].Name;
+                    newTable.QualifiedName = subreport.Database.Tables[0].Name;
+                    boReportDocument.ReportClientDocument.SubreportController.SetTableLocation(subreport.Name, table, newTable);
+                }
+            }
+
+            boReportDocument.VerifyDatabase();
+
         }
 
         // internal static void sendmail()

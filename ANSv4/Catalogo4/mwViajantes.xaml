@@ -1,12 +1,12 @@
-﻿<Window xmlns:_productos="clr-namespace:Catalogo._productos"  x:Class="Catalogo.MainWindow"
+﻿<Window x:Class="Catalogo.mwViajantes" x:Name="CatalogoMwViajantes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
-        Height="600" Width="1280"
+        xmlns:_productos="clr-namespace:Catalogo._productos"          
+        Height="600" Width="1024"
         Title="Catálogo Dígital de Productos - Auto Náutica Sur s.r.l. - v4.0" 
         Loaded="Window_Loaded_1" 
-        WindowStartupLocation="CenterScreen"        
-        x:Name="CatalogoMainWindow"
+        WindowStartupLocation="CenterScreen"                
         BorderThickness="0"
         ResizeMode="CanResize"  Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFE31C19">
 
@@ -15,24 +15,13 @@
            
             <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="90"/>
+                <RowDefinition Height="26"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
             <Grid Name="header" Visibility="Visible" Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="200" />
-                </Grid.ColumnDefinitions>
-                <Image Name="topLogo" Grid.Column="0" Source="recursos/Nuevo-logo-Auto-nautica-original.png"  Stretch="None" Width="150" Height="150" Margin="1"/>                                
-                <Image Name="topBanner" Source="recursos/top1.png" Grid.Column="1" Stretch="Fill"/>
-                <!--
-                <Grid Name="topBanner" Grid.Column="1" />
-                <Image Name="topBanner" Source="pack://siteoforigin:,,,/recursos/Nuevo-logo-Auto-nautica-horizontal-original.png" Grid.Column="1" Margin="17.985,0,37.313,0" />
-                -->
-                <WrapPanel  Orientation="Vertical"   HorizontalAlignment="Right" Grid.Column="2">
+                <Grid  HorizontalAlignment="Right">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                     <Button Content="2" BorderBrush="White" 
                     x:Name="ChangeViewButton"
@@ -87,14 +76,13 @@
                     Click="Exit"
                     />
                 </StackPanel>
-                <Image Name="topRedesSociales" VerticalAlignment="Bottom"  Source="recursos/cotizacion-redes.png" Margin="0,30,3,0" Width="164"/>                    
-                </WrapPanel>
+                </Grid>
             </Grid>
 
             <ad:DockingManager x:Name="dockManager" Grid.Row="1" IsAnimationEnabled="True" >
                 <ad:ResizingPanel Orientation="Vertical">
                     <ad:ResizingPanel Orientation="Horizontal">
-                        <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0" SelectionChanged="DocumentPane_SelectionChanged_1">
+                        <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0">
 
                             <ad:DocumentContent Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
                                 <Grid Name="grProductos">
@@ -194,21 +182,15 @@
                                     <ListBoxItem Content="Configuración Aplic."/>
                                 </ListBox>
                             </ad:DockableContent>
-
-                            <ad:DockableContent x:Name="ContentSugerencias" Title="Sugerencias"  DockableStyle="AutoHide" IsCloseable="False">
-                                <TreeView>
-                                    <TreeViewItem Header="Sugerencia 1"/>
-                                    <TreeViewItem Header="Sugerencia 2"/>
-                                </TreeView>
-                            </ad:DockableContent>
+                            
                         </ad:DockablePane>
                     </ad:ResizingPanel>
                 </ad:ResizingPanel>
             </ad:DockingManager>
 
             <StatusBar Grid.Row="2">
-                <StatusBarItem Name="StatusBar2" Content="Catálogo Dígital de Productos - v4.0" HorizontalAlignment="Left" Margin="5,0,0,0" />
-                <StatusBarItem Name="StatusBar1" Content="2014 © Todos los derechos reservados por Auto Náutica Sur S.R.L." HorizontalAlignment="Right" Margin="5,0" />
+                <StatusBarItem Name="iSB2" Content="Catálogo Dígital de Productos - v4.0" HorizontalAlignment="Left" Margin="5,0,0,0" />
+                <StatusBarItem Name="iSB1" Content="2014 © Todos los derechos reservados por Auto Náutica Sur S.R.L." HorizontalAlignment="Right" Margin="5,0" />
             </StatusBar>
         </Grid>
 

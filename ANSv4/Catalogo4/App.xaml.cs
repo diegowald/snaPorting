@@ -25,7 +25,8 @@ namespace Catalogo
 
             Catalogo.MainMod.Main();
 
-            MainWindow wnd = new MainWindow();
+            mwClientes wnd = new mwClientes();
+            //mwViajantes wnd = new mwViajantes();
             wnd.ShowDialog();
 
             if (Global01.Conexion != null)

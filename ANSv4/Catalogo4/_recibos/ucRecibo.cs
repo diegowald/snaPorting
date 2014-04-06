@@ -895,32 +895,15 @@ namespace Catalogo._recibos
 
         public static void Recibo_Imprimir(string NroRecibo)
         {
-            string sReporte = "";
+            //string sReporte =  @"D:\Users\pablo\Documents\Visual Studio 2012\Projects\wf_35c_pruebas1\Recibo_Enc4.rpt";
 
-            sReporte = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\reportes\Recibo_Enc4.rpt";
-
+            string sReporte = Global01.AppPath + "\\Reportes\\Recibo_Enc3.rpt";
             ReportDocument oReport = new ReportDocument();
 
             oReport.Load(sReporte);
-            
-            //oReport.SetParameterValue("pNroRecibo", NroRecibo);
+            Funciones.util.ChangeReportConnectionInfo(ref oReport);
 
-            //OleDbDataAdapter objAdapterEnc = new OleDbDataAdapter("EXEC v_Recibo_Enc '" + NroRecibo + "'", Global01.Conexion);
-            //OleDbDataAdapter objAdapterDet = new OleDbDataAdapter("EXEC v_Recibo_Det '" + NroRecibo + "'", Global01.Conexion);
-
-            //System.Data.DataSet odsRecibos1 = new System.Data.DataSet();
-            //objAdapterEnc.Fill(odsRecibos1, "v_Recibo_Enc_0");
-            //objAdapterDet.Fill(odsRecibos1, "v_Recibo_Det_0");
-
-            //if (odsRecibos1.Tables[0].Rows.Count == 0)
-            //{
-            //    MessageBox.Show("Registro INEXISTENTE", "Impresión de Recibos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //    return;
-            //}
-
-            //oReport.SetDataSource(odsRecibos1);
-
-            //oReport.TiTle = "R - " + NroRecibo;
+            oReport.SetParameterValue("pNroRecibo", NroRecibo);
 
             fReporte f = new fReporte();
             f.Text = "Recibo n° " + NroRecibo;
@@ -934,9 +917,6 @@ namespace Catalogo._recibos
             f.Dispose();
             f = null;
 
-            //objAdapterEnc = null;
-            //objAdapterDet = null;
-            //odsRecibos1 = null;
             oReport.Dispose();
 
         }
@@ -1256,10 +1236,40 @@ namespace Catalogo._recibos
                     if (Funciones.modINIs.ReadINI("DATOS", "ICC", "0") == "1")
                     {
                         //'Imprimir la cta. cte.
-                        //CtaCte_Imprimir m.IdCliente
+                        CtaCte_Imprimir(cboCliente.SelectedValue.ToString());
                     }
                 }
             }
+        }
+
+        private void CtaCte_Imprimir(string pIdCliente)
+        {
+            string sReporte = "";
+
+            sReporte = Global01.AppPath + "\\Reportes\\CtaCte3.rpt";
+
+            ReportDocument oReport = new ReportDocument();
+
+            oReport.Load(sReporte);
+
+            Funciones.util.ChangeReportConnectionInfo(ref oReport);
+
+            oReport.SetParameterValue("pIdCliente", pIdCliente);
+
+            //oReport.TiTle = "P - " + NroPedido;
+
+            fReporte f = new fReporte();
+            f.Text = "Cta. Cte. del Cliente n° " + pIdCliente;
+            f.DocumentoNro = "CC" + pIdCliente;
+            //f.EmailTO = odsPedidos1.Tables[0].Rows[0]["Email"].ToString();
+            f.EmailTO = "juanpablobrugniere@speedy.com.ar";
+            //f.RazonSocial = odsPedidos1.Tables[0].Rows[0]["RazonSocial"].ToString();
+            f.EmailAsunto = "auto náutica sur - Cta. Cte. del Cliente n° " + pIdCliente;
+            f.oRpt = oReport;
+            f.ShowDialog();
+            f.Dispose();
+            f = null;
+            oReport.Dispose();
         }
 
         private void adlistView_KeyDown(object sender, KeyEventArgs e)
