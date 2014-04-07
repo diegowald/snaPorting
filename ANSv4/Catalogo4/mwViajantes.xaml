@@ -145,7 +145,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Grid x:Name="xInterDepositosArea" Grid.Row="0" />
+                                    <Grid x:Name="xInterDepositoArea" Grid.Row="0" />
                                 </Grid>
                             </ad:DocumentContent>
 

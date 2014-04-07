@@ -250,7 +250,7 @@ namespace Catalogo._pedidos
             this.nvTransporteBuscarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nvTransporteBuscarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nvTransporteBuscarBtn.ForeColor = System.Drawing.Color.White;
-            this.nvTransporteBuscarBtn.Location = new System.Drawing.Point(504, 15);
+            this.nvTransporteBuscarBtn.Location = new System.Drawing.Point(504, 17);
             this.nvTransporteBuscarBtn.Name = "nvTransporteBuscarBtn";
             this.nvTransporteBuscarBtn.Size = new System.Drawing.Size(30, 23);
             this.nvTransporteBuscarBtn.TabIndex = 39;
@@ -267,7 +267,7 @@ namespace Catalogo._pedidos
             this.nvComprarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nvComprarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nvComprarBtn.ForeColor = System.Drawing.Color.White;
-            this.nvComprarBtn.Location = new System.Drawing.Point(60, 14);
+            this.nvComprarBtn.Location = new System.Drawing.Point(60, 16);
             this.nvComprarBtn.Name = "nvComprarBtn";
             this.nvComprarBtn.Size = new System.Drawing.Size(60, 25);
             this.nvComprarBtn.TabIndex = 38;
