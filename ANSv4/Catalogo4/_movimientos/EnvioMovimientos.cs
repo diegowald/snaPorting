@@ -14,17 +14,61 @@ namespace Catalogo.util.BackgroundTasks
             TRANSMITIR_RECORDSET_OCULTO = 3
         }
 
+        public struct MOVIMIENTO_SELECCIONADO
+        {
+            public long nro;
+            public string origen;
+        }
+
         MODOS_TRANSMISION _modoTransmision;
         private bool _resultado;
         int _idCliente;
         bool _useSettingIni;
+        System.Collections.Generic.List<long> filtroNotaVenta;
+        System.Collections.Generic.List<long> filtroRecibo;
+        System.Collections.Generic.List<long> filtroDevolucion;
+        System.Collections.Generic.List<long> filtroInterdeposito;
+        System.Collections.Generic.List<long> filtroRendicion;
 
-        public EnvioMovimientos(JOB_TYPE jobType, int idCliente, bool useSettingsIni, MODOS_TRANSMISION modoTransmision)
+        public EnvioMovimientos(JOB_TYPE jobType, int idCliente, bool useSettingsIni, MODOS_TRANSMISION modoTransmision,
+            System.Collections.Generic.List<MOVIMIENTO_SELECCIONADO> filtro)
             : base(jobType)
         {
             _idCliente = idCliente;
             _useSettingIni = useSettingsIni;
             _modoTransmision = modoTransmision;
+            filtroNotaVenta = new List<long>();
+            filtroRecibo = new List<long>();
+            filtroDevolucion = new List<long>();
+            filtroInterdeposito = new List<long>();
+            filtroRendicion = new List<long>();
+
+            if (filtro != null)
+            {
+                foreach (MOVIMIENTO_SELECCIONADO ms in filtro)
+                {
+                    switch (ms.origen)
+                    {
+                        case "NOTA DE VENTA":
+                            filtroNotaVenta.Add(ms.nro);
+                            break;
+                        case "RECIBO":
+                            filtroRecibo.Add(ms.nro);
+                            break;
+                        case "DEVOLUCION":
+                            filtroDevolucion.Add(ms.nro);
+                            break;
+                        case "INTERDEPOSITO":
+                            filtroInterdeposito.Add(ms.nro);
+                            break;
+                        case "RENDICION":
+                            filtroRendicion.Add(ms.nro);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
 
         public override void execute()
@@ -93,14 +137,26 @@ namespace Catalogo.util.BackgroundTasks
                                 _devoluciones.EnvioPedido envio = new _devoluciones.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, _idCliente.ToString(), false, "");
                                 if (envio.Inicializado)
                                 {
-                                    envio.obtenerDatos(Nro);
-                                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                                         auditoria.Auditor.AccionesAuditadas.TRANSMITE, "P1 : " + movs["Nro"]);
-                                    if (envio.enviarPedido() != 0)
+                                    bool enviar = false;
+                                    if (filtroNotaVenta.Count == 0)
                                     {
-                                        fallaEnvioPedido = true;
+                                        enviar = true;
+                                    }
+                                    else
+                                    {
+                                        enviar = filtroNotaVenta.Contains(long.Parse(Nro));
+                                    }
+                                    if (enviar)
+                                    {
+                                        envio.obtenerDatos(Nro);
                                         auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                                             auditoria.Auditor.AccionesAuditadas.FALLO, "P1 " + movs["Nro"]);
+                                             auditoria.Auditor.AccionesAuditadas.TRANSMITE, "P1 : " + movs["Nro"]);
+                                        if (envio.enviarPedido() != 0)
+                                        {
+                                            fallaEnvioPedido = true;
+                                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
+                                                 auditoria.Auditor.AccionesAuditadas.FALLO, "P1 " + movs["Nro"]);
+                                        }
                                     }
                                 }
                                 else
@@ -116,17 +172,29 @@ namespace Catalogo.util.BackgroundTasks
                                 Global01.URL_ANS, Global01.URL_ANS2, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
-                                    envio.obtenerDatos(Nro);
-                                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
-                                         auditoria.Auditor.AccionesAuditadas.TRANSMITE, "R1 " + movs["Nro"]);
-                                    if (envio.EnviarRecibo() != 0)
+                                    bool enviar = false;
+                                    if (filtroRecibo.Count == 0)
                                     {
-                                        fallaEnvioRecibo = true;
-                                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
-                                             auditoria.Auditor.AccionesAuditadas.FALLO, "R1 " + movs["Nro"]);
+                                        enviar = true;
                                     }
                                     else
                                     {
+                                        enviar = filtroRecibo.Contains(long.Parse(Nro));
+                                    }
+                                    if (enviar)
+                                    {
+                                        envio.obtenerDatos(Nro);
+                                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
+                                             auditoria.Auditor.AccionesAuditadas.TRANSMITE, "R1 " + movs["Nro"]);
+                                        if (envio.EnviarRecibo() != 0)
+                                        {
+                                            fallaEnvioRecibo = true;
+                                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
+                                                 auditoria.Auditor.AccionesAuditadas.FALLO, "R1 " + movs["Nro"]);
+                                        }
+                                        else
+                                        {
+                                        }
                                     }
                                 }
                                 else
@@ -142,14 +210,27 @@ namespace Catalogo.util.BackgroundTasks
                                      Global01.URL_ANS, Global01.URL_ANS2, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
-                                    envio.ObtenerDatos(Nro);
-                                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones,
-                                         auditoria.Auditor.AccionesAuditadas.TRANSMITE, "D1 " + movs["Nro"]);
-                                    if (envio.EnviarDevolucion() != 0)
+                                                                        bool enviar = false;
+                                    if (filtroDevolucion.Count == 0)
                                     {
-                                        fallaEnvioDevolucion = true;
+                                        enviar = true;
+                                    }
+                                    else
+                                    {
+                                        enviar = filtroDevolucion.Contains(long.Parse(Nro));
+                                    }
+                                    if (enviar)
+                                    {
+
+                                        envio.ObtenerDatos(Nro);
                                         auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones,
-                                             auditoria.Auditor.AccionesAuditadas.FALLO, "D1 " + movs["Nro"]);
+                                             auditoria.Auditor.AccionesAuditadas.TRANSMITE, "D1 " + movs["Nro"]);
+                                        if (envio.EnviarDevolucion() != 0)
+                                        {
+                                            fallaEnvioDevolucion = true;
+                                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones,
+                                                 auditoria.Auditor.AccionesAuditadas.FALLO, "D1 " + movs["Nro"]);
+                                        }
                                     }
                                 }
                                 else
@@ -164,14 +245,26 @@ namespace Catalogo.util.BackgroundTasks
                                 _interdeposito.EnvioInterDeposito envio = new _interdeposito.EnvioInterDeposito(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
-                                    envio.ObtenerDatos(Nro);
-                                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito,
-                                         auditoria.Auditor.AccionesAuditadas.TRANSMITE, "ID1= " + movs["Nro"]);
-                                    if (envio.EnviarInterDeposito() != 0)
+                                    bool enviar = false;
+                                    if (filtroInterdeposito.Count == 0)
                                     {
-                                        fallaEnvioInterDeposito = true;
+                                        enviar = true;
+                                    }
+                                    else
+                                    {
+                                        enviar = filtroInterdeposito.Contains(long.Parse(Nro));
+                                    }
+                                    if (enviar)
+                                    {
+                                        envio.ObtenerDatos(Nro);
                                         auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito,
-                                             auditoria.Auditor.AccionesAuditadas.FALLO, "ID1 " + movs["Nro"]);
+                                             auditoria.Auditor.AccionesAuditadas.TRANSMITE, "ID1= " + movs["Nro"]);
+                                        if (envio.EnviarInterDeposito() != 0)
+                                        {
+                                            fallaEnvioInterDeposito = true;
+                                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito,
+                                                 auditoria.Auditor.AccionesAuditadas.FALLO, "ID1 " + movs["Nro"]);
+                                        }
                                     }
                                 }
                                 else
@@ -186,14 +279,26 @@ namespace Catalogo.util.BackgroundTasks
                                 _rendicion.EnvioRendicion envio = new _rendicion.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
-                                    envio.ObtenerDatos(Nro);
-                                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion,
-                                         auditoria.Auditor.AccionesAuditadas.TRANSMITE, "RC1 " + movs["Nro"]);
-                                    if (envio.EnviarRendicion() != 0)
+                                    bool enviar = false;
+                                    if (filtroRendicion.Count == 0)
                                     {
-                                        fallaEnvioRendicion = true;
+                                        enviar = true;
+                                    }
+                                    else
+                                    {
+                                        enviar = filtroRendicion.Contains(long.Parse(Nro));
+                                    }
+                                    if (enviar)
+                                    {
+                                        envio.ObtenerDatos(Nro);
                                         auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion,
-                                             auditoria.Auditor.AccionesAuditadas.FALLO, "RC1 " + movs["Nro"]);
+                                             auditoria.Auditor.AccionesAuditadas.TRANSMITE, "RC1 " + movs["Nro"]);
+                                        if (envio.EnviarRendicion() != 0)
+                                        {
+                                            fallaEnvioRendicion = true;
+                                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion,
+                                                 auditoria.Auditor.AccionesAuditadas.FALLO, "RC1 " + movs["Nro"]);
+                                        }
                                     }
                                 }
                                 else

@@ -218,33 +218,32 @@ namespace Catalogo._movimientos
 
                 if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
                 {
-                    if (movDataGridView.SelectedRows != null)
+                    if (movDataGridView.SelectedRows != null && movDataGridView.SelectedRows.Count > 0)
                     {
                         if (MessageBox.Show("Tiene movimientos que aun no ha enviado. ¿QUIERE ENVIARLOS AHORA?", "Envio de Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
+                            System.Collections.Generic.List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO> filtro = new List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>();
+ 
                             foreach (DataGridViewRow row in movDataGridView.Rows)
                             {
                                 if (row.Cells["Selec"].Value != null && row.Cells["Selec"].Value.ToString() != "" && (bool)row.Cells["Selec"].Value)
                                 {
-                                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "NOTA")
-                                    {
-                                        MessageBox.Show(row.Cells["Origen"].Value.ToString() + " - " + row.Cells["Nro"].Value.ToString(), "atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    }
-                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "DEVO")
-                                    {
-                                        MessageBox.Show(row.Cells["Origen"].Value.ToString() + " - " + row.Cells["Nro"].Value.ToString(), "atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    }
-                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "RECI")
-                                    {
-                                        MessageBox.Show(row.Cells["Origen"].Value.ToString() + " - " + row.Cells["Nro"].Value.ToString(), "atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    }
-                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "INTE")
-                                    {
-                                        MessageBox.Show(row.Cells["Origen"].Value.ToString() + " - " + row.Cells["Nro"].Value.ToString(), "atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    }
-                                    row.Cells["Selec"].Value = false;
+                                    util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO item=new util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO();
+                                    item.nro = (int)row.Cells["Nro"].Value;
+                                    item.origen=row.Cells["Origen"].Value.ToString();
+                                    filtro.Add(item);
                                 }
                             }
+
+                            Catalogo.util.BackgroundTasks.EnvioMovimientos envio =
+                                new util.BackgroundTasks.EnvioMovimientos(
+                                    util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico,
+                                    int.Parse(this.cboCliente.SelectedValue.ToString()),
+                                    false,
+                                    util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_LISTVIEW,
+                                    filtro);
+
+                            envio.run();
 
                             ObtenerMovimientos();
                         }

@@ -308,7 +308,7 @@ namespace Catalogo
                                 if (true)
                                 {
                                     Catalogo.util.BackgroundTasks.EnvioMovimientos movs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
-                                        0, false, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET);
+                                        0, false, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET, null);
                                     movs.run();
                                     //                  Dim dlg As frmConexionEnvio
                                     //                  Set dlg = New frmConexionEnvio
