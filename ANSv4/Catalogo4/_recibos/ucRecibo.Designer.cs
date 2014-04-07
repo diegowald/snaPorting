@@ -101,10 +101,14 @@ namespace Catalogo._recibos
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.adPnlBotton = new System.Windows.Forms.Panel();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
             this.adTotalDeducirAlRestoLbl = new System.Windows.Forms.Label();
             this.adTotalDeducirLbl = new System.Windows.Forms.Label();
             this.rTabAplicacion = new System.Windows.Forms.TabPage();
             this.apPnlBotton = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.apTotalPercepcionLbl = new System.Windows.Forms.Label();
             this.apTotalAplicacionLbl = new System.Windows.Forms.Label();
             this.apPnlMain = new System.Windows.Forms.Panel();
@@ -161,6 +165,7 @@ namespace Catalogo._recibos
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.raPnlBotton = new System.Windows.Forms.Panel();
+            this.label25 = new System.Windows.Forms.Label();
             this.raImporteTotalLbl = new System.Windows.Forms.Label();
             this.raObservacionesTxt = new System.Windows.Forms.TextBox();
             this.raObservacionesLbl = new System.Windows.Forms.Label();
@@ -171,11 +176,6 @@ namespace Catalogo._recibos
             this.btnIniciar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnVer = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
             ccFechaLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ccComprobanteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ccImporteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -451,6 +451,7 @@ namespace Catalogo._recibos
             // 
             this.CliNNovedadTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CliNNovedadTxt.Location = new System.Drawing.Point(12, 21);
+            this.CliNNovedadTxt.MaxLength = 32;
             this.CliNNovedadTxt.Name = "CliNNovedadTxt";
             this.CliNNovedadTxt.Size = new System.Drawing.Size(384, 21);
             this.CliNNovedadTxt.TabIndex = 3;
@@ -872,6 +873,7 @@ namespace Catalogo._recibos
             // adImporteTxt
             // 
             this.adImporteTxt.Location = new System.Drawing.Point(204, 26);
+            this.adImporteTxt.MaxLength = 10;
             this.adImporteTxt.Name = "adImporteTxt";
             this.adImporteTxt.Size = new System.Drawing.Size(100, 21);
             this.adImporteTxt.TabIndex = 4;
@@ -881,6 +883,7 @@ namespace Catalogo._recibos
             // adConceptoTxt
             // 
             this.adConceptoTxt.Location = new System.Drawing.Point(8, 26);
+            this.adConceptoTxt.MaxLength = 32;
             this.adConceptoTxt.Name = "adConceptoTxt";
             this.adConceptoTxt.Size = new System.Drawing.Size(190, 21);
             this.adConceptoTxt.TabIndex = 3;
@@ -914,6 +917,24 @@ namespace Catalogo._recibos
             this.adPnlBotton.Name = "adPnlBotton";
             this.adPnlBotton.Size = new System.Drawing.Size(778, 53);
             this.adPnlBotton.TabIndex = 3;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(344, 19);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(194, 15);
+            this.label27.TabIndex = 4;
+            this.label27.Text = "Total de los Porcentajes a Deducir";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(177, 19);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(90, 15);
+            this.label26.TabIndex = 3;
+            this.label26.Text = "Total a Deducir";
             // 
             // adTotalDeducirAlRestoLbl
             // 
@@ -958,6 +979,24 @@ namespace Catalogo._recibos
             this.apPnlBotton.Name = "apPnlBotton";
             this.apPnlBotton.Size = new System.Drawing.Size(778, 53);
             this.apPnlBotton.TabIndex = 2;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(295, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(99, 15);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Total Percepción";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(60, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 15);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Total Aplicación";
             // 
             // apTotalPercepcionLbl
             // 
@@ -1064,6 +1103,7 @@ namespace Catalogo._recibos
             // apPercepcionTxt
             // 
             this.apPercepcionTxt.Location = new System.Drawing.Point(413, 21);
+            this.apPercepcionTxt.MaxLength = 10;
             this.apPercepcionTxt.Name = "apPercepcionTxt";
             this.apPercepcionTxt.Size = new System.Drawing.Size(100, 21);
             this.apPercepcionTxt.TabIndex = 5;
@@ -1073,6 +1113,7 @@ namespace Catalogo._recibos
             // apImporteTxt
             // 
             this.apImporteTxt.Location = new System.Drawing.Point(298, 21);
+            this.apImporteTxt.MaxLength = 10;
             this.apImporteTxt.Name = "apImporteTxt";
             this.apImporteTxt.Size = new System.Drawing.Size(100, 21);
             this.apImporteTxt.TabIndex = 4;
@@ -1082,6 +1123,7 @@ namespace Catalogo._recibos
             // apConceptoTxt
             // 
             this.apConceptoTxt.Location = new System.Drawing.Point(8, 21);
+            this.apConceptoTxt.MaxLength = 32;
             this.apConceptoTxt.Name = "apConceptoTxt";
             this.apConceptoTxt.Size = new System.Drawing.Size(259, 21);
             this.apConceptoTxt.TabIndex = 3;
@@ -1319,6 +1361,7 @@ namespace Catalogo._recibos
             // 
             this.cvCpaTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvCpaTxt.Location = new System.Drawing.Point(334, 113);
+            this.cvCpaTxt.MaxLength = 10;
             this.cvCpaTxt.Name = "cvCpaTxt";
             this.cvCpaTxt.Size = new System.Drawing.Size(100, 21);
             this.cvCpaTxt.TabIndex = 8;
@@ -1371,6 +1414,7 @@ namespace Catalogo._recibos
             // 
             this.cvNroChequeTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvNroChequeTxt.Location = new System.Drawing.Point(503, 69);
+            this.cvNroChequeTxt.MaxLength = 15;
             this.cvNroChequeTxt.Name = "cvNroChequeTxt";
             this.cvNroChequeTxt.Size = new System.Drawing.Size(100, 21);
             this.cvNroChequeTxt.TabIndex = 5;
@@ -1379,6 +1423,7 @@ namespace Catalogo._recibos
             // 
             this.cvNroCuentaTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvNroCuentaTxt.Location = new System.Drawing.Point(384, 69);
+            this.cvNroCuentaTxt.MaxLength = 15;
             this.cvNroCuentaTxt.Name = "cvNroCuentaTxt";
             this.cvNroCuentaTxt.Size = new System.Drawing.Size(100, 21);
             this.cvNroCuentaTxt.TabIndex = 4;
@@ -1387,6 +1432,7 @@ namespace Catalogo._recibos
             // 
             this.cvTipoCambioTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvTipoCambioTxt.Location = new System.Drawing.Point(504, 26);
+            this.cvTipoCambioTxt.MaxLength = 10;
             this.cvTipoCambioTxt.Name = "cvTipoCambioTxt";
             this.cvTipoCambioTxt.Size = new System.Drawing.Size(100, 21);
             this.cvTipoCambioTxt.TabIndex = 2;
@@ -1396,6 +1442,7 @@ namespace Catalogo._recibos
             // 
             this.cvImporteTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvImporteTxt.Location = new System.Drawing.Point(385, 26);
+            this.cvImporteTxt.MaxLength = 10;
             this.cvImporteTxt.Name = "cvImporteTxt";
             this.cvImporteTxt.Size = new System.Drawing.Size(100, 21);
             this.cvImporteTxt.TabIndex = 1;
@@ -1526,6 +1573,15 @@ namespace Catalogo._recibos
             this.raPnlBotton.Name = "raPnlBotton";
             this.raPnlBotton.Size = new System.Drawing.Size(778, 32);
             this.raPnlBotton.TabIndex = 2;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(485, 9);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(79, 15);
+            this.label25.TabIndex = 3;
+            this.label25.Text = "Total  Recibo";
             // 
             // raImporteTotalLbl
             // 
@@ -1677,51 +1733,6 @@ namespace Catalogo._recibos
             this.btnVer.Text = "Ver";
             this.btnVer.UseVisualStyleBackColor = false;
             this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(60, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(93, 15);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Total Aplicación";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(295, 21);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(99, 15);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Total Percepción";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(485, 9);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(79, 15);
-            this.label25.TabIndex = 3;
-            this.label25.Text = "Total  Recibo";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(177, 19);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(90, 15);
-            this.label26.TabIndex = 3;
-            this.label26.Text = "Total a Deducir";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(344, 19);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(194, 15);
-            this.label27.TabIndex = 4;
-            this.label27.Text = "Total de los Porcentajes a Deducir";
             // 
             // ucRecibo
             // 

@@ -15,7 +15,6 @@ using AvalonDock;
 using Catalogo.Funciones.emitter_receiver;
 using System.Threading;
 
-
 namespace Catalogo
 {
     /// <summary>
@@ -37,8 +36,7 @@ namespace Catalogo
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
             ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
             this.Closing += mwViajantes_Closing;
-    }
-
+        }
 
         private void addFlashPlayer()
         {
@@ -156,6 +154,24 @@ namespace Catalogo
             return xRecibo;
         }
 
+        private Catalogo._interdeposito.ucInterDeposito addInterDepositoArea()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            Catalogo._interdeposito.ucInterDeposito xInterDeposito;
+            xInterDeposito = new Catalogo._interdeposito.ucInterDeposito();
+            xInterDeposito.AutoScroll = false;
+            xInterDeposito.Location = new System.Drawing.Point(0, 0);
+            xInterDeposito.Dock = System.Windows.Forms.DockStyle.Fill;
+            xInterDeposito.Name = "InterDeposito";
+
+            host.Child = xInterDeposito;
+            this.xInterDepositoArea.Children.Add(host);
+
+            return xInterDeposito;
+        }
+
         private Catalogo._productos.GridViewFilter2  addProductsArea()
         {
             // Create the interop host control.
@@ -196,6 +212,7 @@ namespace Catalogo
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {
 
+            Catalogo._interdeposito.ucInterDeposito IntDep = addInterDepositoArea();
             Catalogo._recibos.ucRecibo rec = addReciboArea();
             Catalogo._movimientos.ucMovimientos mov = addMovimientosArea();
             ////Catalogo._novedades.ucNovedades nov = addNovedadesArea();
@@ -236,7 +253,6 @@ namespace Catalogo
         {
             this.ContentMenu.ToggleAutoHide();
         }
-
    
         private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
         {
@@ -265,7 +281,6 @@ namespace Catalogo
         {
             WindowState = WindowState.Maximized;
         }
-
 
         void mwViajantes_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

@@ -893,7 +893,7 @@ namespace Catalogo._pedidos
         {
             get
             {
-                return (int)cboCliente.SelectedValue;
+                return Int16.Parse(cboCliente.SelectedValue.ToString());
             }
         }
 

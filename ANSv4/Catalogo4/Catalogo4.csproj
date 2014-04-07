@@ -173,6 +173,14 @@
     <Compile Include="_devoluciones\ucDevolucion.Designer.cs">
       <DependentUpon>ucDevolucion.cs</DependentUpon>
     </Compile>
+    <Compile Include="_interdeposito\InterDeposito.cs" />
+    <Compile Include="_interdeposito\InterDepositoFacturas.cs" />
+    <Compile Include="_interdeposito\ucInterDeposito.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_interdeposito\ucInterDeposito.Designer.cs">
+      <DependentUpon>ucInterDeposito.cs</DependentUpon>
+    </Compile>
     <Compile Include="_movimientos\ucMovimientos.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -398,6 +406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_devoluciones\ucDevolucion.resx">
       <DependentUpon>ucDevolucion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_interdeposito\ucInterDeposito.resx">
+      <DependentUpon>ucInterDeposito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_movimientos\ucMovimientos.resx">
       <DependentUpon>ucMovimientos.cs</DependentUpon>

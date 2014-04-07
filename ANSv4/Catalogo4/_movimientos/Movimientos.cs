@@ -50,7 +50,6 @@ namespace Catalogo._movimientos
             }
             
             return dr;
-
         }
 
         public bool preguntoAlSalir()
@@ -65,7 +64,8 @@ namespace Catalogo._movimientos
 
             if (rec.HasRows)
             {
-                return ((int)rec["cantidad"] > 0);
+                rec.Read();
+                return (Int16.Parse(rec["cantidad"].ToString()) > 0);
             }
 
             return false;
@@ -83,7 +83,8 @@ namespace Catalogo._movimientos
             System.Data.OleDb.OleDbDataReader rec = Funciones.oleDbFunciones.Comando(_conexion, "SELECT Count(*) AS Cantidad FROM UnionPedidoRecibo WHERE UnionPedidoRecibo.IdCliente=" + _idCliente + " and (f_Transmicion is NULL) and left(Nro,5)='" + _idCliente + "'");
             if (rec.HasRows)
             {
-                return (int)rec["cantidad"] > 0;
+                rec.Read();
+                return (Int16.Parse(rec["cantidad"].ToString()) > 0);
             }
             return false;
         }

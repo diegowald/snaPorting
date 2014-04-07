@@ -106,7 +106,7 @@ namespace Catalogo._productos
                     {
                         imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
 
-                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "1") == "1")
+                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "0") == "1")
                         {
                             descargarImagen(ImgProductoWeb, ImgProducto);
                         }
