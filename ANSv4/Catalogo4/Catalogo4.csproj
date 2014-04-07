@@ -299,12 +299,6 @@
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
     <Compile Include="_registro\AppRegistro.cs" />
     <Compile Include="_rendiciones\EnvioRendicion.cs" />
-    <Compile Include="_rendiciones\ucRendiciones.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="_rendiciones\ucRendiciones.Designer.cs">
-      <DependentUpon>ucRendiciones.cs</DependentUpon>
-    </Compile>
     <Compile Include="_updateData\fDataUpdate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -426,9 +420,6 @@
       <DependentUpon>ucPedido.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\FiltroSearch.resx" />
-    <EmbeddedResource Include="_rendiciones\ucRendiciones.resx">
-      <DependentUpon>ucRendiciones.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="_updateData\fDataUpdate.resx">
       <DependentUpon>fDataUpdate.cs</DependentUpon>
     </EmbeddedResource>
