@@ -78,7 +78,7 @@ namespace Catalogo._productos
                 if (dato.Cells["linea"].Value.ToString().Length > 0)
                 {
                     string ImgLinea = Global01.AppPath + "\\imagenes\\lineas\\" + dato.Cells["linea"].Value.ToString() + ".png";
-                    string ImgProductoWeb = "http://" + Global01.URL_ANS + "/IMAGENES/" + dato.Cells["linea"].Value.ToString() + "/ARTICULOS/" + dato.Cells["c_producto"].Value.ToString().Replace("/", " ") + ".jpg";                    
+                    string ImgProductoWeb = "http://" + Global01.URL_ANS + "/IMAGENES/" + dato.Cells["linea"].Value.ToString() + "/ARTICULOS/" + dato.Cells["c_producto"].Value.ToString().Replace("/", " ") + ".jpg";
                     string ImgProducto = Global01.AppPath + "\\imagenes\\" + dato.Cells["linea"].Value.ToString() + "\\Articulos\\" + dato.Cells["c_producto"].Value.ToString().Replace("/", " ") + ".jpg";
 
                     if (System.IO.File.Exists(ImgLinea))
@@ -88,29 +88,36 @@ namespace Catalogo._productos
                     else
                     {
                         imgIzquierda.Source = new BitmapImage(new Uri(ImgLineaDefault, UriKind.Absolute));
-                    };
+                    }
 
+                    validateImagefile(ImgProducto);
                     if (System.IO.File.Exists(ImgProducto))
                     {
-                        imgDerecha.Source = new BitmapImage(new Uri(ImgProducto, UriKind.Absolute));
+                        try
+                        {
+                            imgDerecha.Source = new BitmapImage(new Uri(ImgProducto, UriKind.Absolute));
+                        }
+                        catch
+                        {
+                            imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
+                        }
                     }
-                    else 
+                    else
                     {
                         imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
 
-                        if (Funciones.modINIs.ReadINI("DATOS","chkImagenUpdate", "0")=="1")
-                        {                            
+                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "1") == "1")
+                        {
                             descargarImagen(ImgProductoWeb, ImgProducto);
                         }
-
-                    };
+                    }
                 }
                 else
                 {
                     imgIzquierda.Source = new BitmapImage(new Uri(ImgLineaDefault, UriKind.Absolute));
-                };
+                }
 
-            };
+            }
 
         }
 
@@ -119,24 +126,62 @@ namespace Catalogo._productos
             System.Net.WebClient ImgWeb = new System.Net.WebClient();
             ImgWeb.DownloadFileCompleted += ImgWeb_DownloadFileCompleted;
 
-           try 
+            try
             {
                 _Destino = Destino;
                 //ImgWeb.DownloadFile(Origen, Destino);
                 ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
 
             }
-            catch (Exception e)
-            {               
-                     throw new Exception(e.Message.ToString() );
-            };
-            
+            catch (System.Web.HttpException e)
+            {
+            }
+            catch (System.Net.WebException wex)
+            {
+            }
         }
 
         void ImgWeb_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
-            imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
+            validateImagefile(_Destino);
+            if (System.IO.File.Exists(_Destino))
+            {
+                try
+                {
+                    imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
+                }
+                catch
+                {
+                    string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
+                    imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
+                }
+            }
+            else
+            {
+                string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
+                imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
+            }
         }
 
+        private void validateImagefile(string fileName)
+        {
+            try
+            {
+                if (System.IO.File.Exists(fileName))
+                {
+                    System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
+                    if (fi.Length == 0)
+                    {
+                        fi.Delete();
+                    }
+                }
+            }
+            catch (System.IO.IOException ex)
+            {
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 }
