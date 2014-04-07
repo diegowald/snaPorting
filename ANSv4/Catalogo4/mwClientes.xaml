@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
-                <Image Name="topLogo" Grid.Column="0" Source="pack://siteoforigin:,,,/recursos/Nuevo-logo-Auto-nautica-original.png" ClipToBounds="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>                                
+                <Image Name="topLogo" Grid.Column="0" ClipToBounds="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>                                
                 <Grid Name="topBanner" Grid.Column="1" />
                 <!--
                 <Image Name="topBanner" Source="recursos/top1.png" Grid.Column="1" Stretch="Fill"/>                

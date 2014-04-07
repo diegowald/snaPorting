@@ -22,14 +22,23 @@ namespace Catalogo
     /// </summary>
     public partial class mwClientes : Window
     {
-        
+
         public mwClientes()
         {
-            this.Hide();
-            InitializeComponent();            
-            //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
-            //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
-            ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+            try
+            {
+                this.Hide();
+                InitializeComponent();
+                //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
+                //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
+                ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+#if SaborViajante
+                this.header.Visibility = System.Windows.Visibility.Hidden;
+#endif
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void addFlashPlayer()
