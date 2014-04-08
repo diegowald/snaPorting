@@ -260,7 +260,7 @@ namespace Catalogo._recibos
             else
             {
                 auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
-                     auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " rec:" + mvarNroRecibo + " tot:" + String.Format("fixed", mvarTotal));
+                     auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + mvarIdCliente.ToString().Trim().PadLeft(6, '0') + " rec:" + mvarNroRecibo + " tot:" + string.Format("{0:N2}", mvarTotal));
                 //Nuevo();
                 if (GuardoOK != null)
                 {

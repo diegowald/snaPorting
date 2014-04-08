@@ -200,7 +200,7 @@ namespace Catalogo._interdeposito
             }
             else
             {
-                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito, auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " intD:" + mvarNroInterDeposito + " tot:");
+                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito, auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + mvarIdCliente.ToString().Trim().PadLeft(6, '0') + " intD:" + mvarNroInterDeposito + " tot:");
                 //Nuevo();
                 if (GuardoOK != null)
                 {

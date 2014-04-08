@@ -294,8 +294,8 @@ namespace Catalogo._devoluciones
 
         private void devMflistView_KeyDown(object sender, KeyEventArgs e)
         {
-    
-            if (devMflistView.SelectedItems != null)
+
+            if (devMflistView.SelectedItems != null & devMflistView.SelectedItems.Count > 0)
             {              
                 if (e.KeyCode==Keys.O && e.Modifiers==Keys.Control)
                 {    //Observaciones del Item
@@ -336,7 +336,7 @@ namespace Catalogo._devoluciones
         private void devMnlistView_KeyDown(object sender, KeyEventArgs e)
         {
 
-            if (devMnlistView.SelectedItems != null)
+            if (devMnlistView.SelectedItems != null & devMnlistView.SelectedItems.Count > 0)
             {
                 if (e.KeyCode == Keys.O && e.Modifiers == Keys.Control)
                 {    //Observaciones del Item
