@@ -54,7 +54,7 @@ namespace Catalogo
 
                     //dlg.modoUpdate = ActivarApp
                     //dlg.Show vbModal
-                };
+                }
             }
             else
             {
@@ -65,7 +65,7 @@ namespace Catalogo
                 }
 
                 update_productos();
-            };
+            }
 
             //- ACA ESTA LA PAPA ----------------------
             //- Run mi APP MainWindow -----------------
@@ -141,7 +141,7 @@ namespace Catalogo
 
             }
             dr = null;
-            //if (Global01.Conexion.State == ConnectionState.Open) { Global01.Conexion.Close(); };
+            //if (Global01.Conexion.State == ConnectionState.Open) { Global01.Conexion.Close(); }
 
         }
 
@@ -154,7 +154,7 @@ namespace Catalogo
             {
                 MessageBox.Show("El uso de la aplicación EXPIRO!, Comuniquese con auto náutica sur", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
-            };
+            }
 
             if (Global01.F_UltimoAcceso.Date > DateTime.Today.Date)
             {
@@ -164,13 +164,13 @@ namespace Catalogo
             else
             {
                 Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_UltimoAcceso_upd");
-            };
+            }
 
             if (Int32.Parse(Global01.NroUsuario.ToString()) <= 0 | Int64.Parse(Global01.Cuit.ToString()) <= 1)
             {
                 MessageBox.Show("Error en nº de Cuenta ó Cuit, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
-            };
+            }
 
             if (DateTime.Today.Date > Global01.dbCaduca.Date)
             {
@@ -181,8 +181,8 @@ namespace Catalogo
                 if (DateTime.Today.Date > Global01.dbCaduca.Date.AddDays(3).Date)
                 {
                     MessageBox.Show("Quedan menos de 3 días para la validez del Catálogo, debe actualizar por internet o comuniquese con su viajante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                };
-            };
+                }
+            }
 
         }
 
@@ -252,7 +252,7 @@ namespace Catalogo
                     {
                         MessageBox.Show("BIENVENDO A NUESTRO CATALOGO!.", "REGISTRADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         goto AcaRegistro;
-                    };
+                    }
                 }
                 else
                 {
@@ -278,9 +278,9 @@ namespace Catalogo
                         else
                         {
                             Global01.AppActiva = false;
-                        };
-                    };
-                };
+                        }
+                    }
+                }
             }
             else
             {
@@ -288,7 +288,7 @@ namespace Catalogo
                 Global01.AppActiva = true;
                 ///// BORRAR ESTA LINEA!!!!!!!
                 Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
-            };
+            }
             //--------------------------------------XX
 
         }
@@ -315,7 +315,7 @@ namespace Catalogo
             {
                 MessageBox.Show("Hay otra instancia de la aplicación abierta", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
-            };
+            }
 
             if (!System.IO.File.Exists(Global01.dstring))
             {

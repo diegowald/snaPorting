@@ -70,7 +70,7 @@ namespace Catalogo._rendiciones
             if (!Global01.AppActiva)
             {
                 this.Dispose();
-            };
+            }
 
         }
 
@@ -87,7 +87,7 @@ namespace Catalogo._rendiciones
                     {	//Or lvValores.ListItems.Count < 1 Then
                         sResultado = false;
                         MessageBox.Show("Error! Debe consolidar la rendición actual", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    };
+                    }
                 }
 
                 if (pCampo.ToLower() == "valores")
@@ -98,19 +98,19 @@ namespace Catalogo._rendiciones
                         {
                             sResultado = false;
                             MessageBox.Show("Debe ingresar Nro. de Boleta de Depósito", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        };
+                        }
                     }
                     else
                     {
                         sResultado = false;
                         MessageBox.Show("Debe ingresar Nro. de Boleta de Depósito", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    };
+                    }
 
                     if (float.Parse("0" + txtBd_Monto.Text) <= 0)
                     {
                         sResultado = false;
                         MessageBox.Show("Debe ingresar monto del comprobante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    };
+                    }
 
                     if (_opTipoDeposito_1.Checked == true)
                     {
@@ -118,16 +118,16 @@ namespace Catalogo._rendiciones
                         {
                             sResultado = false;
                             MessageBox.Show("Debe elegir el cheque a rendir", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        };
+                        }
 
                         if (byte.Parse("0" + txtBdCh_Cantidad.Text) <= 0)
                         {
                             MessageBox.Show("Debe ingresar cantidad de cheques", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             sResultado = false;
-                        };
-                    };
-                };
-            };
+                        }
+                    }
+                }
+            }
 
             return sResultado;
         }
@@ -275,7 +275,7 @@ namespace Catalogo._rendiciones
                             if (Global01.TranActiva != null)
                             {
                                 Global01.TranActiva.Commit();
-                            };
+                            }
 
 		                    Cursor.Current = Cursors.Default;
 
@@ -314,7 +314,7 @@ namespace Catalogo._rendiciones
                         finally
                         {
                             Global01.TranActiva = null;
-                        };
+                        }
 
 		                Cursor.Current = Cursors.Default;
 	                }			
@@ -595,7 +595,7 @@ namespace Catalogo._rendiciones
 		        lblDivDolarC.Text = "0,00";
 		        lblCertificadosCantidadC.Text = "0,00";
 		        lblCertificadosTotalC.Text = "0,00";
-		    };
+		    }
 
 		    if ((Modo == "datos" | Modo == "all")) 
             {
@@ -684,7 +684,7 @@ namespace Catalogo._rendiciones
 			        MessageBox.Show("Debe ingresarse el valor a buscar!", "Datos Válidos", MessageBoxButtons.OK, MessageBoxIcon.Information );
 			        functionReturnValue = false;
 			        txtBuscar.Focus();
-		        };
+		        }
 	        } 
             else if (_optBuscar_1.Checked) 
             {
@@ -948,7 +948,7 @@ namespace Catalogo._rendiciones
                     {
                         // por fecha
                         m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "F_Rendicion >= #" + mskFbuscar.Value.ToString("yyyy/mm/dd") + "# and F_Rendicion <= #" + mskFbuscar.Value.AddDays(60).ToString("yyyy/mm/dd") + "#", "F_Rendicion");
-                    };
+                    }
 
                     if (m.DR.HasRows)
                     {
@@ -958,11 +958,11 @@ namespace Catalogo._rendiciones
                     {
                         MessageBox.Show("No se encontraron coincidencias con el valor buscado","Busqueda",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                         //txtBuscar.SetFocus
-                    };
+                    }
 
                     m.DR = null;
-                };
-            };
+                }
+            }
         }
 
         private void ucRendiciones_Load(object sender, EventArgs e)
@@ -1004,7 +1004,7 @@ namespace Catalogo._rendiciones
 		        lblCertificadosTotal.Text = string.Format("{0:N2}",float.Parse("0" + lblCertificadosTotal.Text) + float.Parse("0" + lvRecibos.Items[m.i].SubItems[9].Text));
 		        lblCertificadosCantidad.Text = string.Format("{0:N2}",float.Parse("0" + lblCertificadosCantidad.Text) + float.Parse("0" + lvRecibos.Items[m.i].SubItems[10].Text));
 		        lblRecibosTotal.Text = string.Format("{0:N2}",float.Parse("0" + lblRecibosTotal.Text) + float.Parse("0" + lvRecibos.Items[m.i].SubItems[11].Text));
-	        };
+	        }
         }
 
         private void TotalValores()
@@ -1081,7 +1081,7 @@ namespace Catalogo._rendiciones
             else 
             {
 		        e.KeyChar = char.ToUpper(e.KeyChar);
-	        };       
+	        }       
         }
 
         public static void Rendicion_Imprimir(string NroInterDeposito)

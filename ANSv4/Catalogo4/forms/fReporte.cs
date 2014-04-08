@@ -32,7 +32,7 @@ namespace Catalogo
                 btnVerPDF.Enabled = true;
                 btnEnviarMail.Enabled = true;
                 crViewer1.ShowPrintButton = true;
-            };
+            }
 
             crViewer1.ReportSource = oRpt;
             crViewer1.Refresh();

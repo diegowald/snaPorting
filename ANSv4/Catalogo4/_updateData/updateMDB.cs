@@ -21,7 +21,10 @@ namespace Catalogo.Funciones
 
             Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
 
-            if (!(Global01.Conexion.State == System.Data.ConnectionState.Open)) { Global01.Conexion.Open(); };
+            if (!(Global01.Conexion.State == System.Data.ConnectionState.Open)) 
+            { 
+                Global01.Conexion.Open(); 
+            }
 
             if (Global01.TranActiva==null)
             {
@@ -72,7 +75,7 @@ namespace Catalogo.Funciones
                 if (Global01.TranActiva != null)
                 {
                     Global01.TranActiva.Commit();
-                 };
+                }
             }
             catch (Exception e)
             {

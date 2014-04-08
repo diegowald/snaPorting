@@ -100,30 +100,16 @@ namespace Catalogo._productos
             loadDataGridView();
         }
 
-        private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
-        public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
+        private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;        public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
         {
-            get
-            {
-                return _emisor;
-            }
-            set
-            {
-                _emisor = value;
-            }
+            get;
+            set;
         }
 
-        private emisorHandler<util.Pair<int, int>> _emisor2;
         public emisorHandler<util.Pair<int, int>> emisor2
         {
-            get
-            {
-                return _emisor2;
-            }
-            set
-            {
-                _emisor2 = value;
-            }
+            get;
+            set;
         }
 
         private void xCargarDataControl()
@@ -301,7 +287,7 @@ namespace Catalogo._productos
                 foreach (DataRowView drv in dvProducts)
                 {
                     drv["Precio"] = (float)drv["PrecioLista"] * pct;
-                };
+                }
             }
             else
             {
@@ -311,8 +297,8 @@ namespace Catalogo._productos
                     foreach (DataRowView drv in dvProducts)
                     {
                         drv["Precio"] = drv["PrecioLista"];
-                    };
-                };
+                    }
+                }
             }
 
             // Bind Datagrid view to the DataView
@@ -334,14 +320,13 @@ namespace Catalogo._productos
             {
                 DataGridViewRow row = cell.OwningRow;
                 this.emitir(row);
-            };
+            }
           
         }
 
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
-
             if (dataGridIdle)
             {
                 DataGridViewCell cell = null;
@@ -356,25 +341,32 @@ namespace Catalogo._productos
                     this.emitir(row);
                     // etc.
                 }
-            };
+            }
 
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == (int)CCol.cSemaforo)
+            try
             {
-
-               DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
-
-               if (cell != null)
+                if (e.ColumnIndex == (int)CCol.cSemaforo)
                 {
-                    DataGridViewRow row = cell.OwningRow;
-                    Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
-                    existencia.onCancelled += ExistenciaCancelled;
-                    existencia.onFinished += ExistenciaFinished;
-                    existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
+
+                    DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
+
+                    if (cell != null)
+                    {
+                        DataGridViewRow row = cell.OwningRow;
+                        Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+                        existencia.onCancelled += ExistenciaCancelled;
+                        existencia.onFinished += ExistenciaFinished;
+                        existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -412,47 +404,54 @@ namespace Catalogo._productos
                     cell.ToolTipText= "Disponible en 24 hs. \n valor de referencia (" + aResultado[1] + ") unidades";
                     cell.Value= "x";
                     break;
-              };
+              }
 
-            };
+            }
 
             //System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", idProducto, resultado));
         }
 
         private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            switch (e.KeyChar)
+            try
             {
-                case '+':
-                    this.emitir3(_pedidos.PedidosHelper.Acciones.INCREMENTAR);
-                    break;
-                case '-':
-                    this.emitir3(_pedidos.PedidosHelper.Acciones.DECREMENTAR);
-                    break;
-                case (char)Keys.Enter:
-                    this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);
-                    break;
-                default:
-                    break;
+                switch (e.KeyChar)
+                {
+                    case '+':
+                        this.emitir3(_pedidos.PedidosHelper.Acciones.INCREMENTAR);
+                        break;
+                    case '-':
+                        this.emitir3(_pedidos.PedidosHelper.Acciones.DECREMENTAR);
+                        break;
+                    case (char)Keys.Enter:
+                        this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
             }
         }
 
         private void dataGridView1_DoubleClick(object sender, EventArgs e)
         {
-            this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);
+            try
+            {
+                this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
-        emisorHandler<_pedidos.PedidosHelper.Acciones> _emisor3;
         public emisorHandler<_pedidos.PedidosHelper.Acciones> emisor3
         {
-            get
-            {
-                return _emisor3;
-            }
-            set
-            {
-                _emisor3 = value;
-            }
+            get;
+            set;
         }
 
     }

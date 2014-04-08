@@ -211,7 +211,7 @@ namespace Catalogo._recibos
                 {
                     rec.Read();
                     mvarNroRecibo = Global01.NroUsuario.Trim() + "-" + (int.Parse(rec["NroRecibo"].ToString().Substring(rec["NroRecibo"].ToString().Length - 8)) + 1).ToString().PadLeft(8, '0');
-                };
+                }
                 rec = null;
             }
 

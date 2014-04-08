@@ -102,11 +102,17 @@ namespace Catalogo._registro
 
         public static bool ValidateMachineId(string s)
         {
-            if (s.Trim().Length == 0) { return false; };
+            if (s.Trim().Length == 0) 
+            { 
+                return false; 
+            }
 
             bool resultado = false;
 
-            if (s == ObtenerCRC(ref Global01.IDMaquina)) { resultado = true; };
+            if (s == ObtenerCRC(ref Global01.IDMaquina)) 
+            { 
+                resultado = true;
+            }
 
             return resultado;
         }
@@ -144,11 +150,17 @@ namespace Catalogo._registro
 
         public static bool ValidateLLaveViajante(string s)
         {
-            if (s.Trim().Length == 0) { return false; };
+            if (s.Trim().Length == 0) 
+            { 
+                return false; 
+            }
 
             bool resultado = false;
 
-            if (s == Global01.LLaveViajante) { resultado = true; };
+            if (s == Global01.LLaveViajante) 
+            { 
+                resultado = true; 
+            }
 
             return resultado;
         }

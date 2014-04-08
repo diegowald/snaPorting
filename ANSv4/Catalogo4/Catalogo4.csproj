@@ -150,6 +150,12 @@
     <Compile Include="notifications\NotificationCenter.cs" />
     <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
     <Compile Include="util\emitter-receiver\ICancellableEmitter.cs" />
+    <Compile Include="util\errorHandling\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="util\errorHandling\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="util\errorHandling\ErrorHandler.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,7 +262,6 @@
     <Compile Include="_application\UpdateAppConfig.cs" />
     <Compile Include="_pedidos\Pedido.cs" />
     <Compile Include="_pedidos\PedidoItem.cs" />
-    <Compile Include="_productos\BackgroundImageLoader.cs" />
     <Compile Include="_recibos\AplicacionItem.cs" />
     <Compile Include="_recibos\DeducirItem.cs" />
     <Compile Include="_recibos\Recibo.cs" />
@@ -404,6 +409,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="util\errorHandling\ErrorForm.resx">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="util\errorHandling\ErrorHandler.resx">
       <DependentUpon>ErrorHandler.cs</DependentUpon>

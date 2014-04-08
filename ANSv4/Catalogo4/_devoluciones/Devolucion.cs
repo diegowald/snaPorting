@@ -127,7 +127,7 @@ namespace Catalogo._devoluciones
                     else
                     {
                         mvarNroDevolucion = Global01.NroUsuario.Trim() + "-" + (int.Parse(rec["NroDevolucion"].ToString().Substring(rec["NroDevolucion"].ToString().Length - 8)) + 1).ToString().PadLeft(8, '0');
-                    };                  
+                    }                  
                 }
                 rec = null;
             }

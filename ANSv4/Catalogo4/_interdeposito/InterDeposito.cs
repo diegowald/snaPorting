@@ -161,7 +161,7 @@ namespace Catalogo._interdeposito
                     else
                     {
                         mvarNroInterDeposito = Global01.NroUsuario.Trim() + "-" + (int.Parse(rec["NroInterDeposito"].ToString().Substring(rec["NroInterDeposito"].ToString().Length - 8)) + 1).ToString().PadLeft(8, '0');
-                    };                  
+                    }                  
                 }
                 rec = null;
             }

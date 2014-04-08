@@ -36,7 +36,7 @@ namespace Catalogo._devoluciones
             if (!Global01.AppActiva)
             {
                 this.Dispose();
-            };
+            }
 
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
@@ -62,7 +62,7 @@ namespace Catalogo._devoluciones
                 devMfVehiculoCbo.Items.Clear();
                 devMfVehiculoCbo.Items.AddRange(filterQuantityArray);
                 devMfVehiculoCbo.SelectedIndex = 0;
-            };
+            }
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
@@ -79,7 +79,7 @@ namespace Catalogo._devoluciones
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Devolución para el cliente ..."; }
                 btnIniciar.Enabled = false;
-            };
+            }
             this.emitir(cboCliente.SelectedIndex);
 
         }
@@ -187,8 +187,8 @@ namespace Catalogo._devoluciones
 
                             devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
                             devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
-                        };
-                    };
+                        }
+                    }
 
                     devMflistView.Tag = "-1";
                     devMnlistView.Tag = "-1";
@@ -196,9 +196,9 @@ namespace Catalogo._devoluciones
                 else
                 {
                     MessageBox.Show("Seleccione un Cliente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                };
+                }
 
-            };
+            }
 
         }
 
@@ -308,7 +308,7 @@ namespace Catalogo._devoluciones
                     else
                     { // Apreto Cancelar
                         devMflistView.SelectedItems[0].SubItems[9].Text = "";
-                    };
+                    }
                 }
                 else if (e.KeyCode == Keys.Delete)
                 {  //DEL
@@ -320,7 +320,7 @@ namespace Catalogo._devoluciones
                     if (Decimal.Parse(devMflistView.SelectedItems[0].SubItems[2].Text.ToString()) < 999)
                     {
                         devMflistView.SelectedItems[0].SubItems[2].Text = (Decimal.Parse(devMflistView.SelectedItems[0].SubItems[2].Text.ToString()) + 1).ToString();
-                    };
+                    }
                 }
                 else if (e.KeyValue.ToString() == "189")
                 {
@@ -328,9 +328,9 @@ namespace Catalogo._devoluciones
                     {
                         devMflistView.SelectedItems[0].SubItems[2].Text = (Decimal.Parse(devMflistView.SelectedItems[0].SubItems[2].Text.ToString()) - 1).ToString();
                     }
-                };
+                }
     
-            };
+            }
         }
 
         private void devMnlistView_KeyDown(object sender, KeyEventArgs e)
@@ -349,7 +349,7 @@ namespace Catalogo._devoluciones
                     else
                     { // Apreto Cancelar
                         devMnlistView.SelectedItems[0].SubItems[9].Text = "";
-                    };
+                    }
                 }
                 else if (e.KeyCode == Keys.Delete)
                 {  //DEL
@@ -361,7 +361,7 @@ namespace Catalogo._devoluciones
                     if (Decimal.Parse(devMnlistView.SelectedItems[0].SubItems[2].Text.ToString()) < 999)
                     {
                         devMnlistView.SelectedItems[0].SubItems[2].Text = (Decimal.Parse(devMnlistView.SelectedItems[0].SubItems[2].Text.ToString()) + 1).ToString();
-                    };
+                    }
                 }
                 else if (e.KeyValue.ToString() == "189")
                 {
@@ -369,9 +369,9 @@ namespace Catalogo._devoluciones
                     {
                         devMnlistView.SelectedItems[0].SubItems[2].Text = (Decimal.Parse(devMnlistView.SelectedItems[0].SubItems[2].Text.ToString()) - 1).ToString();
                     }
-                };
+                }
 
-            };
+            }
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
@@ -395,7 +395,7 @@ namespace Catalogo._devoluciones
                 else
                 { // Apreto Cancelar
                     dev.Observaciones = "";
-                };
+                }
 
                 //Mercaderia Nueva
                 if (devMnlistView.Items.Count > 0)
@@ -412,8 +412,8 @@ namespace Catalogo._devoluciones
                                     "",
                                     "",
                                     devMnlistView.Items[i].SubItems[9].Text.ToString());
-                    };
-                };
+                    }
+                }
 
                 //Mercaderia Fallada
                 if (devMflistView.Items.Count > 0)
@@ -430,8 +430,8 @@ namespace Catalogo._devoluciones
                                     devMflistView.Items[i].SubItems[6].Text.ToString(),
                                     devMflistView.Items[i].SubItems[7].Text.ToString(),
                                     devMflistView.Items[i].SubItems[9].Text.ToString());
-                    };
-                };
+                    }
+                }
 
                 dev.Guardar("grabar");
 
@@ -446,7 +446,7 @@ namespace Catalogo._devoluciones
 
                 devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
                 devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));  
-            };
+            }
 
 
         }
@@ -476,8 +476,8 @@ namespace Catalogo._devoluciones
                                 "",
                                 "",
                                 devMnlistView.Items[i].SubItems[9].Text.ToString());
-                };
-            };
+                }
+            }
 
             //Mercaderia Fallada
             if (devMflistView.Items.Count > 0)
@@ -494,8 +494,8 @@ namespace Catalogo._devoluciones
                                 devMflistView.Items[i].SubItems[6].Text.ToString(),
                                 devMflistView.Items[i].SubItems[7].Text.ToString(),
                                 devMflistView.Items[i].SubItems[9].Text.ToString());
-                };
-            };
+                }
+            }
 
             dev.Guardar("VER");
             Cursor.Current = Cursors.Default;
@@ -582,7 +582,7 @@ namespace Catalogo._devoluciones
                     {
                         MessageBox.Show("Debe completar datos para la DEVOLUCION!", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
-                    };
+                    }
 
                     if (devMnMalSolicitadoRb.Checked)
                     {
@@ -611,7 +611,7 @@ namespace Catalogo._devoluciones
                             devMnlistView.Items[i].Selected = true;
                             ii = i;
                             break;
-                        };
+                        }
                     }
 
                     if (existe)
@@ -651,7 +651,7 @@ namespace Catalogo._devoluciones
                         devMnlistView.Items[ItemX.Index].Selected = true;
                         Funciones.util.AutoSizeLVColumnas(ref devMnlistView);
 
-                    };
+                    }
 
                     LimpiarIngresoDevolucion();
                 }
@@ -676,7 +676,7 @@ namespace Catalogo._devoluciones
                     {
                         MessageBox.Show("Debe completar datos para la DEVOLUCION!", "atención",MessageBoxButtons.OK,MessageBoxIcon.Exclamation); 
                         return;
-                    };
+                    }
 
                     int ii = 0;
                     for (int i = 0; i < devMflistView.Items.Count; i++)
@@ -688,7 +688,7 @@ namespace Catalogo._devoluciones
                             devMflistView.Items[i].Selected = true;
                             ii = i;
                             break;
-                        };
+                        }
                     }
 
                     if (existe)
@@ -725,7 +725,7 @@ namespace Catalogo._devoluciones
                         devMflistView.Items.Add(ItemX);
                         devMflistView.Items[ItemX.Index].Selected = true;
                         Funciones.util.AutoSizeLVColumnas(ref devMflistView);
-                    };
+                    }
 
                     LimpiarIngresoDevolucion();
                 }
@@ -791,10 +791,10 @@ namespace Catalogo._devoluciones
                     devMfModeloCbo.Items.AddRange(filterPriceArray);
                     devMfModeloCbo.SelectedIndex = 0;
 
-                };
+                }
 
                 fb = null;
-            };
+            }
         }
 
         private void devMnlistView_DoubleClick(object sender, EventArgs e)
@@ -828,9 +828,9 @@ namespace Catalogo._devoluciones
                     if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "DEVO")
                     {
                         Devolucion_Imprimir(row.Cells["Nro"].Value.ToString());
-                    };
-                };
-            };
+                    }
+                }
+            }
         }
 
         public Funciones.emitter_receiver.emisorHandler<int> emisor

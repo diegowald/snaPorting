@@ -27,7 +27,7 @@ namespace Catalogo.Funciones
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '\b')
             {
                 bResultado = true;
-            };
+            }
             return bResultado;
         }
 
@@ -44,10 +44,13 @@ namespace Catalogo.Funciones
                 if (!Char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '.' && e.KeyChar != '\b')
                 {
                     e.Handled = true;
-                };
-            };
+                }
+            }
 
-            if (e.KeyChar == '.') { e.KeyChar = ','; };
+            if (e.KeyChar == '.') 
+            { 
+                e.KeyChar = ','; 
+            }
 
         }
 
@@ -96,7 +99,7 @@ namespace Catalogo.Funciones
             else
             {
                 dt = Catalogo.Funciones.oleDbFunciones.xGetDt(conexion, Tabla, Condicion, Orden, OtrosCampos);
-            };
+            }
 
             if (AceptaNulo)
             {
@@ -109,7 +112,7 @@ namespace Catalogo.Funciones
                 else
                 {
                     dr[0] = "- seleccione -";
-                };
+                }
                 dt.Rows.InsertAt(dr, 0);
             }
 
@@ -143,10 +146,10 @@ namespace Catalogo.Funciones
                         if (MyListview1.Columns[i].Width < wAnchoCol)
                         {
                             MyListview1.AutoResizeColumn(i, System.Windows.Forms.ColumnHeaderAutoResizeStyle.HeaderSize);
-                        };
-                    };
-                };               
-            };
+                        }
+                    }
+                }            
+            }
 
         }
 

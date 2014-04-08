@@ -32,7 +32,7 @@ namespace Catalogo._pedidos
             if (!Global01.AppActiva)
             {
                 this.Dispose();
-            };
+            }
 
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
@@ -49,22 +49,29 @@ namespace Catalogo._pedidos
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
-        {           
-            paEnviosCbo.SelectedIndex = -1;
+        {
+            try
+            {
+                paEnviosCbo.SelectedIndex = -1;
 
-            if (cboCliente.SelectedIndex > 0)
-            {
-                toolStripStatusLabel1.Text = "Nota de Venta para el cliente: " + this.cboCliente.Text.ToString();
-                btnIniciar.Enabled = true;
-                paEnviosCbo.SelectedIndex = 2;
+                if (cboCliente.SelectedIndex > 0)
+                {
+                    toolStripStatusLabel1.Text = "Nota de Venta para el cliente: " + this.cboCliente.Text.ToString();
+                    btnIniciar.Enabled = true;
+                    paEnviosCbo.SelectedIndex = 2;
+                }
+                else
+                {
+                    if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Pedido para el cliente ..."; }
+                    btnIniciar.Enabled = false;
+                }
+                //paEnviosCbo_SelectedIndexChanged(null, null);
+                this.emitir(cboCliente.SelectedIndex);
             }
-            else
+            catch (Exception ex)
             {
-                if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Pedido para el cliente ..."; }
-                btnIniciar.Enabled = false;
-            };
-            //paEnviosCbo_SelectedIndexChanged(null, null);
-            this.emitir(cboCliente.SelectedIndex);
+                util.errorHandling.ErrorForm.show();
+            }
         }
         
         private void paEnviosCbo_SelectedIndexChanged(object sender, EventArgs e)
@@ -110,128 +117,140 @@ namespace Catalogo._pedidos
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-
-            if (Global01.OperacionActivada == "DEVOLUCION" )
+            try
             {
-                MessageBox.Show("Debe cerrar la DEVOLUCION para comenzar la VENTA", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-            else
-            {
-                if (cboCliente.SelectedIndex > 0)
+                if (Global01.OperacionActivada == "DEVOLUCION")
                 {
-                    if (btnIniciar.Tag.ToString() == "INICIAR")
-                    {
-                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                            auditoria.Auditor.AccionesAuditadas.INICIA, "");                            
-                        nvlistView.Items.Clear();
-
-                        OleDbDataReader dr = null;
-     
-                        if (Funciones.modINIs.ReadINI("DATOS", "PedidoNE", "1") == "1")
-                        {
-                            _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(cboCliente.SelectedValue.ToString()));
-                            dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS,"NOTA DE VENTA");
-                            if (dr.HasRows)
-                            {
-                                MessageBox.Show("Hay un pedido pendiente de envio, sugerimos: \n Ir a pedidos anteriores (no enviados) abrirlo y continuar con el mismo", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                paEnviosCbo.SelectedIndex = 2;
-                                PedidoTab.SelectedIndex = 1;                                
-                                nvAntTab.Select();
-                                PedidoTab.Visible = true;
-                                
-                                return;
-                            } ;                   
-                        }
-
-                        dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM tblPedido_Bkp WHERE IdCliente=" + cboCliente.SelectedValue.ToString());
-                        if (dr.HasRows)
-                        {
-                            if (MessageBox.Show("¿Desea RECUPERAR la copia del pedido anterior?", "atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            {
-
-                                while (dr.Read())
-                                {
-                                    ListViewItem ItemX = new ListViewItem(dr["CodigoCorto"].ToString());
-                                    ////alternate row color
-                                    if (nvlistView.Items.Count % 2 != 0)
-                                    {
-                                        ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
-                                    }
-
-                                    ItemX.SubItems.Add(dr["Descrip"].ToString());          //01
-                                    ItemX.SubItems.Add(dr["Precio"].ToString());           //02
-                                    ItemX.SubItems.Add(dr["Cantidad"].ToString());         //03
-                                    ItemX.SubItems.Add(dr["SubTotal"].ToString());         //04
-                                    ItemX.SubItems.Add(dr["Similar"].ToString());          //05
-                                    ItemX.SubItems.Add(dr["Deposito"].ToString());         //06
-                                    ItemX.SubItems.Add(dr["Oferta"].ToString());           //07
-                                    ItemX.SubItems.Add(dr["IdCatalogo"].ToString());       //08
-                                    ItemX.SubItems.Add(dr["Codigo"].ToString());           //09
-                                    ItemX.SubItems.Add(dr["Observaciones"].ToString());    //10
-
-                                    nvlistView.Items.Add(ItemX);
-                                };
-                                Funciones.util.AutoSizeLVColumnas(ref nvlistView);
-                            }
-                            else
-                            {
-                                Funciones.oleDbFunciones.ComandoIU(Global01.Conexion,"DELETE FROM tblPedido_Bkp");
-                            };
-
-                        };
-
-                        dr = null;
-     
-                       // nvlistView.Items.Clear();
-                        TotalPedido();
-                        IniciarPedido();
-                        HabilitarPedido();
-
-                        nvSimilarChk.Checked = false;
-                        nvEsOfertaChk.Checked = false;
-                        nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
-                        PedidoTab.SelectedIndex = 0;
-                        PedidoTab.Visible = true;
-                    }
-                    else
-                    {
-                        if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Pedido?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido, auditoria.Auditor.AccionesAuditadas.CANCELA, "");
-                            PedidoTab.Visible = false;
-                            nvlistView.Items.Clear();
-                            TotalPedido();                            
-                            CerrarPedido();
-                            InhabilitarPedido();
-
-                            cboCliente.SelectedIndex = 0;
-                            nvSimilarChk.Checked = false;
-                            nvEsOfertaChk.Checked = false;
-                            nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));                            
-                        };
-                    };
-
-                    nvlistView.Tag = "-1";
+                    MessageBox.Show("Debe cerrar la DEVOLUCION para comenzar la VENTA", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Seleccione un Cliente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                };
+                    if (cboCliente.SelectedIndex > 0)
+                    {
+                        if (btnIniciar.Tag.ToString() == "INICIAR")
+                        {
+                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
+                                auditoria.Auditor.AccionesAuditadas.INICIA, "");
+                            nvlistView.Items.Clear();
 
-            };
+                            OleDbDataReader dr = null;
 
+                            if (Funciones.modINIs.ReadINI("DATOS", "PedidoNE", "1") == "1")
+                            {
+                                _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(cboCliente.SelectedValue.ToString()));
+                                dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "NOTA DE VENTA");
+                                if (dr.HasRows)
+                                {
+                                    MessageBox.Show("Hay un pedido pendiente de envio, sugerimos: \n Ir a pedidos anteriores (no enviados) abrirlo y continuar con el mismo", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    paEnviosCbo.SelectedIndex = 2;
+                                    PedidoTab.SelectedIndex = 1;
+                                    nvAntTab.Select();
+                                    PedidoTab.Visible = true;
+
+                                    return;
+                                }
+                            }
+
+                            dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM tblPedido_Bkp WHERE IdCliente=" + cboCliente.SelectedValue.ToString());
+                            if (dr.HasRows)
+                            {
+                                if (MessageBox.Show("¿Desea RECUPERAR la copia del pedido anterior?", "atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                {
+
+                                    while (dr.Read())
+                                    {
+                                        ListViewItem ItemX = new ListViewItem(dr["CodigoCorto"].ToString());
+                                        ////alternate row color
+                                        if (nvlistView.Items.Count % 2 != 0)
+                                        {
+                                            ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                                        }
+
+                                        ItemX.SubItems.Add(dr["Descrip"].ToString());          //01
+                                        ItemX.SubItems.Add(dr["Precio"].ToString());           //02
+                                        ItemX.SubItems.Add(dr["Cantidad"].ToString());         //03
+                                        ItemX.SubItems.Add(dr["SubTotal"].ToString());         //04
+                                        ItemX.SubItems.Add(dr["Similar"].ToString());          //05
+                                        ItemX.SubItems.Add(dr["Deposito"].ToString());         //06
+                                        ItemX.SubItems.Add(dr["Oferta"].ToString());           //07
+                                        ItemX.SubItems.Add(dr["IdCatalogo"].ToString());       //08
+                                        ItemX.SubItems.Add(dr["Codigo"].ToString());           //09
+                                        ItemX.SubItems.Add(dr["Observaciones"].ToString());    //10
+
+                                        nvlistView.Items.Add(ItemX);
+                                    }
+                                    Funciones.util.AutoSizeLVColumnas(ref nvlistView);
+                                }
+                                else
+                                {
+                                    Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblPedido_Bkp");
+                                }
+
+                            }
+
+                            dr = null;
+
+                            // nvlistView.Items.Clear();
+                            TotalPedido();
+                            IniciarPedido();
+                            HabilitarPedido();
+
+                            nvSimilarChk.Checked = false;
+                            nvEsOfertaChk.Checked = false;
+                            nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
+                            PedidoTab.SelectedIndex = 0;
+                            PedidoTab.Visible = true;
+                        }
+                        else
+                        {
+                            if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Pedido?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido, auditoria.Auditor.AccionesAuditadas.CANCELA, "");
+                                PedidoTab.Visible = false;
+                                nvlistView.Items.Clear();
+                                TotalPedido();
+                                CerrarPedido();
+                                InhabilitarPedido();
+
+                                cboCliente.SelectedIndex = 0;
+                                nvSimilarChk.Checked = false;
+                                nvEsOfertaChk.Checked = false;
+                                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
+                            }
+                        }
+
+                        nvlistView.Tag = "-1";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Seleccione un Cliente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
         private void ucPedido_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsControl(e.KeyChar) && e.KeyChar == ((char)Keys.D))
-            {   //CTRL + D
-                if (btnIniciar.Tag.ToString() == "CANCELAR")
-                {
-                    //VerDetallePedido();                  
-                };
-            };
+            try
+            {
+                if (Char.IsControl(e.KeyChar) && e.KeyChar == ((char)Keys.D))
+                {   //CTRL + D
+                    if (btnIniciar.Tag.ToString() == "CANCELAR")
+                    {
+                        //VerDetallePedido();                  
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
         private void CerrarPedido()
@@ -356,7 +375,7 @@ namespace Catalogo._pedidos
                             nvlistView.Items[i].Selected = true;
                             ii = i;
                             break;
-                        };
+                        }
                     }
 
                     if (existe)
@@ -394,7 +413,7 @@ namespace Catalogo._pedidos
                         nvlistView.Items[ItemX.Index].Selected = true;
                         Funciones.util.AutoSizeLVColumnas(ref nvlistView);
 
-                    };
+                    }
 
                     Pedido_bkp(Global01.Conexion,
                                 Int32.Parse(cboCliente.SelectedValue.ToString()), 
@@ -424,72 +443,77 @@ namespace Catalogo._pedidos
         
         private void nvlistView_KeyDown(object sender, KeyEventArgs e)
         {
-
-            if (nvlistView.SelectedItems != null & nvlistView.SelectedItems.Count > 0)
+            try
             {
-                bool wEntro = false;
-               
-                if (e.KeyCode==Keys.O && e.Modifiers==Keys.Control)
-                {    //Observaciones del Item
-
-                    string wItemObservaciones = nvlistView.SelectedItems[0].SubItems[10].Text;
-                    if (Funciones.util.InputBox(" (Presione Cancelar para quitar la Observación)  ", "Observaciones para el Item", 80, ref wItemObservaciones) == DialogResult.OK)
-                    {
-                        nvlistView.SelectedItems[0].SubItems[10].Text = wItemObservaciones;
-                    }
-                    else
-                    { // Apreto Cancelar
-                        nvlistView.SelectedItems[0].SubItems[10].Text = "";
-                    };
-                    wEntro = true;
-                }
-                else if (e.KeyCode == Keys.Delete)
-                {  //DEL
-                    Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblPedido_Bkp WHERE IdCatalogo='" + nvlistView.SelectedItems[0].SubItems[8].Text.ToString() + "'");
-                    nvlistView.Items.Remove(nvlistView.SelectedItems[0]);
-
-                    nvlistView.SelectedItems.Clear(); 
-                    TotalPedido();
-                }
-                else if (e.KeyValue.ToString()  == "187")
+                if (nvlistView.SelectedItems != null & nvlistView.SelectedItems.Count > 0)
                 {
-                    if (Decimal.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) < 999)
-                    {
-                        nvlistView.SelectedItems[0].SubItems[3].Text = (Decimal.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) + 1).ToString();
-                        nvlistView.SelectedItems[0].SubItems[4].Text = (float.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) * float.Parse(nvlistView.SelectedItems[0].SubItems[2].Text.ToString())).ToString();
-                        wEntro = true;
-                    };
-                }
-                else if (e.KeyValue.ToString() == "189")
-                {
-                    if (Decimal.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) > 1)
-                    {
-                        nvlistView.SelectedItems[0].SubItems[3].Text = (Decimal.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) - 1).ToString();
-                        nvlistView.SelectedItems[0].SubItems[4].Text = (float.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) * float.Parse(nvlistView.SelectedItems[0].SubItems[2].Text.ToString())).ToString();
+                    bool wEntro = false;
+
+                    if (e.KeyCode == Keys.O && e.Modifiers == Keys.Control)
+                    {    //Observaciones del Item
+
+                        string wItemObservaciones = nvlistView.SelectedItems[0].SubItems[10].Text;
+                        if (Funciones.util.InputBox(" (Presione Cancelar para quitar la Observación)  ", "Observaciones para el Item", 80, ref wItemObservaciones) == DialogResult.OK)
+                        {
+                            nvlistView.SelectedItems[0].SubItems[10].Text = wItemObservaciones;
+                        }
+                        else
+                        { // Apreto Cancelar
+                            nvlistView.SelectedItems[0].SubItems[10].Text = "";
+                        }
                         wEntro = true;
                     }
-                };
+                    else if (e.KeyCode == Keys.Delete)
+                    {  //DEL
+                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblPedido_Bkp WHERE IdCatalogo='" + nvlistView.SelectedItems[0].SubItems[8].Text.ToString() + "'");
+                        nvlistView.Items.Remove(nvlistView.SelectedItems[0]);
 
-                if (wEntro) 
-                {
-                    Pedido_bkp(Global01.Conexion,
-                                Int32.Parse(cboCliente.SelectedValue.ToString()), 
-                                nvlistView.SelectedItems[0].SubItems[9].Text,
-                                nvlistView.SelectedItems[0].SubItems[1].Text,
-                                float.Parse(nvlistView.SelectedItems[0].SubItems[2].Text.ToString()),
-                                Int16.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()),
-                                float.Parse(nvlistView.SelectedItems[0].SubItems[4].Text.ToString()),
-                                short.Parse(nvlistView.SelectedItems[0].SubItems[5].Text.ToString()),
-                                short.Parse(nvlistView.SelectedItems[0].SubItems[6].Text.ToString()),
-                                short.Parse(nvlistView.SelectedItems[0].SubItems[7].Text.ToString()),
-                                nvlistView.SelectedItems[0].SubItems[8].Text,                                
-                                nvlistView.SelectedItems[0].Text,
-                                nvlistView.SelectedItems[0].SubItems[10].Text,
-                                true);                         
-                    TotalPedido();
+                        nvlistView.SelectedItems.Clear();
+                        TotalPedido();
+                    }
+                    else if (e.KeyValue.ToString() == "187")
+                    {
+                        if (Decimal.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) < 999)
+                        {
+                            nvlistView.SelectedItems[0].SubItems[3].Text = (Decimal.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) + 1).ToString();
+                            nvlistView.SelectedItems[0].SubItems[4].Text = (float.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) * float.Parse(nvlistView.SelectedItems[0].SubItems[2].Text.ToString())).ToString();
+                            wEntro = true;
+                        }
+                    }
+                    else if (e.KeyValue.ToString() == "189")
+                    {
+                        if (Decimal.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) > 1)
+                        {
+                            nvlistView.SelectedItems[0].SubItems[3].Text = (Decimal.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) - 1).ToString();
+                            nvlistView.SelectedItems[0].SubItems[4].Text = (float.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()) * float.Parse(nvlistView.SelectedItems[0].SubItems[2].Text.ToString())).ToString();
+                            wEntro = true;
+                        }
+                    }
+
+                    if (wEntro)
+                    {
+                        Pedido_bkp(Global01.Conexion,
+                                    Int32.Parse(cboCliente.SelectedValue.ToString()),
+                                    nvlistView.SelectedItems[0].SubItems[9].Text,
+                                    nvlistView.SelectedItems[0].SubItems[1].Text,
+                                    float.Parse(nvlistView.SelectedItems[0].SubItems[2].Text.ToString()),
+                                    Int16.Parse(nvlistView.SelectedItems[0].SubItems[3].Text.ToString()),
+                                    float.Parse(nvlistView.SelectedItems[0].SubItems[4].Text.ToString()),
+                                    short.Parse(nvlistView.SelectedItems[0].SubItems[5].Text.ToString()),
+                                    short.Parse(nvlistView.SelectedItems[0].SubItems[6].Text.ToString()),
+                                    short.Parse(nvlistView.SelectedItems[0].SubItems[7].Text.ToString()),
+                                    nvlistView.SelectedItems[0].SubItems[8].Text,
+                                    nvlistView.SelectedItems[0].Text,
+                                    nvlistView.SelectedItems[0].SubItems[10].Text,
+                                    true);
+                        TotalPedido();
+                    }
                 }
-    
-            };
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
         private void Pedido_bkp(System.Data.OleDb.OleDbConnection Conexion,
@@ -511,8 +535,11 @@ namespace Catalogo._pedidos
             {
 
                 System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand();
-                
-                if (!(Conexion.State == ConnectionState.Open)) { Conexion.Open(); };
+
+                if (!(Conexion.State == ConnectionState.Open)) 
+                { 
+                    Conexion.Open(); 
+                }
 
                 if (!Existe)
                 {
@@ -521,14 +548,14 @@ namespace Catalogo._pedidos
                     cmd.Parameters.Add("pDescrip", System.Data.OleDb.OleDbType.VarChar, 64).Value = Descrip;
                     cmd.Parameters.Add("pPrecio", System.Data.OleDb.OleDbType.Single).Value = Precio;
                     cmd.Parameters.Add("pCantidad", System.Data.OleDb.OleDbType.Integer).Value = Cantidad;
-                    cmd.Parameters.Add("pSubTotal", System.Data.OleDb.OleDbType.Single).Value =SubTotal;
+                    cmd.Parameters.Add("pSubTotal", System.Data.OleDb.OleDbType.Single).Value = SubTotal;
                     cmd.Parameters.Add("pSimilar", System.Data.OleDb.OleDbType.TinyInt).Value = Similar;
                     cmd.Parameters.Add("pDeposito", System.Data.OleDb.OleDbType.TinyInt).Value = Deposito;
-                    cmd.Parameters.Add("pOferta", System.Data.OleDb.OleDbType.TinyInt).Value =  Oferta;
-                    cmd.Parameters.Add("pIdCatalogo", System.Data.OleDb.OleDbType.VarChar, 38).Value =  IDCatalogo;
+                    cmd.Parameters.Add("pOferta", System.Data.OleDb.OleDbType.TinyInt).Value = Oferta;
+                    cmd.Parameters.Add("pIdCatalogo", System.Data.OleDb.OleDbType.VarChar, 38).Value = IDCatalogo;
                     cmd.Parameters.Add("pCodigoCorto", System.Data.OleDb.OleDbType.VarChar, 30).Value = CodigoCorto;
                     cmd.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 80).Value = Observaciones;
-          
+
                     cmd.Connection = Conexion;
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "usp_Pedido_Bkp_add";
@@ -539,21 +566,21 @@ namespace Catalogo._pedidos
                     cmd.Parameters.Add("pCantidad", System.Data.OleDb.OleDbType.Integer).Value = Cantidad;
                     cmd.Parameters.Add("pSubTotal", System.Data.OleDb.OleDbType.Single).Value = SubTotal;
                     cmd.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 80).Value = Observaciones;
-                    cmd.Parameters.Add("pIdCatalogo", System.Data.OleDb.OleDbType.VarChar, 38).Value =  IDCatalogo;
+                    cmd.Parameters.Add("pIdCatalogo", System.Data.OleDb.OleDbType.VarChar, 38).Value = IDCatalogo;
 
                     cmd.Connection = Conexion;
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.CommandText = "usp_Pedido_Bkp_upd";
                     cmd.ExecuteNonQuery();
-                };
-                
+                }
+
                 cmd = null;
 
             }
             catch (System.Data.OleDb.OleDbException ex)
             {
                 switch (ex.ErrorCode)
-                { 
+                {
                     case -2147467259:
                         break;
                 }
@@ -566,95 +593,109 @@ namespace Catalogo._pedidos
                 //            '  porque crearían valores duplicados en el índice, clave principal o relación.
                 //            ' Cambie los datos en el campo o los campos que contienen datos duplicados,
                 //            ' quite el índice o vuelva a definir el índice para permitir entradas duplicadas e inténtelo de nuevo.
-
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
             }
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-           const string PROCNAME_ = "btnImprimir_Click";
-
-            Cursor.Current = Cursors.WaitCursor;
-
-            if (nvlistView.Items.Count > 0)
+            try
             {
-                InhabilitarPedido();
+                const string PROCNAME_ = "btnImprimir_Click";
 
-                bool wSimilar;
-                bool wOferta;
+                Cursor.Current = Cursors.WaitCursor;
 
-                Catalogo._devoluciones.Pedido ped = new Catalogo._devoluciones.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
-                ped.NroImpresion = 0;
-                for (int i = 0; i < nvlistView.Items.Count; i++)
+                if (nvlistView.Items.Count > 0)
                 {
-                    wSimilar = (nvlistView.Items[i].SubItems[5].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
-                    wOferta = (nvlistView.Items[i].SubItems[7].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
+                    InhabilitarPedido();
 
-                    ped.ADDItem(nvlistView.Items[i].SubItems[8].Text.ToString(),
-                                float.Parse(nvlistView.Items[i].SubItems[2].Text.ToString()),
-                                Int16.Parse(nvlistView.Items[i].SubItems[3].Text.ToString()),
-                                wSimilar,
-                                byte.Parse(nvlistView.Items[i].SubItems[6].Text.ToString()),
-                                wOferta,
-                                nvlistView.Items[i].SubItems[10].Text.ToString());
-                };
+                    bool wSimilar;
+                    bool wOferta;
 
-                ped.Guardar("grabar");
+                    Catalogo._devoluciones.Pedido ped = new Catalogo._devoluciones.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+                    ped.NroImpresion = 0;
+                    for (int i = 0; i < nvlistView.Items.Count; i++)
+                    {
+                        wSimilar = (nvlistView.Items[i].SubItems[5].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
+                        wOferta = (nvlistView.Items[i].SubItems[7].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
 
-                Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblPedido_Bkp");
-                Cursor.Current = Cursors.Default;
-                
-                Pedido_Imprimir(Global01.NroImprimir);
-                Global01.NroImprimir = "";
-                
-                CerrarPedido();
-                nvlistView.Items.Clear();
-                TotalPedido();
-                nvSimilarChk.Checked = false;
-                nvEsOfertaChk.Checked = false;
-                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));  
+                        ped.ADDItem(nvlistView.Items[i].SubItems[8].Text.ToString(),
+                                    float.Parse(nvlistView.Items[i].SubItems[2].Text.ToString()),
+                                    Int16.Parse(nvlistView.Items[i].SubItems[3].Text.ToString()),
+                                    wSimilar,
+                                    byte.Parse(nvlistView.Items[i].SubItems[6].Text.ToString()),
+                                    wOferta,
+                                    nvlistView.Items[i].SubItems[10].Text.ToString());
+                    }
 
-            };
+                    ped.Guardar("grabar");
 
+                    Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblPedido_Bkp");
+                    Cursor.Current = Cursors.Default;
+
+                    Pedido_Imprimir(Global01.NroImprimir);
+                    Global01.NroImprimir = "";
+
+                    CerrarPedido();
+                    nvlistView.Items.Clear();
+                    TotalPedido();
+                    nvSimilarChk.Checked = false;
+                    nvEsOfertaChk.Checked = false;
+                    nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
+
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
         private void btnVer_Click(object sender, EventArgs e)
         {
-
-            const string PROCNAME_ = "btnVer_Click";
-
-            Cursor.Current = Cursors.WaitCursor;
-
-            if (nvlistView.Items.Count > 0)
+            try
             {
+                const string PROCNAME_ = "btnVer_Click";
 
-                bool wSimilar;
-                bool wOferta;
+                Cursor.Current = Cursors.WaitCursor;
 
-                Catalogo._devoluciones.Pedido ped = new Catalogo._devoluciones.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
-                ped.NroImpresion = 0;
-                for (int i = 0; i < nvlistView.Items.Count; i++)
+                if (nvlistView.Items.Count > 0)
                 {
-                    wSimilar = (nvlistView.Items[i].SubItems[5].Text.ToString()=="1" ? (bool)(true) : (bool)(false));
-                    wOferta = (nvlistView.Items[i].SubItems[7].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
 
-                    ped.ADDItem(nvlistView.Items[i].SubItems[8].Text.ToString(),
-                                float.Parse(nvlistView.Items[i].SubItems[2].Text.ToString()),      
-                                Int16.Parse(nvlistView.Items[i].SubItems[3].Text.ToString()),
-                                wSimilar,
-                                byte.Parse(nvlistView.Items[i].SubItems[6].Text.ToString()),
-                                wOferta,
-                                nvlistView.Items[i].SubItems[10].Text.ToString());
-                };
+                    bool wSimilar;
+                    bool wOferta;
 
-                ped.Guardar("VER");
-                Cursor.Current = Cursors.Default;
+                    Catalogo._devoluciones.Pedido ped = new Catalogo._devoluciones.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+                    ped.NroImpresion = 0;
+                    for (int i = 0; i < nvlistView.Items.Count; i++)
+                    {
+                        wSimilar = (nvlistView.Items[i].SubItems[5].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
+                        wOferta = (nvlistView.Items[i].SubItems[7].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
 
-                Pedido_Imprimir(Global01.NroImprimir);
-                Global01.NroImprimir = "";
+                        ped.ADDItem(nvlistView.Items[i].SubItems[8].Text.ToString(),
+                                    float.Parse(nvlistView.Items[i].SubItems[2].Text.ToString()),
+                                    Int16.Parse(nvlistView.Items[i].SubItems[3].Text.ToString()),
+                                    wSimilar,
+                                    byte.Parse(nvlistView.Items[i].SubItems[6].Text.ToString()),
+                                    wOferta,
+                                    nvlistView.Items[i].SubItems[10].Text.ToString());
+                    }
 
-            };
+                    ped.Guardar("VER");
+                    Cursor.Current = Cursors.Default;
 
+                    Pedido_Imprimir(Global01.NroImprimir);
+                    Global01.NroImprimir = "";
+
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
         public static void Pedido_Imprimir(string NroPedido)
@@ -669,7 +710,7 @@ namespace Catalogo._pedidos
             else
             {
                 sReporte = Global01.AppPath + "\\Reportes\\Pedido_Enc2.rpt";
-            };
+            }
             
             ReportDocument oReport = new ReportDocument();
 
@@ -696,94 +737,108 @@ namespace Catalogo._pedidos
 
         private void paDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (Global01.AppActiva)
-            {     
-               DataGridViewCell cell = paDataGridView[e.ColumnIndex, e.RowIndex];
-               if (cell != null)
+            try
+            {
+                if (Global01.AppActiva)
                 {
-                    DataGridViewRow row = cell.OwningRow;
-                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="NOTA")
+                    DataGridViewCell cell = paDataGridView[e.ColumnIndex, e.RowIndex];
+                    if (cell != null)
                     {
-                        Pedido_Imprimir(row.Cells["Nro"].Value.ToString());
-                    };
-                };
-            };
+                        DataGridViewRow row = cell.OwningRow;
+                        if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "NOTA")
+                        {
+                            Pedido_Imprimir(row.Cells["Nro"].Value.ToString());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
         private void paDataGridView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Global01.AppActiva)
-            {               
-               //[CTRL + M] ' Marcado de Pedidos, Recibos y Devoluciones como enviadas en forma manual
-               if (e.KeyCode==Keys.M && e.Modifiers==Keys.Control)
-               {
-                    if (paEnviosCbo.Text.ToString().ToUpper()== "NO ENVIADOS")
+            try
+            {
+                if (Global01.AppActiva)
+                {
+                    //[CTRL + M] ' Marcado de Pedidos, Recibos y Devoluciones como enviadas en forma manual
+                    if (e.KeyCode == Keys.M && e.Modifiers == Keys.Control)
                     {
-                        if (paDataGridView.SelectedRows != null) 
+                        if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
                         {
-                            if (MessageBox.Show("CUIDADO!! a los Items marcados NO podrá enviarlos electrónicamente, ¿Está Seguro?", "Marcando como: ENVIADO EN FORMA MANUAL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)                                                       
+                            if (paDataGridView.SelectedRows != null)
+                            {
+                                if (MessageBox.Show("CUIDADO!! a los Items marcados NO podrá enviarlos electrónicamente, ¿Está Seguro?", "Marcando como: ENVIADO EN FORMA MANUAL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                {
+                                    foreach (DataGridViewRow row in paDataGridView.SelectedRows)
+                                    {
+                                        if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "NOTA")
+                                        {
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Pedido_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblPedido_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroPedido='" + row.Cells["Nro"].Value.ToString() + "'");
+                                        }
+                                        else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "DEVO")
+                                        {
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Devolucion_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblDevolucion_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroDevolucion='" + row.Cells["Nro"].Value.ToString() + "'");
+                                        }
+                                        else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "RECI")
+                                        {
+                                            MessageBox.Show("opción no disponible para recibos", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Recibo_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblRecibo_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroRecibo='" + row.Cells["Nro"].Value.ToString() + "'");
+                                        }
+                                        else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "INTE")
+                                        {
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_InterDeposito_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblInterDepotito SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroInterDeposito='" & row.Cells["Nro"].Value.ToString() + "'");
+                                        }
+                                        //paDataGridView.Rows.Remove(row);
+                                        paDataGridView.ClearSelection();
+                                    }
+                                    ObtenerMovimientos();
+                                }
+                            }
+                        }
+                    }
+                    else if (e.KeyCode == Keys.A && e.Modifiers == Keys.Control)
+                    {
+                        if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
+                        {
+                            if (paDataGridView.SelectedRows != null)
                             {
                                 foreach (DataGridViewRow row in paDataGridView.SelectedRows)
                                 {
-                                    if (row.Cells["Origen"].Value.ToString().Substring(0,4).ToUpper()=="NOTA") 
+                                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "NOTA")
                                     {
-                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Pedido_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
-                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblPedido_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroPedido='" + row.Cells["Nro"].Value.ToString() + "'");
+                                        if (MessageBox.Show("¿ Desea abrir el pedido n° " + row.Cells["Nro"].Value.ToString() + " ?", "Abriendo pedido no enviado ...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                        {
+                                            if (cboCliente.SelectedValue.ToString() == row.Cells["IDCliente"].Value.ToString())
+                                            {
+                                                if (btnIniciar.Tag.ToString() == "INICIAR")
+                                                {
+                                                    AbrirPedido("pedido", row.Cells["Nro"].Value.ToString(), Int16.Parse(row.Cells["IdCliente"].Value.ToString()));
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("CUIDADO!! Debe cerrar el pedido ACTUAL", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                                }
+                                            }
+                                        }
                                     }
-                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="DEVO") 
-                                    {
-                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Devolucion_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
-                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblDevolucion_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroDevolucion='" + row.Cells["Nro"].Value.ToString() + "'");
-                                    }
-                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="RECI") 
-                                    {
-                                        MessageBox.Show("opción no disponible para recibos", "atención",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-                                        //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Recibo_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
-                                        //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblRecibo_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroRecibo='" + row.Cells["Nro"].Value.ToString() + "'");
-                                    }
-                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="INTE") 
-                                    {
-                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_InterDeposito_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
-                                        //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblInterDepotito SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroInterDeposito='" & row.Cells["Nro"].Value.ToString() + "'");
-                                    }
-                                    //paDataGridView.Rows.Remove(row);
                                     paDataGridView.ClearSelection();
                                 }
-                                ObtenerMovimientos(); 
                             }
                         }
                     }
                 }
-                else if (e.KeyCode==Keys.A && e.Modifiers==Keys.Control)
-                {     
-                    if (paEnviosCbo.Text.ToString().ToUpper()== "NO ENVIADOS")
-                    {
-                        if (paDataGridView.SelectedRows != null)
-                        {
-                            foreach (DataGridViewRow row in paDataGridView.SelectedRows)
-                            {
-                                if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="NOTA")
-                                {
-                                    if (MessageBox.Show("¿ Desea abrir el pedido n° " + row.Cells["Nro"].Value.ToString() + " ?", "Abriendo pedido no enviado ...", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                                    {
-                                        if (cboCliente.SelectedValue.ToString() == row.Cells["IDCliente"].Value.ToString())
-                                        {
-                                            if (btnIniciar.Tag.ToString() == "INICIAR")
-                                            {
-                                                AbrirPedido("pedido", row.Cells["Nro"].Value.ToString(), Int16.Parse(row.Cells["IdCliente"].Value.ToString()));
-                                            }
-                                            else
-                                            {
-                                                MessageBox.Show("CUIDADO!! Debe cerrar el pedido ACTUAL", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                            };
-                                        };
-                                    };
-                                };
-                                paDataGridView.ClearSelection();
-                            };
-                        }        
-                    }
-                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -846,7 +901,7 @@ namespace Catalogo._pedidos
                         wDisCont = wDisCont + 1;
                     }
                     nvlistView.Items.Add(ItemX);
-                };
+                }
                 Funciones.util.AutoSizeLVColumnas(ref nvlistView);
                 
                 Global01.NroDocumentoAbierto = NroPedido;
@@ -864,7 +919,7 @@ namespace Catalogo._pedidos
                 if (wDisCont > 0)
                 {
                     MessageBox.Show("CUIDADO!!, Hay Códigos Discontinuados", "atención",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-                };
+                }
 
             }
 
@@ -873,8 +928,15 @@ namespace Catalogo._pedidos
 
         private void nvlistView_DoubleClick(object sender, EventArgs e)
         {
-             nvlistView.SelectedItems[0].SubItems[5].Text = (nvSimilarChk.Checked ? "1" : "0");
-             nvlistView.SelectedItems[0].SubItems[6].Text = nvDepositoCbo.SelectedValue.ToString();
+            try
+            {
+                nvlistView.SelectedItems[0].SubItems[5].Text = (nvSimilarChk.Checked ? "1" : "0");
+                nvlistView.SelectedItems[0].SubItems[6].Text = nvDepositoCbo.SelectedValue.ToString();
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
         public Funciones.emitter_receiver.emisorHandler<int> emisor

@@ -33,7 +33,7 @@ namespace Catalogo._recibos
             if (!Global01.AppActiva)
             {
                 this.Dispose();
-            };
+            }
 
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
@@ -70,7 +70,7 @@ namespace Catalogo._recibos
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Recibo para el cliente ..."; }
                 LimpiarClienteDatos();
                 btnIniciar.Enabled = false;
-            };
+            }
             this.emitir(cboCliente.SelectedIndex);
         }
 
@@ -132,7 +132,7 @@ namespace Catalogo._recibos
                 {
                     ItemX.SubItems[1].ForeColor = Color.Red;
                     ItemX.SubItems[1].Font = new Font(cclistView.Font, FontStyle.Bold);
-                };
+                }
                 cclistView.Items.Add(ItemX);            
             }
 
@@ -173,7 +173,7 @@ namespace Catalogo._recibos
                 CliDObservacionesTxt.Text = dr["observaciones"].ToString();
                 CliDRazonSocialTxt.Text = dr["razonsocial"].ToString();
                 CliDTelefonoTxt.Text = dr["telefono"].ToString();
-            };
+            }
   
         }
 
@@ -181,11 +181,10 @@ namespace Catalogo._recibos
         {
             if (CliDEmailTxt.Text.Trim().Length > 0)
             {
-            System.Diagnostics.Process proc = new System.Diagnostics.Process();
-            proc.StartInfo.FileName = "mailto:" + CliDEmailTxt.Text.Trim() + "?subject=" + "auto náutica sur - OdN n° " + Global01.NroUsuario.ToString() + "&body=" + "mi estimado...";
-            proc.Start();
-            };
-
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                proc.StartInfo.FileName = "mailto:" + CliDEmailTxt.Text.Trim() + "?subject=" + "auto náutica sur - OdN n° " + Global01.NroUsuario.ToString() + "&body=" + "mi estimado...";
+                proc.Start();
+            }
         }
 
         private void cvAgregarBtn_Click(object sender, EventArgs e)
@@ -204,12 +203,12 @@ namespace Catalogo._recibos
                     {
                       ItemX =  new ListViewItem(cvTipoValorCbo.Text);
                       ralistView.Tag = "add";
-                    };
+                    }
                 }
                 else 
                 {
                    ItemX =  new ListViewItem(cvTipoValorCbo.Text);
-                };
+                }
 
                 //alternate row color
                 if (ralistView.Items.Count % 2 == 0)
@@ -243,7 +242,7 @@ namespace Catalogo._recibos
 
                 TotalRecibo();
 
-            };
+            }
         }
 
         private bool datosvalidos(string pCampo)
@@ -259,8 +258,8 @@ namespace Catalogo._recibos
                     MessageBox.Show("Ingrese Tipo de Valor", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     wDatosValidos = false;
                     cvTipoValorCbo.Focus();
-                };
-            };   
+                }
+            }   
               
             if (pCampo.ToLower()=="cvimportetxt" | pCampo.ToLower()=="all" | pCampo.ToLower()=="recibo" )
             {
@@ -284,14 +283,14 @@ namespace Catalogo._recibos
                         else 
                         {
                             cvDivisasLbl.Text = string.Format("{0:N2}",float.Parse(cvImporteTxt.Text) * float.Parse(cvTipoCambioTxt.Text));
-                        };
+                        }
                     }
                     else 
                     {
                         cvDivisasLbl.Text = "";
-                    };
-                };
-            };
+                    }
+                }
+            }
 
           if (cvTipoValorCbo.SelectedIndex==1) 
           {  //Cheque
@@ -300,7 +299,7 @@ namespace Catalogo._recibos
                MessageBox.Show("Ingrese Datos del Cheque", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                wDatosValidos = false;
                cvBancoCbo.Focus();
-            };
+            }
           }
           else if (cvTipoValorCbo.SelectedIndex>=5) 
           { //retención               
@@ -309,8 +308,8 @@ namespace Catalogo._recibos
                 MessageBox.Show("Ingrese n° de Retención", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 wDatosValidos = false;
                 cvNroCuentaTxt.Focus();
-            };
-          };
+            }
+          }
 
     
     //if LCase(pCampo) = "clinovedad" Or LCase(pCampo) = "#all" Or LCase(pCampo) = "novedad" {
@@ -408,7 +407,7 @@ namespace Catalogo._recibos
                 cvBancoCbo.Enabled = false;
                 cvCpaTxt.Enabled = false;
                 cvTipoCambioTxt.Enabled = false;
-            };
+            }
 
             cvTipoCambioTxt.Text = "";
             cvDivisasLbl.Text = "";
@@ -421,7 +420,7 @@ namespace Catalogo._recibos
             else if (s.IndexOf("euro") > 0)
             {
                 cvTipoCambioTxt.Text = Global01.Euro.ToString();
-            };
+            }
 
         }
 
@@ -483,15 +482,15 @@ namespace Catalogo._recibos
                         TotalRecibo();
                         TotalADeducir();
                         TotalApli();
-                    };
-                };
+                    }
+                }
 
                 cclistView.Tag = "-1";
             }
             else
             {
               MessageBox.Show("Seleccione un Cliente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            };
+            }
 
         }
 
@@ -560,7 +559,7 @@ namespace Catalogo._recibos
                         AuxNotaCredito = AuxNotaCredito + float.Parse(adlistView.Items[i].SubItems[1].Text.ToString());
                     // sumatoria de subtotal
 
-                };
+                }
 
                 //es un porcentaje ySI al resto
                 if (adlistView.Items[i].SubItems[2].Text.ToString() == "1" & adlistView.Items[i].SubItems[3].Text.ToString() == "1")
@@ -570,8 +569,8 @@ namespace Catalogo._recibos
                     {
                         Aux2 = ((float.Parse(apTotalAplicacionLbl.Text) - Aux - Aux2 + AuxNotaCredito ) * float.Parse(adlistView.Items[i].SubItems[1].Text.ToString())) / 100;
                         Aux3 = Aux3 + Aux2;
-                    };
-                };
+                    }
+                }
             }
 
             adTotalDeducirLbl.Text = string.Format("{0:N2}", Aux);
@@ -749,7 +748,7 @@ namespace Catalogo._recibos
                 {
                     MessageBox.Show("Agregar valores ó quitar última Factura en Aplicación", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);   
                     tOk = false;
-                };
+                }
             }
 
             if (tOk)
@@ -782,8 +781,8 @@ namespace Catalogo._recibos
                     else
                     {
                         tImporte = tImporte + float.Parse(ralistView.Items[i].SubItems[1].Text.ToString());
-                    };
-                };
+                    }
+                }
 
                 rec.NroImpresion = 0;
                 rec.Bahia = wABahiaChk;
@@ -795,7 +794,7 @@ namespace Catalogo._recibos
                 {
                     rec.ADDItemApli(aplistView.Items[i].Text.ToString(), 
                                     float.Parse(aplistView.Items[i].SubItems[1].Text.ToString()));
-                };
+                }
 
                 for (int i = 0; i < adlistView.Items.Count; i++)
                 {
@@ -803,7 +802,7 @@ namespace Catalogo._recibos
                                          float.Parse(adlistView.Items[i].SubItems[1].Text.ToString()),
                                          ((adlistView.Items[i].SubItems[2].Text.ToString() == "1") ? (bool)(true) : (bool)(false)),
                                          ((adlistView.Items[i].SubItems[3].Text.ToString() == "1") ? (bool)(true) : (bool)(false)));             
-                };
+                }
 
                 rec.Guardar("GRABAR");   
                 Recibo_Imprimir(Global01.NroImprimir);         
@@ -851,8 +850,8 @@ namespace Catalogo._recibos
                     else
                     {
                         tImporte = tImporte + float.Parse(ralistView.Items[i].SubItems[1].Text.ToString());
-                    };
-                };
+                    }
+                }
 
                 rec.NroImpresion = 0;
                 rec.Bahia = wABahiaChk;
@@ -864,7 +863,7 @@ namespace Catalogo._recibos
                 {
                     rec.ADDItemApli(aplistView.Items[i].Text.ToString(), 
                                     float.Parse(aplistView.Items[i].SubItems[1].Text.ToString()));
-                };
+                }
 
                 for (int i = 0; i < adlistView.Items.Count; i++)
                 {
@@ -873,7 +872,7 @@ namespace Catalogo._recibos
                                     ((adlistView.Items[i].SubItems[2].Text.ToString() == "1") ? (bool)(true) : (bool)(false)),
                                     ((adlistView.Items[i].SubItems[3].Text.ToString() == "1") ? (bool)(true) : (bool)(false)));             
 
-                };
+                }
 
                 rec.Guardar("VER");
 
@@ -993,8 +992,8 @@ namespace Catalogo._recibos
                                 apAgregarBtn_Click(null,null);
                                 cclistView.SelectedItems[0].ForeColor = Color.Red;
                                 cclistView.SelectedItems[0].Font = new Font(cclistView.Font, FontStyle.Bold);
-                            };
-                        };
+                            }
+                        }
                     }
                     else if (cclistView.SelectedItems[0].SubItems[1].Text.Substring(0,3) == "CRE" |
                                 cclistView.SelectedItems[0].SubItems[1].Text.Substring(0,3) == "REC") 
@@ -1027,12 +1026,12 @@ namespace Catalogo._recibos
                             adAgregarBtn_Click(null,null);
                             cclistView.SelectedItems[0].ForeColor = Color.Red;
                             cclistView.SelectedItems[0].Font = new Font(cclistView.Font, FontStyle.Bold);
-                        };
+                        }
                     }
                     else
                     {
                         MessageBox.Show("El comprobante ya fue aplicado", "atención", MessageBoxButtons.OK, MessageBoxIcon.Information);                                                       
-                    };
+                    }
                 //-------------------------------
                 }
              }
@@ -1060,7 +1059,7 @@ namespace Catalogo._recibos
             else
             {
                 wTipoCascara = "XX";
-            };
+            }
 
             adCascaraBtn.Tag = "Cascara";
 
@@ -1086,7 +1085,7 @@ namespace Catalogo._recibos
                 adConceptoTxt.Text = " cascara: " + adConceptoTxt.Text.ToString().Trim().Substring(0, adConceptoTxt.Text.ToString().Trim().Length - 1) + "%";
                 adPorcentajeChk.Checked = true;
                 adAplicarRestoChk.Checked = true;
-                //if (xI > 1) {adAplicarRestoCb.Checked = true;} else {adAplicarRestoCb.Checked = false;};
+                //if (xI > 1) {adAplicarRestoCb.Checked = true;} else {adAplicarRestoCb.Checked = false;}
                 adAgregarBtn_Click(null, null);
             }
             else
@@ -1131,7 +1130,7 @@ namespace Catalogo._recibos
                     }
                     wEntro1 = true;
                     X += 1;
-                };
+                }
                 wDias = (int)Math.Round(wSumaImpDias / wSumaImp) - 1;
                 wFechaFactPromedio = wFecha1.AddDays(wDias);
             }
@@ -1158,7 +1157,7 @@ namespace Catalogo._recibos
                 }
                 wDias = (int)Math.Round(wSumaImpDias / wSumaImp) - 1;
                 wFechaValoresPromedio = wFecha1.AddDays(wDias);
-            };
+            }
 
             dr = null;
 
@@ -1189,12 +1188,12 @@ namespace Catalogo._recibos
                     {
                       ItemX = new ListViewItem(apConceptoTxt.Text.ToUpper());
                       aplistView.Tag = "add";
-                    };
+                    }
                 }
                 else 
                 {
                     ItemX = new ListViewItem(apConceptoTxt.Text.ToUpper());
-                };
+                }
 
                 ItemX.Tag = "add";
                 ItemX.SubItems.Add(string.Format("{0:N2}",float.Parse("0" + apImporteTxt.Text))); 
@@ -1214,7 +1213,7 @@ namespace Catalogo._recibos
                     cclistView.Items[ItemX.Index].Selected = true;
                     cclistView.SelectedItems[0].ForeColor = Color.Red;
                     cclistView.SelectedItems[0].Font = new Font(cclistView.Font, FontStyle.Bold);                
-                };
+                }
                 ItemX = null;
 
 		        TotalApli();
@@ -1223,7 +1222,7 @@ namespace Catalogo._recibos
 		        apImporteTxt.Text = "";
 		        apPercepcionTxt.Text = "";
 
-            };
+            }
         
         }
 
@@ -1286,7 +1285,7 @@ namespace Catalogo._recibos
                         cclistView.Items[ItemX.Index].Selected = true;
                         cclistView.SelectedItems[0].ForeColor = Color.Black;
                         cclistView.SelectedItems[0].Font = new Font(cclistView.Font, FontStyle.Regular);
-                    };
+                    }
                     ItemX = null;
 
                     adlistView.Items.Remove(adlistView.SelectedItems[0]);
@@ -1311,7 +1310,7 @@ namespace Catalogo._recibos
                         cclistView.Items[ItemX.Index].Selected = true;
                         cclistView.SelectedItems[0].ForeColor = Color.Black;
                         cclistView.SelectedItems[0].Font = new Font(cclistView.Font, FontStyle.Regular);
-                    };
+                    }
                     ItemX = null;
 
                     aplistView.Items.Remove(aplistView.SelectedItems[0]);
@@ -1340,12 +1339,12 @@ namespace Catalogo._recibos
                     {
                         ItemX = new ListViewItem(adConceptoTxt.Text.ToUpper());
                         adlistView.Tag = "add";
-                    };
+                    }
                 }
                 else
                 {
                     ItemX = new ListViewItem(adConceptoTxt.Text.ToUpper());
-                };
+                }
 
                 ItemX.Tag = "add";
                 ItemX.SubItems.Add(string.Format("{0:N2}", float.Parse("0" + adImporteTxt.Text)));
@@ -1366,7 +1365,7 @@ namespace Catalogo._recibos
                     cclistView.Items[ItemX.Index].Selected = true;
                     cclistView.SelectedItems[0].ForeColor = Color.Red;
                     cclistView.SelectedItems[0].Font = new Font(cclistView.Font, FontStyle.Bold);
-                };
+                }
                 ItemX = null;
 
                 TotalADeducir();
@@ -1375,7 +1374,7 @@ namespace Catalogo._recibos
                 adImporteTxt.Text = "";
                 adAplicarRestoChk.Checked = false;
                 adPorcentajeChk.Checked = false;
-            };
+            }
         }
 
         private void ralistView_DoubleClick(object sender, EventArgs e)
@@ -1407,7 +1406,7 @@ namespace Catalogo._recibos
                 {
                     cvDivisasLbl.Text = "";
                     cvTipoCambioTxt.Text = "";
-                };
+                }
             }
         }
 
@@ -1444,7 +1443,7 @@ namespace Catalogo._recibos
             if (btnIniciar.Tag.ToString() == "CANCELAR")
             {
                 VerDetalleRecibo();
-            };
+            }
         }
 
         private void paEnviosCbo_SelectedIndexChanged(object sender, EventArgs e)
@@ -1499,9 +1498,9 @@ namespace Catalogo._recibos
                     if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "RECI")
                     {
                         Recibo_Imprimir(row.Cells["Nro"].Value.ToString());
-                    };
-                };
-            };
+                    }
+                }
+            }
         }
 
 

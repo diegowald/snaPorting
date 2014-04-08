@@ -358,7 +358,7 @@ namespace Catalogo._productos
                         else
                         {
                             columnFilter = string.Format("[{0}]='{1}'", colName, ((String)colValue).Replace("'", "''"));
-                        };
+                        }
                         break;
                         
                 }

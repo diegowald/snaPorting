@@ -309,11 +309,17 @@ namespace Catalogo
 
             if (Funciones.modINIs.ReadINI("DATOS", "ConfirmaSalida", "1") == "1")
             {
-                if (System.Windows.Forms.MessageBox.Show("Saliendo del Catálogo... ¿Está seguro?", "Cerrando la Aplicación", System.Windows.Forms.MessageBoxButtons.YesNo)
-                    == System.Windows.Forms.DialogResult.No)
+                try
                 {
-                    e.Cancel = true;
-                    return;
+                    if (System.Windows.Forms.MessageBox.Show("Saliendo del Catálogo... ¿Está seguro?", "Cerrando la Aplicación", System.Windows.Forms.MessageBoxButtons.YesNo)
+                        == System.Windows.Forms.DialogResult.No)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                }
+                catch
+                {
                 }
             }
 

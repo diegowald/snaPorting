@@ -38,7 +38,7 @@ namespace Catalogo
             {
                 btnIngresar.Enabled = true;
                 chkActualizarClientes.Enabled = true;
-            };
+            }
 
         }
 
@@ -73,7 +73,7 @@ namespace Catalogo
                     errormessage.Text = "ingrese pin.";
                     txtPIN.Focus();
                     return;
-                };
+                }
 
                 txtPIN2.Text = "";
                 txtPIN.Visible = false;
@@ -91,7 +91,7 @@ namespace Catalogo
                     errormessage.Text = "re-ingrese pin.";
                     txtPIN2.Focus();
                     return;
-                };
+                }
 
                 if (txtPIN.Text.Trim().ToUpper() == txtPIN2.Text.Trim().ToUpper())
                 {
@@ -116,9 +116,9 @@ namespace Catalogo
                     txtPIN.Focus();
 
                     MessageBox.Show("Error: Ingrese el PIN nuevamente!", "Atención", MessageBoxButtons.OK, MessageBoxIcon.None);
-                };
+                }
 
-            };
+            }
         }
 
         private void chkActualizarClientes_CheckedChanged(object sender, EventArgs e)

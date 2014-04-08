@@ -84,7 +84,7 @@ namespace Catalogo._productos
                 cboLinea.Items.Clear();
                 cboLinea.Items.AddRange(filterProductArray);
                 cboLinea.SelectedIndex = 0;
-            };
+            }
 
             if (cboFamilia.Items.Count < 1)
             {
@@ -94,7 +94,7 @@ namespace Catalogo._productos
                 cboFamilia.Items.Clear();
                 cboFamilia.Items.AddRange(filterCatagoryArray);
                 cboFamilia.SelectedIndex = 0;
-            };
+            }
 
             if (cboMarca.Items.Count < 1)
             {
@@ -104,7 +104,7 @@ namespace Catalogo._productos
                 cboMarca.Items.Clear();
                 cboMarca.Items.AddRange(filterQuantityArray);
                 cboMarca.SelectedIndex = 0;
-            };
+            }
 
             cboOtros.SelectedIndex = 0;
 
@@ -136,126 +136,140 @@ namespace Catalogo._productos
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            //xCargarDataControl();           
+            try
+            {
+                //xCargarDataControl();           
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
 
         private void cboMarca_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboMarca.SelectedItem != null)
+            try
             {
-
-                FilterBuilder fb = new FilterBuilder();
-
-                if (cboMarca.SelectedItem.ToString() != "(todos)")
+                if (cboMarca.SelectedItem != null)
                 {
 
-                    fb.PopulateFilter(ref Filter_Modelo, dtProducts, "_mm" + cboMarca.SelectedItem.ToString());
-                    String[] filterPriceArray = new String[Filter_Modelo.Count];
-                    Filter_Modelo.Keys.CopyTo(filterPriceArray, 0);
-                    cboModelo.Items.Clear();
-                    cboModelo.Items.AddRange(filterPriceArray);
-                    cboModelo.SelectedIndex = 0;
+                    FilterBuilder fb = new FilterBuilder();
 
+                    if (cboMarca.SelectedItem.ToString() != "(todos)")
+                    {
+
+                        fb.PopulateFilter(ref Filter_Modelo, dtProducts, "_mm" + cboMarca.SelectedItem.ToString());
+                        String[] filterPriceArray = new String[Filter_Modelo.Count];
+                        Filter_Modelo.Keys.CopyTo(filterPriceArray, 0);
+                        cboModelo.Items.Clear();
+                        cboModelo.Items.AddRange(filterPriceArray);
+                        cboModelo.SelectedIndex = 0;
+
+                    }
+                    else
+                    {
+                        fb.PopulateFilter(ref Filter_Modelo, dtProducts, "Modelo");
+                        String[] filterPriceArray = new String[Filter_Modelo.Count];
+                        Filter_Modelo.Keys.CopyTo(filterPriceArray, 0);
+                        cboModelo.Items.Clear();
+                        cboModelo.Items.AddRange(filterPriceArray);
+                        cboModelo.SelectedIndex = 0;
+
+                    }
+
+                    fb = null;
                 }
-                else
-                {
-                    fb.PopulateFilter(ref Filter_Modelo, dtProducts, "Modelo");
-                    String[] filterPriceArray = new String[Filter_Modelo.Count];
-                    Filter_Modelo.Keys.CopyTo(filterPriceArray, 0);
-                    cboModelo.Items.Clear();
-                    cboModelo.Items.AddRange(filterPriceArray);
-                    cboModelo.SelectedIndex = 0;
-
-                };
-
-                fb = null;
-            };
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
 
         private void btnApply0_Click(object sender, EventArgs e)
         {
-            if (dtProducts != null && dtProducts.Rows.Count > 0)
+            try
             {
-                filterString = string.Empty;
-                FilterBuilder fb = new FilterBuilder();
-
-                fb.ApplyFilter(ref filterString, "Linea", cboLinea.SelectedItem.ToString());
-                fb.ApplyFilter(ref filterString, "Familia", cboFamilia.SelectedItem.ToString());
-                fb.ApplyFilter(ref filterString, "Marca", cboMarca.SelectedItem.ToString());
-                fb.ApplyFilter(ref filterString, "Modelo", cboModelo.SelectedItem.ToString());
-
-                string discontinuedValue = string.Empty;
-                string controlValue = string.Empty;
-
-                if (cboOtros.SelectedItem.ToString() == "(todos)") { controlValue = null; }
-
-                if (cboOtros.SelectedItem.ToString() == "Ofertas") { controlValue = "O"; }
-
-                if (!string.IsNullOrEmpty(controlValue))
+                if (dtProducts != null && dtProducts.Rows.Count > 0)
                 {
-                    fb.ApplyFilter(ref filterString, "Control", controlValue);
-                }
+                    filterString = string.Empty;
+                    FilterBuilder fb = new FilterBuilder();
 
-                if (!string.IsNullOrEmpty(txtBuscar.Text))
-                {
-                    fb.ApplyFilter(ref filterString, "(txtBuscar)", txtBuscar.Text.ToUpper());
-                }
+                    fb.ApplyFilter(ref filterString, "Linea", cboLinea.SelectedItem.ToString());
+                    fb.ApplyFilter(ref filterString, "Familia", cboFamilia.SelectedItem.ToString());
+                    fb.ApplyFilter(ref filterString, "Marca", cboMarca.SelectedItem.ToString());
+                    fb.ApplyFilter(ref filterString, "Modelo", cboModelo.SelectedItem.ToString());
 
-                if (cboOtros.SelectedItem.ToString() == "Nuevos")
-                {
-                    fb.ApplyFilter(ref filterString, "Vigencia", "30");
-                }
+                    string discontinuedValue = string.Empty;
+                    string controlValue = string.Empty;
 
-                fb = null;
-                this.emitir(filterString);
-                this.emitir2(float.Parse(txtPorcentajeLinea.Text));
+                    if (cboOtros.SelectedItem.ToString() == "(todos)") { controlValue = null; }
+
+                    if (cboOtros.SelectedItem.ToString() == "Ofertas") { controlValue = "O"; }
+
+                    if (!string.IsNullOrEmpty(controlValue))
+                    {
+                        fb.ApplyFilter(ref filterString, "Control", controlValue);
+                    }
+
+                    if (!string.IsNullOrEmpty(txtBuscar.Text))
+                    {
+                        fb.ApplyFilter(ref filterString, "(txtBuscar)", txtBuscar.Text.ToUpper());
+                    }
+
+                    if (cboOtros.SelectedItem.ToString() == "Nuevos")
+                    {
+                        fb.ApplyFilter(ref filterString, "Vigencia", "30");
+                    }
+
+                    fb = null;
+                    this.emitir(filterString);
+                    this.emitir2(float.Parse(txtPorcentajeLinea.Text));
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
             }
         }
 
         private void btnClearFilters_Click(object sender, EventArgs e)
         {
-            if (dtProducts != null && dtProducts.Rows.Count > 0)
+            try
             {
-                filterString = string.Empty;
+                if (dtProducts != null && dtProducts.Rows.Count > 0)
+                {
+                    filterString = string.Empty;
 
-                if (cboLinea.Items.Count > 0) cboLinea.SelectedIndex = 0;
-                if (cboFamilia.Items.Count > 0) cboFamilia.SelectedIndex = 0;
-                if (cboMarca.Items.Count > 0) cboMarca.SelectedIndex = 0;
-                if (cboModelo.Items.Count > 0) cboModelo.SelectedIndex = 0;
+                    if (cboLinea.Items.Count > 0) cboLinea.SelectedIndex = 0;
+                    if (cboFamilia.Items.Count > 0) cboFamilia.SelectedIndex = 0;
+                    if (cboMarca.Items.Count > 0) cboMarca.SelectedIndex = 0;
+                    if (cboModelo.Items.Count > 0) cboModelo.SelectedIndex = 0;
 
-                cboOtros.SelectedIndex = 0;
+                    cboOtros.SelectedIndex = 0;
 
-                this.emitir(filterString);
-                this.emitir2(0);
+                    this.emitir(filterString);
+                    this.emitir2(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
             }
         }
 
-        emisorHandler<string> _emisor;
         public emisorHandler<string> emisor
         {
-            get
-            {
-                return _emisor;
-            }
-            set
-            {
-                _emisor = value;
-            }
+            get;
+            set;
         }
 
-        emisorHandler<float> _emisor2;
         emisorHandler<float> IEmisor2<float>.emisor2
         {
-            get
-            {
-                return _emisor2;
-            }
-            set
-            {
-                _emisor2 = value;
-            }
+            get;
+            set;
         }
 
         public void onRecibir(util.Pair<int, int> dato)

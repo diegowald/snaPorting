@@ -24,7 +24,7 @@ namespace Catalogo._movimientos
             if (!Global01.AppActiva)
             {
                 this.Dispose();
-            };
+            }
 
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
@@ -46,7 +46,7 @@ namespace Catalogo._movimientos
             else
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Movimientos para el cliente ..."; }
-            };
+            }
             ObtenerMovimientos();
            // EnviosCbo.SelectedIndex = 0;
         }
@@ -109,7 +109,7 @@ namespace Catalogo._movimientos
                     else
                     {
                         movDataGridView.Columns["Selec"].Visible = false;
-                    };
+                    }
 
                     movDataGridView.Refresh();
                     movDataGridView.Visible = true;
@@ -130,125 +130,144 @@ namespace Catalogo._movimientos
 
         private void movDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            if (Global01.AppActiva)
+            try
             {
-
-                DataGridViewCell cell = movDataGridView[e.ColumnIndex, e.RowIndex];
-
-                if (cell != null)
+                if (Global01.AppActiva)
                 {
-                    DataGridViewRow row = cell.OwningRow;
-                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper()=="NOTA")
+
+                    DataGridViewCell cell = movDataGridView[e.ColumnIndex, e.RowIndex];
+
+                    if (cell != null)
                     {
-                        _pedidos.ucPedido.Pedido_Imprimir(row.Cells["Nro"].Value.ToString());
+                        DataGridViewRow row = cell.OwningRow;
+                        if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "NOTA")
+                        {
+                            _pedidos.ucPedido.Pedido_Imprimir(row.Cells["Nro"].Value.ToString());
+                        }
+                        else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "RECI")
+                        {
+                            _recibos.ucRecibo.Recibo_Imprimir(row.Cells["Nro"].Value.ToString());
+                        }
+                        if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "DEVO")
+                        {
+                            _devoluciones.ucDevolucion.Devolucion_Imprimir(row.Cells["Nro"].Value.ToString());
+                        }
+                        if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "INTE")
+                        {
+                            //IntDep_Imprimir(row.Cells["Nro"].Value.ToString());
+                        }
+                        if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "REND")
+                        {
+                            //Rendicion_Imprimir(row.Cells["Nro"].Value.ToString());
+                        }
                     }
-                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "RECI")
-                    {
-                        _recibos.ucRecibo.Recibo_Imprimir(row.Cells["Nro"].Value.ToString());
-                    }
-                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "DEVO")
-                    {
-                        _devoluciones.ucDevolucion.Devolucion_Imprimir(row.Cells["Nro"].Value.ToString());
-                    }
-                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "INTE")
-                    {
-                        //IntDep_Imprimir(row.Cells["Nro"].Value.ToString());
-                    }
-                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "REND")
-                    {
-                        //Rendicion_Imprimir(row.Cells["Nro"].Value.ToString());
-                    };
-                };
-            };
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
         private void movDataGridView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Global01.AppActiva)
+            try
             {
-                //[CTRL + M] ' Marcado de Pedidos, Recibos y Devoluciones como enviadas en forma manual
-                if (e.KeyCode == Keys.M && e.Modifiers == Keys.Control)
+                if (Global01.AppActiva)
                 {
-                    if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
+                    //[CTRL + M] ' Marcado de Pedidos, Recibos y Devoluciones como enviadas en forma manual
+                    if (e.KeyCode == Keys.M && e.Modifiers == Keys.Control)
                     {
-                        if (movDataGridView.SelectedRows != null)
+                        if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
                         {
-                            if (MessageBox.Show("CUIDADO!! a los Items marcados NO podrá enviarlos electrónicamente, ¿Está Seguro?", "Marcando como: ENVIADO EN FORMA MANUAL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if (movDataGridView.SelectedRows != null)
                             {
-                                foreach (DataGridViewRow row in movDataGridView.SelectedRows)
+                                if (MessageBox.Show("CUIDADO!! a los Items marcados NO podrá enviarlos electrónicamente, ¿Está Seguro?", "Marcando como: ENVIADO EN FORMA MANUAL", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                 {
-                                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "NOTA")
+                                    foreach (DataGridViewRow row in movDataGridView.SelectedRows)
                                     {
-                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Pedido_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
-                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblPedido_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroPedido='" + row.Cells["Nro"].Value.ToString() + "'");
+                                        if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "NOTA")
+                                        {
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Pedido_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblPedido_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroPedido='" + row.Cells["Nro"].Value.ToString() + "'");
+                                        }
+                                        else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "DEVO")
+                                        {
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Devolucion_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblDevolucion_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroDevolucion='" + row.Cells["Nro"].Value.ToString() + "'");
+                                        }
+                                        else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "RECI")
+                                        {
+                                            MessageBox.Show("opción no disponible para recibos", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Recibo_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblRecibo_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroRecibo='" + row.Cells["Nro"].Value.ToString() + "'");
+                                        }
+                                        else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "INTE")
+                                        {
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_InterDeposito_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
+                                            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblInterDepotito SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroInterDeposito='" & row.Cells["Nro"].Value.ToString() + "'");
+                                        }
+                                        //paDataGridView.Rows.Remove(row);
+                                        movDataGridView.ClearSelection();
                                     }
-                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "DEVO")
-                                    {
-                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Devolucion_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
-                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblDevolucion_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroDevolucion='" + row.Cells["Nro"].Value.ToString() + "'");
-                                    }
-                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "RECI")
-                                    {
-                                        MessageBox.Show("opción no disponible para recibos", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                        //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Recibo_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
-                                        //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblRecibo_Enc SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroRecibo='" + row.Cells["Nro"].Value.ToString() + "'");
-                                    }
-                                    else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "INTE")
-                                    {
-                                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_InterDeposito_Transmicion_Upd '" + row.Cells["Nro"].Value.ToString() + "'");
-                                        //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblInterDepotito SET Observaciones='ENVIADO EN FORMA MANUAL' WHERE NroInterDeposito='" & row.Cells["Nro"].Value.ToString() + "'");
-                                    }
-                                    //paDataGridView.Rows.Remove(row);
-                                    movDataGridView.ClearSelection();
+                                    ObtenerMovimientos();
                                 }
-                                ObtenerMovimientos();
                             }
                         }
                     }
-                };
-
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
             }
         }
 
         private void EnviarBtn_Click(object sender, EventArgs e)
         {
-            if (Global01.AppActiva)
+            try
             {
-
-                if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
+                if (Global01.AppActiva)
                 {
-                    if (movDataGridView.SelectedRows != null && movDataGridView.SelectedRows.Count > 0)
+
+                    if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
                     {
-                        if (MessageBox.Show("Tiene movimientos que aun no ha enviado. ¿QUIERE ENVIARLOS AHORA?", "Envio de Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (movDataGridView.SelectedRows != null && movDataGridView.SelectedRows.Count > 0)
                         {
-                            System.Collections.Generic.List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO> filtro = new List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>();
- 
-                            foreach (DataGridViewRow row in movDataGridView.Rows)
+                            if (MessageBox.Show("Tiene movimientos que aun no ha enviado. ¿QUIERE ENVIARLOS AHORA?", "Envio de Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
-                                if (row.Cells["Selec"].Value != null && row.Cells["Selec"].Value.ToString() != "" && (bool)row.Cells["Selec"].Value)
+                                System.Collections.Generic.List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO> filtro = new List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>();
+
+                                foreach (DataGridViewRow row in movDataGridView.Rows)
                                 {
-                                    util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO item=new util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO();
-                                    item.nro = (int)row.Cells["Nro"].Value;
-                                    item.origen=row.Cells["Origen"].Value.ToString();
-                                    filtro.Add(item);
+                                    if (row.Cells["Selec"].Value != null && row.Cells["Selec"].Value.ToString() != "" && (bool)row.Cells["Selec"].Value)
+                                    {
+                                        util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO item = new util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO();
+                                        item.nro = (int)row.Cells["Nro"].Value;
+                                        item.origen = row.Cells["Origen"].Value.ToString();
+                                        filtro.Add(item);
+                                    }
                                 }
+
+                                Catalogo.util.BackgroundTasks.EnvioMovimientos envio =
+                                    new util.BackgroundTasks.EnvioMovimientos(
+                                        util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico,
+                                        int.Parse(this.cboCliente.SelectedValue.ToString()),
+                                        false,
+                                        util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_LISTVIEW,
+                                        filtro);
+
+                                envio.run();
+
+                                ObtenerMovimientos();
                             }
-
-                            Catalogo.util.BackgroundTasks.EnvioMovimientos envio =
-                                new util.BackgroundTasks.EnvioMovimientos(
-                                    util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico,
-                                    int.Parse(this.cboCliente.SelectedValue.ToString()),
-                                    false,
-                                    util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_LISTVIEW,
-                                    filtro);
-
-                            envio.run();
-
-                            ObtenerMovimientos();
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorForm.show();
             }
         }
      

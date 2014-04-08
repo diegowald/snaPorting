@@ -28,7 +28,7 @@ namespace Catalogo._interdeposito
             if (!Global01.AppActiva)
             {
                 this.Dispose();
-            };
+            }
 
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
@@ -59,7 +59,7 @@ namespace Catalogo._interdeposito
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "InterDeposito para el cliente ..."; }
                 btnIniciar.Enabled = false;
-            };
+            }
 //            this.emitir(cboCliente.SelectedIndex);
         }
 
@@ -79,12 +79,12 @@ namespace Catalogo._interdeposito
                     {
                       ItemX =  new ListViewItem("FAC");
                       ralistView.Tag = "add";
-                    };
+                    }
                 }
                 else 
                 {
                    ItemX =  new ListViewItem("FAC");
-                };
+                }
 
                 //alternate row color
                 if (ralistView.Items.Count % 2 == 0)
@@ -108,7 +108,7 @@ namespace Catalogo._interdeposito
                 bdFacturasTxt.Text = "";
                 bdFacturasTxt.Focus();
 
-            };
+            }
         }
 
         private bool datosvalidos(string pCampo)
@@ -121,8 +121,8 @@ namespace Catalogo._interdeposito
                 {
                     MessageBox.Show("Ingrese facturas que afecta", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     wDatosValidos = false;
-                };
-            };
+                }
+            }
 
             if  (pCampo.ToLower() == "all" | pCampo.ToLower() == "interdeposito")
             {
@@ -130,8 +130,8 @@ namespace Catalogo._interdeposito
                 {
                     MessageBox.Show("Ingrese Efectivo ó Cheque", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     wDatosValidos = false;                    
-                };
-            };   
+                }
+            }   
 
             if (pCampo.ToLower() == "bdbancocbo" | pCampo.ToLower() == "all" | pCampo.ToLower()=="interdeposito")
             {
@@ -140,8 +140,8 @@ namespace Catalogo._interdeposito
                     MessageBox.Show("Ingrese Cuenta de Banco", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     wDatosValidos = false;
                     bdBancoCbo.Focus();
-                };
-            };   
+                }
+            }
               
             if (pCampo.ToLower()=="bdimportetxt" | pCampo.ToLower()=="all" | pCampo.ToLower()=="interdeposito" )
             {
@@ -151,7 +151,7 @@ namespace Catalogo._interdeposito
                     wDatosValidos = false;
                     bdImporteTxt.Focus();
                 }
-            };
+            }
             
             if (pCampo.ToLower() == "bdfacturastxt" | pCampo.ToLower() == "all" | pCampo.ToLower() == "interdepositof")
             {
@@ -161,7 +161,7 @@ namespace Catalogo._interdeposito
                     wDatosValidos = false;
                     bdFacturasTxt.Focus();
                 }
-            };
+            }
 
             if (pCampo.ToLower() == "bdnumerotxt" | pCampo.ToLower() == "all" | pCampo.ToLower() == "interdeposito")
             {
@@ -171,7 +171,7 @@ namespace Catalogo._interdeposito
                     wDatosValidos = false;
                     bdNumeroTxt.Focus();
                 }
-            };
+            }
 
             if (pCampo.ToLower() == "bdcachequestxt" | pCampo.ToLower() == "all" | pCampo.ToLower() == "interdeposito")
             {
@@ -181,7 +181,7 @@ namespace Catalogo._interdeposito
                     wDatosValidos = false;
                     bdCaChequesTxt.Focus();
                 }
-            };
+            }
 
             return wDatosValidos;
         }
@@ -237,13 +237,13 @@ namespace Catalogo._interdeposito
                         rTabsInterDeposito.SelectedIndex = 1;
                         cboCliente.SelectedIndex = 0;
                         CerrarInterDeposito();                                                
-                    };
-                };
+                    }
+                }
             }
             else
             {
               MessageBox.Show("Seleccione un Cliente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            };
+            }
         }
 
         private void ralistView_KeyDown(object sender, KeyEventArgs e)
@@ -330,7 +330,7 @@ namespace Catalogo._interdeposito
                     intDep.ADDFacturas(ralistView.Items[i].SubItems[1].Text.ToString(),
                                     ralistView.Items[i].SubItems[2].Text.ToString(),
                                     float.Parse("0" + ralistView.Items[i].SubItems[3].Text.ToString()));
-                };
+                }
         
                 intDep.Bco_Dep_Tipo = ((bdTipoEfectivoRb.Checked) ?  "E" : "C");
                 intDep.Bco_Dep_Fecha = bdFechaDt.Value;
@@ -362,7 +362,7 @@ namespace Catalogo._interdeposito
                     intDep.ADDFacturas(ralistView.Items[i].Text,
                                     ralistView.Items[i].SubItems[1].Text.ToString(),
                                     float.Parse("0" + ralistView.Items[i].SubItems[2].Text.ToString()));
-                };
+                }
 
                 intDep.Bco_Dep_Tipo = ((bdTipoEfectivoRb.Checked) ? "E" : "C");
                 intDep.Bco_Dep_Fecha = bdFechaDt.Value;
@@ -459,9 +459,9 @@ namespace Catalogo._interdeposito
                     if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "INTE")
                     {
                         InterDeposito_Imprimir(row.Cells["Nro"].Value.ToString());
-                    };
-                };
-            };
+                    }
+                }
+            }
         }
 
         private void bdTipoChequesRb_CheckedChanged(object sender, EventArgs e)
@@ -470,7 +470,7 @@ namespace Catalogo._interdeposito
             {
                 bdCaChequesTxt.Enabled = true;
                 bdBancoCbo.Enabled = true;
-            };
+            }
         }
 
         private void bdTipoEfectivoRb_CheckedChanged(object sender, EventArgs e)
@@ -479,7 +479,7 @@ namespace Catalogo._interdeposito
             {
                 bdCaChequesTxt.Enabled = false;
                 bdBancoCbo.Enabled = false;
-            };
+            }
         }
 
     } //fin clase
