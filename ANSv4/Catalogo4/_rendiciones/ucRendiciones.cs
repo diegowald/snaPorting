@@ -192,26 +192,21 @@ namespace Catalogo._rendiciones
                     if (cboRecibos.Items.Count > 0) 
                     {
                         cboRecibos.SelectedIndex = cboRecibos.Items.Count-1; 
-	                    this.txtRecDesde.Text = cboRecibos.SelectedText; 
+	                    this.txtRecDesde.Text = cboRecibos.SelectedValue.ToString(); 
 	                    //cboRecibos.RemoveItem cboRecibos.ListCount - 1
-                    }
-
-                    //Recibos
-                    if (sTAB.SelectedIndex == 0) {
+                    };
+                    
+                    if (sTAB.SelectedIndex == 0)
+                    {//Recibos
 	                    // dtF_Rendicion.SetFocus
 	                    txtDescripcion.Focus();
-                    } else {
-	                    //Valores
-	                    if (sTAB.SelectedIndex == 1) {
-
-		                    dtBd_Fecha.Focus();
-	                    }
-                    }
+                    } 
+                    else if (sTAB.SelectedIndex == 1)
+                    {//Valores
+		                dtBd_Fecha.Focus();
+                    };
 
 				    break;
-			    //m.id = 0
-			    //mskN_Despacho.SetFocus
-
 			    case tAccion.Modificar:
 
                 //    CambiarA(tEstado.Nuevo);
@@ -339,12 +334,12 @@ namespace Catalogo._rendiciones
 				    break;
 			    case tAccion.Imprimir:
 
-                    Rendicion_Imprimir(lblNroRendicion.Text.Substring(lblNroRendicion.Text.Length - 8));
-				
-				    m.Accion = tAccion.Cancelar;
+                    m.Accion = tAccion.Cancelar;
                     CambiarA(tEstado.Neutro);
 				    Habilita(m.Accion);
 
+                    Rendicion_Imprimir(lblNroRendicion.Text.Substring(lblNroRendicion.Text.Length - 8));
+				
 				    break;
 			    case tAccion.Eliminar:
                     if (DatosValidos("eliminar")) {
@@ -432,7 +427,7 @@ namespace Catalogo._rendiciones
 					    tsbCancelar.Enabled = false;
 					    tsbBuscar.Enabled = true;
 					    tsbImprimir.Enabled = true;
-					    tsbBorrar.Enabled = true;
+					    tsbBorrar.Enabled = false;
 					    tsbCerrar.Enabled = true;
 				    }
 
@@ -718,13 +713,27 @@ namespace Catalogo._rendiciones
                 adoCMD.Connection = Global01.Conexion;
                 adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
                 adoCMD.CommandText = "usp_Rendicion_add";
-                adoCMD.ExecuteNonQuery();
 
-                System.Data.OleDb.OleDbDataReader rec = null;
-		        rec = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "@@identity");
-                rec.Read();
-		        pID = Int16.Parse(rec["ID"].ToString());
-		        rec = null;
+                if (Global01.TranActiva != null)
+                {
+                    adoCMD.Transaction = Global01.TranActiva;
+                }
+                try
+                {
+                    adoCMD.ExecuteNonQuery();
+
+                    System.Data.OleDb.OleDbDataReader rec = null;
+                    rec = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "@@identity");
+                    rec.Read();
+                    pID = Int16.Parse(rec["ID"].ToString());
+                    rec = null;
+
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message.ToString());
+                }              
+
 	        } 
             else if (pOper == "upd") 
             {
@@ -735,7 +744,20 @@ namespace Catalogo._rendiciones
                 adoCMD.Connection = Global01.Conexion;
                 adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
                 adoCMD.CommandText = "usp_Rendicion_upd";
-                adoCMD.ExecuteNonQuery();  
+
+                if (Global01.TranActiva != null)
+                {
+                    adoCMD.Transaction = Global01.TranActiva;
+                }
+                try
+                {
+                    adoCMD.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message.ToString());
+                }                   
+
 	        }
 
 	        adoCMD = null;
@@ -759,7 +781,19 @@ namespace Catalogo._rendiciones
                 adoCMD.Connection = Global01.Conexion;
                 adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
                 adoCMD.CommandText = "usp_RendicionValores_add";
-                adoCMD.ExecuteNonQuery();  
+                
+                if (Global01.TranActiva != null)
+                {
+                    adoCMD.Transaction = Global01.TranActiva;
+                }
+                try
+                {
+                    adoCMD.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message.ToString());
+                }   
             }
 
             adoCMD = null;
@@ -866,7 +900,7 @@ namespace Catalogo._rendiciones
 
                         cboCheques.Items.Clear();
                         //m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "v_Recibo_Det_Cheques_Detalle", "NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'" "NONE");
-                        Funciones.util.CargaCombo(Global01.Conexion, ref cboCheques,"v_Recibo_Det_Cheques_Detalle","Descrip", "NewIndex","NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'");
+                        Funciones.util.CargaCombo(Global01.Conexion, ref cboCheques,"v_Recibo_Det_Cheques_Detalle","Descrip", "NewIndex","NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'","NONE",false,false,"Descrip");
 
                         TotalRecibos();
                         TotalControles();
@@ -910,11 +944,19 @@ namespace Catalogo._rendiciones
                     m.ItemX.SubItems.Add(txtBd_Nro.Text);
                     m.ItemX.SubItems.Add(txtBd_Monto.Text);
                     m.ItemX.SubItems.Add(txtBdCh_Cantidad.Text);
-                    //m.ItemX.SubItems.Add("0"); //NroRendicion
-                    m.ItemX.SubItems.Add(cboCheques.SelectedText);
+                    m.ItemX.SubItems.Add("0"); //NroRendicion
+
+                    if (_opTipoDeposito_1.Checked == true)
+                    {
+                        m.ItemX.SubItems.Add(cboCheques.SelectedText);
+                        // PABLO // cboCheques.Items.RemoveAt(cboCheques.SelectedIndex);
+                    }
+                    else
+                    {
+                        m.ItemX.SubItems.Add("");
+                    }
 
                     lvValores.Items.Add(m.ItemX);
-
                     Funciones.util.AutoSizeLVColumnas(ref lvValores);
       
                     TotalValores();
@@ -969,12 +1011,19 @@ namespace Catalogo._rendiciones
         {
             //Funciones.util.SizeLastColumn(lvRecibos);
             //Funciones.util.SizeLastColumn(lvValores);
-		
-		    sTAB.SelectedIndex = 0;
+  
+            cboRecibos.SelectedIndex = -1;    
+            txtBuscar.Text = "";
+            mskFbuscar.Value = DateTime.Today.Date;
+    
+            sTAB.SelectedIndex = 0;
 
 		    LimpiarPantalla("all");
 
-		    CambiarA(tEstado.Neutro);        
+            m.Accion = tAccion.Neutro;
+            CambiarA(tEstado.Neutro);        
+            Habilita(m.Accion);
+		    
         }	
 
         private void TotalRecibos()
@@ -1020,7 +1069,7 @@ namespace Catalogo._rendiciones
             //    Exit Sub
             //End If
 	    
-	        for (m.i = 1; m.i <= lvValores.Items.Count; m.i++) {
+	        for (m.i = 0; m.i < lvValores.Items.Count; m.i++) {
 		        if (lvValores.Items[m.i].SubItems[1].Text == "E") 
                 {
 			        lblEfectivoV.Text = string.Format("{0:N2}",float.Parse("0" + lblEfectivoV.Text) + float.Parse("0" + lvValores.Items[m.i].SubItems[4].Text));
@@ -1108,6 +1157,325 @@ namespace Catalogo._rendiciones
 
             oReport.Dispose();
         }
+//----------------------------
+        private void cboCheques_Leave(System.Object eventSender, System.EventArgs eventArgs)
+        {
+            string s = cboCheques.SelectedText;
+            if (s.Length > 0 ) txtBd_Monto.Text = s.Substring(s.IndexOf("$") + 2).Replace(")", "");
+        }
+
+        private void cboRecibos_Leave(System.Object eventSender, System.EventArgs eventArgs)
+        {
+
+            if (cboRecibos.SelectedIndex >= 0)
+            {
+                this.txtRecHasta.Text = cboRecibos.SelectedValue.ToString();
+            }
+
+        }
+
+        private void cboRecibos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (cboRecibos.SelectedIndex >= 0)
+            {
+                this.txtRecHasta.Text = cboRecibos.SelectedValue.ToString();
+            }
+        }
+
+        private void lvValores_DoubleClick(System.Object eventSender, System.EventArgs eventArgs)
+        {
+
+            if (m.Accion == tAccion.Nuevo | m.Accion == tAccion.Modificar)
+            {
+
+                if (lvValores.SelectedItems != null & lvValores.SelectedItems.Count > 0)
+                {
+
+                    lblIdValor.Text = lvValores.SelectedItems[0].Text;
+
+                    _opTipoDeposito_0.Checked = ((lvValores.SelectedItems[0].SubItems[1].Text=="E") ? true : false);
+                    //_opTipoDeposito_1.Checked = ((lvValores.SelectedItems[0].SubItems[1].Text == "C") ? true : false);
+                    dtBd_Fecha.Value = DateTime.Parse(lvValores.SelectedItems[0].SubItems[2].Text);
+                    txtBd_Nro.Text = lvValores.SelectedItems[0].SubItems[3].Text;
+                    txtBd_Monto.Text = lvValores.SelectedItems[0].SubItems[4].Text;
+                    txtBdCh_Cantidad.Text = lvValores.SelectedItems[0].SubItems[5].Text;
+
+                    // PABLO // cboCheques.Items.Add(new VB6.ListBoxItem((lvValores.FocusedItem.SubItems(7).Text), cboCheques.NewIndex));
+
+                    cboCheques.Items.Insert(0,lvValores.SelectedItems[0].SubItems[7].Text);
+                    cboCheques.SelectedIndex = 0;
+
+                    //Funciones.util.BuscarIndiceEnCombo(ref cboCheques, lvValores.SelectedItems[0].SubItems[7].Text, false);
+
+                    Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblRendicionValores WHERE ID=" + lvValores.SelectedItems[0].Text);
+
+                    lvValores.Items.Remove(lvValores.SelectedItems[0]);
+                    lvValores.SelectedItems.Clear(); 
+                    
+                    TotalValores();
+                    TotalControles();
+                };
+            };
+        }
+
+        private void optBuscar_CheckedChanged(System.Object eventSender, System.EventArgs eventArgs)
+        {
+
+        }
+
+        private void _optBuscar_0_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_optBuscar_0.Checked)
+            {//TxtBuscar
+                txtBuscar.Enabled = true;
+                mskFbuscar.Enabled = false;
+                txtBuscar.Focus();
+            }
+            else
+            {//Fecha
+                txtBuscar.Enabled = false;
+                mskFbuscar.Enabled = true;
+                mskFbuscar.Focus();
+            }
+        }
+
+        private void _opTipoDeposito_0_CheckedChanged(object sender, EventArgs e)
+        {
+            //Me.txtBdCh_Cantidad.Enabled = Me.opTipoDeposito.Item(1).value
+            txtBd_Monto.Enabled = _opTipoDeposito_0.Checked;
+            cboCheques.Enabled = _opTipoDeposito_1.Checked;
+
+            if (_opTipoDeposito_0.Checked)
+            {
+                this.txtBdCh_Cantidad.Text = "0";
+            }
+            else
+            {
+                this.txtBdCh_Cantidad.Text = "1";
+            }
+        }
+
+        ////-1-
+        //private void txtLatEfectivo_Monto_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtLatCert_Cantidad_Leave(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    txtLatCert_Cantidad.Text = VB6.Format("0" + this.txtLatCert_Cantidad.Text, "00");
+        //    TotalControles();
+        //}
+
+        //private void txtLatCh_Cantidad_Leave(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    txtLatCh_Cantidad.Text = VB6.Format("0" + txtLatCh_Cantidad.Text, "00");
+        //    TotalControles();
+        //}
+
+        //private void txtRecHasta_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtBdCh_Cantidad_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtBdCh_Cantidad_KeyPress(System.Object eventSender, System.Windows.Forms.KeyPressEventArgs eventArgs)
+        //{
+        //    short KeyAscii = Strings.Asc(eventArgs.KeyChar);
+        //    SoloMontos(txtBdCh_Cantidad, KeyAscii);
+        //    eventArgs.KeyChar = Strings.Chr(KeyAscii);
+        //    if (KeyAscii == 0)
+        //    {
+        //        eventArgs.Handled = true;
+        //    }
+        //}
+
+        //private void txtBd_Monto_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtBd_Monto_KeyPress(System.Object eventSender, System.Windows.Forms.KeyPressEventArgs eventArgs)
+        //{
+        //    short KeyAscii = Strings.Asc(eventArgs.KeyChar);
+        //    SoloMontos(txtBd_Monto, KeyAscii);
+        //    eventArgs.KeyChar = Strings.Chr(KeyAscii);
+        //    if (KeyAscii == 0)
+        //    {
+        //        eventArgs.Handled = true;
+        //    }
+        //}
+
+        //private void txtBd_Monto_Leave(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    txtBd_Monto.Text = VB6.Format("0" + txtBd_Monto.Text, "##,###,##0.00");
+        //}
+
+        //private void txtBd_Nro_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtBd_Nro_KeyPress(System.Object eventSender, System.Windows.Forms.KeyPressEventArgs eventArgs)
+        //{
+        //    short KeyAscii = Strings.Asc(eventArgs.KeyChar);
+        //    SoloMontos(txtBd_Nro, KeyAscii);
+        //    eventArgs.KeyChar = Strings.Chr(KeyAscii);
+        //    if (KeyAscii == 0)
+        //    {
+        //        eventArgs.Handled = true;
+        //    }
+        //}
+
+        //private void txtLatEfectivo_Monto_KeyPress(System.Object eventSender, System.Windows.Forms.KeyPressEventArgs eventArgs)
+        //{
+        //    short KeyAscii = Strings.Asc(eventArgs.KeyChar);
+        //    SoloMontos(txtLatEfectivo_Monto, KeyAscii);
+        //    eventArgs.KeyChar = Strings.Chr(KeyAscii);
+        //    if (KeyAscii == 0)
+        //    {
+        //        eventArgs.Handled = true;
+        //    }
+        //}
+
+        //private void txtLatEfectivo_Monto_Leave(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    txtLatEfectivo_Monto.Text = VB6.Format("0" + txtLatEfectivo_Monto.Text, "##,###,##0.00");
+
+        //    TotalControles();
+
+        //}
+
+        ////-2-
+        //private void txtLatCh_Monto_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtLatCh_Monto_KeyPress(System.Object eventSender, System.Windows.Forms.KeyPressEventArgs eventArgs)
+        //{
+        //    short KeyAscii = Strings.Asc(eventArgs.KeyChar);
+        //    SoloMontos(txtLatCh_Monto, KeyAscii);
+        //    eventArgs.KeyChar = Strings.Chr(KeyAscii);
+        //    if (KeyAscii == 0)
+        //    {
+        //        eventArgs.Handled = true;
+        //    }
+        //}
+
+        //private void txtLatCh_Monto_Leave(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    txtLatCh_Monto.Text = VB6.Format("0" + txtLatCh_Monto.Text, "##,###,##0.00");
+        //    TotalControles();
+        //}
+
+        ////-3-
+        //private void txtLatCert_Monto_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtLatCert_Monto_KeyPress(System.Object eventSender, System.Windows.Forms.KeyPressEventArgs eventArgs)
+        //{
+        //    short KeyAscii = Strings.Asc(eventArgs.KeyChar);
+        //    SoloMontos(txtLatCert_Monto, KeyAscii);
+        //    eventArgs.KeyChar = Strings.Chr(KeyAscii);
+        //    if (KeyAscii == 0)
+        //    {
+        //        eventArgs.Handled = true;
+        //    }
+        //}
+
+        //private void txtLatCert_Monto_Leave(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    txtLatCert_Monto.Text = VB6.Format("0" + txtLatCert_Monto.Text, "##,###,##0.00");
+        //    TotalControles();
+        //}
+
+        ////-4-
+        //private void txtLatDiv_dolar_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtLatDiv_dolar_KeyPress(System.Object eventSender, System.Windows.Forms.KeyPressEventArgs eventArgs)
+        //{
+        //    short KeyAscii = Strings.Asc(eventArgs.KeyChar);
+        //    SoloMontos(txtLatDiv_dolar, KeyAscii);
+        //    eventArgs.KeyChar = Strings.Chr(KeyAscii);
+        //    if (KeyAscii == 0)
+        //    {
+        //        eventArgs.Handled = true;
+        //    }
+        //}
+
+        //private void txtLatDiv_dolar_Leave(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    txtLatDiv_dolar.Text = VB6.Format("0" + txtLatDiv_dolar.Text, "##,###,##0.00");
+        //    TotalControles();
+        //}
+
+        ////-5-
+        //private void txtLatDiv_euro_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtLatDiv_euro_KeyPress(System.Object eventSender, System.Windows.Forms.KeyPressEventArgs eventArgs)
+        //{
+        //    short KeyAscii = Strings.Asc(eventArgs.KeyChar);
+        //    SoloMontos(txtLatDiv_euro, KeyAscii);
+        //    eventArgs.KeyChar = Strings.Chr(KeyAscii);
+        //    if (KeyAscii == 0)
+        //    {
+        //        eventArgs.Handled = true;
+        //    }
+        //}
+
+        //private void txtLatDiv_euro_Leave(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    txtLatDiv_euro.Text = VB6.Format("0" + txtLatDiv_euro.Text, "##,###,##0.00");
+        //    TotalControles();
+        //}
+
+        ////-6-
+        //private void txtLatCh_Cantidad_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtLatCh_Cantidad_KeyPress(System.Object eventSender, System.Windows.Forms.KeyPressEventArgs eventArgs)
+        //{
+        //    short KeyAscii = Strings.Asc(eventArgs.KeyChar);
+        //    SoloMontos(txtLatCh_Cantidad, KeyAscii);
+        //    eventArgs.KeyChar = Strings.Chr(KeyAscii);
+        //    if (KeyAscii == 0)
+        //    {
+        //        eventArgs.Handled = true;
+        //    }
+        //}
+
+        ////-7-
+        //private void txtLatCert_Cantidad_Enter(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    SelectControlContent();
+        //}
+
+        //private void txtLatCert_Cantidad_KeyPress(System.Object eventSender, System.Windows.Forms.KeyPressEventArgs eventArgs)
+        //{
+        //    short KeyAscii = Strings.Asc(eventArgs.KeyChar);
+        //    SoloMontos(txtLatCert_Cantidad, KeyAscii);
+        //    eventArgs.KeyChar = Strings.Chr(KeyAscii);
+        //    if (KeyAscii == 0)
+        //    {
+        //        eventArgs.Handled = true;
+        //    }
+        //}
 
     } //fin clase
 } //fin namespace
