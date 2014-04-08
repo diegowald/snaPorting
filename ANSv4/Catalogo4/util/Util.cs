@@ -158,7 +158,7 @@ namespace Catalogo.Funciones
 
         }
 
-        internal static void CargarLV(ref  System.Windows.Forms.ListView MyListview1, ref System.Data.SqlClient.SqlDataReader MyData, string MiColor = "gris")
+        internal static void CargarLV(ref  System.Windows.Forms.ListView MyListview1, System.Data.SqlClient.SqlDataReader MyData, string MiColor = "gris")
         {
             System.Windows.Forms.ColumnHeader lvwColumn = default(System.Windows.Forms.ColumnHeader);
             System.Windows.Forms.ListViewItem itmListItem = default(System.Windows.Forms.ListViewItem);
@@ -174,6 +174,7 @@ namespace Catalogo.Funciones
 
                 switch (MyData.GetProviderSpecificFieldType(shtCntr).FullName.ToLower())
                 {
+                   //System.Data.OleDb.OleDbType.VarChar 
                     case "system.data.sqltypes.sqlstring":
                         lvwColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
                         break;
