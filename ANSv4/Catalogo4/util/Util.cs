@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Text;
 using Microsoft.VisualBasic;
 using System.Windows.Forms;
@@ -89,6 +90,18 @@ namespace Catalogo.Funciones
 
             System.Data.DataTable dt = null;
 
+            if (Campo2.ToLower() == "NewIndex")
+            {
+                DataColumn column = new DataColumn("newindex");
+                column.DataType = System.Type.GetType("System.Int32");
+                column.AutoIncrement = true;
+                column.AutoIncrementSeed = 1;
+                column.AutoIncrementStep = 1;
+                // Add the column to a new DataTable.
+                dt = new DataTable("table");
+                dt.Columns.Add(column);
+            }
+
             if (OtrosCampos == "NONE")
             {
                 dt = Catalogo.Funciones.oleDbFunciones.xGetDt(conexion, Tabla, Condicion, Orden, Campo1 + "," + Campo2);
@@ -118,7 +131,7 @@ namespace Catalogo.Funciones
             combo.ValueMember = Campo2;
             combo.DataSource = dt.DefaultView;
 
-            combo.SelectedIndex = 0;
+            if (combo.Items.Count > 0) combo.SelectedIndex = 0;
             combo.Enabled = true;
         }
 
@@ -219,7 +232,7 @@ namespace Catalogo.Funciones
 
                 itmListItem.Text = strTest;
 
-                for (shtCntr = 0; shtCntr < Convert.ToInt16(MyData.FieldCount); shtCntr++)
+                for (shtCntr = 1; shtCntr < Convert.ToInt16(MyData.FieldCount); shtCntr++)
                 {
                     if (MyData.IsDBNull(shtCntr))
                     {

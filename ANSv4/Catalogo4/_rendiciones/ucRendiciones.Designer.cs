@@ -30,8 +30,8 @@ namespace Catalogo._rendiciones
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucRendiciones));
             this.sTAB = new System.Windows.Forms.TabControl();
             this.rTabRec = new System.Windows.Forms.TabPage();
@@ -167,7 +167,6 @@ namespace Catalogo._rendiciones
             this.paEnviarBtn = new System.Windows.Forms.Button();
             this.paEnviosCbo = new System.Windows.Forms.ComboBox();
             this.devAnterioresDataGridView = new System.Windows.Forms.DataGridView();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ucPnlTop = new System.Windows.Forms.Panel();
             this.TB = new System.Windows.Forms.ToolStrip();
             this.tsbNuevo = new System.Windows.Forms.ToolStripButton();
@@ -206,7 +205,6 @@ namespace Catalogo._rendiciones
             this.sTAB.Controls.Add(this.rTabVal);
             this.sTAB.Controls.Add(this.rTabBuscar);
             this.sTAB.Controls.Add(this.rTabAnt);
-            this.sTAB.Controls.Add(this.tabPage1);
             this.sTAB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sTAB.Location = new System.Drawing.Point(0, 32);
             this.sTAB.Multiline = true;
@@ -214,7 +212,6 @@ namespace Catalogo._rendiciones
             this.sTAB.SelectedIndex = 0;
             this.sTAB.Size = new System.Drawing.Size(968, 433);
             this.sTAB.TabIndex = 1;
-            this.sTAB.Visible = false;
             // 
             // rTabRec
             // 
@@ -247,7 +244,6 @@ namespace Catalogo._rendiciones
             // 
             // cmdReciboAdd
             // 
-            this.cmdReciboAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmdReciboAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.cmdReciboAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.cmdReciboAdd.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -297,7 +293,7 @@ namespace Catalogo._rendiciones
             // _lvRecibos_ColumnHeader_1
             // 
             this._lvRecibos_ColumnHeader_1.Text = "NroRecibo";
-            this._lvRecibos_ColumnHeader_1.Width = 0;
+            this._lvRecibos_ColumnHeader_1.Width = 170;
             // 
             // _lvRecibos_ColumnHeader_2
             // 
@@ -401,6 +397,8 @@ namespace Catalogo._rendiciones
             this.cboRecibos.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cboRecibos.Size = new System.Drawing.Size(341, 21);
             this.cboRecibos.TabIndex = 26;
+            this.cboRecibos.SelectedIndexChanged += new System.EventHandler(this.cboRecibos_SelectedIndexChanged);
+            this.cboRecibos.Leave += new System.EventHandler(this.cboRecibos_Leave);
             // 
             // Label2
             // 
@@ -458,7 +456,6 @@ namespace Catalogo._rendiciones
             // 
             // dtF_Rendicion
             // 
-            this.dtF_Rendicion.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dtF_Rendicion.CustomFormat = "dd/MM/yyyy";
             this.dtF_Rendicion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtF_Rendicion.Location = new System.Drawing.Point(149, 24);
@@ -1590,7 +1587,6 @@ namespace Catalogo._rendiciones
             // 
             // cmdValorAdd
             // 
-            this.cmdValorAdd.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmdValorAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.cmdValorAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.cmdValorAdd.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -1609,7 +1605,6 @@ namespace Catalogo._rendiciones
             // 
             // dtBd_Fecha
             // 
-            this.dtBd_Fecha.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dtBd_Fecha.CustomFormat = "dd/MM/yyyy";
             this.dtBd_Fecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtBd_Fecha.Location = new System.Drawing.Point(336, 41);
@@ -1628,6 +1623,7 @@ namespace Catalogo._rendiciones
             this.cboCheques.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cboCheques.Size = new System.Drawing.Size(317, 21);
             this.cboCheques.TabIndex = 64;
+            this.cboCheques.Leave += new System.EventHandler(this.cboCheques_Leave);
             // 
             // _opTipoDeposito_1
             // 
@@ -1657,6 +1653,7 @@ namespace Catalogo._rendiciones
             this._opTipoDeposito_0.TabStop = true;
             this._opTipoDeposito_0.Text = "Efectivo";
             this._opTipoDeposito_0.UseVisualStyleBackColor = false;
+            this._opTipoDeposito_0.CheckedChanged += new System.EventHandler(this._opTipoDeposito_0_CheckedChanged);
             // 
             // txtBdCh_Cantidad
             // 
@@ -1809,7 +1806,6 @@ namespace Catalogo._rendiciones
             // 
             // cmdBuscar
             // 
-            this.cmdBuscar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmdBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.cmdBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.cmdBuscar.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -1844,7 +1840,6 @@ namespace Catalogo._rendiciones
             // 
             // mskFbuscar
             // 
-            this.mskFbuscar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.mskFbuscar.CustomFormat = "dd/MM/yyyy";
             this.mskFbuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.mskFbuscar.Location = new System.Drawing.Point(385, 55);
@@ -1894,6 +1889,7 @@ namespace Catalogo._rendiciones
             this._optBuscar_0.TabStop = true;
             this._optBuscar_0.Text = "Nº de Rendición";
             this._optBuscar_0.UseVisualStyleBackColor = false;
+            this._optBuscar_0.CheckedChanged += new System.EventHandler(this._optBuscar_0_CheckedChanged);
             // 
             // lblFecha
             // 
@@ -1927,8 +1923,8 @@ namespace Catalogo._rendiciones
             this.paDataGridView.AllowUserToAddRows = false;
             this.paDataGridView.AllowUserToDeleteRows = false;
             this.paDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.paDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.paDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1990,8 +1986,8 @@ namespace Catalogo._rendiciones
             // 
             this.devAnterioresDataGridView.AllowUserToAddRows = false;
             this.devAnterioresDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.devAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.devAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.devAnterioresDataGridView.Location = new System.Drawing.Point(3, 3);
@@ -2002,15 +1998,6 @@ namespace Catalogo._rendiciones
             this.devAnterioresDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.devAnterioresDataGridView.Size = new System.Drawing.Size(954, 401);
             this.devAnterioresDataGridView.TabIndex = 1;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(960, 407);
-            this.tabPage1.TabIndex = 7;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // ucPnlTop
             // 
@@ -2061,6 +2048,7 @@ namespace Catalogo._rendiciones
             this.tsbNuevo.Size = new System.Drawing.Size(28, 28);
             this.tsbNuevo.Text = "Nuevo";
             this.tsbNuevo.ToolTipText = "Nuevo";
+            this.tsbNuevo.Click += new System.EventHandler(this.tsbNuevo_Click);
             // 
             // tsbModificar
             // 
@@ -2073,6 +2061,7 @@ namespace Catalogo._rendiciones
             this.tsbModificar.Size = new System.Drawing.Size(28, 28);
             this.tsbModificar.Text = "Modificar";
             this.tsbModificar.ToolTipText = "Modificar";
+            this.tsbModificar.Click += new System.EventHandler(this.tsbModificar_Click);
             // 
             // ToolStripSeparator5
             // 
@@ -2089,6 +2078,7 @@ namespace Catalogo._rendiciones
             this.tsbGrabar.Name = "tsbGrabar";
             this.tsbGrabar.Size = new System.Drawing.Size(28, 28);
             this.tsbGrabar.Text = "Grabar";
+            this.tsbGrabar.Click += new System.EventHandler(this.tsbGrabar_Click);
             // 
             // tsbCancelar
             // 
@@ -2100,6 +2090,7 @@ namespace Catalogo._rendiciones
             this.tsbCancelar.Name = "tsbCancelar";
             this.tsbCancelar.Size = new System.Drawing.Size(28, 28);
             this.tsbCancelar.Text = "Cancelar";
+            this.tsbCancelar.Click += new System.EventHandler(this.tsbCancelar_Click);
             // 
             // ToolStripSeparator6
             // 
@@ -2116,6 +2107,7 @@ namespace Catalogo._rendiciones
             this.tsbBuscar.Name = "tsbBuscar";
             this.tsbBuscar.Size = new System.Drawing.Size(28, 28);
             this.tsbBuscar.Text = "Buscar";
+            this.tsbBuscar.Click += new System.EventHandler(this.tsbBuscar_Click);
             // 
             // tsbImprimir
             // 
@@ -2127,6 +2119,7 @@ namespace Catalogo._rendiciones
             this.tsbImprimir.Name = "tsbImprimir";
             this.tsbImprimir.Size = new System.Drawing.Size(28, 28);
             this.tsbImprimir.Text = "Imprimir";
+            this.tsbImprimir.Click += new System.EventHandler(this.tsbImprimir_Click);
             // 
             // ToolStripSeparator7
             // 
@@ -2143,6 +2136,7 @@ namespace Catalogo._rendiciones
             this.tsbBorrar.Name = "tsbBorrar";
             this.tsbBorrar.Size = new System.Drawing.Size(28, 28);
             this.tsbBorrar.Text = "Borrar";
+            this.tsbBorrar.Click += new System.EventHandler(this.tsbBorrar_Click);
             // 
             // ToolStripSeparator8
             // 
@@ -2159,6 +2153,7 @@ namespace Catalogo._rendiciones
             this.tsbCerrar.Name = "tsbCerrar";
             this.tsbCerrar.Size = new System.Drawing.Size(28, 28);
             this.tsbCerrar.Text = "Cerrar";
+            this.tsbCerrar.Click += new System.EventHandler(this.tsbCerrar_Click);
             // 
             // ucRendiciones
             // 
@@ -2280,7 +2275,6 @@ namespace Catalogo._rendiciones
         public System.Windows.Forms.Label lblTit1;
         public System.Windows.Forms.Label Label24;
         public System.Windows.Forms.Label lblTit2;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DateTimePicker dtBd_Fecha;
         private System.Windows.Forms.DateTimePicker dtF_Rendicion;
         public System.Windows.Forms.Panel fraLVValores;

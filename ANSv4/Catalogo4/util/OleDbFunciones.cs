@@ -88,6 +88,8 @@ namespace Catalogo.Funciones
         internal static System.Data.OleDb.OleDbDataReader xGetDr(System.Data.OleDb.OleDbConnection conexion, string Tabla, string Condicion = "ALL", string Orden = "NONE", string Campos = "*", string Alcance = "")
         {
 
+            System.Data.OleDb.OleDbDataReader dr = null;
+ 
             string sql = null;
             string sCondicion = "";
             string sOrden = "";
@@ -103,21 +105,67 @@ namespace Catalogo.Funciones
             if (Orden != "NONE")
                 sOrden = " ORDER BY " + Orden;
 
-            sql = "SELECT " + sAlcance + sCampos + " FROM " + Tabla + sCondicion + sOrden;
+            if (Condicion == "@@identity")
+            {
+                sql = "SELECT  @@identity as ID FROM " + Tabla;
+            }
+            else
+            {
+                sql = "SELECT " + sAlcance + sCampos + " FROM " + Tabla + sCondicion + sOrden;
+            };            
 
             if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); };
             System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(sql, conexion);
 
-            return cmd.ExecuteReader();
+            if (Global01.TranActiva != null)
+            {
+                cmd.Transaction = Global01.TranActiva;
+            }
+            try
+            {
+                dr =cmd.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                cmd.Transaction = null;
+            }
 
+            return dr;
+            
         }
 
         internal static System.Data.OleDb.OleDbDataReader Comando(System.Data.OleDb.OleDbConnection conexion, string TextoComando)
         {
+
+            System.Data.OleDb.OleDbDataReader dr = null;
+
             if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); };
+            
             System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando,conexion);
 
-            return cmd.ExecuteReader();
+            if (Global01.TranActiva != null)
+            {
+                cmd.Transaction = Global01.TranActiva;
+            }
+            try
+            {
+                dr = cmd.ExecuteReader();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message.ToString());
+            }
+            finally
+            {
+                cmd.Transaction = null;
+            }
+
+            return dr;
+
         }
 
         internal static void ComandoIU(System.Data.OleDb.OleDbConnection conexion, string TextoComando)

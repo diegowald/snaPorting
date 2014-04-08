@@ -25,7 +25,7 @@ namespace Catalogo
 
             Catalogo.MainMod.Main();
 
-
+           // Catalogo._pruebas.fPruebas wnd = new Catalogo._pruebas.fPruebas();
             //mwClientes wnd = new mwClientes();
             mwViajantes wnd = new mwViajantes();
 
