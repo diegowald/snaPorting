@@ -256,6 +256,7 @@
     <Compile Include="_application\UpdateAppConfig.cs" />
     <Compile Include="_pedidos\Pedido.cs" />
     <Compile Include="_pedidos\PedidoItem.cs" />
+    <Compile Include="_productos\BackgroundImageLoader.cs" />
     <Compile Include="_recibos\AplicacionItem.cs" />
     <Compile Include="_recibos\DeducirItem.cs" />
     <Compile Include="_recibos\Recibo.cs" />

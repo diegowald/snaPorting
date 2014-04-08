@@ -106,9 +106,9 @@ namespace Catalogo._productos
                     {
                         imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
 
-                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "0") == "1")
+                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "1") == "1")
                         {
-                            descargarImagen(ImgProductoWeb, ImgProducto);
+                            descargarImagen(ImgProductoWeb, ImgProducto, dato);
                         }
                     }
                 }
@@ -121,26 +121,29 @@ namespace Catalogo._productos
 
         }
 
-        private void descargarImagen(string Origen, string Destino)
+        private void descargarImagen(string Origen, string Destino, System.Windows.Forms.DataGridViewRow dato)
         {
-            System.Net.WebClient ImgWeb = new System.Net.WebClient();
-            ImgWeb.DownloadFileCompleted += ImgWeb_DownloadFileCompleted;
+            if (dato.Tag == null)
+            {
+                dato.Tag = 0;
+                System.Net.WebClient ImgWeb = new System.Net.WebClient();
+                ImgWeb.DownloadFileCompleted += ImgWeb_DownloadFileCompleted;
 
-            try
-            {
-                _Destino = Destino;
-                //ImgWeb.DownloadFile(Origen, Destino);
-                ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
+                try
+                {
+                    _Destino = Destino;
+                    //ImgWeb.DownloadFile(Origen, Destino);
+                    ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
 
-            }
-            catch (System.Web.HttpException e)
-            {
-            }
-            catch (System.Net.WebException wex)
-            {
+                }
+                catch (System.Web.HttpException e)
+                {
+                }
+                catch (System.Net.WebException wex)
+                {
+                }
             }
         }
-
         void ImgWeb_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             validateImagefile(_Destino);
