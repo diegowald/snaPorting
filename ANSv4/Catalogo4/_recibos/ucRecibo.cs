@@ -196,7 +196,7 @@ namespace Catalogo._recibos
                 
                 if (ralistView.Tag.ToString() == "upd")
                 {
-                    if (ralistView.SelectedItems != null) 
+                    if (ralistView.SelectedItems != null & ralistView.SelectedItems.Count > 0) 
                     {
                       ItemX = ralistView.SelectedItems[0];
                     }
@@ -610,7 +610,7 @@ namespace Catalogo._recibos
 
         private void ralistView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (ralistView.SelectedItems != null)
+            if (ralistView.SelectedItems != null & ralistView.SelectedItems.Count > 0)
             {
                 if (e.KeyCode == Keys.Delete)
                 {  //DEL
@@ -1181,7 +1181,7 @@ namespace Catalogo._recibos
                 
                 if (aplistView.Tag.ToString() == "upd")
                 {
-                    if (aplistView.SelectedItems != null) 
+                    if (aplistView.SelectedItems != null & aplistView.SelectedItems.Count > 0) 
                     {
                       ItemX = aplistView.SelectedItems[0];
                     }
@@ -1299,7 +1299,7 @@ namespace Catalogo._recibos
 
         private void aplistView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (aplistView.SelectedItems != null)
+            if (aplistView.SelectedItems != null & aplistView.SelectedItems.Count > 0)
             {
                 if (e.KeyCode == Keys.Delete)
                 {  //DEL
@@ -1332,7 +1332,7 @@ namespace Catalogo._recibos
 
                 if (adlistView.Tag.ToString() == "upd")
                 {
-                    if (adlistView.SelectedItems != null)
+                    if (adlistView.SelectedItems != null & adlistView.SelectedItems.Count > 0)
                     {
                         ItemX = adlistView.SelectedItems[0];
                     }
@@ -1382,7 +1382,7 @@ namespace Catalogo._recibos
         {
             const string PROCNAME_ = "lvValores_DblClick";
 
-            if (ralistView.SelectedItems != null)
+            if (ralistView.SelectedItems != null & ralistView.SelectedItems.Count > 0)
             {                
                 Funciones.util.BuscarIndiceEnCombo(ref cvTipoValorCbo, ralistView.SelectedItems[0].SubItems[10].Text.ToString(), false);
                 cvImporteTxt.Text = ralistView.SelectedItems[0].SubItems[1].Text;

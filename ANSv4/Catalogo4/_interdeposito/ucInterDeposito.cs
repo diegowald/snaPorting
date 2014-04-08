@@ -71,7 +71,7 @@ namespace Catalogo._interdeposito
                 
                 if (ralistView.Tag.ToString() == "upd")
                 {
-                    if (ralistView.SelectedItems != null) 
+                    if (ralistView.SelectedItems != null & ralistView.SelectedItems.Count > 0) 
                     {
                       ItemX = ralistView.SelectedItems[0];
                     }
@@ -248,7 +248,7 @@ namespace Catalogo._interdeposito
 
         private void ralistView_KeyDown(object sender, KeyEventArgs e)
         {
-            if (ralistView.SelectedItems != null & ralistView.SelectedItems.Count >0)
+            if (ralistView.SelectedItems != null & ralistView.SelectedItems.Count > 0)
             {
                 if (e.KeyCode == Keys.Delete)
                 {  //DEL

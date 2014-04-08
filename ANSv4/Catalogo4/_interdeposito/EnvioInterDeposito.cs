@@ -54,13 +54,13 @@ namespace Catalogo._interdeposito
             Ifacturas = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_InterDepositoFacturas '" + NroInterDeposito + "'");
 
             m_NroInterDeposito = NroInterDeposito;
-            m_CodCliente = String.Format("000000", I["IDCliente"].ToString().Trim());
-            m_Bco_Dep_Fecha = String.Format("ddMMyyyy", I["Bco_Dep_Fecha"]);
+            m_CodCliente = I["IDCliente"].ToString().Trim().PadLeft(6,'0');
+            m_Bco_Dep_Fecha = string.Format("{0:ddMMyyyy}",DateTime.Parse(I["Bco_Dep_Fecha"].ToString()));
             m_Bco_Dep_Tipo = I["Bco_Dep_Tipo"].ToString();
             m_Bco_Dep_Numero = I["Bco_Dep_Numero"].ToString().PadLeft(10, '0');
-            m_Bco_Dep_Monto = String.Format("00000000000000000", (float)I["Bco_Dep_Monto"] * 100);
-            m_Bco_Dep_Ch_Cantidad = String.Format("00", I["Bco_Dep_Ch_Cantidad"]);
-            m_Bco_Dep_IdCta = String.Format("000", I["Bco_Dep_IdCta"]);
+            m_Bco_Dep_Monto = (float.Parse(I["Bco_Dep_Monto"].ToString()) * 100).ToString().Trim().PadLeft(17, '0');
+            m_Bco_Dep_Ch_Cantidad = I["Bco_Dep_Ch_Cantidad"].ToString().Trim().PadLeft(2, '0');
+            m_Bco_Dep_IdCta = I["Bco_Dep_IdCta"].ToString().Trim().PadLeft(3, '0');
 
             m_Observaciones = "";
 
@@ -70,7 +70,7 @@ namespace Catalogo._interdeposito
                 while (Ifacturas.Read())
                 {
                     m_Detalle += Ifacturas["T_Comprobante"].ToString() + "-" + Ifacturas["N_Comprobante"].ToString() + ",";
-                    m_Detalle += String.Format("00000000000000000", (float)Ifacturas["Importe"] * 100) + ";";
+                    m_Detalle += (float.Parse(Ifacturas["Importe"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ";";
                 }
             }
 

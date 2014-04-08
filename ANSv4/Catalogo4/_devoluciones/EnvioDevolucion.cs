@@ -52,7 +52,7 @@ namespace Catalogo._devolucion
 		Det = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Devolucion_Det '" + NroDevolucion + "'");
 
 		m_NroDevolucion = NroDevolucion;
-		m_CodCliente = String.Format("000000", Enc["IDCliente"].ToString().Trim());
+		m_CodCliente = Enc["IDCliente"].ToString().Trim().PadLeft(6,'0');
 		m_Fecha = Enc["F_Devolucion"].ToString();
 		m_Observaciones = Enc["Observaciones"].ToString().Replace(",", " ");
 
@@ -62,13 +62,13 @@ namespace Catalogo._devolucion
 			while (Det.Read()) 
             {
 				m_Detalle += Det["C_Producto"].ToString() + ",";
-				m_Detalle += String.Format("00000000", Det["Cantidad"].ToString().Trim()) + "00,";
+				m_Detalle += Det["Cantidad"].ToString().Trim().PadLeft(8,'0') + "00,";
 				m_Detalle += "NO" + ",";
 				m_Detalle += "NO" + ",";
 				m_Detalle += "NO" + ",";
 				m_Detalle += Det["miDeposito"].ToString() + ",";
 				m_Detalle += Det["Factura"].ToString() + ",";
-				m_Detalle += String.Format("00", Det["TipoDev"]) + ",";
+				m_Detalle += Det["TipoDev"].ToString().Trim().PadLeft(2,'0') + ",";
 				m_Detalle += Det["Vehiculo"].ToString() + ",";
 				m_Detalle += Det["Modelo"].ToString() + ",";
 				m_Detalle += Det["Motor"].ToString() + ",";

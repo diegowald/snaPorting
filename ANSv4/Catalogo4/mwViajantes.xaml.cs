@@ -118,6 +118,25 @@ namespace Catalogo
             return xDevolucion;
         }
 
+        private Catalogo._rendiciones.ucRendiciones addRendicionArea()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            // Create the MaskedTextBox control.
+            Catalogo._rendiciones.ucRendiciones xRendicion;
+            xRendicion = new Catalogo._rendiciones.ucRendiciones();
+            //xDevolucion.AutoScroll = false;
+            //xDevolucion.Location = new System.Drawing.Point(0, 0);
+            //xDevolucion.Dock = System.Windows.Forms.DockStyle.Fill;
+            //xDevolucion.Name = "Devoluciones";
+
+            host.Child = xRendicion;
+            this.xRendicionArea.Children.Add(host);
+
+            return xRendicion;
+        }
+
         private Catalogo._movimientos.ucMovimientos addMovimientosArea()
         {
             // Create the interop host control.
@@ -212,6 +231,7 @@ namespace Catalogo
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {
 
+            Catalogo._rendiciones.ucRendiciones RenD = addRendicionArea();
             Catalogo._interdeposito.ucInterDeposito IntDep = addInterDepositoArea();
             Catalogo._recibos.ucRecibo rec = addReciboArea();
             Catalogo._movimientos.ucMovimientos mov = addMovimientosArea();

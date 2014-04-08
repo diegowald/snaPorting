@@ -30,8 +30,8 @@ namespace Catalogo._rendiciones
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucRendiciones));
             this.sTAB = new System.Windows.Forms.TabControl();
             this.rTabRec = new System.Windows.Forms.TabPage();
@@ -1824,7 +1824,7 @@ namespace Catalogo._rendiciones
             this.cmdBuscar.TabIndex = 77;
             this.cmdBuscar.Text = "Buscar";
             this.cmdBuscar.UseVisualStyleBackColor = false;
-            this.cmdBuscar.Click += new System.EventHandler(this.cmdBuscar_Click_1);
+            this.cmdBuscar.Click += new System.EventHandler(this.cmdBuscar_Click);
             // 
             // lvBuscar
             // 
@@ -1864,6 +1864,7 @@ namespace Catalogo._rendiciones
             this.txtBuscar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.txtBuscar.Size = new System.Drawing.Size(285, 20);
             this.txtBuscar.TabIndex = 72;
+            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
             // 
             // _optBuscar_1
             // 
@@ -1926,8 +1927,8 @@ namespace Catalogo._rendiciones
             this.paDataGridView.AllowUserToAddRows = false;
             this.paDataGridView.AllowUserToDeleteRows = false;
             this.paDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.paDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.paDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1989,8 +1990,8 @@ namespace Catalogo._rendiciones
             // 
             this.devAnterioresDataGridView.AllowUserToAddRows = false;
             this.devAnterioresDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.devAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.devAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.devAnterioresDataGridView.Location = new System.Drawing.Point(3, 3);

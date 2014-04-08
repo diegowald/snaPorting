@@ -58,10 +58,10 @@ public class EnvioRecibo
 		System.Data.OleDb.OleDbDataReader nCre = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_Deducir_Normal '" + nroRecibo + "'");
 
 		_NroRecibo = nroRecibo;
-		_CodCliente = String.Format("000000", Enc["IDCliente"].ToString().Trim());
+        _CodCliente = Enc["IDCliente"].ToString().Trim().PadLeft(6, '0');
 		_Fecha = Enc["F_Recibo"].ToString().Substring(7, 4) + Enc["F_Recibo"].ToString().Substring(4, 2) + Enc["F_Recibo"].ToString().Substring(1, 2);
-		_Total = String.Format("00000000000000000", (float)Enc["Total"] * 100);
-		_Bahia = ((bool)Enc["Bahia"] ? "si" : "no");
+        _Total = (float.Parse(Enc["Total"].ToString()) * 100).ToString().Trim().PadLeft(17, '0');
+        _Bahia = (bool.Parse(Enc["Bahia"].ToString()) ? "si" : "no");
 
 		if (Det.HasRows) {
 			while (Det.Read()) 
@@ -70,11 +70,11 @@ public class EnvioRecibo
 
 				if ((int) Det["TipoValor"] == 3 | (int) Det["TipoValor"] == 4) 
                 {
-					_Detalle += String.Format("00000000000000000", (float)Det["Divisas"] * 100) + ",";
+                    _Detalle += (float.Parse(Det["Divisas"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
 				} 
                 else 
                 {
-					_Detalle += String.Format("00000000000000000", (float) Det["Importe"] * 100) + ",";
+                    _Detalle += (float.Parse(Det["Importe"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
 				}
 
 				if (object.ReferenceEquals(Det["N_Cheque"], DBNull.Value)) 
@@ -126,7 +126,7 @@ public class EnvioRecibo
 
                 _Detalle += Det["chPropio"].ToString() + ",";
 
-				_Detalle += String.Format("00000000000000000", (float) Det["T_Cambio"] * 100) + ";";
+                _Detalle += (float.Parse(Det["T_Cambio"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ";";
 
 			}
 		}
@@ -135,7 +135,7 @@ public class EnvioRecibo
 
 			while (Fac.Read()) {
 				_Facturas += Fac["Concepto"].ToString() + ",";
-				_Facturas += String.Format("00000000000000000", (float) Fac["Importe"] * 100) + ",";
+                _Facturas += (float.Parse(Fac["Importe"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
 				_Facturas += Fac["Total"].ToString() + ";";
 			}
 		}
@@ -146,7 +146,7 @@ public class EnvioRecibo
                 if (nCre["Concepto"].ToString().Substring(0, 4).ToUpper() == "CRE-") 
                 {
 					_NotasCredito += nCre["Concepto"] + ",";
-					_NotasCredito += String.Format("00000000000000000", (float) nCre["TotaldeduN"] * 100) + ";";
+                    _NotasCredito += (float.Parse(nCre["TotaldeduN"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ";";
 				}
 			}
 		}

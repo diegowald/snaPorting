@@ -51,7 +51,7 @@ namespace Catalogo._devoluciones
             System.Data.OleDb.OleDbDataReader det = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Pedido_Det '" + NroPedido + "'");
 
             _NroPedido = NroPedido;
-            _CodCliente = ((int)enc["IDCliente"]).ToString("000000");
+            _CodCliente = enc["IDCliente"].ToString().Trim().PadLeft(6, '0');
             _Fecha = enc["F_Pedido"].ToString();
             _Observaciones = enc["Observaciones"].ToString().Replace(",", " ");
             _Transporte = enc["Transporte"].ToString();
@@ -62,7 +62,7 @@ namespace Catalogo._devoluciones
                 while (det.Read())
                 {
                     _Detalle += det["C_Producto"].ToString() + ","
-                        + String.Format("00000000", det["Cantidad"].ToString().Trim()) + "00,"
+                        + det["Cantidad"].ToString().Trim().PadLeft(8, '0') + "00,"
                         + det["miSimilar"].ToString() + ","
                         + det["miOferta"].ToString() + ","
                         + det["miBahia"].ToString() + ","

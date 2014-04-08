@@ -174,7 +174,7 @@ namespace Catalogo._devoluciones
             }
             else
             {
-                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido, auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + String.Format("000000", mvarIdCliente) + " ped:" + mvarNroPedido + " tot:" + String.Format("fixed", wTotal));
+                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido, auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + mvarIdCliente.ToString().Trim().PadLeft(6, '0') + " ped:" + mvarNroPedido + " tot:" + string.Format("{0:N2}", wTotal));
                 //Nuevo();
                 if (GuardoOK != null)
                 {

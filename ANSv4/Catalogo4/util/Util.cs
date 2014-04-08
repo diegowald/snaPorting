@@ -16,21 +16,39 @@ namespace Catalogo.Funciones
 
         const string m_sMODULENAME_ = "util";
 
+        internal static void aMayuscula(ref KeyPressEventArgs e)
+        {
+            e.KeyChar = char.ToUpper(e.KeyChar);
+        }
+
+        internal static bool SoloDigitos(KeyPressEventArgs e)
+        {
+            bool bResultado = false;
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '\b')
+            {
+                bResultado = true;
+            };
+            return bResultado;
+        }
+
         internal static void EsImporte(object sender, ref System.Windows.Forms.KeyPressEventArgs e)
         {
-            if (e.KeyChar == '.') { e.KeyChar = ','; };
-
-            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.ToString().IndexOf(',') > 0)
+            
+            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.ToString().IndexOf(',') > 0 |
+                e.KeyChar == '.' && (sender as System.Windows.Forms.TextBox).Text.ToString().IndexOf('.') > 0)
             {
                 e.Handled = true;
             }
             else
             {
-                if (!Char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '\b')
+                if (!Char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '.' && e.KeyChar != '\b')
                 {
                     e.Handled = true;
                 };
             };
+
+            if (e.KeyChar == '.') { e.KeyChar = ','; };
+
         }
 
         internal static void BuscarIndiceEnCombo(ref System.Windows.Forms.ComboBox combo, string strBuscar, bool EsList)
@@ -158,7 +176,7 @@ namespace Catalogo.Funciones
 
         }
 
-        internal static void CargarLV(ref  System.Windows.Forms.ListView MyListview1, System.Data.SqlClient.SqlDataReader MyData, string MiColor = "gris")
+        internal static void CargarLV(ref  System.Windows.Forms.ListView MyListview1, System.Data.OleDb.OleDbDataReader MyData, string MiColor = "gris")
         {
             System.Windows.Forms.ColumnHeader lvwColumn = default(System.Windows.Forms.ColumnHeader);
             System.Windows.Forms.ListViewItem itmListItem = default(System.Windows.Forms.ListViewItem);

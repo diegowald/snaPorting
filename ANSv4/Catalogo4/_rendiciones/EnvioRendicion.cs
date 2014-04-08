@@ -19,14 +19,14 @@ namespace Catalogo._rendicion
         private string m_IdViajante;
         private string m_F_Rendicion;
         private string m_Observaciones;
-        private double m_Efectivo;
+        private float m_Efectivo;
         private float m_Dolares;
         private float m_Euros;
         private byte m_ChequesCant;
-        private double m_ChequesMonto;
+        private float m_ChequesMonto;
         private byte m_CertificadosCant;
 
-        private double m_CertificadosMonto;
+        private float m_CertificadosMonto;
         private string m_DetalleValores;
 
         private string m_DetalleRecibos;
@@ -60,19 +60,19 @@ namespace Catalogo._rendicion
             RenRecibos = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Rendicion_Recibos_rpt '" + NroRendicion.Substring(NroRendicion.Length - 8) + "'");
 
             m_NroRendicion = NroRendicion;
-            m_IdViajante = String.Format("000000", Ren["IDCliente"].ToString().Trim());
+            m_IdViajante = Ren["IDCliente"].ToString().Trim().PadLeft(6, '0');
             m_F_Rendicion = Ren["F_Rendicion"].ToString().Substring(7, 4) +
                 Ren["F_Rendicion"].ToString().Substring(4, 2) +
                 Ren["F_Rendicion"].ToString().Substring(1, 2);
             m_Observaciones = Ren["Descripcion"].ToString().Trim();
 
-            m_Efectivo = (double)Ren["Efectivo_Monto"] * 100;
-            m_Dolares = (float)Ren["Dolar_Cantidad"] * 100;
-            m_Euros = (float)Ren["Euros_Cantidad"] * 100;
-            m_ChequesMonto = (float)Ren["Cheques_Monto"] * 100;
-            m_CertificadosMonto = (float)Ren["Certificados_Monto"] * 100;
-            m_ChequesCant = (byte)Ren["Cheques_Cantidad"];
-            m_CertificadosCant = (byte)Ren["Certificados_Cantidad"];
+            m_Efectivo = float.Parse(Ren["Efectivo_Monto"].ToString()) * 100;
+            m_Dolares = float.Parse(Ren["Dolar_Cantidad"].ToString()) * 100;
+            m_Euros = float.Parse(Ren["Euros_Cantidad"].ToString()) * 100;
+            m_ChequesMonto = float.Parse(Ren["Cheques_Monto"].ToString()) * 100;
+            m_CertificadosMonto = float.Parse(Ren["Certificados_Monto"].ToString()) * 100;
+            m_ChequesCant = byte.Parse(Ren["Cheques_Cantidad"].ToString());
+            m_CertificadosCant = byte.Parse(Ren["Certificados_Cantidad"].ToString());
 
             if (RenValores.HasRows)
             {
@@ -84,10 +84,10 @@ namespace Catalogo._rendicion
                         + RenValores["Bco_Dep_Fecha"].ToString().Substring(4, 2)
                         + RenValores["Bco_Dep_Fecha"].ToString().Substring(1, 2) + ",";
                     m_DetalleValores += RenValores["Bco_Dep_Numero"].ToString().Substring(10) + ",";
-                    m_DetalleValores += String.Format("00000000000000000", (float)RenValores["Bco_Dep_Monto"] * 100) + ",";
-                    m_DetalleValores += String.Format("00", RenValores["Bco_Dep_Ch_Cantidad"]) + ",";
+                    m_DetalleValores += (float.Parse(RenValores["Bco_Dep_Monto"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
+                    m_DetalleValores += RenValores["Bco_Dep_Ch_Cantidad"].ToString().Trim().PadLeft(2, '0') + ",";
                     m_DetalleValores += RenValores["N_Cheque"].ToString().Trim().PadLeft(15, ' ') + ",";
-                    m_DetalleValores += String.Format("000", RenValores["IdBanco"]) + ";";
+                    m_DetalleValores += RenValores["IdBanco"].ToString().Trim().PadLeft(3, '0') + ";";
                 }
             }
 
@@ -100,15 +100,15 @@ namespace Catalogo._rendicion
                     m_DetalleRecibos += RenRecibos["F_Recibo"].ToString().Substring(7, 4)
                         + RenRecibos["F_Recibo"].ToString().Substring(4, 2)
                         + RenRecibos["F_Recibo"].ToString().Substring(1, 2) + ",";
-                    m_DetalleRecibos += String.Format("000000", RenRecibos["Nro_Cuenta"].ToString().Trim()) + ",";
-                    m_DetalleRecibos += String.Format("00000000000000000", (float)RenRecibos["Efectivo"] * 100) + ",";
-                    m_DetalleRecibos += String.Format("00000000000000000", (float)RenRecibos["Divisas_Dolares"] * 100) + ",";
-                    m_DetalleRecibos += String.Format("00000000000000000", (float)RenRecibos["Divisas_Euros"] * 100) + ",";
-                    m_DetalleRecibos += String.Format("00000000000000000", (float)RenRecibos["Cheques_Total"] * 100) + ",";
-                    m_DetalleRecibos += String.Format("00", RenRecibos["Cheques_Cantidad"]) + ",";
-                    m_DetalleRecibos += String.Format("00000000000000000", (float)RenRecibos["Certificados_Total"] * 100) + ",";
-                    m_DetalleRecibos += String.Format("00", RenRecibos["Certificados_Cantidad"]) + ",";
-                    m_DetalleRecibos += String.Format("00000000000000000", (float)RenRecibos["TotalRecibo"] * 100) + ";";
+                    m_DetalleRecibos += RenRecibos["Nro_Cuenta"].ToString().Trim().PadLeft(6, '0') + ",";
+                    m_DetalleRecibos += (float.Parse(RenRecibos["Efectivo"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
+                    m_DetalleRecibos += (float.Parse(RenRecibos["Divisas_Dolares"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
+                    m_DetalleRecibos += (float.Parse(RenRecibos["Divisas_Euros"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
+                    m_DetalleRecibos += (float.Parse(RenRecibos["Cheques_Total"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
+                    m_DetalleRecibos += RenRecibos["Cheques_Cantidad"].ToString().Trim().PadLeft(2, '0') + ",";
+                    m_DetalleRecibos += (float.Parse(RenRecibos["Certificados_Total"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
+                    m_DetalleRecibos += RenRecibos["Certificados_Cantidad"].ToString().Trim().PadLeft(2, '0') + ",";
+                    m_DetalleRecibos += (float.Parse(RenRecibos["TotalRecibo"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ";";
                 }
             }
 

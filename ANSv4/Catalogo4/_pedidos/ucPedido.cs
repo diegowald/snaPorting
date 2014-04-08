@@ -424,8 +424,8 @@ namespace Catalogo._pedidos
         
         private void nvlistView_KeyDown(object sender, KeyEventArgs e)
         {
-    
-            if (nvlistView.SelectedItems != null)
+
+            if (nvlistView.SelectedItems != null & nvlistView.SelectedItems.Count > 0)
             {
                 bool wEntro = false;
                
