@@ -582,7 +582,7 @@ namespace Catalogo._pedidos
                 switch (ex.ErrorCode)
                 {
                     case -2147467259: // registro duplicado
-                        throw ex; 
+                        throw new util.errorHandling.RegistroDuplicadoException(ex);
                 }
             }
             catch (Exception ex)

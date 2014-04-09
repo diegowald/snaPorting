@@ -188,7 +188,7 @@ namespace Catalogo._interdeposito
                 switch (ex.ErrorCode)
                 {
                     case -2147467259:
-                        throw ex;
+                        throw new util.errorHandling.RegistroDuplicadoException(ex);
                         //throw (new Exception(ex.Message));   //util.errorHandling.ErrorForm.show();
                 }
             }

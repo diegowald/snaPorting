@@ -242,7 +242,7 @@ namespace Catalogo._clientes
             catch (System.Data.OleDb.OleDbException ex)
             {
                 //ErrorHandler:
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147467259)
+                if (ex.ErrorCode ==-2147467259)
                 {
                     //        If Err.Number = -2147467259 Then
                     //            ' El registro está duplicado... debo borrar el registro e intentar nuevamente

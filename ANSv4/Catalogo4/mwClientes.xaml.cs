@@ -26,7 +26,11 @@ namespace Catalogo
         private Catalogo._productos.SearchFilter sf = null;
         private Catalogo._productos.GridViewFilter2 gv = null;
         private Catalogo._pedidos.ucPedido ped = null;
-        
+        Catalogo._interdeposito.ucInterDeposito IntDep = null;
+        Catalogo._movimientos.ucMovimientos mov = null;
+        Catalogo._novedades.ucNovedades nov = null;
+
+
         public mwClientes()
         {
             try
@@ -187,9 +191,9 @@ namespace Catalogo
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {
-            Catalogo._interdeposito.ucInterDeposito IntDep = addInterDepositoArea();  
-            Catalogo._movimientos.ucMovimientos mov = addMovimientosArea();
-           //Catalogo._novedades.ucNovedades nov = addNovedadesArea();
+           IntDep = addInterDepositoArea();  
+           mov = addMovimientosArea();
+           //nov = addNovedadesArea();
 
             addFlashPlayer();
 
@@ -395,26 +399,30 @@ namespace Catalogo
 
         private void DocumentPane_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-/*            if (e.AddedItems.Count > 0)
+            if (e.AddedItems.Count > 0)
             {
-                AvalonDock.DockableContent content = e.AddedItems[0] as AvalonDock.DockableContent;
-                System.Diagnostics.Debug.WriteLine(content.Name);
-                System.Diagnostics.Debug.WriteLine(content.Title);
-                switch (content.Title)
+                foreach (object obj in e.AddedItems)
                 {
-                    case "Productos":
-                        break;
-                    case "Inter-Depósitos":
-                        break;
-                    case "Bandeja de Enviados":
-                        break;
-                    case "Novedades en Línea":
-                        break;
-                    default:
-                        // Nothing
-                        break;
+                    if (obj is AvalonDock.DocumentContent)
+                    {
+                        AvalonDock.DocumentContent content = obj as AvalonDock.DocumentContent;
+                        switch (content.Title)
+                        {
+                            case "Productos":
+                                break;
+                            case "Inter-Depósitos":
+                                break;
+                            case "Bandeja de Enviados":
+                                break;
+                            case "Novedades en Línea":
+                                break;
+                            default:
+                                // Nothing
+                                break;
+                        }
+                    }
                 }
-            }*/
+            }
         }
 
     }

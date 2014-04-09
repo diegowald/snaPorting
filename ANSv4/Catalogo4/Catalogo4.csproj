@@ -182,6 +182,7 @@
     <Compile Include="_devoluciones\ucDevolucion.Designer.cs">
       <DependentUpon>ucDevolucion.cs</DependentUpon>
     </Compile>
+    <Compile Include="util\errorHandling\RegistroDuplicadoException.cs" />
     <Compile Include="_interdeposito\InterDeposito.cs" />
     <Compile Include="_interdeposito\InterDepositoFacturas.cs" />
     <Compile Include="_interdeposito\ucInterDeposito.cs">
