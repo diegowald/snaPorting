@@ -121,37 +121,26 @@ namespace Catalogo.auditoria
             {
                 case AccionesAuditadas.INICIA:
                     return "INICIA";
-                    break;
                 case AccionesAuditadas.EXITOSO:
                     return "EXITOSO";
-                    break;
                 case AccionesAuditadas.FALLO:
                     return "FALLO";
-                    break;
                 case AccionesAuditadas.CANCELA:
                     return "CANCELA";
-                        break;
                 case  AccionesAuditadas.GUARDA:
                     return "GUARDA";
-                    break;
                 case AccionesAuditadas.TRANSMITE:
                     return "TRANSMITE";
-                    break;
                 case AccionesAuditadas.IMPRIME:
                     return "IMPRIME";
-                    break;
                 case AccionesAuditadas.INFORMA:
                     return "INFORMA";
-                    break;
                 case AccionesAuditadas.TERMINA:
                     return "TERMINA";
-                    break;
                 case AccionesAuditadas.DESCONOCIDO:
                     return "DESCONOCIDO";
-                    break;
                 default:
                     return "";
-                    break;
             }
         }
 

@@ -83,8 +83,6 @@ namespace Catalogo._interdeposito
 
         public long EnviarInterDeposito()
         {
-            long functionReturnValue = 0;
-
             bool Cancel = false;
             long resultado = 0;
 
@@ -128,7 +126,6 @@ namespace Catalogo._interdeposito
                 return -1;
             }
         }
-
 
         public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress, bool usaProxy, string proxyServerAddress)
         {

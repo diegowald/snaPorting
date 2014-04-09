@@ -27,7 +27,9 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
-                <Image Name="topLogo" Grid.Column="0" ClipToBounds="True" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>                                
+                <Grid Name="grTopLogo" Grid.Column="0" >
+                    <Image Name="TopLogo" VerticalAlignment="Top"  Source="recursos/logo.png" Margin="0,3,3,0"/>
+                </Grid>                
                 <Grid Name="topBanner" Grid.Column="1" />
                 <!--
                 <Image Name="topBanner" Source="recursos/top1.png" Grid.Column="1" Stretch="Fill"/>                
@@ -127,14 +129,16 @@
                                     </Grid>
                                 </Grid>
                             </ad:DocumentContent>
+
                             <ad:DocumentContent Title="Inter-Depósitos" IsCloseable="False" IsFloatingAllowed="False">
                                 <Grid Name="grInterDepositos">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Grid x:Name="xInterDepositosArea" Grid.Row="0" />
+                                    <Grid x:Name="xInterDepositoArea" Grid.Row="0" />
                                 </Grid>
                             </ad:DocumentContent>
+                            
                             <ad:DocumentContent Title="Bandeja de Enviados" IsCloseable="False" IsFloatingAllowed="False">
                                 <Grid Name="grMovimientos">
                                     <Grid.RowDefinitions>

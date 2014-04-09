@@ -333,10 +333,11 @@ namespace Catalogo._appConfig
             }
 
             bool wSalir = false;
-            string strComando;
-            string[] sComando;
-            long code;
-            long I;
+
+            //string strComando;
+            //string[] sComando;
+            //long code;
+            //long I;
 
             System.Data.DataSet ds = cliente.ObtenerComandosDS(_macAddress);
 

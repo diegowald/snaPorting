@@ -342,7 +342,14 @@ namespace Catalogo._interdeposito
                 intDep.NroImpresion = 0;
                 intDep.Observaciones = bdObservacionesTxt.Text;
 
-                intDep.Guardar("GRABAR");   
+                //try
+                //{
+                    intDep.Guardar("GRABAR");
+                //}
+                //catch
+                //{ 
+                //}
+
                 InterDeposito_Imprimir(Global01.NroImprimir);         
                 Global01.NroImprimir = "";
                 Cursor.Current = Cursors.Default;

@@ -188,12 +188,13 @@ namespace Catalogo._interdeposito
                 switch (ex.ErrorCode)
                 {
                     case -2147467259:
-                        throw ex;  //util.errorHandling.ErrorForm.show();
+                        throw ex;
+                        //throw (new Exception(ex.Message));   //util.errorHandling.ErrorForm.show();
                 }
             }
             catch (Exception ex)
             {
-                throw ex;  //util.errorHandling.ErrorForm.show();
+                throw (new Exception(ex.Message));  //util.errorHandling.ErrorForm.show();
             }
 
             adoCMD = null;

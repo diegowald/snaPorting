@@ -27,6 +27,7 @@ namespace Catalogo._devolucion
         private string m_Detalle;
 
         private bool DatosObtenidos;
+
         public EnvioDevolucion(System.Data.OleDb.OleDbConnection conexion, string ipAddress, string ipAddressIntranet, string MacAddress, bool usaProxy, string proxyServerAddress)
         {
             Inicializar(ipAddress, ipAddressIntranet, MacAddress, usaProxy, proxyServerAddress);
@@ -82,8 +83,6 @@ namespace Catalogo._devolucion
 
         public long EnviarDevolucion()
         {
-            long functionReturnValue = 0;
-
             bool Cancel = false;
 
             long resultado = 0;
