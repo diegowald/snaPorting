@@ -128,9 +128,10 @@ namespace Catalogo.Funciones
             {
                 dr =cmd.ExecuteReader();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception(e.Message.ToString());
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;
             }
             finally
             {
@@ -158,9 +159,10 @@ namespace Catalogo.Funciones
             {
                 dr = cmd.ExecuteReader();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception(e.Message.ToString());
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;
             }
             finally
             {
@@ -198,7 +200,6 @@ namespace Catalogo.Funciones
             }
             catch (Exception e)
             {               
-
                 throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
 
             }
