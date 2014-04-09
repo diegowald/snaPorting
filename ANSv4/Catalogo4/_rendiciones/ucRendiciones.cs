@@ -254,14 +254,13 @@ namespace Catalogo._rendiciones
 		                        Habilita(m.Accion);
 				            }
                         }
-                        catch (Exception e)
+                        catch (Exception ex)
                         {
-
                             if (Global01.TranActiva != null)
                             {
                                 Global01.TranActiva.Rollback();
                             }
-                            //throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                            throw ex; 
                         }
                         finally
                         {
@@ -655,9 +654,9 @@ namespace Catalogo._rendiciones
                     rec = null;
 
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    throw new Exception(e.Message.ToString());
+                    throw ex;
                 }              
 
 	        } 
@@ -679,9 +678,9 @@ namespace Catalogo._rendiciones
                 {
                     adoCMD.ExecuteNonQuery();
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    throw new Exception(e.Message.ToString());
+                    throw ex;  //new Exception(ex.Message.ToString());
                 }                   
 
 	        }
@@ -716,9 +715,9 @@ namespace Catalogo._rendiciones
                 {
                     adoCMD.ExecuteNonQuery();
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    throw new Exception(e.Message.ToString());
+                    throw ex;  //new Exception(ex.Message.ToString());
                 }   
             }
 

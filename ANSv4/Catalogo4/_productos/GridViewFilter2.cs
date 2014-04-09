@@ -100,7 +100,12 @@ namespace Catalogo._productos
             loadDataGridView();
         }
 
-        private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;        public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
+
+        /// <summary>
+        /// DIEGO PABLO OJO!!!!!!
+        /// </summary>
+        //private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
+        public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
         {
             get;
             set;
@@ -313,7 +318,7 @@ namespace Catalogo._productos
             // Show the counts in the toolstrip
             this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
 
-            dataGridView1.Rows[0].Selected = true;
+            //dataGridView1.Rows[0].Selected = true;
 
             DataGridViewCell cell = dataGridView1[0, 0];
             if (cell != null)
@@ -366,7 +371,7 @@ namespace Catalogo._productos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -432,7 +437,7 @@ namespace Catalogo._productos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -444,7 +449,7 @@ namespace Catalogo._productos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 

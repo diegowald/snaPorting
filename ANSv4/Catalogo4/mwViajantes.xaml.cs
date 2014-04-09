@@ -50,11 +50,13 @@ namespace Catalogo
             flash.Dock = System.Windows.Forms.DockStyle.Top;
             flash.Location = new System.Drawing.Point(0, 0);
             flash.Name = "flash";
-            flash.file = "http://samples.mplayerhq.hu/SWF/962_fws.swf";
+            flash.file = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\recursos\autonatica.swf";
             //filterControl.Size = new System.Drawing.Size(640, 480);
             //filterControl.TabIndex = 0;
             //gridViewControl.Text = "Lista de Productos";
+
             flash.play();
+
             // Assign the MaskedTextBox control as the host control's child.
             host.Child = flash;
 
@@ -229,13 +231,13 @@ namespace Catalogo
         }
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
-        {
-
-            Catalogo._rendiciones.ucRendiciones RenD = addRendicionArea();
+        {            
             Catalogo._interdeposito.ucInterDeposito IntDep = addInterDepositoArea();
-            Catalogo._recibos.ucRecibo rec = addReciboArea();
             Catalogo._movimientos.ucMovimientos mov = addMovimientosArea();
-            ////Catalogo._novedades.ucNovedades nov = addNovedadesArea();
+
+            Catalogo._recibos.ucRecibo rec = addReciboArea();
+            Catalogo._rendiciones.ucRendiciones RenD = addRendicionArea();
+           //Catalogo._novedades.ucNovedades nov = addNovedadesArea();
 
             sf = addSearchArea();
             gv = addProductsArea();
@@ -318,8 +320,9 @@ namespace Catalogo
                         return;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    throw ex;
                 }
             }
 

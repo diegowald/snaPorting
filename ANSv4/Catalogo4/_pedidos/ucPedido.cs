@@ -70,7 +70,7 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
         
@@ -231,7 +231,7 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -249,7 +249,7 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -512,7 +512,7 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -581,22 +581,13 @@ namespace Catalogo._pedidos
             {
                 switch (ex.ErrorCode)
                 {
-                    case -2147467259:
-                        break;
+                    case -2147467259: // registro duplicado
+                        throw ex; 
                 }
-                //ErrorHandler:
-
-                //        If Err.Number = -2147467259 Then
-                //            ' El registro está duplicado... debo borrar el registro e intentar nuevamente
-                //            ' El error dice así:
-                //            ' Los cambios solicitados en la tabla no se realizaron correctamente
-                //            '  porque crearían valores duplicados en el índice, clave principal o relación.
-                //            ' Cambie los datos en el campo o los campos que contienen datos duplicados,
-                //            ' quite el índice o vuelva a definir el índice para permitir entradas duplicadas e inténtelo de nuevo.
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -650,7 +641,7 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -694,7 +685,7 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -754,7 +745,7 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -838,7 +829,7 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -935,7 +926,7 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorForm.show();
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 

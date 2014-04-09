@@ -314,9 +314,9 @@ namespace Catalogo._appConfig
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    // TODO: hacer algo con este catch'em all
+                    throw ex;  //util.errorHandling.ErrorForm.show();
                 }
             }
         }
@@ -333,10 +333,11 @@ namespace Catalogo._appConfig
             }
 
             bool wSalir = false;
-            string strComando;
-            string[] sComando;
-            long code;
-            long I;
+
+            //string strComando;
+            //string[] sComando;
+            //long code;
+            //long I;
 
             System.Data.DataSet ds = cliente.ObtenerComandosDS(_macAddress);
 
@@ -399,9 +400,9 @@ namespace Catalogo._appConfig
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    // TODO: hacer algo con este catch'em all
+                    throw ex;  //util.errorHandling.ErrorForm.show();
                 }
             }
 

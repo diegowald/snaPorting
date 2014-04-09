@@ -77,13 +77,14 @@ namespace Catalogo.Funciones
                     Global01.TranActiva.Commit();
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
 
                 if (Global01.TranActiva != null)
                 {
                     Global01.TranActiva.Rollback();
                 }
+                throw ex;
                 //throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
             finally

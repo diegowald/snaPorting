@@ -201,8 +201,9 @@ namespace Catalogo.util
                 file.Close();
                 System.IO.File.Delete(tempFolder + vclu);
             }
-            catch
+            catch (Exception ex)
             {
+                throw ex;
             }
         }
 

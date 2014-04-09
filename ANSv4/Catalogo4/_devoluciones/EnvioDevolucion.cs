@@ -27,6 +27,7 @@ namespace Catalogo._devolucion
         private string m_Detalle;
 
         private bool DatosObtenidos;
+
         public EnvioDevolucion(System.Data.OleDb.OleDbConnection conexion, string ipAddress, string ipAddressIntranet, string MacAddress, bool usaProxy, string proxyServerAddress)
         {
             Inicializar(ipAddress, ipAddressIntranet, MacAddress, usaProxy, proxyServerAddress);
@@ -82,8 +83,6 @@ namespace Catalogo._devolucion
 
         public long EnviarDevolucion()
         {
-            long functionReturnValue = 0;
-
             bool Cancel = false;
 
             long resultado = 0;
@@ -160,10 +159,11 @@ namespace Catalogo._devolucion
                     WebServiceInicializado = false;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                //            if (Err().Number == -2147024809)
+                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
                 {
+                    //	if (Err().Number == -2147024809) {
                     // Intento con el ip interno
                     Cliente = new DevolucionWS.Devolucion();
                     Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Devolucion.asmx?wsdl";
@@ -176,10 +176,10 @@ namespace Catalogo._devolucion
                     m_ip = ipAddressIntranet;
                     WebServiceInicializado = true;
                 }
-                //          else
-                //          {
-                //              Err().Raise(Err().Number, Err().Source, Err().Description);
-                //          }
+                else
+                {
+                    throw ex;
+                }
             }
         }
 

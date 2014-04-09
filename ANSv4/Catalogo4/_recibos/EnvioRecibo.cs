@@ -239,11 +239,10 @@ public class EnvioRecibo
                 webServiceInicializado = false;
             }
         }
-        catch
+        catch (Exception ex)
         {
-            //        if (Err().Number == -2147024809)
+            if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
             {
-                // Intento con el ip interno
                 cliente = new RecibosWS.Recibos_v_303();
                 cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Recibos_v_303.asmx?wsdl";
                 if (usaProxy)
@@ -255,10 +254,10 @@ public class EnvioRecibo
                 webServiceInicializado = true;
                 _ip = ipAddressIntranet;
             }
-            //      else
-            //      {
-            //          Err().Raise(Err().Number, Err().Source, Err().Description);
-            //      }
+            else
+            {
+                throw ex;
+            }
         }
     }
 }

@@ -28,19 +28,19 @@ namespace Catalogo.util
             }
         }
 
-
         public void play()
         {
             try
             {
                 if (axShockwaveFlash1.Movie.Length != 0)
                 {
+                    axShockwaveFlash1.Loop = true;
                     axShockwaveFlash1.Play();
                 }
             }
-            catch(Exception e)
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(e.Message);
+                throw ex;
             }
         }
 

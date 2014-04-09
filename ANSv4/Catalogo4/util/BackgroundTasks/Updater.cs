@@ -216,23 +216,14 @@ namespace Catalogo.util.BackgroundTasks
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                /*ErrorGuardianLocalHandler:
-                  Select Case ErrorGuardianGlobalHandler(m_sMODULENAME_, PROCNAME_)
-                  Case vbAbort
-                      Err.Raise Err.Number
-                  Case vbRetry
-                      Resume
-                  Case vbIgnore
-                      Resume Next
-                  End Select
-                '-------- ErrorGuardian End ----------*/
                 if (Global01.TranActiva != null)
                 {
                     Global01.TranActiva.Rollback();
                     Global01.TranActiva = null;
                 }
+                throw ex;
             }
         }
 

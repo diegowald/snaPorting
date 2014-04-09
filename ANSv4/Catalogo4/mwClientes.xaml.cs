@@ -23,6 +23,10 @@ namespace Catalogo
     public partial class mwClientes : Window
     {
 
+        private Catalogo._productos.SearchFilter sf = null;
+        private Catalogo._productos.GridViewFilter2 gv = null;
+        private Catalogo._pedidos.ucPedido ped = null;
+        
         public mwClientes()
         {
             try
@@ -32,12 +36,16 @@ namespace Catalogo
                 //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
                 //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
                 ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+                this.Closing += mwClientes_Closing;
+
 #if SaborViajante
-                this.header.Visibility = System.Windows.Visibility.Hidden;
+    this.header.Visibility = System.Windows.Visibility.Hidden;
 #endif
+
             }
             catch (Exception ex)
             {
+                throw ex;
             }
         }
 
@@ -122,6 +130,24 @@ namespace Catalogo
             return xMovimientos;
         }
 
+        private Catalogo._interdeposito.ucInterDeposito addInterDepositoArea()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            Catalogo._interdeposito.ucInterDeposito xInterDeposito;
+            xInterDeposito = new Catalogo._interdeposito.ucInterDeposito();
+            xInterDeposito.AutoScroll = false;
+            xInterDeposito.Location = new System.Drawing.Point(0, 0);
+            xInterDeposito.Dock = System.Windows.Forms.DockStyle.Fill;
+            xInterDeposito.Name = "InterDeposito";
+
+            host.Child = xInterDeposito;
+            this.xInterDepositoArea.Children.Add(host);
+
+            return xInterDeposito;
+        }
+
         private Catalogo._productos.GridViewFilter2  addProductsArea()
         {
             // Create the interop host control.
@@ -161,15 +187,15 @@ namespace Catalogo
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {
-
+            Catalogo._interdeposito.ucInterDeposito IntDep = addInterDepositoArea();  
             Catalogo._movimientos.ucMovimientos mov = addMovimientosArea();
-            ////Catalogo._novedades.ucNovedades nov = addNovedadesArea();
-
-            Catalogo._productos.SearchFilter sf = addSearchArea();
-            Catalogo._productos.GridViewFilter2 gv = addProductsArea();
-            Catalogo._pedidos.ucPedido ped = addPedidoArea();
+           //Catalogo._novedades.ucNovedades nov = addNovedadesArea();
 
             addFlashPlayer();
+
+            sf = addSearchArea();
+            gv = addProductsArea();
+            ped = addPedidoArea();
 
             sf.attachReceptor(gv);
             sf.attachReceptor2(gv);
@@ -179,7 +205,7 @@ namespace Catalogo
             gv.attachReceptor2(sf);
             gv.attachReceptor3(ped);
 
-            ped.attachReceptor(mov); 
+            ped.attachReceptor(mov);
 
             this.Show();
             SplashScreen.CloseSplashScreen();
@@ -224,6 +250,147 @@ namespace Catalogo
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Maximized;
+        }
+
+        void mwClientes_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+            //    On Error GoTo ErrorGuardianLocalHandler
+
+            if (Funciones.modINIs.ReadINI("DATOS", "ConfirmaSalida", "1") == "1")
+            {
+                try
+                {
+                    if (System.Windows.Forms.MessageBox.Show("Saliendo del Catálogo... ¿Está seguro?", "Cerrando la Aplicación", System.Windows.Forms.MessageBoxButtons.YesNo)
+                        == System.Windows.Forms.DialogResult.No)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            //  #If Sabor = 3 Or Sabor = 4 Then
+
+            if (Global01.OperacionActivada == "PEDIDO")
+            {
+                //      If cmdVISITA.Tag <> "INICIAR Visita" Then
+                System.Windows.Forms.MessageBox.Show("Antes de salir debe cerrar VISITA", "Atención",
+                    System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
+                e.Cancel = true;
+                return;
+            }
+
+            if (ped.IDClienteSeleccionado != -1)
+            {
+                _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, ped.IDClienteSeleccionado);
+                if (movimientos.preguntoAlSalir())
+                {
+                    //          ' Si hay movimientos pendientes pregunto si quiere enviarlos
+                    System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show("Tiene movimientos que aun no ha enviado. ¿QUIERE ENVIARLOS AHORA?", "ENVIO DE MOVIMIENTOS", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question);
+                    switch (result)
+                    {
+                        case System.Windows.Forms.DialogResult.Yes:
+                            {
+                                //if (ProbarConexion())
+                                if (true)
+                                {
+                                    Catalogo.util.BackgroundTasks.EnvioMovimientos movs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+                                        0, false, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET, null);
+                                    movs.run();
+                                    //                  Dim dlg As frmConexionEnvio
+                                    //                  Set dlg = New frmConexionEnvio
+                                    //                  dlg.ModoTransmision = TRANSMITIR_RECORDSET
+                                    //                  dlg.IdCliente = 0
+                                    //                  dlg.Show vbModal, Me
+                                    //                  Set dlg = Nothing
+                                }
+                                else
+                                {
+                                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Comunicaciones,
+                                         auditoria.Auditor.AccionesAuditadas.FALLO, "Probar Conexion, TRANSMITIR_RECORDSET " + ped.IDClienteSeleccionado.ToString());
+                                }
+                            }
+                            break;
+                        case System.Windows.Forms.DialogResult.No:
+                            {
+                                if (Global01.miSABOR != Global01.TiposDeCatalogo.Invitado &&
+                                    Global01.miSABOR != Global01.TiposDeCatalogo.Cliente &&
+                                    Funciones.modINIs.ReadINI("DATOS", "EEA", "1") == "1")
+                                {
+
+                                    //                    If Len(Trim(Dir(vg.Path & "\monitorE.exe"))) > 0 Then
+                                    //                        Shell vg.Path & "\monitorE.exe", vbHide
+                                    //                    End If
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            //  With Me
+            //    If .WindowState <> vbMinimized Then
+            //      GuardarFormatoForm Me
+            //      WriteINI "Preferencias", "picHorizontal", picHorizontal.Top
+            //                    
+            //      GrabarLVColumnas Me.lvBuscar
+            //      GrabarLVColumnas Me.lvEstado
+            //      GrabarLVColumnas Me.lvMovimientos
+            //      GrabarLVColumnas Me.lvPedido
+            //      GrabarLVColumnas Me.lvDevolucion1
+            //      GrabarLVColumnas Me.lvDevolucion2
+            //      GrabarLVColumnas Me.lvValores
+            //      GrabarLVColumnas Me.lvAplicacion
+            //      GrabarLVColumnas Me.lvADeducir
+            //    End If
+            //  End With 'Me
+
+            //  Set fExistencia = Nothing
+            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Programa,
+                auditoria.Auditor.AccionesAuditadas.TERMINA, "se cierra la aplicacion");
+            //  Select Case UnloadMode
+            //    Case vbFormControlMenu
+            //        '0 El usuario eligió el comando Cerrar del menú Control del formulario.
+            //        vg.auditor.Guardar Programa, TERMINA, "eligió el comando Cerrar"
+            //    Case vbFormCode
+            //        '1 Se invocó la instrucción Unload desde el código.
+            //        vg.auditor.Guardar Programa, TERMINA, "instrucción Unload"
+            //    Case vbAppWindows
+            //        '2 La sesión actual del entorno operativo Microsoft Windows está finalizando.
+            //        vg.auditor.Guardar Programa, TERMINA, "Microsoft Windows está finalizando"
+            //    Case vbAppTaskManager
+            //        '3 El Administrador de tareas de Microsoft Windows está cerrando la aplicación.
+            //        vg.auditor.Guardar Programa, TERMINA, "vbAppTaskManager"
+            //    Case vbFormMDIForm
+            //        '4 Un formulario MDI secundario se está cerrando porque el formulario MDI también se está cerrando.
+            //        vg.auditor.Guardar Programa, TERMINA, "vbFormMDIForm"
+            //    Case vbFormOwner
+            //        '5 Un formulario se está cerrando por que su formulario propietario se está cerrando
+            //        vg.auditor.Guardar Programa, TERMINA, "vbFormOwner"
+            // End Select
+
+            //'-------- ErrorGuardian Begin --------
+            //Exit Sub
+            //
+            //ErrorGuardianLocalHandler:
+            //    If Err.Number = 53 Then ' el archivo de VersionAnterior NO EXISTE
+            //        Resume Next
+            //    Else
+            //        Select Case ErrorGuardianGlobalHandler(m_sMODULENAME_, PROCNAME_)
+            //            Case vbRetry
+            //                Resume
+            //            Case vbIgnore
+            //                Resume Next
+            //        End Select
+            //    End If
+            //'-------- ErrorGuardian End ----------
         }
 
     }

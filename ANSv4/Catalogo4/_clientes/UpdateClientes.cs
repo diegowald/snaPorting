@@ -185,7 +185,7 @@ namespace Catalogo._clientes
                     this.emitir(new util.Pair<string, float>("Sincronización de Clientes Finalizada", 100));///, Cancel)
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 //ErrorHandler:
                 if (Global01.TranActiva != null)
@@ -193,7 +193,7 @@ namespace Catalogo._clientes
                     Global01.TranActiva.Rollback();
                     Global01.TranActiva = null;
                 }
-                throw;
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
             finally
             {
@@ -238,6 +238,7 @@ namespace Catalogo._clientes
 
                 cmd = null;
             }
+
             catch (System.Data.OleDb.OleDbException ex)
             {
                 //ErrorHandler:
@@ -253,11 +254,15 @@ namespace Catalogo._clientes
                     Funciones.oleDbFunciones.ComandoIU(Conexion, "DELETE FROM tblClientes WHERE ID = " + ID.ToString());
                     Clientes_Add(Conexion, ID, RazonSocial, Cuit, Email, IDViajante, Domicilio,
                         Ciudad, Telefono, Observaciones, Activo, F_Actualizacion, Cascara);
-                    //            Err.Clear()
-                    //            Resume
-                    //        End If
                 }
-                throw ex;
+                else
+                {
+                    throw ex;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -356,8 +361,9 @@ namespace Catalogo._clientes
                                 }
                             }
                         }
-                        catch
+                        catch (Exception ex)
                         {
+                            throw ex;  //util.errorHandling.ErrorForm.show();
                         }
                         lastID = (int)row["ID"];
                     }
@@ -428,10 +434,9 @@ namespace Catalogo._clientes
                                 }
                             }
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            // catch'em all. Ver la manera de corregir esto...
-                            throw;
+                            throw ex;  //util.errorHandling.ErrorForm.show();
                         }
                         lastId = long.Parse(row["ID"].ToString());
                     }

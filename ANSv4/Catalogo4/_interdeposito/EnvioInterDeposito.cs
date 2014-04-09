@@ -83,8 +83,6 @@ namespace Catalogo._interdeposito
 
         public long EnviarInterDeposito()
         {
-            long functionReturnValue = 0;
-
             bool Cancel = false;
             long resultado = 0;
 
@@ -129,7 +127,6 @@ namespace Catalogo._interdeposito
             }
         }
 
-
         public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress, bool usaProxy, string proxyServerAddress)
         {
             bool Conectado = util.SimplePing.ping(ipAddress, 5000);
@@ -162,7 +159,7 @@ namespace Catalogo._interdeposito
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
                 if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
                 {
@@ -181,7 +178,7 @@ namespace Catalogo._interdeposito
                 }
                 else
                 {
-                    throw;
+                    throw ex;
                 }
             }
         }

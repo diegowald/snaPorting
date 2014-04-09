@@ -61,8 +61,9 @@ namespace Catalogo.util
                         exeProcess.WaitForExit();
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    throw ex;
                     // Log error.
                 }
 
