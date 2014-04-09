@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchFilter));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.txtBuscar = new System.Windows.Forms.ToolStripTextBox();
-            this.btnApply0 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnApply0 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.cboLinea = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -48,8 +48,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnClearFilters = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.lblPorcentajeLinea = new System.Windows.Forms.ToolStripLabel();
             this.txtPorcentajeLinea = new System.Windows.Forms.ToolStripTextBox();
+            this.lblPorcentajeLinea = new System.Windows.Forms.ToolStripLabel();
             this.tslItems = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -97,6 +97,11 @@
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(102, 27);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
+            // 
             // btnApply0
             // 
             this.btnApply0.AutoSize = false;
@@ -109,11 +114,6 @@
             this.btnApply0.Text = "buscar";
             this.btnApply0.Click += new System.EventHandler(this.btnApply0_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
-            // 
             // toolStripLabel4
             // 
             this.toolStripLabel4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -125,7 +125,7 @@
             // 
             this.cboLinea.AutoSize = false;
             this.cboLinea.Name = "cboLinea";
-            this.cboLinea.Size = new System.Drawing.Size(86, 27);
+            this.cboLinea.Size = new System.Drawing.Size(86, 23);
             // 
             // toolStripLabel1
             // 
@@ -138,7 +138,7 @@
             // 
             this.cboFamilia.AutoSize = false;
             this.cboFamilia.Name = "cboFamilia";
-            this.cboFamilia.Size = new System.Drawing.Size(116, 27);
+            this.cboFamilia.Size = new System.Drawing.Size(116, 23);
             // 
             // toolStripLabel2
             // 
@@ -151,7 +151,7 @@
             // 
             this.cboMarca.AutoSize = false;
             this.cboMarca.Name = "cboMarca";
-            this.cboMarca.Size = new System.Drawing.Size(90, 27);
+            this.cboMarca.Size = new System.Drawing.Size(90, 23);
             this.cboMarca.SelectedIndexChanged += new System.EventHandler(this.cboMarca_SelectedIndexChanged);
             // 
             // toolStripLabel3
@@ -165,7 +165,7 @@
             // 
             this.cboModelo.AutoSize = false;
             this.cboModelo.Name = "cboModelo";
-            this.cboModelo.Size = new System.Drawing.Size(86, 27);
+            this.cboModelo.Size = new System.Drawing.Size(86, 23);
             // 
             // toolStripLabel5
             // 
@@ -224,14 +224,6 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
             // 
-            // lblPorcentajeLinea
-            // 
-            this.lblPorcentajeLinea.AutoSize = false;
-            this.lblPorcentajeLinea.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPorcentajeLinea.Name = "lblPorcentajeLinea";
-            this.lblPorcentajeLinea.Size = new System.Drawing.Size(20, 24);
-            this.lblPorcentajeLinea.Text = " % ";
-            // 
             // txtPorcentajeLinea
             // 
             this.txtPorcentajeLinea.AutoSize = false;
@@ -239,6 +231,15 @@
             this.txtPorcentajeLinea.Name = "txtPorcentajeLinea";
             this.txtPorcentajeLinea.Size = new System.Drawing.Size(25, 23);
             this.txtPorcentajeLinea.Text = "0";
+            this.txtPorcentajeLinea.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPorcentajeLinea_KeyPress);
+            // 
+            // lblPorcentajeLinea
+            // 
+            this.lblPorcentajeLinea.AutoSize = false;
+            this.lblPorcentajeLinea.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPorcentajeLinea.Name = "lblPorcentajeLinea";
+            this.lblPorcentajeLinea.Size = new System.Drawing.Size(20, 24);
+            this.lblPorcentajeLinea.Text = " % ";
             // 
             // tslItems
             // 
