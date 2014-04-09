@@ -751,6 +751,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="recursos\logo.png" />
+    <Resource Include="recursos\logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="recursos\autonatica.swf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

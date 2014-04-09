@@ -27,9 +27,9 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="200" />
                 </Grid.ColumnDefinitions>
-                <Grid Name="grTopLogo" Grid.Column="0" >
-                    <Image Name="TopLogo" VerticalAlignment="Top"  Source="recursos/logo.png" Margin="0,3,3,0"/>
-                </Grid>                
+                <WrapPanel  Orientation="Vertical"   HorizontalAlignment="left" Grid.Column="0">
+                    <Image Name="topLogo" VerticalAlignment="Bottom" Source="recursos/logo.png" Margin="0,1,1,0" Width="150"/>
+                </WrapPanel>
                 <Grid Name="topBanner" Grid.Column="1" />
                 <!--
                 <Image Name="topBanner" Source="recursos/top1.png" Grid.Column="1" Stretch="Fill"/>                
