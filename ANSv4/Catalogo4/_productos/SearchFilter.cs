@@ -226,7 +226,7 @@ namespace Catalogo._productos
 
                     fb = null;
                     this.emitir(filterString);
-                    this.emitir2(float.Parse(txtPorcentajeLinea.Text));
+                    this.emitir2(float.Parse("0" + txtPorcentajeLinea.Text));
                 }
             }
             catch (Exception ex)
@@ -275,6 +275,11 @@ namespace Catalogo._productos
         public void onRecibir(util.Pair<int, int> dato)
         {
             showItemCounts(dato.first, dato.second);
+        }
+
+        private void txtPorcentajeLinea_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Funciones.util.SoloDigitos(e);
         }
     }
 }
