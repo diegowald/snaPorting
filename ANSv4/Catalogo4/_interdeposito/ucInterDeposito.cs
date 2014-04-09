@@ -342,13 +342,28 @@ namespace Catalogo._interdeposito
                 intDep.NroImpresion = 0;
                 intDep.Observaciones = bdObservacionesTxt.Text;
 
-                //try
-                //{
+                try
+                {
                     intDep.Guardar("GRABAR");
-                //}
-                //catch
-                //{ 
-                //}
+                }
+                catch (System.Data.OleDb.OleDbException ex)
+                {
+                    switch (ex.ErrorCode)
+                    {
+                        case -2147467259:
+                            MessageBox.Show("Registro Duplicado", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        default:
+                             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                             util.errorHandling.ErrorForm.show();
+                             return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    util.errorHandling.ErrorForm.show();
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
 
                 InterDeposito_Imprimir(Global01.NroImprimir);         
                 Global01.NroImprimir = "";

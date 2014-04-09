@@ -179,23 +179,23 @@ namespace Catalogo._interdeposito
             adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
             adoCMD.CommandText = "usp_InterDeposito_add";
 
-            try
-            {
-                adoCMD.ExecuteNonQuery();
-            }
-            catch (System.Data.OleDb.OleDbException ex)
-            {
-                switch (ex.ErrorCode)
-                {
-                    case -2147467259:
-                        throw ex;
-                        //throw (new Exception(ex.Message));   //util.errorHandling.ErrorForm.show();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw (new Exception(ex.Message));  //util.errorHandling.ErrorForm.show();
-            }
+            //try
+            //{
+            adoCMD.ExecuteNonQuery();
+            //}
+            //catch (System.Data.OleDb.OleDbException ex)
+            //{
+            //    switch (ex.ErrorCode)
+            //    {
+            //        case -2147467259:
+            //            throw ex;
+            //            //throw (new Exception(ex.Message));   //util.errorHandling.ErrorForm.show();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw (new Exception(ex.Message));  //util.errorHandling.ErrorForm.show();
+            //}
 
             adoCMD = null;
 
