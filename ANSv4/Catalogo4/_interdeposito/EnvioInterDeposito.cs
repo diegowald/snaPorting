@@ -162,7 +162,7 @@ namespace Catalogo._interdeposito
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
                 if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
                 {
@@ -181,7 +181,7 @@ namespace Catalogo._interdeposito
                 }
                 else
                 {
-                    throw;
+                    throw ex;
                 }
             }
         }

@@ -28,7 +28,6 @@ namespace Catalogo.util
             }
         }
 
-
         public void play()
         {
             try
@@ -38,9 +37,9 @@ namespace Catalogo.util
                     axShockwaveFlash1.Play();
                 }
             }
-            catch(Exception e)
+            catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine(e.Message);
+                throw ex;
             }
         }
 

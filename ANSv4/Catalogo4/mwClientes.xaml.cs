@@ -38,6 +38,7 @@ namespace Catalogo
             }
             catch (Exception ex)
             {
+                throw ex;
             }
         }
 

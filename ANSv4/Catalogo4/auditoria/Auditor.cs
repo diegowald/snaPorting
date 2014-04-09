@@ -59,85 +59,58 @@ namespace Catalogo.auditoria
             {
                 case ObjetosAuditados.RegistroPrograma:
                     return "RegistroPrograma";
-                    break;
                 case ObjetosAuditados.Logueo:
                     return "Logueo";
-                    break;
                 case ObjetosAuditados.ActualizacionCliente:
                     return "ActualizacionCliente";
-                    break;
                 case ObjetosAuditados.ActualizacionCatalogo:
                     return "ActualizacionCatalogo";
-                    break;
                 case  ObjetosAuditados.Programa:
                     return"Programa";
-                    break;
                 case ObjetosAuditados.Visita:
                     return "Visita";
-                    break;
                 case ObjetosAuditados.Pedido:
                     return "Pedido";
-                    break;
                 case  ObjetosAuditados.ImpresionPedido:
                     return "ImpresionPedido";
-                    break;
                 case ObjetosAuditados.Recibo:
                     return "Recibo";
-                    break;
                 case ObjetosAuditados.ImpresionRecibo:
                     return "ImpresionRecibo";
-                    break;
                 case ObjetosAuditados.Seguridad:
                     return "Seguridad";
-                    break;
                 case ObjetosAuditados.AppConfig:
                     return "AppConfig";
-                    break;
                 case ObjetosAuditados.Comandos:
                     return"Comandos";
-                    break;
                 case ObjetosAuditados.WebServices:
                     return "WebServices";
-                    break;
                 case ObjetosAuditados.Comunicaciones:
                     return "Comunicaciones";
-                    break;
                 case ObjetosAuditados.TiempoOperacion:
                     return "TiempoOperacion";
-                    break;
                 case ObjetosAuditados.SubRutina:
                     return "SubRutina";
-                    break;
                 case ObjetosAuditados.Devoluciones:
                     return "Devoluciones";
-                    break;
                 case ObjetosAuditados.ImpresionDevolucion:
                     return "ImpresionDevolucion";
-                    break;
                 case ObjetosAuditados.ActualizacionGeneral:
                     return "ActualizacionGeneral";
-                    break;
                 case ObjetosAuditados.InterDeposito:
                     return "InterDeposito";
-                    break;
                 case ObjetosAuditados.ImpresionInterDeposito:
                     return "ImpresionInterDeposito";
-                    break;
                 case ObjetosAuditados.Rendicion:
                     return"Rendicion";
-                    break;
                 case  ObjetosAuditados.ImpresionRendicion:
                     return "ImpresionRendicion";
-                    break;
                 case ObjetosAuditados.ErrordePrograma:
                     return "ErrordePrograma";
-                    break;
                 case ObjetosAuditados.Rutina:
                     return "Rutina";
-                    break;
                 default:
                     return "";
-                    break;
             }
         }
 

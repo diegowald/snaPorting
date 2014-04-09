@@ -65,9 +65,9 @@ namespace Catalogo._registro
 
                 return functionReturnValue;
             }
-            catch 
+            catch (Exception ex)
             {
-                return "";
+                throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 
@@ -90,9 +90,10 @@ namespace Catalogo._registro
 
                 functionReturnValue = sBuilder.ToString();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                throw ex;  //util.errorHandling.ErrorForm.show();
+                //throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
             finally
             {
@@ -137,9 +138,10 @@ namespace Catalogo._registro
                     functionReturnValue = s == ObtenerCRC(ref xParam);
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                throw ex;  //util.errorHandling.ErrorForm.show();
+                //throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
             finally
             {

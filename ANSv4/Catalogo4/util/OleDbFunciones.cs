@@ -128,9 +128,9 @@ namespace Catalogo.Funciones
             {
                 dr =cmd.ExecuteReader();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception(e.Message.ToString());
+                throw ex;  //throw new Exception(ex.Message.ToString());
             }
             finally
             {
@@ -158,9 +158,9 @@ namespace Catalogo.Funciones
             {
                 dr = cmd.ExecuteReader();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception(e.Message.ToString());
+                throw new Exception(ex.Message.ToString());
             }
             finally
             {
@@ -196,11 +196,9 @@ namespace Catalogo.Funciones
                 //    cmd.Transaction.Commit();
                 //}
             }
-            catch (Exception e)
+            catch (Exception ex)
             {               
-
-                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-
+                throw new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
             finally
             {
@@ -225,32 +223,11 @@ namespace Catalogo.Funciones
                 adoCN = null;
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-
-                switch (util.ErrorGuardianGlobalHandler(m_sMODULENAME_, PROCNAME_))
-                {
-                    case 1:
-                        //Constants.vbRetry:
-                        // ERROR: Not supported in C#: ResumeStatement
-
-                        break;
-                    case 2:
-                        //Constants.vbIgnore:
-                        // ERROR: Not supported in C#: ResumeStatement
-
-                        break;
-                }
+                throw new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
-
-            finally
-            {
-
-            }
-
         }
-
 
         private static void ProcesarTablasLinks(ADODB.Connection Conexion, string db)
         {
@@ -284,14 +261,14 @@ namespace Catalogo.Funciones
 
 	            Adox_Cat = null;
             }
-            catch (System.IO.IOException e)
+            catch (System.IO.IOException ex)
             {
-                throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                //throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                throw ex;
             }
-
-            finally
+            catch (Exception ex)
             {
-
+                throw ex;
             }
         }
 
@@ -332,17 +309,15 @@ namespace Catalogo.Funciones
 
                 System.IO.File.Delete(dbNewBakup);
             }
-            catch (System.IO.IOException e)
+            catch (System.IO.IOException ex)
             {
                 //throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-               
+                throw ex;               
             }
-
-            finally
+            catch (Exception ex)
             {
-        
+                throw ex;
             }
-      
         }
 
 
@@ -353,8 +328,6 @@ namespace Catalogo.Funciones
 
             try
             {
-              
-
                 ADODB.Connection adoCN = new ADODB.Connection();
 
                 adoDbConectar(adoCN, Global01.strConexionAd);
@@ -376,17 +349,15 @@ namespace Catalogo.Funciones
                 adoDbDesconectar(adoCN);
                 adoCN = null;
             }
-            catch (System.IO.IOException e)
+            catch (System.IO.IOException ex)
             {
-                throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-
+                //throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                throw ex;
             }
-
-            finally
+            catch (Exception ex)
             {
-
+                throw ex;
             }
-
         }
 
 
@@ -417,17 +388,15 @@ namespace Catalogo.Funciones
                 adoDbDesconectar(adoCN);
                 adoCN = null;
             }
-            catch (System.IO.IOException e)
+            catch (System.IO.IOException ex)
             {
-                throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-
+                //throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                throw ex;
             }
-
-            finally
+            catch (Exception ex)
             {
-
+                throw ex;
             }
-
           }
       
     }

@@ -318,8 +318,9 @@ namespace Catalogo
                         return;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    throw ex;
                 }
             }
 

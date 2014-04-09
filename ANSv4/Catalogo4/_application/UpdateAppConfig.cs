@@ -314,9 +314,9 @@ namespace Catalogo._appConfig
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    // TODO: hacer algo con este catch'em all
+                    throw ex;  //util.errorHandling.ErrorForm.show();
                 }
             }
         }
@@ -399,9 +399,9 @@ namespace Catalogo._appConfig
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    // TODO: hacer algo con este catch'em all
+                    throw ex;  //util.errorHandling.ErrorForm.show();
                 }
             }
 

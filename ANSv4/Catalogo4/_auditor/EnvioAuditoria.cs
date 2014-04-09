@@ -66,7 +66,7 @@ namespace Catalogo._audit
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
                 {
@@ -85,7 +85,7 @@ namespace Catalogo._audit
                 }
                 else
                 {
-                    throw;
+                    throw ex;
                 }
             }
         }

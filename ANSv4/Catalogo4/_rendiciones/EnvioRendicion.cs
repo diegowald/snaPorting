@@ -203,11 +203,12 @@ namespace Catalogo._rendicion
                     WebServiceInicializado = false;
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
-                //            if (Err().Number == -2147024809)
                 {
+                    //errhandler:
+                    //        If Err.Number = -2147024809 Then
                     // Intento con el ip interno
                     Cliente = new RendicionWS.Rendicion();
                     Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Rendicion.asmx?wsdl";
@@ -222,11 +223,9 @@ namespace Catalogo._rendicion
                 }
                 else
                 {
-                    throw;
+                    throw ex;
                 }
             }
         }
-
-
     }
 }

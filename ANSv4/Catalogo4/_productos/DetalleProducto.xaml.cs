@@ -136,11 +136,13 @@ namespace Catalogo._productos
                     ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
 
                 }
-                catch (System.Web.HttpException e)
+                catch (System.Web.HttpException ex)
                 {
+                    throw ex;
                 }
                 catch (System.Net.WebException wex)
                 {
+                    throw wex;
                 }
             }
         }
@@ -153,10 +155,11 @@ namespace Catalogo._productos
                 {
                     imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
                 }
-                catch
+                catch (Exception ex)
                 {
                     string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
                     imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
+                    throw ex;
                 }
             }
             else
@@ -181,9 +184,11 @@ namespace Catalogo._productos
             }
             catch (System.IO.IOException ex)
             {
+                throw ex;
             }
             catch (Exception ex)
             {
+                throw ex;
             }
         }
     }
