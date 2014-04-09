@@ -53,7 +53,7 @@ namespace Catalogo
             flash.Dock = System.Windows.Forms.DockStyle.Top;
             flash.Location = new System.Drawing.Point(0, 0);
             flash.Name = "flash";
-            flash.file = @"C:\Catalogo ANS\Imagenes\autonatica.swf";
+            flash.file = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\recursos\autonatica.swf";
             //filterControl.Size = new System.Drawing.Size(640, 480);
             //filterControl.TabIndex = 0;
             //gridViewControl.Text = "Lista de Productos";

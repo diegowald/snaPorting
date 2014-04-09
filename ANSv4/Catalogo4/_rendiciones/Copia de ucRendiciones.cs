@@ -63,9 +63,9 @@ namespace Catalogo._rendiciones
         {
             InitializeComponent();
 
-            _ToolTip.SetToolTip(btnIniciar, "INICIAR Rendición");
-            _ToolTip.SetToolTip(btnImprimir, "Graba e Imprime la Rendición ...");
-            _ToolTip.SetToolTip(btnVer, "ver ...");
+            //_ToolTip.SetToolTip(btnIniciar, "INICIAR Devolución");
+            //_ToolTip.SetToolTip(btnImprimir, "Graba e Imprime Devolución ...");
+            //_ToolTip.SetToolTip(btnVer, "ver ...");
 
             if (!Global01.AppActiva)
             {
@@ -131,7 +131,50 @@ namespace Catalogo._rendiciones
 
             return sResultado;
         }
-	    
+
+	    private void tsbNuevo_Click(System.Object sender, System.EventArgs e)
+	    {
+		    Accion_Click(tAccion.Nuevo);
+	    }
+
+	    private void tsbModificar_Click(System.Object sender, System.EventArgs e)
+	    {
+		    Accion_Click(tAccion.Modificar);
+	    }
+
+	    private void tsbGrabar_Click(System.Object sender, System.EventArgs e)
+	    {
+		    if (DatosValidos("all")) 
+            {
+			    Accion_Click(tAccion.Guardar);
+		    }
+	    }
+
+	    private void tsbCancelar_Click(System.Object sender, System.EventArgs e)
+	    {
+		    Accion_Click(tAccion.Cancelar);
+	    }
+
+	    private void tsbBuscar_Click(System.Object sender, System.EventArgs e)
+	    {
+		    Accion_Click(tAccion.Buscar);
+	    }
+
+	    private void tsbImprimir_Click(System.Object sender, System.EventArgs e)
+	    {
+		    Accion_Click(tAccion.Imprimir);
+	    }
+
+	    private void tsbBorrar_Click(System.Object sender, System.EventArgs e)
+	    {
+		    Accion_Click(tAccion.Eliminar);
+	    }
+
+	    private void tsbCerrar_Click(System.Object sender, System.EventArgs e)
+	    {
+		    Accion_Click(tAccion.Cerrar);
+	    }
+
 	    private void Accion_Click(tAccion Accion)
 	    {		
             switch (Accion) {
@@ -291,14 +334,12 @@ namespace Catalogo._rendiciones
 				    break;
 			    case tAccion.Imprimir:
 
-                    if (lblNroRendicion.Text.Trim().Length > 0)
-                    {
-                        m.Accion = tAccion.Cancelar;
-                        CambiarA(tEstado.Neutro);
-				        Habilita(m.Accion);                    
-                        Rendicion_Imprimir(lblNroRendicion.Text.Substring(lblNroRendicion.Text.Length - 8));
-                    };
+                    m.Accion = tAccion.Cancelar;
+                    CambiarA(tEstado.Neutro);
+				    Habilita(m.Accion);
 
+                    Rendicion_Imprimir(lblNroRendicion.Text.Substring(lblNroRendicion.Text.Length - 8));
+				
 				    break;
 			    case tAccion.Eliminar:
                     if (DatosValidos("eliminar")) {
@@ -329,8 +370,8 @@ namespace Catalogo._rendiciones
                     if (lvBuscar.Items.Count > 0) {
 
 	                    sTAB.SelectedIndex = 0;
-	                    m.ID = Int16.Parse(m.ItemX.Text);
-                        
+
+	                    m.ID = Convert.ToInt32(m.ItemX.Text);
 	                    m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "NroRendicion=" + m.ID.ToString());
 
                         if (!(m.miError))
@@ -339,15 +380,12 @@ namespace Catalogo._rendiciones
 			                    m.Accion = tAccion.Neutro;
                                 CambiarA(tEstado.Vista);
 			                    Habilita(m.Accion);
-                                m.DR.Read();
 			                    AsignarDatos();
-                                btnVer.Enabled = true;
 		                    }
 	                    } else {
                             MessageBox.Show("Errores al abrie la Rendición", "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 	                    }
 	                    m.DR = null;
-                        m.ItemX = null;
                     }
 				    break;
 			    case tAccion.Listas:
@@ -369,65 +407,101 @@ namespace Catalogo._rendiciones
 
 			    case tEstado.Neutro:
 
-					btnIniciar.Enabled = true;
-					btnImprimir.Enabled = false;
-					btnBuscar.Enabled = true;
-                    btnVer.Enabled = false;
-					btnEliminar.Enabled = false;
+				    //if (!(vAcceso(1, 1, "frmDespachos1")))
+                    if (false) 
+                    {
+					    tsbNuevo.Enabled = false;
+					    tsbModificar.Enabled = false;
+					    tsbGrabar.Enabled = false;
+					    tsbCancelar.Enabled = false;
+					    tsbBuscar.Enabled = true;
+					    tsbImprimir.Enabled = true;
+					    tsbBorrar.Enabled = false;
+					    tsbCerrar.Enabled = true;
+				    } 
+                    else 
+                    {
+					    tsbNuevo.Enabled = true;
+					    tsbModificar.Enabled = false;
+					    tsbGrabar.Enabled = false;
+					    tsbCancelar.Enabled = false;
+					    tsbBuscar.Enabled = true;
+					    tsbImprimir.Enabled = true;
+					    tsbBorrar.Enabled = false;
+					    tsbCerrar.Enabled = true;
+				    }
 
 				    break;
 			    case tEstado.Nuevo:
 
-                    btnIniciar.Enabled = true;
-				    btnImprimir.Enabled = true;
-				    btnBuscar.Enabled = false;
-				    btnVer.Enabled = false;
-				    btnEliminar.Enabled = false;
+				    tsbNuevo.Enabled = false;
+				    tsbModificar.Enabled = false;
+				    tsbGrabar.Enabled = true;
+				    tsbCancelar.Enabled = true;
+				    tsbBuscar.Enabled = false;
+				    tsbImprimir.Enabled = false;
+				    tsbBorrar.Enabled = false;
+				    tsbCerrar.Enabled = true;
 
 				    break;
 			    case tEstado.Modificar:
 
-				    btnIniciar.Enabled = true;
-				    btnImprimir.Enabled = false;
-				    btnBuscar.Enabled = true;
-				    btnVer.Enabled = true;
-				    btnEliminar.Enabled = true;
+				    tsbNuevo.Enabled = true;
+				    tsbModificar.Enabled = true;
+				    tsbGrabar.Enabled = false;
+				    tsbCancelar.Enabled = true;
+				    tsbBuscar.Enabled = true;
+				    tsbImprimir.Enabled = true;
+				    tsbBorrar.Enabled = true;
+				    tsbCerrar.Enabled = true;
 
 				    break;
 			    case tEstado.Buscar:
 
-				    btnIniciar.Enabled = true;
-				    btnImprimir.Enabled = false;
-				    btnBuscar.Enabled = false;
-                    btnVer.Enabled = false;
-				    btnEliminar.Enabled = false;
+				    tsbNuevo.Enabled = false;
+				    tsbModificar.Enabled = false;
+				    tsbGrabar.Enabled = false;
+				    tsbCancelar.Enabled = true;
+				    tsbBuscar.Enabled = false;
+				    tsbImprimir.Enabled = true;
+				    tsbBorrar.Enabled = false;
+				    tsbCerrar.Enabled = true;
 
 				    break;
 			    case tEstado.Imprimir:
 
-                    btnIniciar.Enabled = true;
-				    btnImprimir.Enabled = false;
-				    btnBuscar.Enabled = false;
-                    btnVer.Enabled = false;
-				    btnEliminar.Enabled = false;
+				    tsbNuevo.Enabled = false;
+				    tsbModificar.Enabled = false;
+				    tsbGrabar.Enabled = false;
+				    tsbCancelar.Enabled = true;
+				    tsbBuscar.Enabled = false;
+				    tsbImprimir.Enabled = true;
+				    tsbBorrar.Enabled = false;
+				    tsbCerrar.Enabled = true;
 
 				    break;
 			    case tEstado.Eliminar:
 
-                    btnIniciar.Enabled = true;
-				    btnImprimir.Enabled = false;
-				    btnBuscar.Enabled = false;
-				    btnVer.Enabled = false;
-				    btnEliminar.Enabled = false;
+				    tsbNuevo.Enabled = false;
+				    tsbModificar.Enabled = false;
+				    tsbGrabar.Enabled = false;
+				    tsbCancelar.Enabled = true;
+				    tsbBuscar.Enabled = false;
+				    tsbImprimir.Enabled = false;
+				    tsbBorrar.Enabled = false;
+				    tsbCerrar.Enabled = true;
 
 				    break;
 			    case tEstado.Vista:
 
-				    btnIniciar.Enabled = true;
-				    btnImprimir.Enabled = false;
-				    btnBuscar.Enabled = true;
-                    btnVer.Enabled = false;
-				    btnEliminar.Enabled = true;
+				    tsbNuevo.Enabled = true;
+				    tsbModificar.Enabled = true;
+				    tsbGrabar.Enabled = false;
+				    tsbCancelar.Enabled = false;
+				    tsbBuscar.Enabled = true;
+				    tsbImprimir.Enabled = true;
+				    tsbBorrar.Enabled = true;
+				    tsbCerrar.Enabled = true;
 
 				    break;
 		    }
@@ -915,7 +989,7 @@ namespace Catalogo._rendiciones
                     else if (_optBuscar_1.Checked)
                     {
                         // por fecha
-                        m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "F_Rendicion >= #" + mskFbuscar.Value.ToString("yyyy/MM/dd") + "# and F_Rendicion <= #" + mskFbuscar.Value.AddDays(60).ToString("yyyy/MM/dd") + "#", "F_Rendicion");
+                        m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "F_Rendicion >= #" + mskFbuscar.Value.ToString("yyyy/mm/dd") + "# and F_Rendicion <= #" + mskFbuscar.Value.AddDays(60).ToString("yyyy/mm/dd") + "#", "F_Rendicion");
                     }
 
                     if (m.DR.HasRows)
@@ -1273,66 +1347,5 @@ namespace Catalogo._rendiciones
             e.Handled = Funciones.util.SoloDigitos(e);
         }
 
-   
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            Accion_Click(tAccion.Eliminar);
-        }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            Accion_Click(tAccion.Buscar);
-        }
-
-        private void btnVer_Click(object sender, EventArgs e)
-        {
-            Accion_Click(tAccion.Imprimir);
-        }
-
-        private void btnImprimir_Click(object sender, EventArgs e)
-        {
-            if (DatosValidos("all"))
-            {
-                Accion_Click(tAccion.Guardar);
-            }
-        }
-
-        private void btnIniciar_Click(object sender, EventArgs e)
-        {
-            if (btnIniciar.Tag.ToString() == "INICIAR")
-            {
-                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion,auditoria.Auditor.AccionesAuditadas.INICIA);
-
-                btnIniciar.Text = "CANCELAR";
-                btnIniciar.Tag = "CANCELAR";
-                _ToolTip.SetToolTip(btnIniciar, "CANCELAR la Rendición");
-
-                Accion_Click(tAccion.Nuevo);               
-
-            }
-            else
-            {
-                if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR la Rendición?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion, auditoria.Auditor.AccionesAuditadas.CANCELA);
-                    
-                    btnIniciar.Text = "Iniciar";
-                    btnIniciar.Tag = "INICIAR";
-                    _ToolTip.SetToolTip(btnIniciar, "INICIAR Recibo Nuevo");
-
-                    Accion_Click(tAccion.Cancelar);
-                    
-                    //ObtenerMovimientos();
-                }
-            }                       
-        }
-
-        private void lvBuscar_DoubleClick(object sender, EventArgs e)
-        {
-            m.ItemX = lvBuscar.SelectedItems[0];
-            Accion_Click(tAccion.Neutro);
-        }
-
-  
     } //fin clase
 } //fin namespace
