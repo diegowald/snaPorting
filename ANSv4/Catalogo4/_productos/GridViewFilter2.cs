@@ -318,13 +318,16 @@ namespace Catalogo._productos
             // Show the counts in the toolstrip
             this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
 
-            //dataGridView1.Rows[0].Selected = true;
-
-            DataGridViewCell cell = dataGridView1[0, 0];
-            if (cell != null)
+            if (currentRowCount > 0)
             {
-                DataGridViewRow row = cell.OwningRow;
-                this.emitir(row);
+                dataGridView1.Rows[0].Selected = true;
+
+                DataGridViewCell cell = dataGridView1[0, 0];
+                if (cell != null)
+                {
+                    DataGridViewRow row = cell.OwningRow;
+                    this.emitir(row);
+                }
             }
           
         }
