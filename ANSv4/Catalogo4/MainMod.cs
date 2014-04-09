@@ -21,7 +21,7 @@ namespace Catalogo
             //splashthread.IsBackground = true;
             //splashthread.Start();
 
-            inicializaGlobales();
+            //inicializaGlobales();
 
             valida_ubicacionDatos();
 
@@ -324,6 +324,7 @@ namespace Catalogo
                 miEnd();
             }
 
+
             if (!System.IO.File.Exists(Global01.cstring))
             {
                 MessageBox.Show("Error en la instalación del archivo de Datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -339,7 +340,7 @@ namespace Catalogo
 
         }
 
-        private static void inicializaGlobales()
+        public static void inicializaGlobales()
         {
             Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
             Global01.NoConn = false;
@@ -348,14 +349,39 @@ namespace Catalogo
             Global01.Conexion = null;
             Global01.TranActiva = null;
 
-            Global01.AppPath = Funciones.modINIs.ReadINI("Datos", "Path", "C:\\Catalogo ANS");
-
+        vadenuevo:
+            if (!System.IO.File.Exists(Environment.GetEnvironmentVariable("windir") + "\\locans.log"))
+            {
+                Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", "C:\\Catalogo ANS"); 
+            }
+            Global01.AppPath = Funciones.modINIs.INIRead(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", "C:\\Catalogo ANS");
+          
             Global01.PathAcrobat = Funciones.modINIs.ReadINI("Datos", "PathAcrobat", "");
             Global01.FileBak = "CopiaCata_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mdb";
 
             Global01.cstring = Global01.AppPath + "\\datos\\ans.mdb";
             Global01.dstring = Global01.AppPath + "\\datos\\catalogo.mdb";
             Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
+   
+            if (!System.IO.File.Exists(Global01.dstring))
+            {             
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+                
+                folderBrowserDialog1.Description = "Seleccione la ubicación donde está instalado el Catálogo de Auto Náutica Sur.";
+                folderBrowserDialog1.ShowNewFolderButton = false;
+                folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+                DialogResult result = folderBrowserDialog1.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", folderBrowserDialog1.SelectedPath.ToString()); 
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                   miEnd();
+                }
+                goto vadenuevo;
+            }
 
             Global01.strConexionUs = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Us + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
             Global01.strConexionAd = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Ad + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
@@ -394,7 +420,6 @@ namespace Catalogo
             Global01.Euro = float.Parse(Funciones.modINIs.INIRead(Global01.AppPath + "\\Cambio.ini", "General", "Euro", "1"));
 
         }
-
 
         public static void miEnd()
         {

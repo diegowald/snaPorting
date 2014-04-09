@@ -22,6 +22,8 @@ namespace Catalogo
         private void Application_Startup(object sender, StartupEventArgs e)
         {
 
+            Catalogo.MainMod.inicializaGlobales();
+ 
             Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
             splashthread.IsBackground = true;
             splashthread.Start();

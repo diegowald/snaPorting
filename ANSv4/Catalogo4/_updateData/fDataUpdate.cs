@@ -43,8 +43,8 @@ namespace Catalogo.util
                 Cursor.Current = Cursors.WaitCursor;
               
                 ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = DownloadedFile; 
-                //+" -d" + Global01.AppPath.ToString() 
+                //startInfo.FileName = DownloadedFile; 
+                startInfo.FileName = "\"" + Global01.AppPath.ToString() + DownloadedFile + "\" -d\"" + Global01.AppPath.ToString() + "\""; 
 
                 startInfo.CreateNoWindow = false;
                 startInfo.UseShellExecute = false;
