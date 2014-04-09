@@ -386,7 +386,7 @@ namespace Catalogo._productos
 
             string sqlWhere = null;
             string[] PalabrasClave = txtBuscar.Split(' ');
-            int i = 0;
+            //int i = 0;
                
 	        if (!string.IsNullOrEmpty(txtBuscar)) 
             {

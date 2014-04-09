@@ -352,6 +352,25 @@ namespace Catalogo._interdeposito
                     System.Windows.Forms.MessageBox.Show(ex.Message);
                     return;
                 }
+                catch (System.Data.OleDb.OleDbException ex)
+                {
+                    switch (ex.ErrorCode)
+                    {
+                        case -2147467259:
+                            MessageBox.Show("Registro Duplicado", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        default:
+                             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                             util.errorHandling.ErrorForm.show();
+                             return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    util.errorHandling.ErrorForm.show();
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+>>>>>>> bec18f57e2e2348f21288570f0b4798c549e2141
+                }
 
                 InterDeposito_Imprimir(Global01.NroImprimir);         
                 Global01.NroImprimir = "";
