@@ -163,6 +163,7 @@
     <Compile Include="util\errorHandling\ErrorHandler.Designer.cs">
       <DependentUpon>ErrorHandler.cs</DependentUpon>
     </Compile>
+    <Compile Include="util\errorHandling\ErrorLogger.cs" />
     <Compile Include="util\FlashControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

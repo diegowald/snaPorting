@@ -272,13 +272,16 @@ namespace Catalogo._productos
             if ((Convert.ToString(colValue) == "(todos)")) { return; }
 
             string colFilter = addFilter(colName, colValue);
-            if (string.IsNullOrEmpty(filterString))
+            if (colFilter.Length > 0)
             {
-                filterString += colFilter;
-            }
-            else
-            {
-                filterString += " AND " + colFilter;
+                if (string.IsNullOrEmpty(filterString))
+                {
+                    filterString += colFilter;
+                }
+                else
+                {
+                    filterString += " AND " + colFilter;
+                }
             }
         }
         
@@ -385,21 +388,21 @@ namespace Catalogo._productos
             string[] PalabrasClave = txtBuscar.Split(' ');
             int i = 0;
                
-	        if (!string.IsNullOrEmpty(txtBuscar)) {
-		        int iTemp = PalabrasClave.GetUpperBound(0);
-                for (i = 0; i < iTemp; i++){
-                    if (!string.IsNullOrEmpty(PalabrasClave[i]))
+	        if (!string.IsNullOrEmpty(txtBuscar)) 
+            {
+                foreach (string palabra in PalabrasClave)
+                {
+                    if (!string.IsNullOrEmpty(palabra))
                     {
                         if (!string.IsNullOrEmpty(sqlWhere))
                         {
-                            sqlWhere = sqlWhere + " AND ";
+                            sqlWhere += " AND ";
                         }
-
-					    sqlWhere +=  " (MiCodigo  + ' ' +  c_producto + ' ' + Equivalencia + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' +  O_Producto + ' ' + Original + ' ' + Contiene + ' ' + ReemplazaA + ' ' + Motor  LIKE '%";				      
-				        sqlWhere += PalabrasClave[i];
-				        sqlWhere = sqlWhere + "%')";
-			        }
-		        }
+                        sqlWhere += " (MiCodigo  + ' ' +  c_producto + ' ' + Equivalencia + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' +  O_Producto + ' ' + Original + ' ' + Contiene + ' ' + ReemplazaA + ' ' + Motor  LIKE '%";
+                        sqlWhere += palabra;
+                        sqlWhere += "%')";
+                    }
+                }
 	        }
 
             return sqlWhere;

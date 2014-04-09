@@ -130,7 +130,7 @@ namespace Catalogo.Funciones
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;
             }
             finally
@@ -161,7 +161,7 @@ namespace Catalogo.Funciones
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;
             }
             finally
