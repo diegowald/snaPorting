@@ -45,7 +45,7 @@ namespace Catalogo
             }
             catch (Exception ex)
             {
-                throw ex;
+                //throw ex;
             }
         }
 
@@ -391,6 +391,30 @@ namespace Catalogo
             //        End Select
             //    End If
             //'-------- ErrorGuardian End ----------
+        }
+
+        private void DocumentPane_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+/*            if (e.AddedItems.Count > 0)
+            {
+                AvalonDock.DockableContent content = e.AddedItems[0] as AvalonDock.DockableContent;
+                System.Diagnostics.Debug.WriteLine(content.Name);
+                System.Diagnostics.Debug.WriteLine(content.Title);
+                switch (content.Title)
+                {
+                    case "Productos":
+                        break;
+                    case "Inter-Depósitos":
+                        break;
+                    case "Bandeja de Enviados":
+                        break;
+                    case "Novedades en Línea":
+                        break;
+                    default:
+                        // Nothing
+                        break;
+                }
+            }*/
         }
 
     }

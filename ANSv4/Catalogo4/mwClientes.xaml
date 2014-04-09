@@ -97,7 +97,7 @@
             <ad:DockingManager x:Name="dockManager" Grid.Row="1" IsAnimationEnabled="True" >
                 <ad:ResizingPanel Orientation="Vertical">
                     <ad:ResizingPanel Orientation="Horizontal">
-                        <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0">
+                        <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0" SelectionChanged="DocumentPane_SelectionChanged_1" >
 
                             <ad:DocumentContent Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
                                 <Grid Name="grProductos">

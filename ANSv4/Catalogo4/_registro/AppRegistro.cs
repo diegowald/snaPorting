@@ -67,7 +67,8 @@ namespace Catalogo._registro
             }
             catch (Exception ex)
             {
-                throw ex;  //util.errorHandling.ErrorForm.show();
+                //throw ex;  //util.errorHandling.ErrorForm.show();
+                return "";
             }
         }
 
