@@ -79,59 +79,8 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accessibility" />
-    <Reference Include="AvalonDock">
-      <HintPath>..\..\_Recursos\lib\AvalonDock_DLLs_NET35\AvalonDock.dll</HintPath>
-    </Reference>
-    <Reference Include="AvalonDock.Themes">
-      <HintPath>..\..\_Recursos\lib\AvalonDock_DLLs_NET35\AvalonDock.Themes.dll</HintPath>
-    </Reference>
-    <Reference Include="AxInterop.ShockwaveFlashObjects">
-      <HintPath>..\..\_Recursos\AxInterop.ShockwaveFlashObjects.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="CrystalDecisions.ReportAppServer.Controllers, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="PresentationUI, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="ReachFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.EnterpriseServices" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Printing" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="UIAutomationTypes" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="WindowsFormsIntegration" />
-    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
     <Compile Include="auditoria\Auditor.cs" />
     <Compile Include="mwViajantes.xaml.cs">
       <DependentUpon>mwViajantes.xaml</DependentUpon>
@@ -365,18 +314,6 @@
     <Compile Include="_recibos\ucRecibo.Designer.cs">
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </Compile>
-    <Page Include="mwViajantes.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="_registro\Registration.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="mwClientes.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -385,10 +322,6 @@
       <DependentUpon>mwClientes.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="_productos\DetalleProducto.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -725,22 +658,16 @@
     <None Include="recursos\Nuevo-logo-Auto-nautica-rojo-y-blanco.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="recursos\LOGO-ANS-48X48.ico" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="recursos\LOGO-ANS-32X32.ico" />
-    <Resource Include="recursos\LOGO-ANS-24X24.ico" />
-    <Resource Include="recursos\LOGO-ANS-16X16.ico" />
-    <Resource Include="recursos\top1.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="reportes\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="recursos\cotizacion-redes.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -770,4 +697,65 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\Accessibility.dll" />
+    <ReferencePath Include="D:\Desarrollos\GitHub\snaPorting\_Recursos\lib\AvalonDock_DLLs_NET35\AvalonDock.dll" />
+    <ReferencePath Include="D:\Desarrollos\GitHub\snaPorting\_Recursos\lib\AvalonDock_DLLs_NET35\AvalonDock.Themes.dll" />
+    <ReferencePath Include="D:\Desarrollos\GitHub\snaPorting\_Recursos\AxInterop.ShockwaveFlashObjects.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.ReportAppServer.ClientDoc.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </ReferencePath>
+    <ReferencePath Include="C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.ReportAppServer.Controllers.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </ReferencePath>
+    <ReferencePath Include="C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.ReportAppServer.DataDefModel.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </ReferencePath>
+    <ReferencePath Include="C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Common\SAP BusinessObjects Enterprise XI 4.0\win32_x86\dotnet\CrystalDecisions.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\Microsoft.VisualBasic.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\mscorlib.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\PresentationFramework.dll" />
+    <ReferencePath Include="C:\Windows\assembly\GAC_MSIL\PresentationUI\3.0.0.0__31bf3856ad364e35\PresentationUI.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\ReachFramework.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.5\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.5\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Data.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Deployment.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Drawing.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.EnterpriseServices.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Management.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\System.Printing.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Web.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Web.Services.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll" />
+    <ReferencePath Include="C:\Windows\Microsoft.NET\Framework\v2.0.50727\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.5\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\UIAutomationProvider.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\UIAutomationTypes.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\WindowsBase.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\v3.0\WindowsFormsIntegration.dll" />
+    <ReferencePath Include="obj\Debug\Interop.ADODB.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </ReferencePath>
+    <ReferencePath Include="obj\Debug\Interop.ADOX.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </ReferencePath>
+    <ReferencePath Include="obj\Debug\Interop.JRO.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </ReferencePath>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\obj\Debug\mwViajantes.g.cs" />
+    <Compile Include="D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\obj\Debug\_registro\Registration.g.cs" />
+    <Compile Include="D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\obj\Debug\mwClientes.g.cs" />
+    <Compile Include="D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\obj\Debug\_productos\DetalleProducto.g.cs" />
+    <Compile Include="D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\obj\Debug\App.g.cs" />
+    <Compile Include="D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\obj\Debug\Catalogo_Content.g.cs" />
+    <Compile Include="D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
 </Project>

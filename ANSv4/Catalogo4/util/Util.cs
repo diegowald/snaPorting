@@ -34,24 +34,24 @@ namespace Catalogo.Funciones
 
         internal static void EsImporte(object sender, ref System.Windows.Forms.KeyPressEventArgs e)
         {
-            
-            if (e.KeyChar == ',' && (sender as System.Windows.Forms.TextBox).Text.ToString().IndexOf(',') > 0 |
-                e.KeyChar == '.' && (sender as System.Windows.Forms.TextBox).Text.ToString().IndexOf('.') > 0)
+
+            if (e.KeyChar == '.')
+            {
+                e.KeyChar = ',';
+            };
+
+            if (e.KeyChar == ',' & (sender as System.Windows.Forms.TextBox).Text.ToString().IndexOf(',') > 0 |
+                e.KeyChar == '.' & (sender as System.Windows.Forms.TextBox).Text.ToString().IndexOf('.') > 0)
             {
                 e.Handled = true;
             }
             else
             {
-                if (!Char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '.' && e.KeyChar != '\b')
+                if (!Char.IsDigit(e.KeyChar) & e.KeyChar != ',' & e.KeyChar != '.' & e.KeyChar != '\b')
                 {
                     e.Handled = true;
-                }
-            }
-
-            if (e.KeyChar == '.') 
-            { 
-                e.KeyChar = ','; 
-            }
+                };
+            };
 
         }
 
