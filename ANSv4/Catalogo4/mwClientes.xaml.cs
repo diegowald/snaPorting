@@ -191,11 +191,11 @@ namespace Catalogo
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {
+            addFlashPlayer();
+            /*
            IntDep = addInterDepositoArea();  
            mov = addMovimientosArea();
            //nov = addNovedadesArea();
-
-            addFlashPlayer();
 
             sf = addSearchArea();
             gv = addProductsArea();
@@ -210,7 +210,7 @@ namespace Catalogo
             gv.attachReceptor3(ped);
 
             ped.attachReceptor(mov);
-
+*/
             this.Show();
             SplashScreen.CloseSplashScreen();
 
@@ -397,6 +397,52 @@ namespace Catalogo
             //'-------- ErrorGuardian End ----------
         }
 
+        private void crearControlesProductos()
+        {
+            if (sf == null)
+            {
+                sf = addSearchArea();
+                gv = addProductsArea();
+                ped = addPedidoArea();
+
+                sf.attachReceptor(gv);
+                sf.attachReceptor2(gv);
+
+                gv.attachReceptor(productDetalle);
+                gv.attachReceptor(ped);
+                gv.attachReceptor2(sf);
+                gv.attachReceptor3(ped);
+
+                if (mov != null)
+                {
+                    ped.attachReceptor(mov);
+                }
+            }
+        }
+
+        private void crearControlesInterDepositos()
+        {
+            if (IntDep == null)
+            {
+                IntDep = addInterDepositoArea();
+            }
+        }
+
+        private void crearControlesBandejaEnviados()
+        {
+            mov = addMovimientosArea();
+
+            if (ped != null)
+            {
+                ped.attachReceptor(mov);
+            }
+        }
+
+        private void crearControlesNovedades()
+        {
+            //nov = addNovedadesArea();
+        }
+
         private void DocumentPane_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
@@ -409,12 +455,16 @@ namespace Catalogo
                         switch (content.Title)
                         {
                             case "Productos":
+                                crearControlesProductos();
                                 break;
                             case "Inter-Depósitos":
+                                crearControlesInterDepositos();
                                 break;
                             case "Bandeja de Enviados":
+                                crearControlesBandejaEnviados();
                                 break;
                             case "Novedades en Línea":
+                                crearControlesNovedades();
                                 break;
                             default:
                                 // Nothing

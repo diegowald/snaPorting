@@ -369,7 +369,6 @@ namespace Catalogo._interdeposito
                 {
                     util.errorHandling.ErrorForm.show();
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
->>>>>>> bec18f57e2e2348f21288570f0b4798c549e2141
                 }
 
                 InterDeposito_Imprimir(Global01.NroImprimir);         
