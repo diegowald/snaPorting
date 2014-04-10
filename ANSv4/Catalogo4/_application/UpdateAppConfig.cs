@@ -2,20 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Catalogo._appConfig
 {
     class UpdateAppConfig
     {
-
-//    Private Declare Function EbExecuteLine Lib "vba6.dll" _
-//                                      (ByVal pStringToExec As Long, ByVal Foo1 As Long, _
-//                                       ByVal Foo2 As Long, ByVal fCheckOnly As Long) As Long
-
+        //Public Event SincronizarAppProgress(ByVal Detalle As String, ByVal Avance As Single, ByRef Cancel As Boolean)
 
         private AppConfigWS.appConfig cliente;
         private bool webServiceInicializado;
-//    Public Event SincronizarAppProgress(ByVal Detalle As String, ByVal Avance As Single, ByRef Cancel As Boolean)
         private string _macAddress;
         private string _ipAddress;
 
@@ -39,9 +35,7 @@ namespace Catalogo._appConfig
             }
         }
 
-        protected void inicializar(string MacAddress,
-            string ipAddress, string ipAddressIntranet, 
-            bool usaProxy, string proxyServerAddress)
+        protected void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet, bool usaProxy, string proxyServerAddress)
         {
             bool conectado = util.SimplePing.ping(ipAddress, 5000);
 
@@ -49,8 +43,6 @@ namespace Catalogo._appConfig
             {
                 conectado = util.SimplePing.ping(ipAddressIntranet, 5000);
             }
-            
-            //        On Error GoTo errhandler
             try
             {
                 if (!webServiceInicializado)
@@ -77,8 +69,6 @@ namespace Catalogo._appConfig
             {
                 if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
                 {
-                    //        If Err.Number = -2147024809 Then
-                    //            ' Intento con el ip interno
                     cliente = new AppConfigWS.appConfig();
                     cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/appConfig.asmx?wsdl";
                     if (usaProxy)
@@ -113,7 +103,7 @@ namespace Catalogo._appConfig
         {
             bool cancel = false;
 
-            //    '    RaiseEvent SincronizarAppProgress("Iniciando Sincronización App Config", 0, Cancel)
+//RaiseEvent SincronizarAppProgress("Iniciando Sincronización App Config", 0, Cancel)
             if (!webServiceInicializado)
             {
                 cancel = true;
@@ -121,7 +111,7 @@ namespace Catalogo._appConfig
 
             if (!cancel)
             {
-                //    '        RaiseEvent SincronizarAppProgress("Sincronizando App Config", 40, Cancel)
+//RaiseEvent SincronizarAppProgress("Sincronizando App Config", 40, Cancel)
             }
 
             if (!cancel)
@@ -131,7 +121,7 @@ namespace Catalogo._appConfig
 
             if (!cancel)
             {
-                //    '        RaiseEvent SincronizarAppProgress("Sincronizando comandos", 60, Cancel)
+//RaiseEvent SincronizarAppProgress("Sincronizando comandos", 60, Cancel)
             }
 
             if (!cancel)
@@ -141,7 +131,7 @@ namespace Catalogo._appConfig
 
             if (!cancel)
             {
-                //    '        RaiseEvent SincronizarAppProgress("Sincronizando App Config", 75, Cancel)
+//RaiseEvent SincronizarAppProgress("Sincronizando App Config", 75, Cancel)
             }
 
             if (!cancel)
@@ -179,9 +169,10 @@ namespace Catalogo._appConfig
                         auditarProceso);
                 }
             }
+
             if (!cancel)
             {
-                //    '        RaiseEvent SincronizarAppProgress("Fin de la sincronizacion de App Config", 100, Cancel)
+//RaiseEvent SincronizarAppProgress("Fin de la sincronizacion de App Config", 100, Cancel)
             }
 
             if (!cancel)
@@ -247,8 +238,7 @@ namespace Catalogo._appConfig
                         System.Data.DataRow row = ds.Tables[0].Rows[i];
                         if ((row["Campo"].ToString().Trim().Length > 0) && (row["Valor"].ToString().Trim().Length > 0))
                         {
-                            string tipo = row["Tipo"].ToString().Trim();
-                            //    '                    If Left(Trim(rs("Tipo")), 1) = 2 Then 'Actualizo ansAppConfig ???
+                            string tipo = row["Tipo"].ToString().Trim().Substring(0,1);
                             if (tipo == "2") // Actualizo ansAppConfig
                             {
                                 switch (tipo)
@@ -316,15 +306,13 @@ namespace Catalogo._appConfig
                 }
                 catch (Exception ex)
                 {
-                    throw ex;  //util.errorHandling.ErrorForm.show();
+                    //throw ex;  //util.errorHandling.ErrorForm.show();
                 }
             }
         }
 
         public void obtenerComandos(ref bool cancel)
-        {
-            //    '        On Error Resume Next
-
+        {  
             if (!util.SimplePing.ping(_ipAddress, 5000))
             {
                 // Conexion no valida
@@ -334,18 +322,10 @@ namespace Catalogo._appConfig
 
             bool wSalir = false;
 
-            //string strComando;
-            //string[] sComando;
-            //long code;
-            //long I;
-
             System.Data.DataSet ds = cliente.ObtenerComandosDS(_macAddress);
 
             if (ds.Tables[0].Rows.Count > 0)
             {
-                //    '            'i = 1
-
-                //    '            On Error GoTo Proximo
                 try
                 {
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -360,39 +340,27 @@ namespace Catalogo._appConfig
                                 case "sh":
                                     {
                                         System.Diagnostics.Process p = new System.Diagnostics.Process();
-                                        p.StartInfo.FileName = row["Comando"].ToString().Substring(4);
+                                        p.StartInfo.FileName = row["Comando"].ToString().Substring(3);
                                         p.StartInfo.UseShellExecute = true;
                                         p.Start();
                                         p.WaitForExit();
                                     }
                                     break;
-                                case "vb":
-                                    {
-                                        // Alguna Funcion de mantenimiento de visual basic
-
-                                        //    '                            If Len(Trim(Mid(rs("comando"), 4))) > 0 Then
-                                        //    '                                strComando = Trim(Mid(rs("comando"), 4))
-                                        //    '                                Code = EbExecuteLine(StrPtr(strComando), 0&, 0&, Abs(False)) = 0
-                                        //    '                            End If
-                                    }
-                                    break;
                                 case "sw": // write key setting.ini
                                     {
-                                        //    '                            sComando = Split(Mid(rs("Comando"), 4), "//")
-                                        //    '                            WriteINI(sComando(0), sComando(1), sComando(2))
-                                        //    '                            If sComando(1) = "mdb" Then
-                                        //    '                                wSalir = True
-                                        //    '                            End If
+                                        string[] sComando = row["Comando"].ToString().Substring(3).Split(new string[] {"//"}, StringSplitOptions.None);
+                                        Funciones.modINIs.WriteINI(sComando[0], sComando[1], sComando[2]);
+                                        if (sComando[1]=="mdb") wSalir=true;
                                     }
                                     break;
                                 case "sd": // delete key setting.ini
                                     {
-                                        //    '                            sComando = Split(Mid(rs("Comando"), 4), "//")
-                                        //    '                            DeleteKeyINI(sComando(0), sComando(1))
-                                    }
+                                        string[] sComando = row["Comando"].ToString().Substring(3).Split(new string[] { "//" }, StringSplitOptions.None);
+                                        Funciones.modINIs.DeleteKeyINI(sComando[0], sComando[1]);
+                                }
                                     break;
                                 case "db":
-                                    Funciones.oleDbFunciones.ComandoIU(conexion, row["Comando"].ToString().Substring(4));
+                                    Funciones.oleDbFunciones.ComandoIU(conexion, row["Comando"].ToString().Substring(3));
                                     break;
                                 default:
                                     break;
@@ -413,8 +381,8 @@ namespace Catalogo._appConfig
                     Global01.TranActiva.Commit();
                     Global01.TranActiva = null;
                 }
-                //    '            MsgBox("Se han efectuado modificaciones en la aplicación," & vbCrLf & "ésta de cerrará, luego re-ingrese nuevamente", vbCritical, "Atención")
-                //    '            mainMod.miEND()
+                MessageBox.Show("Se han efectuado modificaciones en la aplicación, \n ésta de cerrará, luego re-ingrese nuevamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Catalogo.MainMod.miEnd();
             }
         }
 

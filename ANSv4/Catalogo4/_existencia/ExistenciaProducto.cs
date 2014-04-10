@@ -35,9 +35,7 @@ namespace Catalogo.util.BackgroundTasks
             string ipCatalogo =  ipPriv.GetIPCatalogo();
 
             Catalogo._existencia.VerExistencia existencia = new Catalogo._existencia.VerExistencia();
-            existencia.Inicializar("3PRUEBA-CATALOGO-4", ipPrivado, ipIntranet, false, "");
-
-            //existencia.Inicializar(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+            existencia.Inicializar(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
 
             string pSemaforo = "";
             existencia.ExistenciaSemaforo(_idProducto, Global01.NroUsuario, ref pSemaforo);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Catalogo._Application
 {
@@ -15,9 +16,7 @@ namespace Catalogo._Application
         private string _MacAddress;
         private string _ipAddress;
 
-        public ActivarAplicacion(string MacAddress,
-            string ipAddress, string ipAddressIntranet,
-            bool usaProxy, string proxyServerAddress)
+        public ActivarAplicacion(string MacAddress, string ipAddress, string ipAddressIntranet, bool usaProxy, string proxyServerAddress)
         {
             webServiceInicializado = false;
             inicializar(MacAddress, ipAddress, ipAddressIntranet, usaProxy, proxyServerAddress);
@@ -31,17 +30,13 @@ namespace Catalogo._Application
             }
         }
 
-        public void inicializar(string MacAddress,
-            string ipAddress, string ipAddressIntranet, bool usaProxy, string proxyServerAddress)
+        public void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet, bool usaProxy, string proxyServerAddress)
         {
             bool conectado = util.SimplePing.ping(ipAddress, 5000);
             if (!conectado)
             {
                 conectado = util.SimplePing.ping(ipAddressIntranet, 5000);
             }
-
-
-            //        On Error GoTo errhandler
             try
             {
                 if (!webServiceInicializado)
@@ -89,7 +84,6 @@ namespace Catalogo._Application
             }
         }
 
-
         private string obtenerLlaveViajante(string ZonaViajante)
         {
             string llaveViajante = string.Empty;
@@ -100,7 +94,7 @@ namespace Catalogo._Application
                 if (s.Trim().Length > 0)
                 {
                     string xParam = s + Global01.IDMaquinaCRC;
-                    llaveViajante = ZonaViajante + Global01.NroUsuario + Global01.Cuit + _registro.AppRegistro.ObtenerCRC(ref xParam);
+                    llaveViajante = ZonaViajante + Global01.NroUsuario + Global01.Cuit + _registro.AppRegistro.ObtenerCRC(xParam);
                 }
             }
             return llaveViajante;
@@ -112,7 +106,7 @@ namespace Catalogo._Application
             int estado;
             string sResultado = String.Empty;
 
-            //    '    RaiseEvent SincronizarActivarAppProgress("Iniciando Servicio Web", 0, Cancel)
+//RaiseEvent SincronizarActivarAppProgress("Iniciando Servicio Web", 0, Cancel)
 
             if (!webServiceInicializado)
             {
@@ -121,29 +115,26 @@ namespace Catalogo._Application
 
             if (!cancel)
             {
-                //    '        RaiseEvent SincronizarActivarAppProgress("Verificando Estado Viajante/Cliente", 40, Cancel)
+//RaiseEvent SincronizarActivarAppProgress("Verificando Estado Viajante/Cliente", 40, Cancel)
             }
 
             if (!cancel)
             {
+                //zzzzz iiiii ccccccccccc
+                //12345 67890 12345678901
+                //wZonaViajante = Mid(vg.LLaveViajante, 1, 5)
+
                 string wZonaviajante = Global01.LLaveViajante.Substring(0, 5);
                 string wLLaveViajante;
-                //    '        Dim wZonaViajante As String
-                //    '        Dim wLlaveViajante As String
 
-                //    '        'zzzzz iiiii ccccccccccc
-                //    '        '12345 67890 12345678901
-
-                //    '        wZonaViajante = Mid(vg.LLaveViajante, 1, 5)
-                Global01.NroUsuario = Global01.LLaveViajante.Substring(6, 5);
-                Global01.Cuit = Global01.LLaveViajante.Substring(11, 11);
+                Global01.NroUsuario = Global01.LLaveViajante.Substring(5, 5);
+                Global01.Cuit = Global01.LLaveViajante.Substring(10, 11);
 
                 wLLaveViajante = obtenerLlaveViajante(wZonaviajante);
 
                 if (_registro.AppRegistro.ValidateLLaveViajante(wLLaveViajante))
                 {
-                    estado = obtenerEstado(ref cancel, Global01.Cuit,
-                        Global01.NroUsuario, wZonaviajante, Global01.IDMaquina);
+                    estado = obtenerEstado(ref cancel, Global01.Cuit, Global01.NroUsuario, wZonaviajante, Global01.IDMaquina);
 
                     switch (estado)
                     {
@@ -172,12 +163,12 @@ namespace Catalogo._Application
                             break;
                         case 9: // Por Aca Bien
                             sResultado = "Registro Exitoso, copie los datos obtenidos en la PC del Cliente";
-                        //    '                    DeleteKeyINI("DATOS", "LLaveViajante")
+                            Funciones.modINIs.DeleteKeyINI("DATOS", "LLaveViajante");
                             
                            string xParam = Global01.IDMaquina + Global01.IDMaquinaCRC;
-                           Global01.IDMaquinaREG = _registro.AppRegistro.ObtenerCRC(ref xParam);
+                           Global01.IDMaquinaREG = _registro.AppRegistro.ObtenerCRC(xParam);
 
-                        //    '                    WriteINI("DATOS", "RegistrationKey", vg.IDMaquinaREG)
+                           Funciones.modINIs.WriteINI("DATOS", "RegistrationKey", Global01.IDMaquinaREG);
 
                             Global01.AppActiva = true;
 
@@ -190,20 +181,18 @@ namespace Catalogo._Application
                 }
                 else
                 {
-                    //    '            DeleteKeyINI("DATOS", "LLaveViajante")
+                    Funciones.modINIs.DeleteKeyINI("DATOS", "LLaveViajante");
                     sResultado = "Error en la llave ingresada por el viajante";
                 }
             }
 
             if (sResultado != String.Empty)
             {
-                //    '        MsgBox(sResultado, vbInformation, "Resultado Activación")
+                MessageBox.Show(sResultado, "Resultado de la Activación", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-
-        private int obtenerEstado(ref bool cancel, string Cuit,
-            string IDAns, string IDViajante, string LLaveCliente)
+        private int obtenerEstado(ref bool cancel, string Cuit, string IDAns, string IDViajante, string LLaveCliente)
         {
             if (!util.SimplePing.ping(_ipAddress, 5000))
             {
@@ -223,7 +212,7 @@ namespace Catalogo._Application
             byte estado;
             string sResultado = String.Empty;
 
-            //        RaiseEvent SincronizarActivarAppProgress("Iniciando Servicio Web", 0, Cancel)
+            //RaiseEvent SincronizarActivarAppProgress("Iniciando Servicio Web", 0, Cancel)
             if (!webServiceInicializado)
             {
                 cancel = true;
@@ -231,7 +220,7 @@ namespace Catalogo._Application
 
             if (!cancel)
             {
-                //            RaiseEvent SincronizarActivarAppProgress("Estado Actual del Catálogo", 40, Cancel)
+              //RaiseEvent SincronizarActivarAppProgress("Estado Actual del Catálogo", 40, Cancel)
             }
 
             if (!cancel)
@@ -256,21 +245,18 @@ namespace Catalogo._Application
                         break;
                 }
 
-
                 if (!cancel)
                 {
-                    //                RaiseEvent SincronizarActivarAppProgress("Un momento por favor...", 70, Cancel)
+                    //RaiseEvent SincronizarActivarAppProgress("Un momento por favor...", 70, Cancel)
                 }
             }
 
             if (sResultado != String.Empty)
             {
-                //            RaiseEvent SincronizarActivarAppProgress(sResultado, 100, Cancel)
-                //            MsgBox(sResultado & vbCrLf & vbCrLf & "ID: " & m_MacAddress, vbInformation, "Estado Actual del Catálogo")
+                //RaiseEvent SincronizarActivarAppProgress(sResultado, 100, Cancel)
+                MessageBox.Show(sResultado + "\n\nID: " + _MacAddress, "Estado Actual del Catálogo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
-
 
         private byte obtenerEstadoActual(ref bool cancel, string Cuit, string IDAns)
         {
@@ -305,7 +291,6 @@ namespace Catalogo._Application
                 }
             }
         }
-
 
         private byte obtenerListaPrecio(ref bool cancel, string Cuit, string IDAns)
         {

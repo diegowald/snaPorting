@@ -50,14 +50,22 @@ namespace Catalogo
                 if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     ActivarApplicacion();
-                    //Dim dlg As New frmConexionUpdate
-
-                    //dlg.modoUpdate = ActivarApp
-                    //dlg.Show vbModal
                 }
             }
             else
             {
+
+                if (Funciones.modINIs.ReadINI("DATOS", "INFO", "1") == "0") //Or vg.RecienRegistrado Or vg.NoConn
+                {
+                    //Anula Transmicion
+                    //vg.auditor.Guardar Seguridad, CANCELA, "No chequea AppConfigServer"
+                }
+                else
+                {
+                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig, false);
+                    updater.run();
+                }
+
                 if (Global01.ActualizarClientes)
                 {   
                     util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateCuentas, false);
@@ -225,13 +233,13 @@ namespace Catalogo
  
             //- Registro y activación -------------XX
         AcaRegistro:
-            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            if (false)
+            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            //if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
                     // Genera nueva Instalacion ID y va a Registro
-                    Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(ref Global01.IDMaquina);
+                    Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(Global01.IDMaquina);
                     Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
                     Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
                     Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
@@ -287,7 +295,7 @@ namespace Catalogo
                 // registrada y activa
                 Global01.AppActiva = true;
                 ///// BORRAR ESTA LINEA!!!!!!!
-                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
             }
             //--------------------------------------XX
 

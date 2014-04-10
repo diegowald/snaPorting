@@ -42,7 +42,7 @@ namespace Catalogo._registro
             varSerial[4] = TomarInfoWMI(ref varObjectToID[4]);
 
             string xParam = varSerial[1].ToString() + varSerial[2].ToString() + varSerial[3].ToString() + varSerial[4].ToString();
-            functionReturnValue = ((int)(Global01.miSABOR)).ToString() + ObtenerCRC(ref xParam);
+            functionReturnValue = ((int)(Global01.miSABOR)).ToString() + ObtenerCRC(xParam);
 
             return functionReturnValue.Trim().ToUpper();
 
@@ -72,7 +72,7 @@ namespace Catalogo._registro
             }
         }
 
-        public static string ObtenerCRC(ref string s)
+        public static string ObtenerCRC(string s)
         {
             const string PROCNAME_ = "ObtenerCRC";
 
@@ -111,7 +111,7 @@ namespace Catalogo._registro
 
             bool resultado = false;
 
-            if (s == ObtenerCRC(ref Global01.IDMaquina)) 
+            if (s == ObtenerCRC(Global01.IDMaquina)) 
             { 
                 resultado = true;
             }
@@ -136,7 +136,7 @@ namespace Catalogo._registro
                 else
                 {
                     string xParam = Global01.IDMaquina.ToString() + Global01.IDMaquinaCRC.ToString();
-                    functionReturnValue = s == ObtenerCRC(ref xParam);
+                    functionReturnValue = s == ObtenerCRC(xParam);
                 }
             }
             catch (Exception ex)

@@ -126,9 +126,6 @@ namespace Catalogo.util
 
 	    public IPPrivado(string ipAddress, string MacAddress, bool usaProxy, string URLProxyServer)
 	    {
-		     // ERROR: Not supported in C#: OnErrorStatement
-
-
 		    bool Conectado = false;
 
             //Conectado = My.Computer.Network.Ping(ipAddress, 5000);
