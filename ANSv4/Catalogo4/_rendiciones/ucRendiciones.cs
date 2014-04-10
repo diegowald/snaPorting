@@ -136,14 +136,9 @@ namespace Catalogo._rendiciones
 	    {		
             switch (Accion) {
 			    case tAccion.Nuevo:
-
-				    m.Accion = tAccion.Nuevo;
-				    CambiarA(tEstado.Nuevo);
-				    Habilita(m.Accion);
-
                     m.ID = 0;
 
-                    if (cboRecibos.Items.Count > 0) cboRecibos.Items.Clear();
+                    //if (cboRecibos.Items.Count > 0) cboRecibos.Items.Clear();
                     Funciones.util.CargaCombo(Global01.Conexion, ref cboRecibos, "v_Recibo_Enc_noR_cbo", "Descrip", "ID");
 
                     if (cboRecibos.Items.Count > 0) 
@@ -162,6 +157,10 @@ namespace Catalogo._rendiciones
                     {//Valores
 		                dtBd_Fecha.Focus();
                     };
+				    
+                    m.Accion = tAccion.Nuevo;
+				    CambiarA(tEstado.Nuevo);
+				    Habilita(m.Accion);
 
 				    break;
 			    case tAccion.Modificar:
@@ -273,8 +272,8 @@ namespace Catalogo._rendiciones
   			        break;
 			    case tAccion.Cancelar:
 
-				    CambiarA(tEstado.Neutro);
-				    m.escape = true;
+                    m.escape = true;
+                    CambiarA(tEstado.Neutro);
 				    m.Accion = tAccion.Cancelar;
 				    Habilita(m.Accion);
 
@@ -284,8 +283,6 @@ namespace Catalogo._rendiciones
 				    CambiarA(tEstado.Buscar);
 				    m.Accion = tAccion.Buscar;
 				    Habilita(m.Accion);
-		        
-                    sTAB.SelectedIndex = 2;
 
 				    break;
 			    case tAccion.Imprimir:
@@ -373,6 +370,7 @@ namespace Catalogo._rendiciones
 					btnBuscar.Enabled = true;
                     btnVer.Enabled = false;
 					btnEliminar.Enabled = false;
+                    sTAB.Visible = false;
 
 				    break;
 			    case tEstado.Nuevo:
@@ -446,6 +444,7 @@ namespace Catalogo._rendiciones
                     LimpiarPantalla("all");
 
 				    sTAB.SelectTab(0);
+                    sTAB.Visible = true;
 
 				    break;
 			    case tAccion.Modificar:
@@ -467,9 +466,9 @@ namespace Catalogo._rendiciones
                     fraLVValores.Enabled = false;
 
                     fraBuscar.Enabled = true;
-
 				    LimpiarPantalla("buscar");
 				    sTAB.SelectTab(2);
+                    sTAB.Visible = true;
 
 				    break;
 			    case tAccion.Imprimir:
@@ -491,6 +490,7 @@ namespace Catalogo._rendiciones
                     fraLVRecibos.Enabled = false;
                     fraLVValores.Enabled = false;
                     fraBuscar.Enabled = false;
+                    lvBuscar.Visible = false;
 
 				    break;
 			    case tAccion.Cancelar:
@@ -720,19 +720,7 @@ namespace Catalogo._rendiciones
                     throw ex;  //new Exception(ex.Message.ToString());
                 }   
             }
-
             adoCMD = null;
-
-            //ElseIf pOper = "upd" Then
-            //Set adoPRM = adoCMD.CreateParameter("pID", adInteger, adParamInput, , pID)
-            //adoCMD.Parameters.Append adoPRM
-		
-            //adoCMD.ActiveConnection = Conexion
-            //adoCMD.CommandType = adCmdStoredProc
-            //adoCMD.CommandText = "usp_RendicionValores_upd"
-            //adoCMD.Execute
-            //adoCMD.Parameters.Delete ("pID")
-
         }
   
 	    private void CerrarToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
@@ -920,6 +908,7 @@ namespace Catalogo._rendiciones
                     if (m.DR.HasRows)
                     {
                         Funciones.util.CargarLV(ref lvBuscar, m.DR);
+                        lvBuscar.Visible = true;
                     }
                     else
                     {
@@ -941,8 +930,6 @@ namespace Catalogo._rendiciones
             txtBuscar.Text = "";
             mskFbuscar.Value = DateTime.Today.Date;
     
-            sTAB.SelectedIndex = 0;
-
 		    LimpiarPantalla("all");
 
             m.Accion = tAccion.Neutro;
@@ -1082,7 +1069,7 @@ namespace Catalogo._rendiciones
 
             oReport.Dispose();
         }
-//----------------------------
+
         private void cboCheques_Leave(System.Object eventSender, System.EventArgs eventArgs)
         {
             string s = cboCheques.SelectedText;
@@ -1332,6 +1319,5 @@ namespace Catalogo._rendiciones
             Accion_Click(tAccion.Neutro);
         }
 
-  
     } //fin clase
 } //fin namespace

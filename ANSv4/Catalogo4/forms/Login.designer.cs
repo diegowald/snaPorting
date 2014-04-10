@@ -83,7 +83,7 @@
             // 
             // btnNuevo
             // 
-            this.btnNuevo.BackColor = System.Drawing.Color.Red;
+            this.btnNuevo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.btnNuevo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnNuevo.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnNuevo.FlatAppearance.BorderSize = 2;
@@ -119,7 +119,7 @@
             // 
             // btnIngresar
             // 
-            this.btnIngresar.BackColor = System.Drawing.Color.Red;
+            this.btnIngresar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.btnIngresar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnIngresar.Enabled = false;
             this.btnIngresar.FlatAppearance.BorderColor = System.Drawing.Color.White;

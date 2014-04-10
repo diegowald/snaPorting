@@ -70,10 +70,11 @@
             // 
             // btnEnviarMail
             // 
-            this.btnEnviarMail.BackColor = System.Drawing.Color.Red;
+            this.btnEnviarMail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.btnEnviarMail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnEnviarMail.Enabled = false;
             this.btnEnviarMail.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnEnviarMail.FlatAppearance.BorderSize = 2;
             this.btnEnviarMail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.btnEnviarMail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEnviarMail.ForeColor = System.Drawing.Color.White;
@@ -87,10 +88,11 @@
             // 
             // btnVerPDF
             // 
-            this.btnVerPDF.BackColor = System.Drawing.Color.Red;
+            this.btnVerPDF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.btnVerPDF.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnVerPDF.Enabled = false;
             this.btnVerPDF.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnVerPDF.FlatAppearance.BorderSize = 2;
             this.btnVerPDF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.btnVerPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVerPDF.ForeColor = System.Drawing.Color.White;
