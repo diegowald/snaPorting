@@ -24,6 +24,7 @@ namespace Catalogo._productos
         public DetalleProducto()
         {
             InitializeComponent();
+            _imgEnDescarga = new List<string>();
         }
 
         public void onRecibir(System.Windows.Forms.DataGridViewRow dato)
@@ -106,7 +107,7 @@ namespace Catalogo._productos
                     {
                         imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
 
-                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "0") == "1")
+                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "1") == "1")
                         {
                             descargarImagen(ImgProductoWeb, ImgProducto, dato);
                         }
@@ -123,27 +124,16 @@ namespace Catalogo._productos
 
         private void descargarImagen(string Origen, string Destino, System.Windows.Forms.DataGridViewRow dato)
         {
-            if (dato.Tag == null)
+            if (!isImageDownloading(Destino))
             {
-                dato.Tag = 0;
+                setImageDownloading(Destino);
                 System.Net.WebClient ImgWeb = new System.Net.WebClient();
                 ImgWeb.DownloadFileCompleted += ImgWeb_DownloadFileCompleted;
 
-                try
-                {
-                    _Destino = Destino;
-                    //ImgWeb.DownloadFile(Origen, Destino);
-                    ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
+                _Destino = Destino;
 
-                }
-                catch (System.Web.HttpException ex)
-                {
-                    throw ex;
-                }
-                catch (System.Net.WebException wex)
-                {
-                    throw wex;
-                }
+                //ImgWeb.DownloadFile(Origen, Destino);
+                ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
             }
         }
         void ImgWeb_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
@@ -191,5 +181,23 @@ namespace Catalogo._productos
                 throw ex;
             }
         }
+
+
+        private System.Collections.Generic.List<string> _imgEnDescarga;
+
+        private bool isImageDownloading(string file)
+        {
+            return _imgEnDescarga.Contains(file);
+        }
+
+        private void setImageDownloading(string file)
+        {
+            if (!isImageDownloading(file))
+            {
+                _imgEnDescarga.Add(file);
+            }
+        }
+
+
     }
 }
