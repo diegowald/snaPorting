@@ -243,7 +243,8 @@ namespace Catalogo._movimientos
                                     if (row.Cells["Selec"].Value != null && row.Cells["Selec"].Value.ToString() != "" && (bool)row.Cells["Selec"].Value)
                                     {
                                         util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO item = new util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO();
-                                        item.nro = (int)row.Cells["Nro"].Value;
+                                        System.Diagnostics.Debug.WriteLine(row.Cells["Nro"].Value);
+                                        item.nro = row.Cells["Nro"].Value.ToString();
                                         item.origen = row.Cells["Origen"].Value.ToString();
                                         filtro.Add(item);
                                     }
@@ -251,7 +252,7 @@ namespace Catalogo._movimientos
 
                                 Catalogo.util.BackgroundTasks.EnvioMovimientos envio =
                                     new util.BackgroundTasks.EnvioMovimientos(
-                                        util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico,
+                                        util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
                                         int.Parse(this.cboCliente.SelectedValue.ToString()),
                                         false,
                                         util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_LISTVIEW,

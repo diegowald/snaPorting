@@ -16,7 +16,7 @@ namespace Catalogo.util.BackgroundTasks
 
         public struct MOVIMIENTO_SELECCIONADO
         {
-            public long nro;
+            public string nro;
             public string origen;
         }
 
@@ -24,11 +24,11 @@ namespace Catalogo.util.BackgroundTasks
         private bool _resultado;
         int _idCliente;
         bool _useSettingIni;
-        System.Collections.Generic.List<long> filtroNotaVenta;
-        System.Collections.Generic.List<long> filtroRecibo;
-        System.Collections.Generic.List<long> filtroDevolucion;
-        System.Collections.Generic.List<long> filtroInterdeposito;
-        System.Collections.Generic.List<long> filtroRendicion;
+        System.Collections.Generic.List<string> filtroNotaVenta;
+        System.Collections.Generic.List<string> filtroRecibo;
+        System.Collections.Generic.List<string> filtroDevolucion;
+        System.Collections.Generic.List<string> filtroInterdeposito;
+        System.Collections.Generic.List<string> filtroRendicion;
 
         public EnvioMovimientos(JOB_TYPE jobType, int idCliente, bool useSettingsIni, MODOS_TRANSMISION modoTransmision,
             System.Collections.Generic.List<MOVIMIENTO_SELECCIONADO> filtro)
@@ -37,17 +37,17 @@ namespace Catalogo.util.BackgroundTasks
             _idCliente = idCliente;
             _useSettingIni = useSettingsIni;
             _modoTransmision = modoTransmision;
-            filtroNotaVenta = new List<long>();
-            filtroRecibo = new List<long>();
-            filtroDevolucion = new List<long>();
-            filtroInterdeposito = new List<long>();
-            filtroRendicion = new List<long>();
+            filtroNotaVenta = new List<string>();
+            filtroRecibo = new List<string>();
+            filtroDevolucion = new List<string>();
+            filtroInterdeposito = new List<string>();
+            filtroRendicion = new List<string>();
 
             if (filtro != null)
             {
                 foreach (MOVIMIENTO_SELECCIONADO ms in filtro)
                 {
-                    switch (ms.origen)
+                    switch (ms.origen.ToUpper())
                     {
                         case "NOTA DE VENTA":
                             filtroNotaVenta.Add(ms.nro);
@@ -122,7 +122,7 @@ namespace Catalogo.util.BackgroundTasks
             }
 
             _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, _idCliente);
-            System.Data.OleDb.OleDbDataReader movs = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "");
+            System.Data.OleDb.OleDbDataReader movs = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "(todos)");
 
             if (movs.HasRows)
             {
@@ -144,7 +144,7 @@ namespace Catalogo.util.BackgroundTasks
                                     }
                                     else
                                     {
-                                        enviar = filtroNotaVenta.Contains(long.Parse(Nro));
+                                        enviar = filtroNotaVenta.Contains(Nro);
                                     }
                                     if (enviar)
                                     {
@@ -179,7 +179,7 @@ namespace Catalogo.util.BackgroundTasks
                                     }
                                     else
                                     {
-                                        enviar = filtroRecibo.Contains(long.Parse(Nro));
+                                        enviar = filtroRecibo.Contains(Nro);
                                     }
                                     if (enviar)
                                     {
@@ -217,7 +217,7 @@ namespace Catalogo.util.BackgroundTasks
                                     }
                                     else
                                     {
-                                        enviar = filtroDevolucion.Contains(long.Parse(Nro));
+                                        enviar = filtroDevolucion.Contains(Nro);
                                     }
                                     if (enviar)
                                     {
@@ -252,7 +252,7 @@ namespace Catalogo.util.BackgroundTasks
                                     }
                                     else
                                     {
-                                        enviar = filtroInterdeposito.Contains(long.Parse(Nro));
+                                        enviar = filtroInterdeposito.Contains(Nro);
                                     }
                                     if (enviar)
                                     {
@@ -286,7 +286,7 @@ namespace Catalogo.util.BackgroundTasks
                                     }
                                     else
                                     {
-                                        enviar = filtroRendicion.Contains(long.Parse(Nro));
+                                        enviar = filtroRendicion.Contains(Nro);
                                     }
                                     if (enviar)
                                     {
