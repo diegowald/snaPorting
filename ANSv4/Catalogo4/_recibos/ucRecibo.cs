@@ -706,7 +706,7 @@ namespace Catalogo._recibos
 
                 if (ralistView.Items[i].SubItems[10].Text=="3" | ralistView.Items[i].SubItems[10].Text=="4")
                 {
-                    Aux = Aux + (float.Parse(ralistView.Items[i].SubItems[1].Text) * float.Parse(ralistView.Items[i].SubItems[12].Text));
+                    Aux = Aux + (float.Parse("0" + ralistView.Items[i].SubItems[1].Text) * float.Parse("0" + ralistView.Items[i].SubItems[12].Text));
                 }
                 else
                 {
@@ -1195,6 +1195,16 @@ namespace Catalogo._recibos
                     ItemX = new ListViewItem(apConceptoTxt.Text.ToUpper());
                 }
 
+                //alternate row color
+                if (aplistView.Items.Count % 2 == 0)
+                {
+                    ItemX.BackColor = Color.White;
+                }
+                else
+                {
+                    ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                }
+
                 ItemX.Tag = "add";
                 ItemX.SubItems.Add(string.Format("{0:N2}",float.Parse("0" + apImporteTxt.Text))); 
                 ItemX.SubItems.Add(string.Format("{0:N2}",float.Parse("0" + apPercepcionTxt.Text))); 
@@ -1344,6 +1354,16 @@ namespace Catalogo._recibos
                 else
                 {
                     ItemX = new ListViewItem(adConceptoTxt.Text.ToUpper());
+                }
+
+                //alternate row color
+                if (adlistView.Items.Count % 2 == 0)
+                {
+                    ItemX.BackColor = Color.White;
+                }
+                else
+                {
+                    ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
                 }
 
                 ItemX.Tag = "add";
@@ -1517,6 +1537,7 @@ namespace Catalogo._recibos
             if (btnIniciar.Tag.ToString() == "INICIAR")
                 cboCliente.SelectedIndex = dato;
         }
+
 
     } //fin clase
 } //fin namespace

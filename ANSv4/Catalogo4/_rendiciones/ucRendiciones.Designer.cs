@@ -30,8 +30,9 @@ namespace Catalogo._rendiciones
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sTAB = new System.Windows.Forms.TabControl();
             this.rTabRec = new System.Windows.Forms.TabPage();
             this.fraDatos = new System.Windows.Forms.Panel();
@@ -152,13 +153,6 @@ namespace Catalogo._rendiciones
             this.Label24 = new System.Windows.Forms.Label();
             this.lblTit2 = new System.Windows.Forms.Label();
             this.rTabBuscar = new System.Windows.Forms.TabPage();
-            this.fraBuscar = new System.Windows.Forms.Panel();
-            this.cmdBuscar = new System.Windows.Forms.Button();
-            this.lvBuscar = new System.Windows.Forms.ListView();
-            this.mskFbuscar = new System.Windows.Forms.DateTimePicker();
-            this.txtBuscar = new System.Windows.Forms.TextBox();
-            this._optBuscar_1 = new System.Windows.Forms.RadioButton();
-            this._optBuscar_0 = new System.Windows.Forms.RadioButton();
             this.rTabAnt = new System.Windows.Forms.TabPage();
             this.paDataGridView = new System.Windows.Forms.DataGridView();
             this.paPnlTop = new System.Windows.Forms.Panel();
@@ -171,6 +165,17 @@ namespace Catalogo._rendiciones
             this.btnIniciar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnVer = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.fraBuscar = new System.Windows.Forms.Panel();
+            this.lvBuscar = new System.Windows.Forms.ListView();
+            this.fndNroRendicionLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fndFechaRendicionLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.fndDescripcionLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cmdBuscar = new System.Windows.Forms.Button();
+            this.mskFbuscar = new System.Windows.Forms.DateTimePicker();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
+            this._optBuscar_1 = new System.Windows.Forms.RadioButton();
+            this._optBuscar_0 = new System.Windows.Forms.RadioButton();
             this.sTAB.SuspendLayout();
             this.rTabRec.SuspendLayout();
             this.fraDatos.SuspendLayout();
@@ -180,12 +185,12 @@ namespace Catalogo._rendiciones
             this.fraLVValores.SuspendLayout();
             this.fraDatos1.SuspendLayout();
             this.rTabBuscar.SuspendLayout();
-            this.fraBuscar.SuspendLayout();
             this.rTabAnt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paDataGridView)).BeginInit();
             this.paPnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.devAnterioresDataGridView)).BeginInit();
             this.ucPnlTop.SuspendLayout();
+            this.fraBuscar.SuspendLayout();
             this.SuspendLayout();
             // 
             // sTAB
@@ -196,29 +201,32 @@ namespace Catalogo._rendiciones
             this.sTAB.Controls.Add(this.rTabBuscar);
             this.sTAB.Controls.Add(this.rTabAnt);
             this.sTAB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sTAB.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sTAB.Location = new System.Drawing.Point(0, 32);
-            this.sTAB.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.sTAB.Margin = new System.Windows.Forms.Padding(3, 16, 3, 3);
             this.sTAB.Multiline = true;
             this.sTAB.Name = "sTAB";
             this.sTAB.SelectedIndex = 0;
             this.sTAB.Size = new System.Drawing.Size(825, 433);
             this.sTAB.TabIndex = 0;
+            this.sTAB.Visible = false;
             // 
             // rTabRec
             // 
-            this.rTabRec.BackColor = System.Drawing.Color.White;
+            this.rTabRec.BackColor = System.Drawing.Color.Transparent;
             this.rTabRec.Controls.Add(this.fraDatos);
             this.rTabRec.Controls.Add(this.fraClave);
             this.rTabRec.Controls.Add(this.fraLVRecibos);
-            this.rTabRec.Location = new System.Drawing.Point(4, 25);
+            this.rTabRec.Location = new System.Drawing.Point(4, 27);
             this.rTabRec.Name = "rTabRec";
-            this.rTabRec.Size = new System.Drawing.Size(817, 404);
+            this.rTabRec.Size = new System.Drawing.Size(817, 402);
             this.rTabRec.TabIndex = 5;
             this.rTabRec.Text = "Recibos";
             // 
             // fraDatos
             // 
-            this.fraDatos.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.fraDatos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.fraDatos.BackColor = System.Drawing.Color.Transparent;
             this.fraDatos.Controls.Add(this.cmdReciboAdd);
             this.fraDatos.Controls.Add(this.lvRecibos);
             this.fraDatos.Controls.Add(this.txtRecHasta);
@@ -227,7 +235,6 @@ namespace Catalogo._rendiciones
             this.fraDatos.Controls.Add(this.Label2);
             this.fraDatos.Controls.Add(this.Label1);
             this.fraDatos.Controls.Add(this.Label12);
-            this.fraDatos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fraDatos.Location = new System.Drawing.Point(0, 92);
             this.fraDatos.Name = "fraDatos";
             this.fraDatos.Size = new System.Drawing.Size(817, 251);
@@ -275,6 +282,7 @@ namespace Catalogo._rendiciones
             this.lvRecibos.Location = new System.Drawing.Point(8, 44);
             this.lvRecibos.Name = "lvRecibos";
             this.lvRecibos.Size = new System.Drawing.Size(801, 204);
+            this.lvRecibos.SmallImageList = this.imageList1;
             this.lvRecibos.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.lvRecibos.TabIndex = 43;
             this.lvRecibos.Tag = "rendicion_recibos";
@@ -356,7 +364,7 @@ namespace Catalogo._rendiciones
             this.txtRecHasta.MaxLength = 8;
             this.txtRecHasta.Name = "txtRecHasta";
             this.txtRecHasta.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtRecHasta.Size = new System.Drawing.Size(55, 20);
+            this.txtRecHasta.Size = new System.Drawing.Size(55, 21);
             this.txtRecHasta.TabIndex = 28;
             this.txtRecHasta.Text = "0";
             this.txtRecHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -372,7 +380,7 @@ namespace Catalogo._rendiciones
             this.txtRecDesde.MaxLength = 8;
             this.txtRecDesde.Name = "txtRecDesde";
             this.txtRecDesde.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtRecDesde.Size = new System.Drawing.Size(55, 20);
+            this.txtRecDesde.Size = new System.Drawing.Size(55, 21);
             this.txtRecDesde.TabIndex = 27;
             this.txtRecDesde.Text = "0";
             this.txtRecDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -386,7 +394,7 @@ namespace Catalogo._rendiciones
             this.cboRecibos.Location = new System.Drawing.Point(13, 18);
             this.cboRecibos.Name = "cboRecibos";
             this.cboRecibos.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cboRecibos.Size = new System.Drawing.Size(341, 21);
+            this.cboRecibos.Size = new System.Drawing.Size(341, 23);
             this.cboRecibos.TabIndex = 0;
             this.cboRecibos.SelectedIndexChanged += new System.EventHandler(this.cboRecibos_SelectedIndexChanged);
             this.cboRecibos.Leave += new System.EventHandler(this.cboRecibos_Leave);
@@ -400,7 +408,7 @@ namespace Catalogo._rendiciones
             this.Label2.Location = new System.Drawing.Point(452, 3);
             this.Label2.Name = "Label2";
             this.Label2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label2.Size = new System.Drawing.Size(61, 13);
+            this.Label2.Size = new System.Drawing.Size(67, 15);
             this.Label2.TabIndex = 25;
             this.Label2.Text = "Rec. Hasta";
             // 
@@ -413,7 +421,7 @@ namespace Catalogo._rendiciones
             this.Label1.Location = new System.Drawing.Point(374, 3);
             this.Label1.Name = "Label1";
             this.Label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label1.Size = new System.Drawing.Size(64, 13);
+            this.Label1.Size = new System.Drawing.Size(71, 15);
             this.Label1.TabIndex = 24;
             this.Label1.Text = "Rec. Desde";
             // 
@@ -426,20 +434,20 @@ namespace Catalogo._rendiciones
             this.Label12.Location = new System.Drawing.Point(14, 3);
             this.Label12.Name = "Label12";
             this.Label12.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label12.Size = new System.Drawing.Size(46, 13);
+            this.Label12.Size = new System.Drawing.Size(52, 15);
             this.Label12.TabIndex = 23;
             this.Label12.Text = "Recibos";
             this.Label12.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // fraClave
             // 
-            this.fraClave.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.fraClave.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.fraClave.BackColor = System.Drawing.Color.Transparent;
             this.fraClave.Controls.Add(this.dtF_Rendicion);
             this.fraClave.Controls.Add(this.txtDescripcion);
             this.fraClave.Controls.Add(this.lblNroRendicion);
             this.fraClave.Controls.Add(this.Label9);
             this.fraClave.Controls.Add(this.Label7);
-            this.fraClave.Dock = System.Windows.Forms.DockStyle.Top;
             this.fraClave.Location = new System.Drawing.Point(0, 0);
             this.fraClave.Name = "fraClave";
             this.fraClave.Size = new System.Drawing.Size(817, 92);
@@ -451,7 +459,7 @@ namespace Catalogo._rendiciones
             this.dtF_Rendicion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtF_Rendicion.Location = new System.Drawing.Point(149, 24);
             this.dtF_Rendicion.Name = "dtF_Rendicion";
-            this.dtF_Rendicion.Size = new System.Drawing.Size(100, 20);
+            this.dtF_Rendicion.Size = new System.Drawing.Size(100, 21);
             this.dtF_Rendicion.TabIndex = 0;
             // 
             // txtDescripcion
@@ -464,7 +472,7 @@ namespace Catalogo._rendiciones
             this.txtDescripcion.MaxLength = 128;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtDescripcion.Size = new System.Drawing.Size(478, 20);
+            this.txtDescripcion.Size = new System.Drawing.Size(478, 21);
             this.txtDescripcion.TabIndex = 1;
             // 
             // lblNroRendicion
@@ -476,7 +484,7 @@ namespace Catalogo._rendiciones
             this.lblNroRendicion.Location = new System.Drawing.Point(266, 28);
             this.lblNroRendicion.Name = "lblNroRendicion";
             this.lblNroRendicion.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblNroRendicion.Size = new System.Drawing.Size(88, 13);
+            this.lblNroRendicion.Size = new System.Drawing.Size(102, 15);
             this.lblNroRendicion.TabIndex = 8;
             this.lblNroRendicion.Text = "00000-00000000";
             // 
@@ -489,7 +497,7 @@ namespace Catalogo._rendiciones
             this.Label9.Location = new System.Drawing.Point(78, 57);
             this.Label9.Name = "Label9";
             this.Label9.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label9.Size = new System.Drawing.Size(63, 13);
+            this.Label9.Size = new System.Drawing.Size(72, 15);
             this.Label9.TabIndex = 10;
             this.Label9.Text = "Descripción";
             this.Label9.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -503,14 +511,15 @@ namespace Catalogo._rendiciones
             this.Label7.Location = new System.Drawing.Point(4, 28);
             this.Label7.Name = "Label7";
             this.Label7.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label7.Size = new System.Drawing.Size(137, 13);
+            this.Label7.Size = new System.Drawing.Size(154, 15);
             this.Label7.TabIndex = 9;
             this.Label7.Text = "Nº y Fecha de la Rendición";
             this.Label7.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // fraLVRecibos
             // 
-            this.fraLVRecibos.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.fraLVRecibos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.fraLVRecibos.BackColor = System.Drawing.Color.Transparent;
             this.fraLVRecibos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.fraLVRecibos.Controls.Add(this.Label42);
             this.fraLVRecibos.Controls.Add(this.Label41);
@@ -529,7 +538,6 @@ namespace Catalogo._rendiciones
             this.fraLVRecibos.Controls.Add(this.Label30);
             this.fraLVRecibos.Controls.Add(this.lblEfectivo);
             this.fraLVRecibos.Cursor = System.Windows.Forms.Cursors.Default;
-            this.fraLVRecibos.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.fraLVRecibos.Enabled = false;
             this.fraLVRecibos.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fraLVRecibos.Location = new System.Drawing.Point(0, 343);
@@ -547,7 +555,7 @@ namespace Catalogo._rendiciones
             this.Label42.Location = new System.Drawing.Point(5, 11);
             this.Label42.Name = "Label42";
             this.Label42.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label42.Size = new System.Drawing.Size(55, 13);
+            this.Label42.Size = new System.Drawing.Size(59, 15);
             this.Label42.TabIndex = 26;
             this.Label42.Text = "Efectivo $";
             this.Label42.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -561,7 +569,7 @@ namespace Catalogo._rendiciones
             this.Label41.Location = new System.Drawing.Point(172, 38);
             this.Label41.Name = "Label41";
             this.Label41.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label41.Size = new System.Drawing.Size(62, 13);
+            this.Label41.Size = new System.Drawing.Size(70, 15);
             this.Label41.TabIndex = 34;
             this.Label41.Text = "Euros Cant.";
             this.Label41.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -575,7 +583,7 @@ namespace Catalogo._rendiciones
             this.lblDivEuroCantidad.Location = new System.Drawing.Point(282, 38);
             this.lblDivEuroCantidad.Name = "lblDivEuroCantidad";
             this.lblDivEuroCantidad.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblDivEuroCantidad.Size = new System.Drawing.Size(28, 13);
+            this.lblDivEuroCantidad.Size = new System.Drawing.Size(31, 15);
             this.lblDivEuroCantidad.TabIndex = 35;
             this.lblDivEuroCantidad.Text = "0,00";
             this.lblDivEuroCantidad.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -589,7 +597,7 @@ namespace Catalogo._rendiciones
             this.Label38.Location = new System.Drawing.Point(363, 38);
             this.Label38.Name = "Label38";
             this.Label38.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label38.Size = new System.Drawing.Size(38, 13);
+            this.Label38.Size = new System.Drawing.Size(42, 15);
             this.Label38.TabIndex = 36;
             this.Label38.Text = "Cert. $";
             this.Label38.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -603,7 +611,7 @@ namespace Catalogo._rendiciones
             this.lblCertificadosTotal.Location = new System.Drawing.Point(442, 38);
             this.lblCertificadosTotal.Name = "lblCertificadosTotal";
             this.lblCertificadosTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblCertificadosTotal.Size = new System.Drawing.Size(28, 13);
+            this.lblCertificadosTotal.Size = new System.Drawing.Size(31, 15);
             this.lblCertificadosTotal.TabIndex = 37;
             this.lblCertificadosTotal.Text = "0,00";
             this.lblCertificadosTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -617,7 +625,7 @@ namespace Catalogo._rendiciones
             this.Label31.Location = new System.Drawing.Point(480, 38);
             this.Label31.Name = "Label31";
             this.Label31.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label31.Size = new System.Drawing.Size(57, 13);
+            this.Label31.Size = new System.Drawing.Size(63, 15);
             this.Label31.TabIndex = 38;
             this.Label31.Text = "Cert. Cant.";
             this.Label31.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -631,7 +639,7 @@ namespace Catalogo._rendiciones
             this.lblCertificadosCantidad.Location = new System.Drawing.Point(566, 38);
             this.lblCertificadosCantidad.Name = "lblCertificadosCantidad";
             this.lblCertificadosCantidad.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblCertificadosCantidad.Size = new System.Drawing.Size(13, 13);
+            this.lblCertificadosCantidad.Size = new System.Drawing.Size(14, 15);
             this.lblCertificadosCantidad.TabIndex = 39;
             this.lblCertificadosCantidad.Text = "0";
             this.lblCertificadosCantidad.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -645,7 +653,7 @@ namespace Catalogo._rendiciones
             this.lblRecibosTotal.Location = new System.Drawing.Point(671, 38);
             this.lblRecibosTotal.Name = "lblRecibosTotal";
             this.lblRecibosTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblRecibosTotal.Size = new System.Drawing.Size(28, 13);
+            this.lblRecibosTotal.Size = new System.Drawing.Size(31, 15);
             this.lblRecibosTotal.TabIndex = 41;
             this.lblRecibosTotal.Text = "0.00";
             this.lblRecibosTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -659,7 +667,7 @@ namespace Catalogo._rendiciones
             this.Label36.Location = new System.Drawing.Point(587, 38);
             this.Label36.Name = "Label36";
             this.Label36.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label36.Size = new System.Drawing.Size(40, 13);
+            this.Label36.Size = new System.Drawing.Size(44, 15);
             this.Label36.TabIndex = 40;
             this.Label36.Text = "Total $";
             this.Label36.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -673,7 +681,7 @@ namespace Catalogo._rendiciones
             this.lblChequesCantidad.Location = new System.Drawing.Point(566, 11);
             this.lblChequesCantidad.Name = "lblChequesCantidad";
             this.lblChequesCantidad.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblChequesCantidad.Size = new System.Drawing.Size(13, 13);
+            this.lblChequesCantidad.Size = new System.Drawing.Size(14, 15);
             this.lblChequesCantidad.TabIndex = 33;
             this.lblChequesCantidad.Text = "0";
             this.lblChequesCantidad.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -687,7 +695,7 @@ namespace Catalogo._rendiciones
             this.Label34.Location = new System.Drawing.Point(486, 11);
             this.Label34.Name = "Label34";
             this.Label34.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label34.Size = new System.Drawing.Size(51, 13);
+            this.Label34.Size = new System.Drawing.Size(56, 15);
             this.Label34.TabIndex = 32;
             this.Label34.Text = "Ch. Cant.";
             this.Label34.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -701,7 +709,7 @@ namespace Catalogo._rendiciones
             this.lblDivDolarCantidad.Location = new System.Drawing.Point(281, 11);
             this.lblDivDolarCantidad.Name = "lblDivDolarCantidad";
             this.lblDivDolarCantidad.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblDivDolarCantidad.Size = new System.Drawing.Size(28, 13);
+            this.lblDivDolarCantidad.Size = new System.Drawing.Size(31, 15);
             this.lblDivDolarCantidad.TabIndex = 29;
             this.lblDivDolarCantidad.Text = "0,00";
             this.lblDivDolarCantidad.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -715,7 +723,7 @@ namespace Catalogo._rendiciones
             this.Label32.Location = new System.Drawing.Point(163, 11);
             this.Label32.Name = "Label32";
             this.Label32.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label32.Size = new System.Drawing.Size(71, 13);
+            this.Label32.Size = new System.Drawing.Size(81, 15);
             this.Label32.TabIndex = 28;
             this.Label32.Text = "Dólares Cant.";
             this.Label32.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -729,7 +737,7 @@ namespace Catalogo._rendiciones
             this.lblChequesTotal.Location = new System.Drawing.Point(442, 11);
             this.lblChequesTotal.Name = "lblChequesTotal";
             this.lblChequesTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblChequesTotal.Size = new System.Drawing.Size(28, 13);
+            this.lblChequesTotal.Size = new System.Drawing.Size(31, 15);
             this.lblChequesTotal.TabIndex = 31;
             this.lblChequesTotal.Text = "0,00";
             this.lblChequesTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -743,7 +751,7 @@ namespace Catalogo._rendiciones
             this.Label30.Location = new System.Drawing.Point(369, 11);
             this.Label30.Name = "Label30";
             this.Label30.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label30.Size = new System.Drawing.Size(32, 13);
+            this.Label30.Size = new System.Drawing.Size(35, 15);
             this.Label30.TabIndex = 30;
             this.Label30.Text = "Ch. $";
             this.Label30.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -757,7 +765,7 @@ namespace Catalogo._rendiciones
             this.lblEfectivo.Location = new System.Drawing.Point(103, 11);
             this.lblEfectivo.Name = "lblEfectivo";
             this.lblEfectivo.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblEfectivo.Size = new System.Drawing.Size(28, 13);
+            this.lblEfectivo.Size = new System.Drawing.Size(31, 15);
             this.lblEfectivo.TabIndex = 27;
             this.lblEfectivo.Text = "0,00";
             this.lblEfectivo.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -765,19 +773,20 @@ namespace Catalogo._rendiciones
             // rTabVal
             // 
             this.rTabVal.AutoScroll = true;
+            this.rTabVal.BackColor = System.Drawing.Color.Transparent;
             this.rTabVal.Controls.Add(this.fraLVValores);
             this.rTabVal.Controls.Add(this.fraDatos1);
-            this.rTabVal.Location = new System.Drawing.Point(4, 25);
+            this.rTabVal.Location = new System.Drawing.Point(4, 27);
             this.rTabVal.Name = "rTabVal";
             this.rTabVal.Padding = new System.Windows.Forms.Padding(3);
-            this.rTabVal.Size = new System.Drawing.Size(817, 404);
+            this.rTabVal.Size = new System.Drawing.Size(817, 402);
             this.rTabVal.TabIndex = 0;
             this.rTabVal.Text = "Rendición de Valores";
-            this.rTabVal.UseVisualStyleBackColor = true;
             // 
             // fraLVValores
             // 
-            this.fraLVValores.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.fraLVValores.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.fraLVValores.BackColor = System.Drawing.Color.Transparent;
             this.fraLVValores.Controls.Add(this.lvValores);
             this.fraLVValores.Controls.Add(this.txtLatCert_Cantidad);
             this.fraLVValores.Controls.Add(this.txtLatCh_Cantidad);
@@ -826,7 +835,6 @@ namespace Catalogo._rendiciones
             this.fraLVValores.Controls.Add(this.Label28);
             this.fraLVValores.Controls.Add(this.lblTotalV);
             this.fraLVValores.Cursor = System.Windows.Forms.Cursors.Default;
-            this.fraLVValores.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fraLVValores.Enabled = false;
             this.fraLVValores.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fraLVValores.Location = new System.Drawing.Point(3, 71);
@@ -839,7 +847,6 @@ namespace Catalogo._rendiciones
             // lvValores
             // 
             this.lvValores.AllowColumnReorder = true;
-            this.lvValores.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lvValores.BackColor = System.Drawing.SystemColors.Window;
             this.lvValores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this._lvValores_ColumnHeader_1,
@@ -857,6 +864,7 @@ namespace Catalogo._rendiciones
             this.lvValores.Location = new System.Drawing.Point(6, 6);
             this.lvValores.Name = "lvValores";
             this.lvValores.Size = new System.Drawing.Size(801, 111);
+            this.lvValores.SmallImageList = this.imageList1;
             this.lvValores.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.lvValores.TabIndex = 105;
             this.lvValores.Tag = "rendicion_valores";
@@ -911,11 +919,11 @@ namespace Catalogo._rendiciones
             this.txtLatCert_Cantidad.BackColor = System.Drawing.SystemColors.Window;
             this.txtLatCert_Cantidad.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtLatCert_Cantidad.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtLatCert_Cantidad.Location = new System.Drawing.Point(357, 210);
+            this.txtLatCert_Cantidad.Location = new System.Drawing.Point(357, 211);
             this.txtLatCert_Cantidad.MaxLength = 2;
             this.txtLatCert_Cantidad.Name = "txtLatCert_Cantidad";
             this.txtLatCert_Cantidad.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtLatCert_Cantidad.Size = new System.Drawing.Size(34, 20);
+            this.txtLatCert_Cantidad.Size = new System.Drawing.Size(34, 21);
             this.txtLatCert_Cantidad.TabIndex = 3;
             this.txtLatCert_Cantidad.Text = "0";
             this.txtLatCert_Cantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -928,11 +936,11 @@ namespace Catalogo._rendiciones
             this.txtLatCh_Cantidad.BackColor = System.Drawing.SystemColors.Window;
             this.txtLatCh_Cantidad.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtLatCh_Cantidad.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtLatCh_Cantidad.Location = new System.Drawing.Point(204, 210);
+            this.txtLatCh_Cantidad.Location = new System.Drawing.Point(204, 211);
             this.txtLatCh_Cantidad.MaxLength = 2;
             this.txtLatCh_Cantidad.Name = "txtLatCh_Cantidad";
             this.txtLatCh_Cantidad.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtLatCh_Cantidad.Size = new System.Drawing.Size(34, 20);
+            this.txtLatCh_Cantidad.Size = new System.Drawing.Size(34, 21);
             this.txtLatCh_Cantidad.TabIndex = 1;
             this.txtLatCh_Cantidad.Text = "0";
             this.txtLatCh_Cantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -945,11 +953,11 @@ namespace Catalogo._rendiciones
             this.txtLatDiv_euro.BackColor = System.Drawing.SystemColors.Window;
             this.txtLatDiv_euro.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtLatDiv_euro.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtLatDiv_euro.Location = new System.Drawing.Point(582, 210);
+            this.txtLatDiv_euro.Location = new System.Drawing.Point(582, 211);
             this.txtLatDiv_euro.MaxLength = 13;
             this.txtLatDiv_euro.Name = "txtLatDiv_euro";
             this.txtLatDiv_euro.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtLatDiv_euro.Size = new System.Drawing.Size(73, 20);
+            this.txtLatDiv_euro.Size = new System.Drawing.Size(73, 21);
             this.txtLatDiv_euro.TabIndex = 6;
             this.txtLatDiv_euro.Text = "0,00";
             this.txtLatDiv_euro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -962,11 +970,11 @@ namespace Catalogo._rendiciones
             this.txtLatDiv_dolar.BackColor = System.Drawing.SystemColors.Window;
             this.txtLatDiv_dolar.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtLatDiv_dolar.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtLatDiv_dolar.Location = new System.Drawing.Point(582, 185);
+            this.txtLatDiv_dolar.Location = new System.Drawing.Point(582, 186);
             this.txtLatDiv_dolar.MaxLength = 13;
             this.txtLatDiv_dolar.Name = "txtLatDiv_dolar";
             this.txtLatDiv_dolar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtLatDiv_dolar.Size = new System.Drawing.Size(73, 20);
+            this.txtLatDiv_dolar.Size = new System.Drawing.Size(73, 21);
             this.txtLatDiv_dolar.TabIndex = 5;
             this.txtLatDiv_dolar.Text = "0,00";
             this.txtLatDiv_dolar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -979,11 +987,11 @@ namespace Catalogo._rendiciones
             this.txtLatCert_Monto.BackColor = System.Drawing.SystemColors.Window;
             this.txtLatCert_Monto.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtLatCert_Monto.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtLatCert_Monto.Location = new System.Drawing.Point(402, 210);
+            this.txtLatCert_Monto.Location = new System.Drawing.Point(402, 211);
             this.txtLatCert_Monto.MaxLength = 13;
             this.txtLatCert_Monto.Name = "txtLatCert_Monto";
             this.txtLatCert_Monto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtLatCert_Monto.Size = new System.Drawing.Size(73, 20);
+            this.txtLatCert_Monto.Size = new System.Drawing.Size(73, 21);
             this.txtLatCert_Monto.TabIndex = 4;
             this.txtLatCert_Monto.Text = "0,00";
             this.txtLatCert_Monto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -996,11 +1004,11 @@ namespace Catalogo._rendiciones
             this.txtLatCh_Monto.BackColor = System.Drawing.SystemColors.Window;
             this.txtLatCh_Monto.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtLatCh_Monto.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtLatCh_Monto.Location = new System.Drawing.Point(252, 210);
+            this.txtLatCh_Monto.Location = new System.Drawing.Point(252, 211);
             this.txtLatCh_Monto.MaxLength = 13;
             this.txtLatCh_Monto.Name = "txtLatCh_Monto";
             this.txtLatCh_Monto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtLatCh_Monto.Size = new System.Drawing.Size(73, 20);
+            this.txtLatCh_Monto.Size = new System.Drawing.Size(73, 21);
             this.txtLatCh_Monto.TabIndex = 2;
             this.txtLatCh_Monto.Text = "0,00";
             this.txtLatCh_Monto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1013,11 +1021,11 @@ namespace Catalogo._rendiciones
             this.txtLatEfectivo_Monto.BackColor = System.Drawing.SystemColors.Window;
             this.txtLatEfectivo_Monto.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtLatEfectivo_Monto.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtLatEfectivo_Monto.Location = new System.Drawing.Point(66, 192);
+            this.txtLatEfectivo_Monto.Location = new System.Drawing.Point(66, 193);
             this.txtLatEfectivo_Monto.MaxLength = 13;
             this.txtLatEfectivo_Monto.Name = "txtLatEfectivo_Monto";
             this.txtLatEfectivo_Monto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtLatEfectivo_Monto.Size = new System.Drawing.Size(85, 20);
+            this.txtLatEfectivo_Monto.Size = new System.Drawing.Size(85, 21);
             this.txtLatEfectivo_Monto.TabIndex = 0;
             this.txtLatEfectivo_Monto.Text = "0,00";
             this.txtLatEfectivo_Monto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1030,10 +1038,10 @@ namespace Catalogo._rendiciones
             this.Label22.BackColor = System.Drawing.Color.Transparent;
             this.Label22.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label22.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label22.Location = new System.Drawing.Point(105, 262);
+            this.Label22.Location = new System.Drawing.Point(105, 263);
             this.Label22.Name = "Label22";
             this.Label22.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label22.Size = new System.Drawing.Size(68, 13);
+            this.Label22.Size = new System.Drawing.Size(74, 15);
             this.Label22.TabIndex = 88;
             this.Label22.Text = "EFECTIVO $";
             this.Label22.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1044,10 +1052,10 @@ namespace Catalogo._rendiciones
             this.Label39.BackColor = System.Drawing.Color.Transparent;
             this.Label39.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label39.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label39.Location = new System.Drawing.Point(543, 286);
+            this.Label39.Location = new System.Drawing.Point(543, 287);
             this.Label39.Name = "Label39";
             this.Label39.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label39.Size = new System.Drawing.Size(43, 13);
+            this.Label39.Size = new System.Drawing.Size(50, 15);
             this.Label39.TabIndex = 97;
             this.Label39.Text = "Dólares";
             this.Label39.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1058,10 +1066,10 @@ namespace Catalogo._rendiciones
             this.Label37.BackColor = System.Drawing.Color.Transparent;
             this.Label37.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label37.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label37.Location = new System.Drawing.Point(551, 309);
+            this.Label37.Location = new System.Drawing.Point(551, 310);
             this.Label37.Name = "Label37";
             this.Label37.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label37.Size = new System.Drawing.Size(34, 13);
+            this.Label37.Size = new System.Drawing.Size(39, 15);
             this.Label37.TabIndex = 104;
             this.Label37.Text = "Euros";
             this.Label37.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1072,10 +1080,10 @@ namespace Catalogo._rendiciones
             this.Label43.BackColor = System.Drawing.Color.Transparent;
             this.Label43.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label43.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label43.Location = new System.Drawing.Point(585, 262);
+            this.Label43.Location = new System.Drawing.Point(585, 263);
             this.Label43.Name = "Label43";
             this.Label43.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label43.Size = new System.Drawing.Size(49, 13);
+            this.Label43.Size = new System.Drawing.Size(52, 15);
             this.Label43.TabIndex = 91;
             this.Label43.Text = "DIVISAS";
             this.Label43.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1086,10 +1094,10 @@ namespace Catalogo._rendiciones
             this.lblDivEuroC.BackColor = System.Drawing.Color.Transparent;
             this.lblDivEuroC.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblDivEuroC.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblDivEuroC.Location = new System.Drawing.Point(636, 309);
+            this.lblDivEuroC.Location = new System.Drawing.Point(636, 310);
             this.lblDivEuroC.Name = "lblDivEuroC";
             this.lblDivEuroC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblDivEuroC.Size = new System.Drawing.Size(28, 13);
+            this.lblDivEuroC.Size = new System.Drawing.Size(31, 15);
             this.lblDivEuroC.TabIndex = 103;
             this.lblDivEuroC.Text = "0,00";
             this.lblDivEuroC.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1100,10 +1108,10 @@ namespace Catalogo._rendiciones
             this.lblDivDolarC.BackColor = System.Drawing.Color.Transparent;
             this.lblDivDolarC.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblDivDolarC.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblDivDolarC.Location = new System.Drawing.Point(636, 286);
+            this.lblDivDolarC.Location = new System.Drawing.Point(636, 287);
             this.lblDivDolarC.Name = "lblDivDolarC";
             this.lblDivDolarC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblDivDolarC.Size = new System.Drawing.Size(28, 13);
+            this.lblDivDolarC.Size = new System.Drawing.Size(31, 15);
             this.lblDivDolarC.TabIndex = 98;
             this.lblDivDolarC.Text = "0,00";
             this.lblDivDolarC.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1114,10 +1122,10 @@ namespace Catalogo._rendiciones
             this.Label33.BackColor = System.Drawing.Color.Transparent;
             this.Label33.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label33.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label33.Location = new System.Drawing.Point(564, 171);
+            this.Label33.Location = new System.Drawing.Point(564, 172);
             this.Label33.Name = "Label33";
             this.Label33.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label33.Size = new System.Drawing.Size(49, 13);
+            this.Label33.Size = new System.Drawing.Size(52, 15);
             this.Label33.TabIndex = 73;
             this.Label33.Text = "DIVISAS";
             this.Label33.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1128,10 +1136,10 @@ namespace Catalogo._rendiciones
             this.Label18.BackColor = System.Drawing.Color.Transparent;
             this.Label18.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label18.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label18.Location = new System.Drawing.Point(511, 189);
+            this.Label18.Location = new System.Drawing.Point(511, 190);
             this.Label18.Name = "Label18";
             this.Label18.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label18.Size = new System.Drawing.Size(43, 13);
+            this.Label18.Size = new System.Drawing.Size(50, 15);
             this.Label18.TabIndex = 79;
             this.Label18.Text = "Dólares";
             this.Label18.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1142,10 +1150,10 @@ namespace Catalogo._rendiciones
             this.Label40.BackColor = System.Drawing.Color.Transparent;
             this.Label40.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label40.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label40.Location = new System.Drawing.Point(258, 262);
+            this.Label40.Location = new System.Drawing.Point(258, 263);
             this.Label40.Name = "Label40";
             this.Label40.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label40.Size = new System.Drawing.Size(59, 13);
+            this.Label40.Size = new System.Drawing.Size(66, 15);
             this.Label40.TabIndex = 89;
             this.Label40.Text = "CHEQUES";
             this.Label40.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1156,10 +1164,10 @@ namespace Catalogo._rendiciones
             this.Label35.BackColor = System.Drawing.Color.Transparent;
             this.Label35.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label35.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label35.Location = new System.Drawing.Point(393, 262);
+            this.Label35.Location = new System.Drawing.Point(393, 263);
             this.Label35.Name = "Label35";
             this.Label35.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label35.Size = new System.Drawing.Size(85, 13);
+            this.Label35.Size = new System.Drawing.Size(93, 15);
             this.Label35.TabIndex = 90;
             this.Label35.Text = "CERTIFICADOS";
             this.Label35.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1170,10 +1178,10 @@ namespace Catalogo._rendiciones
             this.Label27.BackColor = System.Drawing.Color.Transparent;
             this.Label27.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label27.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label27.Location = new System.Drawing.Point(229, 286);
+            this.Label27.Location = new System.Drawing.Point(229, 287);
             this.Label27.Name = "Label27";
             this.Label27.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label27.Size = new System.Drawing.Size(49, 13);
+            this.Label27.Size = new System.Drawing.Size(56, 15);
             this.Label27.TabIndex = 92;
             this.Label27.Text = "Cantidad";
             this.Label27.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1184,10 +1192,10 @@ namespace Catalogo._rendiciones
             this.Label26.BackColor = System.Drawing.Color.Transparent;
             this.Label26.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label26.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label26.Location = new System.Drawing.Point(381, 286);
+            this.Label26.Location = new System.Drawing.Point(381, 287);
             this.Label26.Name = "Label26";
             this.Label26.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label26.Size = new System.Drawing.Size(49, 13);
+            this.Label26.Size = new System.Drawing.Size(56, 15);
             this.Label26.TabIndex = 94;
             this.Label26.Text = "Cantidad";
             this.Label26.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1198,10 +1206,10 @@ namespace Catalogo._rendiciones
             this.Label25.BackColor = System.Drawing.Color.Transparent;
             this.Label25.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label25.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label25.Location = new System.Drawing.Point(300, 286);
+            this.Label25.Location = new System.Drawing.Point(300, 287);
             this.Label25.Name = "Label25";
             this.Label25.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label25.Size = new System.Drawing.Size(46, 13);
+            this.Label25.Size = new System.Drawing.Size(52, 15);
             this.Label25.TabIndex = 93;
             this.Label25.Text = "Monto $";
             this.Label25.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1212,10 +1220,10 @@ namespace Catalogo._rendiciones
             this.Label19.BackColor = System.Drawing.Color.Transparent;
             this.Label19.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label19.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label19.Location = new System.Drawing.Point(449, 286);
+            this.Label19.Location = new System.Drawing.Point(449, 287);
             this.Label19.Name = "Label19";
             this.Label19.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label19.Size = new System.Drawing.Size(46, 13);
+            this.Label19.Size = new System.Drawing.Size(52, 15);
             this.Label19.TabIndex = 95;
             this.Label19.Text = "Monto $";
             this.Label19.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1226,10 +1234,10 @@ namespace Catalogo._rendiciones
             this.Label21.BackColor = System.Drawing.Color.Transparent;
             this.Label21.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label21.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label21.Location = new System.Drawing.Point(225, 171);
+            this.Label21.Location = new System.Drawing.Point(225, 172);
             this.Label21.Name = "Label21";
             this.Label21.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label21.Size = new System.Drawing.Size(59, 13);
+            this.Label21.Size = new System.Drawing.Size(66, 15);
             this.Label21.TabIndex = 71;
             this.Label21.Text = "CHEQUES";
             this.Label21.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1240,10 +1248,10 @@ namespace Catalogo._rendiciones
             this.Label20.BackColor = System.Drawing.Color.Transparent;
             this.Label20.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label20.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label20.Location = new System.Drawing.Point(360, 171);
+            this.Label20.Location = new System.Drawing.Point(360, 172);
             this.Label20.Name = "Label20";
             this.Label20.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label20.Size = new System.Drawing.Size(85, 13);
+            this.Label20.Size = new System.Drawing.Size(93, 15);
             this.Label20.TabIndex = 72;
             this.Label20.Text = "CERTIFICADOS";
             this.Label20.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1257,7 +1265,7 @@ namespace Catalogo._rendiciones
             this.Label17.Location = new System.Drawing.Point(111, -576);
             this.Label17.Name = "Label17";
             this.Label17.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label17.Size = new System.Drawing.Size(32, 13);
+            this.Label17.Size = new System.Drawing.Size(35, 15);
             this.Label17.TabIndex = 58;
             this.Label17.Text = "Ch. $";
             this.Label17.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1268,10 +1276,10 @@ namespace Catalogo._rendiciones
             this.Label14.BackColor = System.Drawing.Color.Transparent;
             this.Label14.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label14.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label14.Location = new System.Drawing.Point(196, 189);
+            this.Label14.Location = new System.Drawing.Point(196, 190);
             this.Label14.Name = "Label14";
             this.Label14.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label14.Size = new System.Drawing.Size(49, 13);
+            this.Label14.Size = new System.Drawing.Size(56, 15);
             this.Label14.TabIndex = 74;
             this.Label14.Text = "Cantidad";
             this.Label14.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1282,10 +1290,10 @@ namespace Catalogo._rendiciones
             this.Label10.BackColor = System.Drawing.Color.Transparent;
             this.Label10.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label10.Location = new System.Drawing.Point(348, 189);
+            this.Label10.Location = new System.Drawing.Point(348, 190);
             this.Label10.Name = "Label10";
             this.Label10.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label10.Size = new System.Drawing.Size(49, 13);
+            this.Label10.Size = new System.Drawing.Size(56, 15);
             this.Label10.TabIndex = 76;
             this.Label10.Text = "Cantidad";
             this.Label10.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1296,10 +1304,10 @@ namespace Catalogo._rendiciones
             this.Label8.BackColor = System.Drawing.Color.Transparent;
             this.Label8.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label8.Location = new System.Drawing.Point(267, 189);
+            this.Label8.Location = new System.Drawing.Point(267, 190);
             this.Label8.Name = "Label8";
             this.Label8.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label8.Size = new System.Drawing.Size(46, 13);
+            this.Label8.Size = new System.Drawing.Size(52, 15);
             this.Label8.TabIndex = 75;
             this.Label8.Text = "Monto $";
             this.Label8.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1310,10 +1318,10 @@ namespace Catalogo._rendiciones
             this.Label6.BackColor = System.Drawing.Color.Transparent;
             this.Label6.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label6.Location = new System.Drawing.Point(519, 214);
+            this.Label6.Location = new System.Drawing.Point(519, 215);
             this.Label6.Name = "Label6";
             this.Label6.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label6.Size = new System.Drawing.Size(34, 13);
+            this.Label6.Size = new System.Drawing.Size(39, 15);
             this.Label6.TabIndex = 85;
             this.Label6.Text = "Euros";
             this.Label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1324,10 +1332,10 @@ namespace Catalogo._rendiciones
             this.Label5.BackColor = System.Drawing.Color.Transparent;
             this.Label5.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label5.Location = new System.Drawing.Point(71, 171);
+            this.Label5.Location = new System.Drawing.Point(71, 172);
             this.Label5.Name = "Label5";
             this.Label5.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label5.Size = new System.Drawing.Size(68, 13);
+            this.Label5.Size = new System.Drawing.Size(74, 15);
             this.Label5.TabIndex = 70;
             this.Label5.Text = "EFECTIVO $";
             this.Label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1338,10 +1346,10 @@ namespace Catalogo._rendiciones
             this.Label4.BackColor = System.Drawing.Color.Transparent;
             this.Label4.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label4.Location = new System.Drawing.Point(416, 189);
+            this.Label4.Location = new System.Drawing.Point(416, 190);
             this.Label4.Name = "Label4";
             this.Label4.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label4.Size = new System.Drawing.Size(46, 13);
+            this.Label4.Size = new System.Drawing.Size(52, 15);
             this.Label4.TabIndex = 77;
             this.Label4.Text = "Monto $";
             this.Label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1352,10 +1360,10 @@ namespace Catalogo._rendiciones
             this.Label3.BackColor = System.Drawing.Color.Transparent;
             this.Label3.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label3.Location = new System.Drawing.Point(39, 147);
+            this.Label3.Location = new System.Drawing.Point(39, 148);
             this.Label3.Name = "Label3";
             this.Label3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label3.Size = new System.Drawing.Size(281, 13);
+            this.Label3.Size = new System.Drawing.Size(308, 15);
             this.Label3.TabIndex = 69;
             this.Label3.Text = "VALORES FÍSICOS ENTREGADOS EN CASA CENTRAL";
             // 
@@ -1365,10 +1373,10 @@ namespace Catalogo._rendiciones
             this.lblChequesCantidadC.BackColor = System.Drawing.Color.Transparent;
             this.lblChequesCantidadC.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblChequesCantidadC.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblChequesCantidadC.Location = new System.Drawing.Point(246, 309);
+            this.lblChequesCantidadC.Location = new System.Drawing.Point(246, 310);
             this.lblChequesCantidadC.Name = "lblChequesCantidadC";
             this.lblChequesCantidadC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblChequesCantidadC.Size = new System.Drawing.Size(13, 13);
+            this.lblChequesCantidadC.Size = new System.Drawing.Size(14, 15);
             this.lblChequesCantidadC.TabIndex = 99;
             this.lblChequesCantidadC.Text = "0";
             this.lblChequesCantidadC.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1379,10 +1387,10 @@ namespace Catalogo._rendiciones
             this.lblCertificadosCantidadC.BackColor = System.Drawing.Color.Transparent;
             this.lblCertificadosCantidadC.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblCertificadosCantidadC.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblCertificadosCantidadC.Location = new System.Drawing.Point(396, 309);
+            this.lblCertificadosCantidadC.Location = new System.Drawing.Point(396, 310);
             this.lblCertificadosCantidadC.Name = "lblCertificadosCantidadC";
             this.lblCertificadosCantidadC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblCertificadosCantidadC.Size = new System.Drawing.Size(13, 13);
+            this.lblCertificadosCantidadC.Size = new System.Drawing.Size(14, 15);
             this.lblCertificadosCantidadC.TabIndex = 101;
             this.lblCertificadosCantidadC.Text = "0";
             this.lblCertificadosCantidadC.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1393,10 +1401,10 @@ namespace Catalogo._rendiciones
             this.lblChequesTotalC.BackColor = System.Drawing.Color.Transparent;
             this.lblChequesTotalC.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblChequesTotalC.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblChequesTotalC.Location = new System.Drawing.Point(320, 309);
+            this.lblChequesTotalC.Location = new System.Drawing.Point(320, 310);
             this.lblChequesTotalC.Name = "lblChequesTotalC";
             this.lblChequesTotalC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblChequesTotalC.Size = new System.Drawing.Size(28, 13);
+            this.lblChequesTotalC.Size = new System.Drawing.Size(31, 15);
             this.lblChequesTotalC.TabIndex = 100;
             this.lblChequesTotalC.Text = "0,00";
             this.lblChequesTotalC.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1407,10 +1415,10 @@ namespace Catalogo._rendiciones
             this.lblEfectivoC.BackColor = System.Drawing.Color.Transparent;
             this.lblEfectivoC.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblEfectivoC.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblEfectivoC.Location = new System.Drawing.Point(127, 286);
+            this.lblEfectivoC.Location = new System.Drawing.Point(127, 287);
             this.lblEfectivoC.Name = "lblEfectivoC";
             this.lblEfectivoC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblEfectivoC.Size = new System.Drawing.Size(28, 13);
+            this.lblEfectivoC.Size = new System.Drawing.Size(31, 15);
             this.lblEfectivoC.TabIndex = 96;
             this.lblEfectivoC.Text = "0,00";
             this.lblEfectivoC.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1421,10 +1429,10 @@ namespace Catalogo._rendiciones
             this.lblCertificadosTotalC.BackColor = System.Drawing.Color.Transparent;
             this.lblCertificadosTotalC.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblCertificadosTotalC.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblCertificadosTotalC.Location = new System.Drawing.Point(461, 309);
+            this.lblCertificadosTotalC.Location = new System.Drawing.Point(461, 310);
             this.lblCertificadosTotalC.Name = "lblCertificadosTotalC";
             this.lblCertificadosTotalC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblCertificadosTotalC.Size = new System.Drawing.Size(28, 13);
+            this.lblCertificadosTotalC.Size = new System.Drawing.Size(31, 15);
             this.lblCertificadosTotalC.TabIndex = 102;
             this.lblCertificadosTotalC.Text = "0,00";
             this.lblCertificadosTotalC.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1435,10 +1443,10 @@ namespace Catalogo._rendiciones
             this.Label15.BackColor = System.Drawing.Color.Transparent;
             this.Label15.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label15.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label15.Location = new System.Drawing.Point(40, 233);
+            this.Label15.Location = new System.Drawing.Point(40, 234);
             this.Label15.Name = "Label15";
             this.Label15.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label15.Size = new System.Drawing.Size(363, 13);
+            this.Label15.Size = new System.Drawing.Size(402, 15);
             this.Label15.TabIndex = 87;
             this.Label15.Text = "CONTROL VALORES RENDIDOS CONTRA RECIBOS SELECCIONADOS";
             // 
@@ -1448,10 +1456,10 @@ namespace Catalogo._rendiciones
             this.Label52.BackColor = System.Drawing.Color.Transparent;
             this.Label52.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label52.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label52.Location = new System.Drawing.Point(100, 120);
+            this.Label52.Location = new System.Drawing.Point(100, 121);
             this.Label52.Name = "Label52";
             this.Label52.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label52.Size = new System.Drawing.Size(55, 13);
+            this.Label52.Size = new System.Drawing.Size(59, 15);
             this.Label52.TabIndex = 61;
             this.Label52.Text = "Efectivo $";
             this.Label52.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1462,10 +1470,10 @@ namespace Catalogo._rendiciones
             this.lblEfectivoV.BackColor = System.Drawing.Color.Transparent;
             this.lblEfectivoV.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblEfectivoV.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblEfectivoV.Location = new System.Drawing.Point(193, 120);
+            this.lblEfectivoV.Location = new System.Drawing.Point(193, 121);
             this.lblEfectivoV.Name = "lblEfectivoV";
             this.lblEfectivoV.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblEfectivoV.Size = new System.Drawing.Size(28, 13);
+            this.lblEfectivoV.Size = new System.Drawing.Size(31, 15);
             this.lblEfectivoV.TabIndex = 62;
             this.lblEfectivoV.Text = "0,00";
             this.lblEfectivoV.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1476,10 +1484,10 @@ namespace Catalogo._rendiciones
             this.Label50.BackColor = System.Drawing.Color.Transparent;
             this.Label50.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label50.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label50.Location = new System.Drawing.Point(354, 120);
+            this.Label50.Location = new System.Drawing.Point(354, 121);
             this.Label50.Name = "Label50";
             this.Label50.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label50.Size = new System.Drawing.Size(32, 13);
+            this.Label50.Size = new System.Drawing.Size(35, 15);
             this.Label50.TabIndex = 65;
             this.Label50.Text = "Ch. $";
             this.Label50.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1490,10 +1498,10 @@ namespace Catalogo._rendiciones
             this.lblChequesTotalV.BackColor = System.Drawing.Color.Transparent;
             this.lblChequesTotalV.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblChequesTotalV.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblChequesTotalV.Location = new System.Drawing.Point(432, 120);
+            this.lblChequesTotalV.Location = new System.Drawing.Point(432, 121);
             this.lblChequesTotalV.Name = "lblChequesTotalV";
             this.lblChequesTotalV.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblChequesTotalV.Size = new System.Drawing.Size(28, 13);
+            this.lblChequesTotalV.Size = new System.Drawing.Size(31, 15);
             this.lblChequesTotalV.TabIndex = 66;
             this.lblChequesTotalV.Text = "0,00";
             this.lblChequesTotalV.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1504,10 +1512,10 @@ namespace Catalogo._rendiciones
             this.Label48.BackColor = System.Drawing.Color.Transparent;
             this.Label48.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label48.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label48.Location = new System.Drawing.Point(273, 120);
+            this.Label48.Location = new System.Drawing.Point(273, 121);
             this.Label48.Name = "Label48";
             this.Label48.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label48.Size = new System.Drawing.Size(51, 13);
+            this.Label48.Size = new System.Drawing.Size(56, 15);
             this.Label48.TabIndex = 63;
             this.Label48.Text = "Ch. Cant.";
             this.Label48.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1518,10 +1526,10 @@ namespace Catalogo._rendiciones
             this.lblChequesCantidadV.BackColor = System.Drawing.Color.Transparent;
             this.lblChequesCantidadV.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblChequesCantidadV.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblChequesCantidadV.Location = new System.Drawing.Point(335, 120);
+            this.lblChequesCantidadV.Location = new System.Drawing.Point(335, 121);
             this.lblChequesCantidadV.Name = "lblChequesCantidadV";
             this.lblChequesCantidadV.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblChequesCantidadV.Size = new System.Drawing.Size(13, 13);
+            this.lblChequesCantidadV.Size = new System.Drawing.Size(14, 15);
             this.lblChequesCantidadV.TabIndex = 64;
             this.lblChequesCantidadV.Text = "0";
             this.lblChequesCantidadV.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1532,10 +1540,10 @@ namespace Catalogo._rendiciones
             this.Label46.BackColor = System.Drawing.Color.Transparent;
             this.Label46.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label46.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label46.Location = new System.Drawing.Point(45, 120);
+            this.Label46.Location = new System.Drawing.Point(45, 121);
             this.Label46.Name = "Label46";
             this.Label46.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label46.Size = new System.Drawing.Size(42, 13);
+            this.Label46.Size = new System.Drawing.Size(47, 15);
             this.Label46.TabIndex = 60;
             this.Label46.Text = "Totales";
             this.Label46.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1546,10 +1554,10 @@ namespace Catalogo._rendiciones
             this.Label28.BackColor = System.Drawing.Color.Transparent;
             this.Label28.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label28.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Label28.Location = new System.Drawing.Point(558, 120);
+            this.Label28.Location = new System.Drawing.Point(558, 121);
             this.Label28.Name = "Label28";
             this.Label28.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label28.Size = new System.Drawing.Size(40, 13);
+            this.Label28.Size = new System.Drawing.Size(44, 15);
             this.Label28.TabIndex = 67;
             this.Label28.Text = "Total $";
             this.Label28.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -1560,17 +1568,18 @@ namespace Catalogo._rendiciones
             this.lblTotalV.BackColor = System.Drawing.Color.Transparent;
             this.lblTotalV.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblTotalV.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblTotalV.Location = new System.Drawing.Point(642, 120);
+            this.lblTotalV.Location = new System.Drawing.Point(642, 121);
             this.lblTotalV.Name = "lblTotalV";
             this.lblTotalV.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTotalV.Size = new System.Drawing.Size(28, 13);
+            this.lblTotalV.Size = new System.Drawing.Size(31, 15);
             this.lblTotalV.TabIndex = 68;
             this.lblTotalV.Text = "0,00";
             this.lblTotalV.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // fraDatos1
             // 
-            this.fraDatos1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.fraDatos1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.fraDatos1.BackColor = System.Drawing.Color.Transparent;
             this.fraDatos1.Controls.Add(this.cmdValorAdd);
             this.fraDatos1.Controls.Add(this.dtBd_Fecha);
             this.fraDatos1.Controls.Add(this.cboCheques);
@@ -1585,7 +1594,6 @@ namespace Catalogo._rendiciones
             this.fraDatos1.Controls.Add(this.lblTit1);
             this.fraDatos1.Controls.Add(this.Label24);
             this.fraDatos1.Controls.Add(this.lblTit2);
-            this.fraDatos1.Dock = System.Windows.Forms.DockStyle.Top;
             this.fraDatos1.Location = new System.Drawing.Point(3, 3);
             this.fraDatos1.Name = "fraDatos1";
             this.fraDatos1.Size = new System.Drawing.Size(811, 68);
@@ -1614,7 +1622,7 @@ namespace Catalogo._rendiciones
             this.dtBd_Fecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtBd_Fecha.Location = new System.Drawing.Point(336, 41);
             this.dtBd_Fecha.Name = "dtBd_Fecha";
-            this.dtBd_Fecha.Size = new System.Drawing.Size(100, 20);
+            this.dtBd_Fecha.Size = new System.Drawing.Size(100, 21);
             this.dtBd_Fecha.TabIndex = 7;
             // 
             // cboCheques
@@ -1626,7 +1634,7 @@ namespace Catalogo._rendiciones
             this.cboCheques.Location = new System.Drawing.Point(3, 41);
             this.cboCheques.Name = "cboCheques";
             this.cboCheques.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.cboCheques.Size = new System.Drawing.Size(317, 21);
+            this.cboCheques.Size = new System.Drawing.Size(317, 23);
             this.cboCheques.TabIndex = 6;
             // 
             // _opTipoDeposito_1
@@ -1634,10 +1642,10 @@ namespace Catalogo._rendiciones
             this._opTipoDeposito_1.BackColor = System.Drawing.SystemColors.Control;
             this._opTipoDeposito_1.Cursor = System.Windows.Forms.Cursors.Default;
             this._opTipoDeposito_1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._opTipoDeposito_1.Location = new System.Drawing.Point(76, 22);
+            this._opTipoDeposito_1.Location = new System.Drawing.Point(76, 19);
             this._opTipoDeposito_1.Name = "_opTipoDeposito_1";
             this._opTipoDeposito_1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this._opTipoDeposito_1.Size = new System.Drawing.Size(67, 16);
+            this._opTipoDeposito_1.Size = new System.Drawing.Size(83, 20);
             this._opTipoDeposito_1.TabIndex = 5;
             this._opTipoDeposito_1.TabStop = true;
             this._opTipoDeposito_1.Text = "Cheques";
@@ -1649,10 +1657,10 @@ namespace Catalogo._rendiciones
             this._opTipoDeposito_0.Checked = true;
             this._opTipoDeposito_0.Cursor = System.Windows.Forms.Cursors.Default;
             this._opTipoDeposito_0.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._opTipoDeposito_0.Location = new System.Drawing.Point(6, 22);
+            this._opTipoDeposito_0.Location = new System.Drawing.Point(6, 19);
             this._opTipoDeposito_0.Name = "_opTipoDeposito_0";
             this._opTipoDeposito_0.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this._opTipoDeposito_0.Size = new System.Drawing.Size(64, 16);
+            this._opTipoDeposito_0.Size = new System.Drawing.Size(83, 20);
             this._opTipoDeposito_0.TabIndex = 4;
             this._opTipoDeposito_0.TabStop = true;
             this._opTipoDeposito_0.Text = "Efectivo";
@@ -1669,7 +1677,7 @@ namespace Catalogo._rendiciones
             this.txtBdCh_Cantidad.MaxLength = 2;
             this.txtBdCh_Cantidad.Name = "txtBdCh_Cantidad";
             this.txtBdCh_Cantidad.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBdCh_Cantidad.Size = new System.Drawing.Size(34, 20);
+            this.txtBdCh_Cantidad.Size = new System.Drawing.Size(34, 21);
             this.txtBdCh_Cantidad.TabIndex = 10;
             this.txtBdCh_Cantidad.Text = "1";
             this.txtBdCh_Cantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1684,7 +1692,7 @@ namespace Catalogo._rendiciones
             this.txtBd_Monto.MaxLength = 13;
             this.txtBd_Monto.Name = "txtBd_Monto";
             this.txtBd_Monto.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBd_Monto.Size = new System.Drawing.Size(91, 20);
+            this.txtBd_Monto.Size = new System.Drawing.Size(91, 21);
             this.txtBd_Monto.TabIndex = 9;
             this.txtBd_Monto.Text = "0,00";
             this.txtBd_Monto.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1700,7 +1708,7 @@ namespace Catalogo._rendiciones
             this.txtBd_Nro.MaxLength = 8;
             this.txtBd_Nro.Name = "txtBd_Nro";
             this.txtBd_Nro.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBd_Nro.Size = new System.Drawing.Size(55, 20);
+            this.txtBd_Nro.Size = new System.Drawing.Size(55, 21);
             this.txtBd_Nro.TabIndex = 8;
             this.txtBd_Nro.Text = "0";
             this.txtBd_Nro.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -1712,10 +1720,10 @@ namespace Catalogo._rendiciones
             this.lblIdValor.BackColor = System.Drawing.Color.Transparent;
             this.lblIdValor.Cursor = System.Windows.Forms.Cursors.Default;
             this.lblIdValor.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lblIdValor.Location = new System.Drawing.Point(211, 6);
+            this.lblIdValor.Location = new System.Drawing.Point(249, 6);
             this.lblIdValor.Name = "lblIdValor";
             this.lblIdValor.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblIdValor.Size = new System.Drawing.Size(13, 13);
+            this.lblIdValor.Size = new System.Drawing.Size(14, 15);
             this.lblIdValor.TabIndex = 57;
             this.lblIdValor.Text = "0";
             this.lblIdValor.Visible = false;
@@ -1729,7 +1737,7 @@ namespace Catalogo._rendiciones
             this.lblTit3.Location = new System.Drawing.Point(652, 24);
             this.lblTit3.Name = "lblTit3";
             this.lblTit3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTit3.Size = new System.Drawing.Size(68, 13);
+            this.lblTit3.Size = new System.Drawing.Size(77, 15);
             this.lblTit3.TabIndex = 63;
             this.lblTit3.Text = "Ca. Cheques";
             // 
@@ -1742,7 +1750,7 @@ namespace Catalogo._rendiciones
             this.Label16.Location = new System.Drawing.Point(3, 6);
             this.Label16.Name = "Label16";
             this.Label16.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label16.Size = new System.Drawing.Size(202, 13);
+            this.Label16.Size = new System.Drawing.Size(228, 15);
             this.Label16.TabIndex = 56;
             this.Label16.Text = "Boleta de Depósito de Efectivo, Cheques";
             // 
@@ -1755,7 +1763,7 @@ namespace Catalogo._rendiciones
             this.lblTit1.Location = new System.Drawing.Point(474, 24);
             this.lblTit1.Name = "lblTit1";
             this.lblTit1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTit1.Size = new System.Drawing.Size(51, 13);
+            this.lblTit1.Size = new System.Drawing.Size(56, 15);
             this.lblTit1.TabIndex = 61;
             this.lblTit1.Text = "B.D. Nro.";
             // 
@@ -1768,7 +1776,7 @@ namespace Catalogo._rendiciones
             this.Label24.Location = new System.Drawing.Point(333, 24);
             this.Label24.Name = "Label24";
             this.Label24.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Label24.Size = new System.Drawing.Size(37, 13);
+            this.Label24.Size = new System.Drawing.Size(41, 15);
             this.Label24.TabIndex = 60;
             this.Label24.Text = "Fecha";
             // 
@@ -1781,149 +1789,40 @@ namespace Catalogo._rendiciones
             this.lblTit2.Location = new System.Drawing.Point(535, 24);
             this.lblTit2.Name = "lblTit2";
             this.lblTit2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTit2.Size = new System.Drawing.Size(46, 13);
+            this.lblTit2.Size = new System.Drawing.Size(52, 15);
             this.lblTit2.TabIndex = 62;
             this.lblTit2.Text = "Monto $";
             // 
             // rTabBuscar
             // 
+            this.rTabBuscar.BackColor = System.Drawing.Color.Transparent;
             this.rTabBuscar.Controls.Add(this.fraBuscar);
-            this.rTabBuscar.Location = new System.Drawing.Point(4, 25);
+            this.rTabBuscar.Location = new System.Drawing.Point(4, 27);
             this.rTabBuscar.Name = "rTabBuscar";
-            this.rTabBuscar.Size = new System.Drawing.Size(817, 404);
+            this.rTabBuscar.Size = new System.Drawing.Size(817, 402);
             this.rTabBuscar.TabIndex = 6;
             this.rTabBuscar.Text = "Buscar";
-            this.rTabBuscar.UseVisualStyleBackColor = true;
-            // 
-            // fraBuscar
-            // 
-            this.fraBuscar.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.fraBuscar.Controls.Add(this.cmdBuscar);
-            this.fraBuscar.Controls.Add(this.lvBuscar);
-            this.fraBuscar.Controls.Add(this.mskFbuscar);
-            this.fraBuscar.Controls.Add(this.txtBuscar);
-            this.fraBuscar.Controls.Add(this._optBuscar_1);
-            this.fraBuscar.Controls.Add(this._optBuscar_0);
-            this.fraBuscar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fraBuscar.Location = new System.Drawing.Point(0, 0);
-            this.fraBuscar.Name = "fraBuscar";
-            this.fraBuscar.Size = new System.Drawing.Size(817, 404);
-            this.fraBuscar.TabIndex = 10;
-            // 
-            // cmdBuscar
-            // 
-            this.cmdBuscar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cmdBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.cmdBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.cmdBuscar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.cmdBuscar.FlatAppearance.BorderSize = 2;
-            this.cmdBuscar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.cmdBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cmdBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdBuscar.ForeColor = System.Drawing.Color.White;
-            this.cmdBuscar.Location = new System.Drawing.Point(549, 52);
-            this.cmdBuscar.Name = "cmdBuscar";
-            this.cmdBuscar.Size = new System.Drawing.Size(75, 25);
-            this.cmdBuscar.TabIndex = 77;
-            this.cmdBuscar.Text = "Buscar";
-            this.cmdBuscar.UseVisualStyleBackColor = false;
-            this.cmdBuscar.Click += new System.EventHandler(this.cmdBuscar_Click);
-            // 
-            // lvBuscar
-            // 
-            this.lvBuscar.AllowColumnReorder = true;
-            this.lvBuscar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lvBuscar.BackColor = System.Drawing.SystemColors.Window;
-            this.lvBuscar.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.lvBuscar.FullRowSelect = true;
-            this.lvBuscar.GridLines = true;
-            this.lvBuscar.LabelWrap = false;
-            this.lvBuscar.Location = new System.Drawing.Point(84, 95);
-            this.lvBuscar.Name = "lvBuscar";
-            this.lvBuscar.Size = new System.Drawing.Size(635, 268);
-            this.lvBuscar.TabIndex = 76;
-            this.lvBuscar.Tag = "rendicion_buscar";
-            this.lvBuscar.UseCompatibleStateImageBehavior = false;
-            this.lvBuscar.View = System.Windows.Forms.View.Details;
-            this.lvBuscar.DoubleClick += new System.EventHandler(this.lvBuscar_DoubleClick);
-            // 
-            // mskFbuscar
-            // 
-            this.mskFbuscar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.mskFbuscar.CustomFormat = "dd/MM/yyyy";
-            this.mskFbuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.mskFbuscar.Location = new System.Drawing.Point(431, 55);
-            this.mskFbuscar.Name = "mskFbuscar";
-            this.mskFbuscar.Size = new System.Drawing.Size(100, 20);
-            this.mskFbuscar.TabIndex = 75;
-            // 
-            // txtBuscar
-            // 
-            this.txtBuscar.AcceptsReturn = true;
-            this.txtBuscar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtBuscar.BackColor = System.Drawing.SystemColors.Window;
-            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtBuscar.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtBuscar.Location = new System.Drawing.Point(84, 55);
-            this.txtBuscar.MaxLength = 0;
-            this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.txtBuscar.Size = new System.Drawing.Size(285, 20);
-            this.txtBuscar.TabIndex = 72;
-            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
-            // 
-            // _optBuscar_1
-            // 
-            this._optBuscar_1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this._optBuscar_1.BackColor = System.Drawing.Color.Transparent;
-            this._optBuscar_1.Checked = true;
-            this._optBuscar_1.Cursor = System.Windows.Forms.Cursors.Default;
-            this._optBuscar_1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._optBuscar_1.Location = new System.Drawing.Point(216, 24);
-            this._optBuscar_1.Name = "_optBuscar_1";
-            this._optBuscar_1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this._optBuscar_1.Size = new System.Drawing.Size(105, 17);
-            this._optBuscar_1.TabIndex = 71;
-            this._optBuscar_1.TabStop = true;
-            this._optBuscar_1.Text = "Fecha";
-            this._optBuscar_1.UseVisualStyleBackColor = false;
-            // 
-            // _optBuscar_0
-            // 
-            this._optBuscar_0.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this._optBuscar_0.BackColor = System.Drawing.Color.Transparent;
-            this._optBuscar_0.Cursor = System.Windows.Forms.Cursors.Default;
-            this._optBuscar_0.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._optBuscar_0.Location = new System.Drawing.Point(89, 24);
-            this._optBuscar_0.Name = "_optBuscar_0";
-            this._optBuscar_0.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this._optBuscar_0.Size = new System.Drawing.Size(165, 17);
-            this._optBuscar_0.TabIndex = 70;
-            this._optBuscar_0.TabStop = true;
-            this._optBuscar_0.Text = "Nº de Rendición";
-            this._optBuscar_0.UseVisualStyleBackColor = false;
-            this._optBuscar_0.CheckedChanged += new System.EventHandler(this._optBuscar_0_CheckedChanged);
             // 
             // rTabAnt
             // 
+            this.rTabAnt.BackColor = System.Drawing.Color.Transparent;
             this.rTabAnt.Controls.Add(this.paDataGridView);
             this.rTabAnt.Controls.Add(this.paPnlTop);
             this.rTabAnt.Controls.Add(this.devAnterioresDataGridView);
-            this.rTabAnt.Location = new System.Drawing.Point(4, 25);
+            this.rTabAnt.Location = new System.Drawing.Point(4, 27);
             this.rTabAnt.Name = "rTabAnt";
             this.rTabAnt.Padding = new System.Windows.Forms.Padding(3);
-            this.rTabAnt.Size = new System.Drawing.Size(817, 404);
+            this.rTabAnt.Size = new System.Drawing.Size(817, 402);
             this.rTabAnt.TabIndex = 4;
             this.rTabAnt.Text = "Anteriores";
-            this.rTabAnt.UseVisualStyleBackColor = true;
             // 
             // paDataGridView
             // 
             this.paDataGridView.AllowUserToAddRows = false;
             this.paDataGridView.AllowUserToDeleteRows = false;
             this.paDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle41.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle41;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.paDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.paDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1935,7 +1834,7 @@ namespace Catalogo._rendiciones
             this.paDataGridView.RowHeadersWidth = 4;
             this.paDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.paDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.paDataGridView.Size = new System.Drawing.Size(811, 356);
+            this.paDataGridView.Size = new System.Drawing.Size(811, 354);
             this.paDataGridView.TabIndex = 3;
             // 
             // paPnlTop
@@ -1977,7 +1876,7 @@ namespace Catalogo._rendiciones
             "NO Enviados"});
             this.paEnviosCbo.Location = new System.Drawing.Point(5, 9);
             this.paEnviosCbo.Name = "paEnviosCbo";
-            this.paEnviosCbo.Size = new System.Drawing.Size(214, 21);
+            this.paEnviosCbo.Size = new System.Drawing.Size(214, 23);
             this.paEnviosCbo.TabIndex = 32;
             this.paEnviosCbo.Text = "(todos)";
             // 
@@ -1985,8 +1884,8 @@ namespace Catalogo._rendiciones
             // 
             this.devAnterioresDataGridView.AllowUserToAddRows = false;
             this.devAnterioresDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle42.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle42;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.devAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.devAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.devAnterioresDataGridView.Location = new System.Drawing.Point(3, 3);
@@ -1995,7 +1894,7 @@ namespace Catalogo._rendiciones
             this.devAnterioresDataGridView.ReadOnly = true;
             this.devAnterioresDataGridView.RowHeadersWidth = 4;
             this.devAnterioresDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.devAnterioresDataGridView.Size = new System.Drawing.Size(811, 398);
+            this.devAnterioresDataGridView.Size = new System.Drawing.Size(811, 396);
             this.devAnterioresDataGridView.TabIndex = 1;
             // 
             // ucPnlTop
@@ -2104,6 +2003,134 @@ namespace Catalogo._rendiciones
             this.btnVer.UseVisualStyleBackColor = false;
             this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(1, 24);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // fraBuscar
+            // 
+            this.fraBuscar.BackColor = System.Drawing.Color.Transparent;
+            this.fraBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.fraBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.fraBuscar.Controls.Add(this.lvBuscar);
+            this.fraBuscar.Controls.Add(this.cmdBuscar);
+            this.fraBuscar.Controls.Add(this.mskFbuscar);
+            this.fraBuscar.Controls.Add(this.txtBuscar);
+            this.fraBuscar.Controls.Add(this._optBuscar_1);
+            this.fraBuscar.Controls.Add(this._optBuscar_0);
+            this.fraBuscar.Location = new System.Drawing.Point(53, 35);
+            this.fraBuscar.Name = "fraBuscar";
+            this.fraBuscar.Size = new System.Drawing.Size(731, 331);
+            this.fraBuscar.TabIndex = 12;
+            // 
+            // lvBuscar
+            // 
+            this.lvBuscar.BackColor = System.Drawing.Color.White;
+            this.lvBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvBuscar.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.fndNroRendicionLv,
+            this.fndFechaRendicionLv,
+            this.fndDescripcionLv});
+            this.lvBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvBuscar.FullRowSelect = true;
+            this.lvBuscar.GridLines = true;
+            this.lvBuscar.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvBuscar.HideSelection = false;
+            this.lvBuscar.Location = new System.Drawing.Point(42, 114);
+            this.lvBuscar.MultiSelect = false;
+            this.lvBuscar.Name = "lvBuscar";
+            this.lvBuscar.Size = new System.Drawing.Size(640, 192);
+            this.lvBuscar.SmallImageList = this.imageList1;
+            this.lvBuscar.TabIndex = 78;
+            this.lvBuscar.Tag = "nada";
+            this.lvBuscar.UseCompatibleStateImageBehavior = false;
+            this.lvBuscar.View = System.Windows.Forms.View.Details;
+            // 
+            // fndNroRendicionLv
+            // 
+            this.fndNroRendicionLv.Text = "n° Rendición";
+            this.fndNroRendicionLv.Width = 90;
+            // 
+            // fndFechaRendicionLv
+            // 
+            this.fndFechaRendicionLv.Text = "Fecha";
+            this.fndFechaRendicionLv.Width = 90;
+            // 
+            // fndDescripcionLv
+            // 
+            this.fndDescripcionLv.Text = "Descripción";
+            this.fndDescripcionLv.Width = 120;
+            // 
+            // cmdBuscar
+            // 
+            this.cmdBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.cmdBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.cmdBuscar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.cmdBuscar.FlatAppearance.BorderSize = 2;
+            this.cmdBuscar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.cmdBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cmdBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdBuscar.ForeColor = System.Drawing.Color.White;
+            this.cmdBuscar.Location = new System.Drawing.Point(549, 51);
+            this.cmdBuscar.Name = "cmdBuscar";
+            this.cmdBuscar.Size = new System.Drawing.Size(75, 25);
+            this.cmdBuscar.TabIndex = 77;
+            this.cmdBuscar.Text = "Buscar";
+            this.cmdBuscar.UseVisualStyleBackColor = false;
+            // 
+            // mskFbuscar
+            // 
+            this.mskFbuscar.CustomFormat = "dd/MM/yyyy";
+            this.mskFbuscar.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.mskFbuscar.Location = new System.Drawing.Point(408, 53);
+            this.mskFbuscar.Name = "mskFbuscar";
+            this.mskFbuscar.Size = new System.Drawing.Size(100, 21);
+            this.mskFbuscar.TabIndex = 75;
+            // 
+            // txtBuscar
+            // 
+            this.txtBuscar.AcceptsReturn = true;
+            this.txtBuscar.BackColor = System.Drawing.SystemColors.Window;
+            this.txtBuscar.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBuscar.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtBuscar.Location = new System.Drawing.Point(84, 53);
+            this.txtBuscar.MaxLength = 0;
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtBuscar.Size = new System.Drawing.Size(285, 21);
+            this.txtBuscar.TabIndex = 72;
+            // 
+            // _optBuscar_1
+            // 
+            this._optBuscar_1.BackColor = System.Drawing.Color.Transparent;
+            this._optBuscar_1.Checked = true;
+            this._optBuscar_1.Cursor = System.Windows.Forms.Cursors.Default;
+            this._optBuscar_1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._optBuscar_1.Location = new System.Drawing.Point(216, 23);
+            this._optBuscar_1.Name = "_optBuscar_1";
+            this._optBuscar_1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._optBuscar_1.Size = new System.Drawing.Size(121, 17);
+            this._optBuscar_1.TabIndex = 71;
+            this._optBuscar_1.TabStop = true;
+            this._optBuscar_1.Text = "Fecha";
+            this._optBuscar_1.UseVisualStyleBackColor = false;
+            // 
+            // _optBuscar_0
+            // 
+            this._optBuscar_0.BackColor = System.Drawing.Color.Transparent;
+            this._optBuscar_0.Cursor = System.Windows.Forms.Cursors.Default;
+            this._optBuscar_0.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._optBuscar_0.Location = new System.Drawing.Point(89, 23);
+            this._optBuscar_0.Name = "_optBuscar_0";
+            this._optBuscar_0.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this._optBuscar_0.Size = new System.Drawing.Size(121, 17);
+            this._optBuscar_0.TabIndex = 70;
+            this._optBuscar_0.TabStop = true;
+            this._optBuscar_0.Text = "Nº de Rendición";
+            this._optBuscar_0.UseVisualStyleBackColor = false;
+            // 
             // ucRendiciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2128,13 +2155,13 @@ namespace Catalogo._rendiciones
             this.fraDatos1.ResumeLayout(false);
             this.fraDatos1.PerformLayout();
             this.rTabBuscar.ResumeLayout(false);
-            this.fraBuscar.ResumeLayout(false);
-            this.fraBuscar.PerformLayout();
             this.rTabAnt.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.paDataGridView)).EndInit();
             this.paPnlTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.devAnterioresDataGridView)).EndInit();
             this.ucPnlTop.ResumeLayout(false);
+            this.fraBuscar.ResumeLayout(false);
+            this.fraBuscar.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2196,13 +2223,6 @@ namespace Catalogo._rendiciones
         public System.Windows.Forms.Label lblEfectivo;
         private System.Windows.Forms.DateTimePicker dtF_Rendicion;
         private System.Windows.Forms.Button cmdReciboAdd;
-        private System.Windows.Forms.Panel fraBuscar;
-        private System.Windows.Forms.Button cmdBuscar;
-        public System.Windows.Forms.ListView lvBuscar;
-        private System.Windows.Forms.DateTimePicker mskFbuscar;
-        public System.Windows.Forms.TextBox txtBuscar;
-        public System.Windows.Forms.RadioButton _optBuscar_1;
-        public System.Windows.Forms.RadioButton _optBuscar_0;
         public System.Windows.Forms.Panel fraLVValores;
         public System.Windows.Forms.ListView lvValores;
         public System.Windows.Forms.ColumnHeader _lvValores_ColumnHeader_1;
@@ -2280,5 +2300,16 @@ namespace Catalogo._rendiciones
         private System.Windows.Forms.Button btnIniciar;
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.Button btnVer;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Panel fraBuscar;
+        private System.Windows.Forms.ListView lvBuscar;
+        private System.Windows.Forms.ColumnHeader fndNroRendicionLv;
+        private System.Windows.Forms.ColumnHeader fndFechaRendicionLv;
+        private System.Windows.Forms.ColumnHeader fndDescripcionLv;
+        private System.Windows.Forms.Button cmdBuscar;
+        private System.Windows.Forms.DateTimePicker mskFbuscar;
+        public System.Windows.Forms.TextBox txtBuscar;
+        public System.Windows.Forms.RadioButton _optBuscar_1;
+        public System.Windows.Forms.RadioButton _optBuscar_0;
     }
 }

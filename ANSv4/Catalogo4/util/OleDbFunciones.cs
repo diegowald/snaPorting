@@ -314,11 +314,11 @@ namespace Catalogo.Funciones
             catch (System.IO.IOException ex)
             {
                 //throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-                throw ex;               
+                //throw ex;               
             }
             catch (Exception ex)
             {
-                throw ex;
+                //throw ex;
             }
         }
 

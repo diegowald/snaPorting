@@ -91,6 +91,7 @@ namespace Catalogo._recibos
             this.adImporteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.adPorcentajeLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.adPorcentajeAlrestoLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.adPnlTop = new System.Windows.Forms.Panel();
             this.adCascaraBtn = new System.Windows.Forms.Button();
             this.adAgregarBtn = new System.Windows.Forms.Button();
@@ -116,6 +117,7 @@ namespace Catalogo._recibos
             this.apConceptoLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.apImporteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.apPercepcionLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.apPnlTop = new System.Windows.Forms.Panel();
             this.apAgregarBtn = new System.Windows.Forms.Button();
             this.apPercepcionTxt = new System.Windows.Forms.TextBox();
@@ -140,6 +142,7 @@ namespace Catalogo._recibos
             this.raIdValorLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.raIdBancoLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.raTCambio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.raPnlTop = new System.Windows.Forms.Panel();
             this.cvDivisasLbl = new System.Windows.Forms.Label();
             this.cvCancelarBtn = new System.Windows.Forms.Button();
@@ -299,7 +302,7 @@ namespace Catalogo._recibos
             // 
             // rTabAnteriores
             // 
-            this.rTabAnteriores.BackColor = System.Drawing.Color.LightYellow;
+            this.rTabAnteriores.BackColor = System.Drawing.Color.Transparent;
             this.rTabAnteriores.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabAnteriores.Controls.Add(this.paDataGridView);
             this.rTabAnteriores.Controls.Add(this.paPnlTop);
@@ -378,7 +381,7 @@ namespace Catalogo._recibos
             // 
             // rTabClienteNov
             // 
-            this.rTabClienteNov.BackColor = System.Drawing.Color.LightYellow;
+            this.rTabClienteNov.BackColor = System.Drawing.Color.Transparent;
             this.rTabClienteNov.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabClienteNov.Controls.Add(this.CliNPnlMain);
             this.rTabClienteNov.Controls.Add(this.CliNPnlTop);
@@ -390,30 +393,30 @@ namespace Catalogo._recibos
             // 
             // CliNPnlMain
             // 
-            this.CliNPnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CliNPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliNPnlMain.Enabled = false;
-            this.CliNPnlMain.Location = new System.Drawing.Point(0, 53);
+            this.CliNPnlMain.Location = new System.Drawing.Point(0, 79);
             this.CliNPnlMain.Name = "CliNPnlMain";
-            this.CliNPnlMain.Size = new System.Drawing.Size(784, 342);
+            this.CliNPnlMain.Size = new System.Drawing.Size(784, 316);
             this.CliNPnlMain.TabIndex = 6;
             // 
             // CliNPnlTop
             // 
+            this.CliNPnlTop.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliNPnlTop.Controls.Add(this.CliNAgregarBtn);
             this.CliNPnlTop.Controls.Add(this.CliNFechaDtp);
             this.CliNPnlTop.Controls.Add(this.label13);
             this.CliNPnlTop.Controls.Add(this.CliNNovedadTxt);
             this.CliNPnlTop.Controls.Add(this.label14);
-            this.CliNPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.CliNPnlTop.Enabled = false;
-            this.CliNPnlTop.Location = new System.Drawing.Point(0, 0);
+            this.CliNPnlTop.Location = new System.Drawing.Point(0, 12);
             this.CliNPnlTop.Name = "CliNPnlTop";
-            this.CliNPnlTop.Size = new System.Drawing.Size(784, 53);
+            this.CliNPnlTop.Size = new System.Drawing.Size(784, 49);
             this.CliNPnlTop.TabIndex = 5;
             // 
             // CliNAgregarBtn
             // 
-            this.CliNAgregarBtn.BackColor = System.Drawing.Color.Red;
+            this.CliNAgregarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.CliNAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.CliNAgregarBtn.Enabled = false;
             this.CliNAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -467,7 +470,7 @@ namespace Catalogo._recibos
             // 
             // rTabClienteDatos
             // 
-            this.rTabClienteDatos.BackColor = System.Drawing.Color.LightYellow;
+            this.rTabClienteDatos.BackColor = System.Drawing.Color.Transparent;
             this.rTabClienteDatos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabClienteDatos.Controls.Add(this.CliDPnlMain);
             this.rTabClienteDatos.Location = new System.Drawing.Point(4, 27);
@@ -480,6 +483,7 @@ namespace Catalogo._recibos
             // CliDPnlMain
             // 
             this.CliDPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CliDPnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CliDPnlMain.Controls.Add(this.CliDDomicilioTxt);
             this.CliDPnlMain.Controls.Add(this.CliDEmailTxt);
             this.CliDPnlMain.Controls.Add(this.CliDObservacionesTxt);
@@ -497,9 +501,9 @@ namespace Catalogo._recibos
             this.CliDPnlMain.Controls.Add(this.label23);
             this.CliDPnlMain.Controls.Add(this.label24);
             this.CliDPnlMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDPnlMain.Location = new System.Drawing.Point(3, 3);
+            this.CliDPnlMain.Location = new System.Drawing.Point(84, 48);
             this.CliDPnlMain.Name = "CliDPnlMain";
-            this.CliDPnlMain.Size = new System.Drawing.Size(626, 396);
+            this.CliDPnlMain.Size = new System.Drawing.Size(602, 312);
             this.CliDPnlMain.TabIndex = 1;
             this.CliDPnlMain.DoubleClick += new System.EventHandler(this.CliDPnlMain_DoubleClick);
             // 
@@ -507,7 +511,7 @@ namespace Catalogo._recibos
             // 
             this.CliDDomicilioTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDDomicilioTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDDomicilioTxt.Location = new System.Drawing.Point(23, 143);
+            this.CliDDomicilioTxt.Location = new System.Drawing.Point(10, 100);
             this.CliDDomicilioTxt.Name = "CliDDomicilioTxt";
             this.CliDDomicilioTxt.Size = new System.Drawing.Size(276, 21);
             this.CliDDomicilioTxt.TabIndex = 22;
@@ -516,7 +520,7 @@ namespace Catalogo._recibos
             // 
             this.CliDEmailTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDEmailTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDEmailTxt.Location = new System.Drawing.Point(205, 196);
+            this.CliDEmailTxt.Location = new System.Drawing.Point(192, 153);
             this.CliDEmailTxt.Name = "CliDEmailTxt";
             this.CliDEmailTxt.Size = new System.Drawing.Size(392, 21);
             this.CliDEmailTxt.TabIndex = 21;
@@ -525,7 +529,7 @@ namespace Catalogo._recibos
             // 
             this.CliDObservacionesTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDObservacionesTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDObservacionesTxt.Location = new System.Drawing.Point(23, 260);
+            this.CliDObservacionesTxt.Location = new System.Drawing.Point(10, 217);
             this.CliDObservacionesTxt.Multiline = true;
             this.CliDObservacionesTxt.Name = "CliDObservacionesTxt";
             this.CliDObservacionesTxt.Size = new System.Drawing.Size(574, 56);
@@ -535,7 +539,7 @@ namespace Catalogo._recibos
             // 
             this.CliDCuitTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDCuitTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDCuitTxt.Location = new System.Drawing.Point(404, 94);
+            this.CliDCuitTxt.Location = new System.Drawing.Point(391, 51);
             this.CliDCuitTxt.Name = "CliDCuitTxt";
             this.CliDCuitTxt.Size = new System.Drawing.Size(100, 21);
             this.CliDCuitTxt.TabIndex = 19;
@@ -544,7 +548,7 @@ namespace Catalogo._recibos
             // 
             this.CliDTelefonoTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDTelefonoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDTelefonoTxt.Location = new System.Drawing.Point(23, 196);
+            this.CliDTelefonoTxt.Location = new System.Drawing.Point(10, 153);
             this.CliDTelefonoTxt.Name = "CliDTelefonoTxt";
             this.CliDTelefonoTxt.Size = new System.Drawing.Size(144, 21);
             this.CliDTelefonoTxt.TabIndex = 14;
@@ -553,7 +557,7 @@ namespace Catalogo._recibos
             // 
             this.CliDLocalidadTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDLocalidadTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDLocalidadTxt.Location = new System.Drawing.Point(321, 143);
+            this.CliDLocalidadTxt.Location = new System.Drawing.Point(308, 100);
             this.CliDLocalidadTxt.Name = "CliDLocalidadTxt";
             this.CliDLocalidadTxt.Size = new System.Drawing.Size(276, 21);
             this.CliDLocalidadTxt.TabIndex = 13;
@@ -562,7 +566,7 @@ namespace Catalogo._recibos
             // 
             this.CliDRazonSocialTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDRazonSocialTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDRazonSocialTxt.Location = new System.Drawing.Point(129, 94);
+            this.CliDRazonSocialTxt.Location = new System.Drawing.Point(116, 51);
             this.CliDRazonSocialTxt.Name = "CliDRazonSocialTxt";
             this.CliDRazonSocialTxt.Size = new System.Drawing.Size(269, 21);
             this.CliDRazonSocialTxt.TabIndex = 12;
@@ -571,7 +575,7 @@ namespace Catalogo._recibos
             // 
             this.CliDNroCuentaTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDNroCuentaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDNroCuentaTxt.Location = new System.Drawing.Point(23, 94);
+            this.CliDNroCuentaTxt.Location = new System.Drawing.Point(10, 51);
             this.CliDNroCuentaTxt.Name = "CliDNroCuentaTxt";
             this.CliDNroCuentaTxt.Size = new System.Drawing.Size(100, 21);
             this.CliDNroCuentaTxt.TabIndex = 11;
@@ -580,7 +584,7 @@ namespace Catalogo._recibos
             // 
             this.label15.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(405, 76);
+            this.label15.Location = new System.Drawing.Point(392, 33);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(46, 15);
             this.label15.TabIndex = 8;
@@ -590,7 +594,7 @@ namespace Catalogo._recibos
             // 
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(23, 244);
+            this.label16.Location = new System.Drawing.Point(10, 201);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(88, 15);
             this.label16.TabIndex = 7;
@@ -600,7 +604,7 @@ namespace Catalogo._recibos
             // 
             this.label17.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(202, 180);
+            this.label17.Location = new System.Drawing.Point(189, 137);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(42, 15);
             this.label17.TabIndex = 6;
@@ -610,7 +614,7 @@ namespace Catalogo._recibos
             // 
             this.label20.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(23, 181);
+            this.label20.Location = new System.Drawing.Point(10, 138);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(55, 15);
             this.label20.TabIndex = 5;
@@ -620,7 +624,7 @@ namespace Catalogo._recibos
             // 
             this.label21.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(318, 128);
+            this.label21.Location = new System.Drawing.Point(305, 85);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(61, 15);
             this.label21.TabIndex = 4;
@@ -630,7 +634,7 @@ namespace Catalogo._recibos
             // 
             this.label22.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(23, 128);
+            this.label22.Location = new System.Drawing.Point(10, 85);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(59, 15);
             this.label22.TabIndex = 3;
@@ -640,7 +644,7 @@ namespace Catalogo._recibos
             // 
             this.label23.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(126, 76);
+            this.label23.Location = new System.Drawing.Point(113, 33);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(80, 15);
             this.label23.TabIndex = 2;
@@ -650,7 +654,7 @@ namespace Catalogo._recibos
             // 
             this.label24.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(23, 76);
+            this.label24.Location = new System.Drawing.Point(10, 33);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(78, 15);
             this.label24.TabIndex = 1;
@@ -658,7 +662,7 @@ namespace Catalogo._recibos
             // 
             // rTabCtaCte
             // 
-            this.rTabCtaCte.BackColor = System.Drawing.Color.LightYellow;
+            this.rTabCtaCte.BackColor = System.Drawing.Color.Transparent;
             this.rTabCtaCte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabCtaCte.Controls.Add(this.ccPnlMain);
             this.rTabCtaCte.Controls.Add(this.ccPnlBotton);
@@ -671,16 +675,15 @@ namespace Catalogo._recibos
             // 
             // ccPnlMain
             // 
+            this.ccPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ccPnlMain.Controls.Add(this.cclistView);
-            this.ccPnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ccPnlMain.Location = new System.Drawing.Point(3, 3);
+            this.ccPnlMain.Location = new System.Drawing.Point(3, 18);
             this.ccPnlMain.Name = "ccPnlMain";
-            this.ccPnlMain.Size = new System.Drawing.Size(778, 355);
+            this.ccPnlMain.Size = new System.Drawing.Size(778, 340);
             this.ccPnlMain.TabIndex = 0;
             // 
             // cclistView
             // 
-            this.cclistView.BackColor = System.Drawing.Color.White;
             this.cclistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cclistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             ccFechaLv,
@@ -696,17 +699,16 @@ namespace Catalogo._recibos
             ccIdClienteLv,
             ccEstaAplicadaLv,
             ccEsContadoLv});
-            this.cclistView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cclistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cclistView.FullRowSelect = true;
             this.cclistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cclistView.HideSelection = false;
-            this.cclistView.Location = new System.Drawing.Point(0, 0);
+            this.cclistView.Location = new System.Drawing.Point(11, 14);
             this.cclistView.MultiSelect = false;
             this.cclistView.Name = "cclistView";
-            this.cclistView.Size = new System.Drawing.Size(778, 355);
+            this.cclistView.Size = new System.Drawing.Size(754, 320);
             this.cclistView.SmallImageList = this.imageList1;
-            this.cclistView.TabIndex = 1;
+            this.cclistView.TabIndex = 2;
             this.cclistView.UseCompatibleStateImageBehavior = false;
             this.cclistView.View = System.Windows.Forms.View.Details;
             this.cclistView.Click += new System.EventHandler(this.cclistView_Click);
@@ -715,8 +717,8 @@ namespace Catalogo._recibos
             // 
             // ccPnlBotton
             // 
+            this.ccPnlBotton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ccPnlBotton.Controls.Add(this.ccActualizadaFechaLbl);
-            this.ccPnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ccPnlBotton.Location = new System.Drawing.Point(3, 358);
             this.ccPnlBotton.Name = "ccPnlBotton";
             this.ccPnlBotton.Size = new System.Drawing.Size(778, 34);
@@ -733,7 +735,7 @@ namespace Catalogo._recibos
             // 
             // rTabADeducir
             // 
-            this.rTabADeducir.BackColor = System.Drawing.Color.LightYellow;
+            this.rTabADeducir.BackColor = System.Drawing.Color.Transparent;
             this.rTabADeducir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabADeducir.Controls.Add(this.adPnlMain);
             this.rTabADeducir.Controls.Add(this.adPnlTop);
@@ -747,41 +749,37 @@ namespace Catalogo._recibos
             // 
             // adPnlMain
             // 
+            this.adPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.adPnlMain.Controls.Add(this.adlistView);
-            this.adPnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.adPnlMain.Enabled = false;
-            this.adPnlMain.Location = new System.Drawing.Point(3, 56);
+            this.adPnlMain.Location = new System.Drawing.Point(3, 62);
             this.adPnlMain.Name = "adPnlMain";
-            this.adPnlMain.Size = new System.Drawing.Size(778, 283);
+            this.adPnlMain.Size = new System.Drawing.Size(778, 277);
             this.adPnlMain.TabIndex = 5;
             // 
             // adlistView
             // 
-            this.adlistView.BackColor = System.Drawing.Color.White;
             this.adlistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.adlistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.adConceptoLv,
             this.adImporteLv,
             this.adPorcentajeLv,
-            this.adPorcentajeAlrestoLv});
-            this.adlistView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.adPorcentajeAlrestoLv,
+            this.columnHeader3});
             this.adlistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.adlistView.FullRowSelect = true;
-            this.adlistView.GridLines = true;
             this.adlistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.adlistView.HideSelection = false;
-            this.adlistView.Location = new System.Drawing.Point(0, 0);
+            this.adlistView.Location = new System.Drawing.Point(8, 8);
             this.adlistView.MultiSelect = false;
             this.adlistView.Name = "adlistView";
-            this.adlistView.Size = new System.Drawing.Size(778, 283);
+            this.adlistView.Size = new System.Drawing.Size(756, 258);
             this.adlistView.SmallImageList = this.imageList1;
             this.adlistView.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.adlistView.TabIndex = 3;
+            this.adlistView.TabIndex = 4;
             this.adlistView.Tag = "nada";
             this.adlistView.UseCompatibleStateImageBehavior = false;
             this.adlistView.View = System.Windows.Forms.View.Details;
-            this.adlistView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.adlistView_ColumnClick);
-            this.adlistView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.adlistView_KeyDown);
             // 
             // adConceptoLv
             // 
@@ -800,8 +798,13 @@ namespace Catalogo._recibos
             // 
             this.adPorcentajeAlrestoLv.Text = "% al Resto";
             // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Width = 0;
+            // 
             // adPnlTop
             // 
+            this.adPnlTop.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.adPnlTop.Controls.Add(this.adCascaraBtn);
             this.adPnlTop.Controls.Add(this.adAgregarBtn);
             this.adPnlTop.Controls.Add(this.adAplicarRestoChk);
@@ -810,16 +813,15 @@ namespace Catalogo._recibos
             this.adPnlTop.Controls.Add(this.adConceptoTxt);
             this.adPnlTop.Controls.Add(this.label18);
             this.adPnlTop.Controls.Add(this.label19);
-            this.adPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.adPnlTop.Enabled = false;
-            this.adPnlTop.Location = new System.Drawing.Point(3, 3);
+            this.adPnlTop.Location = new System.Drawing.Point(3, 6);
             this.adPnlTop.Name = "adPnlTop";
-            this.adPnlTop.Size = new System.Drawing.Size(778, 53);
+            this.adPnlTop.Size = new System.Drawing.Size(778, 58);
             this.adPnlTop.TabIndex = 4;
             // 
             // adCascaraBtn
             // 
-            this.adCascaraBtn.BackColor = System.Drawing.Color.Red;
+            this.adCascaraBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.adCascaraBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.adCascaraBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.adCascaraBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
@@ -836,7 +838,7 @@ namespace Catalogo._recibos
             // 
             // adAgregarBtn
             // 
-            this.adAgregarBtn.BackColor = System.Drawing.Color.Red;
+            this.adAgregarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.adAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.adAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.adAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
@@ -908,11 +910,11 @@ namespace Catalogo._recibos
             // 
             // adPnlBotton
             // 
+            this.adPnlBotton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.adPnlBotton.Controls.Add(this.label27);
             this.adPnlBotton.Controls.Add(this.label26);
             this.adPnlBotton.Controls.Add(this.adTotalDeducirAlRestoLbl);
             this.adPnlBotton.Controls.Add(this.adTotalDeducirLbl);
-            this.adPnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.adPnlBotton.Location = new System.Drawing.Point(3, 339);
             this.adPnlBotton.Name = "adPnlBotton";
             this.adPnlBotton.Size = new System.Drawing.Size(778, 53);
@@ -956,7 +958,7 @@ namespace Catalogo._recibos
             // 
             // rTabAplicacion
             // 
-            this.rTabAplicacion.BackColor = System.Drawing.Color.LightYellow;
+            this.rTabAplicacion.BackColor = System.Drawing.Color.Transparent;
             this.rTabAplicacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabAplicacion.Controls.Add(this.apPnlBotton);
             this.rTabAplicacion.Controls.Add(this.apPnlMain);
@@ -970,14 +972,14 @@ namespace Catalogo._recibos
             // 
             // apPnlBotton
             // 
+            this.apPnlBotton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.apPnlBotton.Controls.Add(this.label7);
             this.apPnlBotton.Controls.Add(this.label6);
             this.apPnlBotton.Controls.Add(this.apTotalPercepcionLbl);
             this.apPnlBotton.Controls.Add(this.apTotalAplicacionLbl);
-            this.apPnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.apPnlBotton.Location = new System.Drawing.Point(3, 339);
+            this.apPnlBotton.Location = new System.Drawing.Point(3, 334);
             this.apPnlBotton.Name = "apPnlBotton";
-            this.apPnlBotton.Size = new System.Drawing.Size(778, 53);
+            this.apPnlBotton.Size = new System.Drawing.Size(778, 58);
             this.apPnlBotton.TabIndex = 2;
             // 
             // label7
@@ -1018,32 +1020,30 @@ namespace Catalogo._recibos
             // 
             // apPnlMain
             // 
+            this.apPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.apPnlMain.Controls.Add(this.aplistView);
-            this.apPnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.apPnlMain.Enabled = false;
-            this.apPnlMain.Location = new System.Drawing.Point(3, 56);
+            this.apPnlMain.Location = new System.Drawing.Point(3, 89);
             this.apPnlMain.Name = "apPnlMain";
-            this.apPnlMain.Size = new System.Drawing.Size(778, 336);
+            this.apPnlMain.Size = new System.Drawing.Size(778, 303);
             this.apPnlMain.TabIndex = 1;
             // 
             // aplistView
             // 
-            this.aplistView.BackColor = System.Drawing.Color.White;
             this.aplistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.aplistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.apConceptoLv,
             this.apImporteLv,
-            this.apPercepcionLv});
-            this.aplistView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.apPercepcionLv,
+            this.columnHeader2});
             this.aplistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aplistView.FullRowSelect = true;
-            this.aplistView.GridLines = true;
             this.aplistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.aplistView.HideSelection = false;
-            this.aplistView.Location = new System.Drawing.Point(0, 0);
+            this.aplistView.Location = new System.Drawing.Point(0, 23);
             this.aplistView.MultiSelect = false;
             this.aplistView.Name = "aplistView";
-            this.aplistView.Size = new System.Drawing.Size(778, 336);
+            this.aplistView.Size = new System.Drawing.Size(775, 238);
             this.aplistView.SmallImageList = this.imageList1;
             this.aplistView.TabIndex = 3;
             this.aplistView.Tag = "nada";
@@ -1068,8 +1068,13 @@ namespace Catalogo._recibos
             this.apPercepcionLv.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.apPercepcionLv.Width = 140;
             // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Width = 0;
+            // 
             // apPnlTop
             // 
+            this.apPnlTop.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.apPnlTop.Controls.Add(this.apAgregarBtn);
             this.apPnlTop.Controls.Add(this.apPercepcionTxt);
             this.apPnlTop.Controls.Add(this.apImporteTxt);
@@ -1077,22 +1082,21 @@ namespace Catalogo._recibos
             this.apPnlTop.Controls.Add(this.label12);
             this.apPnlTop.Controls.Add(this.label11);
             this.apPnlTop.Controls.Add(this.label10);
-            this.apPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.apPnlTop.Enabled = false;
-            this.apPnlTop.Location = new System.Drawing.Point(3, 3);
+            this.apPnlTop.Location = new System.Drawing.Point(3, 6);
             this.apPnlTop.Name = "apPnlTop";
-            this.apPnlTop.Size = new System.Drawing.Size(778, 53);
+            this.apPnlTop.Size = new System.Drawing.Size(778, 55);
             this.apPnlTop.TabIndex = 0;
             // 
             // apAgregarBtn
             // 
-            this.apAgregarBtn.BackColor = System.Drawing.Color.Red;
+            this.apAgregarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.apAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.apAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.apAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.apAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.apAgregarBtn.ForeColor = System.Drawing.Color.White;
-            this.apAgregarBtn.Location = new System.Drawing.Point(531, 18);
+            this.apAgregarBtn.Location = new System.Drawing.Point(531, 23);
             this.apAgregarBtn.Name = "apAgregarBtn";
             this.apAgregarBtn.Size = new System.Drawing.Size(75, 25);
             this.apAgregarBtn.TabIndex = 6;
@@ -1102,7 +1106,7 @@ namespace Catalogo._recibos
             // 
             // apPercepcionTxt
             // 
-            this.apPercepcionTxt.Location = new System.Drawing.Point(413, 21);
+            this.apPercepcionTxt.Location = new System.Drawing.Point(413, 26);
             this.apPercepcionTxt.MaxLength = 10;
             this.apPercepcionTxt.Name = "apPercepcionTxt";
             this.apPercepcionTxt.Size = new System.Drawing.Size(100, 21);
@@ -1112,7 +1116,7 @@ namespace Catalogo._recibos
             // 
             // apImporteTxt
             // 
-            this.apImporteTxt.Location = new System.Drawing.Point(298, 21);
+            this.apImporteTxt.Location = new System.Drawing.Point(298, 26);
             this.apImporteTxt.MaxLength = 10;
             this.apImporteTxt.Name = "apImporteTxt";
             this.apImporteTxt.Size = new System.Drawing.Size(100, 21);
@@ -1122,7 +1126,7 @@ namespace Catalogo._recibos
             // 
             // apConceptoTxt
             // 
-            this.apConceptoTxt.Location = new System.Drawing.Point(8, 21);
+            this.apConceptoTxt.Location = new System.Drawing.Point(8, 26);
             this.apConceptoTxt.MaxLength = 32;
             this.apConceptoTxt.Name = "apConceptoTxt";
             this.apConceptoTxt.Size = new System.Drawing.Size(259, 21);
@@ -1131,7 +1135,7 @@ namespace Catalogo._recibos
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(410, 5);
+            this.label12.Location = new System.Drawing.Point(410, 10);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(69, 15);
             this.label12.TabIndex = 2;
@@ -1140,7 +1144,7 @@ namespace Catalogo._recibos
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(295, 5);
+            this.label11.Location = new System.Drawing.Point(295, 10);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 15);
             this.label11.TabIndex = 1;
@@ -1149,7 +1153,7 @@ namespace Catalogo._recibos
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(5, 5);
+            this.label10.Location = new System.Drawing.Point(5, 10);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 15);
             this.label10.TabIndex = 0;
@@ -1157,7 +1161,7 @@ namespace Catalogo._recibos
             // 
             // rTabActual
             // 
-            this.rTabActual.BackColor = System.Drawing.Color.LightYellow;
+            this.rTabActual.BackColor = System.Drawing.Color.Transparent;
             this.rTabActual.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabActual.Controls.Add(this.raPnlMain);
             this.rTabActual.Controls.Add(this.raPnlTop);
@@ -1172,17 +1176,16 @@ namespace Catalogo._recibos
             // 
             // raPnlMain
             // 
+            this.raPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.raPnlMain.Controls.Add(this.ralistView);
-            this.raPnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.raPnlMain.Location = new System.Drawing.Point(3, 177);
+            this.raPnlMain.Location = new System.Drawing.Point(3, 179);
             this.raPnlMain.Name = "raPnlMain";
-            this.raPnlMain.Size = new System.Drawing.Size(778, 183);
+            this.raPnlMain.Size = new System.Drawing.Size(778, 181);
             this.raPnlMain.TabIndex = 1;
             // 
             // ralistView
             // 
-            this.ralistView.BackColor = System.Drawing.Color.White;
-            this.ralistView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ralistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ralistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.raValorLv,
             this.raImporteLv,
@@ -1196,19 +1199,18 @@ namespace Catalogo._recibos
             this.raABahiaLv,
             this.raIdValorLv,
             this.raIdBancoLv,
-            this.raTCambio});
-            this.ralistView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.raTCambio,
+            this.columnHeader1});
             this.ralistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ralistView.FullRowSelect = true;
-            this.ralistView.GridLines = true;
             this.ralistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ralistView.HideSelection = false;
-            this.ralistView.Location = new System.Drawing.Point(0, 0);
+            this.ralistView.Location = new System.Drawing.Point(8, 8);
             this.ralistView.MultiSelect = false;
             this.ralistView.Name = "ralistView";
-            this.ralistView.Size = new System.Drawing.Size(778, 183);
+            this.ralistView.Size = new System.Drawing.Size(756, 169);
             this.ralistView.SmallImageList = this.imageList1;
-            this.ralistView.TabIndex = 3;
+            this.ralistView.TabIndex = 4;
             this.ralistView.Tag = "nada";
             this.ralistView.UseCompatibleStateImageBehavior = false;
             this.ralistView.View = System.Windows.Forms.View.Details;
@@ -1274,8 +1276,13 @@ namespace Catalogo._recibos
             this.raTCambio.Text = "T. Cambio";
             this.raTCambio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 0;
+            // 
             // raPnlTop
             // 
+            this.raPnlTop.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.raPnlTop.BackColor = System.Drawing.Color.Transparent;
             this.raPnlTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.raPnlTop.Controls.Add(this.cvDivisasLbl);
@@ -1301,15 +1308,13 @@ namespace Catalogo._recibos
             this.raPnlTop.Controls.Add(this.label3);
             this.raPnlTop.Controls.Add(this.label2);
             this.raPnlTop.Controls.Add(this.label1);
-            this.raPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.raPnlTop.Location = new System.Drawing.Point(3, 3);
+            this.raPnlTop.Location = new System.Drawing.Point(3, 6);
             this.raPnlTop.Name = "raPnlTop";
-            this.raPnlTop.Size = new System.Drawing.Size(778, 174);
+            this.raPnlTop.Size = new System.Drawing.Size(778, 171);
             this.raPnlTop.TabIndex = 0;
             // 
             // cvDivisasLbl
             // 
-            this.cvDivisasLbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvDivisasLbl.AutoSize = true;
             this.cvDivisasLbl.Location = new System.Drawing.Point(641, 27);
             this.cvDivisasLbl.Name = "cvDivisasLbl";
@@ -1321,7 +1326,6 @@ namespace Catalogo._recibos
             // 
             // cvCancelarBtn
             // 
-            this.cvCancelarBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvCancelarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.cvCancelarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.cvCancelarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -1340,7 +1344,6 @@ namespace Catalogo._recibos
             // 
             // cvAceptarBtn
             // 
-            this.cvAceptarBtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvAceptarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
             this.cvAceptarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.cvAceptarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
@@ -1359,7 +1362,6 @@ namespace Catalogo._recibos
             // 
             // cvCpaTxt
             // 
-            this.cvCpaTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvCpaTxt.Location = new System.Drawing.Point(334, 113);
             this.cvCpaTxt.MaxLength = 10;
             this.cvCpaTxt.Name = "cvCpaTxt";
@@ -1368,7 +1370,6 @@ namespace Catalogo._recibos
             // 
             // cvABahiaChk
             // 
-            this.cvABahiaChk.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvABahiaChk.AutoSize = true;
             this.cvABahiaChk.Location = new System.Drawing.Point(538, 114);
             this.cvABahiaChk.Name = "cvABahiaChk";
@@ -1379,7 +1380,6 @@ namespace Catalogo._recibos
             // 
             // cvDeTerceroChk
             // 
-            this.cvDeTerceroChk.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvDeTerceroChk.AutoSize = true;
             this.cvDeTerceroChk.Location = new System.Drawing.Point(445, 114);
             this.cvDeTerceroChk.Name = "cvDeTerceroChk";
@@ -1390,7 +1390,6 @@ namespace Catalogo._recibos
             // 
             // cvFecCobroDt
             // 
-            this.cvFecCobroDt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvFecCobroDt.CustomFormat = "dd/MM/yyyy";
             this.cvFecCobroDt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.cvFecCobroDt.Location = new System.Drawing.Point(197, 113);
@@ -1402,7 +1401,6 @@ namespace Catalogo._recibos
             // 
             // cvFecEmiDt
             // 
-            this.cvFecEmiDt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvFecEmiDt.CustomFormat = "dd/MM/yyyy";
             this.cvFecEmiDt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.cvFecEmiDt.Location = new System.Drawing.Point(91, 113);
@@ -1412,7 +1410,6 @@ namespace Catalogo._recibos
             // 
             // cvNroChequeTxt
             // 
-            this.cvNroChequeTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvNroChequeTxt.Location = new System.Drawing.Point(503, 69);
             this.cvNroChequeTxt.MaxLength = 15;
             this.cvNroChequeTxt.Name = "cvNroChequeTxt";
@@ -1421,7 +1418,6 @@ namespace Catalogo._recibos
             // 
             // cvNroCuentaTxt
             // 
-            this.cvNroCuentaTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvNroCuentaTxt.Location = new System.Drawing.Point(384, 69);
             this.cvNroCuentaTxt.MaxLength = 15;
             this.cvNroCuentaTxt.Name = "cvNroCuentaTxt";
@@ -1430,7 +1426,6 @@ namespace Catalogo._recibos
             // 
             // cvTipoCambioTxt
             // 
-            this.cvTipoCambioTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvTipoCambioTxt.Location = new System.Drawing.Point(504, 26);
             this.cvTipoCambioTxt.MaxLength = 10;
             this.cvTipoCambioTxt.Name = "cvTipoCambioTxt";
@@ -1440,7 +1435,6 @@ namespace Catalogo._recibos
             // 
             // cvImporteTxt
             // 
-            this.cvImporteTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvImporteTxt.Location = new System.Drawing.Point(385, 26);
             this.cvImporteTxt.MaxLength = 10;
             this.cvImporteTxt.Name = "cvImporteTxt";
@@ -1451,7 +1445,6 @@ namespace Catalogo._recibos
             // 
             // cvBancoCbo
             // 
-            this.cvBancoCbo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvBancoCbo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cvBancoCbo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cvBancoCbo.FormattingEnabled = true;
@@ -1462,7 +1455,6 @@ namespace Catalogo._recibos
             // 
             // cvTipoValorCbo
             // 
-            this.cvTipoValorCbo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvTipoValorCbo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cvTipoValorCbo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cvTipoValorCbo.FormattingEnabled = true;
@@ -1474,7 +1466,6 @@ namespace Catalogo._recibos
             // 
             // label9
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(331, 97);
             this.label9.Name = "label9";
@@ -1484,7 +1475,6 @@ namespace Catalogo._recibos
             // 
             // label8
             // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(194, 97);
             this.label8.Name = "label8";
@@ -1494,7 +1484,6 @@ namespace Catalogo._recibos
             // 
             // cvFecEmiLbl
             // 
-            this.cvFecEmiLbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvFecEmiLbl.AutoSize = true;
             this.cvFecEmiLbl.Location = new System.Drawing.Point(92, 97);
             this.cvFecEmiLbl.Name = "cvFecEmiLbl";
@@ -1504,7 +1493,6 @@ namespace Catalogo._recibos
             // 
             // cvNroChequeLbl
             // 
-            this.cvNroChequeLbl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cvNroChequeLbl.AutoSize = true;
             this.cvNroChequeLbl.Location = new System.Drawing.Point(500, 50);
             this.cvNroChequeLbl.Name = "cvNroChequeLbl";
@@ -1514,7 +1502,6 @@ namespace Catalogo._recibos
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(381, 50);
             this.label5.Name = "label5";
@@ -1524,7 +1511,6 @@ namespace Catalogo._recibos
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(89, 50);
             this.label4.Name = "label4";
@@ -1534,7 +1520,6 @@ namespace Catalogo._recibos
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(501, 10);
             this.label3.Name = "label3";
@@ -1544,7 +1529,6 @@ namespace Catalogo._recibos
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(382, 10);
             this.label2.Name = "label2";
@@ -1554,7 +1538,6 @@ namespace Catalogo._recibos
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(90, 10);
             this.label1.Name = "label1";
@@ -1564,11 +1547,11 @@ namespace Catalogo._recibos
             // 
             // raPnlBotton
             // 
+            this.raPnlBotton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.raPnlBotton.Controls.Add(this.label25);
             this.raPnlBotton.Controls.Add(this.raImporteTotalLbl);
             this.raPnlBotton.Controls.Add(this.raObservacionesTxt);
             this.raPnlBotton.Controls.Add(this.raObservacionesLbl);
-            this.raPnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.raPnlBotton.Location = new System.Drawing.Point(3, 360);
             this.raPnlBotton.Name = "raPnlBotton";
             this.raPnlBotton.Size = new System.Drawing.Size(778, 32);
@@ -1630,6 +1613,7 @@ namespace Catalogo._recibos
             this.rTabsRecibo.TabIndex = 0;
             this.rTabsRecibo.Tag = "nada";
             this.rTabsRecibo.Visible = false;
+            this.rTabsRecibo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.adlistView_KeyDown);
             // 
             // ucPnlTop
             // 
@@ -1816,12 +1800,10 @@ namespace Catalogo._recibos
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TabPage rTabCtaCte;
         private System.Windows.Forms.Panel ccPnlMain;
-        private System.Windows.Forms.ListView cclistView;
         private System.Windows.Forms.Panel ccPnlBotton;
         private System.Windows.Forms.Label ccActualizadaFechaLbl;
         private System.Windows.Forms.TabPage rTabADeducir;
         private System.Windows.Forms.Panel adPnlMain;
-        private System.Windows.Forms.ListView adlistView;
         private System.Windows.Forms.Panel adPnlTop;
         private System.Windows.Forms.CheckBox adAplicarRestoChk;
         private System.Windows.Forms.CheckBox adPorcentajeChk;
@@ -1874,20 +1856,6 @@ namespace Catalogo._recibos
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel raPnlMain;
-        private System.Windows.Forms.ListView ralistView;
-        private System.Windows.Forms.ColumnHeader raValorLv;
-        private System.Windows.Forms.ColumnHeader raImporteLv;
-        private System.Windows.Forms.ColumnHeader raFEmiRetLv;
-        private System.Windows.Forms.ColumnHeader raFCobroLv;
-        private System.Windows.Forms.ColumnHeader raNChequeLv;
-        private System.Windows.Forms.ColumnHeader raNCuentaLv;
-        private System.Windows.Forms.ColumnHeader raBancoLv;
-        private System.Windows.Forms.ColumnHeader raCpaLv;
-        private System.Windows.Forms.ColumnHeader raDeTerceroLv;
-        private System.Windows.Forms.ColumnHeader raABahiaLv;
-        private System.Windows.Forms.ColumnHeader raIdValorLv;
-        private System.Windows.Forms.ColumnHeader raIdBancoLv;
-        private System.Windows.Forms.ColumnHeader raTCambio;
         private System.Windows.Forms.TabControl rTabsRecibo;
         private System.Windows.Forms.Button CliNAgregarBtn;
         private System.Windows.Forms.Button adCascaraBtn;
@@ -1903,10 +1871,6 @@ namespace Catalogo._recibos
         private System.Windows.Forms.Button paEnviarBtn;
         private System.Windows.Forms.ComboBox paEnviosCbo;
         private System.Windows.Forms.Label adTotalDeducirAlRestoLbl;
-        private System.Windows.Forms.ColumnHeader adConceptoLv;
-        private System.Windows.Forms.ColumnHeader adImporteLv;
-        private System.Windows.Forms.ColumnHeader adPorcentajeLv;
-        private System.Windows.Forms.ColumnHeader adPorcentajeAlrestoLv;
         private System.Windows.Forms.ColumnHeader apConceptoLv;
         private System.Windows.Forms.ColumnHeader apImporteLv;
         private System.Windows.Forms.ColumnHeader apPercepcionLv;
@@ -1916,5 +1880,28 @@ namespace Catalogo._recibos
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ListView cclistView;
+        private System.Windows.Forms.ListView adlistView;
+        private System.Windows.Forms.ColumnHeader adConceptoLv;
+        private System.Windows.Forms.ColumnHeader adImporteLv;
+        private System.Windows.Forms.ColumnHeader adPorcentajeLv;
+        private System.Windows.Forms.ColumnHeader adPorcentajeAlrestoLv;
+        private System.Windows.Forms.ListView ralistView;
+        private System.Windows.Forms.ColumnHeader raValorLv;
+        private System.Windows.Forms.ColumnHeader raImporteLv;
+        private System.Windows.Forms.ColumnHeader raFEmiRetLv;
+        private System.Windows.Forms.ColumnHeader raFCobroLv;
+        private System.Windows.Forms.ColumnHeader raNChequeLv;
+        private System.Windows.Forms.ColumnHeader raNCuentaLv;
+        private System.Windows.Forms.ColumnHeader raBancoLv;
+        private System.Windows.Forms.ColumnHeader raCpaLv;
+        private System.Windows.Forms.ColumnHeader raDeTerceroLv;
+        private System.Windows.Forms.ColumnHeader raABahiaLv;
+        private System.Windows.Forms.ColumnHeader raIdValorLv;
+        private System.Windows.Forms.ColumnHeader raIdBancoLv;
+        private System.Windows.Forms.ColumnHeader raTCambio;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
