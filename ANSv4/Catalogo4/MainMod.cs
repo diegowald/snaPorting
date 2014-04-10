@@ -62,7 +62,7 @@ namespace Catalogo
                 }
                 else
                 {
-                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig, false);
+                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig, false);
                     updater.run();
                 }
 
@@ -445,8 +445,7 @@ namespace Catalogo
 
             //Get the name of all processes having the 
             //same name as this process name 
-            Process[] allProcessWithThisName
-                            = Process.GetProcessesByName(currPrsName);
+            Process[] allProcessWithThisName = Process.GetProcessesByName(currPrsName);
 
             //if more than one process is running return true.
             //which means already previous instance of the application 

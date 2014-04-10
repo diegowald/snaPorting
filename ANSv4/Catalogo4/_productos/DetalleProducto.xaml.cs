@@ -29,6 +29,9 @@ namespace Catalogo._productos
         public void onRecibir(System.Windows.Forms.DataGridViewRow dato)
         {
             txtDetalle.Inlines.Clear();
+            txtDetalle.Visibility = System.Windows.Visibility.Hidden;
+            imgIzquierda.Visibility = System.Windows.Visibility.Hidden;
+            imgDerecha.Visibility = System.Windows.Visibility.Hidden; 
 
             if (dato != null)
             {
@@ -51,7 +54,7 @@ namespace Catalogo._productos
 
                 txtDetalle.Inlines.Add(new Run("Medidas: ") { FontWeight = FontWeights.Bold });
                 txtDetalle.Inlines.Add(new Run(dato.Cells["o_producto"].Value.ToString()) { Foreground = Brushes.Blue });
-                
+
                 txtDetalle.Inlines.Add(new Run("  Reemplaza a: ") { FontWeight = FontWeights.Bold });
                 txtDetalle.Inlines.Add(new Run(dato.Cells["reemplazaa"].Value.ToString()) { Foreground = Brushes.Blue });
                 txtDetalle.Inlines.Add(new Run("  Equivalencia: ") { FontWeight = FontWeights.Bold });
@@ -106,7 +109,7 @@ namespace Catalogo._productos
                     {
                         imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
 
-                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "0") == "1")
+                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "1") == "1")
                         {
                             descargarImagen(ImgProductoWeb, ImgProducto, dato);
                         }
@@ -117,8 +120,11 @@ namespace Catalogo._productos
                     imgIzquierda.Source = new BitmapImage(new Uri(ImgLineaDefault, UriKind.Absolute));
                 }
 
+                txtDetalle.Visibility = System.Windows.Visibility.Visible;
+                imgIzquierda.Visibility = System.Windows.Visibility.Visible;
+                imgDerecha.Visibility = System.Windows.Visibility.Visible;
             }
-
+ 
         }
 
         private void descargarImagen(string Origen, string Destino, System.Windows.Forms.DataGridViewRow dato)
@@ -138,11 +144,13 @@ namespace Catalogo._productos
                 }
                 catch (System.Web.HttpException ex)
                 {
-                    throw ex;
+                    //throw ex;
+                    System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
                 }
                 catch (System.Net.WebException wex)
                 {
-                    throw wex;
+                    //throw wex;
+                    System.Diagnostics.Debug.WriteLine(wex.Message.ToString());
                 }
             }
         }
@@ -159,7 +167,8 @@ namespace Catalogo._productos
                 {
                     string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
                     imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
-                    throw ex;
+                    //throw ex;
+                    System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
                 }
             }
             else
@@ -184,11 +193,13 @@ namespace Catalogo._productos
             }
             catch (System.IO.IOException ex)
             {
-                throw ex;
+                //throw ex;
+                System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
             }
             catch (Exception ex)
             {
-                throw ex;
+                //throw ex;
+                System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
             }
         }
     }
