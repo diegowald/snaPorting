@@ -187,7 +187,7 @@ namespace Catalogo.auditoria
 
         private bool validarConexion()
         {
-            return Conexion1!=null;
+            return Conexion1 != null;
         }
     }
 }

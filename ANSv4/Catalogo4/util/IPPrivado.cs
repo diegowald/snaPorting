@@ -133,9 +133,7 @@ namespace Catalogo.util
 		    Conectado = true;
 		    if (!WebServiceInicializado) {
 			    if (Conectado) {
-				    //Cliente = New WSCatalogo.InfoSoapClient("", "http://" & ipAddress & "/Catalogo/Info.asmx?wsdl")
 				    Cliente = new CatalogoWS.Info();
-				    // DIEGO -> Implementar proxy!
 				    if (usaProxy) {
 					    Cliente.Proxy = new System.Net.WebProxy(URLProxyServer);
 				    }

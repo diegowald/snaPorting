@@ -51,6 +51,7 @@ namespace Catalogo._devoluciones
             System.Data.OleDb.OleDbDataReader det = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Pedido_Det '" + NroPedido + "'");
 
             _NroPedido = NroPedido;
+            enc.Read();
             _CodCliente = enc["IDCliente"].ToString().Trim().PadLeft(6, '0');
             _Fecha = enc["F_Pedido"].ToString();
             _Observaciones = enc["Observaciones"].ToString().Replace(",", " ");

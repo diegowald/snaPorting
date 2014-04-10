@@ -137,15 +137,7 @@ namespace Catalogo.util.BackgroundTasks
                                 _devoluciones.EnvioPedido envio = new _devoluciones.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, _idCliente.ToString(), false, "");
                                 if (envio.Inicializado)
                                 {
-                                    bool enviar = false;
-                                    if (filtroNotaVenta.Count == 0)
-                                    {
-                                        enviar = true;
-                                    }
-                                    else
-                                    {
-                                        enviar = filtroNotaVenta.Contains(Nro);
-                                    }
+                                    bool enviar = usarFiltros && filtroNotaVenta.Contains(Nro);
                                     if (enviar)
                                     {
                                         envio.obtenerDatos(Nro);
@@ -171,15 +163,7 @@ namespace Catalogo.util.BackgroundTasks
                                 _recibos.EnvioRecibo envio = new _recibos.EnvioRecibo(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
-                                    bool enviar = false;
-                                    if (filtroRecibo.Count == 0)
-                                    {
-                                        enviar = true;
-                                    }
-                                    else
-                                    {
-                                        enviar = filtroRecibo.Contains(Nro);
-                                    }
+                                    bool enviar = usarFiltros && filtroRecibo.Contains(Nro);
                                     if (enviar)
                                     {
                                         envio.obtenerDatos(Nro);
@@ -206,15 +190,7 @@ namespace Catalogo.util.BackgroundTasks
                                 _devolucion.EnvioDevolucion envio = new _devolucion.EnvioDevolucion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
-                                    bool enviar = false;
-                                    if (filtroDevolucion.Count == 0)
-                                    {
-                                        enviar = true;
-                                    }
-                                    else
-                                    {
-                                        enviar = filtroDevolucion.Contains(Nro);
-                                    }
+                                    bool enviar = usarFiltros && filtroDevolucion.Contains(Nro);
                                     if (enviar)
                                     {
                                         envio.ObtenerDatos(Nro);
@@ -238,15 +214,7 @@ namespace Catalogo.util.BackgroundTasks
                                 _interdeposito.EnvioInterDeposito envio = new _interdeposito.EnvioInterDeposito(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
-                                    bool enviar = false;
-                                    if (filtroInterdeposito.Count == 0)
-                                    {
-                                        enviar = true;
-                                    }
-                                    else
-                                    {
-                                        enviar = filtroInterdeposito.Contains(Nro);
-                                    }
+                                    bool enviar = usarFiltros && filtroInterdeposito.Contains(Nro);
                                     if (enviar)
                                     {
                                         envio.ObtenerDatos(Nro);
@@ -270,15 +238,7 @@ namespace Catalogo.util.BackgroundTasks
                                 _rendicion.EnvioRendicion envio = new _rendicion.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
                                 if (envio.Inicializado)
                                 {
-                                    bool enviar = false;
-                                    if (filtroRendicion.Count == 0)
-                                    {
-                                        enviar = true;
-                                    }
-                                    else
-                                    {
-                                        enviar = filtroRendicion.Contains(Nro);
-                                    }
+                                    bool enviar = usarFiltros && filtroRendicion.Contains(Nro);
                                     if (enviar)
                                     {
                                         envio.ObtenerDatos(Nro);
@@ -313,5 +273,16 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
+        private bool usarFiltros
+        {
+            get
+            {
+                return (filtroNotaVenta.Count > 0)
+                    || (filtroRecibo.Count > 0)
+                    || (filtroDevolucion.Count > 0)
+                    || (filtroInterdeposito.Count > 0)
+                    || (filtroRendicion.Count > 0);
+            }
+        }
     }
 }

@@ -430,17 +430,23 @@ namespace Catalogo
 
         private void crearControlesBandejaEnviados()
         {
-            mov = addMovimientosArea();
-
-            if (ped != null)
+            if (mov == null)
             {
-                ped.attachReceptor(mov);
+                mov = addMovimientosArea();
+
+                if (ped != null)
+                {
+                    ped.attachReceptor(mov);
+                }
             }
         }
 
         private void crearControlesNovedades()
         {
-            //nov = addNovedadesArea();
+            if (nov == null)
+            {
+                //nov = addNovedadesArea();
+            }
         }
 
         private void DocumentPane_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
