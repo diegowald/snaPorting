@@ -4,7 +4,7 @@ using CrystalDecisions.CrystalReports.Engine;
 
 namespace Catalogo
 {
-    public partial class fReporte : Form
+    public partial class fReporte1 : Form
     {
 
         public ReportDocument oRpt=null;
@@ -13,13 +13,13 @@ namespace Catalogo
         public string EmailAsunto = "";
         public string RazonSocial = "";
         
-        public fReporte()
+        public fReporte1()
         {
             InitializeComponent();
 
         }
 
-        private void fReporte_Load(object sender, EventArgs e)
+        private void fReporte1_Load(object sender, EventArgs e)
         {
             if (DocumentoNro.Substring(DocumentoNro.ToString().Trim().Length - 8) == "99999999")
             {
