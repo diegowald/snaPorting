@@ -328,7 +328,15 @@ namespace Catalogo._productos
                     DataGridViewRow row = cell.OwningRow;
                     this.emitir(row);
                 }
+                else
+                {
+                    this.emitir(null);
+                };
             }
+            else
+            {
+                this.emitir(null);
+            };
           
         }
 
@@ -348,6 +356,10 @@ namespace Catalogo._productos
                     DataGridViewRow row = cell.OwningRow;
                     this.emitir(row);
                     // etc.
+                }
+                else
+                {
+                    this.emitir(null);
                 }
             }
 

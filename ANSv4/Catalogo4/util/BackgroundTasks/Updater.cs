@@ -60,8 +60,7 @@ namespace Catalogo.util.BackgroundTasks
             {
                 case UpdateType.UpdateCuentas:
                     {
-                        Catalogo._clientes.UpdateClientes envio = new _clientes.UpdateClientes(Global01.Conexion,
-                            Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+                        Catalogo._clientes.UpdateClientes envio = new _clientes.UpdateClientes(Global01.Conexion, Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
                         envio.attachReceptor(this);
                         envio.attachCancellableReceptor(this);
                         if (envio.inicializado)
@@ -72,8 +71,7 @@ namespace Catalogo.util.BackgroundTasks
                     break;
                 case UpdateType.UpdateAppConfig:
                     {
-                        Catalogo._appConfig.UpdateAppConfig envio = new _appConfig.UpdateAppConfig(Global01.IDMaquina,
-                            Global01.URL_ANS, Global01.URL_ANS2, false, "", Global01.Conexion);
+                        Catalogo._appConfig.UpdateAppConfig envio = new _appConfig.UpdateAppConfig(Global01.IDMaquina, ipPrivado, ipIntranet, false, "", Global01.Conexion);
                         if (envio.Inicializado)
                         {
                             envio.sincronizarApp();
@@ -82,8 +80,7 @@ namespace Catalogo.util.BackgroundTasks
                     break;
                 case UpdateType.ActivarApp:
                     {
-                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina,
-                            Global01.URL_ANS, Global01.URL_ANS2, false, "");
+                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
                         if (app.Inicializao)
                         {
                             app.activar();
@@ -92,8 +89,7 @@ namespace Catalogo.util.BackgroundTasks
                     break;
                 case UpdateType.EstadoActual:
                     {
-                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina,
-                            Global01.URL_ANS, Global01.URL_ANS2, false, "");
+                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
                         if (app.Inicializao)
                         {
                             app.estadoActual();
@@ -102,8 +98,7 @@ namespace Catalogo.util.BackgroundTasks
                     break;
                 case UpdateType.ListaPrecio:
                     {
-                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina,
-                            Global01.URL_ANS, Global01.URL_ANS2, false, "");
+                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
                         if (app.Inicializao)
                         {
                             app.listaPrecio();
@@ -161,8 +156,7 @@ namespace Catalogo.util.BackgroundTasks
                     return;
                 }
 
-                Catalogo._audit.EnvioAuditoria envAudit = new _audit.EnvioAuditoria(Global01.IDMaquina,
-                    Global01.URL_ANS, Global01.URL_ANS2, false, "");
+                Catalogo._audit.EnvioAuditoria envAudit = new _audit.EnvioAuditoria(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
                 if (envAudit.Inicializado)
                 {
                     if (Global01.TranActiva == null)

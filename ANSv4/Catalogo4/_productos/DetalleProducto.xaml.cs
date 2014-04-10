@@ -30,6 +30,9 @@ namespace Catalogo._productos
         public void onRecibir(System.Windows.Forms.DataGridViewRow dato)
         {
             txtDetalle.Inlines.Clear();
+            txtDetalle.Visibility = System.Windows.Visibility.Hidden;
+            imgIzquierda.Visibility = System.Windows.Visibility.Hidden;
+            imgDerecha.Visibility = System.Windows.Visibility.Hidden; 
 
             if (dato != null)
             {
@@ -52,7 +55,7 @@ namespace Catalogo._productos
 
                 txtDetalle.Inlines.Add(new Run("Medidas: ") { FontWeight = FontWeights.Bold });
                 txtDetalle.Inlines.Add(new Run(dato.Cells["o_producto"].Value.ToString()) { Foreground = Brushes.Blue });
-                
+
                 txtDetalle.Inlines.Add(new Run("  Reemplaza a: ") { FontWeight = FontWeights.Bold });
                 txtDetalle.Inlines.Add(new Run(dato.Cells["reemplazaa"].Value.ToString()) { Foreground = Brushes.Blue });
                 txtDetalle.Inlines.Add(new Run("  Equivalencia: ") { FontWeight = FontWeights.Bold });
@@ -118,8 +121,11 @@ namespace Catalogo._productos
                     imgIzquierda.Source = new BitmapImage(new Uri(ImgLineaDefault, UriKind.Absolute));
                 }
 
+                txtDetalle.Visibility = System.Windows.Visibility.Visible;
+                imgIzquierda.Visibility = System.Windows.Visibility.Visible;
+                imgDerecha.Visibility = System.Windows.Visibility.Visible;
             }
-
+ 
         }
 
         private void descargarImagen(string Origen, string Destino, System.Windows.Forms.DataGridViewRow dato)
@@ -131,11 +137,24 @@ namespace Catalogo._productos
                 ImgWeb.DownloadFileCompleted += ImgWeb_DownloadFileCompleted;
 
                 _Destino = Destino;
-
-                //ImgWeb.DownloadFile(Origen, Destino);
-                ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
+                try
+                {
+                    //ImgWeb.DownloadFile(Origen, Destino);
+                    ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
+                }
+                catch (System.Web.HttpException ex)
+                {
+                    //throw ex;
+                    System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
+                }
+                catch (System.Net.WebException wex)
+                {
+                    //throw wex;
+                    System.Diagnostics.Debug.WriteLine(wex.Message.ToString());
+                }
             }
         }
+        
         void ImgWeb_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
             validateImagefile(_Destino);
@@ -149,7 +168,8 @@ namespace Catalogo._productos
                 {
                     string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
                     imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
-                    throw ex;
+                    //throw ex;
+                    System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
                 }
             }
             else
@@ -174,11 +194,13 @@ namespace Catalogo._productos
             }
             catch (System.IO.IOException ex)
             {
-                throw ex;
+                //throw ex;
+                System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
             }
             catch (Exception ex)
             {
-                throw ex;
+                //throw ex;
+                System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
             }
         }
 

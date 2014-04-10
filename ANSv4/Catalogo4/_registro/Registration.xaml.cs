@@ -162,7 +162,7 @@ namespace Catalogo
                     
                 string xParam = passwordBox1.Password.ToString() + Global01.IDMaquinaCRC;
                 Global01.NroUsuario = textBoxNroCuenta.Text.PadLeft(5,'0');
-                Global01.LLaveViajante = textBoxNroZona.Text.PadLeft(5,'0') + textBoxNroCuenta.Text.PadLeft(5,'0') + textBoxCuit.Text.ToString().Replace("-", "") + Catalogo._registro.AppRegistro.ObtenerCRC(ref xParam);
+                Global01.LLaveViajante = textBoxNroZona.Text.PadLeft(5,'0') + textBoxNroCuenta.Text.PadLeft(5,'0') + textBoxCuit.Text.ToString().Replace("-", "") + Catalogo._registro.AppRegistro.ObtenerCRC(xParam);
                 //zzzzziiiiiccccccccccc
                 //123456789012345678901
                 Funciones.modINIs.WriteINI("DATOS", "LLaveViajante", Global01.LLaveViajante);

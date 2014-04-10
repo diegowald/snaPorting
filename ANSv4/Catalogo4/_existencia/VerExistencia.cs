@@ -27,64 +27,66 @@ namespace Catalogo._existencia
 
 	    public void Inicializar(string MacAddress, string ipAddress, string ipAddressIntranet, bool usaProxy, string ipProxyServer)
 	    {
-		    m_UsaProxy = usaProxy;
-		    m_IPProxyServer = ipProxyServer;
+            m_UsaProxy = usaProxy;
+            m_IPProxyServer = ipProxyServer;
 
-		    bool Conectado = false;
+            bool Conectado = util.SimplePing.ping(ipAddress, 5000);
+            if (!Conectado)
+            {
+                Conectado = util.SimplePing.ping(ipAddressIntranet, 5000);
+            }
 
-            //Conectado = My.Computer.Network.Ping(ipAddress, 5000);
-            Conectado = true;
+            try
+            {
+                if (Conectado)
+                {
+                    if (!WebServiceInicializado)
+                    {
+                        Cliente = new VerExistenciaWS.VerExistencia();
+                        Cliente.Url = "http://" + ipAddress + "/wsOracle/VerExistencia.asmx?wsdl";
+                        if (m_UsaProxy)
+                        {
+                            Cliente.Proxy = new System.Net.WebProxy(m_IPProxyServer);
+                        }
 
-            //if (!Conectado) {
-            //    Conectado = My.Computer.Network.Ping(ipAddressIntranet, 5000);
-            //}
+                        m_MacAddress = MacAddress;
+                        m_ipAddress = ipAddress;
+                        WebServiceInicializado = true;
+                    }
+                }
+                else
+                {
+                    WebServiceInicializado = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                {
+                    Cliente = new VerExistenciaWS.VerExistencia();
+                    Cliente.Url = "http://" + ipAddressIntranet + "/wsOracle/VerExistencia.asmx?wsdl";
+                    if (m_UsaProxy)
+                    {
+                        Cliente.Proxy = new System.Net.WebProxy(m_IPProxyServer);
+                    }
 
-		     // ERROR: Not supported in C#: OnErrorStatement
-
-		    if (!WebServiceInicializado) {
-			    if (Conectado) {
-				    Cliente = new VerExistenciaWS.VerExistencia();
-				    Cliente.Url = "http://" + ipAddress + "/wsOracle/VerExistencia.asmx?wsdl";
-				    if (m_UsaProxy) {
-					    Cliente.Proxy = new System.Net.WebProxy(m_IPProxyServer);
-				    }
-
-				    m_MacAddress = MacAddress;
-				    m_ipAddress = ipAddress;
-				    WebServiceInicializado = true;
-			    } else {
-				    WebServiceInicializado = false;
-			    }
-		    }
-
+                    m_ipAddress = ipAddressIntranet;
+                    m_MacAddress = MacAddress;
+                    WebServiceInicializado = true;                    
+                }
+                else
+                {
+                    throw ex;
+                }
+            }
+	
 		    return;
 
-            //errhandler:
-
-            //if (Err().Number == -2147024809) {
-            //    // Intento con el ip interno
-            //    Cliente = new VerExistenciaWS.VerExistencia();
-            //    Cliente.Url = "http://" + ipAddressIntranet + "/wsOracle/VerExistencia.asmx?wsdl";
-            //    if (m_UsaProxy) {
-            //        Cliente.Proxy = new System.Net.WebProxy(m_IPProxyServer);
-            //    }
-
-            //    m_MacAddress = MacAddress;
-            //    WebServiceInicializado = true;
-            //    m_ipAddress = ipAddressIntranet;
-            //    Err().Clear();
-            //} else {
-            //    Err().Raise(Err().Number, Err().Source, Err().Description);
-            //}
-
-	    }
-
+       }
 
 	    public void ExistenciaSemaforo(string pIdProducto, string pNroUsuario, ref string pSemaforo)
 	    {
 		    bool Cancel = false;
-
-		    Cancel = false;
 
 		    if (!WebServiceInicializado) {
 			    Cancel = true;
@@ -98,18 +100,19 @@ namespace Catalogo._existencia
 
 	    private string ObtenerSemaforo(ref bool Cancel, string IDAns, string IdProducto)
 	    {
-		    string functionReturnValue = null;
+            string sResultado = "x";
+            sResultado = Cliente.ObtenerExistencia(m_MacAddress, IDAns, IdProducto);
+            return sResultado;
 
-		    functionReturnValue = "x";
-
-            //if (!My.Computer.Network.Ping(m_ipAddress, 5000)) {
+            //if (!My.Computer.Network.Ping(m_ipAddress, 5000))
+            //{
             //    // Conexion no valida
             //    Cancel = true;
-            //} else {
-			    functionReturnValue = Cliente.ObtenerExistencia(m_MacAddress, IDAns, IdProducto);
             //}
-		    return functionReturnValue;
-
+            //else
+            //{
+            //    sResultado = Cliente.ObtenerExistencia(m_MacAddress, IDAns, IdProducto);
+            //}
 	    }
 
     }
