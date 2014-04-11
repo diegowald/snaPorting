@@ -26,10 +26,11 @@ namespace Catalogo
         private Catalogo._productos.SearchFilter sf = null;
         private Catalogo._productos.GridViewFilter2 gv = null;
         private Catalogo._pedidos.ucPedido ped = null;
-        Catalogo._interdeposito.ucInterDeposito IntDep = null;
-        Catalogo._movimientos.ucMovimientos mov = null;
-        Catalogo._novedades.ucNovedades nov = null;
+        private Catalogo._devoluciones.ucDevolucion dev = null;
 
+        private Catalogo._interdeposito.ucInterDeposito IntDep = null;
+        private Catalogo._movimientos.ucMovimientos mov = null;
+        private Catalogo._novedades.ucNovedades nov = null;
 
         public mwClientes()
         {
@@ -440,7 +441,7 @@ namespace Catalogo
 
         private void crearControlesNovedades()
         {
-            //nov = addNovedadesArea();
+            nov = addNovedadesArea();
         }
 
         private void DocumentPane_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
