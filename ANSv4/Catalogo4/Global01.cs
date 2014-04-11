@@ -43,6 +43,7 @@ namespace Catalogo
        public static string OperacionActivada;
        public static string NroDocumentoAbierto;
        public static string NroUsuario;
+       public static string Zona;
        public static System.DateTime dbCaduca;
        public static System.DateTime appCaduca;
        public static System.DateTime F_ActCatalogo;

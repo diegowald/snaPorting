@@ -1,4 +1,9 @@
 1) en catalogo.mdb
 
+NO ES NECESARIO 11/04/2014
 agregar v_Pedido_Enc_0 v_Pedido_Det_0 v_Devoluciones_Enc_0 v_Devoluciones_Det_0
 (son iguales a las originales sin "_0" pero SIN parametros
+
+agregar Campo "Zona" en appConfig Char(3) y mofificar vistas u usp que muestran o modifican el appConfig
+
+

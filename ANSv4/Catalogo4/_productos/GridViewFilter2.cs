@@ -56,7 +56,7 @@ namespace Catalogo._productos
 
         private DataTable dtProducts = new DataTable();
         private DataView dvProducts = new DataView();
-        private DataTable useTable = new DataTable();
+        //private DataTable useTable = new DataTable();
         private bool xAplicoPorcentajeLinea = false;
         private float porcentajeLinea;
 

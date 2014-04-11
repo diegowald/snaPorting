@@ -41,7 +41,14 @@ namespace Catalogo
             // Carga tabla de Productos en Segundo Plano
             preload.Preloader.instance.refresh();
 
-            load_header();
+            load_header();         
+            
+            //chequea comandos y mensajes desde el servidor
+            if (Funciones.modINIs.ReadINI("DATOS", "INFO", "0") == "1") //Or vg.RecienRegistrado Or vg.NoConn
+            {
+                util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig, false);
+                updater.run();
+            }
 
             valida_appLogin();
 
@@ -55,17 +62,6 @@ namespace Catalogo
             else
             {
 
-                if (Funciones.modINIs.ReadINI("DATOS", "INFO", "1") == "0") //Or vg.RecienRegistrado Or vg.NoConn
-                {
-                    //Anula Transmicion
-                    //vg.auditor.Guardar Seguridad, CANCELA, "No chequea AppConfigServer"
-                }
-                else
-                {
-                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig, false);
-                    updater.run();
-                }
-
                 if (Global01.ActualizarClientes)
                 {   
                     util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateCuentas, false);
@@ -77,20 +73,8 @@ namespace Catalogo
 
             //- ACA ESTA LA PAPA ----------------------
             //- Run mi APP MainWindow -----------------
-                        
-            //   Registration wnd = new Registration(); 
-            //MainWindow wnd = new MainWindow();
-            //wnd.ShowDialog();
-            //wnd.Close();
-
-
-            // para pruebas------------------------------------
-            //_recibos.fRecibo wnd = new _recibos.fRecibo();
-            //wnd.ShowDialog();
-            //wnd.Close();
-            //wnd.Dispose();
-         //   miEnd();
-            // - Fin Main ---
+            //- ** RETORNA AL app.XAML y sigue la EJECUCION NORMAL ** ---
+            //- Fin Main ---
         }
 
         private static void ActivarApplicacion()
@@ -128,6 +112,7 @@ namespace Catalogo
                 Global01.MiBuild = DBNull.Value.Equals(dr["Build"]) ? (int)(0) : Int32.Parse(dr["Build"].ToString());
                 Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
                 Global01.NroUsuario = DBNull.Value.Equals(dr["IDAns"]) ? "00000" : dr["IDAns"].ToString();
+                Global01.Zona = DBNull.Value.Equals(dr["Zona"]) ? "000" : dr["Zona"].ToString();
                 Global01.Cuit = DBNull.Value.Equals(dr["Cuit"]) ? "0" : dr["Cuit"].ToString();
                 Global01.dbCaduca = DBNull.Value.Equals(dr["dbCaduca"]) ? DateTime.Parse("01/01/1900") : DateTime.Parse(dr["dbCaduca"].ToString());
                 Global01.appCaduca = DBNull.Value.Equals(dr["appCaduca"]) ? DateTime.Parse("01/01/1900") : DateTime.Parse(dr["appCaduca"].ToString());
@@ -194,7 +179,7 @@ namespace Catalogo
 
         }
 
-        private static void update_productos()
+        public static void update_productos()
         {
             Catalogo.util.fDataUpdate fu = new Catalogo.util.fDataUpdate();
 
@@ -298,7 +283,6 @@ namespace Catalogo
                 Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
             }
             //--------------------------------------XX
-
         }
 
         private static void update_mdb()
@@ -403,7 +387,8 @@ namespace Catalogo
 
             Global01.OperacionActivada = "nada";
             Global01.NroDocumentoAbierto = "";
-            Global01.NroUsuario = "0";
+            Global01.NroUsuario = "00000";
+            Global01.Zona = "000";
             Global01.Cuit = "0";
             Global01.pin = "";
             Global01.RazonSocial = "";

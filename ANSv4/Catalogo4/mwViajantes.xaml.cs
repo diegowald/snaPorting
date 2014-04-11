@@ -237,7 +237,7 @@ namespace Catalogo
 
             Catalogo._recibos.ucRecibo rec = addReciboArea();
             Catalogo._rendiciones.ucRendiciones RenD = addRendicionArea();
-           //Catalogo._novedades.ucNovedades nov = addNovedadesArea();
+            Catalogo._novedades.ucNovedades nov = addNovedadesArea();
 
             sf = addSearchArea();
             gv = addProductsArea();
