@@ -134,11 +134,11 @@ namespace Catalogo.util.BackgroundTasks
                     {
                         case "NOTA DE VENTA":
                             {
-                                _devoluciones.EnvioPedido envio = new _devoluciones.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, _idCliente.ToString(), false, "");
-                                if (envio.Inicializado)
+                                bool enviar = usarFiltros && filtroNotaVenta.Contains(Nro);
+                                if (enviar)
                                 {
-                                    bool enviar = usarFiltros && filtroNotaVenta.Contains(Nro);
-                                    if (enviar)
+                                    _devoluciones.EnvioPedido envio = new _devoluciones.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, _idCliente.ToString(), false, "");
+                                    if (envio.Inicializado)
                                     {
                                         envio.obtenerDatos(Nro);
                                         auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
@@ -150,21 +150,21 @@ namespace Catalogo.util.BackgroundTasks
                                                  auditoria.Auditor.AccionesAuditadas.FALLO, "P1 " + movs["Nro"]);
                                         }
                                     }
+                                    else
+                                    {
+                                        fallaEnvioPedido = true;
+                                    }
+                                    envio = null;
                                 }
-                                else
-                                {
-                                    fallaEnvioPedido = true;
-                                }
-                                envio = null;
                             }
                             break;
                         case "RECIBO":
                             {
-                                _recibos.EnvioRecibo envio = new _recibos.EnvioRecibo(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
-                                if (envio.Inicializado)
+                                bool enviar = usarFiltros && filtroRecibo.Contains(Nro);
+                                if (enviar)
                                 {
-                                    bool enviar = usarFiltros && filtroRecibo.Contains(Nro);
-                                    if (enviar)
+                                    _recibos.EnvioRecibo envio = new _recibos.EnvioRecibo(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                    if (envio.Inicializado)
                                     {
                                         envio.obtenerDatos(Nro);
                                         auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo, auditoria.Auditor.AccionesAuditadas.TRANSMITE, "R1 " + movs["Nro"]);
@@ -177,21 +177,21 @@ namespace Catalogo.util.BackgroundTasks
                                         {
                                         }
                                     }
+                                    else
+                                    {
+                                        fallaEnvioRecibo = true;
+                                    }
+                                    envio = null;
                                 }
-                                else
-                                {
-                                    fallaEnvioRecibo = true;
-                                }
-                                envio = null;
                             }
                             break;
                         case "DEVOLUCION":
                             {
-                                _devolucion.EnvioDevolucion envio = new _devolucion.EnvioDevolucion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
-                                if (envio.Inicializado)
+                                bool enviar = usarFiltros && filtroDevolucion.Contains(Nro);
+                                if (enviar)
                                 {
-                                    bool enviar = usarFiltros && filtroDevolucion.Contains(Nro);
-                                    if (enviar)
+                                    _devolucion.EnvioDevolucion envio = new _devolucion.EnvioDevolucion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                    if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
                                         auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones, auditoria.Auditor.AccionesAuditadas.TRANSMITE, "D1 " + movs["Nro"]);
@@ -201,21 +201,21 @@ namespace Catalogo.util.BackgroundTasks
                                             auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones, auditoria.Auditor.AccionesAuditadas.FALLO, "D1 " + movs["Nro"]);
                                         }
                                     }
+                                    else
+                                    {
+                                        fallaEnvioDevolucion = true;
+                                    }
+                                    envio = null;
                                 }
-                                else
-                                {
-                                    fallaEnvioDevolucion = true;
-                                }
-                                envio = null;
                             }
                             break;
                         case "INTERDEPOSITO":
                             {
-                                _interdeposito.EnvioInterDeposito envio = new _interdeposito.EnvioInterDeposito(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
-                                if (envio.Inicializado)
+                                bool enviar = usarFiltros && filtroInterdeposito.Contains(Nro);
+                                if (enviar)
                                 {
-                                    bool enviar = usarFiltros && filtroInterdeposito.Contains(Nro);
-                                    if (enviar)
+                                    _interdeposito.EnvioInterDeposito envio = new _interdeposito.EnvioInterDeposito(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                    if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
                                         auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito, auditoria.Auditor.AccionesAuditadas.TRANSMITE, "ID1= " + movs["Nro"]);
@@ -225,21 +225,21 @@ namespace Catalogo.util.BackgroundTasks
                                             auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito, auditoria.Auditor.AccionesAuditadas.FALLO, "ID1 " + movs["Nro"]);
                                         }
                                     }
+                                    else
+                                    {
+                                        fallaEnvioInterDeposito = true;
+                                    }
+                                    envio = null;
                                 }
-                                else
-                                {
-                                    fallaEnvioInterDeposito = true;
-                                }
-                                envio = null;
                             }
                             break;
                         case "RENDICION":
                             {
-                                _rendicion.EnvioRendicion envio = new _rendicion.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
-                                if (envio.Inicializado)
+                                bool enviar = usarFiltros && filtroRendicion.Contains(Nro);
+                                if (enviar)
                                 {
-                                    bool enviar = usarFiltros && filtroRendicion.Contains(Nro);
-                                    if (enviar)
+                                    _rendicion.EnvioRendicion envio = new _rendicion.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                    if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
                                         auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion, auditoria.Auditor.AccionesAuditadas.TRANSMITE, "RC1 " + movs["Nro"]);
@@ -249,10 +249,10 @@ namespace Catalogo.util.BackgroundTasks
                                             auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion, auditoria.Auditor.AccionesAuditadas.FALLO, "RC1 " + movs["Nro"]);
                                         }
                                     }
-                                }
-                                else
-                                {
-                                    fallaEnvioRendicion = true;
+                                    else
+                                    {
+                                        fallaEnvioRendicion = true;
+                                    }
                                 }
                             }
                             break;

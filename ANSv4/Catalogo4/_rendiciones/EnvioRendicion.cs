@@ -60,6 +60,7 @@ namespace Catalogo._rendicion
             RenRecibos = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Rendicion_Recibos_rpt '" + NroRendicion.Substring(NroRendicion.Length - 8) + "'");
 
             m_NroRendicion = NroRendicion;
+            Ren.Read();
             m_IdViajante = Ren["IDCliente"].ToString().Trim().PadLeft(6, '0');
             m_F_Rendicion = Ren["F_Rendicion"].ToString().Substring(7, 4) +
                 Ren["F_Rendicion"].ToString().Substring(4, 2) +

@@ -53,6 +53,7 @@ namespace Catalogo._devolucion
 		Det = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Devolucion_Det '" + NroDevolucion + "'");
 
 		m_NroDevolucion = NroDevolucion;
+        Enc.Read();
 		m_CodCliente = Enc["IDCliente"].ToString().Trim().PadLeft(6,'0');
 		m_Fecha = Enc["F_Devolucion"].ToString();
 		m_Observaciones = Enc["Observaciones"].ToString().Replace(",", " ");

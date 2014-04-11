@@ -54,6 +54,10 @@ namespace Catalogo._interdeposito
             Ifacturas = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_InterDepositoFacturas '" + NroInterDeposito + "'");
 
             m_NroInterDeposito = NroInterDeposito;
+            if (!I.HasRows)
+            {
+                return;
+            }
             m_CodCliente = I["IDCliente"].ToString().Trim().PadLeft(6,'0');
             m_Bco_Dep_Fecha = string.Format("{0:ddMMyyyy}",DateTime.Parse(I["Bco_Dep_Fecha"].ToString()));
             m_Bco_Dep_Tipo = I["Bco_Dep_Tipo"].ToString();
@@ -91,6 +95,10 @@ namespace Catalogo._interdeposito
                 Cancel = true;
             }
 
+            if (!DatosObtenidos)
+            {
+                Cancel = true;
+            }
 
             if (!Cancel)
             {

@@ -58,6 +58,7 @@ public class EnvioRecibo
 		System.Data.OleDb.OleDbDataReader nCre = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_Deducir_Normal '" + nroRecibo + "'");
 
 		_NroRecibo = nroRecibo;
+        Enc.Read();
         _CodCliente = Enc["IDCliente"].ToString().Trim().PadLeft(6, '0');
 		_Fecha = Enc["F_Recibo"].ToString().Substring(7, 4) + Enc["F_Recibo"].ToString().Substring(4, 2) + Enc["F_Recibo"].ToString().Substring(1, 2);
         _Total = (float.Parse(Enc["Total"].ToString()) * 100).ToString().Trim().PadLeft(17, '0');
@@ -68,7 +69,7 @@ public class EnvioRecibo
             {
 				_Detalle += Det["D_Valor"].ToString().Trim().PadLeft(30, ' ') + ",";
 
-				if ((int) Det["TipoValor"] == 3 | (int) Det["TipoValor"] == 4) 
+				if ((byte) Det["TipoValor"] == 3 | (byte) Det["TipoValor"] == 4) 
                 {
                     _Detalle += (float.Parse(Det["Divisas"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
 				} 
