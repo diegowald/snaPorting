@@ -45,6 +45,9 @@ namespace Catalogo
                 Global01.Conexion.Close();
                 Global01.Conexion = null;
             }
+            
+            System.Diagnostics.Debug.WriteLine("saliendo por acá....");
+
             MainMod.miEnd();
             Shutdown();
         }
