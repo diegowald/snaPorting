@@ -134,9 +134,10 @@ namespace Catalogo._productos
 
         private void loadDataGridView()
         {
-
+            System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
             dataGridIdle = false;
-
+            dataGridView1.SuspendLayout();
             // If rows in grid already exist, clear them
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
@@ -308,11 +309,11 @@ namespace Catalogo._productos
 
             // Bind Datagrid view to the DataView
             dataGridView1.DataSource = dvProducts;
-            dataGridView1.Refresh();
+            //dataGridView1.Refresh();
 
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
-
+            dataGridView1.ResumeLayout();
             dataGridIdle = true;
 
             // Show the counts in the toolstrip
@@ -337,7 +338,8 @@ namespace Catalogo._productos
             {
                 this.emitir(null);
             };
-          
+            watch.Stop();
+            System.Diagnostics.Debug.WriteLine("Carga grilla: " + watch.ElapsedMilliseconds.ToString());
         }
 
 
