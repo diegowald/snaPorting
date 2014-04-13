@@ -269,6 +269,17 @@
     </Compile>
     <Compile Include="_pedidos\Pedido.cs" />
     <Compile Include="_pedidos\PedidoItem.cs" />
+    <Compile Include="_preferencias\CheckBoxINI.xaml.cs">
+      <DependentUpon>CheckBoxINI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_preferencias\TextEditINI.xaml.cs">
+      <DependentUpon>TextEditINI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_preferencias\IINIProperty.cs" />
+    <Compile Include="_preferencias\INIPropertyHandler.cs" />
+    <Compile Include="_preferencias\PreferenciasFrm.xaml.cs">
+      <DependentUpon>PreferenciasFrm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="_recibos\AplicacionItem.cs" />
     <Compile Include="_recibos\DeducirItem.cs" />
     <Compile Include="_recibos\Recibo.cs" />
@@ -373,6 +384,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="_preferencias\CheckBoxINI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="_preferencias\TextEditINI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="_preferencias\PreferenciasFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="_registro\Registration.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -445,7 +468,9 @@
     <EmbeddedResource Include="_pedidos\ucPedido.resx">
       <DependentUpon>ucPedido.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="_productos\FiltroSearch.resx" />
+    <EmbeddedResource Include="_productos\FiltroSearch.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="_rendiciones\fPruebas.resx">
       <DependentUpon>fPruebas.cs</DependentUpon>
     </EmbeddedResource>

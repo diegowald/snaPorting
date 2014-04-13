@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Catalogo._preferencias.CheckBoxINI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="20" d:DesignWidth="200">
+    <Grid>
+        <CheckBox Name="check" Content="CheckBox" HorizontalAlignment="Left" Margin="10,0,0,0" Checked="check_Checked"/>
+    </Grid>
+</UserControl>
