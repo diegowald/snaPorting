@@ -15,8 +15,10 @@ namespace Catalogo
         public static void Main()
         {
             const string PROCNAME_ = "Main";
-            Catalogo._preferencias.PreferenciasFrm frm = new _preferencias.PreferenciasFrm();
-            frm.ShowDialog();
+
+            // Las siguientes 2 lineas son para probar frmsettings
+//            Catalogo._preferencias.PreferenciasFrm frm = new _preferencias.PreferenciasFrm();
+//            frm.ShowDialog();
             //--splash form
             //Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
             //splashthread.IsBackground = true;
