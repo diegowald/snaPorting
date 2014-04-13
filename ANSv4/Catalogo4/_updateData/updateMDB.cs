@@ -84,6 +84,8 @@ namespace Catalogo.Funciones
                 {
                     Global01.TranActiva.Rollback();
                 }
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;
                 //throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }

@@ -40,6 +40,8 @@ namespace Catalogo.util
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                
                 throw ex;
             }
         }

@@ -79,6 +79,8 @@ namespace Catalogo._Application
                 }
                 else
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+
                     throw ex;
                 }
             }

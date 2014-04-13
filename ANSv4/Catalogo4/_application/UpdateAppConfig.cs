@@ -81,6 +81,8 @@ namespace Catalogo._appConfig
                 }
                 else
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+
                     throw ex;
                 }
             }
@@ -306,6 +308,8 @@ namespace Catalogo._appConfig
                 }
                 catch (Exception ex)
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+
                     //throw ex;  //util.errorHandling.ErrorForm.show();
                 }
             }
@@ -370,6 +374,8 @@ namespace Catalogo._appConfig
                 }
                 catch (Exception ex)
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+
                     throw ex;  //util.errorHandling.ErrorForm.show();
                 }
             }

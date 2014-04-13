@@ -185,6 +185,7 @@ namespace Catalogo._interdeposito
             }
             catch (System.Data.OleDb.OleDbException ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
                 switch (ex.ErrorCode)
                 {
                     case -2147467259:
@@ -194,6 +195,7 @@ namespace Catalogo._interdeposito
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw (new Exception(ex.Message));  //util.errorHandling.ErrorForm.show();
             }
 

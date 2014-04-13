@@ -67,6 +67,8 @@ namespace Catalogo._registro
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 //throw ex;  //util.errorHandling.ErrorForm.show();
                 return "";
             }
@@ -93,6 +95,8 @@ namespace Catalogo._registro
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
                 //throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
@@ -141,6 +145,8 @@ namespace Catalogo._registro
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
                 //throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }

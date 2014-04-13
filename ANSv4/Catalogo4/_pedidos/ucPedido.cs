@@ -70,6 +70,8 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -231,6 +233,8 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -249,6 +253,8 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -512,6 +518,8 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -641,6 +649,8 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -685,6 +695,8 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -745,6 +757,8 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -829,6 +843,8 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -926,6 +942,8 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }

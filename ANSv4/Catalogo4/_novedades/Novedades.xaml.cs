@@ -144,13 +144,13 @@ namespace Catalogo._novedades
                 }
                 catch (System.Web.HttpException ex)
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
                     //throw ex;
-                    System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
                 }
                 catch (System.Net.WebException wex)
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
                     //throw wex;
-                    System.Diagnostics.Debug.WriteLine(wex.Message.ToString());
                 }
             }
         }
@@ -168,7 +168,7 @@ namespace Catalogo._novedades
                     string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
                     imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
                     //throw ex;
-                    System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
                 }
             }
             else
@@ -194,12 +194,12 @@ namespace Catalogo._novedades
             catch (System.IO.IOException ex)
             {
                 //throw ex;
-                System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
+                util.errorHandling.ErrorLogger.LogMessage(ex);
             }
             catch (Exception ex)
             {
                 //throw ex;
-                System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
+                util.errorHandling.ErrorLogger.LogMessage(ex);
             }
         }
     }

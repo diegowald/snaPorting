@@ -55,6 +55,8 @@ namespace Catalogo
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
             }
         }
 
@@ -88,6 +90,8 @@ namespace Catalogo
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
             }
         }
 

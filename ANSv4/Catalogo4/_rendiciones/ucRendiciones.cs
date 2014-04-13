@@ -259,6 +259,8 @@ namespace Catalogo._rendiciones
                             {
                                 Global01.TranActiva.Rollback();
                             }
+                            util.errorHandling.ErrorLogger.LogMessage(ex);
+
                             throw ex; 
                         }
                         finally
@@ -656,6 +658,8 @@ namespace Catalogo._rendiciones
                 }
                 catch (Exception ex)
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+
                     throw ex;
                 }              
 
@@ -680,6 +684,8 @@ namespace Catalogo._rendiciones
                 }
                 catch (Exception ex)
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+
                     throw ex;  //new Exception(ex.Message.ToString());
                 }                   
 
@@ -717,6 +723,8 @@ namespace Catalogo._rendiciones
                 }
                 catch (Exception ex)
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+
                     throw ex;  //new Exception(ex.Message.ToString());
                 }   
             }

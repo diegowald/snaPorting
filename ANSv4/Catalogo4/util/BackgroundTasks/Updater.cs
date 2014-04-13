@@ -217,6 +217,8 @@ namespace Catalogo.util.BackgroundTasks
                     Global01.TranActiva.Rollback();
                     Global01.TranActiva = null;
                 }
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;
             }
         }

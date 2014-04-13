@@ -349,6 +349,7 @@ namespace Catalogo._interdeposito
                 catch (util.errorHandling.RegistroDuplicadoException ex)
                 {
                     HabilitarInterDeposito();
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
                     System.Windows.Forms.MessageBox.Show(ex.Message);
                     return;
                 }
@@ -361,6 +362,7 @@ namespace Catalogo._interdeposito
                             return;
                         default:
                              MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                             util.errorHandling.ErrorLogger.LogMessage(ex);
                              util.errorHandling.ErrorForm.show();
                              return;
                     }

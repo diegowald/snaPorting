@@ -26,7 +26,11 @@ namespace Catalogo.util.errorHandling
 
                     str.AutoFlush = true;   // Wri9te text with no buffering
                     str.WriteLine(new string('=', 40));
+                    System.Diagnostics.Debug.WriteLine(new string('=', 40));
                     str.WriteLine("Time: " + DateTime.Now.ToString() +
+                    Environment.NewLine
+                        + "Message: " + pMessage);
+                    System.Diagnostics.Debug.WriteLine("Time: " + DateTime.Now.ToString() +
                     Environment.NewLine
                         + "Message: " + pMessage);
                     str.Close();

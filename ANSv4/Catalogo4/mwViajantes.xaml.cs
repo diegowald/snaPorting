@@ -322,6 +322,7 @@ namespace Catalogo
                 }
                 catch (Exception ex)
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
                     throw ex;
                 }
             }

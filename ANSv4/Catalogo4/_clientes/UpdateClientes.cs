@@ -193,6 +193,8 @@ namespace Catalogo._clientes
                     Global01.TranActiva.Rollback();
                     Global01.TranActiva = null;
                 }
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
             finally
@@ -257,11 +259,13 @@ namespace Catalogo._clientes
                 }
                 else
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
                     throw ex;
                 }
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -363,6 +367,7 @@ namespace Catalogo._clientes
                         }
                         catch (Exception ex)
                         {
+                            util.errorHandling.ErrorLogger.LogMessage(ex);
                             throw ex;  //util.errorHandling.ErrorForm.show();
                         }
                         lastID = (int)row["ID"];
@@ -436,6 +441,7 @@ namespace Catalogo._clientes
                         }
                         catch (Exception ex)
                         {
+                            util.errorHandling.ErrorLogger.LogMessage(ex);
                             throw ex;  //util.errorHandling.ErrorForm.show();
                         }
                         lastId = long.Parse(row["ID"].ToString());

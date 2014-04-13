@@ -76,6 +76,8 @@ namespace Catalogo._existencia
                 }
                 else
                 {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+
                     throw ex;
                 }
             }

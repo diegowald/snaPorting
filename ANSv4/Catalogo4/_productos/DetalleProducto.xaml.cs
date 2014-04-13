@@ -145,12 +145,12 @@ namespace Catalogo._productos
                 catch (System.Web.HttpException ex)
                 {
                     //throw ex;
-                    System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
                 }
                 catch (System.Net.WebException wex)
                 {
                     //throw wex;
-                    System.Diagnostics.Debug.WriteLine(wex.Message.ToString());
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
                 }
             }
         }
@@ -169,7 +169,7 @@ namespace Catalogo._productos
                     string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
                     imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
                     //throw ex;
-                    System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
                 }
             }
             else
@@ -195,12 +195,12 @@ namespace Catalogo._productos
             catch (System.IO.IOException ex)
             {
                 //throw ex;
-                System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
+                util.errorHandling.ErrorLogger.LogMessage(ex);
             }
             catch (Exception ex)
             {
                 //throw ex;
-                System.Diagnostics.Debug.WriteLine(ex.Message.ToString());
+                util.errorHandling.ErrorLogger.LogMessage(ex);
             }
         }
 

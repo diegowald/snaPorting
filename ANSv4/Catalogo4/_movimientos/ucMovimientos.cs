@@ -165,6 +165,7 @@ namespace Catalogo._movimientos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -219,6 +220,7 @@ namespace Catalogo._movimientos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
@@ -268,6 +270,7 @@ namespace Catalogo._movimientos
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }

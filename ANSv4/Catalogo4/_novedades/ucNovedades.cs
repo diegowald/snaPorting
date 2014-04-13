@@ -220,6 +220,7 @@ namespace Catalogo._novedades
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
