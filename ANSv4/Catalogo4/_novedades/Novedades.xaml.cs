@@ -149,7 +149,7 @@ namespace Catalogo._novedades
                 }
                 catch (System.Net.WebException wex)
                 {
-                    util.errorHandling.ErrorLogger.LogMessage(ex);
+                    util.errorHandling.ErrorLogger.LogMessage(wex);
                     //throw wex;
                 }
             }

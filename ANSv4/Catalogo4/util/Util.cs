@@ -272,16 +272,16 @@ namespace Catalogo.Funciones
 
         }
 
-        internal static long ErrorGuardianGlobalHandler(string m_sMODULENAME_, string PROCNAME_)
-        {
-            //throw new Exception("Part 1 must be numeric");
+        //internal static long ErrorGuardianGlobalHandler(string m_sMODULENAME_, string PROCNAME_)
+        //{
+        //    //throw new Exception("Part 1 must be numeric");
      
-            //System.Windows.Forms.DialogResult ErrorGuardianUserReply;
+        //    //System.Windows.Forms.DialogResult ErrorGuardianUserReply;
 
-            long functionReturnValue = 0;
+        //    long functionReturnValue = 0;
 
-            return functionReturnValue;
-        }
+        //    return functionReturnValue;
+        //}
 
         public static DialogResult InputBox(string title, string promptText, int MaxLength, ref string value)
         {

@@ -200,8 +200,7 @@ namespace Catalogo.Funciones
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
-           
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
             finally
@@ -229,7 +228,7 @@ namespace Catalogo.Funciones
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 throw new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
@@ -269,14 +268,14 @@ namespace Catalogo.Funciones
             }
             catch (System.IO.IOException ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 //throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
                 throw ex;
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 throw ex;
             }
@@ -321,13 +320,13 @@ namespace Catalogo.Funciones
             }
             catch (System.IO.IOException ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
                 //throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
                 //throw ex;               
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 //throw ex;
             }
@@ -364,14 +363,14 @@ namespace Catalogo.Funciones
             }
             catch (System.IO.IOException ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 //throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
                 throw ex;
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 throw ex;
             }
@@ -407,14 +406,14 @@ namespace Catalogo.Funciones
             }
             catch (System.IO.IOException ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 //throw new Exception(e.Message + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
                 throw ex;
             }
             catch (Exception ex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 throw ex;
             }

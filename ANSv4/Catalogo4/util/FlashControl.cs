@@ -35,6 +35,7 @@ namespace Catalogo.util
                 if (axShockwaveFlash1.Movie.Length != 0)
                 {
                     axShockwaveFlash1.Loop = true;
+                    axShockwaveFlash1.LoadMovie(0, file); 
                     axShockwaveFlash1.Play();
                 }
             }

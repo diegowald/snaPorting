@@ -8,8 +8,10 @@ using System.Windows.Forms;
 
 namespace Catalogo.util.errorHandling
 {
-    partial class ErrorHandler : Form
+    
+    public partial class ErrorHandler : Form
     {
+
         public ErrorHandler(Exception ex)
         {
             InitializeComponent();
@@ -101,5 +103,16 @@ namespace Catalogo.util.errorHandling
             }
         }
         #endregion
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

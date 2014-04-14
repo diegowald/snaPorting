@@ -71,7 +71,6 @@ namespace Catalogo
             //filterControl.Size = new System.Drawing.Size(640, 480);
             //filterControl.TabIndex = 0;
             //gridViewControl.Text = "Lista de Productos";
-
             flash.play();
 
             // Assign the MaskedTextBox control as the host control's child.

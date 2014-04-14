@@ -152,19 +152,19 @@
     <Compile Include="notifications\NotificationCenter.cs" />
     <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
     <Compile Include="util\emitter-receiver\ICancellableEmitter.cs" />
+    <Compile Include="util\errorHandling\ErrorLogger.cs" />
     <Compile Include="util\errorHandling\ErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="util\errorHandling\ErrorForm.Designer.cs">
+    <Compile Include="util\errorHandling\ErrorForm.designer.cs">
       <DependentUpon>ErrorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="util\errorHandling\ErrorHandler.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="util\errorHandling\ErrorHandler.Designer.cs">
+    <Compile Include="util\errorHandling\ErrorHandler.designer.cs">
       <DependentUpon>ErrorHandler.cs</DependentUpon>
     </Compile>
-    <Compile Include="util\errorHandling\ErrorLogger.cs" />
     <Compile Include="util\FlashControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
