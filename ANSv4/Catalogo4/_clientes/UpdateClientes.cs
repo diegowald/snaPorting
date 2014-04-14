@@ -87,7 +87,7 @@ namespace Catalogo._clientes
 
         private void sincroClientesCompletada(ref bool cancel)
         {
-            //        On Error GoTo ErrorHandler
+            //        On Error GoTo .ErrorForm.show()
 
             if (util.SimplePing.ping(_ipAddress, 5000))
             {
@@ -100,7 +100,7 @@ namespace Catalogo._clientes
             cliente.SincronizacionCtasCtesCompletada(_MacAddress);
             return;
 
-            //ErrorHandler:
+            //.ErrorForm.show():
             //        Err.Raise(Err.Number, Err.Source, Err.Description)
 
             //    End Sub
@@ -187,7 +187,7 @@ namespace Catalogo._clientes
             }
             catch (Exception ex)
             {
-                //ErrorHandler:
+                //.ErrorForm.show():
                 if (Global01.TranActiva != null)
                 {
                     Global01.TranActiva.Rollback();
@@ -243,7 +243,7 @@ namespace Catalogo._clientes
 
             catch (System.Data.OleDb.OleDbException ex)
             {
-                //ErrorHandler:
+                //.ErrorForm.show():
                 if (ex.ErrorCode ==-2147467259)
                 {
                     //        If Err.Number = -2147467259 Then

@@ -147,7 +147,7 @@ namespace Catalogo.util
 
 		    return;
 
-            //ErrorHandler:
+            //.ErrorForm.show():
 
 
             //if (Err().Number == -2147024809) {
