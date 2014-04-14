@@ -30,14 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashScreenForm));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.PnlRondoRojo = new System.Windows.Forms.Panel();
+            this.PnlFondoRojo = new System.Windows.Forms.Panel();
             this.PnlBottom = new System.Windows.Forms.Panel();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.PnlRondoRojo.SuspendLayout();
+            this.PnlFondoRojo.SuspendLayout();
             this.PnlBottom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,19 +59,19 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.UseWaitCursor = true;
             // 
-            // PnlRondoRojo
+            // PnlFondoRojo
             // 
-            this.PnlRondoRojo.BackColor = System.Drawing.Color.Red;
-            this.PnlRondoRojo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PnlRondoRojo.Controls.Add(this.PnlBottom);
-            this.PnlRondoRojo.Controls.Add(this.pictureBox1);
-            this.PnlRondoRojo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PnlRondoRojo.Location = new System.Drawing.Point(0, 0);
-            this.PnlRondoRojo.Name = "PnlRondoRojo";
-            this.PnlRondoRojo.Padding = new System.Windows.Forms.Padding(2);
-            this.PnlRondoRojo.Size = new System.Drawing.Size(362, 221);
-            this.PnlRondoRojo.TabIndex = 5;
-            this.PnlRondoRojo.UseWaitCursor = true;
+            this.PnlFondoRojo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PnlFondoRojo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PnlFondoRojo.Controls.Add(this.PnlBottom);
+            this.PnlFondoRojo.Controls.Add(this.pictureBox1);
+            this.PnlFondoRojo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PnlFondoRojo.Location = new System.Drawing.Point(0, 0);
+            this.PnlFondoRojo.Name = "PnlFondoRojo";
+            this.PnlFondoRojo.Padding = new System.Windows.Forms.Padding(2);
+            this.PnlFondoRojo.Size = new System.Drawing.Size(362, 221);
+            this.PnlFondoRojo.TabIndex = 5;
+            this.PnlFondoRojo.UseWaitCursor = true;
             // 
             // PnlBottom
             // 
@@ -87,17 +87,24 @@
             this.PnlBottom.TabIndex = 3;
             this.PnlBottom.UseWaitCursor = true;
             // 
-            // progressBar1
+            // btnCancel
             // 
-            this.progressBar1.ForeColor = System.Drawing.Color.Red;
-            this.progressBar1.Location = new System.Drawing.Point(6, 5);
-            this.progressBar1.MarqueeAnimationSpeed = 50;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(342, 12);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 7;
-            this.progressBar1.UseWaitCursor = true;
-            this.progressBar1.Visible = false;
+            this.btnCancel.BackColor = System.Drawing.Color.Red;
+            this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCancel.FlatAppearance.BorderSize = 2;
+            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.White;
+            this.btnCancel.Location = new System.Drawing.Point(273, 23);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 28);
+            this.btnCancel.TabIndex = 16;
+            this.btnCancel.Text = "Cancelar";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.UseWaitCursor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // label1
             // 
@@ -123,31 +130,24 @@
             this.progressBar2.UseWaitCursor = true;
             this.progressBar2.Visible = false;
             // 
-            // btnCancel
+            // progressBar1
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.Red;
-            this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnCancel.FlatAppearance.BorderSize = 2;
-            this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(273, 23);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 28);
-            this.btnCancel.TabIndex = 16;
-            this.btnCancel.Text = "Cancelar";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.UseWaitCursor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.progressBar1.ForeColor = System.Drawing.Color.Red;
+            this.progressBar1.Location = new System.Drawing.Point(6, 5);
+            this.progressBar1.MarqueeAnimationSpeed = 50;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(342, 12);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 7;
+            this.progressBar1.UseWaitCursor = true;
+            this.progressBar1.Visible = false;
             // 
             // SplashScreenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(362, 221);
-            this.Controls.Add(this.PnlRondoRojo);
+            this.Controls.Add(this.PnlFondoRojo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SplashScreenForm";
@@ -157,7 +157,7 @@
             this.UseWaitCursor = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SplashForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.PnlRondoRojo.ResumeLayout(false);
+            this.PnlFondoRojo.ResumeLayout(false);
             this.PnlBottom.ResumeLayout(false);
             this.PnlBottom.PerformLayout();
             this.ResumeLayout(false);
@@ -167,7 +167,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel PnlRondoRojo;
+        private System.Windows.Forms.Panel PnlFondoRojo;
         private System.Windows.Forms.Panel PnlBottom;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label1;

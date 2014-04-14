@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ErrorHandler));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.PnlFondoRojo = new System.Windows.Forms.Panel();
             this.MainPnl = new System.Windows.Forms.Panel();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.okButton = new System.Windows.Forms.Button();
@@ -41,25 +41,25 @@
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.TopPnl = new System.Windows.Forms.Panel();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.PnlFondoRojo.SuspendLayout();
             this.MainPnl.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.TopPnl.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // PnlFondoRojo
             // 
-            this.panel1.BackColor = System.Drawing.Color.Red;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.Controls.Add(this.MainPnl);
-            this.panel1.Controls.Add(this.TopPnl);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(2);
-            this.panel1.Size = new System.Drawing.Size(562, 372);
-            this.panel1.TabIndex = 0;
+            this.PnlFondoRojo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PnlFondoRojo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PnlFondoRojo.Controls.Add(this.MainPnl);
+            this.PnlFondoRojo.Controls.Add(this.TopPnl);
+            this.PnlFondoRojo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PnlFondoRojo.Location = new System.Drawing.Point(0, 0);
+            this.PnlFondoRojo.Name = "PnlFondoRojo";
+            this.PnlFondoRojo.Padding = new System.Windows.Forms.Padding(2);
+            this.PnlFondoRojo.Size = new System.Drawing.Size(562, 372);
+            this.PnlFondoRojo.TabIndex = 0;
             // 
             // MainPnl
             // 
@@ -215,7 +215,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.CancelButton = this.btnCerrar;
             this.ClientSize = new System.Drawing.Size(562, 372);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.PnlFondoRojo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ErrorHandler";
@@ -223,7 +223,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingresar al Catálogo . . .";
             this.TopMost = true;
-            this.panel1.ResumeLayout(false);
+            this.PnlFondoRojo.ResumeLayout(false);
             this.MainPnl.ResumeLayout(false);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
@@ -235,7 +235,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel PnlFondoRojo;
         private System.Windows.Forms.Panel MainPnl;
         private System.Windows.Forms.Panel TopPnl;
         private System.Windows.Forms.Button btnCerrar;
