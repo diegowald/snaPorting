@@ -201,6 +201,7 @@ namespace Catalogo.Funciones
             catch (Exception ex)
             {
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
+
                 throw new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
             finally
