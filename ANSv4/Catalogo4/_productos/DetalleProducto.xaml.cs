@@ -150,7 +150,7 @@ namespace Catalogo._productos
                 catch (System.Net.WebException wex)
                 {
                     //throw wex;
-                    util.errorHandling.ErrorLogger.LogMessage(ex);
+                    util.errorHandling.ErrorLogger.LogMessage(wex);
                 }
             }
         }

@@ -132,8 +132,8 @@ namespace Catalogo._novedades
             */
 
 
-            string wCondicion = "activo=1 and (destino='ambos' or destino='"+ wDestino2 + "') and origen<>'catalogo' and " +
-                                "f_inicio<=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "# and f_fin>=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "#";
+            string wCondicion = "activo=1 and (destino='ambos' or destino='"+ wDestino2 + "') and origen<>'catalogo' ";/* + 
+                "and " + "f_inicio<=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "# and f_fin>=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "#";*/
             string wOrden = "F_Inicio DESC, Tipo";
             string wCampos = "Descripcion, F_Inicio, F_Fin, N_Archivo, url, zonas, Fecha, Origen, Tipo, ID";
 
