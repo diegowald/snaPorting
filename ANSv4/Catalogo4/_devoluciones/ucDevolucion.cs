@@ -139,7 +139,7 @@ namespace Catalogo._devoluciones
                 {
                     if (btnIniciar.Tag.ToString() == "INICIAR")
                     {
-                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones, auditoria.Auditor.AccionesAuditadas.INICIA, "");                            
+                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Devoluciones, _auditor.Auditor.AccionesAuditadas.INICIA, "");                            
                         
                         devMflistView.Items.Clear();
                         devMnlistView.Items.Clear();
@@ -176,7 +176,7 @@ namespace Catalogo._devoluciones
                     {
                         if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR la Devolución?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones, auditoria.Auditor.AccionesAuditadas.CANCELA, "");
+                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Devoluciones, _auditor.Auditor.AccionesAuditadas.CANCELA, "");
                             DevolucionTab.Visible = false;
                             devMflistView.Items.Clear();
 
@@ -519,7 +519,7 @@ namespace Catalogo._devoluciones
 
             //oReport.TiTle = "P - " + NroPedido;
 
-            fReporte f = new fReporte();
+            varios.fReporte f = new varios.fReporte();
             f.Text = "Nota de Devolución n° " + NroDevolucion;
             f.DocumentoNro = "DE-" + NroDevolucion;
             f.oRpt = oReport;

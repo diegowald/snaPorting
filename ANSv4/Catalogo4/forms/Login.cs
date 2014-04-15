@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace Catalogo
+namespace Catalogo.varios
 {
     
     public partial class fLogin : Form

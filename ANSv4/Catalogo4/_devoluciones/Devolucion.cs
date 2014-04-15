@@ -167,7 +167,7 @@ namespace Catalogo._devoluciones
             }
             else
             {
-                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones, auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + mvarIdCliente.ToString().PadLeft(6,'0') + " dev:" + mvarNroDevolucion + " tot:");
+                _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Devoluciones, _auditor.Auditor.AccionesAuditadas.EXITOSO, "cli:" + mvarIdCliente.ToString().PadLeft(6, '0') + " dev:" + mvarNroDevolucion + " tot:");
                 //Nuevo();
                 if (GuardoOK != null)
                 {

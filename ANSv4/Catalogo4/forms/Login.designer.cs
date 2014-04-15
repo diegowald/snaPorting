@@ -1,4 +1,4 @@
-﻿namespace Catalogo
+﻿namespace Catalogo.varios
 {
     partial class fLogin
     {

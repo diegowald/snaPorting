@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Catalogo.util
+namespace Catalogo.varios
 {
     public partial class UpdateCtl : UserControl
     {

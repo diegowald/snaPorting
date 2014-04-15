@@ -1,4 +1,4 @@
-﻿namespace Catalogo.util
+﻿namespace Catalogo.varios
 {
     partial class fDataUpdate
     {
@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fDataUpdate));
             this.PnlFondoRojo = new System.Windows.Forms.Panel();
-            this.vcUPDATECTL1 = new Catalogo.util.UpdateCtl();
+            this.vcUPDATECTL1 = new Catalogo.varios.UpdateCtl();
             this.TopPnl = new System.Windows.Forms.Panel();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.PnlFondoRojo.SuspendLayout();

@@ -215,8 +215,8 @@ namespace Catalogo._interdeposito
             {
                 if (btnIniciar.Tag.ToString() == "INICIAR")
                 {
-                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito,
-                         auditoria.Auditor.AccionesAuditadas.INICIA);
+                    _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.InterDeposito,
+                         _auditor.Auditor.AccionesAuditadas.INICIA);
                     //Limpio Listados
                     AbrirInterDeposito();
                     
@@ -228,8 +228,8 @@ namespace Catalogo._interdeposito
                 {
                     if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Ingreso?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito,
-                             auditoria.Auditor.AccionesAuditadas.CANCELA);
+                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.InterDeposito,
+                             _auditor.Auditor.AccionesAuditadas.CANCELA);
 
                         InhabilitarInterDeposito();
 
@@ -424,7 +424,7 @@ namespace Catalogo._interdeposito
 
             oReport.DataDefinition.FormulaFields["fZona"].Text = "'" + Global01.NroUsuario + "'";
 
-            fReporte f = new fReporte();
+            varios.fReporte f = new varios.fReporte();
             f.Text = "InterDeposito n° " + NroInterDeposito;
             f.DocumentoNro = "BD-" + NroInterDeposito;
             f.oRpt = oReport;

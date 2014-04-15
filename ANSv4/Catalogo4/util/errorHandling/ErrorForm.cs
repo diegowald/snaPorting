@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace Catalogo.util.errorHandling
 {
-
+    
     public partial class ErrorForm : Form
     {
 

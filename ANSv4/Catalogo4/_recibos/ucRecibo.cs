@@ -454,8 +454,8 @@ namespace Catalogo._recibos
             {
                 if (btnIniciar.Tag.ToString() == "INICIAR")
                 {
-                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
-                         auditoria.Auditor.AccionesAuditadas.INICIA);
+                    _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Recibo,
+                         _auditor.Auditor.AccionesAuditadas.INICIA);
                     //Limpio Listados
                     AbrirRecibo();
 
@@ -471,8 +471,8 @@ namespace Catalogo._recibos
                 {
                     if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Recibo?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo,
-                             auditoria.Auditor.AccionesAuditadas.CANCELA);
+                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Recibo,
+                             _auditor.Auditor.AccionesAuditadas.CANCELA);
 
                         InhabilitarRecibo();
 
@@ -904,7 +904,7 @@ namespace Catalogo._recibos
 
             oReport.SetParameterValue("pNroRecibo", NroRecibo);
 
-            fReporte f = new fReporte();
+            varios.fReporte f = new varios.fReporte();
             f.Text = "Recibo n° " + NroRecibo;
             f.DocumentoNro = "RE-" + NroRecibo;           
             f.oRpt = oReport;
@@ -1261,7 +1261,7 @@ namespace Catalogo._recibos
 
             //oReport.TiTle = "P - " + NroPedido;
 
-            fReporte f = new fReporte();
+            varios.fReporte f = new varios.fReporte();
             f.Text = "Cta. Cte. del Cliente n° " + pIdCliente;
             f.DocumentoNro = "CC-" + pIdCliente;
             f.oRpt = oReport;

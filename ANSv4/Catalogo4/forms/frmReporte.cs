@@ -12,7 +12,7 @@ using System.Diagnostics;
 //using CrystalDecisions.Shared;
 //using CrystalDecisions.ReportAppServer.ClientDoc; 
 
-namespace Catalogo
+namespace Catalogo.varios
 {
     
     public partial class fReporte : Form

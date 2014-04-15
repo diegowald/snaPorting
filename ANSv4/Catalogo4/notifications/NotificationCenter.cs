@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Catalogo.Funciones.emitter_receiver;
 
-namespace Catalogo.notifications
+namespace Catalogo.varios
 {
     public class NotificationCenter : Catalogo.util.singleton<NotificationCenter>,
         Funciones.emitter_receiver.IEmisor<util.Pair<string, float>>,

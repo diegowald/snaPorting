@@ -184,7 +184,7 @@ namespace Catalogo
 
         public static void update_productos()
         {
-            Catalogo.util.fDataUpdate fu = new Catalogo.util.fDataUpdate();
+            Catalogo.varios.fDataUpdate fu = new Catalogo.varios.fDataUpdate();
 
         VadeNuevo:
             fu.SoloCatalogo = Convert.ToBoolean(Funciones.modINIs.ReadINI("DATOS", "SoloCatalogo", "false"));
@@ -207,7 +207,7 @@ namespace Catalogo
 
         private static void valida_appLogin()
         {
-            Catalogo.fLogin f = new Catalogo.fLogin();
+            Catalogo.varios.fLogin f = new Catalogo.varios.fLogin();
             f.ShowDialog();
 
             if (!f.TodoBien)
@@ -233,7 +233,7 @@ namespace Catalogo
                     Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
 
                     // a registrar
-                    Registration fRegistro = new Registration();
+                    Catalogo._registro.Registration fRegistro = new Catalogo._registro.Registration();
                     fRegistro.ShowDialog();
                     fRegistro = null;
 

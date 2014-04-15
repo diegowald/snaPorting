@@ -141,13 +141,13 @@ namespace Catalogo.util.BackgroundTasks
                                     if (envio.Inicializado)
                                     {
                                         envio.obtenerDatos(Nro);
-                                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                                             auditoria.Auditor.AccionesAuditadas.TRANSMITE, "P1 : " + movs["Nro"]);
+                                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Pedido,
+                                             _auditor.Auditor.AccionesAuditadas.TRANSMITE, "P1 : " + movs["Nro"]);
                                         if (envio.enviarPedido() != 0)
                                         {
                                             fallaEnvioPedido = true;
-                                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                                                 auditoria.Auditor.AccionesAuditadas.FALLO, "P1 " + movs["Nro"]);
+                                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Pedido,
+                                                 _auditor.Auditor.AccionesAuditadas.FALLO, "P1 " + movs["Nro"]);
                                         }
                                     }
                                     else
@@ -167,11 +167,11 @@ namespace Catalogo.util.BackgroundTasks
                                     if (envio.Inicializado)
                                     {
                                         envio.obtenerDatos(Nro);
-                                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo, auditoria.Auditor.AccionesAuditadas.TRANSMITE, "R1 " + movs["Nro"]);
+                                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Recibo, _auditor.Auditor.AccionesAuditadas.TRANSMITE, "R1 " + movs["Nro"]);
                                         if (envio.EnviarRecibo() != 0)
                                         {
                                             fallaEnvioRecibo = true;
-                                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Recibo, auditoria.Auditor.AccionesAuditadas.FALLO, "R1 " + movs["Nro"]);
+                                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Recibo, _auditor.Auditor.AccionesAuditadas.FALLO, "R1 " + movs["Nro"]);
                                         }
                                         else
                                         {
@@ -194,11 +194,11 @@ namespace Catalogo.util.BackgroundTasks
                                     if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
-                                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones, auditoria.Auditor.AccionesAuditadas.TRANSMITE, "D1 " + movs["Nro"]);
+                                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Devoluciones, _auditor.Auditor.AccionesAuditadas.TRANSMITE, "D1 " + movs["Nro"]);
                                         if (envio.EnviarDevolucion() != 0)
                                         {
                                             fallaEnvioDevolucion = true;
-                                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Devoluciones, auditoria.Auditor.AccionesAuditadas.FALLO, "D1 " + movs["Nro"]);
+                                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Devoluciones, _auditor.Auditor.AccionesAuditadas.FALLO, "D1 " + movs["Nro"]);
                                         }
                                     }
                                     else
@@ -218,11 +218,11 @@ namespace Catalogo.util.BackgroundTasks
                                     if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
-                                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito, auditoria.Auditor.AccionesAuditadas.TRANSMITE, "ID1= " + movs["Nro"]);
+                                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.InterDeposito, _auditor.Auditor.AccionesAuditadas.TRANSMITE, "ID1= " + movs["Nro"]);
                                         if (envio.EnviarInterDeposito() != 0)
                                         {
                                             fallaEnvioInterDeposito = true;
-                                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.InterDeposito, auditoria.Auditor.AccionesAuditadas.FALLO, "ID1 " + movs["Nro"]);
+                                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.InterDeposito, _auditor.Auditor.AccionesAuditadas.FALLO, "ID1 " + movs["Nro"]);
                                         }
                                     }
                                     else
@@ -238,15 +238,15 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroRendicion.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _rendicion.EnvioRendicion envio = new _rendicion.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                    _rendiciones.EnvioRendicion envio = new _rendiciones.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
                                     if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
-                                        auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion, auditoria.Auditor.AccionesAuditadas.TRANSMITE, "RC1 " + movs["Nro"]);
+                                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Rendicion, _auditor.Auditor.AccionesAuditadas.TRANSMITE, "RC1 " + movs["Nro"]);
                                         if (envio.EnviarRendicion() != 0)
                                         {
                                             fallaEnvioRendicion = true;
-                                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion, auditoria.Auditor.AccionesAuditadas.FALLO, "RC1 " + movs["Nro"]);
+                                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Rendicion, _auditor.Auditor.AccionesAuditadas.FALLO, "RC1 " + movs["Nro"]);
                                         }
                                     }
                                     else

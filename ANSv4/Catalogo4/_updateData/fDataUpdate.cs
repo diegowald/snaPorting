@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 
 
-namespace Catalogo.util
+namespace Catalogo.varios
 {
     public partial class fDataUpdate : Form
     {

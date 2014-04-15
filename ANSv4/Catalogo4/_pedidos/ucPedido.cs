@@ -132,8 +132,8 @@ namespace Catalogo._pedidos
                     {
                         if (btnIniciar.Tag.ToString() == "INICIAR")
                         {
-                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                                auditoria.Auditor.AccionesAuditadas.INICIA, "");
+                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Pedido,
+                                _auditor.Auditor.AccionesAuditadas.INICIA, "");
                             nvlistView.Items.Clear();
 
                             OleDbDataReader dr = null;
@@ -208,7 +208,7 @@ namespace Catalogo._pedidos
                         {
                             if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Pedido?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
-                                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido, auditoria.Auditor.AccionesAuditadas.CANCELA, "");
+                                _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Pedido, _auditor.Auditor.AccionesAuditadas.CANCELA, "");
                                 PedidoTab.Visible = false;
                                 nvlistView.Items.Clear();
                                 TotalPedido();
@@ -724,7 +724,7 @@ namespace Catalogo._pedidos
             
             //oReport.TiTle = "P - " + NroPedido;
  
-            fReporte f = new fReporte();
+            varios.fReporte f = new varios.fReporte();
             f.Text = "Nota de Venta n° " + NroPedido;
             f.DocumentoNro = "NV-" + NroPedido;
             f.oRpt = oReport;

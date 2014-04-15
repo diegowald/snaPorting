@@ -225,7 +225,7 @@ namespace Catalogo.util.BackgroundTasks
 
         public void onRecibir(Pair<string, float> dato)
         {
-            notifications.NotificationCenter.instance.notificar(dato.first, dato.second);
+            Catalogo.varios.NotificationCenter.instance.notificar(dato.first, dato.second);
         }
 
 
@@ -237,7 +237,7 @@ namespace Catalogo.util.BackgroundTasks
 
         public void onRequestCancel(ref bool cancel)
         {
-            notifications.NotificationCenter.instance.requestCancel(ref cancel);
+            Catalogo.varios.NotificationCenter.instance.requestCancel(ref cancel);
         }
     }
 }

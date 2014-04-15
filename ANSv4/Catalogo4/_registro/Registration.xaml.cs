@@ -10,14 +10,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Data;
-using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 
-namespace Catalogo
+namespace Catalogo._registro
 {
     /// <summary>
-    /// Interaction logic for Registration.xaml
+    /// Interaction logic for PreferenciasFrm.xaml
     /// </summary>
     public partial class Registration : Window
     {
@@ -26,11 +24,32 @@ namespace Catalogo
             InitializeComponent();
         }
 
-        private void Login_Click(object sender, RoutedEventArgs e)
+          private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
         {
-            //Login login = new Login();
-            //login.Show();
-            //Close();
+            if (eventArgs.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void ChangeViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Normal;
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Maximized;
         }
 
         private void button2_Click(object sender, RoutedEventArgs e)
@@ -96,7 +115,7 @@ namespace Catalogo
             else vCuit = true;
 
             if (textBoxEmail.Text.Length == 0)
-            {                
+            {
                 errormessage.Text = "ingresar un email";
                 textBoxEmail.Focus();
             }
@@ -137,8 +156,8 @@ namespace Catalogo
                 errormessage.Text = "las llaves ingresadas no coinciden.";
                 passwordBoxConfirm.Focus();
             }
-            else  vpassword = true;
-      
+            else vpassword = true;
+
             if ((vfirstname) && (vlastname) && (vRazonSocial) && (vCuit) && (vemail) && (vNroCuenta) && (vNroZona) && (vpassword))
             {
                 string firstname = textBoxFirstName.Text;
@@ -151,7 +170,7 @@ namespace Catalogo
                 string password = passwordBox1.Password;
 
                 errormessage.Text = "";
-  
+
                 //SqlConnection con = new SqlConnection("Data Source=.\\sqlexpress;Initial Catalog=TestDataBase;User ID=sa;Password=sqlserver223");
                 //con.Open();
                 //SqlCommand cmd = new SqlCommand("Insert into Registration (FirstName,LastName,Email,Password,Address) values('" + firstname + "','" + lastname + "','" + email + "','" + password + "','" + address + "')", con);
@@ -159,10 +178,10 @@ namespace Catalogo
                 //cmd.ExecuteNonQuery();
                 //con.Close();
                 //errormessage.Text = "You have Registered successfully.";
-                    
+
                 string xParam = passwordBox1.Password.ToString() + Global01.IDMaquinaCRC;
-                Global01.NroUsuario = textBoxNroCuenta.Text.PadLeft(5,'0');
-                Global01.LLaveViajante = textBoxNroZona.Text.PadLeft(5,'0') + textBoxNroCuenta.Text.PadLeft(5,'0') + textBoxCuit.Text.ToString().Replace("-", "") + Catalogo._registro.AppRegistro.ObtenerCRC(xParam);
+                Global01.NroUsuario = textBoxNroCuenta.Text.PadLeft(5, '0');
+                Global01.LLaveViajante = textBoxNroZona.Text.PadLeft(5, '0') + textBoxNroCuenta.Text.PadLeft(5, '0') + textBoxCuit.Text.ToString().Replace("-", "") + Catalogo._registro.AppRegistro.ObtenerCRC(xParam);
                 //zzzzziiiiiccccccccccc
                 //123456789012345678901
                 Funciones.modINIs.WriteINI("DATOS", "LLaveViajante", Global01.LLaveViajante);
@@ -172,22 +191,22 @@ namespace Catalogo
 
                 Reset();
                 Close();
-       
+
             }
 
-            
+
             //adoModulo.adoConectar vg.Conexion, qstring
-            
+
             //appConfig_Upd vg.Conexion, vg.Cuit, vg.RazonSocial, vg.ApellidoNombre, _
             //              vg.Domicilio, vg.Telefono, vg.Ciudad, vg.Email, CStr(vg.NroUsuario), CInt(vg.ListaPrecio)
-            
+
             //If vg.miSABOR = A2_Clientes Then
             //    Cliente_Add vg.Conexion, vg.NroUsuario, vg.Cuit, vg.RazonSocial, vg.ApellidoNombre, _
             //             vg.Email, vg.Domicilio, vg.Telefono, vg.Ciudad
             //End If
-            
+
             //adoModulo.adoDesconectar vg.Conexion
-            
+
             //MsgBox ("¡BIENVENIDO A NUESTRO CATALOGO!."), vbInformation, "REGISTRADO"
 
         }
@@ -242,6 +261,5 @@ namespace Catalogo
             return false;
         }
 
-
-   }
+    }
 }

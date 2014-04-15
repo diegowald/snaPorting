@@ -132,7 +132,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="auditoria\Auditor.cs" />
+    <Compile Include="_auditor\Auditor.cs" />
     <Compile Include="forms\frmReporte.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -313,7 +313,7 @@
     </Compile>
     <Compile Include="_recibos\EnvioRecibo.cs" />
     <Compile Include="_registro\Registration.xaml.cs">
-      <SubType>Code</SubType>
+      <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
     <Compile Include="forms\SplashScreen.cs" />
     <Compile Include="forms\SplashScreenForm.cs">

@@ -61,7 +61,7 @@ namespace Catalogo
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
             // Create the MaskedTextBox control.
-            Catalogo.util.FlashControl flash = new util.FlashControl();
+            Catalogo.varios.FlashControl flash = new varios.FlashControl();
             //ShockwaveFlashObjects.ShockwaveFlashClass flash = new ShockwaveFlashObjects.ShockwaveFlashClass();
             flash.AutoScroll = true;
             flash.Dock = System.Windows.Forms.DockStyle.Top;
@@ -213,7 +213,7 @@ namespace Catalogo
             ped.attachReceptor(mov);
 */
             this.Show();
-            SplashScreen.CloseSplashScreen();
+            Catalogo.varios.SplashScreen.CloseSplashScreen();
 
         }
 
@@ -317,8 +317,8 @@ namespace Catalogo
                                 }
                                 else
                                 {
-                                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Comunicaciones,
-                                         auditoria.Auditor.AccionesAuditadas.FALLO, "Probar Conexion, TRANSMITIR_RECORDSET " + ped.IDClienteSeleccionado.ToString());
+                                    _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Comunicaciones,
+                                         _auditor.Auditor.AccionesAuditadas.FALLO, "Probar Conexion, TRANSMITIR_RECORDSET " + ped.IDClienteSeleccionado.ToString());
                                 }
                             }
                             break;
@@ -359,8 +359,8 @@ namespace Catalogo
             //  End With 'Me
 
             //  Set fExistencia = Nothing
-            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Programa,
-                auditoria.Auditor.AccionesAuditadas.TERMINA, "se cierra la aplicacion");
+            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Programa,
+                _auditor.Auditor.AccionesAuditadas.TERMINA, "se cierra la aplicacion");
             //  Select Case UnloadMode
             //    Case vbFormControlMenu
             //        '0 El usuario eligió el comando Cerrar del menú Control del formulario.

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Catalogo
+namespace Catalogo.varios
 {
     /// <summary>
     /// Defined types of messages: Success/Warning/Error.

@@ -28,8 +28,7 @@ namespace Catalogo.util
 		    string functionReturnValue = null;
 
 		     // ERROR: Not supported in C#: OnErrorStatement
-
-
+            
 		    string s = null;
 
 		    if (!WebServiceInicializado) {
