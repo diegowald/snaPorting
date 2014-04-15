@@ -137,7 +137,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroNotaVenta.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _pedidos.EnvioPedido envio = new _pedidos.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, _idCliente.ToString(), false, "");
+                                    _pedidos.EnvioPedido envio = new _pedidos.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
                                     if (envio.Inicializado)
                                     {
                                         envio.obtenerDatos(Nro);

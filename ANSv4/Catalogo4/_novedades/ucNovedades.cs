@@ -178,10 +178,6 @@ namespace Catalogo._novedades
  
         }
 
-        private void procesarYBorrarRegistrosCatalogo(DataTable dtNovedades)
-        {
-            throw new NotImplementedException();
-        }
 
         //private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         //{
@@ -232,7 +228,7 @@ namespace Catalogo._novedades
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
-
+        
         private void mostrarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo)
         {
             if (pTipo == "url")
@@ -288,7 +284,9 @@ namespace Catalogo._novedades
         {
             string txtZona = zona.Trim();
             if (txtZona.Length == 0)
+            {
                 return false;
+            }
             //204;205;3*;08* ver si Global01.Zona
             if (txtZona.Contains('*'))
             {
@@ -342,6 +340,52 @@ namespace Catalogo._novedades
             }
             table.AcceptChanges();
             return table;
+        }
+
+        private void procesarRegistro(System.Data.DataRow row)
+        {
+            string tipo = row["pTipo"] == DBNull.Value ? "" : (string)row["pTipo"];
+            tipo = tipo.ToUpper();
+            switch (tipo)
+            {
+                case "MDB":
+                    {
+                        MainMod.update_productos();
+                        //Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+                        //existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void procesarYBorrarRegistrosCatalogo(DataTable tabla)
+        {
+            for (int i = 0; i < tabla.Rows.Count; i++)
+            {
+                System.Data.DataRow row = tabla.Rows[i];
+                if (row["origen"].ToString().ToUpper() == "CATALOGO")
+                {
+                    procesarRegistro(row);
+                    row.Delete();
+                }
+                /*---DIEGO ---
+                 traer primero registros con origen="catalogo" (ojo tener en cta siempre el destino )
+                 * y ejecutar procesos acorde al tipo ws=webservice mdb=actualizacion
+                 * 
+                 * aca.....ejemplo llamar a void.ejecutarNovedad....(implementar)
+                 *         if (pTipo == "mdb")
+                            {
+                                MainMod.update_productos();
+                                //Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+                                //existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
+                            }
+                 * 
+                 * otros tipos updateAppConfig.ObtenerComandos, etc, etc
+                */
+            }
+            tabla.AcceptChanges();
         }
 
     }

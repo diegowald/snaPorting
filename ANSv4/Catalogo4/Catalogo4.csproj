@@ -107,6 +107,7 @@
     <Reference Include="PresentationUI, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -157,7 +158,6 @@
     </Compile>
     <Compile Include="util\SendFileTo.cs" />
     <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
-    <Compile Include="util\DataGridExtension.cs" />
     <Compile Include="util\emitter-receiver\ICancellableEmitter.cs" />
     <Compile Include="util\errorHandling\ErrorLogger.cs" />
     <Compile Include="util\errorHandling\ErrorForm.cs">
