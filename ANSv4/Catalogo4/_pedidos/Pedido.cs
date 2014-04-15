@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Catalogo._devoluciones
+namespace Catalogo._pedidos
 {
     public class Pedido
     {
-        private const string m_sMODULENAME_ = "clsPedido";
+        //private //const string m_sMODULENAME_ = "clsPedido";
         private string mvarNroPedido;
         private System.DateTime mvarF_Pedido;
         private int mvarIdCliente;
@@ -50,7 +50,10 @@ namespace Catalogo._devoluciones
            mvarConexion = conexion;
 
            if (IDdeCliente > 0)
+           {
                mvarIdCliente = IDdeCliente;
+               Global01.EmailTO = (Funciones.oleDbFunciones.Comando(conexion, "SELECT Email FROM tblClientes WHERE ID=" + IDdeCliente, "Email")).ToLower();
+           }
        }
 
        // FUNDAMENTAL PARA QUE TE DE LOS NOMBRES
@@ -174,7 +177,7 @@ namespace Catalogo._devoluciones
             }
             else
             {
-                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido, auditoria.Auditor.AccionesAuditadas.EXITOSO, "cli:" + mvarIdCliente.ToString().Trim().PadLeft(6, '0') + " ped:" + mvarNroPedido + " tot:" + string.Format("{0:N2}", wTotal));
+                _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Pedido, _auditor.Auditor.AccionesAuditadas.EXITOSO, "cli:" + mvarIdCliente.ToString().Trim().PadLeft(6, '0') + " ped:" + mvarNroPedido + " tot:" + string.Format("{0:N2}", wTotal));
                 //Nuevo();
                 if (GuardoOK != null)
                 {

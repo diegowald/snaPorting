@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Catalogo._audit
+namespace Catalogo._auditor
 {
     class EnvioAuditoria
     {

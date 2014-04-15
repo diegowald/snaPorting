@@ -71,7 +71,7 @@ namespace Catalogo.util.BackgroundTasks
                     break;
                 case UpdateType.UpdateAppConfig:
                     {
-                        Catalogo._appConfig.UpdateAppConfig envio = new _appConfig.UpdateAppConfig(Global01.IDMaquina, ipPrivado, ipIntranet, false, "", Global01.Conexion);
+                        Catalogo._application.UpdateAppConfig envio = new _application.UpdateAppConfig(Global01.IDMaquina, ipPrivado, ipIntranet, false, "", Global01.Conexion);
                         if (envio.Inicializado)
                         {
                             envio.sincronizarApp();
@@ -156,7 +156,7 @@ namespace Catalogo.util.BackgroundTasks
                     return;
                 }
 
-                Catalogo._audit.EnvioAuditoria envAudit = new _audit.EnvioAuditoria(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+                Catalogo._auditor.EnvioAuditoria envAudit = new _auditor.EnvioAuditoria(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
                 if (envAudit.Inicializado)
                 {
                     if (Global01.TranActiva == null)
@@ -225,7 +225,7 @@ namespace Catalogo.util.BackgroundTasks
 
         public void onRecibir(Pair<string, float> dato)
         {
-            notifications.NotificationCenter.instance.notificar(dato.first, dato.second);
+            Catalogo.varios.NotificationCenter.instance.notificar(dato.first, dato.second);
         }
 
 
@@ -237,7 +237,7 @@ namespace Catalogo.util.BackgroundTasks
 
         public void onRequestCancel(ref bool cancel)
         {
-            notifications.NotificationCenter.instance.requestCancel(ref cancel);
+            Catalogo.varios.NotificationCenter.instance.requestCancel(ref cancel);
         }
     }
 }

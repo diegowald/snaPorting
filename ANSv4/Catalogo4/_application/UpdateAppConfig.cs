@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Catalogo._appConfig
+namespace Catalogo._application
 {
     class UpdateAppConfig
     {

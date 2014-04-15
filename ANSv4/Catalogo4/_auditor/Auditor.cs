@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Catalogo.auditoria
+namespace Catalogo._auditor
 {
 
     public class Auditor : Catalogo.util.singleton<Auditor>

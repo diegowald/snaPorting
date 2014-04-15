@@ -1,4 +1,4 @@
-﻿namespace Catalogo.util
+﻿namespace Catalogo.varios
 {
     partial class UpdateCtl
     {

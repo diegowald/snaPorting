@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 //using Microsoft.VisualBasic;
 
-namespace Catalogo._rendicion
+namespace Catalogo._rendiciones
 {
     public class EnvioRendicion
     {

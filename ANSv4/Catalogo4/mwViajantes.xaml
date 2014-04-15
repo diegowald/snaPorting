@@ -8,10 +8,10 @@
         Loaded="Window_Loaded_1" 
         WindowStartupLocation="CenterScreen"                
         BorderThickness="0"
-        ResizeMode="CanResize"  Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFE31C19" >
+        ResizeMode="CanResize"  Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFFFFF" >
 
     <Border Grid.Row="0" x:Name="LayoutRoot" 
-          Background="White" BorderBrush="#E31C19" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">
+          Background="White" BorderBrush="White" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">
            
             <Grid>
             <Grid.RowDefinitions>
@@ -173,16 +173,14 @@
 
                         <ad:DockablePane ad:ResizingPanel.ResizeWidth="150"  ShowHeader="True" >
                             <ad:DockableContent x:Name="ContentMenu" Title="Menú"  DockableStyle="AutoHide" IsCloseable="False" >
-                                <ListBox>
-                                    <ListBoxItem Content="Recibos"/>
-                                    <ListBoxItem Content="Rendiciones"/>
-                                    <ListBoxItem Content="Porcentajes Líneas"/>
-                                    <ListBoxItem Content="ANS en internet"/>
-                                    <ListBoxItem Content="Revista Digital"/>
-                                    <ListBoxItem Content="Configuración Aplic."/>
-                                </ListBox>
-                            </ad:DockableContent>
-                            
+                                <!--Menus-->
+                                <Menu>
+                                    <MenuItem Header="Sitio web de a.n.s." Click="xMenu1_web" Margin="0,20,0,0"/>
+                                    <MenuItem Header="Revista Dígital" Click="xMenu1_revista"/>
+                                    <MenuItem Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
+                                    <MenuItem Header="Configuración Aplic." Click="xMenu1_AppConfig"/>
+                                </Menu>
+                            </ad:DockableContent>                            
                         </ad:DockablePane>
                     </ad:ResizingPanel>
                 </ad:ResizingPanel>

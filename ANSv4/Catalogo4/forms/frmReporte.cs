@@ -7,22 +7,23 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using CrystalDecisions.CrystalReports.Engine;
+using System.Diagnostics;
+//using CrystalDecisions.ReportAppServer.DataDefModel;
+//using CrystalDecisions.Shared;
+//using CrystalDecisions.ReportAppServer.ClientDoc; 
 
-namespace Catalogo
+namespace Catalogo.varios
 {
     
     public partial class fReporte : Form
     {
         public ReportDocument oRpt = null;
         public string DocumentoNro = "";
-        public string EmailTO = "";
-        public string EmailAsunto = "";
-        public string RazonSocial = "";
+
 
         public fReporte()
         {
             InitializeComponent();
-
         }
 
         private void fReporte_Load(object sender, EventArgs e)
@@ -38,11 +39,9 @@ namespace Catalogo
                 btnVerPDF.Enabled = true;
                 btnEnviarMail.Enabled = true;
                 crViewer1.ShowPrintButton = true;
-            }
-
+            }            
             crViewer1.ReportSource = oRpt;
             crViewer1.Refresh();
-
         }
 
         private void btnVerPDF_Click(object sender, EventArgs e)
@@ -56,7 +55,6 @@ namespace Catalogo
             {
                 MessageBox.Show(ex.ToString());
                 util.errorHandling.ErrorLogger.LogMessage(ex);
-
             }
         }
 
@@ -65,36 +63,58 @@ namespace Catalogo
             try
             {
                 oRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
-
-                System.Diagnostics.Process.Start(Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
-
-                if (EmailTO.Trim().Length > 0)
+                
+                Global01.EmailAsunto = this.Text;
+                //Global01.EmailTO = "sistemas@autonauticasur.com.ar";
+                Global01.EmailBody = this.Text;
+                
+                if (Global01.EmailTO.Trim().Length >= 0)
                 {
-                    CrystalDecisions.Shared.ExportOptions ExpOpts = new CrystalDecisions.Shared.ExportOptions();
-                    CrystalDecisions.Shared.MicrosoftMailDestinationOptions MailOpts = new CrystalDecisions.Shared.MicrosoftMailDestinationOptions();
+                    Catalogo.util.SendFileTo.MAPI mapi = new Catalogo.util.SendFileTo.MAPI();
+                    //mapi.AddRecipientTo("@");
+                    mapi.AddRecipientTo(Global01.EmailTO.ToString());
 
-                    ExpOpts = oRpt.ExportOptions;
-                    ExpOpts.ExportDestinationType = CrystalDecisions.Shared.ExportDestinationType.MicrosoftMail;
-                    ExpOpts.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat;
-
-                    MailOpts.MailMessage = EmailAsunto.ToString();
-                    MailOpts.MailToList = EmailTO.ToString();
-                    MailOpts.MailSubject = EmailAsunto.ToString();
-                    MailOpts.MailCCList = RazonSocial.ToString();
-                    MailOpts.UserName = "intldwilliams";
-                    MailOpts.Password = "yourpassword";
-                    ExpOpts.DestinationOptions = MailOpts;
-                    oRpt.Export(ExpOpts);
+                    mapi.AddAttachment(Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+                    mapi.SendMailPopup(Global01.EmailAsunto.ToString(), Global01.EmailBody.ToString());
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 util.errorHandling.ErrorLogger.LogMessage(ex);
-
             }
         }
+      
+        //public void SendSupportEmail(string emailAddress, string subject, string body)
+        //{
+        //    Process.Start("mailto:" + emailAddress + "?subject=" + subject + "&body="
+        //       + body + "&Attach=" + Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+        //}
 
+
+        //private void fReporte_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    if (eventArgs.ChangedButton == MouseButton.Left)
+        //    {
+        //        this.DragMove();
+        //    }
+        //}
+
+        //public FormulaField FindFormulaField (ReportClientDocument oReportClientDocument, string szFormula) 
+        //{
+        //    int iIndex; 
+
+        //    FormulaField oFormulaField; 
+        //    oFormulaField =   new FormulaFieldClass (); 
+
+        //    Fields oFields; 
+        //    oFields = oReportClientDocument.DataDefinition.FormulaFields; 
+
+        //    iIndex = oFields.Find (szFormula, CrFieldDisplayNameTypeEnum.crFieldDisplayNameName, CeLocale.ceLocaleUserDefault); 
+        //    oFormulaField = ((FormulaField) oFields [iIndex]); 
+
+        //    return oFormulaField; 
+        //}
 
         //Cursor.Current = Cursors.WaitCursor;
 

@@ -13,7 +13,7 @@ namespace Catalogo.util
 
 	    // Define como se llama este modulo para el control de errores
 
-	    private const string m_sMODULENAME_ = "clsIPPrivado";
+	    //private //const string m_sMODULENAME_ = "clsIPPrivado";
 	    private CatalogoWS.Info Cliente;
 
 	    private bool WebServiceInicializado;
@@ -28,8 +28,7 @@ namespace Catalogo.util
 		    string functionReturnValue = null;
 
 		     // ERROR: Not supported in C#: OnErrorStatement
-
-
+            
 		    string s = null;
 
 		    if (!WebServiceInicializado) {
@@ -147,7 +146,7 @@ namespace Catalogo.util
 
 		    return;
 
-            //ErrorHandler:
+            //.ErrorForm.show():
 
 
             //if (Err().Number == -2147024809) {

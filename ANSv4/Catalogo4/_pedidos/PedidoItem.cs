@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Catalogo._devoluciones
+namespace Catalogo._pedidos
 {
     public class PedidoItem
     {
 
         // Define como se llama este modulo para el control de errores
 
-        private const string m_sMODULENAME_ = "clsPedidoItem";
+        //private //const string m_sMODULENAME_ = "clsPedidoItem";
         //variables locales para almacenar los valores de las propiedades
 
         private string mvarIDCatalogo;

@@ -269,10 +269,10 @@
   </wsdl:binding>
   <wsdl:service name="Info">
     <wsdl:port name="InfoSoap" binding="tns:InfoSoap">
-      <soap:address location="http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx" />
+      <soap:address location="http://192.168.40.129/wsCatalogo4/Info.asmx" />
     </wsdl:port>
     <wsdl:port name="InfoSoap12" binding="tns:InfoSoap12">
-      <soap12:address location="http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx" />
+      <soap12:address location="http://192.168.40.129/wsCatalogo4/Info.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

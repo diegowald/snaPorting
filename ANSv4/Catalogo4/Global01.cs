@@ -68,6 +68,10 @@ namespace Catalogo
        public static string RazonSocial;
        public static string ApellidoNombre;
 
+       public static string EmailTO;
+       public static string EmailBody;
+       public static string EmailAsunto;
+
        public static string NroImprimir;
     }
 }

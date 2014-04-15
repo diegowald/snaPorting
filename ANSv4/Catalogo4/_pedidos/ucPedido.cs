@@ -18,7 +18,7 @@ namespace Catalogo._pedidos
         Funciones.emitter_receiver.IEmisor<int>, // Para enviar el indice del cliente seleccionado en el combo
         Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
     {
-        private const string m_sMODULENAME_ = "ucPedido";
+        //private //const string m_sMODULENAME_ = "ucPedido";
         ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
         DataGridViewRow ProductoSeleccionado = null;
 
@@ -132,8 +132,8 @@ namespace Catalogo._pedidos
                     {
                         if (btnIniciar.Tag.ToString() == "INICIAR")
                         {
-                            auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido,
-                                auditoria.Auditor.AccionesAuditadas.INICIA, "");
+                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Pedido,
+                                _auditor.Auditor.AccionesAuditadas.INICIA, "");
                             nvlistView.Items.Clear();
 
                             OleDbDataReader dr = null;
@@ -208,7 +208,7 @@ namespace Catalogo._pedidos
                         {
                             if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR el Pedido?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
-                                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Pedido, auditoria.Auditor.AccionesAuditadas.CANCELA, "");
+                                _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Pedido, _auditor.Auditor.AccionesAuditadas.CANCELA, "");
                                 PedidoTab.Visible = false;
                                 nvlistView.Items.Clear();
                                 TotalPedido();
@@ -603,7 +603,7 @@ namespace Catalogo._pedidos
         {
             try
             {
-                const string PROCNAME_ = "btnImprimir_Click";
+                //const string PROCNAME_ = "btnImprimir_Click";
 
                 Cursor.Current = Cursors.WaitCursor;
 
@@ -614,7 +614,7 @@ namespace Catalogo._pedidos
                     bool wSimilar;
                     bool wOferta;
 
-                    Catalogo._devoluciones.Pedido ped = new Catalogo._devoluciones.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+                    Catalogo._pedidos.Pedido ped = new Catalogo._pedidos.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
                     ped.NroImpresion = 0;
                     for (int i = 0; i < nvlistView.Items.Count; i++)
                     {
@@ -659,7 +659,7 @@ namespace Catalogo._pedidos
         {
             try
             {
-                const string PROCNAME_ = "btnVer_Click";
+                //const string PROCNAME_ = "btnVer_Click";
 
                 Cursor.Current = Cursors.WaitCursor;
 
@@ -669,7 +669,7 @@ namespace Catalogo._pedidos
                     bool wSimilar;
                     bool wOferta;
 
-                    Catalogo._devoluciones.Pedido ped = new Catalogo._devoluciones.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+                    Catalogo._pedidos.Pedido ped = new Catalogo._pedidos.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
                     ped.NroImpresion = 0;
                     for (int i = 0; i < nvlistView.Items.Count; i++)
                     {
@@ -724,13 +724,9 @@ namespace Catalogo._pedidos
             
             //oReport.TiTle = "P - " + NroPedido;
  
-            fReporte f = new fReporte();
+            varios.fReporte f = new varios.fReporte();
             f.Text = "Nota de Venta n° " + NroPedido;
-            f.DocumentoNro = "P" + NroPedido;
-            //f.EmailTO = odsPedidos1.Tables[0].Rows[0]["Email"].ToString();
-            f.EmailTO = "juanpablobrugniere@speedy.com.ar";
-            //f.RazonSocial = odsPedidos1.Tables[0].Rows[0]["RazonSocial"].ToString();
-            f.EmailAsunto = "auto náutica sur - nota de venta n° " + NroPedido;
+            f.DocumentoNro = "NV-" + NroPedido;
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();

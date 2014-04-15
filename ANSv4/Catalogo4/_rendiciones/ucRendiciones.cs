@@ -14,7 +14,7 @@ namespace Catalogo._rendiciones
     public partial class ucRendiciones : UserControl
 
     {
-        private const string m_sMODULENAME_ = "ucRendiciones";
+        //private //const string m_sMODULENAME_ = "ucRendiciones";
 
         // - Definiciones Globales -----------
         private enum tAccion : byte
@@ -234,7 +234,7 @@ namespace Catalogo._rendiciones
                             {
 			                    if (wOper == "add") 
                                 {
-                                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion,auditoria.Auditor.AccionesAuditadas.EXITOSO,"viajante:" + Global01.NroUsuario  + " rc:" + lblNroRendicion.Text + " tot:" + string.Format("{0:N2}",lblRecibosTotal.Text));
+                                    _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Rendicion,_auditor.Auditor.AccionesAuditadas.EXITOSO,"viajante:" + Global01.NroUsuario  + " rc:" + lblNroRendicion.Text + " tot:" + string.Format("{0:N2}",lblRecibosTotal.Text));
 				                    MessageBox.Show("Rendición Grabada Con Éxito ! -> N°=" + lblNroRendicion.Text, "Datos Grabados", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			                    } 
                                 else 
@@ -763,7 +763,7 @@ namespace Catalogo._rendiciones
 	
         private void AsignarDatos()
         {
-            const string PROCNAME_ = "AsignarDatos";
+            //const string PROCNAME_ = "AsignarDatos";
   
             lblNroRendicion.Text = m.DR["NroRendicion"].ToString();
             txtDescripcion.Text = "" + m.DR["Descripcion"].ToString();
@@ -801,7 +801,7 @@ namespace Catalogo._rendiciones
 
         private void cmdReciboAdd_Click(object sender, EventArgs e)
         {
-                const string PROCNAME_ = "cmdReciboAdd_Click";
+                //const string PROCNAME_ = "cmdReciboAdd_Click";
 
                 //If cboRecibos.ListIndex < 0 Then
                 if (Convert.ToInt32(this.txtRecDesde.Text) > Convert.ToInt32(this.txtRecHasta.Text))
@@ -833,7 +833,7 @@ namespace Catalogo._rendiciones
 
         private void cmdValorAdd_Click(object sender, EventArgs e)
         {
-            const string PROCNAME_ = "cmdValorAdd_Click";
+            //const string PROCNAME_ = "cmdValorAdd_Click";
     
             if (lvRecibos.Items.Count < 1)
             {
@@ -890,7 +890,7 @@ namespace Catalogo._rendiciones
 
         private void cmdBuscar_Click(object sender, EventArgs e)
         {
-            const string PROCNAME_ = "cmdBuscar_Click";
+            //const string PROCNAME_ = "cmdBuscar_Click";
 
             if (ValidarBuscar())
             {
@@ -948,7 +948,7 @@ namespace Catalogo._rendiciones
 
         private void TotalRecibos()
         {
-	        const string PROCNAME_ = "TotalRecibo";
+	        //const string PROCNAME_ = "TotalRecibo";
 	 
 	        lblEfectivo.Text = string.Format("{0:N2}",0);
 	        lblDivDolarCantidad.Text = string.Format("{0:N2}",0);
@@ -978,7 +978,7 @@ namespace Catalogo._rendiciones
 
         private void TotalValores()
         {
-	        const string PROCNAME_ = "TotalValores";
+	        //const string PROCNAME_ = "TotalValores";
 
 	        lblEfectivoV.Text = string.Format("{0:N2}",0);
 	        lblChequesTotalV.Text = string.Format("{0:N2}",0);
@@ -1011,7 +1011,7 @@ namespace Catalogo._rendiciones
 
         private void TotalControles()
         {
-	        const string PROCNAME_ = "TotalControles";
+	        //const string PROCNAME_ = "TotalControles";
 
 	        lblEfectivoC.ForeColor = Color.Black;
 	        lblDivDolarC.ForeColor = Color.Black;
@@ -1053,28 +1053,26 @@ namespace Catalogo._rendiciones
 	        }       
         }
 
-        public static void Rendicion_Imprimir(string NroInterDeposito)
+        public static void Rendicion_Imprimir(string NroRendicion)
         {
-            string sReporte = Global01.AppPath + "\\Reportes\\InterDeposito1.rpt";
+            string sReporte = Global01.AppPath + "\\Reportes\\Rendicion1.rpt";
             ReportDocument oReport = new ReportDocument();
 
             oReport.Load(sReporte);
             Funciones.util.ChangeReportConnectionInfo(ref oReport);
 
-            oReport.SetParameterValue("pNroInterDeposito", NroInterDeposito);
+            oReport.SetParameterValue("pNroRendicion", NroRendicion);
 
-            fReporte f = new fReporte();
-            f.Text = "InterDeposito n° " + NroInterDeposito;
-            f.DocumentoNro = "R" + NroInterDeposito;
-            //f.EmailTO = odsInterDepositos1.Tables[0].Rows[0]["Email"].Text;
-            f.EmailTO = "juanpablobrugniere@speedy.com.ar";
-            //f.RazonSocial = odsInterDepositos1.Tables[0].Rows[0]["RazonSocial"].Text;
-            f.EmailAsunto = "auto náutica sur - InterDeposito n° " + NroInterDeposito;
+            oReport.DataDefinition.FormulaFields["fZona"].Text = "'" + Global01.NroUsuario + "'";
+            oReport.DataDefinition.FormulaFields["fViajante"].Text = "'" + Global01.ApellidoNombre + "'"; 
+
+            varios.fReporte f = new varios.fReporte();
+            f.Text = "Rendición n° " + NroRendicion;
+            f.DocumentoNro = "RC-" + NroRendicion;
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();
             f = null;
-
             oReport.Dispose();
         }
 
@@ -1295,7 +1293,7 @@ namespace Catalogo._rendiciones
         {
             if (btnIniciar.Tag.ToString() == "INICIAR")
             {
-                auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion,auditoria.Auditor.AccionesAuditadas.INICIA);
+                _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Rendicion,_auditor.Auditor.AccionesAuditadas.INICIA);
 
                 btnIniciar.Text = "CANCELAR";
                 btnIniciar.Tag = "CANCELAR";
@@ -1308,7 +1306,7 @@ namespace Catalogo._rendiciones
             {
                 if (MessageBox.Show("¿Esta Seguro que quiere CANCELAR la Rendición?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    auditoria.Auditor.instance.guardar(auditoria.Auditor.ObjetosAuditados.Rendicion, auditoria.Auditor.AccionesAuditadas.CANCELA);
+                    _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Rendicion, _auditor.Auditor.AccionesAuditadas.CANCELA);
                     
                     btnIniciar.Text = "Iniciar";
                     btnIniciar.Tag = "INICIAR";

@@ -10,7 +10,7 @@ namespace Catalogo.Funciones
     class oleDbFunciones
     {
 
-        const string m_sMODULENAME_ = "oleDbFunciones";
+        //const string m_sMODULENAME_ = "oleDbFunciones";
 
         internal static System.Data.OleDb.OleDbConnection GetConn(string strConexion)
         {
@@ -173,10 +173,48 @@ namespace Catalogo.Funciones
 
         }
 
+        internal static string Comando(System.Data.OleDb.OleDbConnection conexion, string TextoComando, string Campos, bool Concatena = false)
+        {
+
+            System.Data.OleDb.OleDbDataReader dr = null;
+
+            string sResultado = "";
+
+            if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); }
+
+            System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando, conexion);
+
+            if (Global01.TranActiva != null)
+            {
+                cmd.Transaction = Global01.TranActiva;
+            }
+            try
+            {
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    sResultado = (DBNull.Value.Equals(dr[Campos].ToString()) ? "" : dr[Campos].ToString().Trim());
+                }
+            }
+            catch (Exception ex)
+            {
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw new Exception(ex.Message.ToString());
+            }
+            finally
+            {
+                cmd.Transaction = null;
+            }
+
+            return sResultado;
+        }
+
+
         internal static void ComandoIU(System.Data.OleDb.OleDbConnection conexion, string TextoComando)
         {
             
-            const string PROCNAME_ = "ComandoIU";
+            //const string PROCNAME_ = "ComandoIU";
          
             if (!(conexion.State == ConnectionState.Open)) 
             { 
@@ -201,8 +239,8 @@ namespace Catalogo.Funciones
             catch (Exception ex)
             {
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
-           
-                throw new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+
+                throw ex; //new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
             finally
             {
@@ -213,7 +251,7 @@ namespace Catalogo.Funciones
 
         internal static void CambiarLinks(string db)
         {
-            const string PROCNAME_ = "CambiarLinks";
+            //const string PROCNAME_ = "CambiarLinks";
 
             try
             {
@@ -231,14 +269,14 @@ namespace Catalogo.Funciones
             {
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
-                throw new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                throw ex; // new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
         }
 
         private static void ProcesarTablasLinks(ADODB.Connection Conexion, string db)
         {
 	     
-	        const string PROCNAME_ = "ProcesarTablasLinks";
+	        //const string PROCNAME_ = "ProcesarTablasLinks";
 
             try
             {
@@ -299,7 +337,7 @@ namespace Catalogo.Funciones
         public static void CompactDatabase(string dataBase)
         {
 
-            const string PROCNAME_ = "CompactDatabase";
+            //const string PROCNAME_ = "CompactDatabase";
 
             try
             {
@@ -337,7 +375,7 @@ namespace Catalogo.Funciones
         internal static void CambiarQuery(string pQueryNombre, string pQueryComando)
         {
             
-            const string PROCNAME_ = "CambiarQuery";
+            //const string PROCNAME_ = "CambiarQuery";
 
             try
             {
@@ -380,7 +418,7 @@ namespace Catalogo.Funciones
 
         internal static void Cambiar_usp(string pQueryNombre, string pQueryComando)
         {
-            const string PROCNAME_ = "Cambiar_usp";
+            //const string PROCNAME_ = "Cambiar_usp";
             
             try
             {

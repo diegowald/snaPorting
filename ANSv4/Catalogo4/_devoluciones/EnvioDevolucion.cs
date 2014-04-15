@@ -7,7 +7,7 @@ using System.Data;
 using System.Diagnostics;
 //using Microsoft.VisualBasic;
 
-namespace Catalogo._devolucion
+namespace Catalogo._devoluciones
 {
     public class EnvioDevolucion
     {

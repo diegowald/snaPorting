@@ -7,3 +7,13 @@ agregar v_Pedido_Enc_0 v_Pedido_Det_0 v_Devoluciones_Enc_0 v_Devoluciones_Det_0
 agregar Campo "Zona" en appConfig Char(3) y mofificar vistas u usp que muestran o modifican el appConfig
 
 
+
+1) "NOVEDADES"
+en ans.mdb agregar tabla "ansNovedades"
+en catalogo.mdb agregar tabla "tblNovedadLeido"
+en catalogo.mdb agregar vista "v_novedades1" que es "ansNovedad JOIN tblNovedadLeido" y agregar el campo F_Leido Fecha Leido.
+
+
+1) "INTERDEPOSITOS" la v_interdepositos_rpt OJO relacion "uno a muchos"
+
+- Cambiar LOGO en todos los reportes

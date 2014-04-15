@@ -1,4 +1,4 @@
-﻿namespace Catalogo.util
+﻿namespace Catalogo.varios
 {
     partial class fDataUpdate
     {
@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fDataUpdate));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.vcUPDATECTL1 = new Catalogo.util.UpdateCtl();
+            this.PnlFondoRojo = new System.Windows.Forms.Panel();
+            this.vcUPDATECTL1 = new Catalogo.varios.UpdateCtl();
             this.TopPnl = new System.Windows.Forms.Panel();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.PnlFondoRojo.SuspendLayout();
             this.TopPnl.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // PnlFondoRojo
             // 
-            this.panel1.BackColor = System.Drawing.Color.Red;
-            this.panel1.Controls.Add(this.vcUPDATECTL1);
-            this.panel1.Controls.Add(this.TopPnl);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(2);
-            this.panel1.Size = new System.Drawing.Size(459, 222);
-            this.panel1.TabIndex = 0;
+            this.PnlFondoRojo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PnlFondoRojo.Controls.Add(this.vcUPDATECTL1);
+            this.PnlFondoRojo.Controls.Add(this.TopPnl);
+            this.PnlFondoRojo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PnlFondoRojo.Location = new System.Drawing.Point(0, 0);
+            this.PnlFondoRojo.Name = "PnlFondoRojo";
+            this.PnlFondoRojo.Padding = new System.Windows.Forms.Padding(2);
+            this.PnlFondoRojo.Size = new System.Drawing.Size(459, 222);
+            this.PnlFondoRojo.TabIndex = 0;
             // 
             // vcUPDATECTL1
             // 
@@ -95,7 +95,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnCerrar;
             this.ClientSize = new System.Drawing.Size(459, 222);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.PnlFondoRojo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fDataUpdate";
@@ -104,7 +104,7 @@
             this.Text = "Actualización del Catálogo Dígital de Productos";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.fDataUpdate_Load);
-            this.panel1.ResumeLayout(false);
+            this.PnlFondoRojo.ResumeLayout(false);
             this.TopPnl.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -112,7 +112,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel PnlFondoRojo;
         private System.Windows.Forms.Panel TopPnl;
         private System.Windows.Forms.Button btnCerrar;
         private UpdateCtl vcUPDATECTL1;

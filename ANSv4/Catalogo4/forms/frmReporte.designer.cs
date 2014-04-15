@@ -1,4 +1,4 @@
-﻿namespace Catalogo
+﻿namespace Catalogo.varios
 {
     partial class fReporte
     {
@@ -29,33 +29,34 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fReporte));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.PnlFondoRojo = new System.Windows.Forms.Panel();
             this.crViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.TopPnl = new System.Windows.Forms.Panel();
             this.btnEnviarMail = new System.Windows.Forms.Button();
             this.btnVerPDF = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
+            this.PnlFondoRojo.SuspendLayout();
             this.TopPnl.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // PnlFondoRojo
             // 
-            this.panel1.BackColor = System.Drawing.Color.Red;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.Controls.Add(this.crViewer1);
-            this.panel1.Controls.Add(this.TopPnl);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(2);
-            this.panel1.Size = new System.Drawing.Size(1024, 600);
-            this.panel1.TabIndex = 0;
+            this.PnlFondoRojo.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.PnlFondoRojo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PnlFondoRojo.Controls.Add(this.crViewer1);
+            this.PnlFondoRojo.Controls.Add(this.TopPnl);
+            this.PnlFondoRojo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PnlFondoRojo.Location = new System.Drawing.Point(0, 0);
+            this.PnlFondoRojo.Name = "PnlFondoRojo";
+            this.PnlFondoRojo.Padding = new System.Windows.Forms.Padding(2);
+            this.PnlFondoRojo.Size = new System.Drawing.Size(1024, 600);
+            this.PnlFondoRojo.TabIndex = 0;
             // 
             // crViewer1
             // 
             this.crViewer1.ActiveViewIndex = -1;
             this.crViewer1.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
+            this.crViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crViewer1.Cursor = System.Windows.Forms.Cursors.Default;
             this.crViewer1.DisplayBackgroundEdge = false;
             this.crViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -110,6 +111,7 @@
             this.btnEnviarMail.TabIndex = 5;
             this.btnEnviarMail.Text = "Enviar por Email";
             this.btnEnviarMail.UseVisualStyleBackColor = false;
+            this.btnEnviarMail.Click += new System.EventHandler(this.btnEnviarMail_Click);
             // 
             // btnVerPDF
             // 
@@ -128,6 +130,7 @@
             this.btnVerPDF.TabIndex = 4;
             this.btnVerPDF.Text = "Obtener PDF";
             this.btnVerPDF.UseVisualStyleBackColor = false;
+            this.btnVerPDF.Click += new System.EventHandler(this.btnVerPDF_Click);
             // 
             // btnCerrar
             // 
@@ -151,15 +154,14 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.CancelButton = this.btnCerrar;
             this.ClientSize = new System.Drawing.Size(1024, 600);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.PnlFondoRojo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fReporte";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ver . . .";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.fReporte_Load);
-            this.panel1.ResumeLayout(false);
+            this.PnlFondoRojo.ResumeLayout(false);
             this.TopPnl.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -167,7 +169,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel PnlFondoRojo;
         private System.Windows.Forms.Panel TopPnl;
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.Button btnEnviarMail;

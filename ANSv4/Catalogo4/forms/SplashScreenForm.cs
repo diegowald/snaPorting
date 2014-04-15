@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Catalogo.Funciones.emitter_receiver;
-namespace Catalogo
+
+namespace Catalogo.varios
 {
     public partial class SplashScreenForm : Form, 
         Catalogo.Funciones.emitter_receiver.IReceptor<util.Pair<string, float>>,
@@ -41,8 +42,8 @@ namespace Catalogo
             //this.progressBar1.BackColor = Color.Transparent;
 
             //progressBar1.Show();
-            notifications.NotificationCenter.instance.attachReceptor(this);
-            notifications.NotificationCenter.instance.attachCancellableReceptor(this);
+            Catalogo.varios.NotificationCenter.instance.attachReceptor(this);
+            Catalogo.varios.NotificationCenter.instance.attachCancellableReceptor(this);
             btnCancel.Hide();
         }
 
