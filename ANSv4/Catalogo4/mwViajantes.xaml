@@ -175,7 +175,7 @@
                             <ad:DockableContent x:Name="ContentMenu" Title="Menú"  DockableStyle="AutoHide" IsCloseable="False" >
                                 <!--Menus-->
                                 <Menu>
-                                    <MenuItem Header="Sitio web de a.n.s." Click="xMenu1_web"/>
+                                    <MenuItem Header="Sitio web de a.n.s." Click="xMenu1_web" Margin="0,20,0,0"/>
                                     <MenuItem Header="Revista Dígital" Click="xMenu1_revista"/>
                                     <MenuItem Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
                                     <MenuItem Header="Configuración Aplic." Click="xMenu1_AppConfig"/>

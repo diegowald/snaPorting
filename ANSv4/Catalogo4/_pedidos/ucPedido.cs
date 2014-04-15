@@ -614,7 +614,7 @@ namespace Catalogo._pedidos
                     bool wSimilar;
                     bool wOferta;
 
-                    Catalogo._devoluciones.Pedido ped = new Catalogo._devoluciones.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+                    Catalogo._pedidos.Pedido ped = new Catalogo._pedidos.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
                     ped.NroImpresion = 0;
                     for (int i = 0; i < nvlistView.Items.Count; i++)
                     {
@@ -669,7 +669,7 @@ namespace Catalogo._pedidos
                     bool wSimilar;
                     bool wOferta;
 
-                    Catalogo._devoluciones.Pedido ped = new Catalogo._devoluciones.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+                    Catalogo._pedidos.Pedido ped = new Catalogo._pedidos.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
                     ped.NroImpresion = 0;
                     for (int i = 0; i < nvlistView.Items.Count; i++)
                     {

@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 
-
 namespace Catalogo.varios
 {
     public partial class fDataUpdate : Form

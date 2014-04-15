@@ -6,6 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="200">
     <Grid>
-        <CheckBox Name="check" Content="CheckBox" HorizontalAlignment="Left" Margin="10,0,0,0" Checked="check_Checked"/>
+        <CheckBox Name="check" Content="CheckBox" HorizontalAlignment="Left" Margin="10,10,0,0" Checked="check_Checked"/>
     </Grid>
 </UserControl>
