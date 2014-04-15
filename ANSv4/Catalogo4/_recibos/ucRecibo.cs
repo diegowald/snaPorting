@@ -17,7 +17,7 @@ namespace Catalogo._recibos
         Funciones.emitter_receiver.IEmisor<int>, // Para enviar el indice del cliente seleccionado en el combo
         Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
     {
-        private const string m_sMODULENAME_ = "ucRecibo";
+        //private //const string m_sMODULENAME_ = "ucRecibo";
         ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
 
         public ucRecibo()
@@ -496,7 +496,7 @@ namespace Catalogo._recibos
 
         private void TotalApli()
         {
-            const string PROCNAME_ = "TotalApli";
+            //const string PROCNAME_ = "TotalApli";
 
             float Aux = 0;
             float AuxP = 0;
@@ -523,7 +523,7 @@ namespace Catalogo._recibos
 
         private void TotalADeducir()
         {
-            const string PROCNAME_ = "TotalADeducir";
+            //const string PROCNAME_ = "TotalADeducir";
 
             float AuxNotaCredito = 0;
             float Aux3 = 0;
@@ -580,7 +580,7 @@ namespace Catalogo._recibos
 
         private void VerDetalleRecibo()
         {
-            const string PROCNAME_ = "VerDetalleRecibo";
+            //const string PROCNAME_ = "VerDetalleRecibo";
 
             string s = "";
             float Dif = 0;
@@ -906,18 +906,12 @@ namespace Catalogo._recibos
 
             fReporte f = new fReporte();
             f.Text = "Recibo n° " + NroRecibo;
-            f.DocumentoNro = "R" + NroRecibo;
-            //f.EmailTO = odsRecibos1.Tables[0].Rows[0]["Email"].Text;
-            f.EmailTO = "juanpablobrugniere@speedy.com.ar";
-            //f.RazonSocial = odsRecibos1.Tables[0].Rows[0]["RazonSocial"].Text;
-            f.EmailAsunto = "auto náutica sur - recibo n° " + NroRecibo;
+            f.DocumentoNro = "RE-" + NroRecibo;           
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();
             f = null;
-
             oReport.Dispose();
-
         }
 
         private void cclistView_Click(object sender, EventArgs e)
@@ -1098,7 +1092,7 @@ namespace Catalogo._recibos
 
         private int CalculaDiasCascara()
         {
-            const string PROCNAME_ = "CalculaDiasCascara";
+            //const string PROCNAME_ = "CalculaDiasCascara";
 
             byte X = 0;
             int wDias = 32000;
@@ -1172,7 +1166,7 @@ namespace Catalogo._recibos
 
         private void apAgregarBtn_Click(object sender, EventArgs e)
         {
-        	const string PROCNAME_ = "cmdAgregarAplicacion_Click";
+        	//const string PROCNAME_ = "cmdAgregarAplicacion_Click";
 
             if (datosvalidos("aplicacion"))
             {
@@ -1269,11 +1263,7 @@ namespace Catalogo._recibos
 
             fReporte f = new fReporte();
             f.Text = "Cta. Cte. del Cliente n° " + pIdCliente;
-            f.DocumentoNro = "CC" + pIdCliente;
-            //f.EmailTO = odsPedidos1.Tables[0].Rows[0]["Email"].ToString();
-            f.EmailTO = "juanpablobrugniere@speedy.com.ar";
-            //f.RazonSocial = odsPedidos1.Tables[0].Rows[0]["RazonSocial"].ToString();
-            f.EmailAsunto = "auto náutica sur - Cta. Cte. del Cliente n° " + pIdCliente;
+            f.DocumentoNro = "CC-" + pIdCliente;
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();
@@ -1333,7 +1323,7 @@ namespace Catalogo._recibos
 
         private void adAgregarBtn_Click(object sender, EventArgs e)
         {
-            const string PROCNAME_ = "adAgregarBtn_Click";
+            //const string PROCNAME_ = "adAgregarBtn_Click";
 
             if (datosvalidos("adeducir"))
             {
@@ -1399,7 +1389,7 @@ namespace Catalogo._recibos
 
         private void ralistView_DoubleClick(object sender, EventArgs e)
         {
-            const string PROCNAME_ = "lvValores_DblClick";
+            //const string PROCNAME_ = "lvValores_DblClick";
 
             if (ralistView.SelectedItems != null & ralistView.SelectedItems.Count > 0)
             {                
@@ -1522,9 +1512,6 @@ namespace Catalogo._recibos
                 }
             }
         }
-
-
-
 
         public Funciones.emitter_receiver.emisorHandler<int> emisor
         {

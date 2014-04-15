@@ -7,11 +7,11 @@ namespace Catalogo.Funciones
     class updateMDB
     {
 
-        const string m_sMODULENAME_ = "updateMDB";
+        //const string m_sMODULENAME_ = "updateMDB";
 
         internal static void Emergencia(string db)
         {
-            const string PROCNAME_ = "Emergencia";
+            //const string PROCNAME_ = "Emergencia";
 
             Cursor.Current = Cursors.WaitCursor;
 

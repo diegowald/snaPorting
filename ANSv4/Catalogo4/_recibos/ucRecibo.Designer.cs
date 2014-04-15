@@ -179,6 +179,7 @@ namespace Catalogo._recibos
             this.btnIniciar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnVer = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
             ccFechaLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ccComprobanteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ccImporteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -484,6 +485,7 @@ namespace Catalogo._recibos
             // 
             this.CliDPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDPnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CliDPnlMain.Controls.Add(this.label28);
             this.CliDPnlMain.Controls.Add(this.CliDDomicilioTxt);
             this.CliDPnlMain.Controls.Add(this.CliDEmailTxt);
             this.CliDPnlMain.Controls.Add(this.CliDObservacionesTxt);
@@ -522,7 +524,7 @@ namespace Catalogo._recibos
             this.CliDEmailTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CliDEmailTxt.Location = new System.Drawing.Point(192, 153);
             this.CliDEmailTxt.Name = "CliDEmailTxt";
-            this.CliDEmailTxt.Size = new System.Drawing.Size(392, 21);
+            this.CliDEmailTxt.Size = new System.Drawing.Size(368, 21);
             this.CliDEmailTxt.TabIndex = 21;
             // 
             // CliDObservacionesTxt
@@ -1718,6 +1720,17 @@ namespace Catalogo._recibos
             this.btnVer.UseVisualStyleBackColor = false;
             this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
             // 
+            // label28
+            // 
+            this.label28.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(566, 153);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(23, 18);
+            this.label28.TabIndex = 23;
+            this.label28.Text = "@";
+            // 
             // ucRecibo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1903,5 +1916,6 @@ namespace Catalogo._recibos
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.Label label28;
     }
 }

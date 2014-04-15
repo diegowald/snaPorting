@@ -10,7 +10,7 @@ namespace Catalogo._existencia
 
 	    // Define como se llama este modulo para el control de errores
 
-	    private const string m_sMODULENAME_ = "clsVerExistencia";
+	    //private //const string m_sMODULENAME_ = "clsVerExistencia";
 
 	    private VerExistenciaWS.VerExistencia Cliente;
 

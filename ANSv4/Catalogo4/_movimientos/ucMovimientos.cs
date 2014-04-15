@@ -15,7 +15,7 @@ namespace Catalogo._movimientos
         Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
      {
        
-        private const string m_sMODULENAME_ = "ucMovimientos";
+        //private //const string m_sMODULENAME_ = "ucMovimientos";
 
         public ucMovimientos()
         {
@@ -154,11 +154,11 @@ namespace Catalogo._movimientos
                         }
                         if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "INTE")
                         {
-                            //IntDep_Imprimir(row.Cells["Nro"].Value.ToString());
+                            _interdeposito.ucInterDeposito.InterDeposito_Imprimir(row.Cells["Nro"].Value.ToString());
                         }
                         if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "REND")
                         {
-                            //Rendicion_Imprimir(row.Cells["Nro"].Value.ToString());
+                            _rendiciones.ucRendiciones.Rendicion_Imprimir(row.Cells["Nro"].Value.ToString());
                         }
                     }
                 }

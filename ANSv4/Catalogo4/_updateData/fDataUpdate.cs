@@ -44,7 +44,7 @@ namespace Catalogo.util
               
                 ProcessStartInfo startInfo = new ProcessStartInfo();
                 //startInfo.FileName = DownloadedFile; 
-                startInfo.FileName = "\"" + Global01.AppPath.ToString() + DownloadedFile + "\" -d\"" + Global01.AppPath.ToString() + "\""; 
+                startInfo.FileName = "\"" + DownloadedFile + "\" -d\"" + Global01.AppPath.ToString() + "\""; 
 
                 startInfo.CreateNoWindow = false;
                 startInfo.UseShellExecute = false;

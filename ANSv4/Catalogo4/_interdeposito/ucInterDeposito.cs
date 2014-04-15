@@ -15,7 +15,7 @@ namespace Catalogo._interdeposito
     public partial class ucInterDeposito : UserControl
     
     {
-        private const string m_sMODULENAME_ = "ucInterDeposito";
+        //private //const string m_sMODULENAME_ = "ucInterDeposito";
         ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
 
         public ucInterDeposito()
@@ -334,7 +334,7 @@ namespace Catalogo._interdeposito
         
                 intDep.Bco_Dep_Tipo = ((bdTipoEfectivoRb.Checked) ?  "E" : "C");
                 intDep.Bco_Dep_Fecha = bdFechaDt.Value;
-                intDep.Bco_Dep_Numero = Int16.Parse(bdNumeroTxt.Text);
+                intDep.Bco_Dep_Numero = Int32.Parse(bdNumeroTxt.Text);
                 intDep.Bco_Dep_Monto = float.Parse(bdImporteTxt.Text);
                 intDep.Bco_Dep_Ch_Cantidad = byte.Parse("0" + bdCaChequesTxt.Text);
                 intDep.Bco_Dep_IdCta = byte.Parse(bdBancoCbo.SelectedValue.ToString());
@@ -413,27 +413,25 @@ namespace Catalogo._interdeposito
         public static void InterDeposito_Imprimir(string NroInterDeposito)
         {
             string sReporte = Global01.AppPath + "\\Reportes\\InterDeposito1.rpt";
+            //string sReporte = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\reportes\InterDeposito1.rpt";
+
             ReportDocument oReport = new ReportDocument();
 
             oReport.Load(sReporte);
             Funciones.util.ChangeReportConnectionInfo(ref oReport);
-
+      
             oReport.SetParameterValue("pNroInterDeposito", NroInterDeposito);
+
+            oReport.DataDefinition.FormulaFields["fZona"].Text = "'" + Global01.NroUsuario + "'";
 
             fReporte f = new fReporte();
             f.Text = "InterDeposito n° " + NroInterDeposito;
-            f.DocumentoNro = "R" + NroInterDeposito;
-            //f.EmailTO = odsInterDepositos1.Tables[0].Rows[0]["Email"].Text;
-            f.EmailTO = "juanpablobrugniere@speedy.com.ar";
-            //f.RazonSocial = odsInterDepositos1.Tables[0].Rows[0]["RazonSocial"].Text;
-            f.EmailAsunto = "auto náutica sur - InterDeposito n° " + NroInterDeposito;
+            f.DocumentoNro = "BD-" + NroInterDeposito;
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();
             f = null;
-
             oReport.Dispose();
-
         }
 
         private void paEnviosCbo_SelectedIndexChanged(object sender, EventArgs e)

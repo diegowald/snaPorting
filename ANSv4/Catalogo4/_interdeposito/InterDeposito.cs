@@ -7,7 +7,7 @@ namespace Catalogo._interdeposito
 {
     public class InterDeposito
     {
-        private const string m_sMODULENAME_ = "clsInterDeposito";
+        //private //const string m_sMODULENAME_ = "clsInterDeposito";
 
         private System.Data.OleDb.OleDbConnection mvarConexion;
         private string mvarNroInterDeposito;
@@ -39,7 +39,10 @@ namespace Catalogo._interdeposito
            mvarConexion = conexion;
 
            if (IDdeCliente > 0)
+           {
                mvarIdCliente = IDdeCliente;
+               Global01.EmailTO = (Funciones.oleDbFunciones.Comando(conexion, "SELECT Email FROM tblClientes WHERE ID=" + IDdeCliente, "Email")).ToLower();
+           }
        }
 
         public string Observaciones

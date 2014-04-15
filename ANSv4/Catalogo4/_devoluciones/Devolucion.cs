@@ -7,7 +7,7 @@ namespace Catalogo._devoluciones
 {
     public class Devolucion
     {
-        private const string m_sMODULENAME_ = "clsDevolucion";
+        //private //const string m_sMODULENAME_ = "clsDevolucion";
 
         private System.Data.OleDb.OleDbConnection mvarConexion;
         private string mvarNroDevolucion;
@@ -34,7 +34,10 @@ namespace Catalogo._devoluciones
            mvarConexion = conexion;
 
            if (IDdeCliente > 0)
+           {
                mvarIdCliente = IDdeCliente;
+               Global01.EmailTO = (Funciones.oleDbFunciones.Comando(conexion, "SELECT Email FROM tblClientes WHERE ID=" + IDdeCliente, "Email")).ToLower();
+           }
        }
 
         public string Observaciones

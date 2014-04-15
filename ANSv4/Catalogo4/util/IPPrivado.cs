@@ -13,7 +13,7 @@ namespace Catalogo.util
 
 	    // Define como se llama este modulo para el control de errores
 
-	    private const string m_sMODULENAME_ = "clsIPPrivado";
+	    //private //const string m_sMODULENAME_ = "clsIPPrivado";
 	    private CatalogoWS.Info Cliente;
 
 	    private bool WebServiceInicializado;

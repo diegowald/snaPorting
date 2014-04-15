@@ -7,7 +7,7 @@ namespace Catalogo._devoluciones
 {
     public class Pedido
     {
-        private const string m_sMODULENAME_ = "clsPedido";
+        //private //const string m_sMODULENAME_ = "clsPedido";
         private string mvarNroPedido;
         private System.DateTime mvarF_Pedido;
         private int mvarIdCliente;
@@ -50,7 +50,10 @@ namespace Catalogo._devoluciones
            mvarConexion = conexion;
 
            if (IDdeCliente > 0)
+           {
                mvarIdCliente = IDdeCliente;
+               Global01.EmailTO = (Funciones.oleDbFunciones.Comando(conexion, "SELECT Email FROM tblClientes WHERE ID=" + IDdeCliente, "Email")).ToLower();
+           }
        }
 
        // FUNDAMENTAL PARA QUE TE DE LOS NOMBRES

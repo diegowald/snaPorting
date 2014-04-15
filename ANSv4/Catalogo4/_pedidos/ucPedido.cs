@@ -18,7 +18,7 @@ namespace Catalogo._pedidos
         Funciones.emitter_receiver.IEmisor<int>, // Para enviar el indice del cliente seleccionado en el combo
         Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
     {
-        private const string m_sMODULENAME_ = "ucPedido";
+        //private //const string m_sMODULENAME_ = "ucPedido";
         ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
         DataGridViewRow ProductoSeleccionado = null;
 
@@ -603,7 +603,7 @@ namespace Catalogo._pedidos
         {
             try
             {
-                const string PROCNAME_ = "btnImprimir_Click";
+                //const string PROCNAME_ = "btnImprimir_Click";
 
                 Cursor.Current = Cursors.WaitCursor;
 
@@ -659,7 +659,7 @@ namespace Catalogo._pedidos
         {
             try
             {
-                const string PROCNAME_ = "btnVer_Click";
+                //const string PROCNAME_ = "btnVer_Click";
 
                 Cursor.Current = Cursors.WaitCursor;
 
@@ -726,11 +726,7 @@ namespace Catalogo._pedidos
  
             fReporte f = new fReporte();
             f.Text = "Nota de Venta n° " + NroPedido;
-            f.DocumentoNro = "P" + NroPedido;
-            //f.EmailTO = odsPedidos1.Tables[0].Rows[0]["Email"].ToString();
-            f.EmailTO = "juanpablobrugniere@speedy.com.ar";
-            //f.RazonSocial = odsPedidos1.Tables[0].Rows[0]["RazonSocial"].ToString();
-            f.EmailAsunto = "auto náutica sur - nota de venta n° " + NroPedido;
+            f.DocumentoNro = "NV-" + NroPedido;
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();

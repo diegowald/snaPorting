@@ -15,7 +15,7 @@ namespace Catalogo.Funciones
     class util
     {
 
-        const string m_sMODULENAME_ = "util";
+        //const string m_sMODULENAME_ = "util";
 
         internal static void aMayuscula(ref KeyPressEventArgs e)
         {
@@ -361,6 +361,12 @@ namespace Catalogo.Funciones
 
             //boConnectionInfo.UserName = "inVent";
             //boConnectionInfo.Password = "video80min";
+
+            //foreach (FormulaFieldDefinition formulafield in boReportDocument.DataDefinition.FormulaFields)
+            //{
+
+            //    Console.WriteLine("Formula field: " + formulafield.Name + " : " + formulafield.Text);
+            //}
 
             foreach (CrystalDecisions.ReportAppServer.DataDefModel.Table table in boReportDocument.ReportClientDocument.DatabaseController.Database.Tables)
             {

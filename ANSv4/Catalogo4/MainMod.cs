@@ -10,11 +10,11 @@ namespace Catalogo
     static class MainMod
     {
 
-        private const string m_sMODULENAME_ = "MainMod";
+        //private //const string m_sMODULENAME_ = "MainMod";
 
         public static void Main()
         {
-            const string PROCNAME_ = "Main";
+            //const string PROCNAME_ = "Main";
 
             // Las siguientes 2 lineas son para probar frmsettings
 //            Catalogo._preferencias.PreferenciasFrm frm = new _preferencias.PreferenciasFrm();
@@ -415,6 +415,9 @@ namespace Catalogo
             Global01.Dolar = float.Parse(Funciones.modINIs.INIRead(Global01.AppPath + "\\Cambio.ini", "General", "Dolar", "1"));
             Global01.Euro = float.Parse(Funciones.modINIs.INIRead(Global01.AppPath + "\\Cambio.ini", "General", "Euro", "1"));
 
+            Global01.EmailTO = "";
+            Global01.EmailBody = "";
+            Global01.EmailAsunto = "";
         }
 
         public static void miEnd()

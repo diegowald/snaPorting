@@ -6,7 +6,7 @@ namespace Catalogo._registro
     static class AppRegistro
     {
 
-        private const string m_sMODULENAME_ = "AppRegistro";
+        //private //const string m_sMODULENAME_ = "AppRegistro";
 
         public struct WMIPair
         {
@@ -16,7 +16,7 @@ namespace Catalogo._registro
 
         public static string ObtenerIDMaquina()
         {
-            const string PROCNAME_ = "ObtenerIDMaquina";
+            //const string PROCNAME_ = "ObtenerIDMaquina";
 
             string functionReturnValue = null;
 
@@ -52,7 +52,7 @@ namespace Catalogo._registro
         {
             try
             {
-                const string PROCNAME_ = "TomarInfoWMI";
+                //const string PROCNAME_ = "TomarInfoWMI";
 
                 string functionReturnValue = null;
 
@@ -76,7 +76,7 @@ namespace Catalogo._registro
 
         public static string ObtenerCRC(string s)
         {
-            const string PROCNAME_ = "ObtenerCRC";
+            //const string PROCNAME_ = "ObtenerCRC";
 
             string functionReturnValue = null;
 
@@ -127,7 +127,7 @@ namespace Catalogo._registro
 
         public static bool ValidateRegistration(string s)
         {
-            const string PROCNAME_ = "ValidateRegistration";
+            //const string PROCNAME_ = "ValidateRegistration";
 
             bool functionReturnValue = false;
 

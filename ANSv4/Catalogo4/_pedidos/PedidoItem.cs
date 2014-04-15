@@ -10,7 +10,7 @@ namespace Catalogo._devoluciones
 
         // Define como se llama este modulo para el control de errores
 
-        private const string m_sMODULENAME_ = "clsPedidoItem";
+        //private //const string m_sMODULENAME_ = "clsPedidoItem";
         //variables locales para almacenar los valores de las propiedades
 
         private string mvarIDCatalogo;

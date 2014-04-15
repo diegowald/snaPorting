@@ -111,6 +111,7 @@
             this.btnEnviarMail.TabIndex = 5;
             this.btnEnviarMail.Text = "Enviar por Email";
             this.btnEnviarMail.UseVisualStyleBackColor = false;
+            this.btnEnviarMail.Click += new System.EventHandler(this.btnEnviarMail_Click);
             // 
             // btnVerPDF
             // 
@@ -129,6 +130,7 @@
             this.btnVerPDF.TabIndex = 4;
             this.btnVerPDF.Text = "Obtener PDF";
             this.btnVerPDF.UseVisualStyleBackColor = false;
+            this.btnVerPDF.Click += new System.EventHandler(this.btnVerPDF_Click);
             // 
             // btnCerrar
             // 
@@ -158,7 +160,6 @@
             this.Name = "fReporte";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ver . . .";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.fReporte_Load);
             this.PnlFondoRojo.ResumeLayout(false);
             this.TopPnl.ResumeLayout(false);

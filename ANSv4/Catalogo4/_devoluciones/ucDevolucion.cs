@@ -19,7 +19,7 @@ namespace Catalogo._devoluciones
         Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
 
     {
-        private const string m_sMODULENAME_ = "ucDevolucion";
+        //private //const string m_sMODULENAME_ = "ucDevolucion";
         ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
         DataGridViewRow ProductoSeleccionado = null;
 
@@ -376,7 +376,7 @@ namespace Catalogo._devoluciones
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-           const string PROCNAME_ = "btnImprimir_Click";
+           //const string PROCNAME_ = "btnImprimir_Click";
 
             Cursor.Current = Cursors.WaitCursor;
 
@@ -454,7 +454,7 @@ namespace Catalogo._devoluciones
         private void btnVer_Click(object sender, EventArgs e)
         {
 
-            const string PROCNAME_ = "btnVer_Click";
+            //const string PROCNAME_ = "btnVer_Click";
 
             Cursor.Current = Cursors.WaitCursor;
 
@@ -521,17 +521,12 @@ namespace Catalogo._devoluciones
 
             fReporte f = new fReporte();
             f.Text = "Nota de Devolución n° " + NroDevolucion;
-            f.DocumentoNro = "D" + NroDevolucion;
-            //f.EmailTO = odsPedidos1.Tables[0].Rows[0]["Email"].ToString();
-            f.EmailTO = "juanpablobrugniere@speedy.com.ar";
-            //f.RazonSocial = odsPedidos1.Tables[0].Rows[0]["RazonSocial"].ToString();
-            f.EmailAsunto = "auto náutica sur - nota de devolución n° " + NroDevolucion;
+            f.DocumentoNro = "DE-" + NroDevolucion;
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();
             f = null;
             oReport.Dispose();
-
         }
 
         private void paDataGridView_KeyDown(object sender, KeyEventArgs e)

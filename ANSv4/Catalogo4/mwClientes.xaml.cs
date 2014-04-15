@@ -483,5 +483,26 @@ namespace Catalogo
             }
         }
 
+        private void xMenu1_web(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.autonauticasur.com.ar");
+        }
+
+        private void xMenu1_revista(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.autonauticasur-r.com.ar/revista/vigente/index2.html");
+        }
+
+        private void xMenu1_porcentajeL(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void xMenu1_AppConfig(object sender, RoutedEventArgs e)
+        {
+            _preferencias.PreferenciasFrm pref = new _preferencias.PreferenciasFrm();
+            pref.ShowDialog();
+        }
+
     }
 }

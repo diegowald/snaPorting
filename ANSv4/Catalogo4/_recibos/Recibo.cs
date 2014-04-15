@@ -51,7 +51,10 @@ namespace Catalogo._recibos
             mvarConexion = conexion;
 
             if (IDdeCliente > 0)
+            {
                 mvarIdCliente = IDdeCliente;
+                Global01.EmailTO = (Funciones.oleDbFunciones.Comando(conexion, "SELECT Email FROM tblClientes WHERE ID=" + IDdeCliente, "Email")).ToLower();
+            }
         }
 
         public string Observaciones
