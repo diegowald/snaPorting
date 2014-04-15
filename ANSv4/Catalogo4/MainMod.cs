@@ -109,7 +109,7 @@ namespace Catalogo
                 }
 
                 Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP");
-                if (Global01.URL_ANS != "0.0.0.0") { Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString(); }
+                if (Global01.URL_ANS == "0.0.0.0") { Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString(); }
 
                 Global01.ListaPrecio = DBNull.Value.Equals(dr["appCListaPrecio"]) ? (byte)(0) : (byte)(dr["appCListaPrecio"]);
                 Global01.MiBuild = DBNull.Value.Equals(dr["Build"]) ? (int)(0) : Int32.Parse(dr["Build"].ToString());

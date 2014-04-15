@@ -730,10 +730,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Catalogo_VerExistenciaWS_VerExistencia</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx%3fwsdl">
+    <WebReferenceUrl Include="http://192.168.40.129/wsCatalogo4/Info.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\CatalogoWS\</RelPath>
-      <UpdateFromURL>http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://192.168.40.129/wsCatalogo4/Info.asmx%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
