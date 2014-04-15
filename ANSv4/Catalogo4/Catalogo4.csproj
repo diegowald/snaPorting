@@ -151,6 +151,7 @@
     </Compile>
     <Compile Include="notifications\NotificationCenter.cs" />
     <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
+    <Compile Include="util\DataGridExtension.cs" />
     <Compile Include="util\emitter-receiver\ICancellableEmitter.cs" />
     <Compile Include="util\errorHandling\ErrorForm.cs">
       <SubType>Form</SubType>

@@ -116,6 +116,19 @@ namespace Catalogo._novedades
                 wDestino2 = "viajante";
             };
 
+            string wCondicion = "activo=1 and (destino='ambos' or destino='" + wDestino2 + "') and origen<>'catalogo' "; //+
+                               // " and f_inicio<=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "# and f_fin>=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "#";
+            string wOrden = "F_Inicio DESC, Tipo";
+            string wCampos = "Descripcion, F_Inicio, F_Fin, N_Archivo, url, zonas, Fecha, Origen, Tipo, ID";
+
+            dtNovedades  = Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "ansNovedades", wCondicion, wOrden, wCampos);
+
+            // Save the row count in the original datatable
+            dataRowCount = dtNovedades.Rows.Count;
+            
+            dtNovedades = filter(dtNovedades);
+
+            procesarYBorrarRegistrosCatalogo(dtNovedades);
             /*---DIEGO ---
              traer primero registros con origen="catalogo" (ojo tener en cta siempre el destino )
              * y ejecutar procesos acorde al tipo ws=webservice mdb=actualizacion
@@ -131,20 +144,10 @@ namespace Catalogo._novedades
              * otros tipos updateAppConfig.ObtenerComandos, etc, etc
             */
 
-
-            string wCondicion = "activo=1 and (destino='ambos' or destino='" + wDestino2 + "') and origen<>'catalogo' "; //+
-                               // " and f_inicio<=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "# and f_fin>=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "#";
-            string wOrden = "F_Inicio DESC, Tipo";
-            string wCampos = "Descripcion, F_Inicio, F_Fin, N_Archivo, url, zonas, Fecha, Origen, Tipo, ID";
-
-            dtNovedades  = Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "ansNovedades", wCondicion, wOrden, wCampos);
-
-            // Save the row count in the original datatable
-            dataRowCount = dtNovedades.Rows.Count;
             // Create a dataview of the datatable
             dvNovedades.Table = dtNovedades;
 
-           //DIEGO Acá FILTRAR Global01.Zona completado con ceros a la izquierda string de long 3---
+            //DIEGO Acá FILTRAR Global01.Zona completado con ceros a la izquierda string de long 3---
            //ejemplo: en BD 204;205;3*;08* ver si Global01.Zona está incluido en el string "zona del DT" OJO con los '*'
             
             // Filter the dataview
@@ -173,6 +176,11 @@ namespace Catalogo._novedades
                 }
             }
  
+        }
+
+        private void procesarYBorrarRegistrosCatalogo(DataTable dtNovedades)
+        {
+            throw new NotImplementedException();
         }
 
         //private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -273,10 +281,68 @@ namespace Catalogo._novedades
                     updater.run();
                 }
             }
-   
-
         }
 
+
+        private bool perteneceAZona(string zona)
+        {
+            string txtZona = zona.Trim();
+            if (txtZona.Length == 0)
+                return false;
+            //204;205;3*;08* ver si Global01.Zona
+            if (txtZona.Contains('*'))
+            {
+                return Global01.Zona.StartsWith(txtZona.Replace("*", ""));
+            }
+            else
+            {
+                return Global01.Zona == txtZona;
+            }
+        }
+
+        private bool filtra(System.Data.DataRow row)
+        {
+            if (row["zonas"] == DBNull.Value)
+            {
+                return true;
+            }
+            string zonas = (string)row["zonas"];
+            bool pasaFiltro = false;
+            if (zonas.Length == 0)
+            {
+                return true;
+            }
+            else
+            {
+                string[] splitted = zonas.Split(';');
+                
+                foreach (string zona in splitted)
+                {
+                    pasaFiltro |= perteneceAZona(zona);
+                    if (pasaFiltro)
+                    {
+                        break;
+                    }
+                }
+                //204;205;3*;08* ver si Global01.Zona
+            }
+            return pasaFiltro;
+        }
+
+        private System.Data.DataTable filter(System.Data.DataTable table)
+        {
+
+            for (int i =0; i < table.Rows.Count;i++)
+            {
+                System.Data.DataRow row = table.Rows[i];
+                if (!filtra(row))
+                {
+                    row.Delete();
+                }
+            }
+            table.AcceptChanges();
+            return table;
+        }
 
     }
 }
