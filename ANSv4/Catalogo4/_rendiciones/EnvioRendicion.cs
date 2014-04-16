@@ -62,9 +62,7 @@ namespace Catalogo._rendiciones
             m_NroRendicion = NroRendicion;
             Ren.Read();
             m_IdViajante = Ren["IDCliente"].ToString().Trim().PadLeft(6, '0');
-            m_F_Rendicion = Ren["F_Rendicion"].ToString().Substring(7, 4) +
-                Ren["F_Rendicion"].ToString().Substring(4, 2) +
-                Ren["F_Rendicion"].ToString().Substring(1, 2);
+            m_F_Rendicion = string.Format("{0:yyyyMMdd}", DateTime.Parse(Ren["F_Rendicion"].ToString()));
             m_Observaciones = Ren["Descripcion"].ToString().Trim();
 
             m_Efectivo = float.Parse(Ren["Efectivo_Monto"].ToString()) * 100;
@@ -98,9 +96,7 @@ namespace Catalogo._rendiciones
                 while (RenRecibos.Read())
                 {
                     m_DetalleRecibos += RenRecibos["nroRecibo"].ToString() + ",";
-                    m_DetalleRecibos += RenRecibos["F_Recibo"].ToString().Substring(7, 4)
-                        + RenRecibos["F_Recibo"].ToString().Substring(4, 2)
-                        + RenRecibos["F_Recibo"].ToString().Substring(1, 2) + ",";
+                    m_DetalleRecibos += string.Format("{0:yyyyMMdd}", DateTime.Parse(RenRecibos["F_Recibo"].ToString())) + ",";
                     m_DetalleRecibos += RenRecibos["Nro_Cuenta"].ToString().Trim().PadLeft(6, '0') + ",";
                     m_DetalleRecibos += (float.Parse(RenRecibos["Efectivo"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
                     m_DetalleRecibos += (float.Parse(RenRecibos["Divisas_Dolares"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";

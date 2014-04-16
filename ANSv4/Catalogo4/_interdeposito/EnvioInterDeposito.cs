@@ -58,8 +58,10 @@ namespace Catalogo._interdeposito
             {
                 return;
             }
+            I.Read();
+            
             m_CodCliente = I["IDCliente"].ToString().Trim().PadLeft(6,'0');
-            m_Bco_Dep_Fecha = string.Format("{0:ddMMyyyy}",DateTime.Parse(I["Bco_Dep_Fecha"].ToString()));
+            m_Bco_Dep_Fecha = string.Format("{0:yyyyMMdd}",DateTime.Parse(I["Bco_Dep_Fecha"].ToString()));
             m_Bco_Dep_Tipo = I["Bco_Dep_Tipo"].ToString();
             m_Bco_Dep_Numero = I["Bco_Dep_Numero"].ToString().PadLeft(10, '0');
             m_Bco_Dep_Monto = (float.Parse(I["Bco_Dep_Monto"].ToString()) * 100).ToString().Trim().PadLeft(17, '0');

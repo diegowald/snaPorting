@@ -53,7 +53,7 @@ namespace Catalogo._pedidos
             _NroPedido = NroPedido;
             enc.Read();
             _CodCliente = enc["IDCliente"].ToString().Trim().PadLeft(6, '0');
-            _Fecha = enc["F_Pedido"].ToString();
+            _Fecha = string.Format("{0:yyyyMMdd}", DateTime.Parse(enc["F_Pedido"].ToString()));
             _Observaciones = enc["Observaciones"].ToString().Replace(",", " ");
             _Transporte = enc["Transporte"].ToString();
 

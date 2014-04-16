@@ -19,7 +19,8 @@ namespace Catalogo.util
 	    private bool WebServiceInicializado;
 
 	    private string m_MacAddress;
-	    public bool Inicializado {
+	    public bool Inicializado 
+        {
 		    get { return WebServiceInicializado; }
 	    }
 
@@ -125,16 +126,18 @@ namespace Catalogo.util
 
 	    public IPPrivado(string ipAddress, string MacAddress, bool usaProxy, string URLProxyServer)
 	    {
-		    bool Conectado = false;
 
-            //Conectado = My.Computer.Network.Ping(ipAddress, 5000);
+            bool Conectado = util.SimplePing.ping(ipAddress, 5000);
+            //if (!Conectado)
+            //{
+            //    Conectado = util.SimplePing.ping(ipAddressIntranet, 5000);
+            //}
 
-		    Conectado = true;
 		    if (!WebServiceInicializado) {
 			    if (Conectado) {
 				    Cliente = new CatalogoWS.Info();
-                    Cliente.Url = Catalogo.Properties.Settings.Default.Catalogo_CatalogoWS_Info;
-//                    Cliente.Url = "http://" + ipAddress + "/wsCatalogo4/Info.asmx?wsdl";
+                    //Cliente.Url = Catalogo.Properties.Settings.Default.Catalogo_CatalogoWS_Info;
+                    Cliente.Url = "http://" + ipAddress + "/wsCatalogo4/Info.asmx?wsdl";
 				    if (usaProxy) {
 					    Cliente.Proxy = new System.Net.WebProxy(URLProxyServer);
 				    }

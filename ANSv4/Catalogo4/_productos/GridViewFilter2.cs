@@ -81,7 +81,10 @@ namespace Catalogo._productos
         public GridViewFilter2()
         {
 
-            InitializeComponent();          
+            InitializeComponent();
+
+            dataGridView1.RowPostPaint += OnRowPostPaint;
+   
             preload.Preloader.instance.productos.onWorkFinished += dataReady;
 
             xCargarDataControl();
@@ -477,6 +480,46 @@ namespace Catalogo._productos
         {
             get;
             set;
+        }
+
+        void OnRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            //System.Data.DataRowView value = (System.Data.DataRowView)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+            //DataGridViewCellStyle style = dataGridView1.Rows[e.RowIndex].DefaultCellStyle;
+
+
+            string s = " ";
+            Color xColor = Color.Black;
+            string xTipo = dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cTipo].Value.ToString();
+            bool xBold = (float.Parse(dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cPorclinea].Value.ToString()) != 0 | xAplicoPorcentajeLinea);
+            bool xOferta = (dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cControl].Value.ToString() == "O");
+
+            if ( xTipo == "prod_n")
+            {
+                xColor = Color.Green;
+                s += " prod. nuevo;";
+            }
+            else if (xTipo == "apli_n")
+            {
+                xColor = Color.Blue;
+                s += " apli. nueva;";
+            }
+
+            if (xOferta)
+            {
+                xColor = Color.Red; 
+                s += " Oferta!;";
+            }
+
+            if (xBold)
+            {
+                dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cCodigo].Style.Font = new Font(dataGridView1.Font, FontStyle.Bold);
+                s += " $ modificado;";
+            }
+
+            if (xColor != Color.Black) dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cCodigo].Style.ForeColor = xColor;
+            if (s.Trim().Length > 0) dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cCodigo].ToolTipText = s.Trim();
+
         }
 
     }
