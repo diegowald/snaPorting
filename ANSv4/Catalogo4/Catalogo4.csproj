@@ -133,6 +133,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="util\FlashWindow.cs" />
     <Compile Include="_auditor\Auditor.cs" />
     <Compile Include="forms\frmReporte.cs">
       <SubType>Form</SubType>

@@ -26,7 +26,6 @@ namespace Catalogo
         private Catalogo._productos.SearchFilter sf = null;
         private Catalogo._productos.GridViewFilter2 gv = null;
         private Catalogo._pedidos.ucPedido ped = null;
-        private Catalogo._devoluciones.ucDevolucion dev = null;
 
         private Catalogo._interdeposito.ucInterDeposito IntDep = null;
         private Catalogo._movimientos.ucMovimientos mov = null;
@@ -302,18 +301,18 @@ namespace Catalogo
                     {
                         case System.Windows.Forms.DialogResult.Yes:
                             {
-                                //if (ProbarConexion())
-                                if (true)
+
+                                bool Conectado = util.SimplePing.ping(Global01.URL_ANS, 5000);
+                                if (!Conectado)
+                                {
+                                    Conectado = util.SimplePing.ping(Global01.URL_ANS2, 5000);
+                                }
+
+                                if (Conectado)
                                 {
                                     Catalogo.util.BackgroundTasks.EnvioMovimientos movs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
                                         0, false, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET, null);
-                                    movs.run();
-                                    //                  Dim dlg As frmConexionEnvio
-                                    //                  Set dlg = New frmConexionEnvio
-                                    //                  dlg.ModoTransmision = TRANSMITIR_RECORDSET
-                                    //                  dlg.IdCliente = 0
-                                    //                  dlg.Show vbModal, Me
-                                    //                  Set dlg = Nothing
+                                    movs.run();  
                                 }
                                 else
                                 {

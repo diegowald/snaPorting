@@ -274,6 +274,13 @@ namespace Catalogo
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
             this.ContentMenu.ToggleAutoHide();
+
+            //Catalogo.util.FlashWindow fwFlash = new Catalogo.util.FlashWindow();
+            //if (WindowState.) //(this.WindowState == System.Windows.Forms.FormWindowState.Minimized)
+            //{
+            //    // Flash minimized window 
+            //    fwFlash.FlashWindow1(this, Catalogo.util.FlashWindow.enuFlashOptions.FLASHW_ALL, 9999);
+            //}
         }
    
         private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
@@ -355,18 +362,18 @@ namespace Catalogo
                     {
                         case System.Windows.Forms.DialogResult.Yes:
                             {
-                                //if (ProbarConexion())
-                                if (true)
+
+                                bool Conectado = util.SimplePing.ping(Global01.URL_ANS, 5000);
+                                if (!Conectado)
+                                {
+                                    Conectado = util.SimplePing.ping(Global01.URL_ANS2, 5000);
+                                }
+
+                                if (Conectado)
                                 {
                                     Catalogo.util.BackgroundTasks.EnvioMovimientos movs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
                                         0, false, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET, null);
                                     movs.run();
-                                    //                  Dim dlg As frmConexionEnvio
-                                    //                  Set dlg = New frmConexionEnvio
-                                    //                  dlg.ModoTransmision = TRANSMITIR_RECORDSET
-                                    //                  dlg.IdCliente = 0
-                                    //                  dlg.Show vbModal, Me
-                                    //                  Set dlg = Nothing
                                 }
                                 else
                                 {

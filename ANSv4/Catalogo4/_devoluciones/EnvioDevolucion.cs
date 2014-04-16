@@ -55,7 +55,8 @@ namespace Catalogo._devoluciones
 		m_NroDevolucion = NroDevolucion;
         Enc.Read();
 		m_CodCliente = Enc["IDCliente"].ToString().Trim().PadLeft(6,'0');
-		m_Fecha = Enc["F_Devolucion"].ToString();
+        m_Fecha = string.Format("{0:yyyyMMdd}", DateTime.Parse(Enc["F_Devolucion"].ToString()));
+            
 		m_Observaciones = Enc["Observaciones"].ToString().Replace(",", " ");
 
 		if (Det.HasRows) 

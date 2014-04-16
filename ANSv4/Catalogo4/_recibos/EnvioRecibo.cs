@@ -25,10 +25,9 @@ namespace Catalogo._recibos
         private string _Fecha;
         private string _Total;
         private string _Bahia;
-        private string _Detalle;
-        private string _Facturas;
-
-        private string _NotasCredito;
+        private string _Detalle = "";
+        private string _Facturas = "";
+        private string _NotasCredito = "";
 
         private bool DatosObtenidos;
         private System.Data.OleDb.OleDbConnection Conexion1;
@@ -61,7 +60,7 @@ namespace Catalogo._recibos
             _NroRecibo = nroRecibo;
             Enc.Read();
             _CodCliente = Enc["IDCliente"].ToString().Trim().PadLeft(6, '0');
-            _Fecha = Enc["F_Recibo"].ToString().Substring(7, 4) + Enc["F_Recibo"].ToString().Substring(4, 2) + Enc["F_Recibo"].ToString().Substring(1, 2);
+            _Fecha = string.Format("{0:yyyyMMdd}", DateTime.Parse(Enc["F_Recibo"].ToString()));
             _Total = (float.Parse(Enc["Total"].ToString()) * 100).ToString().Trim().PadLeft(17, '0');
             _Bahia = (bool.Parse(Enc["Bahia"].ToString()) ? "si" : "no");
 
@@ -95,9 +94,7 @@ namespace Catalogo._recibos
                     }
                     else
                     {
-                        _Detalle += Det["F_EmiCheque"].ToString().Substring(7, 4)
-                            + Det["F_EmiCheque"].ToString().Substring(4, 2)
-                            + Det["F_EmiCheque"].ToString().Substring(1, 2) + ",";
+                        _Detalle += string.Format("{0:yyyyMMdd}", DateTime.Parse(Det["F_EmiCheque"].ToString())) + ",";
                     }
 
                     if (object.ReferenceEquals(Det["F_CobroCheque"], DBNull.Value))
@@ -106,9 +103,7 @@ namespace Catalogo._recibos
                     }
                     else
                     {
-                        _Detalle += Det["F_CobroCheque"].ToString().Substring(7, 4)
-                            + Det["F_CobroCheque"].ToString().Substring(4, 2)
-                            + Det["F_CobroCheque"].ToString().Substring(1, 2) + ",";
+                        _Detalle += string.Format("{0:yyyyMMdd}", DateTime.Parse(Det["F_CobroCheque"].ToString())) + ",";
                     }
 
                     if (object.ReferenceEquals(Det["Banco"], DBNull.Value))
