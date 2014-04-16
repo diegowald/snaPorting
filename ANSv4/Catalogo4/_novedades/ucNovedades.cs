@@ -55,7 +55,7 @@ namespace Catalogo._novedades
 //SELECT n.Descripcion, n.F_Inicio, n.F_Fin, n.N_Archivo, n.url, n.zonas, n.Fecha, n.Origen, n.Tipo, n.ID FROM ansNovedades AS n;
 
             //Set Columns Count 
-            dgvNovedades.ColumnCount = 10;
+            dgvNovedades.ColumnCount = 11;
 
             //Add Columns
             //"Descripcion, F_Inicio, F_Fin, N_Archivo, url, zonas, Fecha, Origen, Tipo, ID";
@@ -110,6 +110,11 @@ namespace Catalogo._novedades
             dgvNovedades.Columns[9].DataPropertyName = "id";
             //dgvNovedades.Columns[9].Visible = false;
 
+            dgvNovedades.Columns[10].Name = "FLeido";
+            dgvNovedades.Columns[10].HeaderText = "FLeido";
+            dgvNovedades.Columns[10].DataPropertyName = "F_Leido";
+            //dgvNovedades.Columns[10].Visible = false;
+
             string wDestino2 = "cliente"; //valores posibles "ambos;cliente;viajante;catalogo"
             if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente)
             {
@@ -121,7 +126,7 @@ namespace Catalogo._novedades
             string wOrden = "F_Inicio DESC, Tipo";
             string wCampos = "Descripcion, F_Inicio, F_Fin, N_Archivo, url, zonas, Fecha, Origen, Tipo, ID";
 
-            dtNovedades  = Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "ansNovedades", wCondicion, wOrden, wCampos);
+            dtNovedades  = Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "v_Novedades1", wCondicion, wOrden, wCampos);
 
             // Save the row count in the original datatable
             dataRowCount = dtNovedades.Rows.Count;
@@ -143,6 +148,8 @@ namespace Catalogo._novedades
              * 
              * otros tipos updateAppConfig.ObtenerComandos, etc, etc
             */
+
+            procesarInfoNovedades(dtNovedades);
 
             // Create a dataview of the datatable
             dvNovedades.Table = dtNovedades;
@@ -177,7 +184,6 @@ namespace Catalogo._novedades
             }
  
         }
-
 
         //private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         //{
@@ -237,7 +243,6 @@ namespace Catalogo._novedades
             }
             else if (pTipo == "texto")
             {
-
             }
             else if (pTipo == "pdf")
             {
@@ -245,11 +250,9 @@ namespace Catalogo._novedades
             }
             else if (pTipo == "imagen")
             {
-
             }
             else if (pTipo == "flash")
             {
-
             }
 
 //solo a Los efectos de un ejemplo
@@ -386,6 +389,70 @@ namespace Catalogo._novedades
                 */
             }
             tabla.AcceptChanges();
+        }
+
+        private void procesarInfoNovedades(DataTable dtNovedades)
+        {
+            /*
+             *             if (pTipo == "url")
+            {
+                viene desde un campo en la base
+                System.Diagnostics.Process.Start(pUrl + pArchivo);
+            }
+            else if (pTipo == "texto")
+            {
+                viene desde un campo en la base
+
+            }
+            else if (pTipo == "pdf")
+            {
+                se decarga
+                System.Diagnostics.Process.Start(pUrl + pArchivo);
+            }
+            else if (pTipo == "imagen")
+            {
+                de descarga
+            }
+            else if (pTipo == "flash")
+            {
+                se descarga
+            }
+*/
+            foreach (System.Data.DataRow row in dtNovedades.Rows)
+            {
+                switch (row["Tipo"].ToString())
+                {
+                    case "url":
+                        // Viene en la base, no se hace nada.
+                        break;
+                    case "texto":
+                        // Viene en la base, no se hace nada
+                        break;
+                    case "pdf":
+                        // Se descarga
+                        break;
+                    case "imagen":
+                        // Se descarga
+                        break;
+                    case "flash":
+                        // Se descarga
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        private void dgvNovedades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (this.dgvNovedades.Rows[e.RowIndex].Cells["FLeido"].Value == null)
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+            }
+            else
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
+            }
         }
 
     }
