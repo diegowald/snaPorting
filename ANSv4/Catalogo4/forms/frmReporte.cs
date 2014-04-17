@@ -67,11 +67,12 @@ namespace Catalogo.varios
                 Global01.EmailAsunto = this.Text;
                 //Global01.EmailTO = "sistemas@autonauticasur.com.ar";
                 Global01.EmailBody = this.Text;
-                
-                if (Global01.EmailTO.Trim().Length >= 0)
+
+                if (Global01.EmailTO.Trim().Length==0) Global01.EmailTO = "@";
+
+                if (Global01.EmailTO.Trim().Length > 0)
                 {
                     Catalogo.util.SendFileTo.MAPI mapi = new Catalogo.util.SendFileTo.MAPI();
-                    //mapi.AddRecipientTo("@");
                     mapi.AddRecipientTo(Global01.EmailTO.ToString());
 
                     mapi.AddAttachment(Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");

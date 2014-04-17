@@ -31,8 +31,8 @@ namespace Catalogo._rendiciones
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sTAB = new System.Windows.Forms.TabControl();
             this.rTabRec = new System.Windows.Forms.TabPage();
             this.fraDatos = new System.Windows.Forms.Panel();
@@ -51,6 +51,7 @@ namespace Catalogo._rendiciones
             this._lvRecibos_ColumnHeader_11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this._lvRecibos_ColumnHeader_12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this._lvRecibos_ColumnHeader_13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.txtRecHasta = new System.Windows.Forms.TextBox();
             this.txtRecDesde = new System.Windows.Forms.TextBox();
             this.cboRecibos = new System.Windows.Forms.ComboBox();
@@ -153,19 +154,6 @@ namespace Catalogo._rendiciones
             this.Label24 = new System.Windows.Forms.Label();
             this.lblTit2 = new System.Windows.Forms.Label();
             this.rTabBuscar = new System.Windows.Forms.TabPage();
-            this.rTabAnt = new System.Windows.Forms.TabPage();
-            this.paDataGridView = new System.Windows.Forms.DataGridView();
-            this.paPnlTop = new System.Windows.Forms.Panel();
-            this.paEnviarBtn = new System.Windows.Forms.Button();
-            this.paEnviosCbo = new System.Windows.Forms.ComboBox();
-            this.devAnterioresDataGridView = new System.Windows.Forms.DataGridView();
-            this.ucPnlTop = new System.Windows.Forms.Panel();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnIniciar = new System.Windows.Forms.Button();
-            this.btnImprimir = new System.Windows.Forms.Button();
-            this.btnVer = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.fraBuscar = new System.Windows.Forms.Panel();
             this.lvBuscar = new System.Windows.Forms.ListView();
             this.fndNroRendicionLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -176,6 +164,18 @@ namespace Catalogo._rendiciones
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this._optBuscar_1 = new System.Windows.Forms.RadioButton();
             this._optBuscar_0 = new System.Windows.Forms.RadioButton();
+            this.rTabAnt = new System.Windows.Forms.TabPage();
+            this.paDataGridView = new System.Windows.Forms.DataGridView();
+            this.paPnlTop = new System.Windows.Forms.Panel();
+            this.EnviarBtn = new System.Windows.Forms.Button();
+            this.paEnviosCbo = new System.Windows.Forms.ComboBox();
+            this.devAnterioresDataGridView = new System.Windows.Forms.DataGridView();
+            this.ucPnlTop = new System.Windows.Forms.Panel();
+            this.btnIniciar = new System.Windows.Forms.Button();
+            this.btnImprimir = new System.Windows.Forms.Button();
+            this.btnVer = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.sTAB.SuspendLayout();
             this.rTabRec.SuspendLayout();
             this.fraDatos.SuspendLayout();
@@ -185,17 +185,16 @@ namespace Catalogo._rendiciones
             this.fraLVValores.SuspendLayout();
             this.fraDatos1.SuspendLayout();
             this.rTabBuscar.SuspendLayout();
+            this.fraBuscar.SuspendLayout();
             this.rTabAnt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.paDataGridView)).BeginInit();
             this.paPnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.devAnterioresDataGridView)).BeginInit();
             this.ucPnlTop.SuspendLayout();
-            this.fraBuscar.SuspendLayout();
             this.SuspendLayout();
             // 
             // sTAB
             // 
-            this.sTAB.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.sTAB.Controls.Add(this.rTabRec);
             this.sTAB.Controls.Add(this.rTabVal);
             this.sTAB.Controls.Add(this.rTabBuscar);
@@ -217,16 +216,15 @@ namespace Catalogo._rendiciones
             this.rTabRec.Controls.Add(this.fraDatos);
             this.rTabRec.Controls.Add(this.fraClave);
             this.rTabRec.Controls.Add(this.fraLVRecibos);
-            this.rTabRec.Location = new System.Drawing.Point(4, 27);
+            this.rTabRec.Location = new System.Drawing.Point(4, 24);
             this.rTabRec.Name = "rTabRec";
-            this.rTabRec.Size = new System.Drawing.Size(817, 402);
+            this.rTabRec.Size = new System.Drawing.Size(817, 405);
             this.rTabRec.TabIndex = 5;
             this.rTabRec.Text = "Recibos";
             // 
             // fraDatos
             // 
-            this.fraDatos.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.fraDatos.BackColor = System.Drawing.Color.Transparent;
+            this.fraDatos.BackColor = System.Drawing.Color.WhiteSmoke;
             this.fraDatos.Controls.Add(this.cmdReciboAdd);
             this.fraDatos.Controls.Add(this.lvRecibos);
             this.fraDatos.Controls.Add(this.txtRecHasta);
@@ -235,7 +233,7 @@ namespace Catalogo._rendiciones
             this.fraDatos.Controls.Add(this.Label2);
             this.fraDatos.Controls.Add(this.Label1);
             this.fraDatos.Controls.Add(this.Label12);
-            this.fraDatos.Location = new System.Drawing.Point(0, 92);
+            this.fraDatos.Location = new System.Drawing.Point(0, 93);
             this.fraDatos.Name = "fraDatos";
             this.fraDatos.Size = new System.Drawing.Size(817, 251);
             this.fraDatos.TabIndex = 26;
@@ -261,6 +259,7 @@ namespace Catalogo._rendiciones
             // lvRecibos
             // 
             this.lvRecibos.AllowColumnReorder = true;
+            this.lvRecibos.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lvRecibos.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this._lvRecibos_ColumnHeader_1,
             this._lvRecibos_ColumnHeader_2,
@@ -354,6 +353,12 @@ namespace Catalogo._rendiciones
             this._lvRecibos_ColumnHeader_13.Text = "NroRendicion";
             this._lvRecibos_ColumnHeader_13.Width = 170;
             // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(1, 24);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // txtRecHasta
             // 
             this.txtRecHasta.AcceptsReturn = true;
@@ -387,7 +392,6 @@ namespace Catalogo._rendiciones
             // 
             // cboRecibos
             // 
-            this.cboRecibos.BackColor = System.Drawing.SystemColors.Window;
             this.cboRecibos.Cursor = System.Windows.Forms.Cursors.Default;
             this.cboRecibos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRecibos.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -441,14 +445,13 @@ namespace Catalogo._rendiciones
             // 
             // fraClave
             // 
-            this.fraClave.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.fraClave.BackColor = System.Drawing.Color.Transparent;
+            this.fraClave.BackColor = System.Drawing.Color.WhiteSmoke;
             this.fraClave.Controls.Add(this.dtF_Rendicion);
             this.fraClave.Controls.Add(this.txtDescripcion);
             this.fraClave.Controls.Add(this.lblNroRendicion);
             this.fraClave.Controls.Add(this.Label9);
             this.fraClave.Controls.Add(this.Label7);
-            this.fraClave.Location = new System.Drawing.Point(0, 0);
+            this.fraClave.Location = new System.Drawing.Point(0, 1);
             this.fraClave.Name = "fraClave";
             this.fraClave.Size = new System.Drawing.Size(817, 92);
             this.fraClave.TabIndex = 27;
@@ -518,8 +521,7 @@ namespace Catalogo._rendiciones
             // 
             // fraLVRecibos
             // 
-            this.fraLVRecibos.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.fraLVRecibos.BackColor = System.Drawing.Color.Transparent;
+            this.fraLVRecibos.BackColor = System.Drawing.Color.WhiteSmoke;
             this.fraLVRecibos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.fraLVRecibos.Controls.Add(this.Label42);
             this.fraLVRecibos.Controls.Add(this.Label41);
@@ -540,7 +542,7 @@ namespace Catalogo._rendiciones
             this.fraLVRecibos.Cursor = System.Windows.Forms.Cursors.Default;
             this.fraLVRecibos.Enabled = false;
             this.fraLVRecibos.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.fraLVRecibos.Location = new System.Drawing.Point(0, 343);
+            this.fraLVRecibos.Location = new System.Drawing.Point(0, 344);
             this.fraLVRecibos.Name = "fraLVRecibos";
             this.fraLVRecibos.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.fraLVRecibos.Size = new System.Drawing.Size(817, 61);
@@ -776,17 +778,16 @@ namespace Catalogo._rendiciones
             this.rTabVal.BackColor = System.Drawing.Color.Transparent;
             this.rTabVal.Controls.Add(this.fraLVValores);
             this.rTabVal.Controls.Add(this.fraDatos1);
-            this.rTabVal.Location = new System.Drawing.Point(4, 27);
+            this.rTabVal.Location = new System.Drawing.Point(4, 24);
             this.rTabVal.Name = "rTabVal";
             this.rTabVal.Padding = new System.Windows.Forms.Padding(3);
-            this.rTabVal.Size = new System.Drawing.Size(817, 402);
+            this.rTabVal.Size = new System.Drawing.Size(817, 405);
             this.rTabVal.TabIndex = 0;
             this.rTabVal.Text = "Rendición de Valores";
             // 
             // fraLVValores
             // 
-            this.fraLVValores.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.fraLVValores.BackColor = System.Drawing.Color.Transparent;
+            this.fraLVValores.BackColor = System.Drawing.Color.WhiteSmoke;
             this.fraLVValores.Controls.Add(this.lvValores);
             this.fraLVValores.Controls.Add(this.txtLatCert_Cantidad);
             this.fraLVValores.Controls.Add(this.txtLatCh_Cantidad);
@@ -837,7 +838,7 @@ namespace Catalogo._rendiciones
             this.fraLVValores.Cursor = System.Windows.Forms.Cursors.Default;
             this.fraLVValores.Enabled = false;
             this.fraLVValores.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.fraLVValores.Location = new System.Drawing.Point(3, 71);
+            this.fraLVValores.Location = new System.Drawing.Point(3, 72);
             this.fraLVValores.Name = "fraLVValores";
             this.fraLVValores.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.fraLVValores.Size = new System.Drawing.Size(811, 330);
@@ -847,7 +848,7 @@ namespace Catalogo._rendiciones
             // lvValores
             // 
             this.lvValores.AllowColumnReorder = true;
-            this.lvValores.BackColor = System.Drawing.SystemColors.Window;
+            this.lvValores.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lvValores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this._lvValores_ColumnHeader_1,
             this._lvValores_ColumnHeader_2,
@@ -1578,8 +1579,7 @@ namespace Catalogo._rendiciones
             // 
             // fraDatos1
             // 
-            this.fraDatos1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.fraDatos1.BackColor = System.Drawing.Color.Transparent;
+            this.fraDatos1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.fraDatos1.Controls.Add(this.cmdValorAdd);
             this.fraDatos1.Controls.Add(this.dtBd_Fecha);
             this.fraDatos1.Controls.Add(this.cboCheques);
@@ -1594,7 +1594,7 @@ namespace Catalogo._rendiciones
             this.fraDatos1.Controls.Add(this.lblTit1);
             this.fraDatos1.Controls.Add(this.Label24);
             this.fraDatos1.Controls.Add(this.lblTit2);
-            this.fraDatos1.Location = new System.Drawing.Point(3, 3);
+            this.fraDatos1.Location = new System.Drawing.Point(3, 4);
             this.fraDatos1.Name = "fraDatos1";
             this.fraDatos1.Size = new System.Drawing.Size(811, 68);
             this.fraDatos1.TabIndex = 61;
@@ -1639,7 +1639,7 @@ namespace Catalogo._rendiciones
             // 
             // _opTipoDeposito_1
             // 
-            this._opTipoDeposito_1.BackColor = System.Drawing.SystemColors.Control;
+            this._opTipoDeposito_1.BackColor = System.Drawing.Color.Transparent;
             this._opTipoDeposito_1.Cursor = System.Windows.Forms.Cursors.Default;
             this._opTipoDeposito_1.ForeColor = System.Drawing.SystemColors.ControlText;
             this._opTipoDeposito_1.Location = new System.Drawing.Point(76, 19);
@@ -1653,7 +1653,7 @@ namespace Catalogo._rendiciones
             // 
             // _opTipoDeposito_0
             // 
-            this._opTipoDeposito_0.BackColor = System.Drawing.SystemColors.Control;
+            this._opTipoDeposito_0.BackColor = System.Drawing.Color.Transparent;
             this._opTipoDeposito_0.Checked = true;
             this._opTipoDeposito_0.Cursor = System.Windows.Forms.Cursors.Default;
             this._opTipoDeposito_0.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -1795,223 +1795,17 @@ namespace Catalogo._rendiciones
             // 
             // rTabBuscar
             // 
-            this.rTabBuscar.BackColor = System.Drawing.Color.Transparent;
+            this.rTabBuscar.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rTabBuscar.Controls.Add(this.fraBuscar);
-            this.rTabBuscar.Location = new System.Drawing.Point(4, 27);
+            this.rTabBuscar.Location = new System.Drawing.Point(4, 24);
             this.rTabBuscar.Name = "rTabBuscar";
-            this.rTabBuscar.Size = new System.Drawing.Size(817, 402);
+            this.rTabBuscar.Size = new System.Drawing.Size(817, 405);
             this.rTabBuscar.TabIndex = 6;
             this.rTabBuscar.Text = "Buscar";
             // 
-            // rTabAnt
-            // 
-            this.rTabAnt.BackColor = System.Drawing.Color.Transparent;
-            this.rTabAnt.Controls.Add(this.paDataGridView);
-            this.rTabAnt.Controls.Add(this.paPnlTop);
-            this.rTabAnt.Controls.Add(this.devAnterioresDataGridView);
-            this.rTabAnt.Location = new System.Drawing.Point(4, 27);
-            this.rTabAnt.Name = "rTabAnt";
-            this.rTabAnt.Padding = new System.Windows.Forms.Padding(3);
-            this.rTabAnt.Size = new System.Drawing.Size(817, 402);
-            this.rTabAnt.TabIndex = 4;
-            this.rTabAnt.Text = "Anteriores";
-            // 
-            // paDataGridView
-            // 
-            this.paDataGridView.AllowUserToAddRows = false;
-            this.paDataGridView.AllowUserToDeleteRows = false;
-            this.paDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
-            this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.paDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.paDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.paDataGridView.GridColor = System.Drawing.SystemColors.Control;
-            this.paDataGridView.Location = new System.Drawing.Point(3, 45);
-            this.paDataGridView.MultiSelect = false;
-            this.paDataGridView.Name = "paDataGridView";
-            this.paDataGridView.ReadOnly = true;
-            this.paDataGridView.RowHeadersWidth = 4;
-            this.paDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.paDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.paDataGridView.Size = new System.Drawing.Size(811, 354);
-            this.paDataGridView.TabIndex = 3;
-            // 
-            // paPnlTop
-            // 
-            this.paPnlTop.BackColor = System.Drawing.Color.Transparent;
-            this.paPnlTop.Controls.Add(this.paEnviarBtn);
-            this.paPnlTop.Controls.Add(this.paEnviosCbo);
-            this.paPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.paPnlTop.Location = new System.Drawing.Point(3, 3);
-            this.paPnlTop.Name = "paPnlTop";
-            this.paPnlTop.Size = new System.Drawing.Size(811, 42);
-            this.paPnlTop.TabIndex = 2;
-            // 
-            // paEnviarBtn
-            // 
-            this.paEnviarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.paEnviarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.paEnviarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.paEnviarBtn.FlatAppearance.BorderSize = 2;
-            this.paEnviarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.paEnviarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.paEnviarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paEnviarBtn.ForeColor = System.Drawing.Color.White;
-            this.paEnviarBtn.Location = new System.Drawing.Point(235, 6);
-            this.paEnviarBtn.Name = "paEnviarBtn";
-            this.paEnviarBtn.Size = new System.Drawing.Size(60, 27);
-            this.paEnviarBtn.TabIndex = 39;
-            this.paEnviarBtn.Text = "Enviar";
-            this.paEnviarBtn.UseVisualStyleBackColor = false;
-            // 
-            // paEnviosCbo
-            // 
-            this.paEnviosCbo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.paEnviosCbo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.paEnviosCbo.FormattingEnabled = true;
-            this.paEnviosCbo.Items.AddRange(new object[] {
-            "(todos)",
-            "Enviados",
-            "NO Enviados"});
-            this.paEnviosCbo.Location = new System.Drawing.Point(5, 9);
-            this.paEnviosCbo.Name = "paEnviosCbo";
-            this.paEnviosCbo.Size = new System.Drawing.Size(214, 23);
-            this.paEnviosCbo.TabIndex = 32;
-            this.paEnviosCbo.Text = "(todos)";
-            // 
-            // devAnterioresDataGridView
-            // 
-            this.devAnterioresDataGridView.AllowUserToAddRows = false;
-            this.devAnterioresDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.devAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.devAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.devAnterioresDataGridView.Location = new System.Drawing.Point(3, 3);
-            this.devAnterioresDataGridView.MultiSelect = false;
-            this.devAnterioresDataGridView.Name = "devAnterioresDataGridView";
-            this.devAnterioresDataGridView.ReadOnly = true;
-            this.devAnterioresDataGridView.RowHeadersWidth = 4;
-            this.devAnterioresDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.devAnterioresDataGridView.Size = new System.Drawing.Size(811, 396);
-            this.devAnterioresDataGridView.TabIndex = 1;
-            // 
-            // ucPnlTop
-            // 
-            this.ucPnlTop.BackColor = System.Drawing.Color.Red;
-            this.ucPnlTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ucPnlTop.Controls.Add(this.btnBuscar);
-            this.ucPnlTop.Controls.Add(this.btnEliminar);
-            this.ucPnlTop.Controls.Add(this.btnIniciar);
-            this.ucPnlTop.Controls.Add(this.btnImprimir);
-            this.ucPnlTop.Controls.Add(this.btnVer);
-            this.ucPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ucPnlTop.Location = new System.Drawing.Point(0, 0);
-            this.ucPnlTop.Name = "ucPnlTop";
-            this.ucPnlTop.Size = new System.Drawing.Size(825, 32);
-            this.ucPnlTop.TabIndex = 7;
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnBuscar.Enabled = false;
-            this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnBuscar.FlatAppearance.BorderSize = 2;
-            this.btnBuscar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBuscar.ForeColor = System.Drawing.Color.White;
-            this.btnBuscar.Location = new System.Drawing.Point(88, 3);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscar.TabIndex = 1;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = false;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnEliminar.Enabled = false;
-            this.btnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnEliminar.FlatAppearance.BorderSize = 2;
-            this.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminar.ForeColor = System.Drawing.Color.White;
-            this.btnEliminar.Location = new System.Drawing.Point(7, 3);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 0;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = false;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // btnIniciar
-            // 
-            this.btnIniciar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.btnIniciar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnIniciar.Enabled = false;
-            this.btnIniciar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnIniciar.FlatAppearance.BorderSize = 2;
-            this.btnIniciar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnIniciar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIniciar.ForeColor = System.Drawing.Color.White;
-            this.btnIniciar.Location = new System.Drawing.Point(331, 3);
-            this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(75, 23);
-            this.btnIniciar.TabIndex = 4;
-            this.btnIniciar.Tag = "INICIAR";
-            this.btnIniciar.Text = "Iniciar";
-            this.btnIniciar.UseVisualStyleBackColor = false;
-            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
-            // 
-            // btnImprimir
-            // 
-            this.btnImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnImprimir.Enabled = false;
-            this.btnImprimir.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnImprimir.FlatAppearance.BorderSize = 2;
-            this.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimir.ForeColor = System.Drawing.Color.White;
-            this.btnImprimir.Location = new System.Drawing.Point(250, 3);
-            this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(75, 23);
-            this.btnImprimir.TabIndex = 3;
-            this.btnImprimir.Text = "Confirmar";
-            this.btnImprimir.UseVisualStyleBackColor = false;
-            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
-            // 
-            // btnVer
-            // 
-            this.btnVer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.btnVer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnVer.Enabled = false;
-            this.btnVer.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnVer.FlatAppearance.BorderSize = 2;
-            this.btnVer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnVer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVer.ForeColor = System.Drawing.Color.White;
-            this.btnVer.Location = new System.Drawing.Point(170, 3);
-            this.btnVer.Name = "btnVer";
-            this.btnVer.Size = new System.Drawing.Size(75, 23);
-            this.btnVer.TabIndex = 2;
-            this.btnVer.Text = "Ver";
-            this.btnVer.UseVisualStyleBackColor = false;
-            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList1.ImageSize = new System.Drawing.Size(1, 24);
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // fraBuscar
             // 
-            this.fraBuscar.BackColor = System.Drawing.Color.Transparent;
+            this.fraBuscar.BackColor = System.Drawing.Color.WhiteSmoke;
             this.fraBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.fraBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.fraBuscar.Controls.Add(this.lvBuscar);
@@ -2027,8 +1821,8 @@ namespace Catalogo._rendiciones
             // 
             // lvBuscar
             // 
-            this.lvBuscar.BackColor = System.Drawing.Color.White;
-            this.lvBuscar.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvBuscar.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lvBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lvBuscar.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fndNroRendicionLv,
             this.fndFechaRendicionLv,
@@ -2131,10 +1925,196 @@ namespace Catalogo._rendiciones
             this._optBuscar_0.Text = "Nº de Rendición";
             this._optBuscar_0.UseVisualStyleBackColor = false;
             // 
+            // rTabAnt
+            // 
+            this.rTabAnt.BackColor = System.Drawing.Color.Transparent;
+            this.rTabAnt.Controls.Add(this.paDataGridView);
+            this.rTabAnt.Controls.Add(this.paPnlTop);
+            this.rTabAnt.Controls.Add(this.devAnterioresDataGridView);
+            this.rTabAnt.Location = new System.Drawing.Point(4, 24);
+            this.rTabAnt.Name = "rTabAnt";
+            this.rTabAnt.Padding = new System.Windows.Forms.Padding(3);
+            this.rTabAnt.Size = new System.Drawing.Size(817, 405);
+            this.rTabAnt.TabIndex = 4;
+            this.rTabAnt.Text = "Anteriores";
+            // 
+            // paDataGridView
+            // 
+            this.paDataGridView.AllowUserToAddRows = false;
+            this.paDataGridView.AllowUserToDeleteRows = false;
+            this.paDataGridView.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.paDataGridView.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.paDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.paDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.paDataGridView.GridColor = System.Drawing.SystemColors.Control;
+            this.paDataGridView.Location = new System.Drawing.Point(3, 45);
+            this.paDataGridView.MultiSelect = false;
+            this.paDataGridView.Name = "paDataGridView";
+            this.paDataGridView.ReadOnly = true;
+            this.paDataGridView.RowHeadersWidth = 4;
+            this.paDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.paDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.paDataGridView.Size = new System.Drawing.Size(811, 357);
+            this.paDataGridView.TabIndex = 3;
+            // 
+            // paPnlTop
+            // 
+            this.paPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.paPnlTop.Controls.Add(this.EnviarBtn);
+            this.paPnlTop.Controls.Add(this.paEnviosCbo);
+            this.paPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.paPnlTop.Location = new System.Drawing.Point(3, 3);
+            this.paPnlTop.Name = "paPnlTop";
+            this.paPnlTop.Size = new System.Drawing.Size(811, 42);
+            this.paPnlTop.TabIndex = 2;
+            // 
+            // EnviarBtn
+            // 
+            this.EnviarBtn.BackColor = System.Drawing.Color.Transparent;
+            this.EnviarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.EnviarBtn.FlatAppearance.BorderSize = 0;
+            this.EnviarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnviarBtn.Location = new System.Drawing.Point(225, 10);
+            this.EnviarBtn.Name = "EnviarBtn";
+            this.EnviarBtn.Size = new System.Drawing.Size(75, 23);
+            this.EnviarBtn.TabIndex = 41;
+            this.EnviarBtn.Text = "Enviar";
+            this.EnviarBtn.UseVisualStyleBackColor = false;
+            // 
+            // paEnviosCbo
+            // 
+            this.paEnviosCbo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.paEnviosCbo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.paEnviosCbo.FormattingEnabled = true;
+            this.paEnviosCbo.Items.AddRange(new object[] {
+            "(todos)",
+            "Enviados",
+            "NO Enviados"});
+            this.paEnviosCbo.Location = new System.Drawing.Point(5, 9);
+            this.paEnviosCbo.Name = "paEnviosCbo";
+            this.paEnviosCbo.Size = new System.Drawing.Size(214, 23);
+            this.paEnviosCbo.TabIndex = 32;
+            this.paEnviosCbo.Text = "(todos)";
+            // 
+            // devAnterioresDataGridView
+            // 
+            this.devAnterioresDataGridView.AllowUserToAddRows = false;
+            this.devAnterioresDataGridView.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.devAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.devAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.devAnterioresDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.devAnterioresDataGridView.MultiSelect = false;
+            this.devAnterioresDataGridView.Name = "devAnterioresDataGridView";
+            this.devAnterioresDataGridView.ReadOnly = true;
+            this.devAnterioresDataGridView.RowHeadersWidth = 4;
+            this.devAnterioresDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.devAnterioresDataGridView.Size = new System.Drawing.Size(811, 399);
+            this.devAnterioresDataGridView.TabIndex = 1;
+            // 
+            // ucPnlTop
+            // 
+            this.ucPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.ucPnlTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ucPnlTop.Controls.Add(this.btnIniciar);
+            this.ucPnlTop.Controls.Add(this.btnImprimir);
+            this.ucPnlTop.Controls.Add(this.btnVer);
+            this.ucPnlTop.Controls.Add(this.btnBuscar);
+            this.ucPnlTop.Controls.Add(this.btnEliminar);
+            this.ucPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ucPnlTop.Location = new System.Drawing.Point(0, 0);
+            this.ucPnlTop.Name = "ucPnlTop";
+            this.ucPnlTop.Size = new System.Drawing.Size(825, 32);
+            this.ucPnlTop.TabIndex = 7;
+            // 
+            // btnIniciar
+            // 
+            this.btnIniciar.BackColor = System.Drawing.Color.Transparent;
+            this.btnIniciar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnIniciar.Enabled = false;
+            this.btnIniciar.FlatAppearance.BorderSize = 0;
+            this.btnIniciar.Location = new System.Drawing.Point(327, 3);
+            this.btnIniciar.Name = "btnIniciar";
+            this.btnIniciar.Size = new System.Drawing.Size(75, 23);
+            this.btnIniciar.TabIndex = 7;
+            this.btnIniciar.Tag = "INICIAR";
+            this.btnIniciar.Text = "Iniciar";
+            this.btnIniciar.UseVisualStyleBackColor = false;
+            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackColor = System.Drawing.Color.Transparent;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnImprimir.Enabled = false;
+            this.btnImprimir.FlatAppearance.BorderSize = 0;
+            this.btnImprimir.Location = new System.Drawing.Point(246, 3);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(75, 23);
+            this.btnImprimir.TabIndex = 6;
+            this.btnImprimir.Text = "Confirmar";
+            this.btnImprimir.UseVisualStyleBackColor = false;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            // 
+            // btnVer
+            // 
+            this.btnVer.BackColor = System.Drawing.Color.Transparent;
+            this.btnVer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnVer.Enabled = false;
+            this.btnVer.FlatAppearance.BorderSize = 0;
+            this.btnVer.Location = new System.Drawing.Point(165, 3);
+            this.btnVer.Name = "btnVer";
+            this.btnVer.Size = new System.Drawing.Size(75, 23);
+            this.btnVer.TabIndex = 5;
+            this.btnVer.Text = "Ver";
+            this.btnVer.UseVisualStyleBackColor = false;
+            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.btnBuscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnBuscar.Enabled = false;
+            this.btnBuscar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnBuscar.FlatAppearance.BorderSize = 2;
+            this.btnBuscar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.btnBuscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBuscar.ForeColor = System.Drawing.Color.White;
+            this.btnBuscar.Location = new System.Drawing.Point(88, 3);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscar.TabIndex = 1;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.btnEliminar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnEliminar.FlatAppearance.BorderSize = 2;
+            this.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminar.ForeColor = System.Drawing.Color.White;
+            this.btnEliminar.Location = new System.Drawing.Point(7, 3);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btnEliminar.TabIndex = 0;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
             // ucRendiciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Controls.Add(this.sTAB);
             this.Controls.Add(this.ucPnlTop);
@@ -2155,13 +2135,13 @@ namespace Catalogo._rendiciones
             this.fraDatos1.ResumeLayout(false);
             this.fraDatos1.PerformLayout();
             this.rTabBuscar.ResumeLayout(false);
+            this.fraBuscar.ResumeLayout(false);
+            this.fraBuscar.PerformLayout();
             this.rTabAnt.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.paDataGridView)).EndInit();
             this.paPnlTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.devAnterioresDataGridView)).EndInit();
             this.ucPnlTop.ResumeLayout(false);
-            this.fraBuscar.ResumeLayout(false);
-            this.fraBuscar.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2174,7 +2154,6 @@ namespace Catalogo._rendiciones
         private System.Windows.Forms.DataGridView devAnterioresDataGridView;
         private System.Windows.Forms.Panel paPnlTop;
         private System.Windows.Forms.ComboBox paEnviosCbo;
-        private System.Windows.Forms.Button paEnviarBtn;
         private System.Windows.Forms.DataGridView paDataGridView;
         private System.Windows.Forms.TabPage rTabRec;
         private System.Windows.Forms.TabPage rTabBuscar;
@@ -2297,9 +2276,6 @@ namespace Catalogo._rendiciones
         private System.Windows.Forms.Panel ucPnlTop;
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Button btnIniciar;
-        private System.Windows.Forms.Button btnImprimir;
-        private System.Windows.Forms.Button btnVer;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Panel fraBuscar;
         private System.Windows.Forms.ListView lvBuscar;
@@ -2311,5 +2287,9 @@ namespace Catalogo._rendiciones
         public System.Windows.Forms.TextBox txtBuscar;
         public System.Windows.Forms.RadioButton _optBuscar_1;
         public System.Windows.Forms.RadioButton _optBuscar_0;
+        private System.Windows.Forms.Button EnviarBtn;
+        private System.Windows.Forms.Button btnIniciar;
+        private System.Windows.Forms.Button btnImprimir;
+        private System.Windows.Forms.Button btnVer;
     }
 }

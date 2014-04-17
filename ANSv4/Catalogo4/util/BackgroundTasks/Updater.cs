@@ -26,41 +26,46 @@ namespace Catalogo.util.BackgroundTasks
         private String ipPrivado;
         private String ipIntranet;
         private String ipCatalogo;
-        private bool _usarSettingsIni;
-
+ 
         private string resultMessage;
         private bool result;
 
         public override void execute()
         {
-            if (_usarSettingsIni)
+            if (Global01.ipSettingIni)
             {
                 ipPrivado = Global01.URL_ANS;
                 ipIntranet = Global01.URL_ANS2;
-                ipCatalogo = Global01.URL_ANS;
+                //ipCatalogo = Global01.URL_ANS;
             }
             else
             {
-                IPPrivado ipPriv = new IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
+                IPPrivado ipPriv = new IPPrivado(Global01.URL_ANS, Global01.IDMaquina);
                 ipPrivado = ipPriv.GetIP();
                 ipIntranet = ipPriv.GetIpIntranet();
-                ipCatalogo = ipPriv.GetIPCatalogo();
+                //ipCatalogo = ipPriv.GetIPCatalogo();
             }
-
-            if (ipCatalogo.Length == 0)
+            
+            if (ipPrivado.Length == 0 || ipIntranet.Length == 0)
             {
-                if (_modo != UpdateType.UpdateAppConfig)
-                {
-                    resultMessage = "El DNS no puede resolver la direccion IP";
-                }
+                //  Hide
                 return;
             }
+
+            //if (ipPrivado.Length == 0)
+            //{
+            //    if (_modo != UpdateType.UpdateAppConfig)
+            //    {
+            //        resultMessage = "El DNS no puede resolver la direccion IP";
+            //    }
+            //    return;
+            //}
 
             switch (_modo)
             {
                 case UpdateType.UpdateCuentas:
                     {
-                        Catalogo._clientes.UpdateClientes envio = new _clientes.UpdateClientes(Global01.Conexion, Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+                        Catalogo._clientes.UpdateClientes envio = new _clientes.UpdateClientes(Global01.IDMaquina, ipPrivado, ipIntranet);
                         envio.attachReceptor(this);
                         envio.attachCancellableReceptor(this);
                         if (envio.inicializado)
@@ -71,7 +76,7 @@ namespace Catalogo.util.BackgroundTasks
                     break;
                 case UpdateType.UpdateAppConfig:
                     {
-                        Catalogo._application.UpdateAppConfig envio = new _application.UpdateAppConfig(Global01.IDMaquina, ipPrivado, ipIntranet, false, "", Global01.Conexion);
+                        Catalogo._application.UpdateAppConfig envio = new _application.UpdateAppConfig(Global01.IDMaquina, ipPrivado, ipIntranet);
                         if (envio.Inicializado)
                         {
                             envio.sincronizarApp();
@@ -80,7 +85,7 @@ namespace Catalogo.util.BackgroundTasks
                     break;
                 case UpdateType.ActivarApp:
                     {
-                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina, ipPrivado, ipIntranet);
                         if (app.Inicializao)
                         {
                             app.activar();
@@ -89,7 +94,7 @@ namespace Catalogo.util.BackgroundTasks
                     break;
                 case UpdateType.EstadoActual:
                     {
-                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina, ipPrivado, ipIntranet);
                         if (app.Inicializao)
                         {
                             app.estadoActual();
@@ -98,7 +103,7 @@ namespace Catalogo.util.BackgroundTasks
                     break;
                 case UpdateType.ListaPrecio:
                     {
-                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+                        Catalogo._Application.ActivarAplicacion app = new _Application.ActivarAplicacion(Global01.IDMaquina, ipPrivado, ipIntranet);
                         if (app.Inicializao)
                         {
                             app.listaPrecio();
@@ -125,11 +130,10 @@ namespace Catalogo.util.BackgroundTasks
             //System.Windows.Forms.MessageBox.Show("hasta acá todo va bien");
         }
 
-        public Updater(JOB_TYPE jobType, UpdateType modo, bool usarSettingsIni)
+        public Updater(JOB_TYPE jobType, UpdateType modo)
             : base(jobType)
         {
             _modo = modo;
-            _usarSettingsIni = usarSettingsIni;
             result = true;
             resultMessage = "";
         }
@@ -138,9 +142,9 @@ namespace Catalogo.util.BackgroundTasks
         {
             try
             {
-                if (!_usarSettingsIni)
+                if (!Global01.ipSettingIni)
                 {
-                    IPPrivado ipPriv = new IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
+                    IPPrivado ipPriv = new IPPrivado(Global01.URL_ANS, Global01.IDMaquina);
                     ipPrivado = ipPriv.GetIP();
                     ipIntranet = ipPriv.GetIpIntranet();
                 }
@@ -156,7 +160,7 @@ namespace Catalogo.util.BackgroundTasks
                     return;
                 }
 
-                Catalogo._auditor.EnvioAuditoria envAudit = new _auditor.EnvioAuditoria(Global01.IDMaquina, ipPrivado, ipIntranet, false, "");
+                Catalogo._auditor.EnvioAuditoria envAudit = new _auditor.EnvioAuditoria(Global01.IDMaquina, ipPrivado, ipIntranet);
                 if (envAudit.Inicializado)
                 {
                     if (Global01.TranActiva == null)

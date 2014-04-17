@@ -56,8 +56,10 @@ namespace Catalogo
        public static bool xError;
        public static string URL_ANS;
        public static string URL_ANS2;
+       public static string proxyServerAddress;
        public static string MainWindowCaption;
        public static bool NoConn;
+       public static bool ipSettingIni;
        public static int MiBuild;
        public static byte ListaPrecio;
        public static float Dolar;

@@ -13,14 +13,9 @@ namespace Catalogo._auditor
         private AuditWS.audit_v_304 cliente;
         private bool webServiceInicializado;
 
-        public EnvioAuditoria(string MacAddress,
-            string ipAddress,
-            string ipAddressIntranet,
-            bool usaProxy,
-            string proxyServerAddress)
+        public EnvioAuditoria(string MacAddress, string ipAddress, string ipAddressIntranet)
         {
-            inicializar(MacAddress, ipAddress,
-                ipAddressIntranet, usaProxy, proxyServerAddress);
+            inicializar(MacAddress, ipAddress, ipAddressIntranet);
         }
 
         public bool Inicializado
@@ -31,11 +26,7 @@ namespace Catalogo._auditor
             }
         }
 
-        public void inicializar(string MacAddress,
-            string ipAddress,
-            string ipAddressIntranet,
-            bool usaProxy,
-            string proxyServerAddress)
+        public void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
         {
             bool conectado = util.SimplePing.ping(ipAddress, 5000);
 
@@ -52,9 +43,9 @@ namespace Catalogo._auditor
                     {
                         cliente = new AuditWS.audit_v_304();
                         cliente.Url = "http://" + ipAddress + "/wsCatalogo4/audit_v_304.asmx?wsdl";
-                        if (usaProxy)
+                        if (Global01.proxyServerAddress != "0.0.0.0")
                         {
-                            cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                            cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                         }
                         _MacAddress = MacAddress;
                         _ipAddress = ipAddress;
@@ -74,9 +65,9 @@ namespace Catalogo._auditor
                     // Intento con el ip interno
                     cliente = new AuditWS.audit_v_304();
                     cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/audit_v_304.asmx?wsdl";
-                    if (usaProxy)
+                    if (Global01.proxyServerAddress != "0.0.0.0")
                     {
-                        cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                     }
 
                     _MacAddress = MacAddress;

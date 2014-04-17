@@ -21,16 +21,16 @@ namespace Catalogo.util.BackgroundTasks
             while (_running)
             {
                 System.Diagnostics.Debug.WriteLine("CHEQUEANDO NOVEDADES");
-                util.IPPrivado ipPriv = new util.IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
+                util.IPPrivado ipPriv = new util.IPPrivado(Global01.URL_ANS, Global01.IDMaquina);
                 // TODO: agregar la configuracion del proxy
                 string ipPrivado = ipPriv.GetIP();
                 string ipIntranet = ipPriv.GetIpIntranet();
-                string ipCatalogo = ipPriv.GetIPCatalogo();
+                //string ipCatalogo = ipPriv.GetIPCatalogo();
 
                 // Aca va el codigo para chequear si hay novedades en el server.
 
 /*                Catalogo._existencia.VerExistencia existencia = new Catalogo._existencia.VerExistencia();
-                existencia.Inicializar("3PRUEBA-CATALOGO-4", ipPrivado, ipIntranet, false, "");
+                existencia.Inicializar("3PRUEBA-CATALOGO-4", ipPrivado, ipIntranet);
 
                 string pSemaforo = "";
                 existencia.ExistenciaSemaforo(_idProducto, Global01.NroUsuario, ref pSemaforo);

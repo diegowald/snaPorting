@@ -7,7 +7,7 @@ namespace Catalogo.util.errorHandling
 {
     public class ErrorLogger
     {
-        public static String AppErrorLogFileName = "./Reportes/ans.log";
+        public static String AppErrorLogFileName = Global01.AppPath + "\\Reportes\\ans.log";
 
         /// <summary>
         /// Log any messages from the Application

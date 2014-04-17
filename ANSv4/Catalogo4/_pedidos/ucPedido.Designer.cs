@@ -30,8 +30,8 @@ namespace Catalogo._pedidos
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PedidoTab = new System.Windows.Forms.TabControl();
             this.nvActTab = new System.Windows.Forms.TabPage();
             this.nvPnlMain = new System.Windows.Forms.Panel();
@@ -64,7 +64,7 @@ namespace Catalogo._pedidos
             this.nvAntTab = new System.Windows.Forms.TabPage();
             this.paDataGridView = new System.Windows.Forms.DataGridView();
             this.paPnlTop = new System.Windows.Forms.Panel();
-            this.paEnviarBtn = new System.Windows.Forms.Button();
+            this.EnviarBtn = new System.Windows.Forms.Button();
             this.paEnviosCbo = new System.Windows.Forms.ComboBox();
             this.PedidoAnterioresDataGridView = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -118,14 +118,14 @@ namespace Catalogo._pedidos
             // 
             this.nvPnlMain.Controls.Add(this.nvlistView);
             this.nvPnlMain.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.nvPnlMain.Location = new System.Drawing.Point(3, 43);
+            this.nvPnlMain.Location = new System.Drawing.Point(3, 47);
             this.nvPnlMain.Name = "nvPnlMain";
-            this.nvPnlMain.Size = new System.Drawing.Size(854, 303);
+            this.nvPnlMain.Size = new System.Drawing.Size(837, 303);
             this.nvPnlMain.TabIndex = 1;
             // 
             // nvlistView
             // 
-            this.nvlistView.BackColor = System.Drawing.SystemColors.Control;
+            this.nvlistView.BackColor = System.Drawing.Color.WhiteSmoke;
             this.nvlistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.nvlistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.nvCodigoLv,
@@ -148,7 +148,7 @@ namespace Catalogo._pedidos
             this.nvlistView.Location = new System.Drawing.Point(0, 0);
             this.nvlistView.MultiSelect = false;
             this.nvlistView.Name = "nvlistView";
-            this.nvlistView.Size = new System.Drawing.Size(854, 303);
+            this.nvlistView.Size = new System.Drawing.Size(837, 303);
             this.nvlistView.TabIndex = 4;
             this.nvlistView.Tag = "nada";
             this.nvlistView.UseCompatibleStateImageBehavior = false;
@@ -209,7 +209,7 @@ namespace Catalogo._pedidos
             // 
             // nvPnlTop
             // 
-            this.nvPnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(209)))), ((int)(((byte)(210)))));
+            this.nvPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
             this.nvPnlTop.Controls.Add(this.nvEsOfertaChk);
             this.nvPnlTop.Controls.Add(this.nvTransporteBuscarBtn);
             this.nvPnlTop.Controls.Add(this.nvComprarBtn);
@@ -226,14 +226,14 @@ namespace Catalogo._pedidos
             this.nvPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.nvPnlTop.Location = new System.Drawing.Point(3, 3);
             this.nvPnlTop.Name = "nvPnlTop";
-            this.nvPnlTop.Size = new System.Drawing.Size(854, 42);
+            this.nvPnlTop.Size = new System.Drawing.Size(837, 47);
             this.nvPnlTop.TabIndex = 0;
             // 
             // nvEsOfertaChk
             // 
             this.nvEsOfertaChk.AutoSize = true;
             this.nvEsOfertaChk.Enabled = false;
-            this.nvEsOfertaChk.Location = new System.Drawing.Point(127, 20);
+            this.nvEsOfertaChk.Location = new System.Drawing.Point(127, 21);
             this.nvEsOfertaChk.Name = "nvEsOfertaChk";
             this.nvEsOfertaChk.Size = new System.Drawing.Size(70, 17);
             this.nvEsOfertaChk.TabIndex = 40;
@@ -242,32 +242,29 @@ namespace Catalogo._pedidos
             // 
             // nvTransporteBuscarBtn
             // 
-            this.nvTransporteBuscarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.nvTransporteBuscarBtn.BackColor = System.Drawing.Color.Transparent;
             this.nvTransporteBuscarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.nvTransporteBuscarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.nvTransporteBuscarBtn.FlatAppearance.BorderSize = 2;
+            this.nvTransporteBuscarBtn.FlatAppearance.BorderSize = 0;
             this.nvTransporteBuscarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.nvTransporteBuscarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nvTransporteBuscarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nvTransporteBuscarBtn.ForeColor = System.Drawing.Color.White;
-            this.nvTransporteBuscarBtn.Location = new System.Drawing.Point(504, 17);
+            this.nvTransporteBuscarBtn.Location = new System.Drawing.Point(504, 15);
             this.nvTransporteBuscarBtn.Name = "nvTransporteBuscarBtn";
             this.nvTransporteBuscarBtn.Size = new System.Drawing.Size(30, 23);
             this.nvTransporteBuscarBtn.TabIndex = 39;
             this.nvTransporteBuscarBtn.Text = "...";
             this.nvTransporteBuscarBtn.UseVisualStyleBackColor = false;
+            this.nvTransporteBuscarBtn.Click += new System.EventHandler(this.nvTransporteBuscarBtn_Click);
             // 
             // nvComprarBtn
             // 
-            this.nvComprarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.nvComprarBtn.BackColor = System.Drawing.Color.Transparent;
             this.nvComprarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.nvComprarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.nvComprarBtn.FlatAppearance.BorderSize = 2;
+            this.nvComprarBtn.FlatAppearance.BorderSize = 0;
             this.nvComprarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.nvComprarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nvComprarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nvComprarBtn.ForeColor = System.Drawing.Color.White;
-            this.nvComprarBtn.Location = new System.Drawing.Point(60, 16);
+            this.nvComprarBtn.Location = new System.Drawing.Point(60, 13);
             this.nvComprarBtn.Name = "nvComprarBtn";
             this.nvComprarBtn.Size = new System.Drawing.Size(60, 25);
             this.nvComprarBtn.TabIndex = 38;
@@ -328,7 +325,7 @@ namespace Catalogo._pedidos
             this.nvTransporteCbo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.nvTransporteCbo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.nvTransporteCbo.FormattingEnabled = true;
-            this.nvTransporteCbo.Location = new System.Drawing.Point(286, 18);
+            this.nvTransporteCbo.Location = new System.Drawing.Point(286, 17);
             this.nvTransporteCbo.Name = "nvTransporteCbo";
             this.nvTransporteCbo.Size = new System.Drawing.Size(214, 21);
             this.nvTransporteCbo.TabIndex = 32;
@@ -345,7 +342,7 @@ namespace Catalogo._pedidos
             // nvDepositoCbo
             // 
             this.nvDepositoCbo.FormattingEnabled = true;
-            this.nvDepositoCbo.Location = new System.Drawing.Point(203, 18);
+            this.nvDepositoCbo.Location = new System.Drawing.Point(203, 17);
             this.nvDepositoCbo.Name = "nvDepositoCbo";
             this.nvDepositoCbo.Size = new System.Drawing.Size(77, 21);
             this.nvDepositoCbo.TabIndex = 30;
@@ -396,9 +393,10 @@ namespace Catalogo._pedidos
             this.paDataGridView.AllowUserToAddRows = false;
             this.paDataGridView.AllowUserToDeleteRows = false;
             this.paDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.paDataGridView.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.paDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.paDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.paDataGridView.GridColor = System.Drawing.SystemColors.Control;
@@ -416,8 +414,8 @@ namespace Catalogo._pedidos
             // 
             // paPnlTop
             // 
-            this.paPnlTop.BackColor = System.Drawing.Color.Transparent;
-            this.paPnlTop.Controls.Add(this.paEnviarBtn);
+            this.paPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.paPnlTop.Controls.Add(this.EnviarBtn);
             this.paPnlTop.Controls.Add(this.paEnviosCbo);
             this.paPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.paPnlTop.Location = new System.Drawing.Point(3, 3);
@@ -425,22 +423,19 @@ namespace Catalogo._pedidos
             this.paPnlTop.Size = new System.Drawing.Size(854, 42);
             this.paPnlTop.TabIndex = 2;
             // 
-            // paEnviarBtn
+            // EnviarBtn
             // 
-            this.paEnviarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.paEnviarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.paEnviarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.paEnviarBtn.FlatAppearance.BorderSize = 2;
-            this.paEnviarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.paEnviarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.paEnviarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paEnviarBtn.ForeColor = System.Drawing.Color.White;
-            this.paEnviarBtn.Location = new System.Drawing.Point(235, 6);
-            this.paEnviarBtn.Name = "paEnviarBtn";
-            this.paEnviarBtn.Size = new System.Drawing.Size(60, 27);
-            this.paEnviarBtn.TabIndex = 39;
-            this.paEnviarBtn.Text = "Enviar";
-            this.paEnviarBtn.UseVisualStyleBackColor = false;
+            this.EnviarBtn.BackColor = System.Drawing.Color.Transparent;
+            this.EnviarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.EnviarBtn.FlatAppearance.BorderSize = 0;
+            this.EnviarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnviarBtn.Location = new System.Drawing.Point(231, 9);
+            this.EnviarBtn.Name = "EnviarBtn";
+            this.EnviarBtn.Size = new System.Drawing.Size(75, 23);
+            this.EnviarBtn.TabIndex = 40;
+            this.EnviarBtn.Text = "Enviar";
+            this.EnviarBtn.UseVisualStyleBackColor = false;
+            this.EnviarBtn.Click += new System.EventHandler(this.EnviarBtn_Click);
             // 
             // paEnviosCbo
             // 
@@ -451,7 +446,7 @@ namespace Catalogo._pedidos
             "(todos)",
             "Enviados",
             "NO Enviados"});
-            this.paEnviosCbo.Location = new System.Drawing.Point(5, 9);
+            this.paEnviosCbo.Location = new System.Drawing.Point(5, 10);
             this.paEnviosCbo.Name = "paEnviosCbo";
             this.paEnviosCbo.Size = new System.Drawing.Size(214, 21);
             this.paEnviosCbo.TabIndex = 32;
@@ -462,8 +457,8 @@ namespace Catalogo._pedidos
             // 
             this.PedidoAnterioresDataGridView.AllowUserToAddRows = false;
             this.PedidoAnterioresDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.PedidoAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.PedidoAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.PedidoAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.PedidoAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PedidoAnterioresDataGridView.Location = new System.Drawing.Point(3, 3);
@@ -493,7 +488,7 @@ namespace Catalogo._pedidos
             // 
             // ucPnlTop
             // 
-            this.ucPnlTop.BackColor = System.Drawing.Color.Red;
+            this.ucPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ucPnlTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ucPnlTop.Controls.Add(this.cboCliente);
             this.ucPnlTop.Controls.Add(this.btnIniciar);
@@ -522,15 +517,11 @@ namespace Catalogo._pedidos
             // 
             // btnIniciar
             // 
-            this.btnIniciar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.btnIniciar.BackColor = System.Drawing.Color.Transparent;
             this.btnIniciar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnIniciar.Enabled = false;
-            this.btnIniciar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnIniciar.FlatAppearance.BorderSize = 2;
-            this.btnIniciar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnIniciar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIniciar.ForeColor = System.Drawing.Color.White;
-            this.btnIniciar.Location = new System.Drawing.Point(177, 3);
+            this.btnIniciar.FlatAppearance.BorderSize = 0;
+            this.btnIniciar.Location = new System.Drawing.Point(169, 3);
             this.btnIniciar.Name = "btnIniciar";
             this.btnIniciar.Size = new System.Drawing.Size(75, 23);
             this.btnIniciar.TabIndex = 2;
@@ -541,15 +532,11 @@ namespace Catalogo._pedidos
             // 
             // btnImprimir
             // 
-            this.btnImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.btnImprimir.BackColor = System.Drawing.Color.Transparent;
             this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnImprimir.Enabled = false;
-            this.btnImprimir.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnImprimir.FlatAppearance.BorderSize = 2;
-            this.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimir.ForeColor = System.Drawing.Color.White;
-            this.btnImprimir.Location = new System.Drawing.Point(96, 3);
+            this.btnImprimir.FlatAppearance.BorderSize = 0;
+            this.btnImprimir.Location = new System.Drawing.Point(88, 3);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(75, 23);
             this.btnImprimir.TabIndex = 1;
@@ -559,15 +546,11 @@ namespace Catalogo._pedidos
             // 
             // btnVer
             // 
-            this.btnVer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.btnVer.BackColor = System.Drawing.Color.Transparent;
             this.btnVer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnVer.Enabled = false;
-            this.btnVer.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnVer.FlatAppearance.BorderSize = 2;
-            this.btnVer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnVer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVer.ForeColor = System.Drawing.Color.White;
-            this.btnVer.Location = new System.Drawing.Point(15, 3);
+            this.btnVer.FlatAppearance.BorderSize = 0;
+            this.btnVer.Location = new System.Drawing.Point(7, 3);
             this.btnVer.Name = "btnVer";
             this.btnVer.Size = new System.Drawing.Size(75, 23);
             this.btnVer.TabIndex = 0;
@@ -579,6 +562,7 @@ namespace Catalogo._pedidos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Controls.Add(this.PedidoTab);
             this.Controls.Add(this.ucPnlTop);
@@ -645,7 +629,7 @@ namespace Catalogo._pedidos
         private System.Windows.Forms.CheckBox nvEsOfertaChk;
         private System.Windows.Forms.Panel paPnlTop;
         private System.Windows.Forms.ComboBox paEnviosCbo;
-        private System.Windows.Forms.Button paEnviarBtn;
         private System.Windows.Forms.DataGridView paDataGridView;
+        private System.Windows.Forms.Button EnviarBtn;
     }
 }

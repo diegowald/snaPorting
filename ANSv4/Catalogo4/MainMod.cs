@@ -10,22 +10,8 @@ namespace Catalogo
     static class MainMod
     {
 
-        //private //const string m_sMODULENAME_ = "MainMod";
-
-        public static void Main()
+         public static void Main()
         {
-            //const string PROCNAME_ = "Main";
-
-            // Las siguientes 2 lineas son para probar frmsettings
-//            Catalogo._preferencias.PreferenciasFrm frm = new _preferencias.PreferenciasFrm();
-//            frm.ShowDialog();
-            //--splash form
-            //Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
-            //splashthread.IsBackground = true;
-            //splashthread.Start();
-
-            //inicializaGlobales();
-
             valida_ubicacionDatos();
 
             update_mdb();
@@ -44,30 +30,22 @@ namespace Catalogo
             // Carga tabla de Productos en Segundo Plano
             preload.Preloader.instance.refresh();
 
-            load_header();         
-            
+            load_header(); 
+     
             //chequea comandos y mensajes desde el servidor
             if (Funciones.modINIs.ReadINI("DATOS", "INFO", "0") == "1") //Or vg.RecienRegistrado Or vg.NoConn
             {
-                util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig, false);
+                util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig);
                 updater.run();
             }
 
             valida_appLogin();
 
-            if (!Global01.AppActiva)
+            if (Global01.AppActiva)
             {
-                if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    ActivarApplicacion();
-                }
-            }
-            else
-            {
-
                 if (Global01.ActualizarClientes)
                 {   
-                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateCuentas, false);
+                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateCuentas);
                     updater.run();
                 }
 
@@ -82,9 +60,41 @@ namespace Catalogo
 
         private static void ActivarApplicacion()
         {
+            OleDbDataReader dr = null;
+            dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_appConfig2");
+            if (!dr.HasRows)
+            {
+                MessageBox.Show("Aplicación NO inicializada! (error=Version y Tipo), Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                miEnd();
+            }
+            else
+            {
+                dr.Read();
+
+                if (dr["appCVersion"].ToString().Substring(1, 3) != Global01.VersionApp.Substring(3, 3))
+                {
+                    MessageBox.Show("INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    miEnd();
+                }
+                else
+                {
+                    Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP", "0.0.0.0");
+                    if (Global01.URL_ANS != "0.0.0.0")
+                    {
+                        Global01.ipSettingIni = true;
+                    }
+                    else
+                    { 
+                        Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString(); 
+                    }
+                    Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
+                    Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
+                }
+            }
+
             util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
                util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
-               util.BackgroundTasks.Updater.UpdateType.ActivarApp, false);
+               util.BackgroundTasks.Updater.UpdateType.ActivarApp);
             updater.run();
         }
 
@@ -109,7 +119,17 @@ namespace Catalogo
                 }
 
                 Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP", "0.0.0.0");
-                if (Global01.URL_ANS == "0.0.0.0") { Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString(); }
+                if (Global01.URL_ANS != "0.0.0.0")
+                {
+                    Global01.ipSettingIni = true;
+                }
+                else
+                {
+                    Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString();
+                }
+
+
+                Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
 
                 Global01.ListaPrecio = DBNull.Value.Equals(dr["appCListaPrecio"]) ? (byte)(0) : (byte)(dr["appCListaPrecio"]);
                 Global01.MiBuild = DBNull.Value.Equals(dr["Build"]) ? (int)(0) : Int32.Parse(dr["Build"].ToString());
@@ -221,8 +241,8 @@ namespace Catalogo
  
             //- Registro y activación -------------XX
         AcaRegistro:
-            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            if (false)
+            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            //if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -246,7 +266,7 @@ namespace Catalogo
                     }
                     else
                     {
-                        MessageBox.Show("BIENVENDO A NUESTRO CATALOGO!.", "REGISTRADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("BIENVENIDO A NUESTRO CATALOGO!.", "REGISTRADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         goto AcaRegistro;
                     }
                 }
@@ -273,7 +293,12 @@ namespace Catalogo
                         }
                         else
                         {
-                            Global01.AppActiva = false;
+                            Global01.AppActiva = false;          
+                            if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                ActivarApplicacion();
+                                goto AcaRegistro;
+                            }
                         }
                     }
                 }
@@ -283,7 +308,7 @@ namespace Catalogo
                 // registrada y activa
                 Global01.AppActiva = true;
                 ///// BORRAR ESTA LINEA!!!!!!!
-                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
             }
             //--------------------------------------XX
         }
@@ -381,6 +406,7 @@ namespace Catalogo
             Global01.strConexionUs = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Us + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
             Global01.strConexionAd = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Ad + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
 
+            Global01.ipSettingIni = false;
             Global01.IDMaquina = Catalogo._registro.AppRegistro.ObtenerIDMaquina();
             Global01.IDMaquinaCRC = Funciones.modINIs.ReadINI("DATOS", "MachineId", "no");
             Global01.LLaveViajante = Funciones.modINIs.ReadINI("DATOS", "LlaveViajante", "no");

@@ -33,7 +33,6 @@
             this.MainPnl = new System.Windows.Forms.Panel();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.errormessage = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnIngresar = new System.Windows.Forms.Button();
             this.chkActualizarClientes = new System.Windows.Forms.CheckBox();
             this.txtPIN = new System.Windows.Forms.TextBox();
@@ -43,10 +42,11 @@
             this.txtPIN2 = new System.Windows.Forms.TextBox();
             this.TopPnl = new System.Windows.Forms.Panel();
             this.btnCerrar = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PnlFondoRojo.SuspendLayout();
             this.MainPnl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.TopPnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // PnlFondoRojo
@@ -95,7 +95,7 @@
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(75, 28);
             this.btnNuevo.TabIndex = 19;
-            this.btnNuevo.Text = "generar";
+            this.btnNuevo.Text = "Generar";
             this.btnNuevo.UseVisualStyleBackColor = false;
             this.btnNuevo.Visible = false;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
@@ -106,16 +106,6 @@
             this.errormessage.Name = "errormessage";
             this.errormessage.Size = new System.Drawing.Size(217, 23);
             this.errormessage.TabIndex = 17;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(273, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(75, 74);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
             // 
             // btnIngresar
             // 
@@ -132,7 +122,7 @@
             this.btnIngresar.Name = "btnIngresar";
             this.btnIngresar.Size = new System.Drawing.Size(75, 28);
             this.btnIngresar.TabIndex = 15;
-            this.btnIngresar.Text = "ingresar";
+            this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = false;
             this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
             // 
@@ -145,7 +135,7 @@
             this.chkActualizarClientes.Name = "chkActualizarClientes";
             this.chkActualizarClientes.Size = new System.Drawing.Size(124, 19);
             this.chkActualizarClientes.TabIndex = 14;
-            this.chkActualizarClientes.Text = "actualizar clientes";
+            this.chkActualizarClientes.Text = "Actualizar clientes";
             this.chkActualizarClientes.UseVisualStyleBackColor = true;
             this.chkActualizarClientes.CheckedChanged += new System.EventHandler(this.chkActualizarClientes_CheckedChanged);
             // 
@@ -172,23 +162,23 @@
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUsuario.ForeColor = System.Drawing.Color.Silver;
-            this.lblUsuario.Location = new System.Drawing.Point(15, 56);
+            this.lblUsuario.Location = new System.Drawing.Point(15, 42);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(19, 15);
+            this.lblUsuario.Size = new System.Drawing.Size(20, 16);
             this.lblUsuario.TabIndex = 11;
             this.lblUsuario.Text = "...";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(15, 31);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(15, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 15);
+            this.label1.Size = new System.Drawing.Size(94, 16);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Bienvenido ...";
+            this.label1.Text = "Bienvenido . . .";
             // 
             // txtPIN2
             // 
@@ -226,6 +216,17 @@
             this.btnCerrar.Text = "r";
             this.btnCerrar.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Catalogo.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(245, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(113, 87);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
             // fLogin
             // 
             this.AcceptButton = this.btnIngresar;
@@ -247,8 +248,8 @@
             this.PnlFondoRojo.ResumeLayout(false);
             this.MainPnl.ResumeLayout(false);
             this.MainPnl.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.TopPnl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

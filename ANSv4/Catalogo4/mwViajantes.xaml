@@ -172,7 +172,7 @@
                         </ad:DocumentPane>
 
                         <ad:DockablePane ad:ResizingPanel.ResizeWidth="150"  ShowHeader="True" >
-                            <ad:DockableContent x:Name="ContentMenu" Title="Menú"  DockableStyle="AutoHide" IsCloseable="False" >
+                            <ad:DockableContent x:Name="xContentMenu" Title="Menú">
                                 <!--Menus-->
                                 <Menu>
                                     <MenuItem Header="Sitio web de a.n.s." Click="xMenu1_web" Margin="0,20,0,0"/>

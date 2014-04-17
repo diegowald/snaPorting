@@ -509,5 +509,10 @@ namespace Catalogo._interdeposito
             }
         }
 
+        private void EnviarBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
     } //fin clase
 } //fin namespace

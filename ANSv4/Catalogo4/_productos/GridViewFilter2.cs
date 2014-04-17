@@ -494,7 +494,7 @@ namespace Catalogo._productos
             bool xBold = (float.Parse(dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cPorclinea].Value.ToString()) != 0 | xAplicoPorcentajeLinea);
             bool xOferta = (dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cControl].Value.ToString() == "O");
 
-            if ( xTipo == "prod_n")
+            if (xTipo == "prod_n")
             {
                 xColor = Color.Green;
                 s += " prod. nuevo;";
@@ -507,7 +507,7 @@ namespace Catalogo._productos
 
             if (xOferta)
             {
-                xColor = Color.Red; 
+                xColor = Color.Red;
                 s += " Oferta!;";
             }
 

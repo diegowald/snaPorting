@@ -113,9 +113,9 @@
             this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Location = new System.Drawing.Point(3, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 18);
+            this.label1.Size = new System.Drawing.Size(179, 18);
             this.label1.TabIndex = 6;
-            this.label1.Text = "inicializando aplicación . . .";
+            this.label1.Text = "Inicializando aplicación . . .";
             this.label1.UseWaitCursor = true;
             // 
             // progressBar2
