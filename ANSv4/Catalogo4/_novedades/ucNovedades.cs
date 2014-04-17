@@ -17,11 +17,20 @@ namespace Catalogo._novedades
         private DataTable dtNovedades = new DataTable();
         private DataView dvNovedades = new DataView();
 
+        private Catalogo.varios.FlashControl flash;
         public ucNovedades()
         {
             InitializeComponent();
+            flash = new varios.FlashControl();
+            this.splitC1.Panel1.Controls.Add(this.flash);
+
+            pictureBox.Dock = DockStyle.Fill;
+            webBrowser.Dock = DockStyle.Fill;
+            flash.Dock = DockStyle.Fill;
+
             //util.BackgroundTasks.ChequeoNovedades checker = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
             //checker.run();
+            downloadFiles = new Dictionary<string, DownloadStatus>();
         }
          
         private void ucNovedades_Load(object sender, EventArgs e)
@@ -243,6 +252,10 @@ namespace Catalogo._novedades
             }
             else if (pTipo == "texto")
             {
+                this.pictureBox.Visible = false;
+                this.webBrowser.Visible = true;
+                flash.Visible = false;
+                webBrowser.DocumentText = pUrl + pArchivo;
             }
             else if (pTipo == "pdf")
             {
@@ -250,17 +263,26 @@ namespace Catalogo._novedades
             }
             else if (pTipo == "imagen")
             {
+                this.pictureBox.Visible = true;
+                this.webBrowser.Visible = false;
+                flash.Visible = false;
+                string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
+                pictureBox.ImageLocation = dest;
             }
             else if (pTipo == "flash")
             {
+                pictureBox.Visible = false;
+                webBrowser.Visible = false;
+                flash.Visible = true;
+                flash.file = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
+                flash.play();
             }
 
 //solo a Los efectos de un ejemplo
             string sUrl = "file://" + Global01.AppPath + @"\reportes\htmldocs\Viajantes\scroller_newstic.html";
             string sUrl2 = "file://" + Global01.AppPath + @"\reportes\htmldocs\Clientes\scroller_newstic.html";
-            webBrowser1.Navigate(new Uri(sUrl));
-            webBrowser2.Navigate(new Uri(sUrl2));
-
+            //webBrowser1.Navigate(new Uri(sUrl));
+            webBrowser.Navigate(new Uri(sUrl2));
         }
 
         private void ejecutarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo)
@@ -429,13 +451,31 @@ namespace Catalogo._novedades
                         // Viene en la base, no se hace nada
                         break;
                     case "pdf":
-                        // Se descarga
+                        {
+                            // Se descarga
+                            if (row["url"] != DBNull.Value)
+                            {
+                                download((string)row["url"], (string) row["N_Archivo"], (int)row["id"]);
+                            }
+                        }
                         break;
                     case "imagen":
-                        // Se descarga
+                        {
+                            // Se descarga
+                            if (row["url"] != DBNull.Value)
+                            {
+                                download((string)row["url"], (string)row["N_Archivo"], (int)row["id"]);
+                            }
+                        }
                         break;
                     case "flash":
-                        // Se descarga
+                        {
+                            // Se descarga
+                            if (row["url"] != DBNull.Value)
+                            {
+                                download((string)row["url"], (string)row["N_Archivo"], (int)row["id"]);
+                            }
+                        }
                         break;
                     default:
                         break;
@@ -453,6 +493,66 @@ namespace Catalogo._novedades
             {
                 e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
             }
+        }
+
+        private enum DownloadStatus
+        {
+            Downloading,
+            DownloadError,
+            DownloadOK
+        };
+
+        private System.Collections.Generic.Dictionary<string, DownloadStatus> downloadFiles;
+
+        private void download(string url, string archivo, int id)
+        {
+            string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, archivo);
+            bool doDownload = true;
+            if (downloadFiles.ContainsKey(dest))
+            {
+                switch (downloadFiles[dest])
+                {
+                    case DownloadStatus.DownloadError:
+                        // aca hay que repetir
+                        break;
+                    case DownloadStatus.Downloading:
+                        // Ya se esta descargando no es necesario repetir.
+                        doDownload = false;
+                        break;
+                    case DownloadStatus.DownloadOK:
+                        // Ya se descargo. No es necesario repetir
+                        doDownload = false;
+                        break;
+                    default:
+                        // Aca no llegaria nunca... Just in case.
+                        doDownload = false;
+                        break;
+                }
+            }
+
+            if (doDownload)
+            {
+                downloadFiles[dest] = DownloadStatus.Downloading;
+                NovedadesDownloader download = new NovedadesDownloader(url+ archivo, dest, id);
+                download.onFileDownloaded += onFileDownloaded;
+                download.onFileDownloading += onFileDownloading;
+                download.onFileProblem += onFileProblem;
+                download.startDownload();
+            }
+        }
+
+        private void onFileDownloaded(object Tag, string Destino)
+        {
+            downloadFiles[Destino] = DownloadStatus.DownloadOK;
+        }
+
+        private void onFileProblem(object Tag, string Destino, string cause)
+        {
+            downloadFiles[Destino] = DownloadStatus.DownloadError;
+        }
+
+        private void onFileDownloading(object Tag, string Destino, int progress)
+        {
         }
 
     }
