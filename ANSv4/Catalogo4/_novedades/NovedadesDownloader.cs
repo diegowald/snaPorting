@@ -22,10 +22,18 @@ namespace Catalogo._novedades
         {
             try
             {
-                System.Net.WebClient downloader = new System.Net.WebClient();
-                downloader.DownloadFileCompleted += downloader_DownloadFileCompleted;
-                downloader.DownloadProgressChanged += downloader_DownloadProgressChanged;
-                downloader.DownloadFileAsync(new Uri(_URL), _Destino);
+                if (util.SimplePing.ping(_URL, 1000))
+                {
+                    System.Net.WebClient downloader = new System.Net.WebClient();
+                    downloader.DownloadFileCompleted += downloader_DownloadFileCompleted;
+                    downloader.DownloadProgressChanged += downloader_DownloadProgressChanged;
+                    downloader.DownloadFileAsync(new Uri(_URL), _Destino);
+                }
+                else
+                {
+                    // El archivo no existe en el server
+                    fireFileProblem(_URL + " no existe en el servidor");
+                }
             }
             catch (Exception ex)
             {

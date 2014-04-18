@@ -188,7 +188,8 @@ namespace Catalogo._novedades
                                    row.Cells["N_Archivo"].Value.ToString(),
                                    row.Cells["url"].Value.ToString(),
                                    row.Cells["Origen"].Value.ToString(),
-                                   row.Cells["Tipo"].Value.ToString());
+                                   row.Cells["Tipo"].Value.ToString(), 
+                                   int.Parse(row.Cells["id"].Value.ToString()));
                 }
             }
  
@@ -233,7 +234,8 @@ namespace Catalogo._novedades
                                        row.Cells["N_Archivo"].Value.ToString(),
                                        row.Cells["url"].Value.ToString(),
                                        row.Cells["Origen"].Value.ToString(),
-                                       row.Cells["Tipo"].Value.ToString());
+                                       row.Cells["Tipo"].Value.ToString(),
+                                       int.Parse(row.Cells["id"].Value.ToString()));
                     }
                 }
             }
@@ -244,7 +246,7 @@ namespace Catalogo._novedades
             }
         }
         
-        private void mostrarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo)
+        private void mostrarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo, int id)
         {
             if (pTipo == "url")
             {
@@ -255,7 +257,7 @@ namespace Catalogo._novedades
                 this.pictureBox.Visible = false;
                 this.webBrowser.Visible = true;
                 flash.Visible = false;
-                webBrowser.DocumentText = pUrl + pArchivo;
+                webBrowser.DocumentText = pUrl;
             }
             else if (pTipo == "pdf")
             {
@@ -266,7 +268,7 @@ namespace Catalogo._novedades
                 this.pictureBox.Visible = true;
                 this.webBrowser.Visible = false;
                 flash.Visible = false;
-                string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
+                string dest = String.Format("{0}\\imagenes\\Novedades\\{1}_{2}", Global01.AppPath, id, pArchivo);
                 pictureBox.ImageLocation = dest;
             }
             else if (pTipo == "flash")
@@ -274,7 +276,7 @@ namespace Catalogo._novedades
                 pictureBox.Visible = false;
                 webBrowser.Visible = false;
                 flash.Visible = true;
-                flash.file = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
+                flash.file = String.Format("{0}\\imagenes\\Novedades\\{1}_{2}", Global01.AppPath, id, pArchivo);
                 flash.play();
             }
 
@@ -325,7 +327,7 @@ namespace Catalogo._novedades
 
         private bool filtra(System.Data.DataRow row)
         {
-            if (row["zonas"] == DBNull.Value)
+            if (DBNull.Value.Equals(row["zonas"]))
             {
                 return true;
             }
@@ -369,7 +371,7 @@ namespace Catalogo._novedades
 
         private void procesarRegistro(System.Data.DataRow row)
         {
-            string tipo = row["pTipo"] == DBNull.Value ? "" : (string)row["pTipo"];
+            string tipo = DBNull.Value.Equals(row["pTipo"]) ? "" : (string)row["pTipo"];
             tipo = tipo.ToUpper();
             switch (tipo)
             {
@@ -378,6 +380,14 @@ namespace Catalogo._novedades
                         MainMod.update_productos();
                         //Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
                         //existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
+                    }
+                    break;
+                case "UPDATECONFIG":
+                    {
+                    }
+                    break;
+                case "UPDATEPRODUCTOS":
+                    {
                     }
                     break;
                 default:
@@ -415,31 +425,6 @@ namespace Catalogo._novedades
 
         private void procesarInfoNovedades(DataTable dtNovedades)
         {
-            /*
-             *             if (pTipo == "url")
-            {
-                viene desde un campo en la base
-                System.Diagnostics.Process.Start(pUrl + pArchivo);
-            }
-            else if (pTipo == "texto")
-            {
-                viene desde un campo en la base
-
-            }
-            else if (pTipo == "pdf")
-            {
-                se decarga
-                System.Diagnostics.Process.Start(pUrl + pArchivo);
-            }
-            else if (pTipo == "imagen")
-            {
-                de descarga
-            }
-            else if (pTipo == "flash")
-            {
-                se descarga
-            }
-*/
             foreach (System.Data.DataRow row in dtNovedades.Rows)
             {
                 switch (row["Tipo"].ToString())
@@ -453,7 +438,7 @@ namespace Catalogo._novedades
                     case "pdf":
                         {
                             // Se descarga
-                            if (row["url"] != DBNull.Value)
+                            if (!DBNull.Value.Equals(row["url"]))
                             {
                                 download((string)row["url"], (string) row["N_Archivo"], (int)row["id"]);
                             }
@@ -462,7 +447,7 @@ namespace Catalogo._novedades
                     case "imagen":
                         {
                             // Se descarga
-                            if (row["url"] != DBNull.Value)
+                            if (!DBNull.Value.Equals(row["url"]))
                             {
                                 download((string)row["url"], (string)row["N_Archivo"], (int)row["id"]);
                             }
@@ -471,7 +456,7 @@ namespace Catalogo._novedades
                     case "flash":
                         {
                             // Se descarga
-                            if (row["url"] != DBNull.Value)
+                            if (!DBNull.Value.Equals(row["url"]))
                             {
                                 download((string)row["url"], (string)row["N_Archivo"], (int)row["id"]);
                             }
@@ -506,7 +491,7 @@ namespace Catalogo._novedades
 
         private void download(string url, string archivo, int id)
         {
-            string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, archivo);
+            string dest = String.Format("{0}\\imagenes\\Novedades\\{1}_{2}", Global01.AppPath, id, archivo);
             bool doDownload = true;
             if (downloadFiles.ContainsKey(dest))
             {
