@@ -22,7 +22,7 @@ namespace Catalogo.util.errorHandling
                 try
                 {
                     // Log message to default log file.
-                    System.IO.StreamWriter str = new System.IO.StreamWriter(AppErrorLogFileName);
+                    System.IO.StreamWriter str = new System.IO.StreamWriter(AppErrorLogFileName, true);
 
                     str.AutoFlush = true;   // Wri9te text with no buffering
                     str.WriteLine(new string('=', 40));
