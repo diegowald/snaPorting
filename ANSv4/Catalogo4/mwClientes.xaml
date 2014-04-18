@@ -104,19 +104,17 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="2"/>
                                         <RowDefinition Height="90" />
                                         <RowDefinition Height="2"/>
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
                                     <Grid x:Name="searchArea"   Grid.Row="0"  />
-                                    <Grid x:Name="productsArea" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                    <GridSplitter Grid.Row="2" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch"/>
-                                    <_productos:DetalleProducto Grid.Row="3" x:Name="productDetalle"/>
-                                    <GridSplitter Grid.Row="4" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment"  HorizontalAlignment="Stretch"/>
-                                    <Grid x:Name="PedidosDevolucionesArea"   Grid.Row="5">
-                                        <ad:DocumentPane x:Name="xVtaDevDockP" SelectedIndex="0" ad:ResizingPanel.ResizeHeight="250">
+                                    <Grid x:Name="productsArea" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>                                    
+                                    <_productos:DetalleProducto Grid.Row="2" x:Name="productDetalle"/>
+                                    <GridSplitter Grid.Row="3" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch"/>
+                                    <Grid x:Name="PedidosDevolucionesArea"   Grid.Row="4">
+                                        <ad:DocumentPane x:Name="xVtaDevDockP" SelectedIndex="0" ad:ResizingPanel.ResizeHeight="270">
                                             <ad:DockableContent Title="Nota de Venta" x:Name="xNotaVentaAreaDockC" IsCloseable="False">
                                                 <Grid Name="grNotaVenta">
                                                     <Grid.RowDefinitions>
