@@ -94,8 +94,8 @@ namespace Catalogo._productos
                         imgIzquierda.Source = new BitmapImage(new Uri(ImgLineaDefault, UriKind.Absolute));
                     }
 
-                    validateImagefile(ImgProducto);
-                    if (System.IO.File.Exists(ImgProducto))
+                    //validateImagefile(ImgProducto);
+                    if (isValidImage(ImgProducto) && !isImageDownloading(ImgProducto))
                     {
                         try
                         {
@@ -139,8 +139,15 @@ namespace Catalogo._productos
                 _Destino = Destino;
                 try
                 {
-                    //ImgWeb.DownloadFile(Origen, Destino);
-                    ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
+                    if (Catalogo.util.SimplePing.ping(Origen, 500))
+                    {
+                        //ImgWeb.DownloadFile(Origen, Destino);
+                        ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
+                    }
+                    else
+                    {
+                        util.errorHandling.ErrorLogger.LogMessage("No existe la imagen + " + Origen);
+                    }
                 }
                 catch (System.Web.HttpException ex)
                 {
@@ -157,12 +164,13 @@ namespace Catalogo._productos
         
         void ImgWeb_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
-            validateImagefile(_Destino);
-            if (System.IO.File.Exists(_Destino))
+            //validateImagefile(_Destino);
+            if (isValidImage(_Destino))
             {
                 try
                 {
                     imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
+                    _imgEnDescarga.Remove(_Destino);
                 }
                 catch (Exception ex)
                 {
@@ -179,30 +187,44 @@ namespace Catalogo._productos
             }
         }
 
-        private void validateImagefile(string fileName)
+        private bool isValidImage(string fileName)
         {
-            try
+            if (System.IO.File.Exists(fileName))
             {
-                if (System.IO.File.Exists(fileName))
-                {
-                    System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
-                    if (fi.Length == 0)
-                    {
-                        fi.Delete();
-                    }
-                }
+                System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
+                return fi.Length > 0;
             }
-            catch (System.IO.IOException ex)
+            else
             {
-                //throw ex;
-                util.errorHandling.ErrorLogger.LogMessage(ex);
-            }
-            catch (Exception ex)
-            {
-                //throw ex;
-                util.errorHandling.ErrorLogger.LogMessage(ex);
+                return false;
             }
         }
+
+
+        //private void validateImagefile(string fileName)
+        //{
+        //    try
+        //    {
+        //        if (System.IO.File.Exists(fileName))
+        //        {
+        //            System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
+        //            if (fi.Length == 0)
+        //            {
+        //                //fi.Delete();
+        //            }
+        //        }
+        //    }
+        //    catch (System.IO.IOException ex)
+        //    {
+        //        //throw ex;
+        //        util.errorHandling.ErrorLogger.LogMessage(ex);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //throw ex;
+        //        util.errorHandling.ErrorLogger.LogMessage(ex);
+        //    }
+        //}
 
 
         private System.Collections.Generic.List<string> _imgEnDescarga;
