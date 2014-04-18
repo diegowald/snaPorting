@@ -840,5 +840,10 @@ namespace Catalogo._devoluciones
                 cboCliente.SelectedIndex = dato;
         }
 
+        private void EnviarBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
     } //fin clase
 } //fin namespace

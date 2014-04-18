@@ -964,5 +964,20 @@ namespace Catalogo._pedidos
             }
         }
 
+        private void paEnviarBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nvTransporteBuscarBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EnviarBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
     } //fin clase
 } //fin namespace

@@ -26,11 +26,9 @@ namespace Catalogo._pedidos
 
         private System.Data.OleDb.OleDbConnection Conexion1;
 
-        public EnvioPedido(System.Data.OleDb.OleDbConnection Conexion,
-            string ipAddress, string ipAddressIntranet,
-            string MacAddress, bool usaProxy, string proxyServerAddress)
+        public EnvioPedido(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string ipAddressIntranet, string MacAddress)
         {
-            inicializar(ipAddress, ipAddressIntranet, MacAddress, usaProxy, proxyServerAddress);
+            inicializar(ipAddress, ipAddressIntranet, MacAddress);
             Conexion1 = Conexion;
         }
 
@@ -121,11 +119,7 @@ namespace Catalogo._pedidos
         }
 
 
-        public void inicializar(string ipAddress,
-            string ipAddressIntranet,
-            string MacAddress,
-            bool usaProxy,
-            string proxyServerAddress)
+        public void inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
         {
             bool conectado = util.SimplePing.ping(ipAddress, 5000);
             if (!conectado)
@@ -141,9 +135,9 @@ namespace Catalogo._pedidos
                     {
                         cliente = new PedidosWS.Pedidos();
                         cliente.Url = "http://" + ipAddress + "/wsCatalogo4/Pedidos.asmx?wsdl";
-                        if (usaProxy)
+                        if (Global01.proxyServerAddress != "0.0.0.0")
                         {
-                            cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                            cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                         }
 
                         _MacAddress = MacAddress;
@@ -162,9 +156,9 @@ namespace Catalogo._pedidos
                 {
                     cliente = new PedidosWS.Pedidos();
                     cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Pedidos.asmx?wsdl";
-                    if (usaProxy)
+                    if (Global01.proxyServerAddress != "0.0.0.0")
                     {
-                        cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                     }
 
                     _MacAddress = MacAddress;

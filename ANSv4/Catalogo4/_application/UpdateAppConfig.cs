@@ -17,14 +17,10 @@ namespace Catalogo._application
 
         private System.Data.OleDb.OleDbConnection conexion;
 
-        public UpdateAppConfig(string MacAddress,
-            string ipAddress, string ipAddressIntranet, 
-            bool usaProxy, string proxyServerAddress,
-            System.Data.OleDb.OleDbConnection Conexion)
+        public UpdateAppConfig(string MacAddress, string ipAddress, string ipAddressIntranet)
         {
-            inicializar(MacAddress, ipAddress, ipAddressIntranet,
-                usaProxy, proxyServerAddress);
-            conexion = Conexion;
+            inicializar(MacAddress, ipAddress, ipAddressIntranet);
+            conexion = Global01.Conexion;
         }
 
         public bool Inicializado
@@ -35,7 +31,7 @@ namespace Catalogo._application
             }
         }
 
-        protected void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet, bool usaProxy, string proxyServerAddress)
+        protected void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
         {
             bool conectado = util.SimplePing.ping(ipAddress, 5000);
 
@@ -51,9 +47,9 @@ namespace Catalogo._application
                     {
                         cliente = new AppConfigWS.appConfig();
                         cliente.Url = "http://" + ipAddress + "/wsCatalogo4/appConfig.asmx?wsdl";
-                        if (usaProxy)
+                        if (Global01.proxyServerAddress != "0.0.0.0")
                         {
-                            cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                            cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                         }
                         _macAddress = MacAddress;
                         _ipAddress = ipAddress;
@@ -71,9 +67,9 @@ namespace Catalogo._application
                 {
                     cliente = new AppConfigWS.appConfig();
                     cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/appConfig.asmx?wsdl";
-                    if (usaProxy)
+                    if (Global01.proxyServerAddress != "0.0.0.0")
                     {
-                        cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                     }
                     _macAddress = MacAddress;
                     webServiceInicializado = true;

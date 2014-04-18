@@ -51,7 +51,7 @@ namespace Catalogo._recibos
             this.rTabAnteriores = new System.Windows.Forms.TabPage();
             this.paDataGridView = new System.Windows.Forms.DataGridView();
             this.paPnlTop = new System.Windows.Forms.Panel();
-            this.paEnviarBtn = new System.Windows.Forms.Button();
+            this.EnviarBtn = new System.Windows.Forms.Button();
             this.paEnviosCbo = new System.Windows.Forms.ComboBox();
             this.rTabClienteNov = new System.Windows.Forms.TabPage();
             this.CliNPnlMain = new System.Windows.Forms.Panel();
@@ -63,6 +63,7 @@ namespace Catalogo._recibos
             this.label14 = new System.Windows.Forms.Label();
             this.rTabClienteDatos = new System.Windows.Forms.TabPage();
             this.CliDPnlMain = new System.Windows.Forms.Panel();
+            this.label28 = new System.Windows.Forms.Label();
             this.CliDDomicilioTxt = new System.Windows.Forms.TextBox();
             this.CliDEmailTxt = new System.Windows.Forms.TextBox();
             this.CliDObservacionesTxt = new System.Windows.Forms.TextBox();
@@ -144,9 +145,9 @@ namespace Catalogo._recibos
             this.raTCambio = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.raPnlTop = new System.Windows.Forms.Panel();
-            this.cvDivisasLbl = new System.Windows.Forms.Label();
             this.cvCancelarBtn = new System.Windows.Forms.Button();
-            this.cvAceptarBtn = new System.Windows.Forms.Button();
+            this.cvAgregarBtn = new System.Windows.Forms.Button();
+            this.cvDivisasLbl = new System.Windows.Forms.Label();
             this.cvCpaTxt = new System.Windows.Forms.TextBox();
             this.cvABahiaChk = new System.Windows.Forms.CheckBox();
             this.cvDeTerceroChk = new System.Windows.Forms.CheckBox();
@@ -175,11 +176,10 @@ namespace Catalogo._recibos
             this.rTabsRecibo = new System.Windows.Forms.TabControl();
             this.ucPnlTop = new System.Windows.Forms.Panel();
             this.btnResumen = new System.Windows.Forms.Button();
-            this.cboCliente = new System.Windows.Forms.ComboBox();
             this.btnIniciar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnVer = new System.Windows.Forms.Button();
-            this.label28 = new System.Windows.Forms.Label();
+            this.cboCliente = new System.Windows.Forms.ComboBox();
             ccFechaLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ccComprobanteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ccImporteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -303,7 +303,7 @@ namespace Catalogo._recibos
             // 
             // rTabAnteriores
             // 
-            this.rTabAnteriores.BackColor = System.Drawing.Color.Transparent;
+            this.rTabAnteriores.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rTabAnteriores.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabAnteriores.Controls.Add(this.paDataGridView);
             this.rTabAnteriores.Controls.Add(this.paPnlTop);
@@ -322,6 +322,7 @@ namespace Catalogo._recibos
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.paDataGridView.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.paDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.paDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.paDataGridView.GridColor = System.Drawing.SystemColors.Control;
@@ -339,7 +340,7 @@ namespace Catalogo._recibos
             // paPnlTop
             // 
             this.paPnlTop.BackColor = System.Drawing.Color.Transparent;
-            this.paPnlTop.Controls.Add(this.paEnviarBtn);
+            this.paPnlTop.Controls.Add(this.EnviarBtn);
             this.paPnlTop.Controls.Add(this.paEnviosCbo);
             this.paPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.paPnlTop.Location = new System.Drawing.Point(3, 3);
@@ -347,22 +348,19 @@ namespace Catalogo._recibos
             this.paPnlTop.Size = new System.Drawing.Size(778, 42);
             this.paPnlTop.TabIndex = 4;
             // 
-            // paEnviarBtn
+            // EnviarBtn
             // 
-            this.paEnviarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.paEnviarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.paEnviarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.paEnviarBtn.FlatAppearance.BorderSize = 2;
-            this.paEnviarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.paEnviarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.paEnviarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.paEnviarBtn.ForeColor = System.Drawing.Color.White;
-            this.paEnviarBtn.Location = new System.Drawing.Point(235, 6);
-            this.paEnviarBtn.Name = "paEnviarBtn";
-            this.paEnviarBtn.Size = new System.Drawing.Size(60, 27);
-            this.paEnviarBtn.TabIndex = 39;
-            this.paEnviarBtn.Text = "Enviar";
-            this.paEnviarBtn.UseVisualStyleBackColor = false;
+            this.EnviarBtn.BackColor = System.Drawing.Color.Transparent;
+            this.EnviarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.EnviarBtn.FlatAppearance.BorderSize = 0;
+            this.EnviarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EnviarBtn.Location = new System.Drawing.Point(225, 9);
+            this.EnviarBtn.Name = "EnviarBtn";
+            this.EnviarBtn.Size = new System.Drawing.Size(75, 23);
+            this.EnviarBtn.TabIndex = 42;
+            this.EnviarBtn.Text = "Enviar";
+            this.EnviarBtn.UseVisualStyleBackColor = false;
+            this.EnviarBtn.Click += new System.EventHandler(this.EnviarBtn_Click);
             // 
             // paEnviosCbo
             // 
@@ -382,7 +380,7 @@ namespace Catalogo._recibos
             // 
             // rTabClienteNov
             // 
-            this.rTabClienteNov.BackColor = System.Drawing.Color.Transparent;
+            this.rTabClienteNov.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rTabClienteNov.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabClienteNov.Controls.Add(this.CliNPnlMain);
             this.rTabClienteNov.Controls.Add(this.CliNPnlTop);
@@ -394,42 +392,44 @@ namespace Catalogo._recibos
             // 
             // CliNPnlMain
             // 
-            this.CliNPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CliNPnlMain.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.CliNPnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CliNPnlMain.Enabled = false;
-            this.CliNPnlMain.Location = new System.Drawing.Point(0, 79);
+            this.CliNPnlMain.Location = new System.Drawing.Point(0, 56);
             this.CliNPnlMain.Name = "CliNPnlMain";
-            this.CliNPnlMain.Size = new System.Drawing.Size(784, 316);
+            this.CliNPnlMain.Size = new System.Drawing.Size(784, 339);
             this.CliNPnlMain.TabIndex = 6;
             // 
             // CliNPnlTop
             // 
-            this.CliNPnlTop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CliNPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
             this.CliNPnlTop.Controls.Add(this.CliNAgregarBtn);
             this.CliNPnlTop.Controls.Add(this.CliNFechaDtp);
             this.CliNPnlTop.Controls.Add(this.label13);
             this.CliNPnlTop.Controls.Add(this.CliNNovedadTxt);
             this.CliNPnlTop.Controls.Add(this.label14);
+            this.CliNPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.CliNPnlTop.Enabled = false;
-            this.CliNPnlTop.Location = new System.Drawing.Point(0, 12);
+            this.CliNPnlTop.Location = new System.Drawing.Point(0, 0);
             this.CliNPnlTop.Name = "CliNPnlTop";
-            this.CliNPnlTop.Size = new System.Drawing.Size(784, 49);
+            this.CliNPnlTop.Size = new System.Drawing.Size(784, 56);
             this.CliNPnlTop.TabIndex = 5;
             // 
             // CliNAgregarBtn
             // 
-            this.CliNAgregarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.CliNAgregarBtn.BackColor = System.Drawing.Color.Transparent;
             this.CliNAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.CliNAgregarBtn.Enabled = false;
             this.CliNAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.CliNAgregarBtn.FlatAppearance.BorderSize = 0;
             this.CliNAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.CliNAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CliNAgregarBtn.ForeColor = System.Drawing.Color.White;
-            this.CliNAgregarBtn.Location = new System.Drawing.Point(554, 18);
+            this.CliNAgregarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CliNAgregarBtn.Location = new System.Drawing.Point(528, 25);
             this.CliNAgregarBtn.Name = "CliNAgregarBtn";
             this.CliNAgregarBtn.Size = new System.Drawing.Size(75, 25);
-            this.CliNAgregarBtn.TabIndex = 18;
+            this.CliNAgregarBtn.TabIndex = 64;
             this.CliNAgregarBtn.Text = "Agregar";
             this.CliNAgregarBtn.UseVisualStyleBackColor = false;
+            this.CliNAgregarBtn.Click += new System.EventHandler(this.CliNAgregarBtn_Click);
             // 
             // CliNFechaDtp
             // 
@@ -437,7 +437,7 @@ namespace Catalogo._recibos
             this.CliNFechaDtp.CustomFormat = "dd/MM/yyyy";
             this.CliNFechaDtp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CliNFechaDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.CliNFechaDtp.Location = new System.Drawing.Point(402, 21);
+            this.CliNFechaDtp.Location = new System.Drawing.Point(396, 27);
             this.CliNFechaDtp.Name = "CliNFechaDtp";
             this.CliNFechaDtp.Size = new System.Drawing.Size(120, 21);
             this.CliNFechaDtp.TabIndex = 17;
@@ -445,7 +445,7 @@ namespace Catalogo._recibos
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(399, 4);
+            this.label13.Location = new System.Drawing.Point(393, 11);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(41, 15);
             this.label13.TabIndex = 16;
@@ -454,7 +454,7 @@ namespace Catalogo._recibos
             // CliNNovedadTxt
             // 
             this.CliNNovedadTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliNNovedadTxt.Location = new System.Drawing.Point(12, 21);
+            this.CliNNovedadTxt.Location = new System.Drawing.Point(6, 27);
             this.CliNNovedadTxt.MaxLength = 32;
             this.CliNNovedadTxt.Name = "CliNNovedadTxt";
             this.CliNNovedadTxt.Size = new System.Drawing.Size(384, 21);
@@ -463,7 +463,7 @@ namespace Catalogo._recibos
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(9, 4);
+            this.label14.Location = new System.Drawing.Point(3, 11);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(56, 15);
             this.label14.TabIndex = 0;
@@ -471,7 +471,7 @@ namespace Catalogo._recibos
             // 
             // rTabClienteDatos
             // 
-            this.rTabClienteDatos.BackColor = System.Drawing.Color.Transparent;
+            this.rTabClienteDatos.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rTabClienteDatos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabClienteDatos.Controls.Add(this.CliDPnlMain);
             this.rTabClienteDatos.Location = new System.Drawing.Point(4, 27);
@@ -483,7 +483,7 @@ namespace Catalogo._recibos
             // 
             // CliDPnlMain
             // 
-            this.CliDPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CliDPnlMain.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.CliDPnlMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CliDPnlMain.Controls.Add(this.label28);
             this.CliDPnlMain.Controls.Add(this.CliDDomicilioTxt);
@@ -503,15 +503,24 @@ namespace Catalogo._recibos
             this.CliDPnlMain.Controls.Add(this.label23);
             this.CliDPnlMain.Controls.Add(this.label24);
             this.CliDPnlMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDPnlMain.Location = new System.Drawing.Point(84, 48);
+            this.CliDPnlMain.Location = new System.Drawing.Point(15, 18);
             this.CliDPnlMain.Name = "CliDPnlMain";
             this.CliDPnlMain.Size = new System.Drawing.Size(602, 312);
             this.CliDPnlMain.TabIndex = 1;
             this.CliDPnlMain.DoubleClick += new System.EventHandler(this.CliDPnlMain_DoubleClick);
             // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(187, 154);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(23, 18);
+            this.label28.TabIndex = 23;
+            this.label28.Text = "@";
+            // 
             // CliDDomicilioTxt
             // 
-            this.CliDDomicilioTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDDomicilioTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CliDDomicilioTxt.Location = new System.Drawing.Point(10, 100);
             this.CliDDomicilioTxt.Name = "CliDDomicilioTxt";
@@ -520,16 +529,14 @@ namespace Catalogo._recibos
             // 
             // CliDEmailTxt
             // 
-            this.CliDEmailTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDEmailTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDEmailTxt.Location = new System.Drawing.Point(192, 153);
+            this.CliDEmailTxt.Location = new System.Drawing.Point(216, 153);
             this.CliDEmailTxt.Name = "CliDEmailTxt";
             this.CliDEmailTxt.Size = new System.Drawing.Size(368, 21);
             this.CliDEmailTxt.TabIndex = 21;
             // 
             // CliDObservacionesTxt
             // 
-            this.CliDObservacionesTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDObservacionesTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CliDObservacionesTxt.Location = new System.Drawing.Point(10, 217);
             this.CliDObservacionesTxt.Multiline = true;
@@ -539,16 +546,14 @@ namespace Catalogo._recibos
             // 
             // CliDCuitTxt
             // 
-            this.CliDCuitTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDCuitTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliDCuitTxt.Location = new System.Drawing.Point(391, 51);
+            this.CliDCuitTxt.Location = new System.Drawing.Point(484, 51);
             this.CliDCuitTxt.Name = "CliDCuitTxt";
             this.CliDCuitTxt.Size = new System.Drawing.Size(100, 21);
             this.CliDCuitTxt.TabIndex = 19;
             // 
             // CliDTelefonoTxt
             // 
-            this.CliDTelefonoTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDTelefonoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CliDTelefonoTxt.Location = new System.Drawing.Point(10, 153);
             this.CliDTelefonoTxt.Name = "CliDTelefonoTxt";
@@ -557,7 +562,6 @@ namespace Catalogo._recibos
             // 
             // CliDLocalidadTxt
             // 
-            this.CliDLocalidadTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDLocalidadTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CliDLocalidadTxt.Location = new System.Drawing.Point(308, 100);
             this.CliDLocalidadTxt.Name = "CliDLocalidadTxt";
@@ -566,16 +570,14 @@ namespace Catalogo._recibos
             // 
             // CliDRazonSocialTxt
             // 
-            this.CliDRazonSocialTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDRazonSocialTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CliDRazonSocialTxt.Location = new System.Drawing.Point(116, 51);
             this.CliDRazonSocialTxt.Name = "CliDRazonSocialTxt";
-            this.CliDRazonSocialTxt.Size = new System.Drawing.Size(269, 21);
+            this.CliDRazonSocialTxt.Size = new System.Drawing.Size(362, 21);
             this.CliDRazonSocialTxt.TabIndex = 12;
             // 
             // CliDNroCuentaTxt
             // 
-            this.CliDNroCuentaTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.CliDNroCuentaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CliDNroCuentaTxt.Location = new System.Drawing.Point(10, 51);
             this.CliDNroCuentaTxt.Name = "CliDNroCuentaTxt";
@@ -584,9 +586,8 @@ namespace Catalogo._recibos
             // 
             // label15
             // 
-            this.label15.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(392, 33);
+            this.label15.Location = new System.Drawing.Point(481, 33);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(46, 15);
             this.label15.TabIndex = 8;
@@ -594,9 +595,8 @@ namespace Catalogo._recibos
             // 
             // label16
             // 
-            this.label16.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(10, 201);
+            this.label16.Location = new System.Drawing.Point(10, 199);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(88, 15);
             this.label16.TabIndex = 7;
@@ -604,9 +604,8 @@ namespace Catalogo._recibos
             // 
             // label17
             // 
-            this.label17.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(189, 137);
+            this.label17.Location = new System.Drawing.Point(213, 135);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(42, 15);
             this.label17.TabIndex = 6;
@@ -614,9 +613,8 @@ namespace Catalogo._recibos
             // 
             // label20
             // 
-            this.label20.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(10, 138);
+            this.label20.Location = new System.Drawing.Point(10, 135);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(55, 15);
             this.label20.TabIndex = 5;
@@ -624,9 +622,8 @@ namespace Catalogo._recibos
             // 
             // label21
             // 
-            this.label21.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(305, 85);
+            this.label21.Location = new System.Drawing.Point(305, 82);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(61, 15);
             this.label21.TabIndex = 4;
@@ -634,9 +631,8 @@ namespace Catalogo._recibos
             // 
             // label22
             // 
-            this.label22.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(10, 85);
+            this.label22.Location = new System.Drawing.Point(10, 82);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(59, 15);
             this.label22.TabIndex = 3;
@@ -644,7 +640,6 @@ namespace Catalogo._recibos
             // 
             // label23
             // 
-            this.label23.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label23.AutoSize = true;
             this.label23.Location = new System.Drawing.Point(113, 33);
             this.label23.Name = "label23";
@@ -654,7 +649,6 @@ namespace Catalogo._recibos
             // 
             // label24
             // 
-            this.label24.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label24.AutoSize = true;
             this.label24.Location = new System.Drawing.Point(10, 33);
             this.label24.Name = "label24";
@@ -664,7 +658,7 @@ namespace Catalogo._recibos
             // 
             // rTabCtaCte
             // 
-            this.rTabCtaCte.BackColor = System.Drawing.Color.Transparent;
+            this.rTabCtaCte.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rTabCtaCte.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabCtaCte.Controls.Add(this.ccPnlMain);
             this.rTabCtaCte.Controls.Add(this.ccPnlBotton);
@@ -677,15 +671,17 @@ namespace Catalogo._recibos
             // 
             // ccPnlMain
             // 
-            this.ccPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ccPnlMain.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ccPnlMain.Controls.Add(this.cclistView);
-            this.ccPnlMain.Location = new System.Drawing.Point(3, 18);
+            this.ccPnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ccPnlMain.Location = new System.Drawing.Point(3, 3);
             this.ccPnlMain.Name = "ccPnlMain";
-            this.ccPnlMain.Size = new System.Drawing.Size(778, 340);
+            this.ccPnlMain.Size = new System.Drawing.Size(778, 355);
             this.ccPnlMain.TabIndex = 0;
             // 
             // cclistView
             // 
+            this.cclistView.BackColor = System.Drawing.Color.WhiteSmoke;
             this.cclistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cclistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             ccFechaLv,
@@ -719,8 +715,9 @@ namespace Catalogo._recibos
             // 
             // ccPnlBotton
             // 
-            this.ccPnlBotton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ccPnlBotton.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ccPnlBotton.Controls.Add(this.ccActualizadaFechaLbl);
+            this.ccPnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ccPnlBotton.Location = new System.Drawing.Point(3, 358);
             this.ccPnlBotton.Name = "ccPnlBotton";
             this.ccPnlBotton.Size = new System.Drawing.Size(778, 34);
@@ -737,7 +734,7 @@ namespace Catalogo._recibos
             // 
             // rTabADeducir
             // 
-            this.rTabADeducir.BackColor = System.Drawing.Color.Transparent;
+            this.rTabADeducir.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rTabADeducir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabADeducir.Controls.Add(this.adPnlMain);
             this.rTabADeducir.Controls.Add(this.adPnlTop);
@@ -751,16 +748,18 @@ namespace Catalogo._recibos
             // 
             // adPnlMain
             // 
-            this.adPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.adPnlMain.BackColor = System.Drawing.Color.WhiteSmoke;
             this.adPnlMain.Controls.Add(this.adlistView);
+            this.adPnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.adPnlMain.Enabled = false;
-            this.adPnlMain.Location = new System.Drawing.Point(3, 62);
+            this.adPnlMain.Location = new System.Drawing.Point(3, 61);
             this.adPnlMain.Name = "adPnlMain";
-            this.adPnlMain.Size = new System.Drawing.Size(778, 277);
+            this.adPnlMain.Size = new System.Drawing.Size(778, 278);
             this.adPnlMain.TabIndex = 5;
             // 
             // adlistView
             // 
+            this.adlistView.BackColor = System.Drawing.Color.WhiteSmoke;
             this.adlistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.adlistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.adConceptoLv,
@@ -806,7 +805,7 @@ namespace Catalogo._recibos
             // 
             // adPnlTop
             // 
-            this.adPnlTop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.adPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
             this.adPnlTop.Controls.Add(this.adCascaraBtn);
             this.adPnlTop.Controls.Add(this.adAgregarBtn);
             this.adPnlTop.Controls.Add(this.adAplicarRestoChk);
@@ -815,41 +814,41 @@ namespace Catalogo._recibos
             this.adPnlTop.Controls.Add(this.adConceptoTxt);
             this.adPnlTop.Controls.Add(this.label18);
             this.adPnlTop.Controls.Add(this.label19);
+            this.adPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.adPnlTop.Enabled = false;
-            this.adPnlTop.Location = new System.Drawing.Point(3, 6);
+            this.adPnlTop.Location = new System.Drawing.Point(3, 3);
             this.adPnlTop.Name = "adPnlTop";
             this.adPnlTop.Size = new System.Drawing.Size(778, 58);
             this.adPnlTop.TabIndex = 4;
             // 
             // adCascaraBtn
             // 
-            this.adCascaraBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.adCascaraBtn.BackColor = System.Drawing.Color.Transparent;
             this.adCascaraBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.adCascaraBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.adCascaraBtn.FlatAppearance.BorderSize = 0;
             this.adCascaraBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.adCascaraBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.adCascaraBtn.ForeColor = System.Drawing.Color.White;
-            this.adCascaraBtn.Location = new System.Drawing.Point(548, 23);
+            this.adCascaraBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adCascaraBtn.Location = new System.Drawing.Point(548, 21);
             this.adCascaraBtn.Name = "adCascaraBtn";
             this.adCascaraBtn.Size = new System.Drawing.Size(75, 25);
-            this.adCascaraBtn.TabIndex = 22;
-            this.adCascaraBtn.Tag = "nada";
+            this.adCascaraBtn.TabIndex = 65;
             this.adCascaraBtn.Text = "Cascara";
             this.adCascaraBtn.UseVisualStyleBackColor = false;
             this.adCascaraBtn.Click += new System.EventHandler(this.adCascaraBtn_Click);
             // 
             // adAgregarBtn
             // 
-            this.adAgregarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.adAgregarBtn.BackColor = System.Drawing.Color.Transparent;
             this.adAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.adAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.adAgregarBtn.FlatAppearance.BorderSize = 0;
             this.adAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.adAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.adAgregarBtn.ForeColor = System.Drawing.Color.White;
-            this.adAgregarBtn.Location = new System.Drawing.Point(467, 23);
+            this.adAgregarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adAgregarBtn.Location = new System.Drawing.Point(467, 21);
             this.adAgregarBtn.Name = "adAgregarBtn";
             this.adAgregarBtn.Size = new System.Drawing.Size(75, 25);
-            this.adAgregarBtn.TabIndex = 21;
+            this.adAgregarBtn.TabIndex = 64;
             this.adAgregarBtn.Text = "Agregar";
             this.adAgregarBtn.UseVisualStyleBackColor = false;
             this.adAgregarBtn.Click += new System.EventHandler(this.adAgregarBtn_Click);
@@ -876,7 +875,7 @@ namespace Catalogo._recibos
             // 
             // adImporteTxt
             // 
-            this.adImporteTxt.Location = new System.Drawing.Point(204, 26);
+            this.adImporteTxt.Location = new System.Drawing.Point(204, 25);
             this.adImporteTxt.MaxLength = 10;
             this.adImporteTxt.Name = "adImporteTxt";
             this.adImporteTxt.Size = new System.Drawing.Size(100, 21);
@@ -886,7 +885,7 @@ namespace Catalogo._recibos
             // 
             // adConceptoTxt
             // 
-            this.adConceptoTxt.Location = new System.Drawing.Point(8, 26);
+            this.adConceptoTxt.Location = new System.Drawing.Point(8, 25);
             this.adConceptoTxt.MaxLength = 32;
             this.adConceptoTxt.Name = "adConceptoTxt";
             this.adConceptoTxt.Size = new System.Drawing.Size(190, 21);
@@ -912,11 +911,12 @@ namespace Catalogo._recibos
             // 
             // adPnlBotton
             // 
-            this.adPnlBotton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.adPnlBotton.BackColor = System.Drawing.Color.WhiteSmoke;
             this.adPnlBotton.Controls.Add(this.label27);
             this.adPnlBotton.Controls.Add(this.label26);
             this.adPnlBotton.Controls.Add(this.adTotalDeducirAlRestoLbl);
             this.adPnlBotton.Controls.Add(this.adTotalDeducirLbl);
+            this.adPnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.adPnlBotton.Location = new System.Drawing.Point(3, 339);
             this.adPnlBotton.Name = "adPnlBotton";
             this.adPnlBotton.Size = new System.Drawing.Size(778, 53);
@@ -925,7 +925,7 @@ namespace Catalogo._recibos
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(344, 19);
+            this.label27.Location = new System.Drawing.Point(150, 19);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(194, 15);
             this.label27.TabIndex = 4;
@@ -934,7 +934,7 @@ namespace Catalogo._recibos
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(177, 19);
+            this.label26.Location = new System.Drawing.Point(7, 19);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(90, 15);
             this.label26.TabIndex = 3;
@@ -943,7 +943,7 @@ namespace Catalogo._recibos
             // adTotalDeducirAlRestoLbl
             // 
             this.adTotalDeducirAlRestoLbl.AutoSize = true;
-            this.adTotalDeducirAlRestoLbl.Location = new System.Drawing.Point(544, 19);
+            this.adTotalDeducirAlRestoLbl.Location = new System.Drawing.Point(350, 19);
             this.adTotalDeducirAlRestoLbl.Name = "adTotalDeducirAlRestoLbl";
             this.adTotalDeducirAlRestoLbl.Size = new System.Drawing.Size(31, 15);
             this.adTotalDeducirAlRestoLbl.TabIndex = 1;
@@ -952,7 +952,7 @@ namespace Catalogo._recibos
             // adTotalDeducirLbl
             // 
             this.adTotalDeducirLbl.AutoSize = true;
-            this.adTotalDeducirLbl.Location = new System.Drawing.Point(273, 19);
+            this.adTotalDeducirLbl.Location = new System.Drawing.Point(103, 19);
             this.adTotalDeducirLbl.Name = "adTotalDeducirLbl";
             this.adTotalDeducirLbl.Size = new System.Drawing.Size(31, 15);
             this.adTotalDeducirLbl.TabIndex = 0;
@@ -960,7 +960,7 @@ namespace Catalogo._recibos
             // 
             // rTabAplicacion
             // 
-            this.rTabAplicacion.BackColor = System.Drawing.Color.Transparent;
+            this.rTabAplicacion.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rTabAplicacion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabAplicacion.Controls.Add(this.apPnlBotton);
             this.rTabAplicacion.Controls.Add(this.apPnlMain);
@@ -974,11 +974,12 @@ namespace Catalogo._recibos
             // 
             // apPnlBotton
             // 
-            this.apPnlBotton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.apPnlBotton.BackColor = System.Drawing.Color.WhiteSmoke;
             this.apPnlBotton.Controls.Add(this.label7);
             this.apPnlBotton.Controls.Add(this.label6);
             this.apPnlBotton.Controls.Add(this.apTotalPercepcionLbl);
             this.apPnlBotton.Controls.Add(this.apTotalAplicacionLbl);
+            this.apPnlBotton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.apPnlBotton.Location = new System.Drawing.Point(3, 334);
             this.apPnlBotton.Name = "apPnlBotton";
             this.apPnlBotton.Size = new System.Drawing.Size(778, 58);
@@ -987,7 +988,7 @@ namespace Catalogo._recibos
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(295, 21);
+            this.label7.Location = new System.Drawing.Point(165, 21);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(99, 15);
             this.label7.TabIndex = 3;
@@ -996,7 +997,7 @@ namespace Catalogo._recibos
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(60, 21);
+            this.label6.Location = new System.Drawing.Point(7, 21);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(93, 15);
             this.label6.TabIndex = 2;
@@ -1005,7 +1006,7 @@ namespace Catalogo._recibos
             // apTotalPercepcionLbl
             // 
             this.apTotalPercepcionLbl.AutoSize = true;
-            this.apTotalPercepcionLbl.Location = new System.Drawing.Point(400, 21);
+            this.apTotalPercepcionLbl.Location = new System.Drawing.Point(270, 21);
             this.apTotalPercepcionLbl.Name = "apTotalPercepcionLbl";
             this.apTotalPercepcionLbl.Size = new System.Drawing.Size(31, 15);
             this.apTotalPercepcionLbl.TabIndex = 1;
@@ -1014,7 +1015,7 @@ namespace Catalogo._recibos
             // apTotalAplicacionLbl
             // 
             this.apTotalAplicacionLbl.AutoSize = true;
-            this.apTotalAplicacionLbl.Location = new System.Drawing.Point(159, 21);
+            this.apTotalAplicacionLbl.Location = new System.Drawing.Point(106, 21);
             this.apTotalAplicacionLbl.Name = "apTotalAplicacionLbl";
             this.apTotalAplicacionLbl.Size = new System.Drawing.Size(31, 15);
             this.apTotalAplicacionLbl.TabIndex = 0;
@@ -1022,16 +1023,18 @@ namespace Catalogo._recibos
             // 
             // apPnlMain
             // 
-            this.apPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.apPnlMain.BackColor = System.Drawing.Color.WhiteSmoke;
             this.apPnlMain.Controls.Add(this.aplistView);
+            this.apPnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.apPnlMain.Enabled = false;
-            this.apPnlMain.Location = new System.Drawing.Point(3, 89);
+            this.apPnlMain.Location = new System.Drawing.Point(3, 58);
             this.apPnlMain.Name = "apPnlMain";
-            this.apPnlMain.Size = new System.Drawing.Size(778, 303);
+            this.apPnlMain.Size = new System.Drawing.Size(778, 334);
             this.apPnlMain.TabIndex = 1;
             // 
             // aplistView
             // 
+            this.aplistView.BackColor = System.Drawing.Color.WhiteSmoke;
             this.aplistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.aplistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.apConceptoLv,
@@ -1042,10 +1045,10 @@ namespace Catalogo._recibos
             this.aplistView.FullRowSelect = true;
             this.aplistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.aplistView.HideSelection = false;
-            this.aplistView.Location = new System.Drawing.Point(0, 23);
+            this.aplistView.Location = new System.Drawing.Point(0, 6);
             this.aplistView.MultiSelect = false;
             this.aplistView.Name = "aplistView";
-            this.aplistView.Size = new System.Drawing.Size(775, 238);
+            this.aplistView.Size = new System.Drawing.Size(775, 264);
             this.aplistView.SmallImageList = this.imageList1;
             this.aplistView.TabIndex = 3;
             this.aplistView.Tag = "nada";
@@ -1076,7 +1079,7 @@ namespace Catalogo._recibos
             // 
             // apPnlTop
             // 
-            this.apPnlTop.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.apPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
             this.apPnlTop.Controls.Add(this.apAgregarBtn);
             this.apPnlTop.Controls.Add(this.apPercepcionTxt);
             this.apPnlTop.Controls.Add(this.apImporteTxt);
@@ -1084,31 +1087,32 @@ namespace Catalogo._recibos
             this.apPnlTop.Controls.Add(this.label12);
             this.apPnlTop.Controls.Add(this.label11);
             this.apPnlTop.Controls.Add(this.label10);
+            this.apPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.apPnlTop.Enabled = false;
-            this.apPnlTop.Location = new System.Drawing.Point(3, 6);
+            this.apPnlTop.Location = new System.Drawing.Point(3, 3);
             this.apPnlTop.Name = "apPnlTop";
             this.apPnlTop.Size = new System.Drawing.Size(778, 55);
             this.apPnlTop.TabIndex = 0;
             // 
             // apAgregarBtn
             // 
-            this.apAgregarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.apAgregarBtn.BackColor = System.Drawing.Color.Transparent;
             this.apAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.apAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.apAgregarBtn.FlatAppearance.BorderSize = 0;
             this.apAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.apAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.apAgregarBtn.ForeColor = System.Drawing.Color.White;
-            this.apAgregarBtn.Location = new System.Drawing.Point(531, 23);
+            this.apAgregarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.apAgregarBtn.Location = new System.Drawing.Point(492, 22);
             this.apAgregarBtn.Name = "apAgregarBtn";
             this.apAgregarBtn.Size = new System.Drawing.Size(75, 25);
-            this.apAgregarBtn.TabIndex = 6;
+            this.apAgregarBtn.TabIndex = 63;
             this.apAgregarBtn.Text = "Agregar";
             this.apAgregarBtn.UseVisualStyleBackColor = false;
             this.apAgregarBtn.Click += new System.EventHandler(this.apAgregarBtn_Click);
             // 
             // apPercepcionTxt
             // 
-            this.apPercepcionTxt.Location = new System.Drawing.Point(413, 26);
+            this.apPercepcionTxt.Location = new System.Drawing.Point(379, 26);
             this.apPercepcionTxt.MaxLength = 10;
             this.apPercepcionTxt.Name = "apPercepcionTxt";
             this.apPercepcionTxt.Size = new System.Drawing.Size(100, 21);
@@ -1118,7 +1122,7 @@ namespace Catalogo._recibos
             // 
             // apImporteTxt
             // 
-            this.apImporteTxt.Location = new System.Drawing.Point(298, 26);
+            this.apImporteTxt.Location = new System.Drawing.Point(273, 26);
             this.apImporteTxt.MaxLength = 10;
             this.apImporteTxt.Name = "apImporteTxt";
             this.apImporteTxt.Size = new System.Drawing.Size(100, 21);
@@ -1137,7 +1141,7 @@ namespace Catalogo._recibos
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(410, 10);
+            this.label12.Location = new System.Drawing.Point(376, 6);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(69, 15);
             this.label12.TabIndex = 2;
@@ -1146,7 +1150,7 @@ namespace Catalogo._recibos
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(295, 10);
+            this.label11.Location = new System.Drawing.Point(270, 6);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 15);
             this.label11.TabIndex = 1;
@@ -1155,7 +1159,7 @@ namespace Catalogo._recibos
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(5, 10);
+            this.label10.Location = new System.Drawing.Point(5, 6);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(59, 15);
             this.label10.TabIndex = 0;
@@ -1163,7 +1167,7 @@ namespace Catalogo._recibos
             // 
             // rTabActual
             // 
-            this.rTabActual.BackColor = System.Drawing.Color.Transparent;
+            this.rTabActual.BackColor = System.Drawing.Color.WhiteSmoke;
             this.rTabActual.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.rTabActual.Controls.Add(this.raPnlMain);
             this.rTabActual.Controls.Add(this.raPnlTop);
@@ -1178,7 +1182,7 @@ namespace Catalogo._recibos
             // 
             // raPnlMain
             // 
-            this.raPnlMain.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.raPnlMain.BackColor = System.Drawing.Color.WhiteSmoke;
             this.raPnlMain.Controls.Add(this.ralistView);
             this.raPnlMain.Location = new System.Drawing.Point(3, 179);
             this.raPnlMain.Name = "raPnlMain";
@@ -1187,6 +1191,7 @@ namespace Catalogo._recibos
             // 
             // ralistView
             // 
+            this.ralistView.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ralistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ralistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.raValorLv,
@@ -1284,12 +1289,11 @@ namespace Catalogo._recibos
             // 
             // raPnlTop
             // 
-            this.raPnlTop.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.raPnlTop.BackColor = System.Drawing.Color.Transparent;
+            this.raPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
             this.raPnlTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.raPnlTop.Controls.Add(this.cvDivisasLbl);
             this.raPnlTop.Controls.Add(this.cvCancelarBtn);
-            this.raPnlTop.Controls.Add(this.cvAceptarBtn);
+            this.raPnlTop.Controls.Add(this.cvAgregarBtn);
+            this.raPnlTop.Controls.Add(this.cvDivisasLbl);
             this.raPnlTop.Controls.Add(this.cvCpaTxt);
             this.raPnlTop.Controls.Add(this.cvABahiaChk);
             this.raPnlTop.Controls.Add(this.cvDeTerceroChk);
@@ -1315,10 +1319,38 @@ namespace Catalogo._recibos
             this.raPnlTop.Size = new System.Drawing.Size(778, 171);
             this.raPnlTop.TabIndex = 0;
             // 
+            // cvCancelarBtn
+            // 
+            this.cvCancelarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.cvCancelarBtn.FlatAppearance.BorderSize = 0;
+            this.cvCancelarBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cvCancelarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cvCancelarBtn.Location = new System.Drawing.Point(488, 142);
+            this.cvCancelarBtn.Name = "cvCancelarBtn";
+            this.cvCancelarBtn.Size = new System.Drawing.Size(75, 25);
+            this.cvCancelarBtn.TabIndex = 24;
+            this.cvCancelarBtn.Text = "Cancelar";
+            this.cvCancelarBtn.UseVisualStyleBackColor = false;
+            this.cvCancelarBtn.Click += new System.EventHandler(this.cvCancelarBtn_Click);
+            // 
+            // cvAgregarBtn
+            // 
+            this.cvAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.cvAgregarBtn.FlatAppearance.BorderSize = 0;
+            this.cvAgregarBtn.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.cvAgregarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cvAgregarBtn.Location = new System.Drawing.Point(407, 142);
+            this.cvAgregarBtn.Name = "cvAgregarBtn";
+            this.cvAgregarBtn.Size = new System.Drawing.Size(75, 25);
+            this.cvAgregarBtn.TabIndex = 23;
+            this.cvAgregarBtn.Text = "Agregar";
+            this.cvAgregarBtn.UseVisualStyleBackColor = false;
+            this.cvAgregarBtn.Click += new System.EventHandler(this.cvAgregarBtn_Click);
+            // 
             // cvDivisasLbl
             // 
             this.cvDivisasLbl.AutoSize = true;
-            this.cvDivisasLbl.Location = new System.Drawing.Point(641, 27);
+            this.cvDivisasLbl.Location = new System.Drawing.Point(532, 32);
             this.cvDivisasLbl.Name = "cvDivisasLbl";
             this.cvDivisasLbl.Size = new System.Drawing.Size(31, 15);
             this.cvDivisasLbl.TabIndex = 2;
@@ -1326,45 +1358,9 @@ namespace Catalogo._recibos
             this.cvDivisasLbl.Text = "0.00";
             this.cvDivisasLbl.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // cvCancelarBtn
-            // 
-            this.cvCancelarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.cvCancelarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.cvCancelarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.cvCancelarBtn.FlatAppearance.BorderSize = 2;
-            this.cvCancelarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.cvCancelarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cvCancelarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cvCancelarBtn.ForeColor = System.Drawing.Color.White;
-            this.cvCancelarBtn.Location = new System.Drawing.Point(380, 145);
-            this.cvCancelarBtn.Name = "cvCancelarBtn";
-            this.cvCancelarBtn.Size = new System.Drawing.Size(75, 25);
-            this.cvCancelarBtn.TabIndex = 12;
-            this.cvCancelarBtn.Text = "Cancelar";
-            this.cvCancelarBtn.UseVisualStyleBackColor = false;
-            this.cvCancelarBtn.Click += new System.EventHandler(this.cvCancelarBtn_Click);
-            // 
-            // cvAceptarBtn
-            // 
-            this.cvAceptarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.cvAceptarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.cvAceptarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.cvAceptarBtn.FlatAppearance.BorderSize = 2;
-            this.cvAceptarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.cvAceptarBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cvAceptarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cvAceptarBtn.ForeColor = System.Drawing.Color.White;
-            this.cvAceptarBtn.Location = new System.Drawing.Point(299, 145);
-            this.cvAceptarBtn.Name = "cvAceptarBtn";
-            this.cvAceptarBtn.Size = new System.Drawing.Size(75, 25);
-            this.cvAceptarBtn.TabIndex = 11;
-            this.cvAceptarBtn.Text = "Agregar";
-            this.cvAceptarBtn.UseVisualStyleBackColor = false;
-            this.cvAceptarBtn.Click += new System.EventHandler(this.cvAgregarBtn_Click);
-            // 
             // cvCpaTxt
             // 
-            this.cvCpaTxt.Location = new System.Drawing.Point(334, 113);
+            this.cvCpaTxt.Location = new System.Drawing.Point(253, 113);
             this.cvCpaTxt.MaxLength = 10;
             this.cvCpaTxt.Name = "cvCpaTxt";
             this.cvCpaTxt.Size = new System.Drawing.Size(100, 21);
@@ -1373,7 +1369,7 @@ namespace Catalogo._recibos
             // cvABahiaChk
             // 
             this.cvABahiaChk.AutoSize = true;
-            this.cvABahiaChk.Location = new System.Drawing.Point(538, 114);
+            this.cvABahiaChk.Location = new System.Drawing.Point(457, 114);
             this.cvABahiaChk.Name = "cvABahiaChk";
             this.cvABahiaChk.Size = new System.Drawing.Size(106, 19);
             this.cvABahiaChk.TabIndex = 10;
@@ -1383,7 +1379,7 @@ namespace Catalogo._recibos
             // cvDeTerceroChk
             // 
             this.cvDeTerceroChk.AutoSize = true;
-            this.cvDeTerceroChk.Location = new System.Drawing.Point(445, 114);
+            this.cvDeTerceroChk.Location = new System.Drawing.Point(364, 114);
             this.cvDeTerceroChk.Name = "cvDeTerceroChk";
             this.cvDeTerceroChk.Size = new System.Drawing.Size(87, 19);
             this.cvDeTerceroChk.TabIndex = 9;
@@ -1394,7 +1390,7 @@ namespace Catalogo._recibos
             // 
             this.cvFecCobroDt.CustomFormat = "dd/MM/yyyy";
             this.cvFecCobroDt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.cvFecCobroDt.Location = new System.Drawing.Point(197, 113);
+            this.cvFecCobroDt.Location = new System.Drawing.Point(116, 113);
             this.cvFecCobroDt.MaxDate = new System.DateTime(2100, 1, 1, 0, 0, 0, 0);
             this.cvFecCobroDt.MinDate = new System.DateTime(2014, 1, 1, 0, 0, 0, 0);
             this.cvFecCobroDt.Name = "cvFecCobroDt";
@@ -1405,14 +1401,14 @@ namespace Catalogo._recibos
             // 
             this.cvFecEmiDt.CustomFormat = "dd/MM/yyyy";
             this.cvFecEmiDt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.cvFecEmiDt.Location = new System.Drawing.Point(91, 113);
+            this.cvFecEmiDt.Location = new System.Drawing.Point(10, 113);
             this.cvFecEmiDt.Name = "cvFecEmiDt";
             this.cvFecEmiDt.Size = new System.Drawing.Size(100, 21);
             this.cvFecEmiDt.TabIndex = 6;
             // 
             // cvNroChequeTxt
             // 
-            this.cvNroChequeTxt.Location = new System.Drawing.Point(503, 69);
+            this.cvNroChequeTxt.Location = new System.Drawing.Point(422, 69);
             this.cvNroChequeTxt.MaxLength = 15;
             this.cvNroChequeTxt.Name = "cvNroChequeTxt";
             this.cvNroChequeTxt.Size = new System.Drawing.Size(100, 21);
@@ -1420,7 +1416,7 @@ namespace Catalogo._recibos
             // 
             // cvNroCuentaTxt
             // 
-            this.cvNroCuentaTxt.Location = new System.Drawing.Point(384, 69);
+            this.cvNroCuentaTxt.Location = new System.Drawing.Point(302, 69);
             this.cvNroCuentaTxt.MaxLength = 15;
             this.cvNroCuentaTxt.Name = "cvNroCuentaTxt";
             this.cvNroCuentaTxt.Size = new System.Drawing.Size(100, 21);
@@ -1428,7 +1424,7 @@ namespace Catalogo._recibos
             // 
             // cvTipoCambioTxt
             // 
-            this.cvTipoCambioTxt.Location = new System.Drawing.Point(504, 26);
+            this.cvTipoCambioTxt.Location = new System.Drawing.Point(421, 29);
             this.cvTipoCambioTxt.MaxLength = 10;
             this.cvTipoCambioTxt.Name = "cvTipoCambioTxt";
             this.cvTipoCambioTxt.Size = new System.Drawing.Size(100, 21);
@@ -1437,7 +1433,7 @@ namespace Catalogo._recibos
             // 
             // cvImporteTxt
             // 
-            this.cvImporteTxt.Location = new System.Drawing.Point(385, 26);
+            this.cvImporteTxt.Location = new System.Drawing.Point(302, 29);
             this.cvImporteTxt.MaxLength = 10;
             this.cvImporteTxt.Name = "cvImporteTxt";
             this.cvImporteTxt.Size = new System.Drawing.Size(100, 21);
@@ -1450,7 +1446,7 @@ namespace Catalogo._recibos
             this.cvBancoCbo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cvBancoCbo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cvBancoCbo.FormattingEnabled = true;
-            this.cvBancoCbo.Location = new System.Drawing.Point(92, 68);
+            this.cvBancoCbo.Location = new System.Drawing.Point(11, 68);
             this.cvBancoCbo.Name = "cvBancoCbo";
             this.cvBancoCbo.Size = new System.Drawing.Size(270, 23);
             this.cvBancoCbo.TabIndex = 3;
@@ -1460,7 +1456,7 @@ namespace Catalogo._recibos
             this.cvTipoValorCbo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cvTipoValorCbo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cvTipoValorCbo.FormattingEnabled = true;
-            this.cvTipoValorCbo.Location = new System.Drawing.Point(93, 26);
+            this.cvTipoValorCbo.Location = new System.Drawing.Point(10, 28);
             this.cvTipoValorCbo.Name = "cvTipoValorCbo";
             this.cvTipoValorCbo.Size = new System.Drawing.Size(270, 23);
             this.cvTipoValorCbo.TabIndex = 0;
@@ -1469,7 +1465,7 @@ namespace Catalogo._recibos
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(331, 97);
+            this.label9.Location = new System.Drawing.Point(250, 97);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(29, 15);
             this.label9.TabIndex = 16;
@@ -1478,7 +1474,7 @@ namespace Catalogo._recibos
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(194, 97);
+            this.label8.Location = new System.Drawing.Point(113, 97);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 15);
             this.label8.TabIndex = 17;
@@ -1487,7 +1483,7 @@ namespace Catalogo._recibos
             // cvFecEmiLbl
             // 
             this.cvFecEmiLbl.AutoSize = true;
-            this.cvFecEmiLbl.Location = new System.Drawing.Point(92, 97);
+            this.cvFecEmiLbl.Location = new System.Drawing.Point(11, 97);
             this.cvFecEmiLbl.Name = "cvFecEmiLbl";
             this.cvFecEmiLbl.Size = new System.Drawing.Size(89, 15);
             this.cvFecEmiLbl.TabIndex = 18;
@@ -1496,7 +1492,7 @@ namespace Catalogo._recibos
             // cvNroChequeLbl
             // 
             this.cvNroChequeLbl.AutoSize = true;
-            this.cvNroChequeLbl.Location = new System.Drawing.Point(500, 50);
+            this.cvNroChequeLbl.Location = new System.Drawing.Point(419, 50);
             this.cvNroChequeLbl.Name = "cvNroChequeLbl";
             this.cvNroChequeLbl.Size = new System.Drawing.Size(65, 15);
             this.cvNroChequeLbl.TabIndex = 19;
@@ -1505,7 +1501,7 @@ namespace Catalogo._recibos
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(381, 50);
+            this.label5.Location = new System.Drawing.Point(299, 50);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 15);
             this.label5.TabIndex = 20;
@@ -1514,7 +1510,7 @@ namespace Catalogo._recibos
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(89, 50);
+            this.label4.Location = new System.Drawing.Point(8, 50);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 15);
             this.label4.TabIndex = 21;
@@ -1523,7 +1519,7 @@ namespace Catalogo._recibos
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(501, 10);
+            this.label3.Location = new System.Drawing.Point(420, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 15);
             this.label3.TabIndex = 22;
@@ -1532,7 +1528,7 @@ namespace Catalogo._recibos
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(382, 10);
+            this.label2.Location = new System.Drawing.Point(300, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 15);
             this.label2.TabIndex = 0;
@@ -1541,7 +1537,7 @@ namespace Catalogo._recibos
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(90, 10);
+            this.label1.Location = new System.Drawing.Point(9, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 15);
             this.label1.TabIndex = 1;
@@ -1549,7 +1545,7 @@ namespace Catalogo._recibos
             // 
             // raPnlBotton
             // 
-            this.raPnlBotton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.raPnlBotton.BackColor = System.Drawing.Color.WhiteSmoke;
             this.raPnlBotton.Controls.Add(this.label25);
             this.raPnlBotton.Controls.Add(this.raImporteTotalLbl);
             this.raPnlBotton.Controls.Add(this.raObservacionesTxt);
@@ -1595,7 +1591,6 @@ namespace Catalogo._recibos
             // 
             // rTabsRecibo
             // 
-            this.rTabsRecibo.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.rTabsRecibo.Controls.Add(this.rTabActual);
             this.rTabsRecibo.Controls.Add(this.rTabAplicacion);
             this.rTabsRecibo.Controls.Add(this.rTabADeducir);
@@ -1619,13 +1614,13 @@ namespace Catalogo._recibos
             // 
             // ucPnlTop
             // 
-            this.ucPnlTop.BackColor = System.Drawing.Color.Red;
+            this.ucPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ucPnlTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ucPnlTop.Controls.Add(this.btnResumen);
-            this.ucPnlTop.Controls.Add(this.cboCliente);
             this.ucPnlTop.Controls.Add(this.btnIniciar);
             this.ucPnlTop.Controls.Add(this.btnImprimir);
             this.ucPnlTop.Controls.Add(this.btnVer);
+            this.ucPnlTop.Controls.Add(this.cboCliente);
             this.ucPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.ucPnlTop.Location = new System.Drawing.Point(0, 0);
             this.ucPnlTop.Name = "ucPnlTop";
@@ -1634,21 +1629,60 @@ namespace Catalogo._recibos
             // 
             // btnResumen
             // 
-            this.btnResumen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.btnResumen.BackColor = System.Drawing.Color.Transparent;
             this.btnResumen.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnResumen.Enabled = false;
-            this.btnResumen.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnResumen.FlatAppearance.BorderSize = 2;
-            this.btnResumen.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnResumen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnResumen.ForeColor = System.Drawing.Color.White;
-            this.btnResumen.Location = new System.Drawing.Point(7, 3);
+            this.btnResumen.FlatAppearance.BorderSize = 0;
+            this.btnResumen.Location = new System.Drawing.Point(7, 5);
             this.btnResumen.Name = "btnResumen";
             this.btnResumen.Size = new System.Drawing.Size(75, 23);
-            this.btnResumen.TabIndex = 4;
+            this.btnResumen.TabIndex = 8;
             this.btnResumen.Text = "Resumen";
             this.btnResumen.UseVisualStyleBackColor = false;
             this.btnResumen.Click += new System.EventHandler(this.btnResumen_Click);
+            // 
+            // btnIniciar
+            // 
+            this.btnIniciar.BackColor = System.Drawing.Color.Transparent;
+            this.btnIniciar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnIniciar.Enabled = false;
+            this.btnIniciar.FlatAppearance.BorderSize = 0;
+            this.btnIniciar.Location = new System.Drawing.Point(249, 5);
+            this.btnIniciar.Name = "btnIniciar";
+            this.btnIniciar.Size = new System.Drawing.Size(75, 23);
+            this.btnIniciar.TabIndex = 7;
+            this.btnIniciar.Tag = "INICIAR";
+            this.btnIniciar.Text = "Iniciar";
+            this.btnIniciar.UseVisualStyleBackColor = false;
+            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
+            // 
+            // btnImprimir
+            // 
+            this.btnImprimir.BackColor = System.Drawing.Color.Transparent;
+            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnImprimir.Enabled = false;
+            this.btnImprimir.FlatAppearance.BorderSize = 0;
+            this.btnImprimir.Location = new System.Drawing.Point(168, 5);
+            this.btnImprimir.Name = "btnImprimir";
+            this.btnImprimir.Size = new System.Drawing.Size(75, 23);
+            this.btnImprimir.TabIndex = 6;
+            this.btnImprimir.Text = "Confirmar";
+            this.btnImprimir.UseVisualStyleBackColor = false;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
+            // 
+            // btnVer
+            // 
+            this.btnVer.BackColor = System.Drawing.Color.Transparent;
+            this.btnVer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnVer.Enabled = false;
+            this.btnVer.FlatAppearance.BorderSize = 0;
+            this.btnVer.Location = new System.Drawing.Point(87, 5);
+            this.btnVer.Name = "btnVer";
+            this.btnVer.Size = new System.Drawing.Size(75, 23);
+            this.btnVer.TabIndex = 5;
+            this.btnVer.Text = "Ver";
+            this.btnVer.UseVisualStyleBackColor = false;
+            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
             // 
             // cboCliente
             // 
@@ -1665,76 +1699,11 @@ namespace Catalogo._recibos
             this.cboCliente.TabIndex = 3;
             this.cboCliente.SelectedIndexChanged += new System.EventHandler(this.cboCliente_SelectedIndexChanged);
             // 
-            // btnIniciar
-            // 
-            this.btnIniciar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.btnIniciar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnIniciar.Enabled = false;
-            this.btnIniciar.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnIniciar.FlatAppearance.BorderSize = 2;
-            this.btnIniciar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnIniciar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnIniciar.ForeColor = System.Drawing.Color.White;
-            this.btnIniciar.Location = new System.Drawing.Point(250, 3);
-            this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(75, 23);
-            this.btnIniciar.TabIndex = 2;
-            this.btnIniciar.Tag = "INICIAR";
-            this.btnIniciar.Text = "Iniciar";
-            this.btnIniciar.UseVisualStyleBackColor = false;
-            this.btnIniciar.Click += new System.EventHandler(this.btnIniciar_Click);
-            // 
-            // btnImprimir
-            // 
-            this.btnImprimir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.btnImprimir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnImprimir.Enabled = false;
-            this.btnImprimir.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnImprimir.FlatAppearance.BorderSize = 2;
-            this.btnImprimir.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImprimir.ForeColor = System.Drawing.Color.White;
-            this.btnImprimir.Location = new System.Drawing.Point(169, 3);
-            this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(75, 23);
-            this.btnImprimir.TabIndex = 1;
-            this.btnImprimir.Text = "Confirmar";
-            this.btnImprimir.UseVisualStyleBackColor = false;
-            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
-            // 
-            // btnVer
-            // 
-            this.btnVer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.btnVer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnVer.Enabled = false;
-            this.btnVer.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnVer.FlatAppearance.BorderSize = 2;
-            this.btnVer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnVer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnVer.ForeColor = System.Drawing.Color.White;
-            this.btnVer.Location = new System.Drawing.Point(88, 3);
-            this.btnVer.Name = "btnVer";
-            this.btnVer.Size = new System.Drawing.Size(75, 23);
-            this.btnVer.TabIndex = 0;
-            this.btnVer.Text = "Ver";
-            this.btnVer.UseVisualStyleBackColor = false;
-            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
-            // 
-            // label28
-            // 
-            this.label28.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(566, 153);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(23, 18);
-            this.label28.TabIndex = 23;
-            this.label28.Text = "@";
-            // 
             // ucRecibo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.Controls.Add(this.rTabsRecibo);
             this.Controls.Add(this.ucPnlTop);
             this.Controls.Add(this.statusStrip1);
@@ -1846,8 +1815,6 @@ namespace Catalogo._recibos
         private System.Windows.Forms.Label raObservacionesLbl;
         private System.Windows.Forms.Panel raPnlTop;
         private System.Windows.Forms.Label cvDivisasLbl;
-        private System.Windows.Forms.Button cvCancelarBtn;
-        private System.Windows.Forms.Button cvAceptarBtn;
         private System.Windows.Forms.TextBox cvCpaTxt;
         private System.Windows.Forms.CheckBox cvABahiaChk;
         private System.Windows.Forms.CheckBox cvDeTerceroChk;
@@ -1870,24 +1837,15 @@ namespace Catalogo._recibos
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel raPnlMain;
         private System.Windows.Forms.TabControl rTabsRecibo;
-        private System.Windows.Forms.Button CliNAgregarBtn;
-        private System.Windows.Forms.Button adCascaraBtn;
-        private System.Windows.Forms.Button adAgregarBtn;
-        private System.Windows.Forms.Button apAgregarBtn;
         private System.Windows.Forms.Panel ucPnlTop;
         private System.Windows.Forms.ComboBox cboCliente;
-        private System.Windows.Forms.Button btnIniciar;
-        private System.Windows.Forms.Button btnImprimir;
-        private System.Windows.Forms.Button btnVer;
         private System.Windows.Forms.DataGridView paDataGridView;
         private System.Windows.Forms.Panel paPnlTop;
-        private System.Windows.Forms.Button paEnviarBtn;
         private System.Windows.Forms.ComboBox paEnviosCbo;
         private System.Windows.Forms.Label adTotalDeducirAlRestoLbl;
         private System.Windows.Forms.ColumnHeader apConceptoLv;
         private System.Windows.Forms.ColumnHeader apImporteLv;
         private System.Windows.Forms.ColumnHeader apPercepcionLv;
-        private System.Windows.Forms.Button btnResumen;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label7;
@@ -1917,5 +1875,16 @@ namespace Catalogo._recibos
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Button btnResumen;
+        private System.Windows.Forms.Button btnIniciar;
+        private System.Windows.Forms.Button btnImprimir;
+        private System.Windows.Forms.Button btnVer;
+        private System.Windows.Forms.Button cvCancelarBtn;
+        private System.Windows.Forms.Button cvAgregarBtn;
+        private System.Windows.Forms.Button apAgregarBtn;
+        private System.Windows.Forms.Button adAgregarBtn;
+        private System.Windows.Forms.Button adCascaraBtn;
+        private System.Windows.Forms.Button CliNAgregarBtn;
+        private System.Windows.Forms.Button EnviarBtn;
     }
 }

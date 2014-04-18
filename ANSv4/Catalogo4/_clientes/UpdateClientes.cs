@@ -10,20 +10,18 @@ namespace Catalogo._clientes
 
         private UpdateClientesWS.UpdateClientes cliente;
         private bool webServiceInicializado;
-//    Public Event SincronizarClientesProgress(ByVal Detalle As String, ByVal Avance As Single, ByRef Cancel As Boolean)
-//    Public Event SincronizarClientesProgresoParcial(ByVal Detalle As String, ByVal Avance As Single, ByRef Cancel As Boolean)
         private string _MacAddress;
         private string _ipAddress;
 
+        //    Public Event SincronizarClientesProgress(ByVal Detalle As String, ByVal Avance As Single, ByRef Cancel As Boolean)
+        //    Public Event SincronizarClientesProgresoParcial(ByVal Detalle As String, ByVal Avance As Single, ByRef Cancel As Boolean)
+
         private System.Data.OleDb.OleDbConnection conexion;
 
-        public UpdateClientes(System.Data.OleDb.OleDbConnection Conexion,
-            string MacAddress,
-            string ipAddress, string ipAddressIntranet, 
-            bool usaProxy, string proxyServerAddress)
+        public UpdateClientes(string MacAddress, string ipAddress, string ipAddressIntranet)
         {
-            inicializar(MacAddress, ipAddress, ipAddressIntranet, usaProxy, proxyServerAddress);
-            conexion = Conexion;
+            inicializar(MacAddress, ipAddress, ipAddressIntranet);
+            conexion = Global01.Conexion;
         }
 
         public bool inicializado
@@ -34,9 +32,7 @@ namespace Catalogo._clientes
             }
         }
 
-        private void inicializar(string MacAddress,
-            string ipAddress, string ipAddressIntranet, 
-            bool usaProxy, string proxyServerAddress)
+        private void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
         {
             bool conectado = util.SimplePing.ping(ipAddress, 5000);
 
@@ -45,16 +41,15 @@ namespace Catalogo._clientes
                 conectado=util.SimplePing.ping(ipAddressIntranet, 5000);
             }
 
-//        On Error GoTo errhandler
             if (!webServiceInicializado)
             {
                 if (conectado)
                 {
                     cliente = new UpdateClientesWS.UpdateClientes();
                     cliente.Url = "http://" + ipAddress + "/wsCatalogo4/UpdateClientes.asmx?wsdl";
-                    if (usaProxy)
+                    if (Global01.proxyServerAddress != "0.0.0.0")
                     {
-                        cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                     }
                     _MacAddress = MacAddress;
                     _ipAddress = ipAddress;
@@ -65,23 +60,6 @@ namespace Catalogo._clientes
                     webServiceInicializado = false;
                 }
             }
-//        Exit Sub
-//errhandler:
-//        If Err.Number = -2147024809 Then
-//            ' Intento con el ip interno
-//            Cliente = New WSUpdateClientes.UpdateClientesSoapClient("", "http://" & ipAddressIntranet & "/wsCatalogo4/UpdateClientes.asmx?wsdl")
-//            If Trim(Funciones.modINIs.ReadINI("datos", "proxy")) = "1" Then
-//                '                    Cliente.ConnectorProperty("ProxyServer") = Funciones.modINIs.ReadINI("datos", "proxyserver")
-//            End If
-
-//            m_MacAddress = MacAddress
-//            WebServiceInicializado = True
-//            m_ipAddress = ipAddressIntranet
-//            Err.Clear()
-//        Else
-//            Err.Raise(Err.Number, Err.Source, Err.Description)
-//        End If
-//    End Sub
         }
 
 
@@ -99,11 +77,6 @@ namespace Catalogo._clientes
             cliente.SincronizacionClientesCompletada(_MacAddress);
             cliente.SincronizacionCtasCtesCompletada(_MacAddress);
             return;
-
-            //.ErrorForm.show():
-            //        Err.Raise(Err.Number, Err.Source, Err.Description)
-
-            //    End Sub
         }
 
 
@@ -243,7 +216,7 @@ namespace Catalogo._clientes
 
             catch (System.Data.OleDb.OleDbException ex)
             {
-                //.ErrorForm.show():
+
                 if (ex.ErrorCode ==-2147467259)
                 {
                     //        If Err.Number = -2147467259 Then

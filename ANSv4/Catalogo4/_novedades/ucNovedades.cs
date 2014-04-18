@@ -298,7 +298,7 @@ namespace Catalogo._novedades
                 //chequea comandos y mensajes desde el servidor
                 if (Funciones.modINIs.ReadINI("DATOS", "INFO", "0") == "1") //Or vg.RecienRegistrado Or vg.NoConn
                 {
-                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig, false);
+                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig);
                     updater.run();
                 }
             }

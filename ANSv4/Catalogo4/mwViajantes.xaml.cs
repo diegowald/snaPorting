@@ -273,7 +273,7 @@ namespace Catalogo
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
-            this.ContentMenu.ToggleAutoHide();
+            //this.ContentMenu.ToggleAutoHide();
 
             //Catalogo.util.FlashWindow fwFlash = new Catalogo.util.FlashWindow();
             //if (WindowState.) //(this.WindowState == System.Windows.Forms.FormWindowState.Minimized)
@@ -372,7 +372,7 @@ namespace Catalogo
                                 if (Conectado)
                                 {
                                     Catalogo.util.BackgroundTasks.EnvioMovimientos movs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
-                                        0, false, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET, null);
+                                        0, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET, null);
                                     movs.run();
                                 }
                                 else

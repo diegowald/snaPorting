@@ -31,9 +31,9 @@ namespace Catalogo._interdeposito
         private bool DatosObtenidos;
 
         private System.Data.OleDb.OleDbConnection Conexion1;
-        public EnvioInterDeposito(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string ipAddressIntranet, string MacAddress, bool usaProxy, string proxyServerAddress)
+        public EnvioInterDeposito(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string ipAddressIntranet, string MacAddress)
         {
-            Inicializar(ipAddress, ipAddressIntranet, MacAddress, usaProxy, proxyServerAddress);
+            Inicializar(ipAddress, ipAddressIntranet, MacAddress);
             Conexion1 = Conexion;
         }
 
@@ -137,7 +137,7 @@ namespace Catalogo._interdeposito
             }
         }
 
-        public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress, bool usaProxy, string proxyServerAddress)
+        public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
         {
             bool Conectado = util.SimplePing.ping(ipAddress, 5000);
             if (!Conectado)
@@ -153,9 +153,9 @@ namespace Catalogo._interdeposito
                     {
                         Cliente = new InterDepositoWS.InterDeposito();
                         Cliente.Url = "http://" + ipAddress + "/wsCatalogo4/InterDeposito.asmx?wsdl";
-                        if (usaProxy)
+                        if (Global01.proxyServerAddress != "0.0.0.0")
                         {
-                            Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                            Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                         }
 
                         m_MacAddress = MacAddress;
@@ -177,9 +177,9 @@ namespace Catalogo._interdeposito
                     // Intento con el ip interno
                     Cliente = new InterDepositoWS.InterDeposito();
                     Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/InterDeposito.asmx?wsdl";
-                    if (usaProxy)
+                    if (Global01.proxyServerAddress != "0.0.0.0")
                     {
-                        Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                     }
 
                     m_MacAddress = MacAddress;

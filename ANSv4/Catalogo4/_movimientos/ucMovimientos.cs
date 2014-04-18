@@ -255,8 +255,7 @@ namespace Catalogo._movimientos
                                 Catalogo.util.BackgroundTasks.EnvioMovimientos envio =
                                     new util.BackgroundTasks.EnvioMovimientos(
                                         util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
-                                        int.Parse(this.cboCliente.SelectedValue.ToString()),
-                                        false,
+                                        int.Parse(this.cboCliente.SelectedValue.ToString()),                                        
                                         util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_LISTVIEW,
                                         filtro);
 

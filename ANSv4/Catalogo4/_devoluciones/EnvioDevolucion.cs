@@ -28,9 +28,9 @@ namespace Catalogo._devoluciones
 
         private bool DatosObtenidos;
 
-        public EnvioDevolucion(System.Data.OleDb.OleDbConnection conexion, string ipAddress, string ipAddressIntranet, string MacAddress, bool usaProxy, string proxyServerAddress)
+        public EnvioDevolucion(System.Data.OleDb.OleDbConnection conexion, string ipAddress, string ipAddressIntranet, string MacAddress)
         {
-            Inicializar(ipAddress, ipAddressIntranet, MacAddress, usaProxy, proxyServerAddress);
+            Inicializar(ipAddress, ipAddressIntranet, MacAddress);
             Conexion1 = conexion;
         }
 
@@ -131,7 +131,7 @@ namespace Catalogo._devoluciones
         }
 
 
-        public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress, bool usaProxy, string proxyServerAddress)
+        public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
         {
             bool Conectado = util.SimplePing.ping(ipAddress, 5000);
             if (!Conectado)
@@ -146,9 +146,9 @@ namespace Catalogo._devoluciones
                     {
                         Cliente = new DevolucionWS.Devolucion();
                         Cliente.Url = "http://" + ipAddress + "/wsCatalogo4/Devolucion.asmx?wsdl";
-                        if (usaProxy)
+                        if (Global01.proxyServerAddress != "0.0.0.0")
                         {
-                            Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                            Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                         }
 
                         m_MacAddress = MacAddress;
@@ -169,9 +169,9 @@ namespace Catalogo._devoluciones
                     // Intento con el ip interno
                     Cliente = new DevolucionWS.Devolucion();
                     Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Devolucion.asmx?wsdl";
-                    if (usaProxy)
+                    if (Global01.proxyServerAddress != "0.0.0.0")
                     {
-                        Cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                     }
 
                     m_MacAddress = MacAddress;

@@ -1525,6 +1525,15 @@ namespace Catalogo._recibos
                 cboCliente.SelectedIndex = dato;
         }
 
+        private void CliNAgregarBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EnviarBtn_Click(object sender, EventArgs e)
+        {
+
+        }
 
     } //fin clase
 } //fin namespace

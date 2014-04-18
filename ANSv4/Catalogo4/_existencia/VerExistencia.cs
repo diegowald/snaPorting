@@ -17,19 +17,16 @@ namespace Catalogo._existencia
 	    private bool WebServiceInicializado;
 	    private string m_MacAddress;
 	    private string m_ipAddress;
-	    private bool m_UsaProxy;
 
-	    private string m_IPProxyServer;
-	    public bool Inicializado {
+        public bool Inicializado 
+        {
 		    get { return WebServiceInicializado; }
 	    }
 
 
-	    public void Inicializar(string MacAddress, string ipAddress, string ipAddressIntranet, bool usaProxy, string ipProxyServer)
+	    public void Inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
 	    {
-            m_UsaProxy = usaProxy;
-            m_IPProxyServer = ipProxyServer;
-
+  
             bool Conectado = util.SimplePing.ping(ipAddress, 5000);
             if (!Conectado)
             {
@@ -44,9 +41,9 @@ namespace Catalogo._existencia
                     {
                         Cliente = new VerExistenciaWS.VerExistencia();
                         Cliente.Url = "http://" + ipAddress + "/wsOracle/VerExistencia.asmx?wsdl";
-                        if (m_UsaProxy)
+                        if (Global01.proxyServerAddress != "0.0.0.0")
                         {
-                            Cliente.Proxy = new System.Net.WebProxy(m_IPProxyServer);
+                            Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                         }
 
                         m_MacAddress = MacAddress;
@@ -65,9 +62,9 @@ namespace Catalogo._existencia
                 {
                     Cliente = new VerExistenciaWS.VerExistencia();
                     Cliente.Url = "http://" + ipAddressIntranet + "/wsOracle/VerExistencia.asmx?wsdl";
-                    if (m_UsaProxy)
+                    if (Global01.proxyServerAddress != "0.0.0.0")
                     {
-                        Cliente.Proxy = new System.Net.WebProxy(m_IPProxyServer);
+                        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                     }
 
                     m_ipAddress = ipAddressIntranet;

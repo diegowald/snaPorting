@@ -96,15 +96,11 @@
             // 
             // btnEnviarMail
             // 
-            this.btnEnviarMail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.btnEnviarMail.BackColor = System.Drawing.SystemColors.Control;
             this.btnEnviarMail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnEnviarMail.Enabled = false;
-            this.btnEnviarMail.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnEnviarMail.FlatAppearance.BorderSize = 2;
-            this.btnEnviarMail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnEnviarMail.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEnviarMail.FlatAppearance.BorderSize = 0;
             this.btnEnviarMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEnviarMail.ForeColor = System.Drawing.Color.White;
             this.btnEnviarMail.Location = new System.Drawing.Point(135, 24);
             this.btnEnviarMail.Name = "btnEnviarMail";
             this.btnEnviarMail.Size = new System.Drawing.Size(113, 33);
@@ -115,15 +111,11 @@
             // 
             // btnVerPDF
             // 
-            this.btnVerPDF.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
+            this.btnVerPDF.BackColor = System.Drawing.SystemColors.Control;
             this.btnVerPDF.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnVerPDF.Enabled = false;
-            this.btnVerPDF.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.btnVerPDF.FlatAppearance.BorderSize = 2;
-            this.btnVerPDF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.btnVerPDF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVerPDF.FlatAppearance.BorderSize = 0;
             this.btnVerPDF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVerPDF.ForeColor = System.Drawing.Color.White;
             this.btnVerPDF.Location = new System.Drawing.Point(16, 24);
             this.btnVerPDF.Name = "btnVerPDF";
             this.btnVerPDF.Size = new System.Drawing.Size(113, 33);

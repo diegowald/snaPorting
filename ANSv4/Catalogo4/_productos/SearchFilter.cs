@@ -36,18 +36,14 @@ namespace Catalogo._productos
         private System.Collections.Specialized.OrderedDictionary Filter_Otros =
                       new System.Collections.Specialized.OrderedDictionary();
 
-
         public SearchFilter()
-        {
-          
+        {          
             InitializeComponent();
             
             preload.Preloader.instance.productos.onWorkFinished += dataReady;
 
             xCargarDataControl();
-
         }
-
 
         private void xCargarDataControl()
         {

@@ -27,7 +27,7 @@
     <ProductName>Catálogo Dígital de Productos</ProductName>
     <PublisherName>Auto Náutica Sur s.r.l.</PublisherName>
     <SuiteName>Catalogo ANS</SuiteName>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -66,7 +66,7 @@
     <ManifestKeyFile>Catalogo4_ClaveTemporal.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <GenerateManifests>false</GenerateManifests>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -328,12 +328,6 @@
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
     <Compile Include="_registro\AppRegistro.cs" />
     <Compile Include="_rendiciones\EnvioRendicion.cs" />
-    <Compile Include="_rendiciones\fPruebas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="_rendiciones\fPruebas.designer.cs">
-      <DependentUpon>fPruebas.cs</DependentUpon>
-    </Compile>
     <Compile Include="_rendiciones\ucRendiciones.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -479,9 +473,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\FiltroSearch.resx">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="_rendiciones\fPruebas.resx">
-      <DependentUpon>fPruebas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_rendiciones\ucRendiciones.resx">
       <DependentUpon>ucRendiciones.cs</DependentUpon>

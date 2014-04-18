@@ -32,9 +32,9 @@ namespace Catalogo._recibos
         private bool DatosObtenidos;
         private System.Data.OleDb.OleDbConnection Conexion1;
 
-        public EnvioRecibo(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string ipAddressIntranet, string MacAddress, bool usaProxy, string proxyServerAddress)
+        public EnvioRecibo(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string ipAddressIntranet, string MacAddress)
         {
-            Inicializar(ipAddress, ipAddressIntranet, MacAddress, usaProxy, proxyServerAddress);
+            Inicializar(ipAddress, ipAddressIntranet, MacAddress);
             Conexion1 = Conexion;
         }
 
@@ -220,8 +220,7 @@ namespace Catalogo._recibos
             }
         }
 
-
-        public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress, bool usaProxy, string proxyServerAddress)
+        public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
         {
             // ERROR: Not supported in C#: OnErrorStatement
             try
@@ -237,9 +236,9 @@ namespace Catalogo._recibos
                     {
                         cliente = new RecibosWS.Recibos_v_303();
                         cliente.Url = "http://" + ipAddress + "/wsCatalogo4/Recibos_v_303.asmx?wsdl";
-                        if (usaProxy)
+                        if (Global01.proxyServerAddress != "0.0.0.0")
                         {
-                            cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                            cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                         }
 
                         _MacAddress = MacAddress;
@@ -258,9 +257,9 @@ namespace Catalogo._recibos
                 {
                     cliente = new RecibosWS.Recibos_v_303();
                     cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Recibos_v_303.asmx?wsdl";
-                    if (usaProxy)
+                    if (Global01.proxyServerAddress != "0.0.0.0")
                     {
-                        cliente.Proxy = new System.Net.WebProxy(proxyServerAddress);
+                        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
                     }
 
                     _MacAddress = MacAddress;

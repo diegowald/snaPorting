@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitC1 = new System.Windows.Forms.SplitContainer();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.dgvNovedades = new System.Windows.Forms.DataGridView();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.dgvNovedades = new System.Windows.Forms.DataGridView();
             this.splitC1.Panel1.SuspendLayout();
             this.splitC1.Panel2.SuspendLayout();
             this.splitC1.SuspendLayout();
@@ -49,6 +49,7 @@
             // 
             // splitC1.Panel1
             // 
+            this.splitC1.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.splitC1.Panel1.Controls.Add(this.pictureBox);
             this.splitC1.Panel1.Controls.Add(this.webBrowser);
             // 
@@ -59,26 +60,34 @@
             this.splitC1.SplitterDistance = 321;
             this.splitC1.TabIndex = 0;
             // 
-            // pictureBox
+            // pictureBox1
             // 
-            this.pictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox.Image = global::Catalogo.Properties.Resources.Nuevo_logo_Auto_nautica_horizontal_original;
-            this.pictureBox.Location = new System.Drawing.Point(71, 80);
-            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Location = new System.Drawing.Point(249, 22);
+            this.pictureBox.Name = "pictureBox1";
             this.pictureBox.Size = new System.Drawing.Size(233, 173);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox.TabIndex = 2;
             this.pictureBox.TabStop = false;
+            // 
+            // webBrowser2
+            // 
+            this.webBrowser.Location = new System.Drawing.Point(503, 80);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser2";
+            this.webBrowser.Size = new System.Drawing.Size(243, 219);
+            this.webBrowser.TabIndex = 3;
             // 
             // dgvNovedades
             // 
             this.dgvNovedades.AllowUserToAddRows = false;
             this.dgvNovedades.AllowUserToDeleteRows = false;
             this.dgvNovedades.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightYellow;
-            this.dgvNovedades.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightYellow;
+            this.dgvNovedades.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvNovedades.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvNovedades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNovedades.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvNovedades.Location = new System.Drawing.Point(0, 0);
@@ -103,6 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(209)))), ((int)(((byte)(210)))));
             this.Controls.Add(this.splitC1);
             this.Name = "ucNovedades";
             this.Size = new System.Drawing.Size(749, 443);

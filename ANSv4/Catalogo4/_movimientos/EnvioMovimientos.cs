@@ -23,19 +23,18 @@ namespace Catalogo.util.BackgroundTasks
         MODOS_TRANSMISION _modoTransmision;
         private bool _resultado;
         int _idCliente;
-        bool _useSettingIni;
+        
         System.Collections.Generic.List<string> filtroNotaVenta;
         System.Collections.Generic.List<string> filtroRecibo;
         System.Collections.Generic.List<string> filtroDevolucion;
         System.Collections.Generic.List<string> filtroInterdeposito;
         System.Collections.Generic.List<string> filtroRendicion;
 
-        public EnvioMovimientos(JOB_TYPE jobType, int idCliente, bool useSettingsIni, MODOS_TRANSMISION modoTransmision,
+        public EnvioMovimientos(JOB_TYPE jobType, int idCliente, MODOS_TRANSMISION modoTransmision,
             System.Collections.Generic.List<MOVIMIENTO_SELECCIONADO> filtro)
             : base(jobType)
         {
             _idCliente = idCliente;
-            _useSettingIni = useSettingsIni;
             _modoTransmision = modoTransmision;
             filtroNotaVenta = new List<string>();
             filtroRecibo = new List<string>();
@@ -100,7 +99,7 @@ namespace Catalogo.util.BackgroundTasks
 
         private void enviarMovimientos()
         {
-            Catalogo.util.IPPrivado ipPriv;
+            util.IPPrivado ipPriv;
             string ipPrivado;
             string ipIntranet;
             bool fallaEnvioPedido = false;
@@ -109,14 +108,14 @@ namespace Catalogo.util.BackgroundTasks
             bool fallaEnvioInterDeposito = false;
             bool fallaEnvioRendicion = false;
 
-            if (_useSettingIni)
+            if (Global01.ipSettingIni)
             {
                 ipPrivado = Global01.URL_ANS;
                 ipIntranet = Global01.URL_ANS2;
             }
             else
             {
-                ipPriv = new Catalogo.util.IPPrivado(Global01.URL_ANS, Global01.IDMaquina, false, "");
+                ipPriv = new util.IPPrivado(Global01.URL_ANS, Global01.IDMaquina);
                 ipPrivado = ipPriv.GetIP();
                 ipIntranet = ipPriv.GetIpIntranet();
             }
@@ -137,7 +136,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroNotaVenta.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _pedidos.EnvioPedido envio = new _pedidos.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                    _pedidos.EnvioPedido envio = new _pedidos.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.obtenerDatos(Nro);
@@ -163,7 +162,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroRecibo.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _recibos.EnvioRecibo envio = new _recibos.EnvioRecibo(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                    _recibos.EnvioRecibo envio = new _recibos.EnvioRecibo(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.obtenerDatos(Nro);
@@ -190,7 +189,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroDevolucion.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _devoluciones.EnvioDevolucion envio = new _devoluciones.EnvioDevolucion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                    _devoluciones.EnvioDevolucion envio = new _devoluciones.EnvioDevolucion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
@@ -214,7 +213,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroInterdeposito.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _interdeposito.EnvioInterDeposito envio = new _interdeposito.EnvioInterDeposito(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                    _interdeposito.EnvioInterDeposito envio = new _interdeposito.EnvioInterDeposito(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
@@ -238,7 +237,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroRendicion.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _rendiciones.EnvioRendicion envio = new _rendiciones.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina, false, "");
+                                    _rendiciones.EnvioRendicion envio = new _rendiciones.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);

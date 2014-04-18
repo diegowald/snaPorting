@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Semáforo = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Semaforo = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -41,9 +41,10 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightYellow;
             this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Semáforo});
+            this.Semaforo});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
@@ -56,14 +57,15 @@
             this.dataGridView1.DoubleClick += new System.EventHandler(this.dataGridView1_DoubleClick);
             this.dataGridView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView1_KeyPress);
             // 
-            // Semáforo
+            // Semaforo
             // 
-            this.Semáforo.HeaderText = "Semáforo";
-            this.Semáforo.Name = "Semáforo";
-            this.Semáforo.ReadOnly = true;
-            this.Semáforo.Text = "s";
-            this.Semáforo.ToolTipText = "ver existencia";
-            this.Semáforo.Width = 30;
+            this.Semaforo.HeaderText = "Existencia";
+            this.Semaforo.MinimumWidth = 4;
+            this.Semaforo.Name = "Semaforo";
+            this.Semaforo.ReadOnly = true;
+            this.Semaforo.Text = "ver existencia";
+            this.Semaforo.ToolTipText = "ver existencia";
+            this.Semaforo.Width = 4;
             // 
             // GridViewFilter2
             // 
@@ -82,6 +84,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewButtonColumn Semáforo;
+        private System.Windows.Forms.DataGridViewButtonColumn Semaforo;
     }
 }
