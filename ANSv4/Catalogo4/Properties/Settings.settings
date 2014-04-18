@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Catalogo.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Catalogo_CatalogoWS_Info" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx</Value>
-    </Setting>
     <Setting Name="Catalogo_VerExistenciaWS_VerExistencia" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://190.3.78.12/wsOracle/VerExistencia.asmx</Value>
     </Setting>
@@ -53,6 +50,9 @@
   &lt;ProviderName&gt;System.Data.OleDb&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\catalogo.mdb;Password=video80min;User ID=inVent;Jet OLEDB:System database=C:\Windows\Help\kbappcat.hlp</Value>
+    </Setting>
+    <Setting Name="Catalogo_CatalogoWS_Info" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx?wsdl</Value>
     </Setting>
   </Settings>
 </SettingsFile>

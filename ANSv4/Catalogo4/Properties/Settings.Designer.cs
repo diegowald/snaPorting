@@ -26,16 +26,6 @@ namespace Catalogo.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx")]
-        public string Catalogo_CatalogoWS_Info {
-            get {
-                return ((string)(this["Catalogo_CatalogoWS_Info"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wsOracle/VerExistencia.asmx")]
         public string Catalogo_VerExistenciaWS_VerExistencia {
             get {
@@ -164,6 +154,16 @@ namespace Catalogo.Properties {
         public string catalogoConnectionString1 {
             get {
                 return ((string)(this["catalogoConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx?wsdl")]
+        public string Catalogo_CatalogoWS_Info {
+            get {
+                return ((string)(this["Catalogo_CatalogoWS_Info"]));
             }
         }
     }
