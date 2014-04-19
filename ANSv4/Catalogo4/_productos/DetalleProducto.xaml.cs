@@ -32,7 +32,7 @@ namespace Catalogo._productos
             txtDetalle.Inlines.Clear();
             txtDetalle.Visibility = System.Windows.Visibility.Hidden;
             imgIzquierda.Visibility = System.Windows.Visibility.Hidden;
-            imgDerecha.Visibility = System.Windows.Visibility.Hidden; 
+            imgDerecha.Visibility = System.Windows.Visibility.Hidden;
 
             if (dato != null)
             {
@@ -125,7 +125,7 @@ namespace Catalogo._productos
                 imgIzquierda.Visibility = System.Windows.Visibility.Visible;
                 imgDerecha.Visibility = System.Windows.Visibility.Visible;
             }
- 
+
         }
 
         private void descargarImagen(string Origen, string Destino, System.Windows.Forms.DataGridViewRow dato)
@@ -133,21 +133,17 @@ namespace Catalogo._productos
             if (!isImageDownloading(Destino))
             {
                 setImageDownloading(Destino);
-                System.Net.WebClient ImgWeb = new System.Net.WebClient();
-                ImgWeb.DownloadFileCompleted += ImgWeb_DownloadFileCompleted;
+                util.FileDownloader downloader = new util.FileDownloader(Origen, Destino, null, util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+                downloader.onFileDownloaded += onFileDownloaded;
+                downloader.onFileDownloading += onFileDownloading;
+                downloader.onFileProblem += onFileProblem;
 
                 _Destino = Destino;
                 try
                 {
-                    if (Catalogo.util.SimplePing.ping(Origen, 500))
-                    {
-                        //ImgWeb.DownloadFile(Origen, Destino);
-                        ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
-                    }
-                    else
-                    {
-                        util.errorHandling.ErrorLogger.LogMessage("No existe la imagen + " + Origen);
-                    }
+                    downloader.run();
+                    //ImgWeb.DownloadFile(Origen, Destino);
+                    //                        ImgWeb.DownloadFileAsync(new Uri(Origen), Destino);
                 }
                 catch (System.Web.HttpException ex)
                 {
@@ -159,31 +155,6 @@ namespace Catalogo._productos
                     //throw wex;
                     util.errorHandling.ErrorLogger.LogMessage(wex);
                 }
-            }
-        }
-        
-        void ImgWeb_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            //validateImagefile(_Destino);
-            if (isValidImage(_Destino))
-            {
-                try
-                {
-                    imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
-                    _imgEnDescarga.Remove(_Destino);
-                }
-                catch (Exception ex)
-                {
-                    string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
-                    imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
-                    //throw ex;
-                    util.errorHandling.ErrorLogger.LogMessage(ex);
-                }
-            }
-            else
-            {
-                string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
-                imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
             }
         }
 
@@ -242,6 +213,53 @@ namespace Catalogo._productos
             }
         }
 
+
+        public void onFileDownloaded(object Tag, string Destino)
+        {
+            
+            //validateImagefile(_Destino);
+            if (isValidImage(Destino))
+            {
+                try
+                {
+                    if (imgDerecha.Dispatcher.CheckAccess())
+                    {
+                        imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
+                        _imgEnDescarga.Remove(_Destino);
+                    }
+                    else
+                    {
+                        imgDerecha.Dispatcher.Invoke(new Action(() =>
+                            {
+                                imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
+                                _imgEnDescarga.Remove(_Destino);
+                            }));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
+                    imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
+                    //throw ex;
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+                }
+            }
+            else
+            {
+                util.errorHandling.ErrorLogger.LogMessage("Problema al descargar imagen " + Destino);
+                string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
+                imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
+            }
+        }
+
+        public void onFileProblem(object Tag, string Destino, string cause)
+        {
+            util.errorHandling.ErrorLogger.LogMessage("Problema al descargar imagen " + Destino + ". Causa; " + cause);
+        }
+
+        public void onFileDownloading(object Tag, string Destino, int progress)
+        {
+        }
 
     }
 }

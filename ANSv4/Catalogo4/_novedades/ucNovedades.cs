@@ -518,11 +518,11 @@ namespace Catalogo._novedades
             if (doDownload)
             {
                 downloadFiles[dest] = DownloadStatus.Downloading;
-                NovedadesDownloader download = new NovedadesDownloader(url+ archivo, dest, id);
+                util.FileDownloader download = new util.FileDownloader(url+ archivo, dest, id, util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
                 download.onFileDownloaded += onFileDownloaded;
                 download.onFileDownloading += onFileDownloading;
                 download.onFileProblem += onFileProblem;
-                download.startDownload();
+                download.run();
             }
         }
 

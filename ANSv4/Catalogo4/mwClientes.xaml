@@ -112,7 +112,7 @@
                                     <Grid x:Name="searchArea"   Grid.Row="0"  />
                                     <Grid x:Name="productsArea" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>                                    
                                     <_productos:DetalleProducto Grid.Row="2" x:Name="productDetalle"/>
-                                    <GridSplitter Grid.Row="3" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch"/>
+                                    <GridSplitter Grid.Row="3" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment"     HorizontalAlignment="Stretch"/>
                                     <Grid x:Name="PedidosDevolucionesArea"   Grid.Row="4">
                                         <ad:DocumentPane x:Name="xVtaDevDockP" SelectedIndex="0" ad:ResizingPanel.ResizeHeight="270">
                                             <ad:DockableContent Title="Nota de Venta" x:Name="xNotaVentaAreaDockC" IsCloseable="False">

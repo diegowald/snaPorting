@@ -33,9 +33,16 @@ namespace Catalogo.util
             }
             catch (System.Net.WebException wex)
             {
-                util.errorHandling.ErrorLogger.LogMessage(wex);
                 //set flag if there was a timeout or some other issues
-                return false;
+                if (timeOut == 500)
+                {
+                    return ping(ipAddress, timeOut * 2);
+                }
+                else
+                {
+                    util.errorHandling.ErrorLogger.LogMessage(wex);
+                    return false;
+                }
             }
         }
     }
