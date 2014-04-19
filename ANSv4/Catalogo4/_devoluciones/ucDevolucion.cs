@@ -842,7 +842,31 @@ namespace Catalogo._devoluciones
 
         private void EnviarBtn_Click(object sender, EventArgs e)
         {
+            System.Collections.Generic.List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO> filtro
+               = new List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>();
 
+            _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(cboCliente.SelectedValue.ToString()));
+            System.Data.OleDb.OleDbDataReader dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "DEVOLUCION");
+
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO mov = new util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO();
+                    mov.origen = "DEVOLUCION";
+                    mov.nro = (string)dr["Nro"];
+                    filtro.Add(mov);
+                }
+            }
+
+            Catalogo.util.BackgroundTasks.EnvioMovimientos envio =
+                new util.BackgroundTasks.EnvioMovimientos(
+                    util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+                    int.Parse(this.cboCliente.SelectedValue.ToString()),
+                    util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_LISTVIEW,
+                    filtro);
+
+            envio.run();
         }
 
     } //fin clase
