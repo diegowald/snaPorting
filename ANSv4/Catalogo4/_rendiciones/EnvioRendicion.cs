@@ -170,10 +170,10 @@ namespace Catalogo._rendiciones
         public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
         {
             bool Conectado = false;
-            Conectado = util.SimplePing.ping(ipAddress, 5000);
+            Conectado = util.SimplePing.ping(ipAddress, 5000, 0);
             if (!Conectado)
             {
-                Conectado = util.SimplePing.ping(ipAddressIntranet, 5000);
+                Conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
             }
 
             try

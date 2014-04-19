@@ -27,10 +27,10 @@ namespace Catalogo._existencia
 	    public void Inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
 	    {
   
-            bool Conectado = util.SimplePing.ping(ipAddress, 5000);
+            bool Conectado = util.SimplePing.ping(ipAddress, 5000, 0);
             if (!Conectado)
             {
-                Conectado = util.SimplePing.ping(ipAddressIntranet, 5000);
+                Conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
             }
 
             try

@@ -119,7 +119,7 @@ namespace Catalogo.util
             bool Conectado;
 
         VadeNuevo:
-            Conectado = util.SimplePing.ping(ipAddress, 5000);
+            Conectado = util.SimplePing.ping(ipAddress, 5000, 0);
             if (!Conectado)
             {
                 if (MessageBox.Show("Error de Conexión al Servidor, ¿quiere intentar de nuevo?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

@@ -10,6 +10,7 @@ namespace Catalogo.util
         string _URL;
         string _Destino;
         object _Tag;
+        bool downloadOK;
 
         public FileDownloader(string URL, string Destino, object Tag, JOB_TYPE jobType)
             : base(jobType)
@@ -21,15 +22,14 @@ namespace Catalogo.util
 
         private void startDownload()
         {
+            downloadOK = false;
             try
             {
-                if (util.SimplePing.ping(_URL, 500))
+                if (util.SimplePing.ping(_URL, 500, 3))
                 {
                     System.Net.WebClient downloader = new System.Net.WebClient();
                     downloader.DownloadFile(new Uri(_URL), _Destino);
-//                    downloader.DownloadFileCompleted += downloader_DownloadFileCompleted;
-//                    downloader.DownloadProgressChanged += downloader_DownloadProgressChanged;
-//                    downloader.DownloadFileAsync(new Uri(_URL), _Destino);
+                    downloadOK = true;
                 }
                 else
                 {
@@ -76,26 +76,6 @@ namespace Catalogo.util
             }
         }
 
-        void downloader_DownloadProgressChanged(object sender, System.Net.DownloadProgressChangedEventArgs e)
-        {
-            fireFileDownloading(e.ProgressPercentage);
-        }
-
-        void downloader_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-            {
-                fireFileProblem("Cancelled");
-                return;
-            }
-            if (e.Error != null)
-            {
-                util.errorHandling.ErrorLogger.LogMessage(e.Error);
-                fireFileProblem(e.Error.Message);
-            }
-            fireFileDownloaded();
-        }
-
         public override void execute()
         {
             startDownload();
@@ -108,7 +88,10 @@ namespace Catalogo.util
 
         public override void finished()
         {
-            fireFileDownloaded();
+            if (downloadOK)
+            {
+                fireFileDownloaded();
+            }
         }
     }
 }

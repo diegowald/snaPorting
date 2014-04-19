@@ -18,7 +18,7 @@ namespace Catalogo.util
             return reply.Status == System.Net.NetworkInformation.IPStatus.Success;
         }*/
 
-        public static bool ping(string ipAddress, int timeOut)
+        public static bool ping(string ipAddress, int timeOut, int reintentos)
         {
             string url = ipAddress.StartsWith("http://") ? ipAddress : "http://" + ipAddress;
             System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(url);
@@ -34,9 +34,9 @@ namespace Catalogo.util
             catch (System.Net.WebException wex)
             {
                 //set flag if there was a timeout or some other issues
-                if (timeOut == 500)
+                if (reintentos > 0)
                 {
-                    return ping(ipAddress, timeOut * 2);
+                    return ping(ipAddress, timeOut * 2, reintentos - 1);
                 }
                 else
                 {

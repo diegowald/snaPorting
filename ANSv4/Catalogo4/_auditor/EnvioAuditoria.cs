@@ -28,11 +28,11 @@ namespace Catalogo._auditor
 
         public void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
         {
-            bool conectado = util.SimplePing.ping(ipAddress, 5000);
+            bool conectado = util.SimplePing.ping(ipAddress, 5000, 0);
 
             if (!conectado)
             {
-                conectado = util.SimplePing.ping(ipAddressIntranet, 5000);
+                conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
             }
 
             try

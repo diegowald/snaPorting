@@ -32,10 +32,10 @@ namespace Catalogo._Application
 
         public void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
         {
-            bool conectado = util.SimplePing.ping(ipAddress, 5000);
+            bool conectado = util.SimplePing.ping(ipAddress, 5000, 0);
             if (!conectado)
             {
-                conectado = util.SimplePing.ping(ipAddressIntranet, 5000);
+                conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
             }
             try
             {
@@ -90,7 +90,7 @@ namespace Catalogo._Application
         {
             string llaveViajante = string.Empty;
 
-            if (util.SimplePing.ping(_ipAddress, 5000))
+            if (util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 string s = cliente.ObtenerLLaveViajante(ZonaViajante);
                 if (s.Trim().Length > 0)
@@ -196,7 +196,7 @@ namespace Catalogo._Application
 
         private int obtenerEstado(ref bool cancel, string Cuit, string IDAns, string IDViajante, string LLaveCliente)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000))
+            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 // Conexion no valida
                 cancel = true;
@@ -262,7 +262,7 @@ namespace Catalogo._Application
 
         private byte obtenerEstadoActual(ref bool cancel, string Cuit, string IDAns)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000))
+            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 return 0;
             }
@@ -296,7 +296,7 @@ namespace Catalogo._Application
 
         private byte obtenerListaPrecio(ref bool cancel, string Cuit, string IDAns)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000))
+            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 // Conexion no valida
                 cancel = true;

@@ -33,11 +33,11 @@ namespace Catalogo._application
 
         protected void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
         {
-            bool conectado = util.SimplePing.ping(ipAddress, 5000);
+            bool conectado = util.SimplePing.ping(ipAddress, 5000, 0);
 
             if (!conectado)
             {
-                conectado = util.SimplePing.ping(ipAddressIntranet, 5000);
+                conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
             }
             try
             {
@@ -87,7 +87,7 @@ namespace Catalogo._application
 
         private void sincroAppConfigCompletada(ref bool cancel)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000))
+            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 // Conexion no valida
                 cancel = true;
@@ -181,7 +181,7 @@ namespace Catalogo._application
 
         private bool tenerQueEnviarInfo()
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000))
+            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 return false;
             }
@@ -200,7 +200,7 @@ namespace Catalogo._application
             string Version, string build, string ListaPrecio,
             string auditor)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000))
+            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 return false;
             }
@@ -218,7 +218,7 @@ namespace Catalogo._application
 
         protected void obtenerInfo(ref bool cancel)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000))
+            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 // Conexion no valida
                 cancel = true;
@@ -313,7 +313,7 @@ namespace Catalogo._application
 
         public void obtenerComandos(ref bool cancel)
         {  
-            if (!util.SimplePing.ping(_ipAddress, 5000))
+            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 // Conexion no valida
                 cancel = true;

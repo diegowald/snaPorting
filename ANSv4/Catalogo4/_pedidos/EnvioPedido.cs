@@ -121,10 +121,10 @@ namespace Catalogo._pedidos
 
         public void inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
         {
-            bool conectado = util.SimplePing.ping(ipAddress, 5000);
+            bool conectado = util.SimplePing.ping(ipAddress, 5000, 0);
             if (!conectado)
             {
-                conectado = util.SimplePing.ping(ipAddressIntranet, 5000);
+                conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
             }
 
             try

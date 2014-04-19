@@ -34,11 +34,11 @@ namespace Catalogo._clientes
 
         private void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
         {
-            bool conectado = util.SimplePing.ping(ipAddress, 5000);
+            bool conectado = util.SimplePing.ping(ipAddress, 5000, 0);
 
             if (!conectado)
             {
-                conectado=util.SimplePing.ping(ipAddressIntranet, 5000);
+                conectado=util.SimplePing.ping(ipAddressIntranet, 5000, 0);
             }
 
             if (!webServiceInicializado)
@@ -67,7 +67,7 @@ namespace Catalogo._clientes
         {
             //        On Error GoTo .ErrorForm.show()
 
-            if (util.SimplePing.ping(_ipAddress, 5000))
+            if (util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 // conexion no valida.
                 cancel = true;
@@ -281,7 +281,7 @@ namespace Catalogo._clientes
 
         private void sincronizarTodosLosClientes(ref bool cancel)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000))
+            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 cancel = true;
                 return;
@@ -351,7 +351,7 @@ namespace Catalogo._clientes
 
         private void SincronizarTodasLasCtasCtes(ref bool cancel)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000))
+            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 cancel = true;
                 return;
