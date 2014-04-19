@@ -30,9 +30,18 @@ namespace Catalogo._preferencias
         private SaveDelegate doSave;
         private LoadDelegate doLoad;
 
+        private string password
+        {
+            get
+            {
+                return "chiclana917" + ((int)(System.DateTime.Now.Minute / 10)).ToString();
+            }
+        }
+
+
         private void createAndLoadCheckboxes()
         {
-            addCheckBox("Confirma Salida", "DATOS", "ConfirmaSalida", "1", "0", "1");
+            addCheckBox("Confirma Salida", "DATOS", "ConfirmaSalida", "1", "0", "1", true, password);
             addCheckBox("EEA", "DATOS", "EEA", "1", "0", "1");
             addCheckBox("Es gerente", "DATOS", "EsGerente", "1", "0", "0");
             addCheckBox("Pedido NE", "DATOS", "PedidoNE", "1", "0", "1");
