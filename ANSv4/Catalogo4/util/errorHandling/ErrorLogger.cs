@@ -52,25 +52,25 @@ namespace Catalogo.util.errorHandling
             }
         }
 
-        public static void LogMessage(Exception pExeption)
+        public static void LogMessage(Exception pException)
         {
             String str_inner = "";
 
             try
             {
                 str_inner = Environment.NewLine +
-                "Inner Exception Msg: " + pExeption.InnerException.Message +
+                    "Inner Exception Msg: " + (pException.InnerException == null ? "" : pException.InnerException.Message) +
                 Environment.NewLine +
-                "Inner Exception Stack: " + pExeption.InnerException.StackTrace +
+                "Exception Stack: " + pException.StackTrace +
                 Environment.NewLine +
-                "Object: " + pExeption.Source + Environment.NewLine +
-                "Function Call: " + pExeption.TargetSite.Name;
+                "Object: " + pException.Source + Environment.NewLine +
+                "Function Call: " + pException.TargetSite.Name;
             }
             catch (Exception)
             {
             }
 
-            LogMessage("Exception: " + pExeption.Message + Environment.NewLine +
+            LogMessage("Exception: " + pException.Message + Environment.NewLine +
                 "Stack: " + str_inner);
         }
     }
