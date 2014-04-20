@@ -6,13 +6,19 @@ using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo.varios
 {
+    public struct complexMessage
+    {
+        public util.Pair<string, float> progress1;
+        public util.Pair<string, float> progress2;
+    }
+
     public class NotificationCenter : Catalogo.util.singleton<NotificationCenter>,
-        Funciones.emitter_receiver.IEmisor<util.Pair<string, float>>,
+        Funciones.emitter_receiver.IEmisor<complexMessage>,
         Funciones.emitter_receiver.ICancellableEmitter
     {
-        public void notificar(string mensaje, float porcentaje)
+        public void notificar(complexMessage msg)
         {
-            this.emitir(new util.Pair<string, float>(mensaje, porcentaje));
+            this.emitir(msg);
         }
 
         public void requestCancel(ref bool cancel)
@@ -20,13 +26,13 @@ namespace Catalogo.varios
             this.askCancel(ref cancel);
         }
 
-        public Funciones.emitter_receiver.emisorHandler<util.Pair<string, float>> emisor
+        onRequestCancel ICancellableEmitter.requestCancel
         {
             get;
             set;
         }
 
-        onRequestCancel ICancellableEmitter.requestCancel
+        public emisorHandler<complexMessage> emisor
         {
             get;
             set;

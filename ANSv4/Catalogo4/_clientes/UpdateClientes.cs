@@ -3,7 +3,7 @@ using Catalogo.Funciones.emitter_receiver;
 
 namespace Catalogo._clientes
 {
-    class UpdateClientes : Funciones.emitter_receiver.IEmisor<util.Pair<string, float>>,
+    class UpdateClientes : Funciones.emitter_receiver.IEmisor<Catalogo.varios.complexMessage>, 
         Funciones.emitter_receiver.ICancellableEmitter
     {
         // Define como se llama este modulo para el control de errores
@@ -92,7 +92,10 @@ namespace Catalogo._clientes
                     Global01.TranActiva = conexion.BeginTransaction();
                 }
 
-                this.emitir(new util.Pair<string, float>("Sincronizando Clientes ...", 0));///, Cancel)
+                Catalogo.varios.complexMessage msg;
+                msg.progress1 = new util.Pair<string, float>("Sincronizando Clientes ...", 0);
+                msg.progress2 = new util.Pair<string, float>("", 0);
+                this.emitir(msg);///, Cancel)
 
                 if (!webServiceInicializado)
                 {
@@ -101,7 +104,8 @@ namespace Catalogo._clientes
 
                 if (!cancel)
                 {
-                    this.emitir(new util.Pair<string, float>("Sincronizando Clientes ...", 30));//, Cancel)
+                    msg.progress1.second = 30;
+                    this.emitir(msg);
                     this.requestCancel(ref cancel);
                 }
 
@@ -109,24 +113,28 @@ namespace Catalogo._clientes
 
                 if (!cancel)
                 {
-                    sincronizarTodosLosClientes(ref cancel);
+                    sincronizarTodosLosClientes(ref cancel, msg);
                 }
 
                 if (!cancel)
                 {
-                    this.emitir(new util.Pair<string, float>("Sincronizando Cuentas Corrientes", 60));///, Cancel)
+                    msg.progress1.first = "Sincronizando Cuentas Corrientes";
+                    msg.progress1.second = 60;
+                    this.emitir(msg);///, Cancel)
                     this.requestCancel(ref cancel);                                                                                                      ///this.requestCancel(ref cancel);
                 }
 
                 if (!cancel)
                 {
-                    SincronizarTodasLasCtasCtes(ref cancel);
+                    SincronizarTodasLasCtasCtes(ref cancel, msg);
                     this.requestCancel(ref cancel);
                 }
 
                 if (!cancel)
                 {
-                    this.emitir(new util.Pair<string, float>("Finalizando Sincronización de Clientes", 90));//, Cancel)
+                    msg.progress1.first = "Finalizando Sincronización de Clientes";
+                    msg.progress1.second = 90;
+                    this.emitir(msg);
                     this.requestCancel(ref cancel);
                 }
 
@@ -143,7 +151,9 @@ namespace Catalogo._clientes
                         Global01.TranActiva.Rollback();
                         Global01.TranActiva = null;
                     }
-                    this.emitir(new util.Pair<string, float>("Sincronización de Clientes con Errores", 100));///, Cancel)
+                    msg.progress1.first="Sincronización de Clientes con Errores";
+                    msg.progress1.second=100;
+                    this.emitir(msg);
                     this.requestCancel(ref cancel);
                 }
                 else
@@ -155,7 +165,9 @@ namespace Catalogo._clientes
                     }
 
                     Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_appConfig_FActClientes_Upd");
-                    this.emitir(new util.Pair<string, float>("Sincronización de Clientes Finalizada", 100));///, Cancel)
+                    msg.progress1.first = "Sincronización de Clientes Finalizada";
+                    msg.progress1.second = 100;
+                    this.emitir(msg);
                 }
             }
             catch (Exception ex)
@@ -279,7 +291,7 @@ namespace Catalogo._clientes
         }
 
 
-        private void sincronizarTodosLosClientes(ref bool cancel)
+        private void sincronizarTodosLosClientes(ref bool cancel, Catalogo.varios.complexMessage msg)
         {
             if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
@@ -287,10 +299,11 @@ namespace Catalogo._clientes
                 return;
             }
 
-            this.emitir(new util.Pair<string,float>("Sincronizando Clientes ...", 40));//, Cancel)
-            this.requestCancel(ref cancel);
-
-            this.emitir(new util.Pair<string,float>("Importando Mis Clientes", 0));///, Cancel)
+            msg.progress1.first = "Sincronizando Clientes ...";
+            msg.progress1.second = 40;
+            msg.progress2.first = "Importando Mis Clientes";
+            msg.progress2.second = 0;
+            this.emitir(msg);
             this.requestCancel(ref cancel);
             if (cancel)
             {
@@ -307,7 +320,9 @@ namespace Catalogo._clientes
 
             while (restanImportar>0)
             {
-                this.emitir(new util.Pair<string,float>("Sincronizando Clientes ...", ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100));//, Cancel)
+                msg.progress2.first="Sincronizando Clientes ...";
+                msg.progress2.second = ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100;
+                this.emitir(msg);
                 System.Data.DataSet ds = cliente.GetTodosLosClientes_Datos_Registros(_MacAddress, lastID);
   
                 if (ds.Tables[0].Rows.Count > 0)
@@ -330,7 +345,8 @@ namespace Catalogo._clientes
                             cantImportada++;
                             if (cantImportada % 31 == 0)
                             {
-                                this.emitir(new util.Pair<string, float>("Sincronizando Clientes ...", ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100));//, Cancel)
+                                msg.progress2.second = ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100;
+                                this.emitir(msg);
                                 this.requestCancel(ref cancel);
                                 if (cancel)
                                 {
@@ -349,17 +365,18 @@ namespace Catalogo._clientes
             }
         }
 
-        private void SincronizarTodasLasCtasCtes(ref bool cancel)
+        private void SincronizarTodasLasCtasCtes(ref bool cancel, Catalogo.varios.complexMessage msg)
         {
             if (!util.SimplePing.ping(_ipAddress, 5000, 0))
             {
                 cancel = true;
                 return;
             }
-            this.emitir(new util.Pair<string,float>("Sincronizando de Clientes ...", 60));//, Cancel)
-            this.requestCancel(ref cancel);
-
-            this.emitir(new util.Pair<string,float>("Importando Cuentas Corrientes", 0));//, Cancel)
+            msg.progress1.first = "Sincronizando de Clientes ...";
+            msg.progress1.second = 60;
+            msg.progress2.first = "Importando Cuentas Corrientes";
+            msg.progress2.second = 0;
+            this.emitir(msg);
             this.requestCancel(ref cancel);
             if (cancel)
             {
@@ -374,7 +391,9 @@ namespace Catalogo._clientes
 
             while (RestanImportar>0)
             {
-                this.emitir(new util.Pair<string,float>("Sincronizando Clientes ...", ((float)CantidadAImportar - RestanImportar) / CantidadAImportar * 100));//, Cancel)
+                msg.progress2.first = "Sincronizando Cuentas Corrientes ...";
+                msg.progress2.second = ((float)CantidadAImportar - RestanImportar) / CantidadAImportar * 100;
+                this.emitir(msg);
                 System.Data.DataSet ds = cliente.GetTodasLasCtasCtes_Datos_Registros(_MacAddress, lastId);
   
                 if (ds.Tables[0].Rows.Count > 0)
@@ -404,7 +423,8 @@ namespace Catalogo._clientes
                             CantidadImportada++;
                             if (CantidadImportada % 31 == 0)
                             {
-                                this.emitir(new util.Pair<string, float>("Importando Cuentas Corrientes", (float)CantidadImportada / CantidadAImportar * 100));//, Cancel)
+                                msg.progress2.second = (float)CantidadImportada / CantidadAImportar * 100;
+                                this.emitir(msg);
                                 this.requestCancel(ref cancel);
                                 if (cancel)
                                 {
@@ -423,7 +443,7 @@ namespace Catalogo._clientes
             }
         }
 
-        public emisorHandler<util.Pair<string, float>> emisor
+        public emisorHandler<Catalogo.varios.complexMessage> emisor
         {
             get;
             set;

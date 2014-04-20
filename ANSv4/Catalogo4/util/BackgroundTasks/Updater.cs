@@ -7,7 +7,7 @@ using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo.util.BackgroundTasks
 {
     public class Updater : BackgroundTaskBase,
-        Funciones.emitter_receiver.IReceptor<util.Pair<string, float>>, // Para recibir mensajes de Clientes
+        Funciones.emitter_receiver.IReceptor<Catalogo.varios.complexMessage>, // Para recibir mensajes de Clientes
         Funciones.emitter_receiver.ICancellableEmitter, // Para chequear si es necesario cancelar
         Funciones.emitter_receiver.ICancellableReceiver // Para recibir notificaciones de recepcion de cancelacion
     {
@@ -227,9 +227,10 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
-        public void onRecibir(Pair<string, float> dato)
+        public void onRecibir(Catalogo.varios.complexMessage msg)
         {
-            Catalogo.varios.NotificationCenter.instance.notificar(dato.first, dato.second);
+            //Catalogo.varios.NotificationCenter.instance.notificar(dato.first, dato.second);
+            Catalogo.varios.NotificationCenter.instance.notificar(msg);
         }
 
 

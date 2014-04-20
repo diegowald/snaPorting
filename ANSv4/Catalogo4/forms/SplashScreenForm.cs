@@ -10,13 +10,13 @@ using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo.varios
 {
     public partial class SplashScreenForm : Form, 
-        Catalogo.Funciones.emitter_receiver.IReceptor<util.Pair<string, float>>,
+        Catalogo.Funciones.emitter_receiver.IReceptor<Catalogo.varios.complexMessage>,
         Catalogo.Funciones.emitter_receiver.ICancellableReceiver
     {
         delegate void StringParameterDelegate(string Text);
         delegate void StringParameterWithStatusDelegate(string Text, TypeOfMessage tom);
         delegate void SplashShowCloseDelegate();
-        delegate void RecepcionDelegate(util.Pair<string, float> dato);
+        delegate void RecepcionDelegate(Catalogo.varios.complexMessage dato);
         delegate void RequestShowCancelButtonDelegate();
 
         /// <summary>
@@ -94,6 +94,17 @@ namespace Catalogo.varios
             label1.Text = Text;
         }
 
+        public void UpdateStatusText2(string Text)
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new StringParameterDelegate(UpdateStatusText2), new object[] { Text });
+                return;
+            }
+            label2.Visible = (Text.Length > 0);
+            label2.ForeColor = Color.Black;
+            label2.Text = Text;
+        }
 
         /// <summary>
         /// Update text with message color defined as green/yellow/red/ for success/warning/failure
@@ -136,7 +147,7 @@ namespace Catalogo.varios
                 e.Cancel = true;
         }
 
-        public void onRecibir(util.Pair<string, float> dato)
+        public void onRecibir(Catalogo.varios.complexMessage dato)
         {
             if (InvokeRequired)
             {
@@ -145,19 +156,33 @@ namespace Catalogo.varios
                 return;
             }
 
-            if (dato.second != -1)
+            if (dato.progress1.second != -1)
             {
                 progressBar1.Show();
                 progressBar1.Minimum = 0;
                 progressBar1.Maximum = 100;
-                progressBar1.Value = (int)dato.second;
+                progressBar1.Value = (int)dato.progress1.second;
             }
             else
             {
                 progressBar1.Hide();
             }
+
+            if (dato.progress2.second != -1)
+            {
+                progressBar2.Show();
+                progressBar2.Minimum = 0;
+                progressBar2.Maximum = 100;
+                progressBar2.Value = (int)dato.progress2.second;
+            }
+            else
+            {
+                progressBar2.Hide();
+            }
+
             //this.UdpateStatusText(dato.first + ": " + dato.second.ToString() + "%");
-            this.UdpateStatusText(dato.first);
+            this.UdpateStatusText(dato.progress1.first);
+            this.UpdateStatusText2(dato.progress2.first);
         }
 
         private void showCancelButton()
