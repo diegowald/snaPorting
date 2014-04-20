@@ -27,6 +27,12 @@ namespace Catalogo
         private Catalogo._productos.GridViewFilter2 gv = null;
         private Catalogo._pedidos.ucPedido ped = null;
         private Catalogo._devoluciones.ucDevolucion dev = null;
+        private Catalogo._recibos.ucRecibo rec = null;
+        private Catalogo._interdeposito.ucInterDeposito IntDep = null;
+        private Catalogo._movimientos.ucMovimientos mov = null;
+        private Catalogo._novedades.ucNovedades nov = null;
+        private Catalogo._rendiciones.ucRendiciones RenD = null;
+
     
         public mwViajantes()
         {
@@ -231,8 +237,24 @@ namespace Catalogo
         }
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
-        {            
-            Catalogo._interdeposito.ucInterDeposito IntDep = addInterDepositoArea();
+        {
+            if (Global01.miSABOR == Global01.TiposDeCatalogo.Viajante)
+            {
+                this.header.Height = 26;
+                topRedesSociales.Visibility = System.Windows.Visibility.Hidden;
+                topBanner.Visibility = System.Windows.Visibility.Hidden;
+                topLogo.Visibility = System.Windows.Visibility.Hidden;
+            }
+            else
+            {
+                this.header.Height = 90;
+                addFlashPlayer();
+                topRedesSociales.Visibility = System.Windows.Visibility.Visible;
+                topBanner.Visibility = System.Windows.Visibility.Visible;
+                topLogo.Visibility = System.Windows.Visibility.Visible;
+            }
+
+/*            Catalogo._interdeposito.ucInterDeposito IntDep = addInterDepositoArea();
             Catalogo._movimientos.ucMovimientos mov = addMovimientosArea();
 
             Catalogo._recibos.ucRecibo rec = addReciboArea();
@@ -265,7 +287,7 @@ namespace Catalogo
             dev.attachReceptor(ped);
             dev.attachReceptor(dev);
             dev.attachReceptor(mov); 
-
+*/
             this.Show();
             Catalogo.varios.SplashScreen.CloseSplashScreen();
 
@@ -478,6 +500,136 @@ namespace Catalogo
         {
             _preferencias.PreferenciasFrm pref = new _preferencias.PreferenciasFrm();
             pref.ShowDialog();
+        }
+
+        private void DocumentPane_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                foreach (object obj in e.AddedItems)
+                {
+                    if (obj is AvalonDock.DocumentContent)
+                    {
+                        AvalonDock.DocumentContent content = obj as AvalonDock.DocumentContent;
+                        switch (content.Title)
+                        {
+                            case "Productos":
+                                crearControlesProductos();
+                                break;
+                            case "Recibos":
+                                crearControlesRecibos();
+                                break;
+                            case"Rendición de Recibos":
+                                crearcontrolesRendicionRecibos();
+                                break;
+                            case "Inter-Depósitos":
+                                crearControlesInterDepositos();
+                                break;
+                            case "Bandeja de Enviados":
+                                crearControlesBandejaEnviados();
+                                break;
+                            case "Novedades en Línea":
+                                crearControlesNovedades();
+                                break;
+                            default:
+                                // Nothing
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void crearcontrolesRendicionRecibos()
+        {
+            if (RenD == null)
+            {
+                RenD = addRendicionArea();
+            }
+        }
+
+        private void crearControlesRecibos()
+        {
+            if (rec == null)
+            {
+                rec = addReciboArea();
+
+                if (ped != null)
+                {
+                    rec.attachReceptor(ped);
+                }
+
+                if (dev != null)
+                {
+                    rec.attachReceptor(dev);
+                }
+                if (mov != null)
+                {
+                    rec.attachReceptor(mov);
+                }
+            }
+        }
+
+        private void crearControlesProductos()
+        {
+            if (sf == null)
+            {
+                sf = addSearchArea();
+                gv = addProductsArea();
+                ped = addPedidoArea();
+                dev = addDevolucionArea();
+
+                sf.attachReceptor(gv);
+                sf.attachReceptor2(gv);
+
+                gv.attachReceptor(productDetalle);
+                gv.attachReceptor(ped);
+                gv.attachReceptor(dev);
+                gv.attachReceptor2(sf);
+                gv.attachReceptor3(ped);
+                gv.attachReceptor3(dev);
+
+                if (mov != null)
+                {
+                    ped.attachReceptor(mov);
+                }
+
+                if (rec != null)
+                {
+                    ped.attachReceptor(rec);
+                }
+
+                ped.attachReceptor(dev);
+            }
+        }
+
+        private void crearControlesInterDepositos()
+        {
+            if (IntDep == null)
+            {
+                IntDep = addInterDepositoArea();
+            }
+        }
+
+        private void crearControlesBandejaEnviados()
+        {
+            if (mov == null)
+            {
+                mov = addMovimientosArea();
+
+                if (ped != null)
+                {
+                    ped.attachReceptor(mov);
+                }
+            }
+        }
+
+        private void crearControlesNovedades()
+        {
+            if (nov == null)
+            {
+                nov = addNovedadesArea();
+            }
         }
 
     }

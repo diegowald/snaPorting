@@ -402,16 +402,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="mwClientes.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="mwClientes.xaml.cs">
-      <DependentUpon>mwClientes.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="_productos\DetalleProducto.xaml">

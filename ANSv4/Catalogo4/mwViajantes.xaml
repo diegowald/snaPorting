@@ -12,77 +12,83 @@
 
     <Border Grid.Row="0" x:Name="LayoutRoot" 
           Background="White" BorderBrush="White" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">
-           
-            <Grid>
+
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="26"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
             <Grid Name="header" Visibility="Visible" Grid.Row="0">
-                <Grid  HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
-                    <Button Content="2" BorderBrush="White" 
-                    x:Name="ChangeViewButton"
-                    FontFamily="Webdings"                        
-                    FontSize="12"
-                    Width="25"
-                    Height="25"
-                    Margin="15,0,0,0"                        
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="200*" />
+                </Grid.ColumnDefinitions>
+                <WrapPanel  Orientation="Vertical"   HorizontalAlignment="left" Grid.Column="0">
+                    <Image Name="topLogo" VerticalAlignment="Bottom" Source="recursos/logo.png" Margin="0,1,1,0" Width="150"/>
+                </WrapPanel>
+                <Grid Name="topBanner" Grid.Column="1"   />
+                <!--
+                <Image Name="topBanner" Source="recursos/top1.png" Grid.Column="1" Stretch="Fill"/>                
+                <Image Name="topBanner" Source="pack://siteoforigin:,,,/recursos/Nuevo-logo-Auto-nautica-horizontal-original.png" Grid.Column="1" Margin="17.985,0,37.313,0" />
+                -->
+                <WrapPanel  Orientation="Vertical"   HorizontalAlignment="Right" Grid.Column="2">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100">
+                        <Button Content="2" BorderBrush="White" x:Name="ChangeViewButton"
+                                FontFamily="Webdings" FontSize="12" Width="25" Height="25"
                     Background="White"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
                     HorizontalAlignment="Right" Click="ChangeViewButton_Click"
                     />
 
-                    <Button Content="0" BorderBrush="White"
+                        <Button Content="0" BorderBrush="White"
                     x:Name="MinimizeButton"
                     FontFamily="Webdings"                        
                     FontSize="12"
                     Width="25"
                     Height="25"
-                    Margin="1,0,0,0"                
                     Background="White"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
                     HorizontalAlignment="Right" Click="MinimizeButton_Click"
                     />
 
-                    <Button Content="1" BorderBrush="White"
+                        <Button Content="1" BorderBrush="White"
                     x:Name="MaximizeButton"
                     FontFamily="Webdings"                        
                     FontSize="12"
                     Width="25"
                     Height="25"
-                    Margin="1,0,0,0"                
                     Background="White"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
                     HorizontalAlignment="Right" Click="MaximizeButton_Click"
                     />
 
-                    <Button Content="r" BorderBrush="White"
+                        <Button Content="r" BorderBrush="White"
                     x:Name="CloseButton"                            
                     FontFamily="Webdings"                        
                     FontSize="12"
                     Width="25"
                     Height="25"
-                    Margin="1,0,0,0"                        
                     Background="White"
                     HorizontalContentAlignment="Center"
                     VerticalContentAlignment="Center"
                     HorizontalAlignment="Right"
                     Click="Exit"
                     />
-                </StackPanel>
-                </Grid>
+                    </StackPanel>
+                    <Image Name="topRedesSociales" VerticalAlignment="Bottom"  Source="recursos/cotizacion-redes.png" Margin="0,30,3,0" Width="164"/>
+                </WrapPanel>
             </Grid>
 
             <ad:DockingManager x:Name="dockManager" Grid.Row="1" IsAnimationEnabled="True" >
                 <ad:ResizingPanel Orientation="Vertical">
                     <ad:ResizingPanel Orientation="Horizontal">
-                        <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0">
+                        <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0" SelectionChanged="DocumentPane_SelectionChanged">
 
                             <ad:DocumentContent Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
                                 <Grid Name="grProductos">
@@ -157,7 +163,7 @@
                                     <Grid x:Name="xMovimientosArea" Grid.Row="0" />
                                 </Grid>
                             </ad:DocumentContent>
-                            
+
                             <ad:DocumentContent Title="Novedades en Línea" IsCloseable="False" IsFloatingAllowed="False">
                                 <Grid Name="grNovedades">
                                     <Grid.RowDefinitions>
@@ -180,7 +186,7 @@
                                     <MenuItem Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
                                     <MenuItem Header="Configuración Aplic." Click="xMenu1_AppConfig"/>
                                 </Menu>
-                            </ad:DockableContent>                            
+                            </ad:DockableContent>
                         </ad:DockablePane>
                     </ad:ResizingPanel>
                 </ad:ResizingPanel>
