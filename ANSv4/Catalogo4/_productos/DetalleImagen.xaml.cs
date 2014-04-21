@@ -16,6 +16,7 @@ namespace Catalogo._productos
     /// <summary>
     /// Interaction logic for DeetalleImagen.xaml
     /// </summary>
+
     public partial class DetalleImagen : Window
     {
 

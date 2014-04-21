@@ -133,9 +133,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="mwClientes.xaml.cs">
-      <DependentUpon>mwClientes.xaml</DependentUpon>
-    </Compile>
     <Compile Include="reportes\CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -321,9 +318,6 @@
       <DependentUpon>ucPedido.cs</DependentUpon>
     </Compile>
     <Compile Include="_recibos\EnvioRecibo.cs" />
-    <Compile Include="_registro\Registration.xaml.cs">
-      <DependentUpon>Registration.xaml</DependentUpon>
-    </Compile>
     <Compile Include="forms\SplashScreen.cs" />
     <Compile Include="forms\SplashScreenForm.cs">
       <SubType>Form</SubType>
@@ -337,6 +331,12 @@
     <Compile Include="preload\ProductosPreloader.cs" />
     <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
     <Compile Include="_registro\AppRegistro.cs" />
+    <Compile Include="_registro\fRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_registro\fRegistro.designer.cs">
+      <DependentUpon>fRegistro.cs</DependentUpon>
+    </Compile>
     <Compile Include="_rendiciones\EnvioRendicion.cs" />
     <Compile Include="_rendiciones\ucRendiciones.cs">
       <SubType>UserControl</SubType>
@@ -385,10 +385,6 @@
     <Compile Include="_recibos\ucRecibo.Designer.cs">
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </Compile>
-    <Page Include="mwClientes.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="mwViajantes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -412,10 +408,6 @@
     <Page Include="_productos\DetalleImagen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="_registro\Registration.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -483,6 +475,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\FiltroSearch.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_registro\fRegistro.resx">
+      <DependentUpon>fRegistro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_rendiciones\ucRendiciones.resx">
       <DependentUpon>ucRendiciones.cs</DependentUpon>
