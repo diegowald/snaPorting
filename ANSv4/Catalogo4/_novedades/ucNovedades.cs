@@ -31,6 +31,12 @@ namespace Catalogo._novedades
             //util.BackgroundTasks.ChequeoNovedades checker = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
             //checker.run();
             downloadFiles = new Dictionary<string, DownloadStatus>();
+
+            // al iniciar las noveedades se debe ver el pictureBox con la imaggn
+
+            pictureBox.Visible = true;
+            webBrowser.Visible = false;
+            flash.Visible = false;
         }
          
         private void ucNovedades_Load(object sender, EventArgs e)
@@ -180,7 +186,7 @@ namespace Catalogo._novedades
                 dgvNovedades.Rows[0].Selected = true;
 
                 DataGridViewCell cell = dgvNovedades[0, 0];
-                if (cell != null)
+                /*if (cell != null)
                 {
                     DataGridViewRow row = cell.OwningRow;
 
@@ -190,7 +196,7 @@ namespace Catalogo._novedades
                                    row.Cells["Origen"].Value.ToString(),
                                    row.Cells["Tipo"].Value.ToString(), 
                                    int.Parse(row.Cells["id"].Value.ToString()));
-                }
+                }*/
             }
  
         }
