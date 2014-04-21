@@ -289,6 +289,9 @@
     <Compile Include="_preferencias\PreferenciasFrm.xaml.cs">
       <DependentUpon>PreferenciasFrm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="_productos\DetalleImagen.xaml.cs">
+      <DependentUpon>DetalleImagen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="_recibos\AplicacionItem.cs" />
     <Compile Include="_recibos\DeducirItem.cs" />
     <Compile Include="_recibos\Recibo.cs" />
@@ -396,6 +399,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="_preferencias\PreferenciasFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="_productos\DetalleImagen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
