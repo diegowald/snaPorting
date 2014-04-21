@@ -4,7 +4,7 @@
         Title="Detalle Imagen:" Height="400" Width="400">
     <Grid>
         <Button HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Click="Button_Click_1">
-            <Image HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Name="ImagenDetalle"/>
+            <Image HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Name="ImagenDetalle" Stretch="UniformToFill"/>
         </Button>
     </Grid>
 </Window>

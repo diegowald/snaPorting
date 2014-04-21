@@ -364,9 +364,9 @@ namespace Catalogo
         {
 
             //#if SaborViajante
-            Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+            //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
             //#else
-            //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+            Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
             //#endif            
            
 

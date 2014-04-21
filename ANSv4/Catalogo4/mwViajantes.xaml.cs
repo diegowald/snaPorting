@@ -56,7 +56,7 @@ namespace Catalogo
             flash.Location = new System.Drawing.Point(0, 0);
             flash.Name = "flash";
 
-            flash.file = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\recursos\autonatica.swf";
+            flash.file = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\recursos\banner.swf";
 
             flash.play();
 
