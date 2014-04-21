@@ -29,7 +29,7 @@
                 <WrapPanel  Orientation="Vertical"   HorizontalAlignment="left" Grid.Column="0">
                     <Image Name="topLogo" VerticalAlignment="Bottom" Source="recursos/logo.png" Margin="0,1,1,0" Width="150"/>
                 </WrapPanel>
-                <Grid Name="topBanner" Grid.Column="1"   />
+                <Grid Name="topBanner" Grid.Column="1" Grid.ColumnSpan="2"  />
                 <!--
                 <Image Name="topBanner" Source="recursos/top1.png" Grid.Column="1" Stretch="Fill"/>                
                 <Image Name="topBanner" Source="pack://siteoforigin:,,,/recursos/Nuevo-logo-Auto-nautica-horizontal-original.png" Grid.Column="1" Margin="17.985,0,37.313,0" />
@@ -88,7 +88,7 @@
             <ad:DockingManager x:Name="dockManager" Grid.Row="1" IsAnimationEnabled="True" >
                 <ad:ResizingPanel Orientation="Vertical">
                     <ad:ResizingPanel Orientation="Horizontal">
-                        <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="0" SelectionChanged="DocumentPane_SelectionChanged">
+                        <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="5" SelectionChanged="DocumentPane_SelectionChanged">
 
                             <ad:DocumentContent Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
                                 <Grid Name="grProductos">
