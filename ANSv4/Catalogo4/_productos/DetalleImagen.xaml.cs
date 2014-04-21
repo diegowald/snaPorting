@@ -16,12 +16,18 @@ namespace Catalogo._productos
     /// <summary>
     /// Interaction logic for DeetalleImagen.xaml
     /// </summary>
-    public partial class DeetalleImagen : Window
+    public partial class DetalleImagen : Window
     {
-        public DeetalleImagen(string file)
+
+        public DetalleImagen(ImageSource imageSource)
         {
             InitializeComponent();
-            this.ImagenDetalle.Source = new BitmapImage(new Uri(file, UriKind.Absolute));
+            this.ImagenDetalle.Source = imageSource;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
