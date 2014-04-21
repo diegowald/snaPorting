@@ -134,7 +134,7 @@ namespace Catalogo.util
                 if (Conectado) {
 				    Cliente = new CatalogoWS.Info();
                     //Cliente.Url = Catalogo.Properties.Settings.Default.Catalogo_CatalogoWS_Info;
-                    Cliente.Url = "http://" + ipAddress + "/Catalogo/Info.asmx?wsdl";
+                    Cliente.Url = "http://" + ipAddress + "/wsCatalogo4/Info.asmx?wsdl";
                     if (Global01.proxyServerAddress != "0.0.0.0")
                     {
 					    Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);

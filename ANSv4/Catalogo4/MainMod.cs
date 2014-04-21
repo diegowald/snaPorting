@@ -241,8 +241,8 @@ namespace Catalogo
  
             //- Registro y activación -------------XX
         AcaRegistro:
-            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            if (false)
+            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            //if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -253,7 +253,7 @@ namespace Catalogo
                     Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
 
                     // a registrar
-                    Catalogo._registro.Registration fRegistro = new Catalogo._registro.Registration();
+                    Catalogo._registro.fRegistro  fRegistro = new Catalogo._registro.fRegistro() ;
                     fRegistro.ShowDialog();
                     fRegistro = null;
 
@@ -308,7 +308,7 @@ namespace Catalogo
                 // registrada y activa
                 Global01.AppActiva = true;
                 ///// BORRAR ESTA LINEA!!!!!!!
-                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
             }
             //--------------------------------------XX
         }
@@ -363,11 +363,11 @@ namespace Catalogo
         public static void inicializaGlobales()
         {
 
-        //#if SaborViajante
-        //            Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
-        //#else
-            Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
-        //#endif            
+            //#if SaborViajante
+            Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+            //#else
+            //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+            //#endif            
            
 
             Global01.NoConn = false;

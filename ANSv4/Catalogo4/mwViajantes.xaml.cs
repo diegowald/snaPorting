@@ -51,22 +51,17 @@ namespace Catalogo
 
             // Create the MaskedTextBox control.
             Catalogo.varios.FlashControl flash = new varios.FlashControl();
-            //ShockwaveFlashObjects.ShockwaveFlashClass flash = new ShockwaveFlashObjects.ShockwaveFlashClass();
             flash.AutoScroll = true;
             flash.Dock = System.Windows.Forms.DockStyle.Top;
             flash.Location = new System.Drawing.Point(0, 0);
             flash.Name = "flash";
-            flash.file = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\recursos\autonatica.swf";
-            //filterControl.Size = new System.Drawing.Size(640, 480);
-            //filterControl.TabIndex = 0;
-            //gridViewControl.Text = "Lista de Productos";
-
+            flash.file = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\recursos\banner.swf";            
             flash.play();
 
             // Assign the MaskedTextBox control as the host control's child.
             host.Child = flash;
 
-            //this.topBanner.Children.Add(host);
+            this.topBanner.Children.Add(host);
         }
 
         private Catalogo._productos.SearchFilter addSearchArea()
@@ -248,10 +243,10 @@ namespace Catalogo
             else
             {
                 this.header.Height = 90;
-                addFlashPlayer();
                 topRedesSociales.Visibility = System.Windows.Visibility.Visible;
                 topBanner.Visibility = System.Windows.Visibility.Visible;
                 topLogo.Visibility = System.Windows.Visibility.Visible;
+                addFlashPlayer();
             }
 
 /*            Catalogo._interdeposito.ucInterDeposito IntDep = addInterDepositoArea();
