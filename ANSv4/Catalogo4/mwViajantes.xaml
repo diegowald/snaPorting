@@ -22,67 +22,63 @@
 
             <Grid Name="header" Visibility="Visible" Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="170" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="200*" />
+                    <ColumnDefinition Width="170" />
                 </Grid.ColumnDefinitions>
-                <WrapPanel  Orientation="Vertical"   HorizontalAlignment="left" Grid.Column="0">
-                    <Image Name="topLogo" VerticalAlignment="Bottom" Source="recursos/logo.png" Margin="0,1,1,0" Width="150"/>
-                </WrapPanel>
-                <Grid Name="topBanner" Grid.Column="1" Grid.ColumnSpan="2"  />
-                <!--
-                <Image Name="topBanner" Source="recursos/top1.png" Grid.Column="1" Stretch="Fill"/>                
-                <Image Name="topBanner" Source="pack://siteoforigin:,,,/recursos/Nuevo-logo-Auto-nautica-horizontal-original.png" Grid.Column="1" Margin="17.985,0,37.313,0" />
-                -->
-                <WrapPanel  Orientation="Vertical"   HorizontalAlignment="Right" Grid.Column="2">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100">
+                <Grid Name="LeftBanner" HorizontalAlignment="Left" Grid.Column="0">
+                    <Image Name="topLogo" VerticalAlignment="Bottom" Source="recursos/logo.png" Margin="0,1,1,0"/>
+                </Grid>
+                <Grid Name="topBanner" HorizontalAlignment="Center" Grid.Column="1"/>
+                <Grid Name="RightBanner" HorizontalAlignment="Right" Grid.Column="2">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <Button Content="2" BorderBrush="White" x:Name="ChangeViewButton"
-                                FontFamily="Webdings" FontSize="12" Width="25" Height="25"
-                    Background="White"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    HorizontalAlignment="Right" Click="ChangeViewButton_Click"
-                    />
+                        FontFamily="Webdings" FontSize="12" Width="25" Height="25"
+                        Background="White"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Right" Click="ChangeViewButton_Click"
+                        />
 
                         <Button Content="0" BorderBrush="White"
-                    x:Name="MinimizeButton"
-                    FontFamily="Webdings"                        
-                    FontSize="12"
-                    Width="25"
-                    Height="25"
-                    Background="White"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    HorizontalAlignment="Right" Click="MinimizeButton_Click"
-                    />
+                        x:Name="MinimizeButton"
+                        FontFamily="Webdings"                        
+                        FontSize="12"
+                        Width="25"
+                        Height="25"
+                        Background="White"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Right" Click="MinimizeButton_Click"
+                        />
 
                         <Button Content="1" BorderBrush="White"
-                    x:Name="MaximizeButton"
-                    FontFamily="Webdings"                        
-                    FontSize="12"
-                    Width="25"
-                    Height="25"
-                    Background="White"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    HorizontalAlignment="Right" Click="MaximizeButton_Click"
-                    />
+                        x:Name="MaximizeButton"
+                        FontFamily="Webdings"                        
+                        FontSize="12"
+                        Width="25"
+                        Height="25"
+                        Background="White"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Right" Click="MaximizeButton_Click"
+                        />
 
                         <Button Content="r" BorderBrush="White"
-                    x:Name="CloseButton"                            
-                    FontFamily="Webdings"                        
-                    FontSize="12"
-                    Width="25"
-                    Height="25"
-                    Background="White"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    HorizontalAlignment="Right"
-                    Click="Exit"
-                    />
+                        x:Name="CloseButton"                            
+                        FontFamily="Webdings"                        
+                        FontSize="12"
+                        Width="25"
+                        Height="25"
+                        Background="White"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        HorizontalAlignment="Right"
+                        Click="Exit"
+                        />
                     </StackPanel>
-                    <Image Name="topRedesSociales" VerticalAlignment="Bottom"  Source="recursos/cotizacion-redes.png" Margin="0,30,3,0" Width="164"/>
-                </WrapPanel>
+                    <Image Name="topRedesSociales" VerticalAlignment="Bottom"  Source="recursos/cotizacion-redes.png" Margin="0,30,10,6"/>
+                </Grid>
             </Grid>
 
             <ad:DockingManager x:Name="dockManager" Grid.Row="1" IsAnimationEnabled="True" >
@@ -96,17 +92,21 @@
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="*"/>
                                         <RowDefinition Height="2"/>
-                                        <RowDefinition Height="90" />
-                                        <RowDefinition Height="2"/>
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-
-                                    <Grid x:Name="searchArea"   Grid.Row="0"  />
-                                    <Grid x:Name="productsArea" Grid.Row="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                                    <GridSplitter Grid.Row="2" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch"/>
-                                    <_productos:DetalleProducto Grid.Row="3" x:Name="productDetalle"/>
-                                    <GridSplitter Grid.Row="4" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment"  HorizontalAlignment="Stretch"/>
-                                    <Grid x:Name="PedidosDevolucionesArea"   Grid.Row="5">
+                                    <Grid x:Name="searchArea" Grid.Row="0"  />
+                                    <Grid Grid.Row="1"  >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="90"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid x:Name="productsArea" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0"/>
+                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
+                                            <_productos:DetalleProducto x:Name="productDetalle"/>
+                                        </Grid>
+                                    </Grid>
+                                    <GridSplitter Grid.Row="2" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch"/>                                   
+                                    <Grid x:Name="PedidosDevolucionesArea"   Grid.Row="3">
                                         <ad:DocumentPane x:Name="xVtaDevDockP" SelectedIndex="0" ad:ResizingPanel.ResizeHeight="250">
                                             <ad:DockableContent Title="Nota de Venta" x:Name="xNotaVentaAreaDockC" IsCloseable="False">
                                                 <Grid Name="grNotaVenta">
@@ -128,6 +128,7 @@
                                     </Grid>
                                 </Grid>
                             </ad:DocumentContent>
+                            
                             <ad:DocumentContent Title="Recibos" IsCloseable="False" IsFloatingAllowed="False">
                                 <Grid Name="grRecibos">
                                     <Grid.RowDefinitions>
@@ -169,15 +170,13 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <!--<Grid x:Name="xNovedadesArea" Grid.Row="0" >
-                                        <WebBrowser Name="detailsBrowser" Source="http://www.autonauticasur-r.com.ar/portals/0/w3/acc.html" />
-                                    </Grid>-->
+                                    <Grid x:Name="xNovedadesArea" Grid.Row="0" />
                                 </Grid>
                             </ad:DocumentContent>
 
                         </ad:DocumentPane>
 
-                        <ad:DockablePane ad:ResizingPanel.ResizeWidth="150"  ShowHeader="True" >
+                        <ad:DockablePane ad:ResizingPanel.ResizeWidth="150" ShowHeader="True">
                             <ad:DockableContent x:Name="xContentMenu" Title="Menú">
                                 <!--Menus-->
                                 <Menu>
