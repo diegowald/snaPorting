@@ -160,7 +160,7 @@ namespace Catalogo.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.autonauticasur-r.com.ar/Catalogo/Info.asmx?wsdl")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.40.129/wsCatalogo4/Info.asmx")]
         public string Catalogo_CatalogoWS_Info {
             get {
                 return ((string)(this["Catalogo_CatalogoWS_Info"]));
