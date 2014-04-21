@@ -286,11 +286,11 @@ namespace Catalogo._novedades
                 flash.play();
             }
 
-//solo a Los efectos de un ejemplo
-            string sUrl = "file://" + Global01.AppPath + @"\reportes\htmldocs\Viajantes\scroller_newstic.html";
-            string sUrl2 = "file://" + Global01.AppPath + @"\reportes\htmldocs\Clientes\scroller_newstic.html";
-            //webBrowser1.Navigate(new Uri(sUrl));
-            webBrowser.Navigate(new Uri(sUrl2));
+////solo a Los efectos de un ejemplo
+//            string sUrl = "file://" + Global01.AppPath + @"\reportes\htmldocs\Viajantes\scroller_newstic.html";
+//            string sUrl2 = "file://" + Global01.AppPath + @"\reportes\htmldocs\Clientes\scroller_newstic.html";
+//            //webBrowser1.Navigate(new Uri(sUrl));
+//            webBrowser.Navigate(new Uri(sUrl2));
         }
 
         private void ejecutarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo)
