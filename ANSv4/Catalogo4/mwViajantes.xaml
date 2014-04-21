@@ -22,14 +22,14 @@
 
             <Grid Name="header" Visibility="Visible" Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="170" />
+                    <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="170" />
                 </Grid.ColumnDefinitions>
                 <Grid Name="LeftBanner" HorizontalAlignment="Left" Grid.Column="0">
                     <Image Name="topLogo" VerticalAlignment="Bottom" Source="recursos/logo.png" Margin="0,1,1,0"/>
                 </Grid>
-                <Grid Name="topBanner" HorizontalAlignment="Center" Grid.Column="1"/>
+                <Grid Name="topBanner"  Grid.Column="1"/>
                 <Grid Name="RightBanner" HorizontalAlignment="Right" Grid.Column="2">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <Button Content="2" BorderBrush="White" x:Name="ChangeViewButton"

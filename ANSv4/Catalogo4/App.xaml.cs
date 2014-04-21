@@ -31,13 +31,13 @@ namespace Catalogo
             Catalogo.MainMod.Main();
 
             //#if SaborViajante
-            mwViajantes wnd = new mwViajantes();
+           mwViajantes wnd = new mwViajantes();
             //#else
-            //    mwClientes wnd = new mwClientes();
+                //mwClientes wnd1 = new mwClientes();
             //#endif
 
             Application.Current.Exit += Current_Exit;
-
+            //wnd1.Show();
             wnd.ShowDialog();
             
             if (Global01.Conexion != null)
