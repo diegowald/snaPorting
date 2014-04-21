@@ -133,6 +133,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="mwClientes.xaml.cs">
+      <DependentUpon>mwClientes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="reportes\CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -385,6 +388,10 @@
     <Compile Include="_recibos\ucRecibo.Designer.cs">
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </Compile>
+    <Page Include="mwClientes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="mwViajantes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

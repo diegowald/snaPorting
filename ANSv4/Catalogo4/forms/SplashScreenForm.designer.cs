@@ -32,11 +32,11 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PnlFondoRojo = new System.Windows.Forms.Panel();
             this.PnlBottom = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.PnlFondoRojo.SuspendLayout();
             this.PnlBottom.SuspendLayout();
@@ -54,7 +54,7 @@
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 35);
-            this.pictureBox1.Size = new System.Drawing.Size(358, 290);
+            this.pictureBox1.Size = new System.Drawing.Size(436, 286);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -70,7 +70,7 @@
             this.PnlFondoRojo.Location = new System.Drawing.Point(0, 0);
             this.PnlFondoRojo.Name = "PnlFondoRojo";
             this.PnlFondoRojo.Padding = new System.Windows.Forms.Padding(2);
-            this.PnlFondoRojo.Size = new System.Drawing.Size(362, 294);
+            this.PnlFondoRojo.Size = new System.Drawing.Size(440, 290);
             this.PnlFondoRojo.TabIndex = 5;
             this.PnlFondoRojo.UseWaitCursor = true;
             // 
@@ -83,11 +83,24 @@
             this.PnlBottom.Controls.Add(this.progressBar2);
             this.PnlBottom.Controls.Add(this.progressBar1);
             this.PnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PnlBottom.Location = new System.Drawing.Point(2, 218);
+            this.PnlBottom.Location = new System.Drawing.Point(2, 214);
             this.PnlBottom.Name = "PnlBottom";
-            this.PnlBottom.Size = new System.Drawing.Size(358, 74);
+            this.PnlBottom.Size = new System.Drawing.Size(436, 74);
             this.PnlBottom.TabIndex = 3;
             this.PnlBottom.UseWaitCursor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(3, 40);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(149, 14);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Inicializando aplicación . . .";
+            this.label2.UseWaitCursor = true;
+            this.label2.Visible = false;
             // 
             // btnCancel
             // 
@@ -99,7 +112,7 @@
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(273, 45);
+            this.btnCancel.Location = new System.Drawing.Point(357, 43);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 28);
             this.btnCancel.TabIndex = 16;
@@ -126,7 +139,7 @@
             this.progressBar2.Location = new System.Drawing.Point(6, 57);
             this.progressBar2.MarqueeAnimationSpeed = 50;
             this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(261, 11);
+            this.progressBar2.Size = new System.Drawing.Size(345, 11);
             this.progressBar2.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar2.TabIndex = 5;
             this.progressBar2.UseWaitCursor = true;
@@ -138,30 +151,17 @@
             this.progressBar1.Location = new System.Drawing.Point(6, 28);
             this.progressBar1.MarqueeAnimationSpeed = 50;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(342, 11);
+            this.progressBar1.Size = new System.Drawing.Size(345, 11);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 7;
             this.progressBar1.UseWaitCursor = true;
             this.progressBar1.Visible = false;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(3, 40);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(149, 14);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "Inicializando aplicación . . .";
-            this.label2.UseWaitCursor = true;
-            this.label2.Visible = false;
-            // 
             // SplashScreenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 294);
+            this.ClientSize = new System.Drawing.Size(440, 290);
             this.Controls.Add(this.PnlFondoRojo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

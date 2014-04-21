@@ -60,23 +60,24 @@
             this.splitC1.SplitterDistance = 321;
             this.splitC1.TabIndex = 0;
             // 
-            // pictureBox1
+            // pictureBox
             // 
             this.pictureBox.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox.Image = global::Catalogo.Properties.Resources.Nuevo_logo_Auto_nautica_horizontal_original;
-            this.pictureBox.Location = new System.Drawing.Point(249, 22);
-            this.pictureBox.Name = "pictureBox1";
-            this.pictureBox.Size = new System.Drawing.Size(233, 173);
+            this.pictureBox.Location = new System.Drawing.Point(137, 22);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(509, 268);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox.TabIndex = 2;
             this.pictureBox.TabStop = false;
             // 
-            // webBrowser2
+            // webBrowser
             // 
-            this.webBrowser.Location = new System.Drawing.Point(503, 80);
+            this.webBrowser.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.webBrowser.Location = new System.Drawing.Point(328, 56);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser2";
+            this.webBrowser.Name = "webBrowser";
             this.webBrowser.Size = new System.Drawing.Size(243, 219);
             this.webBrowser.TabIndex = 3;
             // 
@@ -98,15 +99,6 @@
             this.dgvNovedades.TabIndex = 3;
             this.dgvNovedades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dgvNovedades.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvNovedades_CellFormatting);
-            // 
-            // webBrowser
-            // 
-            this.webBrowser.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.webBrowser.Location = new System.Drawing.Point(328, 56);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(243, 219);
-            this.webBrowser.TabIndex = 3;
             // 
             // ucNovedades
             // 

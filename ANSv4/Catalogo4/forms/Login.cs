@@ -66,7 +66,7 @@ namespace Catalogo.varios
         private void btnNuevo_Click(object sender, EventArgs e)
         {
             
-            if (btnNuevo.Text=="generar")
+            if (btnNuevo.Text=="Generar")
             {
                 if (txtPIN.Text.Trim().Length == 0)
                 {

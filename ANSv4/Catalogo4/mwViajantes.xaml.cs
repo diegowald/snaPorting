@@ -55,7 +55,9 @@ namespace Catalogo
             flash.Dock = System.Windows.Forms.DockStyle.Top;
             flash.Location = new System.Drawing.Point(0, 0);
             flash.Name = "flash";
-            flash.file = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\recursos\banner.swf";            
+
+            flash.file = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\recursos\autonatica.swf";
+
             flash.play();
 
             // Assign the MaskedTextBox control as the host control's child.

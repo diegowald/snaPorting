@@ -96,7 +96,7 @@ namespace Catalogo._Application
                 if (s.Trim().Length > 0)
                 {
                     string xParam = s + Global01.IDMaquinaCRC;
-                    llaveViajante = ZonaViajante + Global01.NroUsuario + Global01.Cuit + _registro.AppRegistro.ObtenerCRC(xParam);
+                    llaveViajante = ZonaViajante + Global01.NroUsuario + Global01.Cuit.Replace("-","") + _registro.AppRegistro.ObtenerCRC(xParam);
                 }
             }
             return llaveViajante;

@@ -261,5 +261,10 @@ namespace Catalogo._productos
         {
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Catalogo._productos.DetalleImagen frm = new DetalleImagen(imgDerecha.Source);
+            frm.ShowDialog();
+        }
     }
 }
