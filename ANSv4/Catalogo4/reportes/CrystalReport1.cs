@@ -16,14 +16,14 @@ namespace Catalogo.reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class InterDeposito1 : ReportClass {
+    public class CrystalReport1 : ReportClass {
         
-        public InterDeposito1() {
+        public CrystalReport1() {
         }
         
         public override string ResourceName {
             get {
-                return "InterDeposito1.rpt";
+                return "CrystalReport1.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Catalogo.reportes {
         
         public override string FullResourceName {
             get {
-                return "Catalogo.reportes.InterDeposito1.rpt";
+                return "Catalogo.reportes.CrystalReport1.rpt";
             }
             set {
                 // Do nothing
@@ -50,7 +50,7 @@ namespace Catalogo.reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section1 {
             get {
                 return this.ReportDefinition.Sections[0];
             }
@@ -58,7 +58,7 @@ namespace Catalogo.reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section2 {
             get {
                 return this.ReportDefinition.Sections[1];
             }
@@ -66,7 +66,7 @@ namespace Catalogo.reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace Catalogo.reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace Catalogo.reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,23 +90,7 @@ namespace Catalogo.reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[6];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_pNroInterDeposito {
+        public CrystalDecisions.Shared.IParameterField Parameter_pID {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -114,9 +98,9 @@ namespace Catalogo.reportes {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedInterDeposito1 : Component, ICachedReport {
+    public class CachedCrystalReport1 : Component, ICachedReport {
         
-        public CachedInterDeposito1() {
+        public CachedCrystalReport1() {
         }
         
         [Browsable(false)]
@@ -153,7 +137,7 @@ namespace Catalogo.reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            InterDeposito1 rpt = new InterDeposito1();
+            CrystalReport1 rpt = new CrystalReport1();
             rpt.Site = this.Site;
             return rpt;
         }
