@@ -495,8 +495,16 @@ namespace Catalogo
 
         private void xMenu1_AppConfig(object sender, RoutedEventArgs e)
         {
-            _preferencias.PreferenciasFrm pref = new _preferencias.PreferenciasFrm();
-            pref.ShowDialog();
+            try
+            {
+                _preferencias.PreferenciasFrm pref = new _preferencias.PreferenciasFrm();
+                pref.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
         private void DocumentPane_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -82,7 +82,7 @@ namespace Catalogo._preferencias
             {
                 doSave();
             }
-            Hide();
+            Close();
         }
 
         private void ResetButton_Click_1(object sender, RoutedEventArgs e)
@@ -95,7 +95,7 @@ namespace Catalogo._preferencias
 
         private void CancelButton_Click_1(object sender, RoutedEventArgs e)
         {
-            Hide();
+            Close();
         }
 
         private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)

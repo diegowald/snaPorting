@@ -34,7 +34,9 @@
                     </StackPanel>
                 </Grid>
                 <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" Name="textBlockHeading" Text="Configuración y Preferencias de la Aplicación:" VerticalAlignment="Top" Width="209"  FontSize="17" FontStretch="ExtraCondensed"/>
-                <StackPanel Name="stack" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"/>
+                <!--<StackPanel Name="stack" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"/>-->
+                <WrapPanel Name="stack" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
+
                 <Grid Margin="0,0,0,0" Grid.Row="2" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="90"/>
