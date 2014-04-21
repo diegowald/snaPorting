@@ -1,5 +1,5 @@
-﻿#define SaborViajante
-//#define SaborCliente
+﻿//#define SaborViajante
+#define SaborCliente
 
 using System;
 using System.Collections.Generic;
@@ -30,11 +30,11 @@ namespace Catalogo
 
             Catalogo.MainMod.Main();
 
-            #if SaborViajante
-                mwViajantes wnd = new mwViajantes();
-            #else
-                mwClientes wnd = new mwClientes();
-            #endif
+            //#if SaborViajante
+            mwViajantes wnd = new mwViajantes();
+            //#else
+            //    mwClientes wnd = new mwClientes();
+            //#endif
 
             Application.Current.Exit += Current_Exit;
 
