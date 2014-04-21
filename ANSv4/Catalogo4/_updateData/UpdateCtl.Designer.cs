@@ -52,9 +52,9 @@
             this.fraFRAME1.Controls.Add(this.lblNo);
             this.fraFRAME1.Controls.Add(this.lblStep2);
             this.fraFRAME1.Controls.Add(this.lblSI);
-            this.fraFRAME1.Location = new System.Drawing.Point(7, 3);
+            this.fraFRAME1.Location = new System.Drawing.Point(13, 48);
             this.fraFRAME1.Name = "fraFRAME1";
-            this.fraFRAME1.Size = new System.Drawing.Size(438, 140);
+            this.fraFRAME1.Size = new System.Drawing.Size(410, 140);
             this.fraFRAME1.TabIndex = 0;
             this.fraFRAME1.TabStop = false;
             this.fraFRAME1.Text = "Paso 1 de 2";
@@ -87,12 +87,12 @@
             // 
             // lblStep2
             // 
-            this.lblStep2.Location = new System.Drawing.Point(16, 27);
+            this.lblStep2.Location = new System.Drawing.Point(10, 20);
             this.lblStep2.Name = "lblStep2";
-            this.lblStep2.Size = new System.Drawing.Size(416, 44);
+            this.lblStep2.Size = new System.Drawing.Size(388, 44);
             this.lblStep2.TabIndex = 0;
-            this.lblStep2.Text = "Presione click en Continuar para conectar al servidor y verificar actualizaciones" +
-    " disponibles...";
+            this.lblStep2.Text = "Haga click en Continuar para conectar al servidor y verificar actualizaciones dis" +
+    "ponibles...";
             // 
             // lblSI
             // 
@@ -113,7 +113,7 @@
             this.cmdCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdCancel.ForeColor = System.Drawing.Color.White;
-            this.cmdCancel.Location = new System.Drawing.Point(276, 149);
+            this.cmdCancel.Location = new System.Drawing.Point(264, 194);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(75, 27);
             this.cmdCancel.TabIndex = 1;
@@ -130,7 +130,7 @@
             this.cmdNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdNext.ForeColor = System.Drawing.Color.White;
-            this.cmdNext.Location = new System.Drawing.Point(357, 149);
+            this.cmdNext.Location = new System.Drawing.Point(344, 194);
             this.cmdNext.Name = "cmdNext";
             this.cmdNext.Size = new System.Drawing.Size(75, 27);
             this.cmdNext.TabIndex = 2;
@@ -143,9 +143,9 @@
             this.fraFRAME2.Controls.Add(this.progressBar1);
             this.fraFRAME2.Controls.Add(this.lblProgressUpdate);
             this.fraFRAME2.Controls.Add(this.lblUpdate);
-            this.fraFRAME2.Location = new System.Drawing.Point(7, 3);
+            this.fraFRAME2.Location = new System.Drawing.Point(13, 48);
             this.fraFRAME2.Name = "fraFRAME2";
-            this.fraFRAME2.Size = new System.Drawing.Size(438, 140);
+            this.fraFRAME2.Size = new System.Drawing.Size(410, 140);
             this.fraFRAME2.TabIndex = 3;
             this.fraFRAME2.TabStop = false;
             this.fraFRAME2.Text = "Paso 2 de 2";
@@ -183,10 +183,10 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.cmdNext);
             this.Controls.Add(this.cmdCancel);
-            this.Controls.Add(this.fraFRAME1);
             this.Controls.Add(this.fraFRAME2);
+            this.Controls.Add(this.fraFRAME1);
             this.Name = "UpdateCtl";
-            this.Size = new System.Drawing.Size(445, 180);
+            this.Size = new System.Drawing.Size(430, 260);
             this.fraFRAME1.ResumeLayout(false);
             this.fraFRAME1.PerformLayout();
             this.fraFRAME2.ResumeLayout(false);

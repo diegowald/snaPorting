@@ -81,7 +81,7 @@
                 </Grid>
             </Grid>
 
-            <ad:DockingManager x:Name="dockManager" Grid.Row="1" IsAnimationEnabled="True" >
+            <ad:DockingManager x:Name="dockManager" Grid.Row="1" IsAnimationEnabled="False" >
                 <ad:ResizingPanel Orientation="Vertical">
                     <ad:ResizingPanel Orientation="Horizontal">
                         <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="5" SelectionChanged="DocumentPane_SelectionChanged">
@@ -173,12 +173,10 @@
                                     <Grid x:Name="xNovedadesArea" Grid.Row="0" />
                                 </Grid>
                             </ad:DocumentContent>
-
                         </ad:DocumentPane>
 
-                        <ad:DockablePane ad:ResizingPanel.ResizeWidth="150" ShowHeader="True">
-                            <ad:DockableContent x:Name="xContentMenu" Title="Menú">
-                                <!--Menus-->
+                        <ad:DockablePane ad:ResizingPanel.ResizeWidth="150"  ShowHeader="True" >
+                            <ad:DockableContent x:Name="xContentMenu" Title="Menú"  DockableStyle="AutoHide" IsCloseable="False" >
                                 <Menu>
                                     <MenuItem Header="Sitio web de a.n.s." Click="xMenu1_web" Margin="0,20,0,0"/>
                                     <MenuItem Header="Revista Dígital" Click="xMenu1_revista"/>
@@ -186,8 +184,9 @@
                                     <MenuItem Header="Configuración Aplic." Click="xMenu1_AppConfig"/>
                                 </Menu>
                             </ad:DockableContent>
-                        </ad:DockablePane>
-                    </ad:ResizingPanel>
+                        </ad:DockablePane> 
+                        
+                    </ad:ResizingPanel>                    
                 </ad:ResizingPanel>
             </ad:DockingManager>
 

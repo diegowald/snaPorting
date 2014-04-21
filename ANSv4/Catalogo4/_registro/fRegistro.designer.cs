@@ -159,7 +159,7 @@
             this.rRazonSocialTxt.Location = new System.Drawing.Point(159, 122);
             this.rRazonSocialTxt.MaxLength = 64;
             this.rRazonSocialTxt.Name = "rRazonSocialTxt";
-            this.rRazonSocialTxt.Size = new System.Drawing.Size(194, 22);
+            this.rRazonSocialTxt.Size = new System.Drawing.Size(232, 22);
             this.rRazonSocialTxt.TabIndex = 2;
             this.rRazonSocialTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rRazonSocialTxt_KeyPress);
             // 
@@ -181,7 +181,7 @@
             this.rEmailTxt.Location = new System.Drawing.Point(159, 183);
             this.rEmailTxt.MaxLength = 64;
             this.rEmailTxt.Name = "rEmailTxt";
-            this.rEmailTxt.Size = new System.Drawing.Size(194, 22);
+            this.rEmailTxt.Size = new System.Drawing.Size(232, 22);
             this.rEmailTxt.TabIndex = 4;
             this.rEmailTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rEmailTxt_KeyPress);
             // 
@@ -321,9 +321,10 @@
             // 
             // errormessage
             // 
-            this.errormessage.Location = new System.Drawing.Point(22, 355);
+            this.errormessage.AutoSize = true;
+            this.errormessage.Location = new System.Drawing.Point(12, 355);
             this.errormessage.Name = "errormessage";
-            this.errormessage.Size = new System.Drawing.Size(217, 23);
+            this.errormessage.Size = new System.Drawing.Size(22, 13);
             this.errormessage.TabIndex = 17;
             this.errormessage.Text = ". . .";
             // 
@@ -363,7 +364,7 @@
             this.rApellidoTxt.Location = new System.Drawing.Point(159, 92);
             this.rApellidoTxt.MaxLength = 32;
             this.rApellidoTxt.Name = "rApellidoTxt";
-            this.rApellidoTxt.Size = new System.Drawing.Size(194, 22);
+            this.rApellidoTxt.Size = new System.Drawing.Size(210, 22);
             this.rApellidoTxt.TabIndex = 1;
             this.rApellidoTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rApellidoTxt_KeyPress);
             // 
@@ -373,7 +374,7 @@
             this.rNombreTxt.Location = new System.Drawing.Point(159, 64);
             this.rNombreTxt.MaxLength = 32;
             this.rNombreTxt.Name = "rNombreTxt";
-            this.rNombreTxt.Size = new System.Drawing.Size(194, 20);
+            this.rNombreTxt.Size = new System.Drawing.Size(210, 20);
             this.rNombreTxt.TabIndex = 0;
             this.rNombreTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rNombreTxt_KeyPress);
             // 

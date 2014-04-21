@@ -46,7 +46,7 @@
             this.PnlFondoRojo.Location = new System.Drawing.Point(0, 0);
             this.PnlFondoRojo.Name = "PnlFondoRojo";
             this.PnlFondoRojo.Padding = new System.Windows.Forms.Padding(2);
-            this.PnlFondoRojo.Size = new System.Drawing.Size(459, 222);
+            this.PnlFondoRojo.Size = new System.Drawing.Size(440, 290);
             this.PnlFondoRojo.TabIndex = 0;
             // 
             // vcUPDATECTL1
@@ -59,7 +59,7 @@
             this.vcUPDATECTL1.Margin = new System.Windows.Forms.Padding(0);
             this.vcUPDATECTL1.Name = "vcUPDATECTL1";
             this.vcUPDATECTL1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.vcUPDATECTL1.Size = new System.Drawing.Size(455, 192);
+            this.vcUPDATECTL1.Size = new System.Drawing.Size(436, 260);
             this.vcUPDATECTL1.TabIndex = 4;
             // 
             // TopPnl
@@ -70,7 +70,7 @@
             this.TopPnl.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPnl.Location = new System.Drawing.Point(2, 2);
             this.TopPnl.Name = "TopPnl";
-            this.TopPnl.Size = new System.Drawing.Size(455, 26);
+            this.TopPnl.Size = new System.Drawing.Size(436, 26);
             this.TopPnl.TabIndex = 3;
             // 
             // btnCerrar
@@ -80,7 +80,7 @@
             this.btnCerrar.FlatAppearance.BorderSize = 0;
             this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrar.Font = new System.Drawing.Font("Webdings", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnCerrar.Location = new System.Drawing.Point(432, -2);
+            this.btnCerrar.Location = new System.Drawing.Point(413, -2);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(20, 25);
             this.btnCerrar.TabIndex = 0;
@@ -94,7 +94,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnCerrar;
-            this.ClientSize = new System.Drawing.Size(459, 222);
+            this.ClientSize = new System.Drawing.Size(440, 290);
             this.Controls.Add(this.PnlFondoRojo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

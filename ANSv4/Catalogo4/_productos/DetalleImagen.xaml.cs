@@ -30,5 +30,19 @@ namespace Catalogo._productos
         {
             Close();
         }
+
+        private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
+        {
+            if (eventArgs.ChangedButton == MouseButton.Left)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
     }
 }

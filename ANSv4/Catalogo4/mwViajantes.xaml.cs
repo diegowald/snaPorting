@@ -33,7 +33,8 @@ namespace Catalogo
         private Catalogo._novedades.ucNovedades nov = null;
         private Catalogo._rendiciones.ucRendiciones RenD = null;
 
-    
+        private bool _forcedToAutoHide;
+
         public mwViajantes()
         {
             this.Hide();
@@ -290,9 +291,19 @@ namespace Catalogo
 
         }
 
+        private void dockManager_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!_forcedToAutoHide)
+                return;
+            _forcedToAutoHide = false;
+            this.xContentMenu.Activate();
+            this.xContentMenu.ToggleAutoHide();
+        }
+
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
-            //this.ContentMenu.ToggleAutoHide();
+            this.xContentMenu.ToggleAutoHide();
+            _forcedToAutoHide = true;
 
             //Catalogo.util.FlashWindow fwFlash = new Catalogo.util.FlashWindow();
             //if (WindowState.) //(this.WindowState == System.Windows.Forms.FormWindowState.Minimized)

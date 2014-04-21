@@ -52,8 +52,8 @@ namespace Catalogo._registro
                 rCuitTxt.Focus();
                 return;
             }
-           // else if (!Regex.IsMatch(rCuitTxt.Text, @"^[0-9][\w\.-]*[0-9]\-[0-9]$")) 
-            else if (!validateCuit(rCuitTxt.Text))
+            else if (!Regex.IsMatch(rCuitTxt.Text, @"^[0-9][\w\.-]*[0-9]\-[0-9]$")) 
+            //else if (!validateCuit(rCuitTxt.Text))
             {
                 errormessage.Text = "Ingresar un Cuit válido.";
                 rCuitTxt.Select(0, rCuitTxt.Text.Length);

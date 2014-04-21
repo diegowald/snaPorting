@@ -28,7 +28,7 @@ namespace Catalogo._recibos
             _ToolTip.SetToolTip(btnVer, "ver ...");
             _ToolTip.SetToolTip(btnResumen, "Detalle del Recibo ...");
 
-            ccActualizadaFechaLbl.Text = "Cta. Cte. actualizada al " + Global01.F_ActClientes.ToString("dd/MM/yyyy hh:mm");
+            ccActualizadaFechaLbl.Text = "Cta. Cte. actualizada al " + Global01.F_ActClientes.ToString("dd/MM/yyyy HH:mm");
 
             if (!Global01.AppActiva)
             {
