@@ -113,7 +113,7 @@ namespace Catalogo._novedades
 
                 if (!cancel)
                 {
-                    int IdUltimaNovedad = Int16.Parse(Funciones.oleDbFunciones.Comando(conexion, "SELECT TOP 1 ID FROM ansNovedades ORDER BY ID DESC", "ID"));
+                    int IdUltimaNovedad = Int16.Parse("0" + Funciones.oleDbFunciones.Comando(conexion, "SELECT TOP 1 ID FROM ansNovedades ORDER BY ID DESC", "ID"));
 
                     sincronizarTodasLasNovedades(IdUltimaNovedad, ref cancel, msg);
                 }
@@ -281,7 +281,7 @@ namespace Catalogo._novedades
                             Novedades_Add(conexion, 
                                         (int)row["ID"],
                                         (DateTime)row["Fecha"],
-                                        row["Descipcion"].ToString(),
+                                        row["Descripcion"].ToString(),
                                         row["Destino"].ToString(),
                                         row["Origen"].ToString(), 
                                         row["Tipo"].ToString(), 

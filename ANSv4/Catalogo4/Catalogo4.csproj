@@ -212,7 +212,6 @@
     <Compile Include="_movimientos\ucMovimientos.Designer.cs">
       <DependentUpon>ucMovimientos.cs</DependentUpon>
     </Compile>
-    <Compile Include="_novedades\ChequeoNovedades.cs" />
     <Compile Include="_movimientos\EnvioMovimientos.cs" />
     <Compile Include="util\BackgroundTasks\EnvioUpdate.cs" />
     <Compile Include="_existencia\ExistenciaProducto.cs" />
