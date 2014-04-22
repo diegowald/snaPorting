@@ -10,7 +10,7 @@ namespace Catalogo
     static class MainMod
     {
 
-         public static void Main()
+        public static void Main()
         {
             valida_ubicacionDatos();
 
@@ -30,8 +30,8 @@ namespace Catalogo
             // Carga tabla de Productos en Segundo Plano
             preload.Preloader.instance.refresh();
 
-            load_header(); 
-     
+            load_header();
+
             //chequea comandos y mensajes desde el servidor
             if (Funciones.modINIs.ReadINI("DATOS", "INFO", "0") == "1") //Or vg.RecienRegistrado Or vg.NoConn
             {
@@ -47,19 +47,26 @@ namespace Catalogo
                 {
                     util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateCuentas);
                     updater.run();
-
-                    //util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateNovedadesCatalogo);
-                    //updater.run();
-
                 }
 
                 update_productos();
             }
 
+            lanzarProcesosSegunoPlano();
+
+
             //- ACA ESTA LA PAPA ----------------------
             //- Run mi APP MainWindow -----------------
             //- ** RETORNA AL app.XAML y sigue la EJECUCION NORMAL ** ---
             //- Fin Main ---
+        }
+
+        private static void lanzarProcesosSegunoPlano()
+        {
+            Catalogo.util.BackgroundTasks.ChequeoNovedades check = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+            check.run();
+
+            //Aca tiene que ir tambien el proceso que envia al server las transacciones.
         }
 
         private static void ActivarApplicacion()
@@ -88,8 +95,8 @@ namespace Catalogo
                         Global01.ipSettingIni = true;
                     }
                     else
-                    { 
-                        Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString(); 
+                    {
+                        Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString();
                     }
                     Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
                     Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
@@ -116,7 +123,7 @@ namespace Catalogo
             {
                 dr.Read();
 
-                if (dr["appCVersion"].ToString().Substring(1,3)!=Global01.VersionApp.Substring(3,3))
+                if (dr["appCVersion"].ToString().Substring(1, 3) != Global01.VersionApp.Substring(3, 3))
                 {
                     MessageBox.Show("INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     miEnd();
@@ -151,7 +158,7 @@ namespace Catalogo
 
                 Global01.RazonSocial = DBNull.Value.Equals(dr["RazonSocial"]) ? "" : dr["RazonSocial"].ToString();
                 Global01.ApellidoNombre = DBNull.Value.Equals(dr["ApellidoNombre"]) ? "" : dr["ApellidoNombre"].ToString();
-                Global01.pin  = DBNull.Value.Equals(dr["PIN"]) ? "" : dr["PIN"].ToString();
+                Global01.pin = DBNull.Value.Equals(dr["PIN"]) ? "" : dr["PIN"].ToString();
 
                 //Global01.Domicilio = DBNull.Value.Equals(dr["Domicilio"]) ? "" : dr["Domicilio"];
                 //Global01.Ciudad = DBNull.Value.Equals(dr["Ciudad"]) ? "" : dr["Ciudad"];
@@ -186,7 +193,7 @@ namespace Catalogo
                 Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_UltimoAcceso_upd");
             }
 
-            if (Int32.Parse(Global01.NroUsuario.ToString()) <= 0 | Int64.Parse(Global01.Cuit.ToString().Replace("-","")) <= 1)
+            if (Int32.Parse(Global01.NroUsuario.ToString()) <= 0 | Int64.Parse(Global01.Cuit.ToString().Replace("-", "")) <= 1)
             {
                 MessageBox.Show("Error en nº de Cuenta ó Cuit, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
@@ -242,7 +249,7 @@ namespace Catalogo
 
         private static void valida_appRegistro()
         {
- 
+
             //- Registro y activación -------------XX
         AcaRegistro:
             //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
@@ -257,7 +264,7 @@ namespace Catalogo
                     Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
 
                     // a registrar
-                    Catalogo._registro.fRegistro  fRegistro = new Catalogo._registro.fRegistro() ;
+                    Catalogo._registro.fRegistro fRegistro = new Catalogo._registro.fRegistro();
                     fRegistro.ShowDialog();
                     fRegistro = null;
 
@@ -297,7 +304,7 @@ namespace Catalogo
                         }
                         else
                         {
-                            Global01.AppActiva = false;          
+                            Global01.AppActiva = false;
                             if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 ActivarApplicacion();
@@ -372,7 +379,7 @@ namespace Catalogo
             //#else
             Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
             //#endif            
-           
+
 
             Global01.NoConn = false;
             Global01.VersionApp = (int)(Global01.miSABOR) + ".3.2.0";
@@ -383,33 +390,33 @@ namespace Catalogo
         vadenuevo:
             if (!System.IO.File.Exists(Environment.GetEnvironmentVariable("windir") + "\\locans.log"))
             {
-                Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", "C:\\Catalogo ANS"); 
+                Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", "C:\\Catalogo ANS");
             }
             Global01.AppPath = Funciones.modINIs.INIRead(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", "C:\\Catalogo ANS");
-          
+
             Global01.PathAcrobat = Funciones.modINIs.ReadINI("Datos", "PathAcrobat", "");
             Global01.FileBak = "CopiaCata_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mdb";
 
             Global01.cstring = Global01.AppPath + "\\datos\\ans.mdb";
             Global01.dstring = Global01.AppPath + "\\datos\\catalogo.mdb";
             Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
-   
+
             if (!System.IO.File.Exists(Global01.dstring))
-            {             
+            {
                 OpenFileDialog openFileDialog1 = new OpenFileDialog();
                 FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-                
+
                 folderBrowserDialog1.Description = "Seleccione la ubicación donde está instalado el Catálogo de Auto Náutica Sur.";
                 folderBrowserDialog1.ShowNewFolderButton = false;
                 folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
                 DialogResult result = folderBrowserDialog1.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", folderBrowserDialog1.SelectedPath.ToString()); 
+                    Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", folderBrowserDialog1.SelectedPath.ToString());
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                   miEnd();
+                    miEnd();
                 }
                 goto vadenuevo;
             }

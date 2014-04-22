@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo.util.BackgroundTasks
 {
     public class ChequeoNovedades : BackgroundTaskBase
@@ -21,29 +21,9 @@ namespace Catalogo.util.BackgroundTasks
             while (_running)
             {
                 System.Diagnostics.Debug.WriteLine("CHEQUEANDO NOVEDADES");
-                util.IPPrivado ipPriv = new util.IPPrivado(Global01.URL_ANS, Global01.IDMaquina);
-                // TODO: agregar la configuracion del proxy
-                string ipPrivado = ipPriv.GetIP();
-                string ipIntranet = ipPriv.GetIpIntranet();
-                //string ipCatalogo = ipPriv.GetIPCatalogo();
-
-                // Aca va el codigo para chequear si hay novedades en el server.
-                // PABLO-DIEGO ----------------
-
-
-                // 1) Chequeo ws NOVEDADES -> resultado = DataSet
-                // 2) Recorrer DataSet e Insertar en la tabla ansNovedades (suma novedades a las distribuidas con los datos)
-                // 3) Ejecutar usp_Novedades_Anexar (agregar las novedades recien llegadas a la tabla local)
-
-
-
-/*                Catalogo._existencia.VerExistencia existencia = new Catalogo._existencia.VerExistencia();
-                existencia.Inicializar("3PRUEBA-CATALOGO-4", ipPrivado, ipIntranet);
-
-                string pSemaforo = "";
-                existencia.ExistenciaSemaforo(_idProducto, Global01.NroUsuario, ref pSemaforo);
-                _semaforo = pSemaforo;
-                */
+                
+                util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateNovedadesCatalogo);
+                updater.run();
 
                 // min x seg X milisegundos 
                 System.Threading.Thread.Sleep(10 * 60 * 1000); 
@@ -57,7 +37,6 @@ namespace Catalogo.util.BackgroundTasks
 
         public override void finished()
         {
-            
             throw new NotImplementedException();
         }
 

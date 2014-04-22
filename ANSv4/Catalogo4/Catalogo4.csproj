@@ -278,6 +278,7 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="_application\UpdateAppConfig.cs" />
+    <Compile Include="_novedades\ChequeoNovedades.cs" />
     <Compile Include="_novedades\Novedades.xaml.cs">
       <DependentUpon>Novedades.xaml</DependentUpon>
     </Compile>

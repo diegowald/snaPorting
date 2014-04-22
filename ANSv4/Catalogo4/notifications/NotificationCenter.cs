@@ -12,14 +12,29 @@ namespace Catalogo.varios
         public util.Pair<string, float> progress2;
     }
 
+
+
     public class NotificationCenter : Catalogo.util.singleton<NotificationCenter>,
         Funciones.emitter_receiver.IEmisor<complexMessage>,
         Funciones.emitter_receiver.ICancellableEmitter
     {
+        public delegate void refreshNovedadesHandler();
+
+        public refreshNovedadesHandler refreshNovedades;
+
         public void notificar(complexMessage msg)
         {
             this.emitir(msg);
         }
+
+        internal void requestRefreshNovedades()
+        {
+            if (refreshNovedades != null)
+            {
+                refreshNovedades();
+            }
+        }
+
 
         public void requestCancel(ref bool cancel)
         {
@@ -37,5 +52,6 @@ namespace Catalogo.varios
             get;
             set;
         }
+
     }
 }

@@ -4,6 +4,7 @@ using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo._novedades
 {
     class UpdateNovedades : Funciones.emitter_receiver.IEmisor<Catalogo.varios.complexMessage>, 
+        Funciones.emitter_receiver.IEmisor2<string>, // Para emitir un refresh de las novedades del sistema.
         Funciones.emitter_receiver.ICancellableEmitter
     {
         // Define como se llama este modulo para el control de errores
@@ -311,6 +312,7 @@ namespace Catalogo._novedades
                         }
                         lastID = (int)row["ID"];
                     }
+                    this.emitir2("Hacer Refresh novedades");
                 }
             }
         }
@@ -327,5 +329,11 @@ namespace Catalogo._novedades
             set;
         }
 
+
+        public emisorHandler<string> emisor2
+        {
+            get;
+            set;
+        }
     }
 }
