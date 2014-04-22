@@ -495,7 +495,7 @@ namespace Catalogo._novedades
 
         private void dgvNovedades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (this.dgvNovedades.Rows[e.RowIndex].Cells["FLeido"].Value == null)
+            if (this.dgvNovedades.Rows[e.RowIndex].Cells["FLeido"].Value.ToString().Length == 0)
             {
                 e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
             }
