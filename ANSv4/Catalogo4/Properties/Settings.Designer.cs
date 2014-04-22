@@ -135,6 +135,16 @@ namespace Catalogo.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.40.129/wsCatalogo4/Info.asmx")]
+        public string Catalogo_CatalogoWS_Info {
+            get {
+                return ((string)(this["Catalogo_CatalogoWS_Info"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=\"C:\\Catalogo ANS\\Datos\\catalogo.mdb\"" +
             ";Password=video80min;User ID=inVent;Jet OLEDB:System database=C:\\Windows\\Help\\kb" +
@@ -160,10 +170,10 @@ namespace Catalogo.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.40.129/wsCatalogo4/Info.asmx")]
-        public string Catalogo_CatalogoWS_Info {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wscatalogo4/catalogonovedades.asmx")]
+        public string Catalogo_UpdateNovedadesCatalogoWS_CatalogoNovedades {
             get {
-                return ((string)(this["Catalogo_CatalogoWS_Info"]));
+                return ((string)(this["Catalogo_UpdateNovedadesCatalogoWS_CatalogoNovedades"]));
             }
         }
     }

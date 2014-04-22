@@ -114,6 +114,8 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Management" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
@@ -140,6 +142,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="util\FlashWindow.cs" />
+    <Compile Include="Web References\UpdateNovedadesCatalogoWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="_auditor\Auditor.cs" />
     <Compile Include="forms\frmReporte.cs">
       <SubType>Form</SubType>
@@ -205,7 +212,6 @@
     <Compile Include="_movimientos\ucMovimientos.Designer.cs">
       <DependentUpon>ucMovimientos.cs</DependentUpon>
     </Compile>
-    <Compile Include="_novedades\ChequeoNovedades.cs" />
     <Compile Include="_movimientos\EnvioMovimientos.cs" />
     <Compile Include="util\BackgroundTasks\EnvioUpdate.cs" />
     <Compile Include="_existencia\ExistenciaProducto.cs" />
@@ -276,6 +282,7 @@
       <DependentUpon>Novedades.xaml</DependentUpon>
     </Compile>
     <Compile Include="util\FileDownloader.cs" />
+    <Compile Include="_novedades\UpdateNovedades.cs" />
     <Compile Include="_pedidos\Pedido.cs" />
     <Compile Include="_pedidos\PedidoItem.cs" />
     <Compile Include="_preferencias\CheckBoxINI.xaml.cs">
@@ -508,11 +515,9 @@
     <EmbeddedResource Include="_recibos\ucRecibo.resx">
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Catalogo4_ClaveTemporal.pfx" />
     <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -573,6 +578,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\UpdateClientesWS\UpdateClientes.wsdl" />
+    <None Include="Web References\UpdateNovedadesCatalogoWS\catalogonovedades.wsdl" />
+    <None Include="Web References\UpdateNovedadesCatalogoWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\VerExistenciaWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -653,6 +663,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Catalogo_AuditWS_audit_v_304</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wscatalogo4/catalogonovedades.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\UpdateNovedadesCatalogoWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wscatalogo4/catalogonovedades.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo_UpdateNovedadesCatalogoWS_CatalogoNovedades</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/ClientesNovedades.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -795,7 +816,6 @@
     <Resource Include="recursos\LOGO-ANS-16X16.ico" />
     <Resource Include="recursos\top1.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="recursos\cotizacion-redes.png" />
   </ItemGroup>
@@ -822,6 +842,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="recursos\autonatica.swf" />
+    <None Include="Web References\UpdateNovedadesCatalogoWS\catalogonovedades.disco" />
     <Resource Include="recursos\icnYoutube.png" />
     <Resource Include="recursos\icnTwitter.png" />
     <Resource Include="recursos\icnLinkedin.png" />

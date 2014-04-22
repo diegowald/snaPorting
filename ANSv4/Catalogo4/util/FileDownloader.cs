@@ -28,6 +28,7 @@ namespace Catalogo.util
                 if (util.SimplePing.ping(_URL, 500, 3))
                 {
                     System.Net.WebClient downloader = new System.Net.WebClient();
+                    _URL = ((_URL.ToLower().StartsWith("http://")) ? _URL : "http://" + _URL);
                     downloader.DownloadFile(new Uri(_URL), _Destino);
                     downloadOK = true;
                 }

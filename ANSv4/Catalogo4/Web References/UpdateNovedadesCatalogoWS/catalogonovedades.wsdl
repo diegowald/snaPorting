@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetTodasLasNovedades_Cantidad">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="IdNovedad" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTodasLasNovedades_CantidadResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetTodasLasNovedades_CantidadResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTodasLasNovedades_Datos_Registros">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="LastID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTodasLasNovedades_Datos_RegistrosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTodasLasNovedades_Datos_RegistrosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetTodasLasNovedades_CantidadSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTodasLasNovedades_Cantidad" />
+  </wsdl:message>
+  <wsdl:message name="GetTodasLasNovedades_CantidadSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTodasLasNovedades_CantidadResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTodasLasNovedades_Datos_RegistrosSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTodasLasNovedades_Datos_Registros" />
+  </wsdl:message>
+  <wsdl:message name="GetTodasLasNovedades_Datos_RegistrosSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTodasLasNovedades_Datos_RegistrosResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CatalogoNovedadesSoap">
+    <wsdl:operation name="GetTodasLasNovedades_Cantidad">
+      <wsdl:input message="tns:GetTodasLasNovedades_CantidadSoapIn" />
+      <wsdl:output message="tns:GetTodasLasNovedades_CantidadSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTodasLasNovedades_Datos_Registros">
+      <wsdl:input message="tns:GetTodasLasNovedades_Datos_RegistrosSoapIn" />
+      <wsdl:output message="tns:GetTodasLasNovedades_Datos_RegistrosSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CatalogoNovedadesSoap" type="tns:CatalogoNovedadesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetTodasLasNovedades_Cantidad">
+      <soap:operation soapAction="http://tempuri.org/GetTodasLasNovedades_Cantidad" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTodasLasNovedades_Datos_Registros">
+      <soap:operation soapAction="http://tempuri.org/GetTodasLasNovedades_Datos_Registros" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CatalogoNovedadesSoap12" type="tns:CatalogoNovedadesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetTodasLasNovedades_Cantidad">
+      <soap12:operation soapAction="http://tempuri.org/GetTodasLasNovedades_Cantidad" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTodasLasNovedades_Datos_Registros">
+      <soap12:operation soapAction="http://tempuri.org/GetTodasLasNovedades_Datos_Registros" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CatalogoNovedades">
+    <wsdl:port name="CatalogoNovedadesSoap" binding="tns:CatalogoNovedadesSoap">
+      <soap:address location="http://190.3.78.12/wscatalogo4/catalogonovedades.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CatalogoNovedadesSoap12" binding="tns:CatalogoNovedadesSoap12">
+      <soap12:address location="http://190.3.78.12/wscatalogo4/catalogonovedades.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

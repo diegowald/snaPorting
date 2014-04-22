@@ -280,7 +280,7 @@ namespace Catalogo._novedades
                 this.pictureBox.Visible = true;
                 this.webBrowser.Visible = false;
                 flash.Visible = false;
-                string dest = String.Format("{0}\\imagenes\\Novedades\\{1}_{2}", Global01.AppPath, id, pArchivo);
+                string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
                 pictureBox.ImageLocation = dest;
             }
             else if (pTipo == "flash")
@@ -288,7 +288,7 @@ namespace Catalogo._novedades
                 pictureBox.Visible = false;
                 webBrowser.Visible = false;
                 flash.Visible = true;
-                flash.file = String.Format("{0}\\imagenes\\Novedades\\{1}_{2}", Global01.AppPath, id, pArchivo);
+                flash.file = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
                 flash.play();
             }
 
@@ -516,7 +516,7 @@ namespace Catalogo._novedades
 
         private void download(string url, string archivo, int id)
         {
-            string dest = String.Format("{0}\\imagenes\\Novedades\\{1}_{2}", Global01.AppPath, id, archivo);
+            string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, archivo);
             bool doDownload = true;
             if (downloadFiles.ContainsKey(dest))
             {
