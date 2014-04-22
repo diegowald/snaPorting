@@ -19,7 +19,8 @@ namespace Catalogo.util.BackgroundTasks
             UpdateGeneral = 4,
             ActivarApp = 5,
             EstadoActual = 6,
-            ListaPrecio = 7
+            ListaPrecio = 7,
+            UpdateNovedadesCatalogo = 8
         }
 
         private UpdateType _modo;
@@ -107,6 +108,17 @@ namespace Catalogo.util.BackgroundTasks
                         if (app.Inicializao)
                         {
                             app.listaPrecio();
+                        }
+                    }
+                    break;
+                case UpdateType.UpdateNovedadesCatalogo:
+                    {
+                        Catalogo._novedades.UpdateNovedades envio = new _novedades.UpdateNovedades(Global01.IDMaquina, ipPrivado, ipIntranet);
+                        envio.attachReceptor(this);
+                        envio.attachCancellableReceptor(this);
+                        if (envio.inicializado)
+                        {
+                            envio.sincronizarNovedades();
                         }
                     }
                     break;

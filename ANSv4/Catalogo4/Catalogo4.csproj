@@ -509,9 +509,6 @@
     <EmbeddedResource Include="_recibos\ucRecibo.resx">
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Catalogo4_ClaveTemporal.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />

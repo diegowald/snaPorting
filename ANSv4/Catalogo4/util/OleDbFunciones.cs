@@ -65,6 +65,10 @@ namespace Catalogo.Funciones
             string sAlcance = "";
             string sCampos = "*";
 
+            System.Data.OleDb.OleDbDataAdapter objAdapter = new System.Data.OleDb.OleDbDataAdapter();
+            System.Data.DataTable table = new DataTable("miDataTable");
+            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+
             if (Alcance.Trim().Length > 0)
                 sAlcance = Alcance;
             if (Campos.Trim().Length > 0)
@@ -76,11 +80,31 @@ namespace Catalogo.Funciones
 
             sql = "SELECT " + sAlcance + sCampos + " FROM " + Tabla + sCondicion + sOrden;
 
-            System.Data.OleDb.OleDbDataAdapter objAdapter = new System.Data.OleDb.OleDbDataAdapter(sql, conexion);
+            if (!(conexion.State == ConnectionState.Open))
+            {
+                conexion.Open();
+            }
+            
+            System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(sql, conexion);
 
-            DataTable table = new DataTable("miDataTable");
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture;
-            objAdapter.Fill(table);
+            if (Global01.TranActiva != null)
+            {
+                cmd.Transaction = Global01.TranActiva;
+            }
+            try
+            {
+                objAdapter.SelectCommand = cmd;
+                objAdapter.Fill(table);      
+            }
+            catch (Exception ex)
+            {
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;  //throw new Exception(ex.Message.ToString());
+            }
+            finally
+            {
+                cmd.Transaction = null;
+            }
 
             return table;
         }
