@@ -28,6 +28,14 @@ namespace Catalogo.util.BackgroundTasks
                 //string ipCatalogo = ipPriv.GetIPCatalogo();
 
                 // Aca va el codigo para chequear si hay novedades en el server.
+                // PABLO-DIEGO ----------------
+
+
+                // 1) Chequeo ws NOVEDADES -> resultado = DataSet
+                // 2) Recorrer DataSet e Insertar en la tabla ansNovedades (suma novedades a las distribuidas con los datos)
+                // 3) Ejecutar usp_Novedades_Anexar (agregar las novedades recien llegadas a la tabla local)
+
+
 
 /*                Catalogo._existencia.VerExistencia existencia = new Catalogo._existencia.VerExistencia();
                 existencia.Inicializar("3PRUEBA-CATALOGO-4", ipPrivado, ipIntranet);
@@ -49,6 +57,7 @@ namespace Catalogo.util.BackgroundTasks
 
         public override void finished()
         {
+            
             throw new NotImplementedException();
         }
 

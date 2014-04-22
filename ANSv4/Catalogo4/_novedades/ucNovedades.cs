@@ -70,7 +70,7 @@ namespace Catalogo._novedades
 //SELECT n.Descripcion, n.F_Inicio, n.F_Fin, n.N_Archivo, n.url, n.zonas, n.Fecha, n.Origen, n.Tipo, n.ID FROM ansNovedades AS n;
 
             //Set Columns Count 
-            dgvNovedades.ColumnCount = 11;
+            dgvNovedades.ColumnCount = 12;
 
             //Add Columns
             //"Descripcion, F_Inicio, F_Fin, N_Archivo, url, zonas, Fecha, Origen, Tipo, ID";
@@ -130,6 +130,11 @@ namespace Catalogo._novedades
             dgvNovedades.Columns[10].DataPropertyName = "F_Leido";
             //dgvNovedades.Columns[10].Visible = false;
 
+            dgvNovedades.Columns[11].Name = "Destino";
+            dgvNovedades.Columns[11].HeaderText = "Destino";
+            dgvNovedades.Columns[11].DataPropertyName = "Destino";
+            //dgvNovedades.Columns[11].Visible = false;
+
             string wDestino2 = "cliente"; //valores posibles "ambos;cliente;viajante;catalogo"
             if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente)
             {
@@ -139,7 +144,7 @@ namespace Catalogo._novedades
             string wCondicion = "activo=1 and (destino='ambos' or destino='" + wDestino2 + "') and origen<>'catalogo' "; //+
                                // " and f_inicio<=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "# and f_fin>=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "#";
             string wOrden = "F_Inicio DESC, Tipo";
-            string wCampos = "Descripcion, F_Inicio, F_Fin, N_Archivo, url, zonas, Fecha, Origen, Tipo, ID";
+            string wCampos = "Descripcion, F_Inicio, F_Fin, N_Archivo, url, zonas, Fecha, Origen, Tipo, ID, F_Leido, Destino";
 
             dtNovedades  = Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "v_Novedades1", wCondicion, wOrden, wCampos);
 
@@ -300,9 +305,12 @@ namespace Catalogo._novedades
 
         private void marcarComoLeido(int id)
         {
-            string sql = "INSERT INTO tblNovedadLeido (IdNovedad, F_Leido) VALUES ("
-                + id.ToString()
-                + ", #" + System.DateTime.Now.ToString() + "#);";
+            //string sql = "INSERT INTO tblNovedadLeido (IdNovedad, F_Leido) VALUES ("
+            //    + id.ToString()
+            //    + ", #" + System.DateTime.Now.ToString() + "#);";
+
+            string sql = "UPDATE tblNovedadLeido SET F_Leido=Now() WHERE IdNovedad=" + id.ToString();
+
 
             Catalogo.Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, sql);
         }
@@ -318,11 +326,8 @@ namespace Catalogo._novedades
             else if (pTipo == "UpdateAppConfig")
             {
                 //chequea comandos y mensajes desde el servidor
-                if (Funciones.modINIs.ReadINI("DATOS", "INFO", "0") == "1") //Or vg.RecienRegistrado Or vg.NoConn
-                {
                     util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig);
                     updater.run();
-                }
             }
         }
 

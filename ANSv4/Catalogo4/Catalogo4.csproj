@@ -385,6 +385,10 @@
     <Compile Include="_recibos\ucRecibo.Designer.cs">
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </Compile>
+    <Page Include="CustomStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="mwViajantes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -811,6 +815,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="recursos\autonatica.swf" />
+    <Resource Include="recursos\icnYoutube.png" />
+    <Resource Include="recursos\icnTwitter.png" />
+    <Resource Include="recursos\icnLinkedin.png" />
+    <Resource Include="recursos\icnFacebook.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

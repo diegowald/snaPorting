@@ -252,40 +252,6 @@ namespace Catalogo
                 addFlashPlayer();
             }
 
-/*            Catalogo._interdeposito.ucInterDeposito IntDep = addInterDepositoArea();
-            Catalogo._movimientos.ucMovimientos mov = addMovimientosArea();
-
-            Catalogo._recibos.ucRecibo rec = addReciboArea();
-            Catalogo._rendiciones.ucRendiciones RenD = addRendicionArea();
-            Catalogo._novedades.ucNovedades nov = addNovedadesArea();
-
-            sf = addSearchArea();
-            gv = addProductsArea();
-            ped = addPedidoArea();
-            dev = addDevolucionArea();
-
-            sf.attachReceptor(gv);
-            sf.attachReceptor2(gv);
-
-            gv.attachReceptor(productDetalle);
-            gv.attachReceptor(ped);
-            gv.attachReceptor(dev);
-            gv.attachReceptor2(sf);
-            gv.attachReceptor3(ped);
-            gv.attachReceptor3(dev);
-
-            ped.attachReceptor(rec);
-            ped.attachReceptor(dev);
-            ped.attachReceptor(mov); 
-
-            rec.attachReceptor(ped);
-            rec.attachReceptor(dev);
-            rec.attachReceptor(mov); 
-
-            dev.attachReceptor(ped);
-            dev.attachReceptor(dev);
-            dev.attachReceptor(mov); 
-*/
             this.Show();
             Catalogo.varios.SplashScreen.CloseSplashScreen();
 
@@ -375,7 +341,7 @@ namespace Catalogo
             if (Global01.OperacionActivada == "PEDIDO")
             {
                 //      If cmdVISITA.Tag <> "INICIAR Visita" Then
-                System.Windows.Forms.MessageBox.Show("Antes de salir debe cerrar VISITA", "Atención",
+                System.Windows.Forms.MessageBox.Show("Antes de salir debe cerrar el PEDIDO", "Atención",
                     System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
                 e.Cancel = true;
                 return;
@@ -386,7 +352,7 @@ namespace Catalogo
                 _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, ped.IDClienteSeleccionado);
                 if (movimientos.preguntoAlSalir())
                 {
-                    //          ' Si hay movimientos pendientes pregunto si quiere enviarlos
+                    // Si hay movimientos pendientes pregunto si quiere enviarlos
                     System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show("Tiene movimientos que aun no ha enviado. ¿QUIERE ENVIARLOS AHORA?", "ENVIO DE MOVIMIENTOS", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question);
                     switch (result)
                     {
@@ -431,62 +397,8 @@ namespace Catalogo
                 }
             }
 
-            //  With Me
-            //    If .WindowState <> vbMinimized Then
-            //      GuardarFormatoForm Me
-            //      WriteINI "Preferencias", "picHorizontal", picHorizontal.Top
-            //                    
-            //      GrabarLVColumnas Me.lvBuscar
-            //      GrabarLVColumnas Me.lvEstado
-            //      GrabarLVColumnas Me.lvMovimientos
-            //      GrabarLVColumnas Me.lvPedido
-            //      GrabarLVColumnas Me.lvDevolucion1
-            //      GrabarLVColumnas Me.lvDevolucion2
-            //      GrabarLVColumnas Me.lvValores
-            //      GrabarLVColumnas Me.lvAplicacion
-            //      GrabarLVColumnas Me.lvADeducir
-            //    End If
-            //  End With 'Me
-
-            //  Set fExistencia = Nothing
             _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Programa,
                 _auditor.Auditor.AccionesAuditadas.TERMINA, "se cierra la aplicacion");
-            //  Select Case UnloadMode
-            //    Case vbFormControlMenu
-            //        '0 El usuario eligió el comando Cerrar del menú Control del formulario.
-            //        vg.auditor.Guardar Programa, TERMINA, "eligió el comando Cerrar"
-            //    Case vbFormCode
-            //        '1 Se invocó la instrucción Unload desde el código.
-            //        vg.auditor.Guardar Programa, TERMINA, "instrucción Unload"
-            //    Case vbAppWindows
-            //        '2 La sesión actual del entorno operativo Microsoft Windows está finalizando.
-            //        vg.auditor.Guardar Programa, TERMINA, "Microsoft Windows está finalizando"
-            //    Case vbAppTaskManager
-            //        '3 El Administrador de tareas de Microsoft Windows está cerrando la aplicación.
-            //        vg.auditor.Guardar Programa, TERMINA, "vbAppTaskManager"
-            //    Case vbFormMDIForm
-            //        '4 Un formulario MDI secundario se está cerrando porque el formulario MDI también se está cerrando.
-            //        vg.auditor.Guardar Programa, TERMINA, "vbFormMDIForm"
-            //    Case vbFormOwner
-            //        '5 Un formulario se está cerrando por que su formulario propietario se está cerrando
-            //        vg.auditor.Guardar Programa, TERMINA, "vbFormOwner"
-            // End Select
-
-            //'-------- ErrorGuardian Begin --------
-            //Exit Sub
-            //
-            //ErrorGuardianLocalHandler:
-            //    If Err.Number = 53 Then ' el archivo de VersionAnterior NO EXISTE
-            //        Resume Next
-            //    Else
-            //        Select Case ErrorGuardianGlobalHandler(m_sMODULENAME_, PROCNAME_)
-            //            Case vbRetry
-            //                Resume
-            //            Case vbIgnore
-            //                Resume Next
-            //        End Select
-            //    End If
-            //'-------- ErrorGuardian End ----------
         }
 
         private void xMenu1_web(object sender, RoutedEventArgs e)
@@ -527,6 +439,7 @@ namespace Catalogo
                     if (obj is AvalonDock.DocumentContent)
                     {
                         AvalonDock.DocumentContent content = obj as AvalonDock.DocumentContent;
+                        //content.Foreground.SetValue = 
                         switch (content.Title)
                         {
                             case "Productos":
@@ -646,6 +559,26 @@ namespace Catalogo
             {
                 nov = addNovedadesArea();
             }
+        }
+
+        private void btnYoutube_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.youtube.com/channel/UC32Fr7Or2ZZhPnkZLn1n4-Q");            
+        }
+
+        private void btnTwitter_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://twitter.com/AutoNauticaSur");            
+        }
+
+        private void btnFacebook_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.facebook.com/autonauticasur");            
+        }
+
+        private void btnLinkedin_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.linkedin.com/company/3667540");            
         }
 
     }
