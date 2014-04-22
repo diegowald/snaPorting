@@ -281,6 +281,9 @@
     <Compile Include="_preferencias\CheckBoxINI.xaml.cs">
       <DependentUpon>CheckBoxINI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="_preferencias\passwordFrm.xaml.cs">
+      <DependentUpon>passwordFrm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="_preferencias\TextEditINI.xaml.cs">
       <DependentUpon>TextEditINI.xaml</DependentUpon>
     </Compile>
@@ -394,6 +397,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="_preferencias\CheckBoxINI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="_preferencias\passwordFrm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
