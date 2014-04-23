@@ -16,10 +16,10 @@ namespace Catalogo._Application
         private string _MacAddress;
         private string _ipAddress;
 
-        public ActivarAplicacion(string MacAddress, string ipAddress, string ipAddressIntranet)
+        public ActivarAplicacion(string MacAddress, string ipAddress)
         {
             webServiceInicializado = false;
-            inicializar(MacAddress, ipAddress, ipAddressIntranet);
+            inicializar(MacAddress, ipAddress);
         }
 
         public bool Inicializao
@@ -30,13 +30,11 @@ namespace Catalogo._Application
             }
         }
 
-        public void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
+        public void inicializar(string MacAddress, string ipAddress)
         {
-            bool conectado = util.SimplePing.ping(ipAddress, 5000, 0);
-            if (!conectado)
-            {
-                conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
-            }
+            bool conectado = util.network.IPCache.instance.conectado;
+
+ 
             try
             {
                 if (!webServiceInicializado)
@@ -62,27 +60,27 @@ namespace Catalogo._Application
             }
             catch (Exception ex)
             {
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
-                {
-                    //errhandler:
-                    //        If Err.Number = -2147024809 Then
-                    // Intento con el ip interno
-                    cliente = new LLaveClienteWS.LLaveCliente();
-                    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/LLaveCliente.asmx?wsdl";
-                    if (Global01.proxyServerAddress != "0.0.0.0")
-                    {
-                        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
-                    }
-                    _MacAddress = MacAddress;
-                    webServiceInicializado = true;
-                    _ipAddress = ipAddressIntranet;
-                }
-                else
-                {
+                //if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                //{
+                //    //errhandler:
+                //    //        If Err.Number = -2147024809 Then
+                //    // Intento con el ip interno
+                //    cliente = new LLaveClienteWS.LLaveCliente();
+                //    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/LLaveCliente.asmx?wsdl";
+                //    if (Global01.proxyServerAddress != "0.0.0.0")
+                //    {
+                //        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
+                //    }
+                //    _MacAddress = MacAddress;
+                //    webServiceInicializado = true;
+                //    _ipAddress = ipAddressIntranet;
+                //}
+                //else
+                //{
                     util.errorHandling.ErrorLogger.LogMessage(ex);
 
                     throw ex;
-                }
+                //}
             }
         }
 
@@ -90,7 +88,7 @@ namespace Catalogo._Application
         {
             string llaveViajante = string.Empty;
 
-            if (util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (util.network.IPCache.instance.conectado)
             {
                 string s = cliente.ObtenerLLaveViajante(ZonaViajante);
                 if (s.Trim().Length > 0)
@@ -196,7 +194,7 @@ namespace Catalogo._Application
 
         private int obtenerEstado(ref bool cancel, string Cuit, string IDAns, string IDViajante, string LLaveCliente)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 // Conexion no valida
                 cancel = true;
@@ -262,7 +260,7 @@ namespace Catalogo._Application
 
         private byte obtenerEstadoActual(ref bool cancel, string Cuit, string IDAns)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 return 0;
             }
@@ -296,7 +294,7 @@ namespace Catalogo._Application
 
         private byte obtenerListaPrecio(ref bool cancel, string Cuit, string IDAns)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 // Conexion no valida
                 cancel = true;

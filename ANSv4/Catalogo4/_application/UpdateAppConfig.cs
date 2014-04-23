@@ -17,9 +17,9 @@ namespace Catalogo._application
 
         private System.Data.OleDb.OleDbConnection conexion;
 
-        public UpdateAppConfig(string MacAddress, string ipAddress, string ipAddressIntranet)
+        public UpdateAppConfig(string MacAddress, string ipAddress)
         {
-            inicializar(MacAddress, ipAddress, ipAddressIntranet);
+            inicializar(MacAddress, ipAddress);
             conexion = Global01.Conexion;
         }
 
@@ -31,14 +31,10 @@ namespace Catalogo._application
             }
         }
 
-        protected void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
+        protected void inicializar(string MacAddress, string ipAddress)
         {
-            bool conectado = util.SimplePing.ping(ipAddress, 5000, 0);
+            bool conectado = util.network.IPCache.instance.conectado;
 
-            if (!conectado)
-            {
-                conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
-            }
             try
             {
                 if (!webServiceInicializado)
@@ -63,31 +59,31 @@ namespace Catalogo._application
             }
             catch (Exception ex)
             {
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
-                {
-                    cliente = new AppConfigWS.appConfig();
-                    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/appConfig.asmx?wsdl";
-                    if (Global01.proxyServerAddress != "0.0.0.0")
-                    {
-                        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
-                    }
-                    _macAddress = MacAddress;
-                    webServiceInicializado = true;
-                    _ipAddress = ipAddressIntranet;
-                }
-                else
-                {
+                //if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                //{
+                //    cliente = new AppConfigWS.appConfig();
+                //    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/appConfig.asmx?wsdl";
+                //    if (Global01.proxyServerAddress != "0.0.0.0")
+                //    {
+                //        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
+                //    }
+                //    _macAddress = MacAddress;
+                //    webServiceInicializado = true;
+                //    _ipAddress = ipAddressIntranet;
+                //}
+                //else
+                //{
                     util.errorHandling.ErrorLogger.LogMessage(ex);
 
                     throw ex;
-                }
+                //}
             }
         }
 
 
         private void sincroAppConfigCompletada(ref bool cancel)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 // Conexion no valida
                 cancel = true;
@@ -181,7 +177,7 @@ namespace Catalogo._application
 
         private bool tenerQueEnviarInfo()
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 return false;
             }
@@ -200,7 +196,7 @@ namespace Catalogo._application
             string Version, string build, string ListaPrecio,
             string auditor)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 return false;
             }
@@ -218,7 +214,7 @@ namespace Catalogo._application
 
         protected void obtenerInfo(ref bool cancel)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 // Conexion no valida
                 cancel = true;
@@ -313,7 +309,7 @@ namespace Catalogo._application
 
         public void obtenerComandos(ref bool cancel)
         {  
-            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 // Conexion no valida
                 cancel = true;

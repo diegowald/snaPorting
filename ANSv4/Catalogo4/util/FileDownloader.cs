@@ -25,7 +25,8 @@ namespace Catalogo.util
             downloadOK = false;
             try
             {
-                if (util.SimplePing.ping(_URL, 500, 3))
+                if (util.network.IPCache.instance.conectado)
+               // if (util.SimplePing.ping(_URL, 500, 3, Global01.TiposDePing.ICMP))
                 {
                     System.Net.WebClient downloader = new System.Net.WebClient();
                     _URL = ((_URL.ToLower().StartsWith("http://")) ? _URL : "http://" + _URL);

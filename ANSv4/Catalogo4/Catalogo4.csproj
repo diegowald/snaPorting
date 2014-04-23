@@ -145,6 +145,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="util\FlashWindow.cs" />
+    <Compile Include="util\network\IPCache.cs" />
+    <Compile Include="util\SimplePing.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Web References\UpdateNovedadesCatalogoWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -190,7 +194,6 @@
       <DependentUpon>FlashControl.cs</DependentUpon>
     </Compile>
     <Compile Include="util\ListViewItemComparer.cs" />
-    <Compile Include="util\SimplePing.cs" />
     <Compile Include="util\singleton.cs" />
     <Compile Include="_devoluciones\Devolucion.cs" />
     <Compile Include="_devoluciones\DevolucionItem.cs" />
@@ -219,7 +222,6 @@
     <Compile Include="util\BackgroundTasks\EnvioUpdate.cs" />
     <Compile Include="_existencia\ExistenciaProducto.cs" />
     <Compile Include="util\BackgroundTasks\Updater.cs" />
-    <Compile Include="util\IPPrivado.cs" />
     <Compile Include="Web References\AppConfigWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

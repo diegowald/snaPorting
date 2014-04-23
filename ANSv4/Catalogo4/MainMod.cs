@@ -53,7 +53,7 @@ namespace Catalogo
                 update_productos();
             }
 
-            lanzarProcesosSegunoPlano();
+            lanzarProcesosSegundoPlano();
 
 
             //- ACA ESTA LA PAPA ----------------------
@@ -62,7 +62,7 @@ namespace Catalogo
             //- Fin Main ---
         }
 
-        private static void lanzarProcesosSegunoPlano()
+        private static void lanzarProcesosSegundoPlano()
         {
             Catalogo.util.BackgroundTasks.ChequeoNovedades check = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
             check.run();
@@ -91,16 +91,17 @@ namespace Catalogo
                 else
                 {
                     Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP", "0.0.0.0");
-                    if (Global01.URL_ANS != "0.0.0.0")
-                    {
-                        Global01.ipSettingIni = true;
-                    }
-                    else
+                    if (Global01.URL_ANS == "0.0.0.0")
                     {
                         Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString();
                     }
 
-                    Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
+                    Global01.URL_ANS2 = Funciones.modINIs.ReadINI("DATOS", "IP2", "0.0.0.0");
+                    if (Global01.URL_ANS2 == "0.0.0.0")
+                    {
+                        Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
+                    }
+
                     Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
 
                     util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
@@ -133,21 +134,21 @@ namespace Catalogo
                 }
 
                 Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP", "0.0.0.0");
-                if (Global01.URL_ANS != "0.0.0.0")
-                {
-                    Global01.ipSettingIni = true;
-                }
-                else
+                if (Global01.URL_ANS == "0.0.0.0")
                 {
                     Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString();
                 }
 
+                Global01.URL_ANS2 = Funciones.modINIs.ReadINI("DATOS", "IP2", "0.0.0.0");
+                if (Global01.URL_ANS2 == "0.0.0.0")
+                {
+                    Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
+                }
 
                 Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
 
                 Global01.ListaPrecio = DBNull.Value.Equals(dr["appCListaPrecio"]) ? (byte)(0) : (byte)(dr["appCListaPrecio"]);
                 Global01.MiBuild = DBNull.Value.Equals(dr["Build"]) ? (int)(0) : Int32.Parse(dr["Build"].ToString());
-                Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
                 Global01.NroUsuario = DBNull.Value.Equals(dr["IDAns"]) ? "00000" : dr["IDAns"].ToString();
                 Global01.Zona = DBNull.Value.Equals(dr["Zona"]) ? "000" : dr["Zona"].ToString();
                 Global01.Cuit = DBNull.Value.Equals(dr["Cuit"]) ? "0" : dr["Cuit"].ToString();
@@ -254,8 +255,8 @@ namespace Catalogo
 
             //- Registro y activación -------------XX
         AcaRegistro:
-            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            //if (false)
+            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -321,7 +322,7 @@ namespace Catalogo
                 // registrada y activa
                 Global01.AppActiva = true;
                 //-------- BORRAR ESTA LINEA!!!!!!! ----------------------
-                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
             }
             //--------------------------------------XX
         }
@@ -470,7 +471,6 @@ namespace Catalogo
             Global01.strConexionUs = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Us + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
             Global01.strConexionAd = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Ad + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
 
-            Global01.ipSettingIni = false;
             Global01.IDMaquina = Catalogo._registro.AppRegistro.ObtenerIDMaquina();
             Global01.IDMaquinaCRC = Funciones.modINIs.ReadINI("DATOS", "MachineId", "no");
             Global01.LLaveViajante = Funciones.modINIs.ReadINI("DATOS", "LlaveViajante", "no");
@@ -508,6 +508,8 @@ namespace Catalogo
             Global01.EmailTO = "";
             Global01.EmailBody = "";
             Global01.EmailAsunto = "";
+
+            Global01.IPPing = Funciones.modINIs.ReadINI("DATOS", "IPPing", "8.8.8.8");
         }
 
     }

@@ -383,11 +383,7 @@ namespace Catalogo
                     {
                         case System.Windows.Forms.DialogResult.Yes:
                             {
-                                bool Conectado = util.SimplePing.ping(Global01.URL_ANS, 5000, 0);
-                                if (!Conectado)
-                                {
-                                    Conectado = util.SimplePing.ping(Global01.URL_ANS2, 5000, 0);
-                                }
+                                bool Conectado = util.network.IPCache.instance.conectado;
 
                                 if (Conectado)
                                 {

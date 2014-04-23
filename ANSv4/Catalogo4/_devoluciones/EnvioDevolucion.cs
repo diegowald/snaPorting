@@ -28,9 +28,9 @@ namespace Catalogo._devoluciones
 
         private bool DatosObtenidos;
 
-        public EnvioDevolucion(System.Data.OleDb.OleDbConnection conexion, string ipAddress, string ipAddressIntranet, string MacAddress)
+        public EnvioDevolucion(System.Data.OleDb.OleDbConnection conexion, string ipAddress, string MacAddress)
         {
-            Inicializar(ipAddress, ipAddressIntranet, MacAddress);
+            Inicializar(ipAddress, MacAddress);
             Conexion1 = conexion;
         }
 
@@ -131,13 +131,10 @@ namespace Catalogo._devoluciones
         }
 
 
-        public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
+        public void Inicializar(string ipAddress, string MacAddress)
         {
-            bool Conectado = util.SimplePing.ping(ipAddress, 5000, 0);
-            if (!Conectado)
-            {
-                Conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
-            }
+            bool Conectado = util.network.IPCache.instance.conectado;
+
             try
             {
                 if (Conectado)
@@ -163,25 +160,25 @@ namespace Catalogo._devoluciones
             }
             catch (Exception ex)
             {
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
-                {
-                    //	if (Err().Number == -2147024809) {
-                    // Intento con el ip interno
-                    Cliente = new DevolucionWS.Devolucion();
-                    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Devolucion.asmx?wsdl";
-                    if (Global01.proxyServerAddress != "0.0.0.0")
-                    {
-                        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
-                    }
+                //if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                //{
+                //    //	if (Err().Number == -2147024809) {
+                //    // Intento con el ip interno
+                //    Cliente = new DevolucionWS.Devolucion();
+                //    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Devolucion.asmx?wsdl";
+                //    if (Global01.proxyServerAddress != "0.0.0.0")
+                //    {
+                //        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
+                //    }
 
-                    m_MacAddress = MacAddress;
-                    m_ip = ipAddressIntranet;
-                    WebServiceInicializado = true;
-                }
-                else
-                {
+                //    m_MacAddress = MacAddress;
+                //    m_ip = ipAddressIntranet;
+                //    WebServiceInicializado = true;
+                //}
+                //else
+                //{
                     throw ex;
-                }
+                //}
             }
         }
 

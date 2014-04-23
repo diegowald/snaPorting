@@ -31,9 +31,9 @@ namespace Catalogo._interdeposito
         private bool DatosObtenidos;
 
         private System.Data.OleDb.OleDbConnection Conexion1;
-        public EnvioInterDeposito(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string ipAddressIntranet, string MacAddress)
+        public EnvioInterDeposito(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string MacAddress)
         {
-            Inicializar(ipAddress, ipAddressIntranet, MacAddress);
+            Inicializar(ipAddress, MacAddress);
             Conexion1 = Conexion;
         }
 
@@ -137,14 +137,10 @@ namespace Catalogo._interdeposito
             }
         }
 
-        public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
+        public void Inicializar(string ipAddress, string MacAddress)
         {
-            bool Conectado = util.SimplePing.ping(ipAddress, 5000, 0);
-            if (!Conectado)
-            {
-                Conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
-            }
-
+            bool Conectado = util.network.IPCache.instance.conectado;
+   
             try
             {
                 if (Conectado)
@@ -171,25 +167,25 @@ namespace Catalogo._interdeposito
             }
             catch (Exception ex)
             {
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
-                {
-                    //	if (Err().Number == -2147024809) {
-                    // Intento con el ip interno
-                    Cliente = new InterDepositoWS.InterDeposito();
-                    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/InterDeposito.asmx?wsdl";
-                    if (Global01.proxyServerAddress != "0.0.0.0")
-                    {
-                        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
-                    }
+                //if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                //{
+                //    //	if (Err().Number == -2147024809) {
+                //    // Intento con el ip interno
+                //    Cliente = new InterDepositoWS.InterDeposito();
+                //    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/InterDeposito.asmx?wsdl";
+                //    if (Global01.proxyServerAddress != "0.0.0.0")
+                //    {
+                //        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
+                //    }
 
-                    m_MacAddress = MacAddress;
-                    m_ip = ipAddressIntranet;
-                    WebServiceInicializado = true;
-                }
-                else
-                {
+                //    m_MacAddress = MacAddress;
+                //    m_ip = ipAddressIntranet;
+                //    WebServiceInicializado = true;
+                //}
+                //else
+                //{
                     throw ex;
-                }
+                //}
             }
         }
 

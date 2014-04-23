@@ -3,7 +3,7 @@
 namespace Catalogo
 {
 
-    static class Global01
+    public static class Global01
     {
 
        public enum TiposDeCatalogo
@@ -13,6 +13,13 @@ namespace Catalogo
             Viajante = 3,
             Supervisor = 4
         }
+
+       public enum TiposDePing
+       {
+           ICMP =1,
+           HTTP,
+           FILE
+       }
 
        public static string VersionApp;
        public static TiposDeCatalogo miSABOR;
@@ -59,7 +66,6 @@ namespace Catalogo
        public static string proxyServerAddress;
        public static string MainWindowCaption;
        public static bool NoConn;
-       public static bool ipSettingIni;
        public static int MiBuild;
        public static byte ListaPrecio;
        public static float Dolar;
@@ -75,5 +81,6 @@ namespace Catalogo
        public static string EmailAsunto;
 
        public static string NroImprimir;
+       public static string IPPing;
     }
 }

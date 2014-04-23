@@ -24,14 +24,10 @@ namespace Catalogo._existencia
 	    }
 
 
-	    public void Inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
+	    public void Inicializar(string MacAddress, string ipAddress)
 	    {
-  
-            bool Conectado = util.SimplePing.ping(ipAddress, 5000, 0);
-            if (!Conectado)
-            {
-                Conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
-            }
+
+            bool Conectado = util.network.IPCache.instance.conectado;
 
             try
             {
@@ -58,25 +54,25 @@ namespace Catalogo._existencia
             }
             catch (Exception ex)
             {
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
-                {
-                    Cliente = new VerExistenciaWS.VerExistencia();
-                    Cliente.Url = "http://" + ipAddressIntranet + "/wsOracle/VerExistencia.asmx?wsdl";
-                    if (Global01.proxyServerAddress != "0.0.0.0")
-                    {
-                        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
-                    }
+                //if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                //{
+                //    Cliente = new VerExistenciaWS.VerExistencia();
+                //    Cliente.Url = "http://" + ipAddressIntranet + "/wsOracle/VerExistencia.asmx?wsdl";
+                //    if (Global01.proxyServerAddress != "0.0.0.0")
+                //    {
+                //        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
+                //    }
 
-                    m_ipAddress = ipAddressIntranet;
-                    m_MacAddress = MacAddress;
-                    WebServiceInicializado = true;                    
-                }
-                else
-                {
+                //    m_ipAddress = ipAddressIntranet;
+                //    m_MacAddress = MacAddress;
+                //    WebServiceInicializado = true;                    
+                //}
+                //else
+                //{
                     util.errorHandling.ErrorLogger.LogMessage(ex);
 
                     throw ex;
-                }
+                //}
             }
 	
 		    return;
