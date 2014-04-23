@@ -117,5 +117,15 @@ namespace Catalogo._preferencias
         {
             check.Content = displayName;
         }
+
+        private void check_Click_1(object sender, RoutedEventArgs e)
+        {
+            e.Handled = false;
+        }
+
+        private void check_Unchecked_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

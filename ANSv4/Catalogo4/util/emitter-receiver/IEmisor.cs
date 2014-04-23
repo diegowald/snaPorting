@@ -10,7 +10,7 @@ namespace Catalogo
         namespace emitter_receiver
         {
             public delegate void emisorHandler<T>(T dato);
-            
+
             public interface IEmisor<T>
             {
                 emisorHandler<T> emisor {get; set;}

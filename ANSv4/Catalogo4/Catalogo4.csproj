@@ -278,6 +278,7 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="_application\UpdateAppConfig.cs" />
+    <Compile Include="_novedades\ChequeoNovedades.cs" />
     <Compile Include="_novedades\Novedades.xaml.cs">
       <DependentUpon>Novedades.xaml</DependentUpon>
     </Compile>
@@ -287,6 +288,9 @@
     <Compile Include="_pedidos\PedidoItem.cs" />
     <Compile Include="_preferencias\CheckBoxINI.xaml.cs">
       <DependentUpon>CheckBoxINI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_preferencias\passwordFrm.xaml.cs">
+      <DependentUpon>passwordFrm.xaml</DependentUpon>
     </Compile>
     <Compile Include="_preferencias\TextEditINI.xaml.cs">
       <DependentUpon>TextEditINI.xaml</DependentUpon>
@@ -405,6 +409,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="_preferencias\CheckBoxINI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="_preferencias\passwordFrm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

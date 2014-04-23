@@ -8,6 +8,7 @@ namespace Catalogo.util.BackgroundTasks
 {
     public class Updater : BackgroundTaskBase,
         Funciones.emitter_receiver.IReceptor<Catalogo.varios.complexMessage>, // Para recibir mensajes de Clientes
+        Funciones.emitter_receiver.IReceptor<string>, // Para recibir un refresh de novedades
         Funciones.emitter_receiver.ICancellableEmitter, // Para chequear si es necesario cancelar
         Funciones.emitter_receiver.ICancellableReceiver // Para recibir notificaciones de recepcion de cancelacion
     {
@@ -116,6 +117,7 @@ namespace Catalogo.util.BackgroundTasks
                         Catalogo._novedades.UpdateNovedades envio = new _novedades.UpdateNovedades(Global01.IDMaquina, ipPrivado, ipIntranet);
                         envio.attachReceptor(this);
                         envio.attachCancellableReceptor(this);
+                        envio.attachReceptor2(this);
                         if (envio.inicializado)
                         {
                             envio.sincronizarNovedades();
@@ -255,6 +257,11 @@ namespace Catalogo.util.BackgroundTasks
         public void onRequestCancel(ref bool cancel)
         {
             Catalogo.varios.NotificationCenter.instance.requestCancel(ref cancel);
+        }
+
+        public void onRecibir(string dato)
+        {
+            Catalogo.varios.NotificationCenter.instance.requestRefreshNovedades();
         }
     }
 }

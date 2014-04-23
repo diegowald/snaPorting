@@ -28,8 +28,6 @@ namespace Catalogo._novedades
             webBrowser.Dock = DockStyle.Fill;
             flash.Dock = DockStyle.Fill;
 
-            //util.BackgroundTasks.ChequeoNovedades checker = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
-            //checker.run();
             downloadFiles = new Dictionary<string, DownloadStatus>();
 
             // al iniciar las noveedades se debe ver el pictureBox con la imaggn
@@ -37,6 +35,20 @@ namespace Catalogo._novedades
             pictureBox.Visible = true;
             webBrowser.Visible = false;
             flash.Visible = false;
+
+            Catalogo.varios.NotificationCenter.instance.refreshNovedades += refreshNovedades;
+        }
+
+        
+        private delegate void refreshNovedadesDelegate();
+        private void refreshNovedades()
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new refreshNovedadesDelegate(refreshNovedades), null);
+                return;
+            }
+            loadDataGridView();
         }
          
         private void ucNovedades_Load(object sender, EventArgs e)
@@ -495,7 +507,7 @@ namespace Catalogo._novedades
 
         private void dgvNovedades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (this.dgvNovedades.Rows[e.RowIndex].Cells["FLeido"].Value == null)
+            if (this.dgvNovedades.Rows[e.RowIndex].Cells["FLeido"].Value.ToString().Length == 0)
             {
                 e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
             }
