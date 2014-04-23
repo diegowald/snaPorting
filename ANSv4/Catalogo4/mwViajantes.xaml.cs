@@ -76,6 +76,7 @@ namespace Catalogo
                 
             }
             this.Closing += mwViajantes_Closing;
+            crearControlesProductos();
         }
 
         private void addFlashPlayer()
@@ -321,7 +322,7 @@ namespace Catalogo
                 Global01.Conexion = null;
             }
 
-            MainMod.miEnd();
+            this.Close();
         }
 
         private void ChangeViewButton_Click(object sender, RoutedEventArgs e)
