@@ -24,17 +24,16 @@ namespace Catalogo
     /// </summary>
     public partial class mwViajantes : Window
     {
-  
         private Catalogo._productos.SearchFilter sf = null;
         private Catalogo._productos.GridViewFilter2 gv = null;
         private Catalogo._pedidos.ucPedido ped = null;
         private Catalogo._devoluciones.ucDevolucion dev = null;
         private Catalogo._recibos.ucRecibo rec = null;
         private Catalogo._interdeposito.ucInterDeposito IntDep = null;
+        private Catalogo._rendiciones.ucRendiciones RenD = null;        
         private Catalogo._movimientos.ucMovimientos mov = null;
         private Catalogo._novedades.ucNovedades nov = null;
-        private Catalogo._rendiciones.ucRendiciones RenD = null;
-
+        
         private bool _forcedToAutoHide;
 
         public mwViajantes()
@@ -46,7 +45,7 @@ namespace Catalogo
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
 
-            if (Global01.miSABOR <= Global01.TiposDeCatalogo.Cliente)
+            if (Global01.miSABOR <= Global01.TiposDeCatalogo.Cliente | !Global01.AppActiva)
             {
                 this.dcRecibos.IsCloseable = true;
                 this.dcRendiciones.IsCloseable = true;
@@ -58,15 +57,24 @@ namespace Catalogo
             }
 
             if (!Global01.AppActiva)
-            {
-                this.xNotaVentaAreaDockC.IsCloseable = true;
-                this.xNotaVentaAreaDockC.Close();
+            {       
+                this.xVtaDevDockP.Visibility = System.Windows.Visibility.Collapsed;
+                this.grSpliter1.Visibility = System.Windows.Visibility.Collapsed;
+                this.grPedidosDevolucionesArea.Visibility = System.Windows.Visibility.Collapsed;
+
                 this.dcEnviados.IsCloseable = true;
                 this.dcEnviados.Close();
                 this.dcInterDepositos.IsCloseable = true;
                 this.dcInterDepositos.Close();
-            }
 
+                this.appMenu.Visibility = System.Windows.Visibility.Collapsed;
+
+                //this.grProductosArea.Height = 400;
+                this.grProductsArea.Height = 310;
+                this.grProductsDetalle.Height = 90;
+                //this.productDetalle.Height = 90;
+                
+            }
             this.Closing += mwViajantes_Closing;
         }
 
@@ -235,7 +243,7 @@ namespace Catalogo
             gridViewControl.Name = "GridViewProductos";
 
             host.Child = gridViewControl;
-            this.productsArea.Children.Add(host);
+            this.grProductsArea.Children.Add(host);
 
             return gridViewControl;
         }
@@ -261,6 +269,7 @@ namespace Catalogo
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {
+
             if (Global01.miSABOR >= Global01.TiposDeCatalogo.Viajante)
             {
                 this.header.Height = 26;
@@ -339,8 +348,7 @@ namespace Catalogo
             {
                 try
                 {
-                    if (System.Windows.Forms.MessageBox.Show("Saliendo del Catálogo... ¿Está seguro?", "Cerrando la Aplicación", System.Windows.Forms.MessageBoxButtons.YesNo)
-                        == System.Windows.Forms.DialogResult.No)
+                    if (System.Windows.Forms.MessageBox.Show("Saliendo del Catálogo... ¿Está seguro?", "Cerrando la Aplicación", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
                     {
                         e.Cancel = true;
                         return;
