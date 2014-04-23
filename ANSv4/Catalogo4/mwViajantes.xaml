@@ -20,17 +20,17 @@
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <Grid Name="header" Visibility="Visible" Grid.Row="0">
+            <Grid x:Name="header" Visibility="Visible" Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="170" />
                 </Grid.ColumnDefinitions>
-                <Grid Name="LeftBanner" HorizontalAlignment="Left" Grid.Column="0">
-                    <Image Name="topLogo" VerticalAlignment="Bottom" Source="recursos/logo.png" Margin="0,1,1,0"/>
+                <Grid x:Name="LeftBanner" HorizontalAlignment="Left" Grid.Column="0">
+                    <Image x:Name="topLogo" VerticalAlignment="Bottom" Source="recursos/logo.png" Margin="0,1,1,0"/>
                 </Grid>
-                <Grid Name="topBanner"  Grid.Column="1"/>
-                <Grid Name="RightBanner" HorizontalAlignment="Right" Grid.Column="2">
+                <Grid x:Name="topBanner"  Grid.Column="1"/>
+                <Grid x:Name="RightBanner" HorizontalAlignment="Right" Grid.Column="2">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <Button Content="2" BorderBrush="White" x:Name="ChangeViewButton"
                         FontFamily="Webdings" FontSize="12" Width="25" Height="25"
@@ -114,13 +114,13 @@
                 </Grid>
             </Grid>
 
-            <ad:DockingManager x:Name="dockManager" Grid.Row="1" IsAnimationEnabled="False" >
+            <ad:DockingManager Name="dockManager" Grid.Row="1" IsAnimationEnabled="False" >
                 <ad:ResizingPanel Orientation="Vertical">
                     <ad:ResizingPanel Orientation="Horizontal">
                         <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="5" SelectionChanged="DocumentPane_SelectionChanged">
 
-                            <ad:DocumentContent Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
-                                <Grid Name="grProductos">
+                            <ad:DocumentContent Name="dcProductos" Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
+                                <Grid x:Name="grProductos">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30" />
                                         <RowDefinition Height="*"/>
@@ -128,29 +128,29 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <Grid x:Name="searchArea" Grid.Row="0"  />
-                                    <Grid Grid.Row="1"  >
+                                    <Grid x:Name="grProductosArea" Grid.Row="1"  >
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="90"/>
                                         </Grid.RowDefinitions>
-                                        <Grid x:Name="productsArea" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0"/>
-                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1">
-                                            <_productos:DetalleProducto x:Name="productDetalle"/>
+                                        <Grid x:Name="grProductsArea" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   Grid.Row="0"/>
+                                        <Grid x:Name="grProductsDetalle" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="1" Visibility="Visible">
+                                            <_productos:DetalleProducto x:Name="productDetalle" Visibility="Visible" />
                                         </Grid>
                                     </Grid>
-                                    <GridSplitter Grid.Row="2" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch"/>
-                                    <Grid x:Name="PedidosDevolucionesArea"   Grid.Row="3">
-                                        <ad:DocumentPane x:Name="xVtaDevDockP" SelectedIndex="0" ad:ResizingPanel.ResizeHeight="250">
-                                            <ad:DockableContent Title="Nota de Venta" x:Name="xNotaVentaAreaDockC" IsCloseable="False">
-                                                <Grid Name="grNotaVenta">
+                                    <GridSplitter x:Name="grSpliter1" Grid.Row="2" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch" />
+                                    <Grid x:Name="grPedidosDevolucionesArea" Grid.Row="3">
+                                        <ad:DocumentPane Name="xVtaDevDockP" SelectedIndex="0" ad:ResizingPanel.ResizeHeight="250">
+                                            <ad:DockableContent Title="Nota de Venta" Name="xNotaVentaAreaDockC" IsCloseable="False">
+                                                <Grid x:Name="grNotaVenta">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition  Height="*"/>
                                                     </Grid.RowDefinitions>
                                                     <Grid x:Name="xNotaVentaArea" Grid.Row="0" />
                                                 </Grid>
                                             </ad:DockableContent>
-                                            <ad:DockableContent Title="Devoluciones" x:Name="xDevolucionesAreaDockC" IsCloseable="False">
-                                                <Grid Name="grDevoluciones">
+                                            <ad:DockableContent Title="Devoluciones" Name="xDevolucionesAreaDockC" IsCloseable="False">
+                                                <Grid x:Name="grDevoluciones">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition  Height="*"/>
                                                     </Grid.RowDefinitions>
@@ -161,9 +161,8 @@
                                     </Grid>
                                 </Grid>
                             </ad:DocumentContent>
-
-                            <ad:DocumentContent Title="Recibos" IsCloseable="False" IsFloatingAllowed="False">
-                                <Grid Name="grRecibos">
+                            <ad:DocumentContent Name="dcRecibos" Title="Recibos" IsCloseable="False" IsFloatingAllowed="False">
+                                <Grid x:Name="grRecibos">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
                                     </Grid.RowDefinitions>
@@ -171,8 +170,8 @@
                                 </Grid>
                             </ad:DocumentContent>
 
-                            <ad:DocumentContent Title="Rendición de Recibos">
-                                <Grid Name="grRendiciones">
+                            <ad:DocumentContent Name="dcRendiciones" Title="Rendición de Recibos" IsCloseable="False" IsFloatingAllowed="False">
+                                <Grid x:Name="grRendiciones">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
                                     </Grid.RowDefinitions>
@@ -180,8 +179,8 @@
                                 </Grid>
                             </ad:DocumentContent>
 
-                            <ad:DocumentContent Title="Inter-Depósitos" IsCloseable="False" IsFloatingAllowed="False">
-                                <Grid Name="grInterDepositos">
+                            <ad:DocumentContent Name="dcInterDepositos" Title="Inter-Depósitos" IsCloseable="False" IsFloatingAllowed="False">
+                                <Grid x:Name="grInterDepositos">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
                                     </Grid.RowDefinitions>
@@ -189,8 +188,8 @@
                                 </Grid>
                             </ad:DocumentContent>
 
-                            <ad:DocumentContent Title="Bandeja de Enviados" IsCloseable="False" IsFloatingAllowed="False">
-                                <Grid Name="grMovimientos">
+                            <ad:DocumentContent Name="dcEnviados" Title="Bandeja de Enviados" IsCloseable="False" IsFloatingAllowed="False">
+                                <Grid x:Name="grMovimientos">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
                                     </Grid.RowDefinitions>
@@ -198,8 +197,8 @@
                                 </Grid>
                             </ad:DocumentContent>
 
-                            <ad:DocumentContent Title="Novedades en Línea" IsCloseable="False" IsFloatingAllowed="False">
-                                <Grid Name="grNovedades">
+                            <ad:DocumentContent Name="dcNovedades" Title="Novedades en Línea" IsCloseable="False" IsFloatingAllowed="False">
+                                <Grid x:Name="grNovedades">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
                                     </Grid.RowDefinitions>
@@ -208,10 +207,10 @@
                             </ad:DocumentContent>
                         </ad:DocumentPane>
 
-                        <ad:DockablePane ad:ResizingPanel.ResizeWidth="150"  ShowHeader="True" >
-                            <ad:DockableContent x:Name="xContentMenu" Title="Menú"  DockableStyle="AutoHide" IsCloseable="False" >
-                                <Menu>
-                                    <MenuItem Header="Sitio web de a.n.s." Click="xMenu1_web" Margin="0,20,0,0"/>
+                        <ad:DockablePane ad:ResizingPanel.ResizeWidth="150"  ShowHeader="True">
+                            <ad:DockableContent Name="xContentMenu" Title="Menú"  DockableStyle="AutoHide" IsCloseable="False" >
+                                <Menu x:Name="appMenu">
+                                    <MenuItem Header="Sitio web de ANS" Click="xMenu1_web" Margin="0,20,0,0"/>
                                     <MenuItem Header="Revista Dígital" Click="xMenu1_revista"/>
                                     <MenuItem Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
                                     <MenuItem Header="Configuración Aplic." Click="xMenu1_AppConfig"/>
@@ -224,13 +223,11 @@
             </ad:DockingManager>
 
             <StatusBar Grid.Row="2">
-                <StatusBarItem Name="iSB2" Content="Catálogo Dígital de Productos - v4.0" HorizontalAlignment="Left" Margin="5,0,0,0" />
-                <StatusBarItem Name="iSB1" Content="2014 © Todos los derechos reservados por Auto Náutica Sur S.R.L." HorizontalAlignment="Right" Margin="5,0" />
+                <StatusBarItem x:Name="iSB2" Content="Catálogo Dígital de Productos - v4.0" HorizontalAlignment="Left" Margin="5,0,0,0" />
+                <StatusBarItem x:Name="iSB1" Content="2014 © Todos los derechos reservados por Auto Náutica Sur S.R.L." HorizontalAlignment="Right" Margin="5,0" />
             </StatusBar>
         </Grid>
 
     </Border>
-
-
 
 </Window>

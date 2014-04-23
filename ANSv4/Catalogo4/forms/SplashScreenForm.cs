@@ -37,7 +37,8 @@ namespace Catalogo.varios
             //this.label1.BackColor = Color.Transparent;
             //this.pictureBox1.BackColor = Color.Transparent;
             //label1.ForeColor = Color.Green;
-
+            label1.Dock = DockStyle.Bottom;
+            
             //this.progressBar1.Parent = this.pictureBox1;
             //this.progressBar1.BackColor = Color.Transparent;
 
@@ -58,6 +59,7 @@ namespace Catalogo.varios
                 BeginInvoke(new SplashShowCloseDelegate(ShowSplashScreen));
                 return;
             }
+
             this.Show();
             Application.Run(this);
         }
@@ -133,7 +135,6 @@ namespace Catalogo.varios
                     break;
             }
             label1.Text = Text;
-
         }
 
         /// <summary>
@@ -158,6 +159,7 @@ namespace Catalogo.varios
 
             if (dato.progress1.second != -1)
             {
+                label1.Dock = DockStyle.None;
                 progressBar1.Show();
                 progressBar1.Minimum = 0;
                 progressBar1.Maximum = 100;

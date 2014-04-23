@@ -47,14 +47,14 @@
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Enabled = false;
             this.pictureBox1.Image = global::Catalogo.Properties.Resources.Nuevo_logo_Auto_nautica_original;
             this.pictureBox1.Location = new System.Drawing.Point(2, 2);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 35);
-            this.pictureBox1.Size = new System.Drawing.Size(436, 286);
+            this.pictureBox1.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.pictureBox1.Size = new System.Drawing.Size(436, 153);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -70,7 +70,7 @@
             this.PnlFondoRojo.Location = new System.Drawing.Point(0, 0);
             this.PnlFondoRojo.Name = "PnlFondoRojo";
             this.PnlFondoRojo.Padding = new System.Windows.Forms.Padding(2);
-            this.PnlFondoRojo.Size = new System.Drawing.Size(440, 290);
+            this.PnlFondoRojo.Size = new System.Drawing.Size(440, 227);
             this.PnlFondoRojo.TabIndex = 5;
             this.PnlFondoRojo.UseWaitCursor = true;
             // 
@@ -83,7 +83,7 @@
             this.PnlBottom.Controls.Add(this.progressBar2);
             this.PnlBottom.Controls.Add(this.progressBar1);
             this.PnlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PnlBottom.Location = new System.Drawing.Point(2, 214);
+            this.PnlBottom.Location = new System.Drawing.Point(2, 151);
             this.PnlBottom.Name = "PnlBottom";
             this.PnlBottom.Size = new System.Drawing.Size(436, 74);
             this.PnlBottom.TabIndex = 3;
@@ -106,7 +106,7 @@
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Red;
             this.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCancel.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.btnCancel.FlatAppearance.BorderSize = 2;
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -157,7 +157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(440, 290);
+            this.ClientSize = new System.Drawing.Size(440, 227);
             this.Controls.Add(this.PnlFondoRojo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

@@ -7,15 +7,17 @@ namespace Catalogo.util
 {
     public static class SimplePing
     {
-        public static bool ping(string ipAddress, int timeOut, int reintentos)
+        public static bool ping(string ipAddress, int timeOut, byte reintentos, byte tipo = 0)
         {
+            //tipo<>0 para verificar la existencia de un archivo en la nube
+
             bool sResultado = false;
 
-            if (ipAddress.ToLower().IndexOf("www", 0) != -1 | ipAddress.ToLower().IndexOf("imagenes", 0) != -1 | ipAddress.ToLower().IndexOf("novedades", 0) != -1)
+            if (ipAddress.ToLower().IndexOf("www", 0) != -1 | ipAddress.ToLower().IndexOf("imagenes", 0) != -1 | ipAddress.ToLower().IndexOf("novedades", 0) != -1 | tipo != 0)
             {
                 sResultado = ping3(ipAddress, timeOut, reintentos);
             }
-            else
+            else if (tipo == 0 )
             {
                 sResultado = ping2(ipAddress, timeOut);
             }

@@ -31,7 +31,21 @@ namespace Catalogo.varios
         {
             string wArchivoTxt = "update3Z1";
 
+            if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente)
+            {
+                wArchivoTxt = ((Global01.ListaPrecio==2) ? "update2Z2" : "update2Z1"); 
+            }
+            else if (Global01.miSABOR == Global01.TiposDeCatalogo.Viajante)
+            {
+                wArchivoTxt = ((Global01.ListaPrecio==2) ? "update3Z2" : "update3Z1"); 
+            }
+            else if (Global01.miSABOR == Global01.TiposDeCatalogo.Supervisor)
+            {
+                wArchivoTxt = ((Global01.ListaPrecio==2) ? "update4Z2" : "update4Z1"); 
+            }
+
             vcUPDATECTL1.configFileURL = "http://" + Url + "/descargas320/" + wArchivoTxt + ".txt";
+
         }
 
         private void  vcUPDATECTL1_CloseRequest(string DownloadedFile)
@@ -80,7 +94,7 @@ namespace Catalogo.varios
     
         }
 
-        private void vcUPDATECTL1_ConexionError(short Estado)
+        private void vcUPDATECTL1_ConexionError(byte Estado)
         {
             Global01.xError = true;
     

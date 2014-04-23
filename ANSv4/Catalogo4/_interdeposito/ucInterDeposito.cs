@@ -36,7 +36,8 @@ namespace Catalogo._interdeposito
             }
             else
             {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString(), "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
+                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
+                if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedValue = Global01.NroUsuario;
             }
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref bdBancoCbo, "tblBancosDepositosCtas", "BancoCta", "ID", "Activo=0", "Format([ID],'000') & ' - ' & tblBancosDepositosCtas.Nombre", true, false, "Format([ID],'000') & ' - ' & tblBancosDepositosCtas.Nombre AS BancoCta, ID");            
         
@@ -235,7 +236,7 @@ namespace Catalogo._interdeposito
 
                         rTabsInterDeposito.Visible = false;
                         rTabsInterDeposito.SelectedIndex = 1;
-                        cboCliente.SelectedIndex = 0;
+                        if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
                         CerrarInterDeposito();                                                
                     }
                 }

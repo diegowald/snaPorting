@@ -304,7 +304,7 @@ namespace Catalogo._novedades
                 flash.play();
             }
 
-            if (FLeido.Length == 0)
+            if (FLeido.Trim().Length == 0)
             {
                 marcarComoLeido(id);
             }

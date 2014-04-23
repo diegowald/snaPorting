@@ -63,9 +63,9 @@
             this.Semaforo.MinimumWidth = 4;
             this.Semaforo.Name = "Semaforo";
             this.Semaforo.ReadOnly = true;
-            this.Semaforo.Text = "ver existencia";
+            this.Semaforo.Text = "E";
             this.Semaforo.ToolTipText = "ver existencia";
-            this.Semaforo.Width = 4;
+            this.Semaforo.Width = 30;
             // 
             // GridViewFilter2
             // 

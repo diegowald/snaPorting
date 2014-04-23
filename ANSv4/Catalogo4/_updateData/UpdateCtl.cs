@@ -24,6 +24,7 @@ namespace Catalogo.varios
         private string outFile;
         private string successFile;
         private long maxBytes;
+        private string downloadingFile;
 
         public delegate void CloseRequestHandler(string downloadedFile);
         public delegate void ConexionErrorHandler(byte estado);
@@ -121,14 +122,20 @@ namespace Catalogo.varios
         //    }
         //}
 
-        private string downloadingFile;
+        
         private void BeginDownload(string URL, string saveFile)
         {
-            downloadingFile = saveFile;
-            System.Net.WebClient client = new System.Net.WebClient();
-            client.DownloadProgressChanged += client_DownloadProgressChanged;
-            client.DownloadFileCompleted+=client_DownloadFileCompleted;
-            client.DownloadFileAsync(new Uri(URL), saveFile);
+            bool Conectado;
+
+            Conectado = util.SimplePing.ping(URL, 5000, 0, 1);
+            if (Conectado)
+            {
+                downloadingFile = saveFile;
+                System.Net.WebClient client = new System.Net.WebClient();
+                client.DownloadProgressChanged += client_DownloadProgressChanged;
+                client.DownloadFileCompleted += client_DownloadFileCompleted;
+                client.DownloadFileAsync(new Uri(URL), saveFile);
+            }
         }
 
         private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)

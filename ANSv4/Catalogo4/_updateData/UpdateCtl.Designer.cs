@@ -52,7 +52,7 @@
             this.fraFRAME1.Controls.Add(this.lblNo);
             this.fraFRAME1.Controls.Add(this.lblStep2);
             this.fraFRAME1.Controls.Add(this.lblSI);
-            this.fraFRAME1.Location = new System.Drawing.Point(13, 48);
+            this.fraFRAME1.Location = new System.Drawing.Point(10, 3);
             this.fraFRAME1.Name = "fraFRAME1";
             this.fraFRAME1.Size = new System.Drawing.Size(410, 140);
             this.fraFRAME1.TabIndex = 0;
@@ -107,13 +107,13 @@
             // cmdCancel
             // 
             this.cmdCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.cmdCancel.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.cmdCancel.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.cmdCancel.FlatAppearance.BorderSize = 2;
             this.cmdCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.cmdCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdCancel.ForeColor = System.Drawing.Color.White;
-            this.cmdCancel.Location = new System.Drawing.Point(264, 194);
+            this.cmdCancel.Location = new System.Drawing.Point(264, 149);
             this.cmdCancel.Name = "cmdCancel";
             this.cmdCancel.Size = new System.Drawing.Size(75, 27);
             this.cmdCancel.TabIndex = 1;
@@ -124,13 +124,13 @@
             // cmdNext
             // 
             this.cmdNext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(28)))), ((int)(((byte)(25)))));
-            this.cmdNext.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.cmdNext.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.cmdNext.FlatAppearance.BorderSize = 2;
             this.cmdNext.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
             this.cmdNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmdNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdNext.ForeColor = System.Drawing.Color.White;
-            this.cmdNext.Location = new System.Drawing.Point(344, 194);
+            this.cmdNext.Location = new System.Drawing.Point(344, 149);
             this.cmdNext.Name = "cmdNext";
             this.cmdNext.Size = new System.Drawing.Size(75, 27);
             this.cmdNext.TabIndex = 2;
@@ -143,7 +143,7 @@
             this.fraFRAME2.Controls.Add(this.progressBar1);
             this.fraFRAME2.Controls.Add(this.lblProgressUpdate);
             this.fraFRAME2.Controls.Add(this.lblUpdate);
-            this.fraFRAME2.Location = new System.Drawing.Point(13, 48);
+            this.fraFRAME2.Location = new System.Drawing.Point(10, 3);
             this.fraFRAME2.Name = "fraFRAME2";
             this.fraFRAME2.Size = new System.Drawing.Size(410, 140);
             this.fraFRAME2.TabIndex = 3;
@@ -186,7 +186,7 @@
             this.Controls.Add(this.fraFRAME2);
             this.Controls.Add(this.fraFRAME1);
             this.Name = "UpdateCtl";
-            this.Size = new System.Drawing.Size(430, 260);
+            this.Size = new System.Drawing.Size(430, 180);
             this.fraFRAME1.ResumeLayout(false);
             this.fraFRAME1.PerformLayout();
             this.fraFRAME2.ResumeLayout(false);

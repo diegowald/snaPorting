@@ -23,7 +23,9 @@ namespace Catalogo.varios
            this.errormessage.BackColor = Color.Transparent;
            this.errormessage.ForeColor = Color.Red;
 
-            TodoBien = false;
+           if (Global01.miSABOR >= Global01.TiposDeCatalogo.Viajante) this.chkActualizarClientes.Visible = true;
+
+           TodoBien = false;
         }
 
         private void fLogin_Load(object sender, EventArgs e)
@@ -39,7 +41,6 @@ namespace Catalogo.varios
                 btnIngresar.Enabled = true;
                 chkActualizarClientes.Enabled = true;
             }
-
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
@@ -79,7 +80,7 @@ namespace Catalogo.varios
                 txtPIN.Visible = false;
                 txtPIN.Enabled = false;
                 lblPIN.Text = "Reingresar PIN";
-                btnNuevo.Text = "verificar";
+                btnNuevo.Text = "Verificar";
                 txtPIN2.Visible = true;
                 txtPIN2.Enabled = true;
                 txtPIN2.Focus();                
@@ -101,7 +102,8 @@ namespace Catalogo.varios
                     btnNuevo.Enabled = false;
                     Global01.pin = Codificar(txtPIN.Text);
                     Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE appConfig SET PIN='" + Codificar(txtPIN.Text.Trim().ToUpper()) + "'");
-                    MessageBox.Show("PIN generado con éxito!", "Atención", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    MessageBox.Show("PIN generado con éxito!", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    btnIngresar_Click(null,null); 
                 }
                 else 
                 {
@@ -110,12 +112,12 @@ namespace Catalogo.varios
                     txtPIN2.Visible = false;
                     txtPIN2.Enabled = false;
                     lblPIN.Text = "PIN";
-                    btnNuevo.Text = "generar";
+                    btnNuevo.Text = "Generar";
                     txtPIN.Visible = true;
                     txtPIN.Enabled = true;
                     txtPIN.Focus();
 
-                    MessageBox.Show("Error: Ingrese el PIN nuevamente!", "Atención", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    MessageBox.Show("Ingrese el PIN nuevamente!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
@@ -141,7 +143,6 @@ namespace Catalogo.varios
             }
             
             return s;
-
         }
 
     }

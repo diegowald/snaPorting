@@ -1,19 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using AvalonDock;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using AvalonDock;
 using Catalogo.Funciones.emitter_receiver;
-using System.Threading;
+
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading;
+//using System.Windows.Data;
+//using System.Windows.Documents;
+//using System.Windows.Media;
+//using System.Windows.Media.Imaging;
+//using System.Windows.Navigation;
+//using System.Windows.Shapes;
+
 
 namespace Catalogo
 {
@@ -22,26 +24,57 @@ namespace Catalogo
     /// </summary>
     public partial class mwViajantes : Window
     {
-  
         private Catalogo._productos.SearchFilter sf = null;
         private Catalogo._productos.GridViewFilter2 gv = null;
         private Catalogo._pedidos.ucPedido ped = null;
         private Catalogo._devoluciones.ucDevolucion dev = null;
         private Catalogo._recibos.ucRecibo rec = null;
         private Catalogo._interdeposito.ucInterDeposito IntDep = null;
+        private Catalogo._rendiciones.ucRendiciones RenD = null;        
         private Catalogo._movimientos.ucMovimientos mov = null;
         private Catalogo._novedades.ucNovedades nov = null;
-        private Catalogo._rendiciones.ucRendiciones RenD = null;
-
+        
         private bool _forcedToAutoHide;
 
         public mwViajantes()
         {
             this.Hide();
             InitializeComponent();            
+            
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
-            ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+            //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+
+            if (Global01.miSABOR <= Global01.TiposDeCatalogo.Cliente | !Global01.AppActiva)
+            {
+                this.dcRecibos.IsCloseable = true;
+                this.dcRendiciones.IsCloseable = true;
+                this.xDevolucionesAreaDockC.IsCloseable = true;
+
+                this.dcRecibos.Close();
+                this.dcRendiciones.Close();
+                this.xDevolucionesAreaDockC.Close();
+            }
+
+            if (!Global01.AppActiva)
+            {       
+                this.xVtaDevDockP.Visibility = System.Windows.Visibility.Collapsed;
+                this.grSpliter1.Visibility = System.Windows.Visibility.Collapsed;
+                this.grPedidosDevolucionesArea.Visibility = System.Windows.Visibility.Collapsed;
+
+                this.dcEnviados.IsCloseable = true;
+                this.dcEnviados.Close();
+                this.dcInterDepositos.IsCloseable = true;
+                this.dcInterDepositos.Close();
+
+                this.appMenu.Visibility = System.Windows.Visibility.Collapsed;
+
+                //this.grProductosArea.Height = 400;
+                this.grProductsArea.Height = 310;
+                this.grProductsDetalle.Height = 90;
+                //this.productDetalle.Height = 90;
+                
+            }
             this.Closing += mwViajantes_Closing;
         }
 
@@ -57,7 +90,7 @@ namespace Catalogo
             flash.Location = new System.Drawing.Point(0, 0);
             flash.Name = "flash";
 
-            flash.file = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\recursos\banner.swf";
+            flash.file =  Global01.AppPath  + "\\imagenes\\banner.swf";
 
             flash.play();
 
@@ -210,7 +243,7 @@ namespace Catalogo
             gridViewControl.Name = "GridViewProductos";
 
             host.Child = gridViewControl;
-            this.productsArea.Children.Add(host);
+            this.grProductsArea.Children.Add(host);
 
             return gridViewControl;
         }
@@ -236,7 +269,8 @@ namespace Catalogo
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {
-            if (Global01.miSABOR == Global01.TiposDeCatalogo.Viajante)
+
+            if (Global01.miSABOR >= Global01.TiposDeCatalogo.Viajante)
             {
                 this.header.Height = 26;
                 topRedesSociales.Visibility = System.Windows.Visibility.Hidden;
@@ -254,7 +288,6 @@ namespace Catalogo
 
             this.Show();
             Catalogo.varios.SplashScreen.CloseSplashScreen();
-
         }
 
         private void dockManager_MouseDown(object sender, MouseButtonEventArgs e)
@@ -270,13 +303,6 @@ namespace Catalogo
         {
             this.xContentMenu.ToggleAutoHide();
             _forcedToAutoHide = true;
-
-            //Catalogo.util.FlashWindow fwFlash = new Catalogo.util.FlashWindow();
-            //if (WindowState.) //(this.WindowState == System.Windows.Forms.FormWindowState.Minimized)
-            //{
-            //    // Flash minimized window 
-            //    fwFlash.FlashWindow1(this, Catalogo.util.FlashWindow.enuFlashOptions.FLASHW_ALL, 9999);
-            //}
         }
    
         private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
@@ -322,8 +348,7 @@ namespace Catalogo
             {
                 try
                 {
-                    if (System.Windows.Forms.MessageBox.Show("Saliendo del Catálogo... ¿Está seguro?", "Cerrando la Aplicación", System.Windows.Forms.MessageBoxButtons.YesNo)
-                        == System.Windows.Forms.DialogResult.No)
+                    if (System.Windows.Forms.MessageBox.Show("Saliendo del Catálogo... ¿Está seguro?", "Cerrando la Aplicación", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
                     {
                         e.Cancel = true;
                         return;
@@ -358,7 +383,6 @@ namespace Catalogo
                     {
                         case System.Windows.Forms.DialogResult.Yes:
                             {
-
                                 bool Conectado = util.SimplePing.ping(Global01.URL_ANS, 5000, 0);
                                 if (!Conectado)
                                 {
@@ -397,8 +421,7 @@ namespace Catalogo
                 }
             }
 
-            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Programa,
-                _auditor.Auditor.AccionesAuditadas.TERMINA, "se cierra la aplicacion");
+            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Programa, _auditor.Auditor.AccionesAuditadas.TERMINA, "se cierra la aplicacion");
         }
 
         private void xMenu1_web(object sender, RoutedEventArgs e)
