@@ -33,7 +33,7 @@ namespace Catalogo
             load_header(); 
      
             //chequea comandos y mensajes desde el servidor
-            if (Funciones.modINIs.ReadINI("DATOS", "INFO", "0") == "1") //Or vg.RecienRegistrado Or vg.NoConn
+            if (Funciones.modINIs.ReadINI("DATOS", "INFO", "1") == "1") //Or vg.RecienRegistrado Or vg.NoConn
             {
                 util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig);
                 updater.run();
@@ -50,7 +50,6 @@ namespace Catalogo
 
                     //util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateNovedadesCatalogo);
                     //updater.run();
-
                 }
 
                 update_productos();
@@ -91,15 +90,17 @@ namespace Catalogo
                     { 
                         Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString(); 
                     }
+
                     Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
                     Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
+
+                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
+                       util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+                       util.BackgroundTasks.Updater.UpdateType.ActivarApp);
+                    updater.run();
                 }
             }
-
-            util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
-               util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
-               util.BackgroundTasks.Updater.UpdateType.ActivarApp);
-            updater.run();
+            dr = null;
         }
 
         private static void load_header()
@@ -152,10 +153,10 @@ namespace Catalogo
                 Global01.RazonSocial = DBNull.Value.Equals(dr["RazonSocial"]) ? "" : dr["RazonSocial"].ToString();
                 Global01.ApellidoNombre = DBNull.Value.Equals(dr["ApellidoNombre"]) ? "" : dr["ApellidoNombre"].ToString();
                 Global01.pin  = DBNull.Value.Equals(dr["PIN"]) ? "" : dr["PIN"].ToString();
+                Global01.EmailTO = DBNull.Value.Equals(dr["Email"]) ? "" : dr["Email"].ToString();
 
                 //Global01.Domicilio = DBNull.Value.Equals(dr["Domicilio"]) ? "" : dr["Domicilio"];
                 //Global01.Ciudad = DBNull.Value.Equals(dr["Ciudad"]) ? "" : dr["Ciudad"];
-                //Global01.Email = DBNull.Value.Equals(dr["Email"]) ? "" : dr["Email"];
 
                 valida_header();
 
@@ -209,12 +210,10 @@ namespace Catalogo
         public static void update_productos()
         {
             Catalogo.varios.fDataUpdate fu = new Catalogo.varios.fDataUpdate();
-
-        VadeNuevo:
             fu.SoloCatalogo = Convert.ToBoolean(Funciones.modINIs.ReadINI("DATOS", "SoloCatalogo", "false"));
+        VadeNuevo:
             fu.Url = Global01.URL_ANS;
             fu.ShowDialog();
-            fu.Dispose();
 
             if (Global01.xError)
             {
@@ -226,6 +225,7 @@ namespace Catalogo
                     goto VadeNuevo;
                 }
             }
+            fu.Dispose();
             fu = null;
         }
 
@@ -233,11 +233,10 @@ namespace Catalogo
         {
             Catalogo.varios.fLogin f = new Catalogo.varios.fLogin();
             f.ShowDialog();
+            f.Dispose();
 
-            if (!f.TodoBien)
-            {
-                miEnd();
-            }
+            if (!f.TodoBien) miEnd();
+
         }
 
         private static void valida_appRegistro()
@@ -245,8 +244,8 @@ namespace Catalogo
  
             //- Registro y activación -------------XX
         AcaRegistro:
-            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            if (false)
+            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            //if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -311,8 +310,8 @@ namespace Catalogo
             {
                 // registrada y activa
                 Global01.AppActiva = true;
-                ///// BORRAR ESTA LINEA!!!!!!!
-                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                //-------- BORRAR ESTA LINEA!!!!!!! ----------------------
+                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
             }
             //--------------------------------------XX
         }
@@ -364,6 +363,51 @@ namespace Catalogo
 
         }
 
+        public static void miEnd()
+        {
+            System.Environment.Exit(0);
+            Application.Exit();
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+        }
+
+        private static bool PrevInstance()
+        {
+            //get the name of current process, i,e the process 
+            //name of this current application
+
+            string currPrsName = Process.GetCurrentProcess().ProcessName;
+
+            //Get the name of all processes having the 
+            //same name as this process name 
+            Process[] allProcessWithThisName = Process.GetProcessesByName(currPrsName);
+
+            //if more than one process is running return true.
+            //which means already previous instance of the application 
+            //is running
+            if (allProcessWithThisName.Length > 1)
+            {
+                return true; // Yes Previous Instance Exist
+            }
+            else
+            {
+                return false; //No Prev Instance Running
+            }
+
+            //Alternate way using Mutex
+            //using System.Threading;
+            //bool appNewInstance;
+
+            //Mutex m = new Mutex(true, "ApplicationName", out appNewInstance);
+
+            //if (!appNewInstance)
+            //{
+            //    // Already Once Instance Running
+            //    MessageBox.Show("One Instance Of This App Allowed.");
+            //    return;
+            //}
+            //GC.KeepAlive(m);
+        }
+
         public static void inicializaGlobales()
         {
 
@@ -372,7 +416,6 @@ namespace Catalogo
             //#else
             Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
             //#endif            
-           
 
             Global01.NoConn = false;
             Global01.VersionApp = (int)(Global01.miSABOR) + ".3.2.0";
@@ -383,33 +426,33 @@ namespace Catalogo
         vadenuevo:
             if (!System.IO.File.Exists(Environment.GetEnvironmentVariable("windir") + "\\locans.log"))
             {
-                Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", "C:\\Catalogo ANS"); 
+                Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", "C:\\Catalogo ANS");
             }
             Global01.AppPath = Funciones.modINIs.INIRead(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", "C:\\Catalogo ANS");
-          
+
             Global01.PathAcrobat = Funciones.modINIs.ReadINI("Datos", "PathAcrobat", "");
             Global01.FileBak = "CopiaCata_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mdb";
 
             Global01.cstring = Global01.AppPath + "\\datos\\ans.mdb";
             Global01.dstring = Global01.AppPath + "\\datos\\catalogo.mdb";
             Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
-   
+
             if (!System.IO.File.Exists(Global01.dstring))
-            {             
+            {
                 OpenFileDialog openFileDialog1 = new OpenFileDialog();
                 FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-                
+
                 folderBrowserDialog1.Description = "Seleccione la ubicación donde está instalado el Catálogo de Auto Náutica Sur.";
                 folderBrowserDialog1.ShowNewFolderButton = false;
                 folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
                 DialogResult result = folderBrowserDialog1.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", folderBrowserDialog1.SelectedPath.ToString()); 
+                    Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", folderBrowserDialog1.SelectedPath.ToString());
                 }
                 else if (result == DialogResult.Cancel)
                 {
-                   miEnd();
+                    miEnd();
                 }
                 goto vadenuevo;
             }
@@ -455,51 +498,6 @@ namespace Catalogo
             Global01.EmailTO = "";
             Global01.EmailBody = "";
             Global01.EmailAsunto = "";
-        }
-
-        public static void miEnd()
-        {
-            System.Environment.Exit(0);
-            Application.Exit();
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
-        }
-
-        private static bool PrevInstance()
-        {
-            //get the name of current process, i,e the process 
-            //name of this current application
-
-            string currPrsName = Process.GetCurrentProcess().ProcessName;
-
-            //Get the name of all processes having the 
-            //same name as this process name 
-            Process[] allProcessWithThisName = Process.GetProcessesByName(currPrsName);
-
-            //if more than one process is running return true.
-            //which means already previous instance of the application 
-            //is running
-            if (allProcessWithThisName.Length > 1)
-            {
-                return true; // Yes Previous Instance Exist
-            }
-            else
-            {
-                return false; //No Prev Instance Running
-            }
-
-            //Alternate way using Mutex
-            //using System.Threading;
-            //bool appNewInstance;
-
-            //Mutex m = new Mutex(true, "ApplicationName", out appNewInstance);
-
-            //if (!appNewInstance)
-            //{
-            //    // Already Once Instance Running
-            //    MessageBox.Show("One Instance Of This App Allowed.");
-            //    return;
-            //}
-            //GC.KeepAlive(m);
         }
 
     }

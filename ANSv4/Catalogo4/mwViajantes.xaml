@@ -119,7 +119,7 @@
                     <ad:ResizingPanel Orientation="Horizontal">
                         <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="5" SelectionChanged="DocumentPane_SelectionChanged">
 
-                            <ad:DocumentContent Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
+                            <ad:DocumentContent x:Name="dcProductos" Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
                                 <Grid Name="grProductos">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="30" />
@@ -161,8 +161,7 @@
                                     </Grid>
                                 </Grid>
                             </ad:DocumentContent>
-
-                            <ad:DocumentContent Title="Recibos" IsCloseable="False" IsFloatingAllowed="False">
+                            <ad:DocumentContent x:Name="dcRecibos" Title="Recibos" IsCloseable="False" IsFloatingAllowed="False">
                                 <Grid Name="grRecibos">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
@@ -171,7 +170,7 @@
                                 </Grid>
                             </ad:DocumentContent>
 
-                            <ad:DocumentContent Title="Rendición de Recibos">
+                            <ad:DocumentContent x:Name="dcRendiciones" Title="Rendición de Recibos" IsCloseable="False" IsFloatingAllowed="False">
                                 <Grid Name="grRendiciones">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
@@ -180,7 +179,7 @@
                                 </Grid>
                             </ad:DocumentContent>
 
-                            <ad:DocumentContent Title="Inter-Depósitos" IsCloseable="False" IsFloatingAllowed="False">
+                            <ad:DocumentContent x:Name="dcInterDepositos" Title="Inter-Depósitos" IsCloseable="False" IsFloatingAllowed="False">
                                 <Grid Name="grInterDepositos">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
@@ -189,7 +188,7 @@
                                 </Grid>
                             </ad:DocumentContent>
 
-                            <ad:DocumentContent Title="Bandeja de Enviados" IsCloseable="False" IsFloatingAllowed="False">
+                            <ad:DocumentContent x:Name="dcEnviados" Title="Bandeja de Enviados" IsCloseable="False" IsFloatingAllowed="False">
                                 <Grid Name="grMovimientos">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
@@ -198,7 +197,7 @@
                                 </Grid>
                             </ad:DocumentContent>
 
-                            <ad:DocumentContent Title="Novedades en Línea" IsCloseable="False" IsFloatingAllowed="False">
+                            <ad:DocumentContent x:Name="dcNovedades" Title="Novedades en Línea" IsCloseable="False" IsFloatingAllowed="False">
                                 <Grid Name="grNovedades">
                                     <Grid.RowDefinitions>
                                         <RowDefinition  Height="*"/>
@@ -208,10 +207,10 @@
                             </ad:DocumentContent>
                         </ad:DocumentPane>
 
-                        <ad:DockablePane ad:ResizingPanel.ResizeWidth="150"  ShowHeader="True" >
+                        <ad:DockablePane ad:ResizingPanel.ResizeWidth="150"  ShowHeader="True">
                             <ad:DockableContent x:Name="xContentMenu" Title="Menú"  DockableStyle="AutoHide" IsCloseable="False" >
                                 <Menu>
-                                    <MenuItem Header="Sitio web de a.n.s." Click="xMenu1_web" Margin="0,20,0,0"/>
+                                    <MenuItem Header="Sitio web de ANS" Click="xMenu1_web" Margin="0,20,0,0"/>
                                     <MenuItem Header="Revista Dígital" Click="xMenu1_revista"/>
                                     <MenuItem Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
                                     <MenuItem Header="Configuración Aplic." Click="xMenu1_AppConfig"/>

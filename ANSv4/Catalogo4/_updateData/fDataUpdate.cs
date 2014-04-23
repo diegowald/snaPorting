@@ -31,7 +31,31 @@ namespace Catalogo.varios
         {
             string wArchivoTxt = "update3Z1";
 
-            vcUPDATECTL1.configFileURL = "http://" + Url + "/descargas320/" + wArchivoTxt + ".txt";
+            if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente)
+            {
+                wArchivoTxt = ((Global01.ListaPrecio==2) ? "update2Z2" : "update2Z1"); 
+            }
+            else if (Global01.miSABOR == Global01.TiposDeCatalogo.Viajante)
+            {
+                wArchivoTxt = ((Global01.ListaPrecio==2) ? "update3Z2" : "update3Z1"); 
+            }
+            else if (Global01.miSABOR == Global01.TiposDeCatalogo.Supervisor)
+            {
+                wArchivoTxt = ((Global01.ListaPrecio==2) ? "update4Z2" : "update4Z1"); 
+            }
+
+            string ipAddress = "http://" + Url + "/descargas320/" + wArchivoTxt + ".txt";            
+            bool Conectado;
+
+            Conectado = util.SimplePing.ping(ipAddress, 1000, 0, 1);
+            if (!Conectado)
+            {
+                vcUPDATECTL1_ConexionError(-1);
+            }
+            else
+            {
+                vcUPDATECTL1.configFileURL = ipAddress;
+            }
         }
 
         private void  vcUPDATECTL1_CloseRequest(string DownloadedFile)
