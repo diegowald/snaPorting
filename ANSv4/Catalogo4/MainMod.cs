@@ -26,7 +26,7 @@ namespace Catalogo
             Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
 
             valida_appRegistro();
-
+            
             // Carga tabla de Productos en Segundo Plano
             preload.Preloader.instance.refresh();
 
@@ -40,6 +40,9 @@ namespace Catalogo
             }
 
             valida_appLogin();
+
+           // Funciones.oleDbFunciones.Comando(Global01.Conexion, "DELETE FROM ansNovedades");
+           // Funciones.oleDbFunciones.Comando(Global01.Conexion, "DELETE FROM tblNovedadLeido");
 
             if (Global01.AppActiva)
             {
@@ -423,9 +426,9 @@ namespace Catalogo
         {
 
             //#if SaborViajante
-            //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+            Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
             //#else
-            Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+            //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
             //#endif            
 
             Global01.NoConn = false;

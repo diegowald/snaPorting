@@ -232,11 +232,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\CatalogoWS\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
     <Compile Include="Web References\ClientesNovedadesWs\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -521,6 +516,7 @@
     <EmbeddedResource Include="_recibos\ucRecibo.resx">
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Catalogo4_ClaveTemporal.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
@@ -536,11 +532,6 @@
     </None>
     <None Include="Web References\AuditWS\audit_v_304.wsdl" />
     <None Include="Web References\AuditWS\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\CatalogoWS\Info.wsdl" />
-    <None Include="Web References\CatalogoWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -771,17 +762,6 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Catalogo_VerExistenciaWS_VerExistencia</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.40.129/wsCatalogo4/Info.asmx%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\CatalogoWS\</RelPath>
-      <UpdateFromURL>http://192.168.40.129/wsCatalogo4/Info.asmx%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Catalogo_CatalogoWS_Info</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>

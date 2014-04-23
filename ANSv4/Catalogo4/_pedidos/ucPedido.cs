@@ -997,6 +997,7 @@ namespace Catalogo._pedidos
                     filtro);
 
             envio.run();
+            ObtenerMovimientos();
         }
 
     } //fin clase

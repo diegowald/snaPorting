@@ -8,7 +8,6 @@ namespace Catalogo.util.network
     internal class IPCache : Catalogo.util.BackgroundTasks.BackgroundTaskBase
     {
         private bool _conectado;
-
         private static IPCache _instance;
 
         public static IPCache instance
@@ -27,8 +26,8 @@ namespace Catalogo.util.network
         private IPCache(JOB_TYPE jobType)
             : base(jobType)
         {
-            _conectado = false;
             lockPing = new object();
+            _conectado = checkPing();
         }
 
         public override void execute()
@@ -36,14 +35,7 @@ namespace Catalogo.util.network
             while (true)
             {
                 util.errorHandling.ErrorLogger.LogMessage("Chequeando conexion");
-                if (checkPing())
-                {
-                    setConectado(true);
-                }
-                else
-                {
-                    setConectado(false);
-                }
+                setConectado(checkPing());
                 System.Threading.Thread.Sleep(1000 * 60); // 1 minuto por defecto
             }
         }
