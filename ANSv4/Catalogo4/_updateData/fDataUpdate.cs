@@ -44,18 +44,8 @@ namespace Catalogo.varios
                 wArchivoTxt = ((Global01.ListaPrecio==2) ? "update4Z2" : "update4Z1"); 
             }
 
-            string ipAddress = "http://" + Url + "/descargas320/" + wArchivoTxt + ".txt";            
-            bool Conectado;
+            vcUPDATECTL1.configFileURL = "http://" + Url + "/descargas320/" + wArchivoTxt + ".txt";
 
-            Conectado = util.SimplePing.ping(ipAddress, 1000, 0, 1);
-            if (!Conectado)
-            {
-                vcUPDATECTL1_ConexionError(-1);
-            }
-            else
-            {
-                vcUPDATECTL1.configFileURL = ipAddress;
-            }
         }
 
         private void  vcUPDATECTL1_CloseRequest(string DownloadedFile)
@@ -104,7 +94,7 @@ namespace Catalogo.varios
     
         }
 
-        private void vcUPDATECTL1_ConexionError(short Estado)
+        private void vcUPDATECTL1_ConexionError(byte Estado)
         {
             Global01.xError = true;
     

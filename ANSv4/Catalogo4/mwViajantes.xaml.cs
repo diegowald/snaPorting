@@ -90,7 +90,7 @@ namespace Catalogo
             flash.Location = new System.Drawing.Point(0, 0);
             flash.Name = "flash";
 
-            flash.file =  Global01.AppPath  + "\\imagenes\banner.swf";
+            flash.file =  Global01.AppPath  + "\\imagenes\\banner.swf";
 
             flash.play();
 
