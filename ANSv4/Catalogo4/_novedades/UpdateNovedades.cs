@@ -61,14 +61,13 @@ namespace Catalogo._novedades
 
         private void sincroNovedadesCompletada(ref bool cancel)
         {
-            //        On Error GoTo .ErrorForm.show()
 
-            if (util.network.IPCache.instance.conectado)
-            {
-                // conexion no valida.
-                cancel = true;
-                return;
-            }
+            //if (util.network.IPCache.instance.conectado)
+            //{
+            //    // conexion no valida.
+            //    cancel = true;
+            //    return;
+            //}
 
             //cliente.SincronizacionNovedadesCompletada(_MacAddress);
 

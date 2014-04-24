@@ -279,10 +279,11 @@
     </Compile>
     <Compile Include="_application\UpdateAppConfig.cs" />
     <Compile Include="_novedades\ChequeoNovedades.cs" />
+    <Compile Include="util\FileDownloader.cs" />
     <Compile Include="_novedades\Novedades.xaml.cs">
       <DependentUpon>Novedades.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
-    <Compile Include="util\FileDownloader.cs" />
     <Compile Include="_novedades\UpdateNovedades.cs" />
     <Compile Include="_pedidos\Pedido.cs" />
     <Compile Include="_pedidos\PedidoItem.cs" />
@@ -405,8 +406,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="_novedades\Novedades.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="_preferencias\CheckBoxINI.xaml">
       <SubType>Designer</SubType>

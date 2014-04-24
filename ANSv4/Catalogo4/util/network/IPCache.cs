@@ -76,7 +76,7 @@ namespace Catalogo.util.network
 
         private bool checkPing()
         {
-            return Catalogo.util.SimplePing.ping(Global01.IPPing, 1000, 0, Global01.TiposDePing.ICMP);
+            return Catalogo.util.SimplePing.ping(Global01.IPPing, 2000, 0, Global01.TiposDePing.ICMP);
         }
 
       

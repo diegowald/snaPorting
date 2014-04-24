@@ -44,33 +44,31 @@ namespace Catalogo.util
 
         public static bool pingHTTP(string ipAddress, int timeOut, int reintentos)
         {
-            System.Diagnostics.Debug.WriteLine(ipAddress);
-            string url = ((ipAddress.ToLower().StartsWith("http://")) ? ipAddress : "http://" + ipAddress);
-            System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(url);
-            request.AllowAutoRedirect = true; // find out if this site is up and don't follow a redirector
-            request.Method = "HEAD";
-            request.Timeout = timeOut;
-            try
+            bool sResultado = false;
+            
+            if (util.network.IPCache.instance.conectado)
             {
-                var response = request.GetResponse();
-                // do something with response.Headers to find out information about the request
-                return true;
-            }
-            catch (System.Net.WebException wex)
-            {
-                util.errorHandling.ErrorLogger.LogMessage(wex);
-                //set flag if there was a timeout or some other issues
-                if (reintentos > 0)
+                string url = ((ipAddress.ToLower().StartsWith("http://")) ? ipAddress : "http://" + ipAddress);
+                try
                 {
-                    util.errorHandling.ErrorLogger.LogMessage("Reintentando...");
-                    return pingHTTP(ipAddress, timeOut * 2, reintentos - 1);
+                    System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
+                    //request.AllowAutoRedirect = true; // find out if this site is up and don't follow a redirector
+                    //request.Method = "HEAD";
+                    //request.CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+                    //request.Credentials = System.Net.CredentialCache.DefaultCredentials
+                    //request.Timeout = timeOut;
+                    using (System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse())
+                    {
+                        sResultado = response.StatusCode == System.Net.HttpStatusCode.OK;
+                    }
                 }
-                else
+                catch (System.Net.WebException wex)
                 {
                     util.errorHandling.ErrorLogger.LogMessage(wex);
-                    return false;
+                    return sResultado;
                 }
             }
+            return sResultado;
         }
     }
 }
