@@ -12,21 +12,37 @@ namespace Catalogo._novedades
 {
     public partial class ucNovedades : UserControl
     {
+
+        private enum CONTROL
+        {
+            IMAGEN,
+            BROWSER,
+            FLASH,
+            TIPS
+        }
+
+
         private int dataRowCount = 0;
         private bool dataGridIdle = false;
         private DataTable dtNovedades = new DataTable();
         private DataView dvNovedades = new DataView();
 
         private Catalogo.varios.FlashControl flash;
+        private Catalogo._novedades.ucTips tips;
+
         public ucNovedades()
         {
             InitializeComponent();
             flash = new varios.FlashControl();
             this.splitC1.Panel1.Controls.Add(this.flash);
 
+            tips = new ucTips();
+            this.splitC1.Panel1.Controls.Add(tips);
+
             pictureBox.Dock = DockStyle.Fill;
             webBrowser.Dock = DockStyle.Fill;
             flash.Dock = DockStyle.Fill;
+            tips.Dock = DockStyle.Fill;
 
             downloadFiles = new Dictionary<string, DownloadStatus>();
 
@@ -35,6 +51,7 @@ namespace Catalogo._novedades
             pictureBox.Visible = true;
             webBrowser.Visible = false;
             flash.Visible = false;
+            tips.Visible = false;
 
             Catalogo.varios.NotificationCenter.instance.refreshNovedades += refreshNovedades;
         }
@@ -273,35 +290,40 @@ namespace Catalogo._novedades
         private void mostrarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo, int id, string FLeido)
         {
             string localFile = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
-            if (pTipo == "url")
+            switch (pTipo)
             {
-                System.Diagnostics.Process.Start(pUrl + pArchivo);
-            }
-            else if (pTipo == "texto")
-            {
-                this.pictureBox.Visible = false;
-                this.webBrowser.Visible = true;
-                flash.Visible = false;
-                webBrowser.DocumentText = System.IO.File.ReadAllText(localFile);
-            }
-            else if (pTipo == "pdf")
-            {
-                System.Diagnostics.Process.Start(localFile);
-            }
-            else if (pTipo == "imagen")
-            {
-                this.pictureBox.Visible = true;
-                this.webBrowser.Visible = false;
-                flash.Visible = false;
-                pictureBox.ImageLocation = localFile;
-            }
-            else if (pTipo == "flash")
-            {
-                pictureBox.Visible = false;
-                webBrowser.Visible = false;
-                flash.Visible = true;
-                flash.file = localFile;
-                flash.play();
+                case "url":
+                    {
+                        System.Diagnostics.Process.Start(pUrl + pArchivo);
+                    }
+                    break;
+                case "texto":
+                    {
+                        mostrarControl(CONTROL.TIPS);
+                        //webBrowser.DocumentText = System.IO.File.ReadAllText(localFile);
+                        tips.mostrarTips(localFile);
+                    }
+                    break;
+                case "pdf":
+                    {
+                        System.Diagnostics.Process.Start(localFile);
+                    }
+                    break;
+                case "imagen":
+                    {
+                        mostrarControl(CONTROL.IMAGEN);
+                        pictureBox.ImageLocation = localFile;
+                    }
+                    break;
+                case "flash":
+                    {
+                        mostrarControl(CONTROL.FLASH);
+                        flash.file = localFile;
+                        flash.play();
+                    }
+                    break;
+                default: 
+                    break;
             }
 
             if (FLeido.Trim().Length == 0)
@@ -583,5 +605,48 @@ namespace Catalogo._novedades
         {
         }
 
+        private void mostrarControl(CONTROL controlAMostrar)
+        {
+            switch (controlAMostrar)
+            {
+                case CONTROL.BROWSER:
+                    {
+                        flash.Visible = false;
+                        flash.stop();
+                        pictureBox.Visible = false;
+                        webBrowser.Visible = true;
+                        tips.Visible = false;
+                    }
+                    break;
+                case CONTROL.FLASH:
+                    {
+                        flash.Visible = true;
+                        pictureBox.Visible = false;
+                        webBrowser.Visible = false;
+                        tips.Visible = false;
+                    }
+                    break;
+                case CONTROL.IMAGEN:
+                    {
+                        flash.Visible = false;
+                        flash.stop();
+                        pictureBox.Visible = true;
+                        webBrowser.Visible = false;
+                        tips.Visible = false;
+                    }
+                    break;
+                case CONTROL.TIPS:
+                    {
+                        flash.Visible = false;
+                        flash.stop();
+                        pictureBox.Visible = false;
+                        webBrowser.Visible = false;
+                        tips.Visible = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

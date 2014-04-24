@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.chkVer = new System.Windows.Forms.CheckBox();
             this._Label3_1 = new System.Windows.Forms.Label();
             this._Label3_0 = new System.Windows.Forms.Label();
@@ -35,6 +36,7 @@
             this.Frame1 = new System.Windows.Forms.Panel();
             this.Frame2 = new System.Windows.Forms.Panel();
             this.lblTip = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Frame1.SuspendLayout();
             this.Frame2.SuspendLayout();
             this.SuspendLayout();
@@ -68,6 +70,7 @@
             this._Label3_1.Size = new System.Drawing.Size(27, 13);
             this._Label3_1.TabIndex = 9;
             this._Label3_1.Text = "&Salir";
+            this._Label3_1.Click += new System.EventHandler(this._Label3_1_Click);
             // 
             // _Label3_0
             // 
@@ -81,6 +84,7 @@
             this._Label3_0.Size = new System.Drawing.Size(51, 13);
             this._Label3_0.TabIndex = 8;
             this._Label3_0.Text = "Siguiente";
+            this._Label3_0.Click += new System.EventHandler(this._Label3_0_Click);
             // 
             // Label2
             // 
@@ -88,7 +92,7 @@
             this.Label2.BackColor = System.Drawing.Color.Transparent;
             this.Label2.Cursor = System.Windows.Forms.Cursors.Default;
             this.Label2.ForeColor = System.Drawing.Color.Red;
-            this.Label2.Location = new System.Drawing.Point(140, 90);
+            this.Label2.Location = new System.Drawing.Point(142, 95);
             this.Label2.Name = "Label2";
             this.Label2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Label2.Size = new System.Drawing.Size(73, 13);
@@ -132,6 +136,11 @@
             this.lblTip.Size = new System.Drawing.Size(433, 109);
             this.lblTip.TabIndex = 5;
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // ucTips
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -159,6 +168,7 @@
         public System.Windows.Forms.Panel Frame1;
         public System.Windows.Forms.Panel Frame2;
         public System.Windows.Forms.Label lblTip;
+        private System.Windows.Forms.Timer timer1;
 
     }
 }

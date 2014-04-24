@@ -47,5 +47,13 @@ namespace Catalogo.varios
             }
         }
 
+
+        internal void stop()
+        {
+            if (axShockwaveFlash1.IsPlaying())
+            {
+                axShockwaveFlash1.StopPlay();
+            }
+        }
     }
 }

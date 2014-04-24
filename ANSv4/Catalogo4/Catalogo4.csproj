@@ -283,6 +283,12 @@
       <DependentUpon>Novedades.xaml</DependentUpon>
     </Compile>
     <Compile Include="util\FileDownloader.cs" />
+    <Compile Include="_novedades\ucTips.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_novedades\ucTips.Designer.cs">
+      <DependentUpon>ucTips.cs</DependentUpon>
+    </Compile>
     <Compile Include="_novedades\UpdateNovedades.cs" />
     <Compile Include="_pedidos\Pedido.cs" />
     <Compile Include="_pedidos\PedidoItem.cs" />
@@ -488,6 +494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_novedades\ucNovedades.resx">
       <DependentUpon>ucNovedades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_novedades\ucTips.resx">
+      <DependentUpon>ucTips.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_pedidos\ucPedido.resx">
       <DependentUpon>ucPedido.cs</DependentUpon>

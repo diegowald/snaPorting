@@ -6,12 +6,16 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 
 namespace Catalogo._novedades
 {
     public partial class ucTips : UserControl
     {
+
+        public delegate void requestCloseFormDelegate();
+        public requestCloseFormDelegate requestCloseForm;
+
+        private static int tipActual;
 
         string[] arrayTips = null;
         bool bMouseMove = false;
@@ -19,6 +23,9 @@ namespace Catalogo._novedades
         public ucTips()
         {
             InitializeComponent();
+            tipActual = -1;
+            chkVer.Visible = false;
+            _Label3_1.Visible = false;
         }
 
 
@@ -46,48 +53,44 @@ namespace Catalogo._novedades
 
         private void mostrar_tip()
         {
-
-            short n = 0;
+            Random r = new Random();
+            int n = 0;
 
             Frame1.Left = 120;
             
             Random rnd = new Random();
 
-            n = short.Parse(Information.UBound(arrayTips) * VBMath.Rnd());
+            n = r.Next(arrayTips.Length);
 
-        
-
-            if (Information.UBound(arrayTips) > 0)
+            if (arrayTips.Length > 0)
             {
 
-                while (n == static_mostrar_tip_nTipActual)
+                while (n == tipActual)
                 {
-                    n = Conversion.Int(Information.UBound(arrayTips) * VBMath.Rnd());
+                    n = r.Next(arrayTips.Length);
                     System.Windows.Forms.Application.DoEvents();
                 }
 
-                lblTip.Text = arrayTips(n);
-                static_mostrar_tip_nTipActual = n;
-                while (VB6.PixelsToTwipsX(Frame1.Left) <= VB6.PixelsToTwipsX(this.ClientRectangle.Width))
+                lblTip.Text = arrayTips[n];
+                tipActual = n;
+/*                while (VB6.PixelsToTwipsX(Frame1.Left) <= VB6.PixelsToTwipsX(this.ClientRectangle.Width))
                 {
                     Frame1.Left = VB6.TwipsToPixelsX(VB6.PixelsToTwipsX(Frame1.Left) + 1);
                     System.Windows.Forms.Application.DoEvents();
-                }
+                }*/
             }
             else
             {
-                this.Close();
+                fireRequestClose();
             }
 
         }
 
-        public object Cargar_Tips()
+        public void Cargar_Tips(string file)
         {
+/*            string ArchivoTips = null;
 
-            string Linea = null;
-            string ArchivoTips = null;
-
-            if (vg.miSABOR >= 3)
+            if ((int) Global01.miSABOR >=3 )
             {
                 ArchivoTips = Global01.AppPath  + "\\Reportes\\TipsV.txt";
             }
@@ -96,26 +99,9 @@ namespace Catalogo._novedades
                 ArchivoTips = Global01.AppPath + "\\Reportes\\Tips.txt";
             }
 
-            VBMath.Randomize();
-
-            FileSystem.FileOpen(1, ArchivoTips, OpenMode.Input);
-
-            // ERROR: Not supported in C#: ReDimStatement
-
-
-            while (!FileSystem.EOF(1))
-            {
-                Linea = FileSystem.LineInput(1);
-                if (Linea != Constants.vbNullString)
-                {
-                    arrayTips(Information.UBound(arrayTips)) = Linea;
-                    Array.Resize(ref arrayTips, Information.UBound(arrayTips) + 2);
-                }
-            }
-            FileSystem.FileClose();
-
+            arrayTips = System.IO.File.ReadAllLines(ArchivoTips);*/
+            arrayTips = System.IO.File.ReadAllLines(file);
             mostrar_tip();
-
         }
 
         //UPGRADE_WARNING: Event chkVer.CheckStateChanged may fire when form is initialized. Click for more: 'ms-help://MS.VSCC.v90/dv_commoner/local/redirect.htm?keyword="88B12AE1-6DE0-48A0-86F1-60C0686C026A"'
@@ -135,12 +121,12 @@ namespace Catalogo._novedades
             //Label3(1).ForeColor = RGB(60, 140, 210)
             //Label1.ForeColor = RGB(60, 140, 210)
 
-            Cargar_Tips();
+//            Cargar_Tips();
         }
 
 
         private void frmTip_MouseMove(System.Object eventSender, System.Windows.Forms.MouseEventArgs eventArgs)
-        {
+        {/*
             short Button = eventArgs.Button / 0x100000;
             short Shift = System.Windows.Forms.Control.ModifierKeys / 0x10000;
             float X = VB6.PixelsToTwipsX(eventArgs.X);
@@ -150,25 +136,11 @@ namespace Catalogo._novedades
                 bMouseMove = true;
                 Restaurar_Labels();
             }
-
-        }
-
-        private void Label3_Click(System.Object eventSender, System.EventArgs eventArgs)
-        {
-            short Index = Label3.GetIndex(eventSender);
-            switch (Index)
-            {
-                case 0:
-                    mostrar_tip();
-                    break;
-                case 1:
-                    this.Close();
-                    break;
-            }
+            */
         }
 
         private void Label3_MouseMove(System.Object eventSender, System.Windows.Forms.MouseEventArgs eventArgs)
-        {
+        {/*
             short Button = eventArgs.Button / 0x100000;
             short Shift = System.Windows.Forms.Control.ModifierKeys / 0x10000;
             float X = VB6.PixelsToTwipsX(eventArgs.X);
@@ -179,14 +151,43 @@ namespace Catalogo._novedades
                 Restaurar_Labels();
                 Label3(Index).Font = VB6.FontChangeUnderline(Label3(Index).Font, true);
                 bMouseMove = false;
-            }
+            }*/
         }
 
-        public void Restaurar_Labels()
+/*        public void Restaurar_Labels()
         {
             Label3(0).Font = VB6.FontChangeUnderline(Label3(0).Font, false);
             Label3(1).Font = VB6.FontChangeUnderline(Label3(1).Font, false);
         }
+*/
+        private void fireRequestClose()
+        {
+            if (requestCloseForm != null)
+            {
+                requestCloseForm();
+            }
+        }
 
+        private void _Label3_0_Click(object sender, EventArgs e)
+        {
+            mostrar_tip();
+        }
+
+        private void _Label3_1_Click(object sender, EventArgs e)
+        {
+            fireRequestClose();
+        }
+
+
+        internal void mostrarTips(string localFile)
+        {
+            Cargar_Tips(localFile);
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            mostrar_tip();
+        }
     }
 }
