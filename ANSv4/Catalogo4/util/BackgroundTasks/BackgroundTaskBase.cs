@@ -56,7 +56,14 @@ namespace Catalogo.util.BackgroundTasks
 
         void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            execute();
+            try
+            {
+                execute();
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
         }
 
         void worker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
