@@ -272,13 +272,14 @@ namespace Catalogo._novedades
             catch (Exception ex)
             {
                 util.errorHandling.ErrorLogger.LogMessage(ex);
-                throw ex;  //util.errorHandling.ErrorForm.show();
+                util.errorHandling.ErrorForm.show();
             }
         }
         
         private void mostrarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo, int id, string FLeido)
         {
-            string dest;
+
+            string localFile = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
 
             if (pTipo == "url")
             {
@@ -289,27 +290,27 @@ namespace Catalogo._novedades
                 this.pictureBox.Visible = false;
                 this.webBrowser.Visible = true;
                 flash.Visible = false;
-                webBrowser.DocumentText = pUrl;
+                webBrowser.DocumentText = System.IO.File.ReadAllText(localFile);
             }
             else if (pTipo == "pdf")
             {
-                dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);                
-                System.Diagnostics.Process.Start(dest);
+                System.Diagnostics.Process.Start(localFile);
             }
             else if (pTipo == "imagen")
             {
                 this.pictureBox.Visible = true;
                 this.webBrowser.Visible = false;
                 flash.Visible = false;
-                dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
-                pictureBox.ImageLocation = dest;
+
+                pictureBox.ImageLocation = localFile;
+
             }
             else if (pTipo == "flash")
             {
                 pictureBox.Visible = false;
                 webBrowser.Visible = false;
                 flash.Visible = true;
-                flash.file = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
+                flash.file = localFile;
                 flash.play();
             }
 
@@ -323,6 +324,12 @@ namespace Catalogo._novedades
         {
             string sql = "UPDATE tblNovedadLeido SET F_Leido=Now() WHERE IdNovedad=" + id.ToString();
             Catalogo.Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, sql);
+
+            System.Data.DataRow[] rows = this.dtNovedades.Select("ID = " + id.ToString());
+            foreach (System.Data.DataRow row in rows)
+            {
+                row["F_Leido"] = System.DateTime.Now;
+            }
         }
 
         private void ejecutarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo)
