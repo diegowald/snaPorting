@@ -99,14 +99,14 @@ namespace Catalogo._novedades
 
             dgvNovedades.Columns[2].Name = "F_Fin";
             dgvNovedades.Columns[2].HeaderText = "Fecha";
-            dgvNovedades.Columns[2].DataPropertyName = "F_Fin";
-            dgvNovedades.Columns[2].Width = 1440;
+            dgvNovedades.Columns[2].DataPropertyName = "F_Fin";            
             //dgvNovedades.Columns[2].Visible = false;
 
             dgvNovedades.Columns[3].Name = "N_Archivo";
             dgvNovedades.Columns[3].HeaderText = "N_Archivo";
             dgvNovedades.Columns[3].DataPropertyName = "N_Archivo";
-            dgvNovedades.Columns[3].Visible = false;
+            dgvNovedades.Columns[3].Width = 1440;
+            //dgvNovedades.Columns[3].Visible = false;
 
             dgvNovedades.Columns[4].Name = "url";
             dgvNovedades.Columns[4].HeaderText = "url";
@@ -200,25 +200,25 @@ namespace Catalogo._novedades
 
             dataGridIdle = true;
 
-            if (dataRowCount > 0)
-            {
-                dgvNovedades.Rows[0].Selected = true;
+            //if (dataRowCount > 0)
+            //{
+            //    dgvNovedades.Rows[0].Selected = true;
 
-                DataGridViewCell cell = dgvNovedades[0, 0];
-                if (cell != null)
-                {
-                    DataGridViewRow row = cell.OwningRow;
+            //    DataGridViewCell cell = dgvNovedades[0, 0];
+            //    if (cell != null)
+            //    {
+            //        DataGridViewRow row = cell.OwningRow;
 
-                    mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
-                                   row.Cells["N_Archivo"].Value.ToString(),
-                                   row.Cells["url"].Value.ToString(),
-                                   row.Cells["Origen"].Value.ToString(),
-                                   row.Cells["Tipo"].Value.ToString(),
-                                   int.Parse(row.Cells["id"].Value.ToString()),
-                                   row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
+            //        mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
+            //                       row.Cells["N_Archivo"].Value.ToString(),
+            //                       row.Cells["url"].Value.ToString(),
+            //                       row.Cells["Origen"].Value.ToString(),
+            //                       row.Cells["Tipo"].Value.ToString(),
+            //                       int.Parse(row.Cells["id"].Value.ToString()),
+            //                       row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
 
-                }
-            }
+            //    }
+            //}
  
         }
 
@@ -539,7 +539,11 @@ namespace Catalogo._novedades
         private void download(string url, string archivo, int id)
         {
             string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, archivo);
+
+            if (ExisteNovedadfile(dest)) return;
+
             bool doDownload = true;
+            
             if (downloadFiles.ContainsKey(dest))
             {
                 switch (downloadFiles[dest])
@@ -585,6 +589,86 @@ namespace Catalogo._novedades
 
         private void onFileDownloading(object Tag, string Destino, int progress)
         {
+        }
+
+        private void dgvNovedades_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete  && e.Modifiers == Keys.Control)
+            {
+                if (dgvNovedades.SelectedRows != null)
+                {
+                    foreach (DataGridViewRow row in dgvNovedades.SelectedRows)
+                    {
+                        if (row.Cells["Tipo"].Value.ToString() != "url")
+                        {
+                            string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, row.Cells["N_Archivo"].Value.ToString());
+                            borrarNovedadfile(dest);
+                        }
+
+                        dgvNovedades.ClearSelection();
+                    }
+
+                }                
+            }
+        }
+        
+        private void borrarNovedadfile(string fileName)
+        {
+            try
+            {
+                if (System.IO.File.Exists(fileName))
+                {
+                    System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
+                    //if (fi.Length == 0)
+                    //{
+                    //    fi.Delete();
+                    //}
+                    fi.Delete();
+                }
+            }
+            catch (System.IO.IOException ex)
+            {
+                //throw ex;
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
+        }
+
+        private bool ExisteNovedadfile(string fileName)
+        {
+            bool sResultado = false;
+
+            try
+            {
+                if (System.IO.File.Exists(fileName))
+                {
+                    System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
+                    if (fi.Length == 0)
+                    {
+                        fi.Delete();
+                    }
+                    else
+                    {
+                        sResultado = true;
+                    }
+                }
+            }
+            catch (System.IO.IOException ex)
+            {
+                //throw ex;
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
+            
+            return sResultado;
         }
 
     }

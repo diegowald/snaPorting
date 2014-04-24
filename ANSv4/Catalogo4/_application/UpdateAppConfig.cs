@@ -177,13 +177,21 @@ namespace Catalogo._application
 
         private bool tenerQueEnviarInfo()
         {
-            if (!util.network.IPCache.instance.conectado)
-            {
-                return false;
-            }
+            bool sResultado = false;
+            if (!util.network.IPCache.instance.conectado) return sResultado;
 
-            long resultado = cliente.TenerQueEnviarInfo(_macAddress);
-            return resultado == 1;
+            try
+            {
+                long resultado = cliente.TenerQueEnviarInfo(_macAddress);
+                sResultado = resultado == 1;
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
+ 
+            return sResultado;
+
         }
 
         protected bool enviarInfo(string Cuit, string RazonSocial,
@@ -196,35 +204,44 @@ namespace Catalogo._application
             string Version, string build, string ListaPrecio,
             string auditor)
         {
-            if (!util.network.IPCache.instance.conectado)
+
+            bool sResultado = false;
+            if (!util.network.IPCache.instance.conectado) return sResultado;
+
+            try
             {
-                return false;
+                long resultado = cliente.EnviarInfo(_macAddress,
+                    Cuit, RazonSocial, ApellidoNombre,
+                    Domicilio, Telefono, Ciudad,
+                    Email, IDAns, appCaduca,
+                    dbCaduca, PIN, FechaUltimoAcceso,
+                    Mensaje, EnviarAuditoria, Url, Modem,
+                    Version, build, ListaPrecio, auditor);
+
+                sResultado = resultado == 0;
             }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
+ 
+            return sResultado;
 
-            long resultado = cliente.EnviarInfo(_macAddress,
-                Cuit, RazonSocial, ApellidoNombre,
-                Domicilio, Telefono, Ciudad,
-                Email, IDAns, appCaduca,
-                dbCaduca, PIN, FechaUltimoAcceso,
-                Mensaje, EnviarAuditoria, Url, Modem,
-                Version, build, ListaPrecio, auditor);
-
-            return resultado == 0;
         }
 
         protected void obtenerInfo(ref bool cancel)
         {
             if (!util.network.IPCache.instance.conectado)
             {
-                // Conexion no valida
                 cancel = true;
                 return;
             }
-            System.Data.DataSet ds = cliente.ObtenerInfoDS(_macAddress);
 
-            if (ds.Tables[0].Rows.Count > 0)
+            try
             {
-                try
+                System.Data.DataSet ds = cliente.ObtenerInfoDS(_macAddress);
+
+                if (ds.Tables[0].Rows.Count > 0)
                 {
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
@@ -298,31 +315,29 @@ namespace Catalogo._application
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    util.errorHandling.ErrorLogger.LogMessage(ex);
-
-                    //throw ex;  //util.errorHandling.ErrorForm.show();
-                }
             }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                //throw ex;  //util.errorHandling.ErrorForm.show();
+            }
+
         }
 
         public void obtenerComandos(ref bool cancel)
         {  
             if (!util.network.IPCache.instance.conectado)
             {
-                // Conexion no valida
                 cancel = true;
                 return;
             }
-
-            bool wSalir = false;
-
-            System.Data.DataSet ds = cliente.ObtenerComandosDS(_macAddress);
-
-            if (ds.Tables[0].Rows.Count > 0)
+            
+            try
             {
-                try
+                bool wSalir = false;
+                System.Data.DataSet ds = cliente.ObtenerComandosDS(_macAddress);
+
+                if (ds.Tables[0].Rows.Count > 0)
                 {
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
@@ -362,25 +377,25 @@ namespace Catalogo._application
                                     break;
                             }
                         }
+                    }         
+                }
+
+                if (wSalir)
+                {
+                    if (Global01.TranActiva != null)
+                    {
+                        Global01.TranActiva.Commit();
+                        Global01.TranActiva = null;
                     }
+                    MessageBox.Show("Se han efectuado modificaciones en la aplicación, \n ésta de cerrará, luego re-ingrese nuevamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    Catalogo.MainMod.miEnd();
                 }
-                catch (Exception ex)
-                {
-                    util.errorHandling.ErrorLogger.LogMessage(ex);
 
-                    throw ex;  //util.errorHandling.ErrorForm.show();
-                }
             }
-
-            if (wSalir)
+            catch (Exception ex)
             {
-                if (Global01.TranActiva != null)
-                {
-                    Global01.TranActiva.Commit();
-                    Global01.TranActiva = null;
-                }
-                MessageBox.Show("Se han efectuado modificaciones en la aplicación, \n ésta de cerrará, luego re-ingrese nuevamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                Catalogo.MainMod.miEnd();
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                //throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
 

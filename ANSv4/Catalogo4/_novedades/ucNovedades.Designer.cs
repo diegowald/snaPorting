@@ -99,6 +99,8 @@
             this.dgvNovedades.TabIndex = 3;
             this.dgvNovedades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dgvNovedades.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvNovedades_CellFormatting);
+            this.dgvNovedades.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvNovedades_KeyDown);
+
             // 
             // ucNovedades
             // 
