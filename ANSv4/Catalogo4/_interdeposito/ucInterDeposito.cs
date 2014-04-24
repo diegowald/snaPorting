@@ -536,6 +536,7 @@ namespace Catalogo._interdeposito
                     filtro);
 
             envio.run();
+            ObtenerMovimientos();
         }
 
     } //fin clase

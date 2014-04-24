@@ -868,6 +868,7 @@ namespace Catalogo._devoluciones
                     filtro);
 
             envio.run();
+            ObtenerMovimientos();
         }
 
     } //fin clase

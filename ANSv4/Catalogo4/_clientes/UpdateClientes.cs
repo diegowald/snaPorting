@@ -18,9 +18,9 @@ namespace Catalogo._clientes
 
         private System.Data.OleDb.OleDbConnection conexion;
 
-        public UpdateClientes(string MacAddress, string ipAddress, string ipAddressIntranet)
+        public UpdateClientes(string MacAddress, string ipAddress)
         {
-            inicializar(MacAddress, ipAddress, ipAddressIntranet);
+            inicializar(MacAddress, ipAddress);
             conexion = Global01.Conexion;
         }
 
@@ -32,14 +32,9 @@ namespace Catalogo._clientes
             }
         }
 
-        private void inicializar(string MacAddress, string ipAddress, string ipAddressIntranet)
+        private void inicializar(string MacAddress, string ipAddress)
         {
-            bool conectado = util.SimplePing.ping(ipAddress, 5000, 0);
-
-            if (!conectado)
-            {
-                conectado=util.SimplePing.ping(ipAddressIntranet, 5000, 0);
-            }
+            bool conectado = util.network.IPCache.instance.conectado;
 
             if (!webServiceInicializado)
             {
@@ -62,12 +57,10 @@ namespace Catalogo._clientes
             }
         }
 
-
         private void sincroClientesCompletada(ref bool cancel)
         {
             //        On Error GoTo .ErrorForm.show()
-
-            if (util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 // conexion no valida.
                 cancel = true;
@@ -293,7 +286,7 @@ namespace Catalogo._clientes
 
         private void sincronizarTodosLosClientes(ref bool cancel, Catalogo.varios.complexMessage msg)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 cancel = true;
                 return;
@@ -367,7 +360,7 @@ namespace Catalogo._clientes
 
         private void SincronizarTodasLasCtasCtes(ref bool cancel, Catalogo.varios.complexMessage msg)
         {
-            if (!util.SimplePing.ping(_ipAddress, 5000, 0))
+            if (!util.network.IPCache.instance.conectado)
             {
                 cancel = true;
                 return;

@@ -28,14 +28,9 @@ namespace Catalogo.util.BackgroundTasks
 
         public override void execute()
         {
-            util.IPPrivado ipPriv = new util.IPPrivado(Global01.URL_ANS, Global01.IDMaquina);
-            // TODO: agregar la configuracion del proxy
-            string ipPrivado =  ipPriv.GetIP();
-            string ipIntranet =  ipPriv.GetIpIntranet();
-            // string ipCatalogo =  ipPriv.GetIPCatalogo();
 
             Catalogo._existencia.VerExistencia existencia = new Catalogo._existencia.VerExistencia();
-            existencia.Inicializar(Global01.IDMaquina, ipPrivado, ipIntranet);
+            existencia.Inicializar(Global01.IDMaquina, Global01.URL_ANS2);
 
             string pSemaforo = "";
             existencia.ExistenciaSemaforo(_idProducto, Global01.NroUsuario, ref pSemaforo);

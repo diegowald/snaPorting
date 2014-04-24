@@ -470,7 +470,13 @@ namespace Catalogo._novedades
                         // Viene en la base, no se hace nada.
                         break;
                     case "texto":
-                        // Viene en la base, no se hace nada
+                        {
+                            // Se descarga
+                            if (!DBNull.Value.Equals(row["url"]))
+                            {
+                                download((string)row["url"], (string) row["N_Archivo"], (int)row["id"]);
+                            }
+                        }
                         break;
                     case "pdf":
                         {

@@ -35,9 +35,9 @@ namespace Catalogo._rendiciones
 
         private System.Data.OleDb.OleDbConnection Conexion1;
 
-        public EnvioRendicion(System.Data.OleDb.OleDbConnection conexcion, string ipAddress, string ipAddressIntranet, string MacAddress)
+        public EnvioRendicion(System.Data.OleDb.OleDbConnection conexcion, string ipAddress, string MacAddress)
         {
-            Inicializar(ipAddress, ipAddressIntranet, MacAddress);
+            Inicializar(ipAddress, MacAddress);
             Conexion1 = conexcion;
         }
 
@@ -167,14 +167,9 @@ namespace Catalogo._rendiciones
         }
 
 
-        public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
+        public void Inicializar(string ipAddress, string MacAddress)
         {
-            bool Conectado = false;
-            Conectado = util.SimplePing.ping(ipAddress, 5000, 0);
-            if (!Conectado)
-            {
-                Conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
-            }
+            bool Conectado = util.network.IPCache.instance.conectado;
 
             try
             {
@@ -202,26 +197,26 @@ namespace Catalogo._rendiciones
             }
             catch (Exception ex)
             {
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
-                {
-                    //errhandler:
-                    //        If Err.Number = -2147024809 Then
-                    // Intento con el ip interno
-                    Cliente = new RendicionWS.Rendicion();
-                    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Rendicion.asmx?wsdl";
-                    if (Global01.proxyServerAddress != "0.0.0.0")
-                    {
-                        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
-                    }
+                //if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                //{
+                //    //errhandler:
+                //    //        If Err.Number = -2147024809 Then
+                //    // Intento con el ip interno
+                //    Cliente = new RendicionWS.Rendicion();
+                //    Cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Rendicion.asmx?wsdl";
+                //    if (Global01.proxyServerAddress != "0.0.0.0")
+                //    {
+                //        Cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
+                //    }
 
-                    m_MacAddress = MacAddress;
-                    m_ip = ipAddressIntranet;
-                    WebServiceInicializado = true;
-                }
-                else
-                {
+                //    m_MacAddress = MacAddress;
+                //    m_ip = ipAddressIntranet;
+                //    WebServiceInicializado = true;
+                //}
+                //else
+                //{
                     throw ex;
-                }
+                //}
             }
         }
     }

@@ -1557,6 +1557,7 @@ namespace Catalogo._recibos
                     filtro);
 
             envio.run();
+            ObtenerMovimientos();
         }
 
     } //fin clase

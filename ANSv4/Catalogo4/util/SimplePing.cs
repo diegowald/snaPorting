@@ -7,24 +7,31 @@ namespace Catalogo.util
 {
     public static class SimplePing
     {
-        public static bool ping(string ipAddress, int timeOut, byte reintentos, byte tipo = 0)
+        public static bool ping(string ipAddress, int timeOut, byte reintentos, Global01.TiposDePing tipo /*= Global01.TiposDePing.ICMP*/)
         {
             //tipo<>0 para verificar la existencia de un archivo en la nube
 
             bool sResultado = false;
 
-            if (ipAddress.ToLower().IndexOf("www", 0) != -1 | ipAddress.ToLower().IndexOf("imagenes", 0) != -1 | ipAddress.ToLower().IndexOf("novedades", 0) != -1 | tipo != 0)
+            switch (tipo)
             {
-                sResultado = ping3(ipAddress, timeOut, reintentos);
-            }
-            else if (tipo == 0 )
-            {
-                sResultado = ping2(ipAddress, timeOut);
+                case Global01.TiposDePing.HTTP:
+                    {
+                        ipAddress = "http://" + Global01.URL_ANS.ToString() + "/ping.txt";
+                        sResultado = pingHTTP(ipAddress, timeOut, reintentos);
+                    }
+                    break;
+                case Global01.TiposDePing.FILE:
+                    sResultado = pingHTTP(ipAddress, timeOut, reintentos);
+                    break;
+                case Global01.TiposDePing.ICMP:
+                    sResultado = pingICMP(ipAddress, timeOut);
+                    break;
             }
             return sResultado;
         }
 
-        public static bool ping2(string ipAddress, int timeOut)
+        public static bool pingICMP(string ipAddress, int timeOut)
         {
            // ipAddress = "8.8.8.8";
 
@@ -35,11 +42,12 @@ namespace Catalogo.util
             return reply.Status == System.Net.NetworkInformation.IPStatus.Success;
         }
 
-        public static bool ping3(string ipAddress, int timeOut, int reintentos)
+        public static bool pingHTTP(string ipAddress, int timeOut, int reintentos)
         {
+            System.Diagnostics.Debug.WriteLine(ipAddress);
             string url = ((ipAddress.ToLower().StartsWith("http://")) ? ipAddress : "http://" + ipAddress);
             System.Net.HttpWebRequest request = (System.Net.HttpWebRequest)System.Net.HttpWebRequest.Create(url);
-            request.AllowAutoRedirect = false; // find out if this site is up and don't follow a redirector
+            request.AllowAutoRedirect = true; // find out if this site is up and don't follow a redirector
             request.Method = "HEAD";
             request.Timeout = timeOut;
             try
@@ -50,10 +58,12 @@ namespace Catalogo.util
             }
             catch (System.Net.WebException wex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(wex);
                 //set flag if there was a timeout or some other issues
                 if (reintentos > 0)
                 {
-                    return ping3(ipAddress, timeOut * 2, reintentos - 1);
+                    util.errorHandling.ErrorLogger.LogMessage("Reintentando...");
+                    return pingHTTP(ipAddress, timeOut * 2, reintentos - 1);
                 }
                 else
                 {

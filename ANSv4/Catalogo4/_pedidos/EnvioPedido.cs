@@ -26,9 +26,9 @@ namespace Catalogo._pedidos
 
         private System.Data.OleDb.OleDbConnection Conexion1;
 
-        public EnvioPedido(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string ipAddressIntranet, string MacAddress)
+        public EnvioPedido(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string MacAddress)
         {
-            inicializar(ipAddress, ipAddressIntranet, MacAddress);
+            inicializar(ipAddress, MacAddress);
             Conexion1 = Conexion;
         }
 
@@ -119,13 +119,9 @@ namespace Catalogo._pedidos
         }
 
 
-        public void inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
+        public void inicializar(string ipAddress, string MacAddress)
         {
-            bool conectado = util.SimplePing.ping(ipAddress, 5000, 0);
-            if (!conectado)
-            {
-                conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
-            }
+            bool conectado = util.network.IPCache.instance.conectado;
 
             try
             {
@@ -152,23 +148,23 @@ namespace Catalogo._pedidos
             }
             catch (Exception ex)
             {
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
-                {
-                    cliente = new PedidosWS.Pedidos();
-                    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Pedidos.asmx?wsdl";
-                    if (Global01.proxyServerAddress != "0.0.0.0")
-                    {
-                        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
-                    }
+                //if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                //{
+                //    cliente = new PedidosWS.Pedidos();
+                //    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Pedidos.asmx?wsdl";
+                //    if (Global01.proxyServerAddress != "0.0.0.0")
+                //    {
+                //        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
+                //    }
 
-                    _MacAddress = MacAddress;
-                    _ip = ipAddressIntranet;
-                    webServiceInicializado = true;
-                }
-                else
-                {
+                //    _MacAddress = MacAddress;
+                //    _ip = ipAddressIntranet;
+                //    webServiceInicializado = true;
+                //}
+                //else
+                //{
                     throw ex;
-                }
+                //}
             }
         }
 

@@ -32,9 +32,9 @@ namespace Catalogo._recibos
         private bool DatosObtenidos;
         private System.Data.OleDb.OleDbConnection Conexion1;
 
-        public EnvioRecibo(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string ipAddressIntranet, string MacAddress)
+        public EnvioRecibo(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string MacAddress)
         {
-            Inicializar(ipAddress, ipAddressIntranet, MacAddress);
+            Inicializar(ipAddress, MacAddress);
             Conexion1 = Conexion;
         }
 
@@ -220,16 +220,13 @@ namespace Catalogo._recibos
             }
         }
 
-        public void Inicializar(string ipAddress, string ipAddressIntranet, string MacAddress)
+        public void Inicializar(string ipAddress, string MacAddress)
         {
             // ERROR: Not supported in C#: OnErrorStatement
             try
             {
-                bool Conectado = util.SimplePing.ping(ipAddress, 5000, 0);
-                if (!Conectado)
-                {
-                    Conectado = util.SimplePing.ping(ipAddressIntranet, 5000, 0);
-                }
+                bool Conectado = util.network.IPCache.instance.conectado;
+
                 if (Conectado)
                 {
                     if (!webServiceInicializado)
@@ -253,23 +250,23 @@ namespace Catalogo._recibos
             }
             catch (Exception ex)
             {
-                if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
-                {
-                    cliente = new RecibosWS.Recibos_v_303();
-                    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Recibos_v_303.asmx?wsdl";
-                    if (Global01.proxyServerAddress != "0.0.0.0")
-                    {
-                        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
-                    }
+                //if (System.Runtime.InteropServices.Marshal.GetExceptionCode() == -2147024809)
+                //{
+                //    cliente = new RecibosWS.Recibos_v_303();
+                //    cliente.Url = "http://" + ipAddressIntranet + "/wsCatalogo4/Recibos_v_303.asmx?wsdl";
+                //    if (Global01.proxyServerAddress != "0.0.0.0")
+                //    {
+                //        cliente.Proxy = new System.Net.WebProxy(Global01.proxyServerAddress);
+                //    }
 
-                    _MacAddress = MacAddress;
-                    webServiceInicializado = true;
-                    _ip = ipAddressIntranet;
-                }
-                else
-                {
+                //    _MacAddress = MacAddress;
+                //    webServiceInicializado = true;
+                //    _ip = ipAddressIntranet;
+                //}
+                //else
+                //{
                     throw ex;
-                }
+                //}
             }
         }
     }

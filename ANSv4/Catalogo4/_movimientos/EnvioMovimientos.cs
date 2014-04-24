@@ -99,26 +99,12 @@ namespace Catalogo.util.BackgroundTasks
 
         private void enviarMovimientos()
         {
-            util.IPPrivado ipPriv;
-            string ipPrivado;
-            string ipIntranet;
+
             bool fallaEnvioPedido = false;
             bool fallaEnvioRecibo = false;
             bool fallaEnvioDevolucion = false;
             bool fallaEnvioInterDeposito = false;
             bool fallaEnvioRendicion = false;
-
-            if (Global01.ipSettingIni)
-            {
-                ipPrivado = Global01.URL_ANS;
-                ipIntranet = Global01.URL_ANS2;
-            }
-            else
-            {
-                ipPriv = new util.IPPrivado(Global01.URL_ANS, Global01.IDMaquina);
-                ipPrivado = ipPriv.GetIP();
-                ipIntranet = ipPriv.GetIpIntranet();
-            }
 
             _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, _idCliente);
             System.Data.OleDb.OleDbDataReader movs = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "(todos)");
@@ -136,7 +122,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroNotaVenta.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _pedidos.EnvioPedido envio = new _pedidos.EnvioPedido(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina);
+                                    _pedidos.EnvioPedido envio = new _pedidos.EnvioPedido(Global01.Conexion, Global01.URL_ANS2, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.obtenerDatos(Nro);
@@ -162,7 +148,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroRecibo.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _recibos.EnvioRecibo envio = new _recibos.EnvioRecibo(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina);
+                                    _recibos.EnvioRecibo envio = new _recibos.EnvioRecibo(Global01.Conexion, Global01.URL_ANS2, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.obtenerDatos(Nro);
@@ -189,7 +175,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroDevolucion.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _devoluciones.EnvioDevolucion envio = new _devoluciones.EnvioDevolucion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina);
+                                    _devoluciones.EnvioDevolucion envio = new _devoluciones.EnvioDevolucion(Global01.Conexion, Global01.URL_ANS2, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
@@ -213,7 +199,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroInterdeposito.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _interdeposito.EnvioInterDeposito envio = new _interdeposito.EnvioInterDeposito(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina);
+                                    _interdeposito.EnvioInterDeposito envio = new _interdeposito.EnvioInterDeposito(Global01.Conexion, Global01.URL_ANS2, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
@@ -237,7 +223,7 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroRendicion.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _rendiciones.EnvioRendicion envio = new _rendiciones.EnvioRendicion(Global01.Conexion, ipPrivado, ipIntranet, Global01.IDMaquina);
+                                    _rendiciones.EnvioRendicion envio = new _rendiciones.EnvioRendicion(Global01.Conexion, Global01.URL_ANS2, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);

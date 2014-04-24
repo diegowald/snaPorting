@@ -37,7 +37,6 @@ namespace Catalogo.util.BackgroundTasks
 
         public override void finished()
         {
-            throw new NotImplementedException();
         }
 
     }
