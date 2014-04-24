@@ -52,6 +52,7 @@
             this.dataGridView1.RowHeadersWidth = 4;
             this.dataGridView1.Size = new System.Drawing.Size(640, 480);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.DoubleClick += new System.EventHandler(this.dataGridView1_DoubleClick);
@@ -65,7 +66,7 @@
             this.Semaforo.ReadOnly = true;
             this.Semaforo.Text = "E";
             this.Semaforo.ToolTipText = "ver existencia";
-            this.Semaforo.Width = 30;
+            this.Semaforo.Width = 20;
             // 
             // GridViewFilter2
             // 

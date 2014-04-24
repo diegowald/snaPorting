@@ -125,9 +125,7 @@ namespace Catalogo.varios
         
         private void BeginDownload(string URL, string saveFile)
         {
-            bool Conectado;
-
-            Conectado = util.SimplePing.ping(URL, 5000, 0, Global01.TiposDePing.FILE);
+            bool Conectado = util.SimplePing.ping(URL, 2000, 0, Global01.TiposDePing.FILE);
 
             if (Conectado)
             {

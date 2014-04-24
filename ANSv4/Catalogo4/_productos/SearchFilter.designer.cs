@@ -123,6 +123,8 @@
             // 
             // cboLinea
             // 
+            this.cboLinea.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboLinea.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboLinea.AutoSize = false;
             this.cboLinea.Name = "cboLinea";
             this.cboLinea.Size = new System.Drawing.Size(86, 23);
@@ -136,6 +138,8 @@
             // 
             // cboFamilia
             // 
+            this.cboFamilia.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboFamilia.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboFamilia.AutoSize = false;
             this.cboFamilia.Name = "cboFamilia";
             this.cboFamilia.Size = new System.Drawing.Size(116, 23);
@@ -149,6 +153,8 @@
             // 
             // cboMarca
             // 
+            this.cboMarca.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboMarca.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboMarca.AutoSize = false;
             this.cboMarca.Name = "cboMarca";
             this.cboMarca.Size = new System.Drawing.Size(90, 23);
@@ -163,6 +169,8 @@
             // 
             // cboModelo
             // 
+            this.cboModelo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboModelo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboModelo.AutoSize = false;
             this.cboModelo.Name = "cboModelo";
             this.cboModelo.Size = new System.Drawing.Size(86, 23);
@@ -176,6 +184,8 @@
             // 
             // cboOtros
             // 
+            this.cboOtros.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboOtros.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboOtros.AutoSize = false;
             this.cboOtros.Items.AddRange(new object[] {
             "(todos)",

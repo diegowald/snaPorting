@@ -30,8 +30,8 @@ namespace Catalogo.varios
         {
             if (DocumentoNro.Substring(DocumentoNro.ToString().Trim().Length - 8) == "99999999")
             {
-                btnVerPDF.Enabled = true;
-                btnEnviarMail.Enabled = true;
+                btnVerPDF.Enabled = false;
+                btnEnviarMail.Enabled = false;
                 crViewer1.ShowPrintButton = false;
             }
             else

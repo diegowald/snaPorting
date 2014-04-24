@@ -522,5 +522,31 @@ namespace Catalogo._productos
 
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == (int)CCol.cSemaforo)
+                {
+
+                    DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
+
+                    if (cell != null)
+                    {
+                        DataGridViewRow row = cell.OwningRow;
+                        Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+                        existencia.onCancelled += ExistenciaCancelled;
+                        existencia.onFinished += ExistenciaFinished;
+                        existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;  //util.errorHandling.ErrorForm.show();
+            }
+        }
+
     }
 }

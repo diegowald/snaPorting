@@ -125,8 +125,6 @@ namespace Catalogo.util.BackgroundTasks
         {
             try
             {
- 
-
                 Catalogo._auditor.EnvioAuditoria envAudit = new _auditor.EnvioAuditoria(Global01.IDMaquina, Global01.URL_ANS2);
                 if (envAudit.Inicializado)
                 {

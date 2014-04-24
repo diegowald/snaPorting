@@ -52,9 +52,6 @@ namespace Catalogo
                     updater.run();
                 }
 
-                util.BackgroundTasks.Updater updater1 = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateNovedadesCatalogo);
-                updater1.run();
-
                 update_productos();
             }
 
@@ -227,8 +224,10 @@ namespace Catalogo
         {
             Catalogo.varios.fDataUpdate fu = new Catalogo.varios.fDataUpdate();
             fu.SoloCatalogo = Convert.ToBoolean(Funciones.modINIs.ReadINI("DATOS", "SoloCatalogo", "false"));
+            string ipAddress = Global01.URL_ANS;
+
         VadeNuevo:
-            fu.Url = Global01.URL_ANS;
+            fu.Url = ipAddress;
             fu.ShowDialog();
 
             if (Global01.xError)
@@ -237,7 +236,7 @@ namespace Catalogo
 
                 if (MessageBox.Show("Error de Conexión al Servidor, ¿quiere intentar de nuevo?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    Global01.URL_ANS = Global01.URL_ANS2;
+                    ipAddress = Global01.URL_ANS2;
                     goto VadeNuevo;
                 }
             }
@@ -327,7 +326,11 @@ namespace Catalogo
                 // registrada y activa
                 Global01.AppActiva = true;
                 //-------- BORRAR ESTA LINEA!!!!!!! ----------------------
+                //Sabor3 = 
                 Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                //Sabor2 = 
+                //Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
+
             }
             //--------------------------------------XX
         }

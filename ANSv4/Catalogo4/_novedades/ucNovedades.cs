@@ -107,62 +107,63 @@ namespace Catalogo._novedades
             dgvNovedades.Columns[0].Name = "Descripcion";
             dgvNovedades.Columns[0].HeaderText = "Descripción";
             dgvNovedades.Columns[0].DataPropertyName = "Descripcion";
-            //dgvNovedades.Columns[0].Visible = true;
+            dgvNovedades.Columns[0].Width = 360;
 
             dgvNovedades.Columns[1].Name = "F_Inicio";
             dgvNovedades.Columns[1].HeaderText = "Desde";
             dgvNovedades.Columns[1].DataPropertyName = "F_Inicio";
-            //dgvNovedades.Columns[1].Visible = false;
+            dgvNovedades.Columns[1].Visible = false;
 
             dgvNovedades.Columns[2].Name = "F_Fin";
-            dgvNovedades.Columns[2].HeaderText = "Hasta";
-            dgvNovedades.Columns[2].DataPropertyName = "F_Fin";
+            dgvNovedades.Columns[2].HeaderText = "Fecha";
+            dgvNovedades.Columns[2].DataPropertyName = "F_Fin";            
             //dgvNovedades.Columns[2].Visible = false;
 
             dgvNovedades.Columns[3].Name = "N_Archivo";
             dgvNovedades.Columns[3].HeaderText = "N_Archivo";
             dgvNovedades.Columns[3].DataPropertyName = "N_Archivo";
+            dgvNovedades.Columns[3].Width = 1440;
             //dgvNovedades.Columns[3].Visible = false;
 
             dgvNovedades.Columns[4].Name = "url";
             dgvNovedades.Columns[4].HeaderText = "url";
             dgvNovedades.Columns[4].DataPropertyName = "url";
-            //dgvNovedades.Columns[4].Visible = false;
+            dgvNovedades.Columns[4].Visible = false;
 
             dgvNovedades.Columns[5].Name = "zonas";
             dgvNovedades.Columns[5].HeaderText = "zonas";
             dgvNovedades.Columns[5].DataPropertyName = "zonas";
-            //dgvNovedades.Columns[5].Visible = false;
+            dgvNovedades.Columns[5].Visible = false;
 
             dgvNovedades.Columns[6].Name = "fecha";
-            dgvNovedades.Columns[6].HeaderText = "fecha";
+            dgvNovedades.Columns[6].HeaderText = "fecha Publicación";
             dgvNovedades.Columns[6].DataPropertyName = "fecha";
-            //dgvNovedades.Columns[6].Visible = false;
+            dgvNovedades.Columns[6].Visible = false;
 
             dgvNovedades.Columns[7].Name = "origen";
             dgvNovedades.Columns[7].HeaderText = "origen";
             dgvNovedades.Columns[7].DataPropertyName = "origen";
-            //dgvNovedades.Columns[7].Visible = false;
+            dgvNovedades.Columns[7].Visible = false;
 
             dgvNovedades.Columns[8].Name = "tipo";
             dgvNovedades.Columns[8].HeaderText = "tipo";
             dgvNovedades.Columns[8].DataPropertyName = "tipo";
-            //dgvNovedades.Columns[8].Visible = false;
+            dgvNovedades.Columns[8].Visible = false;
 
             dgvNovedades.Columns[9].Name = "id";
             dgvNovedades.Columns[9].HeaderText = "id";
             dgvNovedades.Columns[9].DataPropertyName = "id";
-            //dgvNovedades.Columns[9].Visible = false;
+            dgvNovedades.Columns[9].Visible = false;
 
             dgvNovedades.Columns[10].Name = "FLeido";
             dgvNovedades.Columns[10].HeaderText = "FLeido";
             dgvNovedades.Columns[10].DataPropertyName = "F_Leido";
-            //dgvNovedades.Columns[10].Visible = false;
+            dgvNovedades.Columns[10].Visible = false;
 
             dgvNovedades.Columns[11].Name = "Destino";
             dgvNovedades.Columns[11].HeaderText = "Destino";
             dgvNovedades.Columns[11].DataPropertyName = "Destino";
-            //dgvNovedades.Columns[11].Visible = false;
+            dgvNovedades.Columns[11].Visible = false;
 
             string wDestino2 = "cliente"; //valores posibles "ambos;cliente;viajante;catalogo"
             if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente)
@@ -170,8 +171,9 @@ namespace Catalogo._novedades
                 wDestino2 = "viajante";
             };
 
-            string wCondicion = "activo=1 and (destino='ambos' or destino='" + wDestino2 + "') and origen<>'catalogo' "; //+
-                               // " and f_inicio<=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "# and f_fin>=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "#";
+            string wCondicion = "activo=1 and (destino='ambos' or destino='" + wDestino2 + "') and origen<>'catalogo' " +
+                                " and f_inicio<=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "# and f_fin>=#" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "#";
+
             string wOrden = "F_Inicio DESC, Tipo";
             string wCampos = "Descripcion, F_Inicio, F_Fin, N_Archivo, url, zonas, Fecha, Origen, Tipo, ID, F_Leido, Destino";
 
@@ -215,23 +217,25 @@ namespace Catalogo._novedades
 
             dataGridIdle = true;
 
-            if (dataRowCount > 0)
-            {
-                dgvNovedades.Rows[0].Selected = true;
+            //if (dataRowCount > 0)
+            //{
+            //    dgvNovedades.Rows[0].Selected = true;
 
-                DataGridViewCell cell = dgvNovedades[0, 0];
-                /*if (cell != null)
-                {
-                    DataGridViewRow row = cell.OwningRow;
+            //    DataGridViewCell cell = dgvNovedades[0, 0];
+            //    if (cell != null)
+            //    {
+            //        DataGridViewRow row = cell.OwningRow;
 
-                    mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
-                                   row.Cells["N_Archivo"].Value.ToString(),
-                                   row.Cells["url"].Value.ToString(),
-                                   row.Cells["Origen"].Value.ToString(),
-                                   row.Cells["Tipo"].Value.ToString(), 
-                                   int.Parse(row.Cells["id"].Value.ToString()));
-                }*/
-            }
+            //        mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
+            //                       row.Cells["N_Archivo"].Value.ToString(),
+            //                       row.Cells["url"].Value.ToString(),
+            //                       row.Cells["Origen"].Value.ToString(),
+            //                       row.Cells["Tipo"].Value.ToString(),
+            //                       int.Parse(row.Cells["id"].Value.ToString()),
+            //                       row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
+
+            //    }
+            //}
  
         }
 
@@ -253,7 +257,9 @@ namespace Catalogo._novedades
         //                           row.Cells["N_Archivo"].Value.ToString(),
         //                           row.Cells["url"].Value.ToString(),
         //                           row.Cells["Origen"].Value.ToString(),
-        //                           row.Cells["Tipo"].Value.ToString());
+        //                           row.Cells["Tipo"].Value.ToString(),
+        //                           int.Parse(row.Cells["id"].Value.ToString()),
+        //                           row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
         //        }
         //    }
         //}
@@ -289,6 +295,7 @@ namespace Catalogo._novedades
         
         private void mostrarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo, int id, string FLeido)
         {
+
             string localFile = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
             switch (pTipo)
             {
@@ -330,15 +337,10 @@ namespace Catalogo._novedades
             {
                 marcarComoLeido(id);
             }
-
         }
 
         private void marcarComoLeido(int id)
         {
-            //string sql = "INSERT INTO tblNovedadLeido (IdNovedad, F_Leido) VALUES ("
-            //    + id.ToString()
-            //    + ", #" + System.DateTime.Now.ToString() + "#);";
-
             string sql = "UPDATE tblNovedadLeido SET F_Leido=Now() WHERE IdNovedad=" + id.ToString();
             Catalogo.Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, sql);
 
@@ -364,7 +366,6 @@ namespace Catalogo._novedades
                     updater.run();
             }
         }
-
 
         private bool perteneceAZona(string zona)
         {
@@ -557,7 +558,11 @@ namespace Catalogo._novedades
         private void download(string url, string archivo, int id)
         {
             string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, archivo);
+
+            if (ExisteNovedadfile(dest)) return;
+
             bool doDownload = true;
+            
             if (downloadFiles.ContainsKey(dest))
             {
                 switch (downloadFiles[dest])
@@ -648,5 +653,81 @@ namespace Catalogo._novedades
                     break;
             }
         }
+       
+        private void dgvNovedades_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete  && e.Modifiers == Keys.Control)
+            {
+                if (dgvNovedades.SelectedRows != null)
+                {
+                    foreach (DataGridViewRow row in dgvNovedades.SelectedRows)
+                    {
+                        if (row.Cells["Tipo"].Value.ToString() != "url")
+                        {
+                            string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, row.Cells["N_Archivo"].Value.ToString());
+                            borrarNovedadfile(dest);
+                        }
+
+                        dgvNovedades.ClearSelection();
+                    }
+
+                }                
+            }
+        }
+        
+        private void borrarNovedadfile(string fileName)
+        {
+            try
+            {
+                if (System.IO.File.Exists(fileName))
+                {
+                    System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
+                    //if (fi.Length == 0)
+                    //{
+                    //    fi.Delete();
+                    //}
+                    fi.Delete();
+                }
+            }
+            catch (System.IO.IOException ex)
+            {
+                //throw ex;
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
+        }
+
+        private bool ExisteNovedadfile(string fileName)
+        {
+            bool sResultado = false;
+
+            try
+            {
+                if (System.IO.File.Exists(fileName))
+                {
+                    System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
+                    if (fi.Length == 0)
+                    {
+                        fi.Delete();
+                    }
+                    else
+                    {
+                        sResultado = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //throw ex;
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
+            
+            return sResultado;
+        }
+
     }
 }

@@ -195,17 +195,27 @@ namespace Catalogo._productos
                     filterString = string.Empty;
                     FilterBuilder fb = new FilterBuilder();
 
-                    fb.ApplyFilter(ref filterString, "Linea", cboLinea.SelectedItem.ToString());
-                    fb.ApplyFilter(ref filterString, "Familia", cboFamilia.SelectedItem.ToString());
-                    fb.ApplyFilter(ref filterString, "Marca", cboMarca.SelectedItem.ToString());
-                    fb.ApplyFilter(ref filterString, "Modelo", cboModelo.SelectedItem.ToString());
+                    System.Diagnostics.Debug.WriteLine(cboLinea.SelectedText);
+                    System.Diagnostics.Debug.WriteLine(cboMarca.SelectedText);
+                    System.Diagnostics.Debug.WriteLine(cboModelo.SelectedText);
+
+                    string sLinea = ((cboLinea.SelectedItem != null) ? cboLinea.SelectedItem.ToString() : "");
+                    string sFamilia = ((cboFamilia.SelectedItem != null) ? cboFamilia.SelectedItem.ToString() : "");
+                    string sMarca = ((cboMarca.SelectedItem != null) ? cboMarca.SelectedItem.ToString() : "");
+                    string sModelo = ((cboModelo.SelectedItem != null) ? cboModelo.SelectedItem.ToString() : "");
+                    string sOtros = ((cboOtros.SelectedItem != null) ? cboOtros.SelectedItem.ToString() : "");
+
+                    fb.ApplyFilter(ref filterString, "Linea", sLinea);
+                    fb.ApplyFilter(ref filterString, "Familia", sFamilia);
+                    fb.ApplyFilter(ref filterString, "Marca", sMarca);
+                    fb.ApplyFilter(ref filterString, "Modelo", sModelo);
 
                     string discontinuedValue = string.Empty;
                     string controlValue = string.Empty;
 
-                    if (cboOtros.SelectedItem.ToString() == "(todos)") { controlValue = null; }
+                    if (sOtros == "(todos)") { controlValue = null; }
 
-                    if (cboOtros.SelectedItem.ToString() == "Ofertas") { controlValue = "O"; }
+                    if (sOtros == "Ofertas") { controlValue = "O"; }
 
                     if (!string.IsNullOrEmpty(controlValue))
                     {
@@ -217,7 +227,7 @@ namespace Catalogo._productos
                         fb.ApplyFilter(ref filterString, "(txtBuscar)", txtBuscar.Text.ToUpper());
                     }
 
-                    if (cboOtros.SelectedItem.ToString() == "Nuevos")
+                    if (sOtros == "Nuevos")
                     {
                         fb.ApplyFilter(ref filterString, "Vigencia", "30");
                     }
@@ -241,6 +251,8 @@ namespace Catalogo._productos
                 if (dtProducts != null && dtProducts.Rows.Count > 0)
                 {
                     filterString = string.Empty;
+
+                    txtBuscar.Text = string.Empty;
 
                     if (cboLinea.Items.Count > 0) cboLinea.SelectedIndex = 0;
                     if (cboFamilia.Items.Count > 0) cboFamilia.SelectedIndex = 0;
