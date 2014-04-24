@@ -28,13 +28,19 @@ namespace Catalogo.util.BackgroundTasks
 
         public override void execute()
         {
+            try
+            {
+                Catalogo._existencia.VerExistencia existencia = new Catalogo._existencia.VerExistencia();
+                existencia.Inicializar(Global01.IDMaquina, Global01.URL_ANS2);
 
-            Catalogo._existencia.VerExistencia existencia = new Catalogo._existencia.VerExistencia();
-            existencia.Inicializar(Global01.IDMaquina, Global01.URL_ANS2);
-
-            string pSemaforo = "";
-            existencia.ExistenciaSemaforo(_idProducto, Global01.NroUsuario, ref pSemaforo);
-            _semaforo = pSemaforo;
+                string pSemaforo = "";
+                existencia.ExistenciaSemaforo(_idProducto, Global01.NroUsuario, ref pSemaforo);
+                _semaforo = pSemaforo;
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
         }
 
         public delegate void CancelledHandler(System.Windows.Forms.DataGridViewCell cell);

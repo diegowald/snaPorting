@@ -20,15 +20,23 @@ namespace Catalogo.util.BackgroundTasks
         {
             while (_running)
             {
-                System.Diagnostics.Debug.WriteLine("CHEQUEANDO NOVEDADES");
-                
-                util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateNovedadesCatalogo);
-                updater.run();
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine("CHEQUEANDO NOVEDADES");
 
-                // min x seg X milisegundos 
-                System.Threading.Thread.Sleep(10 * 60 * 1000); 
+                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateNovedadesCatalogo);
+                    updater.run();
+
+                    // min x seg X milisegundos 
+                    System.Threading.Thread.Sleep(10 * 60 * 1000);
+                }
+                catch (Exception ex)
+                {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+                }
             }
         }
+        
 
         public override void cancelled()
         {

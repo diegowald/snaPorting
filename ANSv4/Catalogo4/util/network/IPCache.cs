@@ -34,9 +34,16 @@ namespace Catalogo.util.network
         {
             while (true)
             {
-                util.errorHandling.ErrorLogger.LogMessage("Chequeando conexion");
-                setConectado(checkPing());
-                System.Threading.Thread.Sleep(1000 * 60); // 1 minuto por defecto
+                try
+                {
+                    util.errorHandling.ErrorLogger.LogMessage("Chequeando conexion");
+                    setConectado(checkPing());
+                    System.Threading.Thread.Sleep(1000 * 60); // 1 minuto por defecto
+                }
+                catch (Exception ex)
+                {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+                }
             }
         }
 
