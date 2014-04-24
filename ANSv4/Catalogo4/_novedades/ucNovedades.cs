@@ -266,12 +266,13 @@ namespace Catalogo._novedades
             catch (Exception ex)
             {
                 util.errorHandling.ErrorLogger.LogMessage(ex);
-                throw ex;  //util.errorHandling.ErrorForm.show();
+                util.errorHandling.ErrorForm.show();
             }
         }
         
         private void mostrarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo, int id, string FLeido)
         {
+            string localFile = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
             if (pTipo == "url")
             {
                 System.Diagnostics.Process.Start(pUrl + pArchivo);
@@ -281,26 +282,25 @@ namespace Catalogo._novedades
                 this.pictureBox.Visible = false;
                 this.webBrowser.Visible = true;
                 flash.Visible = false;
-                webBrowser.DocumentText = pUrl;
+                webBrowser.DocumentText = System.IO.File.ReadAllText(localFile);
             }
             else if (pTipo == "pdf")
             {
-                System.Diagnostics.Process.Start(pUrl + pArchivo);
+                System.Diagnostics.Process.Start(localFile);
             }
             else if (pTipo == "imagen")
             {
                 this.pictureBox.Visible = true;
                 this.webBrowser.Visible = false;
                 flash.Visible = false;
-                string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
-                pictureBox.ImageLocation = dest;
+                pictureBox.ImageLocation = localFile;
             }
             else if (pTipo == "flash")
             {
                 pictureBox.Visible = false;
                 webBrowser.Visible = false;
                 flash.Visible = true;
-                flash.file = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
+                flash.file = localFile;
                 flash.play();
             }
 
