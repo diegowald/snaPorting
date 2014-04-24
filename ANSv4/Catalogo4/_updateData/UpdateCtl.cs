@@ -127,7 +127,7 @@ namespace Catalogo.varios
         {
             bool Conectado;
 
-            Conectado = util.SimplePing.ping(URL, 5000, 0, 1);
+            Conectado = util.SimplePing.ping(URL, 5000, 0, "file");
             if (Conectado)
             {
                 downloadingFile = saveFile;

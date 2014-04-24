@@ -47,8 +47,10 @@ namespace Catalogo
                 {
                     util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateCuentas);
                     updater.run();
-
                 }
+
+                util.BackgroundTasks.Updater updater1 = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateNovedadesCatalogo);
+                updater1.run();
 
                 update_productos();
             }
