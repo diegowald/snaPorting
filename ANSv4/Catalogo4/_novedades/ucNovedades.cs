@@ -667,11 +667,9 @@ namespace Catalogo._novedades
                             string dest = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, row.Cells["N_Archivo"].Value.ToString());
                             borrarNovedadfile(dest);
                         }
-
                         dgvNovedades.ClearSelection();
                     }
-
-                }                
+                }
             }
         }
         

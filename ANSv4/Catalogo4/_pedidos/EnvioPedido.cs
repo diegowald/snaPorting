@@ -78,42 +78,50 @@ namespace Catalogo._pedidos
             bool cancel = false;
             long resultado = -1;
 
-            if (!webServiceInicializado)
+            try
             {
-                cancel = true;
-            }
-
-            if (!cancel)
-            {
-                if (Global01.TranActiva == null)
+                if (!webServiceInicializado)
                 {
-                    Global01.TranActiva = Conexion1.BeginTransaction();
+                    cancel = true;
                 }
 
-                resultado = cliente.EnviarPedido7(_MacAddress, _NroPedido, _CodCliente, _Fecha, _Observaciones, _Transporte, _Detalle);
-
-                if (resultado == 0)
+                if (!cancel)
                 {
-                    Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Pedido_Transmicion_Upd '" + _NroPedido + "'");
-                    if (Global01.TranActiva != null)
+                    if (Global01.TranActiva == null)
                     {
-                        Global01.TranActiva.Commit();
-                        Global01.TranActiva = null;
+                        Global01.TranActiva = Conexion1.BeginTransaction();
                     }
+
+                    resultado = cliente.EnviarPedido7(_MacAddress, _NroPedido, _CodCliente, _Fecha, _Observaciones, _Transporte, _Detalle);
+
+                    if (resultado == 0)
+                    {
+                        Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Pedido_Transmicion_Upd '" + _NroPedido + "'");
+                        if (Global01.TranActiva != null)
+                        {
+                            Global01.TranActiva.Commit();
+                            Global01.TranActiva = null;
+                        }
+                    }
+                    else
+                    {
+                        if (Global01.TranActiva != null)
+                        {
+                            Global01.TranActiva.Rollback();
+                            Global01.TranActiva = null;
+                        }
+                    }
+
+                    return resultado;
                 }
                 else
                 {
-                    if (Global01.TranActiva != null)
-                    {
-                        Global01.TranActiva.Rollback();
-                        Global01.TranActiva = null;
-                    }
+                    return -1;
                 }
-
-                return resultado;
             }
-            else
+            catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
                 return -1;
             }
         }

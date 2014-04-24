@@ -82,17 +82,25 @@ namespace Catalogo._auditor
             string Descripciones = "";
             string IDs = "";
 
-            Fechas = String.Join(";", Fecha);
-            Descripciones = String.Join(";", Descripcion);
-            IDs = String.Join(";", Array.ConvertAll(AuditIDs, x => x.ToString()));
-            if (Fechas.Length > 0)
+            try
             {
-                long resultado = cliente.AuditInBlock304(_MacAddress, Fechas, Descripciones, IDs);
-                return resultado == 0;
+                Fechas = String.Join(";", Fecha);
+                Descripciones = String.Join(";", Descripcion);
+                IDs = String.Join(";", Array.ConvertAll(AuditIDs, x => x.ToString()));
+                if (Fechas.Length > 0)
+                {
+                    long resultado = cliente.AuditInBlock304(_MacAddress, Fechas, Descripciones, IDs);
+                    return resultado == 0;
+                }
+                else
+                {
+                    return true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return true;
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                return false;
             }
         }
 

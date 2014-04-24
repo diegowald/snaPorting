@@ -247,43 +247,42 @@ namespace Catalogo._novedades
             {
                 return;
             }
-
-            // Obtengo la cantidad de modificaciones a importar
-            long cantidadAImportar = cliente.GetTodasLasNovedades_Cantidad(_MacAddress, IdUltimaNovedad);
-            long restanImportar = cantidadAImportar;
-            
-            long lastID = 0;
-            long cantImportada = 0;
-
-
-            while (restanImportar>0)
+            try
             {
-                msg.progress2.first="Sincronizando Novedades ...";
-                msg.progress2.second = ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100;
-                this.emitir(msg);
-                System.Data.DataSet ds = cliente.GetTodasLasNovedades_Datos_Registros(_MacAddress, lastID);
-  
-                if (ds.Tables[0].Rows.Count > 0)
-                {
-                    restanImportar-=ds.Tables[0].Rows.Count;
+                // Obtengo la cantidad de modificaciones a importar
+                long cantidadAImportar = cliente.GetTodasLasNovedades_Cantidad(_MacAddress, IdUltimaNovedad);
+                long restanImportar = cantidadAImportar;
 
-            //    'diego          On Error GoTo Proximo
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                long lastID = 0;
+                long cantImportada = 0;
+
+
+                while (restanImportar > 0)
+                {
+                    msg.progress2.first = "Sincronizando Novedades ...";
+                    msg.progress2.second = ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100;
+                    this.emitir(msg);
+                    System.Data.DataSet ds = cliente.GetTodasLasNovedades_Datos_Registros(_MacAddress, lastID);
+
+                    if (ds.Tables[0].Rows.Count > 0)
                     {
-                        System.Data.DataRow row = ds.Tables[0].Rows[i];
-                        try
+                        restanImportar -= ds.Tables[0].Rows.Count;
+
+                        //    'diego          On Error GoTo Proximo
+                        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                         {
-                            Novedades_Add(conexion, 
+                            System.Data.DataRow row = ds.Tables[0].Rows[i];
+                            Novedades_Add(conexion,
                                         (int)row["ID"],
                                         (DateTime)row["Fecha"],
                                         row["Descripcion"].ToString(),
                                         row["Destino"].ToString(),
-                                        row["Origen"].ToString(), 
-                                        row["Tipo"].ToString(), 
+                                        row["Origen"].ToString(),
+                                        row["Tipo"].ToString(),
                                         (DateTime)row["F_Inicio"],
                                         (DateTime)row["F_Fin"],
-                                        row["N_Archivo"].ToString(),            
-                                        row["url"].ToString(),                                         
+                                        row["N_Archivo"].ToString(),
+                                        row["url"].ToString(),
                                         row["zonas"].ToString(),
                                         (byte)row["Activo"]);
 
@@ -298,16 +297,15 @@ namespace Catalogo._novedades
                                     return;
                                 }
                             }
+                            lastID = (int)row["ID"];
                         }
-                        catch (Exception ex)
-                        {
-                            util.errorHandling.ErrorLogger.LogMessage(ex);
-                            throw ex;  //util.errorHandling.ErrorForm.show();
-                        }
-                        lastID = (int)row["ID"];
+                        this.emitir2("Hacer Refresh novedades");
                     }
-                    this.emitir2("Hacer Refresh novedades");
                 }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
             }
         }
     

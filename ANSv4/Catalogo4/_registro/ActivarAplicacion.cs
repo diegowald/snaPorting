@@ -87,17 +87,24 @@ namespace Catalogo._Application
         private string obtenerLlaveViajante(string ZonaViajante)
         {
             string llaveViajante = string.Empty;
-
-            if (util.network.IPCache.instance.conectado)
+            try
             {
-                string s = cliente.ObtenerLLaveViajante(ZonaViajante);
-                if (s.Trim().Length > 0)
+                if (util.network.IPCache.instance.conectado)
                 {
-                    string xParam = s + Global01.IDMaquinaCRC;
-                    llaveViajante = ZonaViajante + Global01.NroUsuario + Global01.Cuit.Replace("-","") + _registro.AppRegistro.ObtenerCRC(xParam);
+                    string s = cliente.ObtenerLLaveViajante(ZonaViajante);
+                    if (s.Trim().Length > 0)
+                    {
+                        string xParam = s + Global01.IDMaquinaCRC;
+                        llaveViajante = ZonaViajante + Global01.NroUsuario + Global01.Cuit.Replace("-", "") + _registro.AppRegistro.ObtenerCRC(xParam);
+                    }
                 }
+                return llaveViajante;
             }
-            return llaveViajante;
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                return llaveViajante;
+            }
         }
 
         public void activar()

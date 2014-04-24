@@ -291,50 +291,49 @@ namespace Catalogo._clientes
                 cancel = true;
                 return;
             }
-
-            msg.progress1.first = "Sincronizando Clientes ...";
-            msg.progress1.second = 40;
-            msg.progress2.first = "Importando Mis Clientes";
-            msg.progress2.second = 0;
-            this.emitir(msg);
-            this.requestCancel(ref cancel);
-            if (cancel)
+            try
             {
-                return;
-            }
-
-            // Obtengo la cantidad de modificaciones a importar
-            long cantidadAImportar = cliente.GetTodosLosClientes_Cantidad(_MacAddress);
-            long restanImportar = cantidadAImportar;
-            
-            long lastID = 0;
-            long cantImportada = 0;
-
-
-            while (restanImportar>0)
-            {
-                msg.progress2.first="Sincronizando Clientes ...";
-                msg.progress2.second = ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100;
+                msg.progress1.first = "Sincronizando Clientes ...";
+                msg.progress1.second = 40;
+                msg.progress2.first = "Importando Mis Clientes";
+                msg.progress2.second = 0;
                 this.emitir(msg);
-                System.Data.DataSet ds = cliente.GetTodosLosClientes_Datos_Registros(_MacAddress, lastID);
-  
-                if (ds.Tables[0].Rows.Count > 0)
+                this.requestCancel(ref cancel);
+                if (cancel)
                 {
-                    restanImportar-=ds.Tables[0].Rows.Count;
+                    return;
+                }
 
-            //    'diego          On Error GoTo Proximo
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                // Obtengo la cantidad de modificaciones a importar
+                long cantidadAImportar = cliente.GetTodosLosClientes_Cantidad(_MacAddress);
+                long restanImportar = cantidadAImportar;
+
+                long lastID = 0;
+                long cantImportada = 0;
+
+
+                while (restanImportar > 0)
+                {
+                    msg.progress2.first = "Sincronizando Clientes ...";
+                    msg.progress2.second = ((float)cantidadAImportar - restanImportar) / cantidadAImportar * 100;
+                    this.emitir(msg);
+                    System.Data.DataSet ds = cliente.GetTodosLosClientes_Datos_Registros(_MacAddress, lastID);
+
+                    if (ds.Tables[0].Rows.Count > 0)
                     {
-                        System.Data.DataRow row = ds.Tables[0].Rows[i];
-                        try
+                        restanImportar -= ds.Tables[0].Rows.Count;
+
+                        //    'diego          On Error GoTo Proximo
+                        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                         {
+                            System.Data.DataRow row = ds.Tables[0].Rows[i];
                             Clientes_Add(conexion, (int)row["ID"],
-                                  row["RazonSocial"].ToString(),
-                                  row["Cuit"].ToString(),
-                                  row["Email"].ToString(), (int)row["IDViajante"],
-                                  row["Domicilio"].ToString(), row["Ciudad"].ToString(),
-                                  row["Telefono"].ToString(), row["Observaciones"].ToString(),
-                                  (byte)row["Activo"], (DateTime)row["F_ActCliente"], row["Cascara"].ToString());
+                                      row["RazonSocial"].ToString(),
+                                      row["Cuit"].ToString(),
+                                      row["Email"].ToString(), (int)row["IDViajante"],
+                                      row["Domicilio"].ToString(), row["Ciudad"].ToString(),
+                                      row["Telefono"].ToString(), row["Observaciones"].ToString(),
+                                      (byte)row["Activo"], (DateTime)row["F_ActCliente"], row["Cascara"].ToString());
                             cantImportada++;
                             if (cantImportada % 31 == 0)
                             {
@@ -346,15 +345,14 @@ namespace Catalogo._clientes
                                     return;
                                 }
                             }
+                            lastID = (int)row["ID"];
                         }
-                        catch (Exception ex)
-                        {
-                            util.errorHandling.ErrorLogger.LogMessage(ex);
-                            throw ex;  //util.errorHandling.ErrorForm.show();
-                        }
-                        lastID = (int)row["ID"];
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
             }
         }
 
@@ -365,47 +363,48 @@ namespace Catalogo._clientes
                 cancel = true;
                 return;
             }
-            msg.progress1.first = "Sincronizando de Clientes ...";
-            msg.progress1.second = 60;
-            msg.progress2.first = "Importando Cuentas Corrientes";
-            msg.progress2.second = 0;
-            this.emitir(msg);
-            this.requestCancel(ref cancel);
-            if (cancel)
-            {
-                return;
-            }
-            
-            // Obtengo la cantidad de modificaciones a importar
-            long CantidadAImportar = cliente.GetTodasLasCtasCtes_Cantidad(_MacAddress);
-            long RestanImportar = CantidadAImportar;
-            long CantidadImportada = 0;
-            long lastId = 0;
 
-            while (RestanImportar>0)
+            try
             {
-                msg.progress2.first = "Sincronizando Cuentas Corrientes ...";
-                msg.progress2.second = ((float)CantidadAImportar - RestanImportar) / CantidadAImportar * 100;
+                msg.progress1.first = "Sincronizando de Clientes ...";
+                msg.progress1.second = 60;
+                msg.progress2.first = "Importando Cuentas Corrientes";
+                msg.progress2.second = 0;
                 this.emitir(msg);
-                System.Data.DataSet ds = cliente.GetTodasLasCtasCtes_Datos_Registros(_MacAddress, lastId);
-  
-                if (ds.Tables[0].Rows.Count > 0)
+                this.requestCancel(ref cancel);
+                if (cancel)
                 {
-                    RestanImportar-=ds.Tables[0].Rows.Count;
+                    return;
+                }
 
-            //    '                On Error GoTo Proximo
+                // Obtengo la cantidad de modificaciones a importar
+                long CantidadAImportar = cliente.GetTodasLasCtasCtes_Cantidad(_MacAddress);
+                long RestanImportar = CantidadAImportar;
+                long CantidadImportada = 0;
+                long lastId = 0;
 
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                while (RestanImportar > 0)
+                {
+                    msg.progress2.first = "Sincronizando Cuentas Corrientes ...";
+                    msg.progress2.second = ((float)CantidadAImportar - RestanImportar) / CantidadAImportar * 100;
+                    this.emitir(msg);
+                    System.Data.DataSet ds = cliente.GetTodasLasCtasCtes_Datos_Registros(_MacAddress, lastId);
+
+                    if (ds.Tables[0].Rows.Count > 0)
                     {
-                        System.Data.DataRow row = ds.Tables[0].Rows[i];
-                        try
+                        RestanImportar -= ds.Tables[0].Rows.Count;
+
+                        //    '                On Error GoTo Proximo
+
+                        for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                         {
+                            System.Data.DataRow row = ds.Tables[0].Rows[i];
                             CtaCte_Add(conexion,
                                 int.Parse(row["IdCliente"].ToString()),
                                 (DateTime)row["F_Comprobante"],
                                 row["T_Comprobante"].ToString(),
                                 row["N_Comprobante"].ToString(),
-                                DBNull.Value.Equals(row["Det_Comprobante"]) ? "" : row["Det_Comprobante"].ToString(), 
+                                DBNull.Value.Equals(row["Det_Comprobante"]) ? "" : row["Det_Comprobante"].ToString(),
                                 int.Parse(row["Importe"].ToString()) / 100,
                                 int.Parse(row["Saldo"].ToString()) / 100,
                                 int.Parse(row["ImpOferta"].ToString()) / 100,
@@ -424,18 +423,16 @@ namespace Catalogo._clientes
                                     return;
                                 }
                             }
+                            lastId = long.Parse(row["ID"].ToString());
                         }
-                        catch (Exception ex)
-                        {
-                            util.errorHandling.ErrorLogger.LogMessage(ex);
-                            throw ex;  //util.errorHandling.ErrorForm.show();
-                        }
-                        lastId = long.Parse(row["ID"].ToString());
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+            }
         }
-
         public emisorHandler<Catalogo.varios.complexMessage> emisor
         {
             get;

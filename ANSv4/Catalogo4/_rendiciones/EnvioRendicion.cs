@@ -127,41 +127,48 @@ namespace Catalogo._rendiciones
                 Cancel = true;
             }
 
-
-            if (!Cancel)
+            try
             {
-                if (Global01.TranActiva == null)
+                if (!Cancel)
                 {
-                    Global01.TranActiva = Conexion1.BeginTransaction();
-                }
-
-                resultado = Cliente.EnviarRendicion(m_MacAddress, m_NroRendicion, m_IdViajante, m_F_Rendicion, m_Observaciones,
-                    m_Efectivo.ToString(), m_Dolares.ToString(), m_Euros.ToString(),
-                    m_ChequesCant.ToString(), m_ChequesMonto.ToString(),
-                m_CertificadosCant.ToString(), m_CertificadosMonto.ToString(), m_DetalleValores, m_DetalleRecibos);
-
-                if (resultado == 0)
-                {
-                    Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Rendicion_Transmicion_Upd '" + m_NroRendicion.Substring(m_NroRendicion.Length - 8) + "'");
-                    if (Global01.TranActiva != null)
+                    if (Global01.TranActiva == null)
                     {
-                        Global01.TranActiva.Commit();
-                        Global01.TranActiva = null;
+                        Global01.TranActiva = Conexion1.BeginTransaction();
                     }
+
+                    resultado = Cliente.EnviarRendicion(m_MacAddress, m_NroRendicion, m_IdViajante, m_F_Rendicion, m_Observaciones,
+                        m_Efectivo.ToString(), m_Dolares.ToString(), m_Euros.ToString(),
+                        m_ChequesCant.ToString(), m_ChequesMonto.ToString(),
+                    m_CertificadosCant.ToString(), m_CertificadosMonto.ToString(), m_DetalleValores, m_DetalleRecibos);
+
+                    if (resultado == 0)
+                    {
+                        Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Rendicion_Transmicion_Upd '" + m_NroRendicion.Substring(m_NroRendicion.Length - 8) + "'");
+                        if (Global01.TranActiva != null)
+                        {
+                            Global01.TranActiva.Commit();
+                            Global01.TranActiva = null;
+                        }
+                    }
+                    else
+                    {
+                        if (Global01.TranActiva != null)
+                        {
+                            Global01.TranActiva.Rollback();
+                            Global01.TranActiva = null;
+                        }
+                    }
+
+                    return resultado;
                 }
                 else
                 {
-                    if (Global01.TranActiva != null)
-                    {
-                        Global01.TranActiva.Rollback();
-                        Global01.TranActiva = null;
-                    }
+                    return -1;
                 }
-
-                return resultado;
             }
-            else
+            catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
                 return -1;
             }
         }

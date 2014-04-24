@@ -96,9 +96,17 @@ namespace Catalogo._existencia
 	    private string ObtenerSemaforo(ref bool Cancel, string IDAns, string IdProducto)
 	    {
             string sResultado = "x";
-            sResultado = Cliente.ObtenerExistencia(m_MacAddress, IDAns, IdProducto);
-            return sResultado;
+            try
+            {
 
+                sResultado = Cliente.ObtenerExistencia(m_MacAddress, IDAns, IdProducto);
+                return sResultado;
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                return sResultado;
+            }
             //if (!My.Computer.Network.Ping(m_ipAddress, 5000))
             //{
             //    // Conexion no valida
