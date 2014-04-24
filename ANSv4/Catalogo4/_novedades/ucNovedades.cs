@@ -308,11 +308,7 @@ namespace Catalogo._novedades
             {
                 marcarComoLeido(id);
             }
-////solo a Los efectos de un ejemplo
-//            string sUrl = "file://" + Global01.AppPath + @"\reportes\htmldocs\Viajantes\scroller_newstic.html";
-//            string sUrl2 = "file://" + Global01.AppPath + @"\reportes\htmldocs\Clientes\scroller_newstic.html";
-//            //webBrowser1.Navigate(new Uri(sUrl));
-//            webBrowser.Navigate(new Uri(sUrl2));
+
         }
 
         private void marcarComoLeido(int id)
@@ -322,9 +318,13 @@ namespace Catalogo._novedades
             //    + ", #" + System.DateTime.Now.ToString() + "#);";
 
             string sql = "UPDATE tblNovedadLeido SET F_Leido=Now() WHERE IdNovedad=" + id.ToString();
-
-
             Catalogo.Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, sql);
+
+            System.Data.DataRow[] rows = this.dtNovedades.Select("ID = " + id.ToString());
+            foreach (System.Data.DataRow row in rows)
+            {
+                row["F_Leido"] = System.DateTime.Now;
+            }
         }
 
         private void ejecutarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo)
