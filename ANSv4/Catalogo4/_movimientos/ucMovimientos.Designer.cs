@@ -30,7 +30,7 @@ namespace Catalogo._movimientos
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.PnlTop = new System.Windows.Forms.Panel();
@@ -168,8 +168,8 @@ namespace Catalogo._movimientos
             this.movDataGridView.AllowUserToAddRows = false;
             this.movDataGridView.AllowUserToDeleteRows = false;
             this.movDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.movDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            this.movDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.movDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.movDataGridView.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.movDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
