@@ -151,12 +151,12 @@ namespace Catalogo._registro
 
             Global01.Conexion.Open();
 
-            appConfig_upd(Global01.Conexion, Global01.Cuit, Global01.RazonSocial, Global01.ApellidoNombre, "Chiclana 915", "(0291) 456-1111", "Bahía Blanca", Global01.EmailTO, Global01.NroUsuario, Global01.ListaPrecio, Int16.Parse(Global01.Zona));
+            appConfig_upd(Global01.Conexion, Global01.Cuit.Replace("-", ""), Global01.RazonSocial, Global01.ApellidoNombre, "Chiclana 915", "(0291) 456-1111", "Bahía Blanca", Global01.EmailTO, Global01.NroUsuario, Global01.ListaPrecio, Int16.Parse(Global01.Zona));
 
             if (Global01.miSABOR ==  Global01.TiposDeCatalogo.Cliente)
             {
                 Cliente_add(Global01.Conexion, Int16.Parse(Global01.NroUsuario), Global01.ApellidoNombre, Global01.RazonSocial, 
-                    Global01.Cuit, Global01.EmailTO, Int16.Parse(Global01.Zona),
+                    Global01.Cuit.Replace("-",""), Global01.EmailTO, Int16.Parse(Global01.Zona),
                     "Chiclana 915", "Bahía Blanca", "(0291) 456-1111", 
                     "de alta en registro de catálogo", 0, DateTime.Now, "Cxx");
             }

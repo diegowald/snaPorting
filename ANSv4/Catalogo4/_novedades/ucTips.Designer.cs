@@ -38,7 +38,6 @@
             this.lblTip = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Frame1.SuspendLayout();
-            this.Frame2.SuspendLayout();
             this.SuspendLayout();
             // 
             // chkVer
@@ -63,7 +62,6 @@
             this._Label3_1.AutoSize = true;
             this._Label3_1.BackColor = System.Drawing.Color.Transparent;
             this._Label3_1.Cursor = System.Windows.Forms.Cursors.Default;
-            this._Label3_1.ForeColor = System.Drawing.Color.Red;
             this._Label3_1.Location = new System.Drawing.Point(586, 274);
             this._Label3_1.Name = "_Label3_1";
             this._Label3_1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -77,8 +75,7 @@
             this._Label3_0.AutoSize = true;
             this._Label3_0.BackColor = System.Drawing.Color.Transparent;
             this._Label3_0.Cursor = System.Windows.Forms.Cursors.Default;
-            this._Label3_0.ForeColor = System.Drawing.Color.Red;
-            this._Label3_0.Location = new System.Drawing.Point(490, 274);
+            this._Label3_0.Location = new System.Drawing.Point(530, 95);
             this._Label3_0.Name = "_Label3_0";
             this._Label3_0.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this._Label3_0.Size = new System.Drawing.Size(51, 13);
@@ -91,17 +88,16 @@
             this.Label2.AutoSize = true;
             this.Label2.BackColor = System.Drawing.Color.Transparent;
             this.Label2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Label2.ForeColor = System.Drawing.Color.Red;
             this.Label2.Location = new System.Drawing.Point(142, 95);
             this.Label2.Name = "Label2";
             this.Label2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Label2.Size = new System.Drawing.Size(73, 13);
             this.Label2.TabIndex = 7;
             this.Label2.Text = "Sugerencia ...";
+            this.Label2.Visible = false;
             // 
             // Frame1
             // 
-            this.Frame1.BackColor = System.Drawing.Color.White;
             this.Frame1.Controls.Add(this.Frame2);
             this.Frame1.Cursor = System.Windows.Forms.Cursors.Default;
             this.Frame1.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -113,14 +109,13 @@
             // 
             // Frame2
             // 
-            this.Frame2.BackColor = System.Drawing.Color.White;
-            this.Frame2.Controls.Add(this.lblTip);
+            this.Frame2.BackColor = System.Drawing.SystemColors.Control;
             this.Frame2.Cursor = System.Windows.Forms.Cursors.Default;
             this.Frame2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Frame2.Location = new System.Drawing.Point(0, 3);
+            this.Frame2.Location = new System.Drawing.Point(348, -13);
             this.Frame2.Name = "Frame2";
             this.Frame2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Frame2.Size = new System.Drawing.Size(462, 129);
+            this.Frame2.Size = new System.Drawing.Size(462, 127);
             this.Frame2.TabIndex = 4;
             this.Frame2.Text = "Frame1";
             // 
@@ -128,12 +123,12 @@
             // 
             this.lblTip.BackColor = System.Drawing.Color.Transparent;
             this.lblTip.Cursor = System.Windows.Forms.Cursors.Default;
-            this.lblTip.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTip.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTip.ForeColor = System.Drawing.Color.Black;
-            this.lblTip.Location = new System.Drawing.Point(12, 3);
+            this.lblTip.Location = new System.Drawing.Point(148, 124);
             this.lblTip.Name = "lblTip";
             this.lblTip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblTip.Size = new System.Drawing.Size(433, 109);
+            this.lblTip.Size = new System.Drawing.Size(433, 114);
             this.lblTip.TabIndex = 5;
             // 
             // timer1
@@ -145,6 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblTip);
             this.Controls.Add(this.Frame1);
             this.Controls.Add(this.chkVer);
             this.Controls.Add(this._Label3_1);
@@ -153,7 +149,6 @@
             this.Name = "ucTips";
             this.Size = new System.Drawing.Size(752, 377);
             this.Frame1.ResumeLayout(false);
-            this.Frame2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

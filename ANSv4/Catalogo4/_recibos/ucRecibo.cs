@@ -108,7 +108,7 @@ namespace Catalogo._recibos
                 }
                 else 
                 {
-                    ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                    ItemX.BackColor = System.Drawing.SystemColors.Control;  //System.Drawing.Color.FromArgb(255, 255, 192);
                 }
 
                 //ItemX.SubItems["1"].Text  = dr["Comprobante"].Text;

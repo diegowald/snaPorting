@@ -86,7 +86,7 @@
             this.dgvNovedades.AllowUserToAddRows = false;
             this.dgvNovedades.AllowUserToDeleteRows = false;
             this.dgvNovedades.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightYellow;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             this.dgvNovedades.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvNovedades.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.dgvNovedades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -100,7 +100,6 @@
             this.dgvNovedades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dgvNovedades.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvNovedades_CellFormatting);
             this.dgvNovedades.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvNovedades_KeyDown);
-
             // 
             // ucNovedades
             // 
