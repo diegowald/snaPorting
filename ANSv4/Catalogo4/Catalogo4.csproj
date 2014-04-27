@@ -303,6 +303,9 @@
     <Compile Include="_preferencias\PreferenciasFrm.xaml.cs">
       <DependentUpon>PreferenciasFrm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="_productos\CustomizedDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="_productos\DetalleImagen.xaml.cs">
       <DependentUpon>DetalleImagen.xaml</DependentUpon>
     </Compile>

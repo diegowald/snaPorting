@@ -30,17 +30,18 @@ namespace Catalogo
         private Catalogo._devoluciones.ucDevolucion dev = null;
         private Catalogo._recibos.ucRecibo rec = null;
         private Catalogo._interdeposito.ucInterDeposito IntDep = null;
-        private Catalogo._rendiciones.ucRendiciones RenD = null;        
+        private Catalogo._rendiciones.ucRendiciones RenD = null;
         private Catalogo._movimientos.ucMovimientos mov = null;
         private Catalogo._novedades.ucNovedades nov = null;
-        
+
         private bool _forcedToAutoHide;
 
         public mwViajantes()
         {
             this.Hide();
-            InitializeComponent();            
-            
+            InitializeComponent();
+
+            setHotKeys();
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
@@ -57,7 +58,7 @@ namespace Catalogo
             }
 
             if (!Global01.AppActiva)
-            {       
+            {
                 this.xVtaDevDockP.Visibility = System.Windows.Visibility.Collapsed;
                 this.grSpliter1.Visibility = System.Windows.Visibility.Collapsed;
                 this.grPedidosDevolucionesArea.Visibility = System.Windows.Visibility.Collapsed;
@@ -73,11 +74,13 @@ namespace Catalogo
                 this.grProductsArea.Height = 310;
                 this.grProductsDetalle.Height = 90;
                 //this.productDetalle.Height = 90;
-                
+
             }
             this.Closing += mwViajantes_Closing;
             crearControlesProductos();
         }
+
+
 
         private void addFlashPlayer()
         {
@@ -91,7 +94,7 @@ namespace Catalogo
             flash.Location = new System.Drawing.Point(0, 0);
             flash.Name = "flash";
 
-            flash.file =  Global01.AppPath  + "\\imagenes\\banner.swf";
+            flash.file = Global01.AppPath + "\\imagenes\\banner.swf";
 
             flash.play();
 
@@ -109,9 +112,9 @@ namespace Catalogo
             Catalogo._productos.SearchFilter filterControl = new _productos.SearchFilter();
             filterControl.AutoScroll = false;
             filterControl.Location = new System.Drawing.Point(0, 0);
-            filterControl.Dock = System.Windows.Forms.DockStyle.Top;       
+            filterControl.Dock = System.Windows.Forms.DockStyle.Top;
             filterControl.Name = "searchFilter";
-          //filterControl.Size = new System.Drawing.Size(640, 480);
+            //filterControl.Size = new System.Drawing.Size(640, 480);
 
             // Assign the MaskedTextBox control as the host control's child.
             host.Child = filterControl;
@@ -201,10 +204,10 @@ namespace Catalogo
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
             Catalogo._recibos.ucRecibo xRecibo;
-            xRecibo = new Catalogo._recibos.ucRecibo() ;
+            xRecibo = new Catalogo._recibos.ucRecibo();
             xRecibo.AutoScroll = false;
             xRecibo.Location = new System.Drawing.Point(0, 0);
-            xRecibo.Dock = System.Windows.Forms.DockStyle.Fill;            
+            xRecibo.Dock = System.Windows.Forms.DockStyle.Fill;
             xRecibo.Name = "Recibos";
 
             host.Child = xRecibo;
@@ -231,7 +234,7 @@ namespace Catalogo
             return xInterDeposito;
         }
 
-        private Catalogo._productos.GridViewFilter2  addProductsArea()
+        private Catalogo._productos.GridViewFilter2 addProductsArea()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
@@ -239,8 +242,8 @@ namespace Catalogo
             Catalogo._productos.GridViewFilter2 gridViewControl;
             gridViewControl = new Catalogo._productos.GridViewFilter2();
             gridViewControl.AutoScroll = false;
-            gridViewControl.Location = new System.Drawing.Point(0, 0);            
-            gridViewControl.Dock = System.Windows.Forms.DockStyle.Fill;            
+            gridViewControl.Location = new System.Drawing.Point(0, 0);
+            gridViewControl.Dock = System.Windows.Forms.DockStyle.Fill;
             gridViewControl.Name = "GridViewProductos";
 
             host.Child = gridViewControl;
@@ -305,7 +308,7 @@ namespace Catalogo
             this.xContentMenu.ToggleAutoHide();
             _forcedToAutoHide = true;
         }
-   
+
         private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
         {
             if (eventArgs.ChangedButton == MouseButton.Left)
@@ -428,7 +431,7 @@ namespace Catalogo
 
         private void xMenu1_revista(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.autonauticasur-r.com.ar/revista/vigente/index2.html");            
+            System.Diagnostics.Process.Start("http://www.autonauticasur-r.com.ar/revista/vigente/index2.html");
         }
 
         private void xMenu1_porcentajeL(object sender, RoutedEventArgs e)
@@ -468,7 +471,7 @@ namespace Catalogo
                             case "Recibos":
                                 crearControlesRecibos();
                                 break;
-                            case"Rendición de Recibos":
+                            case "Rendición de Recibos":
                                 crearcontrolesRendicionRecibos();
                                 break;
                             case "Inter-Depósitos":
@@ -530,6 +533,7 @@ namespace Catalogo
 
                 sf.attachReceptor(gv);
                 sf.attachReceptor2(gv);
+                sf.attachReceptor3(gv);
 
                 gv.attachReceptor(productDetalle);
                 gv.attachReceptor(ped);
@@ -583,23 +587,43 @@ namespace Catalogo
 
         private void btnYoutube_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.youtube.com/channel/UC32Fr7Or2ZZhPnkZLn1n4-Q");            
+            System.Diagnostics.Process.Start("http://www.youtube.com/channel/UC32Fr7Or2ZZhPnkZLn1n4-Q");
         }
 
         private void btnTwitter_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://twitter.com/AutoNauticaSur");            
+            System.Diagnostics.Process.Start("http://twitter.com/AutoNauticaSur");
         }
 
         private void btnFacebook_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.facebook.com/autonauticasur");            
+            System.Diagnostics.Process.Start("http://www.facebook.com/autonauticasur");
         }
 
         private void btnLinkedin_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.linkedin.com/company/3667540");            
+            System.Diagnostics.Process.Start("http://www.linkedin.com/company/3667540");
         }
 
+        private void setHotKeys()
+        {
+            System.Windows.Input.RoutedCommand buscarCmd = new RoutedCommand();
+            buscarCmd.InputGestures.Add(new KeyGesture(Key.B, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(buscarCmd, buscarEvtHandler));
+        }
+
+        private void buscarEvtHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.dockPane.SelectedIndex = 0;
+            doEvents();
+            sf.Focus();
+            this.sf.FocusOnSearch();
+        }
+
+        public void doEvents()
+        {
+            Application.Current.Dispatcher.Invoke(new System.Threading.ThreadStart(delegate { }),
+                System.Windows.Threading.DispatcherPriority.Background);
+        }
     }
 }

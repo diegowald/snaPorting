@@ -15,6 +15,7 @@ namespace Catalogo._productos
     public partial class SearchFilter : UserControl,
         Funciones.emitter_receiver.IEmisor<string>, // Para emitir la condicion de filtrado
         Funciones.emitter_receiver.IEmisor2<float>, // Para emitir el porcentaje
+        Funciones.emitter_receiver.IEmisor3<Keys>, // Para emitir el tab en la grilla
         Funciones.emitter_receiver.IReceptor<util.Pair<int, int>> // Para recibir la cantidad de registros encontrados
     {
 
@@ -43,6 +44,7 @@ namespace Catalogo._productos
             preload.Preloader.instance.productos.onWorkFinished += dataReady;
 
             xCargarDataControl();
+            
         }
 
         private void xCargarDataControl()
@@ -292,6 +294,42 @@ namespace Catalogo._productos
         private void txtPorcentajeLinea_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = Funciones.util.SoloDigitos(e);
+        }
+
+        internal delegate void FocusDelegate();
+        internal void FocusOnSearch()
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new FocusDelegate(FocusOnSearch));
+                return;
+            }
+            this.ActiveControl = txtBuscar.Control;
+        }
+
+        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '\r')
+            {
+                btnApply0.PerformClick();
+                e.Handled = true;
+            }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if ((keyData == Keys.Tab) && (ActiveControl == txtBuscar.Control))
+            {
+                this.emitir3(keyData);
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        public emisorHandler<Keys> emisor3
+        {
+            get;
+            set;
         }
     }
 }

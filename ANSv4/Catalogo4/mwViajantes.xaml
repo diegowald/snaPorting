@@ -9,8 +9,7 @@
         WindowStartupLocation="CenterScreen"                
         BorderThickness="0"
         ResizeMode="CanResize"  Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFFFFF" >
-
-    <Border Grid.Row="0" x:Name="LayoutRoot" 
+        <Border Grid.Row="0" x:Name="LayoutRoot" 
           Background="White" BorderBrush="White" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">
 
         <Grid>
@@ -117,7 +116,7 @@
             <ad:DockingManager Name="dockManager" Grid.Row="1" IsAnimationEnabled="False" >
                 <ad:ResizingPanel Orientation="Vertical">
                     <ad:ResizingPanel Orientation="Horizontal">
-                        <ad:DocumentPane Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="5" SelectionChanged="DocumentPane_SelectionChanged">
+                        <ad:DocumentPane Name="dockPane" Loaded="DocumentPane_Loaded_1" ShowHeader="True" SelectedIndex="5" SelectionChanged="DocumentPane_SelectionChanged">
 
                             <ad:DocumentContent Name="dcProductos" Title="Productos" IsCloseable="False" IsFloatingAllowed="False" >
                                 <Grid x:Name="grProductos">
@@ -227,7 +226,5 @@
                 <StatusBarItem x:Name="iSB1" Content="2014 © Todos los derechos reservados por Auto Náutica Sur S.R.L." HorizontalAlignment="Right" Margin="5,0" />
             </StatusBar>
         </Grid>
-
     </Border>
-
 </Window>

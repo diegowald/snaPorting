@@ -15,6 +15,7 @@ namespace Catalogo._productos
     public partial class GridViewFilter2 : UserControl,
         Funciones.emitter_receiver.IReceptor<string>,  // Para recibir el filtro de datos
         Funciones.emitter_receiver.IReceptor<float>, // Para recibir los porcentajes
+        Funciones.emitter_receiver.IReceptor<Keys>, // Para recibir notificacion de Tab
         Funciones.emitter_receiver.IEmisor<DataGridViewRow>, // Para enviar el registro seleccionado
         Funciones.emitter_receiver.IEmisor2<util.Pair<int, int>>, // Para enviar la cantidad de registros encontrados.
         Funciones.emitter_receiver.IEmisor3<_pedidos.PedidosHelper.Acciones> // Para enviar acciones al pedido desde la grilla de productos.
@@ -84,7 +85,8 @@ namespace Catalogo._productos
             InitializeComponent();
 
             dataGridView1.RowPostPaint += OnRowPostPaint;
-   
+            //         dataGridView1.KeyPress +=dataGridView1_KeyPress;
+
             preload.Preloader.instance.productos.onWorkFinished += dataReady;
 
             xCargarDataControl();
@@ -126,7 +128,7 @@ namespace Catalogo._productos
             preload.Preloader.instance.productos.execute();
         }
 
-       private void dataReady(System.Data.DataTable dataTable)
+        private void dataReady(System.Data.DataTable dataTable)
         {
             dtProducts = dataTable;
 
@@ -405,32 +407,32 @@ namespace Catalogo._productos
         {
 
 
-          if (resultado.IndexOf(";") > 0)
-          {
-          
-              string[] stringSeparators = new string[] {";"};
-              string[] aResultado = resultado.Split(stringSeparators, StringSplitOptions.None);
-     
-              switch   (aResultado[0])
-              {
-                  case "r":
-                    cell.Style.BackColor = Color.Red;
-                    cell.ToolTipText= "NO Disponible";
-                    break;
-                  case "a":
-                    cell.Style.BackColor = Color.Yellow;
-                    cell.ToolTipText= "Disponibilidad Parcial \n valor de referencia (" + aResultado[1] + ") unidades";
-                    break;
-                  case "v":
-                    cell.Style.BackColor = Color.Green;
-                    cell.ToolTipText= "En Tránsito \n valor de referencia (" + aResultado[1] + ") unidades";
-                    break;
-                  case "VV":
-                    cell.Style.BackColor = Color.YellowGreen;
-                    cell.ToolTipText= "Disponible en 24 hs. \n valor de referencia (" + aResultado[1] + ") unidades";
-                    cell.Value= "x";
-                    break;
-              }
+            if (resultado.IndexOf(";") > 0)
+            {
+
+                string[] stringSeparators = new string[] { ";" };
+                string[] aResultado = resultado.Split(stringSeparators, StringSplitOptions.None);
+
+                switch (aResultado[0])
+                {
+                    case "r":
+                        cell.Style.BackColor = Color.Red;
+                        cell.ToolTipText = "NO Disponible";
+                        break;
+                    case "a":
+                        cell.Style.BackColor = Color.Yellow;
+                        cell.ToolTipText = "Disponibilidad Parcial \n valor de referencia (" + aResultado[1] + ") unidades";
+                        break;
+                    case "v":
+                        cell.Style.BackColor = Color.Green;
+                        cell.ToolTipText = "En Tránsito \n valor de referencia (" + aResultado[1] + ") unidades";
+                        break;
+                    case "VV":
+                        cell.Style.BackColor = Color.YellowGreen;
+                        cell.ToolTipText = "Disponible en 24 hs. \n valor de referencia (" + aResultado[1] + ") unidades";
+                        cell.Value = "x";
+                        break;
+                }
 
             }
 
@@ -548,5 +550,15 @@ namespace Catalogo._productos
             }
         }
 
+
+        public void onRecibir(Keys dato)
+        {
+            if (dato == Keys.Tab)
+            {
+                this.ActiveControl = dataGridView1;
+                dataGridView1.Focus();
+                dataGridView1.Select();
+            }
+        }
     }
 }
