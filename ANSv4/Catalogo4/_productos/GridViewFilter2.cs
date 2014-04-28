@@ -1,4 +1,5 @@
-﻿using System;
+﻿//#define usarSemaforoImagen
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -85,13 +86,16 @@ namespace Catalogo._productos
             InitializeComponent();
 
             dataGridView1.RowPostPaint += OnRowPostPaint;
-            //         dataGridView1.KeyPress +=dataGridView1_KeyPress;
 
+#if usarSemaforoImagen
+            dataGridView1.CellPainting += OnCellPainting;
+#endif
             preload.Preloader.instance.productos.onWorkFinished += dataReady;
 
             xCargarDataControl();
 
         }
+
 
         public void onRecibir(string dato)
         {
@@ -412,23 +416,31 @@ namespace Catalogo._productos
 
                 string[] stringSeparators = new string[] { ";" };
                 string[] aResultado = resultado.Split(stringSeparators, StringSplitOptions.None);
-
+                cell.Tag = aResultado[0];
                 switch (aResultado[0])
                 {
                     case "r":
+#if !usarSemaforoImagen
                         cell.Style.BackColor = Color.Red;
+#endif
                         cell.ToolTipText = "NO Disponible";
                         break;
                     case "a":
+#if !usarSemaforoImagen
                         cell.Style.BackColor = Color.Yellow;
+#endif
                         cell.ToolTipText = "Disponibilidad Parcial \n valor de referencia (" + aResultado[1] + ") unidades";
                         break;
                     case "v":
+#if !usarSemaforoImagen
                         cell.Style.BackColor = Color.Green;
+#endif
                         cell.ToolTipText = "En Tránsito \n valor de referencia (" + aResultado[1] + ") unidades";
                         break;
                     case "VV":
+#if !usarSemaforoImagen
                         cell.Style.BackColor = Color.YellowGreen;
+#endif
                         cell.ToolTipText = "Disponible en 24 hs. \n valor de referencia (" + aResultado[1] + ") unidades";
                         cell.Value = "x";
                         break;
@@ -522,6 +534,61 @@ namespace Catalogo._productos
             if (s.Trim().Length > 0) dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cCodigo].ToolTipText = s.Trim();
 
         }
+
+#if usarSemaforoImagen
+        void OnCellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex == 0 && e.RowIndex > -1)
+            {
+                System.Windows.Forms.DataGridViewCell cell =dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (cell != null)
+                {
+                    Brush brush;
+                    bool dibujarCentro = false;
+                    if (cell.Tag != null)
+                    {
+                        string existencia = (string)cell.Tag;
+                        switch (existencia)
+                        {
+                            case "r":
+                                brush = Brushes.Red;
+                                break;
+                            case "a":
+                                brush = Brushes.Yellow;
+                                break;
+                            case "v":
+                                brush = Brushes.Green;
+                                break;
+                            case "VV":
+                                brush = Brushes.Green;
+                                dibujarCentro = true;
+                                //cell.Value = "x";
+                                break;
+                            default:
+                                brush = Brushes.DarkGray;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        // aca hay que dibujar sin informacion
+                        brush = Brushes.DarkGray;
+                    }
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                    Rectangle rect = e.CellBounds;
+                    rect.Inflate(-5, -5);
+                    e.Graphics.FillEllipse(brush, rect);
+                    if (dibujarCentro)
+                    {
+                        Rectangle r = rect;
+                        r.Inflate(-3, -3);
+                        e.Graphics.FillEllipse(Brushes.Black, r);
+                    }
+                    e.Handled = true;
+                }
+            }
+        }
+#endif
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {

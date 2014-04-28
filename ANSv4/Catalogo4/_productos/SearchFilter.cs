@@ -307,6 +307,7 @@ namespace Catalogo._productos
                 return;
             }
             this.ActiveControl = txtBuscar.Control;
+            txtBuscar.Clear();
         }
 
         private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
