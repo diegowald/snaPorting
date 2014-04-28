@@ -70,6 +70,8 @@ namespace Catalogo
             check.run();
 
             //Aca tiene que ir tambien el proceso que envia al server las transacciones.
+/*            Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, -1, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
+            envioMovs.run();*/
         }
 
         private static void ActivarApplicacion()

@@ -630,7 +630,6 @@ namespace Catalogo
             {
                 if (dockPane.SelectedIndex == 1)
                 {
-                    System.Windows.Forms.MessageBox.Show("Implementar ver Resumen");
                     rec.verResumen();
                 }
             }
