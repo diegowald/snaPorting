@@ -544,6 +544,7 @@ namespace Catalogo._productos
                 if (cell != null)
                 {
                     Brush brush;
+                    bool dibujarCentro = false;
                     if (cell.Tag != null)
                     {
                         string existencia = (string)cell.Tag;
@@ -559,7 +560,8 @@ namespace Catalogo._productos
                                 brush = Brushes.Green;
                                 break;
                             case "VV":
-                                brush = Brushes.YellowGreen;
+                                brush = Brushes.Green;
+                                dibujarCentro = true;
                                 //cell.Value = "x";
                                 break;
                             default:
@@ -574,8 +576,14 @@ namespace Catalogo._productos
                     }
                     e.Paint(e.CellBounds, DataGridViewPaintParts.All);
                     Rectangle rect = e.CellBounds;
-                    rect.Inflate(-3, -3);
+                    rect.Inflate(-5, -5);
                     e.Graphics.FillEllipse(brush, rect);
+                    if (dibujarCentro)
+                    {
+                        Rectangle r = rect;
+                        r.Inflate(-3, -3);
+                        e.Graphics.FillEllipse(Brushes.Black, r);
+                    }
                     e.Handled = true;
                 }
             }
