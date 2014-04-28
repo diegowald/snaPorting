@@ -5,18 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Catalogo.Funciones.emitter_receiver;
 
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading;
-//using System.Windows.Data;
-//using System.Windows.Documents;
-//using System.Windows.Media;
-//using System.Windows.Media.Imaging;
-//using System.Windows.Navigation;
-//using System.Windows.Shapes;
-
-
 namespace Catalogo
 {
     /// <summary>
@@ -607,17 +595,76 @@ namespace Catalogo
 
         private void setHotKeys()
         {
-            System.Windows.Input.RoutedCommand buscarCmd = new RoutedCommand();
-            buscarCmd.InputGestures.Add(new KeyGesture(Key.B, ModifierKeys.Control));
-            CommandBindings.Add(new CommandBinding(buscarCmd, buscarEvtHandler));
+            createHotKey(Key.B, ModifierKeys.Control, buscarEvt);
+            createHotKey(Key.D, ModifierKeys.Control, verResumenEvt);
+            createHotKey(Key.P, ModifierKeys.Control, cambioPctEvt);
+            createHotKey(Key.Z, ModifierKeys.Control, checkRregAppEvt);
         }
 
-        private void buscarEvtHandler(object sender, ExecutedRoutedEventArgs e)
+        private void createHotKey(System.Windows.Input.Key key, System.Windows.Input.ModifierKeys modifier, ExecutedRoutedEventHandler handler)
         {
-            this.dockPane.SelectedIndex = 0;
-            doEvents();
-            sf.Focus();
-            this.sf.FocusOnSearch();
+            System.Windows.Input.RoutedCommand routedCmd = new RoutedCommand();
+            routedCmd.InputGestures.Add(new KeyGesture(key, modifier));
+            CommandBindings.Add(new CommandBinding(routedCmd, handler));
+        }
+
+        private void buscarEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                this.dockPane.SelectedIndex = 0;
+                doEvents();
+                sf.Focus();
+                this.sf.FocusOnSearch();
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+        }
+
+        private void verResumenEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                if (dockPane.SelectedIndex == 1)
+                {
+                    System.Windows.Forms.MessageBox.Show("Implementar ver Resumen");
+                    rec.verResumen();
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+        }
+
+        private void cambioPctEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                System.Windows.Forms.MessageBox.Show("Implementar Cambio Porcentaje");
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+        }
+
+        private void checkRregAppEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                System.Windows.Forms.MessageBox.Show("Implementar Check Registro app");
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
         }
 
         public void doEvents()

@@ -1560,5 +1560,13 @@ namespace Catalogo._recibos
             ObtenerMovimientos();
         }
 
+
+        internal void verResumen()
+        {
+            if (btnIniciar.Tag.ToString() != "INICIAR")
+            {
+                System.Windows.Forms.MessageBox.Show("Aca tengo que mostrar el resumen de recibos");
+            }
+        }
     } //fin clase
 } //fin namespace
