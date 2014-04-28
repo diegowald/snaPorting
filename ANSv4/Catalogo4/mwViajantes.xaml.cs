@@ -659,6 +659,7 @@ namespace Catalogo
             try
             {
                 System.Windows.Forms.MessageBox.Show("Implementar Check Registro app");
+                MainMod.valida_appRegistro();
             }
             catch (Exception ex)
             {

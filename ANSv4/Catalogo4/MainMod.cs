@@ -254,7 +254,7 @@ namespace Catalogo
 
         }
 
-        private static void valida_appRegistro()
+        internal static void valida_appRegistro()
         {
 
             //- Registro y activación -------------XX
