@@ -143,8 +143,6 @@ namespace Catalogo._devoluciones
             this.DevolucionTab.Size = new System.Drawing.Size(887, 357);
             this.DevolucionTab.TabIndex = 1;
             this.DevolucionTab.Visible = false;
-            this.DevolucionTab.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.DevolucionTab_Selecting);
-            this.DevolucionTab.Selected += new System.Windows.Forms.TabControlEventHandler(this.DevolucionTab_Selected);
             // 
             // devTabMn
             // 
@@ -200,6 +198,7 @@ namespace Catalogo._devoluciones
             this.devMnlistView.UseCompatibleStateImageBehavior = false;
             this.devMnlistView.View = System.Windows.Forms.View.Details;
             this.devMnlistView.DoubleClick += new System.EventHandler(this.devMnlistView_DoubleClick);
+            this.devMnlistView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.devMnlistView_KeyDown);
             // 
             // devMnCodigoLv
             // 
@@ -754,7 +753,7 @@ namespace Catalogo._devoluciones
             this.paDataGridView.AllowUserToAddRows = false;
             this.paDataGridView.AllowUserToDeleteRows = false;
             this.paDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.paDataGridView.BackgroundColor = System.Drawing.Color.WhiteSmoke;
@@ -818,7 +817,7 @@ namespace Catalogo._devoluciones
             // 
             this.devAnterioresDataGridView.AllowUserToAddRows = false;
             this.devAnterioresDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.devAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.devAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;

@@ -327,9 +327,9 @@ namespace Catalogo
                 Global01.AppActiva = true;
                 //-------- BORRAR ESTA LINEA!!!!!!! ----------------------
                 //Sabor3 = 
-                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
                 //Sabor2 = 
-                Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
+                //Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
 
             }
             //--------------------------------------XX
@@ -431,9 +431,9 @@ namespace Catalogo
         {
 
             //#if SaborViajante
-            //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+            Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
             //#else
-            Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+            //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
             //#endif            
 
             Global01.NoConn = false;

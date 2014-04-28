@@ -28,6 +28,7 @@ namespace Catalogo.varios
 
         private void fReporte_Load(object sender, EventArgs e)
         {
+          
             if (DocumentoNro.Substring(DocumentoNro.ToString().Trim().Length - 8) == "99999999")
             {
                 btnVerPDF.Enabled = false;
@@ -41,7 +42,9 @@ namespace Catalogo.varios
                 crViewer1.ShowPrintButton = true;
             }            
             crViewer1.ReportSource = oRpt;
-            crViewer1.Refresh();
+            Cursor.Current = Cursors.Default;
+            crViewer1.Visible = true;
+            crViewer1.Show(); //.Refresh();
         }
 
         private void btnVerPDF_Click(object sender, EventArgs e)

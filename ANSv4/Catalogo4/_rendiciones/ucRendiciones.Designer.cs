@@ -1944,7 +1944,7 @@ namespace Catalogo._rendiciones
             this.paDataGridView.AllowUserToAddRows = false;
             this.paDataGridView.AllowUserToDeleteRows = false;
             this.paDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.paDataGridView.BackgroundColor = System.Drawing.Color.WhiteSmoke;
@@ -2004,7 +2004,7 @@ namespace Catalogo._rendiciones
             // 
             this.devAnterioresDataGridView.AllowUserToAddRows = false;
             this.devAnterioresDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.devAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.devAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;

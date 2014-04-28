@@ -217,25 +217,25 @@ namespace Catalogo._novedades
 
             dataGridIdle = true;
 
-            //if (dataRowCount > 0)
-            //{
-            //    dgvNovedades.Rows[0].Selected = true;
+            if (dataRowCount > 0)
+            {
+                dgvNovedades.Rows[0].Selected = true;
 
-            //    DataGridViewCell cell = dgvNovedades[0, 0];
-            //    if (cell != null)
-            //    {
-            //        DataGridViewRow row = cell.OwningRow;
+                //DataGridViewCell cell = dgvNovedades[0, 0];
+                //if (cell != null)
+                //{
+                //    DataGridViewRow row = cell.OwningRow;
 
-            //        mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
-            //                       row.Cells["N_Archivo"].Value.ToString(),
-            //                       row.Cells["url"].Value.ToString(),
-            //                       row.Cells["Origen"].Value.ToString(),
-            //                       row.Cells["Tipo"].Value.ToString(),
-            //                       int.Parse(row.Cells["id"].Value.ToString()),
-            //                       row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
+                //    mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
+                //                   row.Cells["N_Archivo"].Value.ToString(),
+                //                   row.Cells["url"].Value.ToString(),
+                //                   row.Cells["Origen"].Value.ToString(),
+                //                   row.Cells["Tipo"].Value.ToString(),
+                //                   int.Parse(row.Cells["id"].Value.ToString()),
+                //                   row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
 
-            //    }
-            //}
+                //}
+            }
  
         }
 
@@ -264,27 +264,26 @@ namespace Catalogo._novedades
         //    }
         //}
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvNovedades_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                if (e.ColumnIndex >= 0)
+
+                DataGridViewCell cell = dgvNovedades[e.ColumnIndex, e.RowIndex];
+
+                if (cell != null)
                 {
-                    DataGridViewCell cell = dgvNovedades[e.ColumnIndex, e.RowIndex];
+                    DataGridViewRow row = cell.OwningRow;
 
-                    if (cell != null)
-                    {
-                        DataGridViewRow row = cell.OwningRow;
-
-                        mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
-                                       row.Cells["N_Archivo"].Value.ToString(),
-                                       row.Cells["url"].Value.ToString(),
-                                       row.Cells["Origen"].Value.ToString(),
-                                       row.Cells["Tipo"].Value.ToString(),
-                                       int.Parse(row.Cells["id"].Value.ToString()),
-                                       row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
-                    }
+                    mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
+                                   row.Cells["N_Archivo"].Value.ToString(),
+                                   row.Cells["url"].Value.ToString(),
+                                   row.Cells["Origen"].Value.ToString(),
+                                   row.Cells["Tipo"].Value.ToString(),
+                                   int.Parse(row.Cells["id"].Value.ToString()),
+                                   row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
                 }
+             
             }
             catch (Exception ex)
             {
@@ -292,6 +291,35 @@ namespace Catalogo._novedades
                 util.errorHandling.ErrorForm.show();
             }
         }
+
+        //private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (e.ColumnIndex >= 0)
+        //        {
+        //            DataGridViewCell cell = dgvNovedades[e.ColumnIndex, e.RowIndex];
+
+        //            if (cell != null)
+        //            {
+        //                DataGridViewRow row = cell.OwningRow;
+
+        //                mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
+        //                               row.Cells["N_Archivo"].Value.ToString(),
+        //                               row.Cells["url"].Value.ToString(),
+        //                               row.Cells["Origen"].Value.ToString(),
+        //                               row.Cells["Tipo"].Value.ToString(),
+        //                               int.Parse(row.Cells["id"].Value.ToString()),
+        //                               row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        util.errorHandling.ErrorLogger.LogMessage(ex);
+        //        util.errorHandling.ErrorForm.show();
+        //    }
+        //}
         
         private void mostrarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo, int id, string FLeido)
         {

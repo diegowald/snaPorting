@@ -17,12 +17,13 @@ namespace Catalogo._recibos
         Funciones.emitter_receiver.IEmisor<int>, // Para enviar el indice del cliente seleccionado en el combo
         Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
     {
-        //private //const string m_sMODULENAME_ = "ucRecibo";
+
         ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
 
         public ucRecibo()
         {
             InitializeComponent();
+        
             _ToolTip.SetToolTip(btnIniciar, "INICIAR Recibo Nuevo");
             _ToolTip.SetToolTip(btnImprimir, "Graba e Imprime el Recibo ...");
             _ToolTip.SetToolTip(btnVer, "ver ...");
@@ -45,8 +46,9 @@ namespace Catalogo._recibos
             }
 
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cvTipoValorCbo, "v_TipoValor", "D_valor", "IDvalor", "ALL", "IDvalor", true, false, "NONE");
-            Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cvBancoCbo, "tblBancos", "Banco", "ID", "Activo=0", "Format([ID],'000') & ' - ' & tblBancos.Nombre", true, false, "Format([ID],'000') & ' - ' & tblBancos.Nombre AS Banco, ID");            
+            Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cvBancoCbo, "tblBancos", "Banco", "ID", "Activo=0", "Format([ID],'000') & ' - ' & tblBancos.Nombre", true, false, "Format([ID],'000') & ' - ' & tblBancos.Nombre AS Banco, ID");
 
+            rTabsRecibo.SelectedIndex = 3;
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,6 +71,7 @@ namespace Catalogo._recibos
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Recibo para el cliente ..."; }
                 LimpiarClienteDatos();
+                LimpiarNovedadCliente();
                 btnIniciar.Enabled = false;
             }
             this.emitir(cboCliente.SelectedIndex);
@@ -145,7 +148,51 @@ namespace Catalogo._recibos
 
         private void CargarClienteNovedades()
         {
-            //this.CliNDataGridView.DataSource = Catalogo.Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "tblClientesNovedades", "IDCliente=" + cboCliente.SelectedValue.ToString(), "F_Carga");
+            DataTable dt = Catalogo.Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "tblClientesNovedades", "IDCliente=" + cboCliente.SelectedValue.ToString(), "F_Carga DESC");
+
+            CliNlistView.Visible = false;
+            CliNlistView.Items.Clear();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DataRow dr = dt.Rows[i];
+
+                ListViewItem ItemX = new ListViewItem(string.Format("{0:dd/MM/yyyy}", DateTime.Parse(dr["F_Carga"].ToString())));
+
+                //alternate row color
+                if (i % 2 == 0)
+                {
+                    ItemX.BackColor = Color.White;
+                }
+                else
+                {
+                    ItemX.BackColor = System.Drawing.SystemColors.Control;  //System.Drawing.Color.FromArgb(255, 255, 192);
+                }
+
+                ItemX.SubItems.Add(dr["Novedad"].ToString());
+                ItemX.SubItems.Add(dr["ID"].ToString());
+                CliNlistView.Items.Add(ItemX);
+            }
+
+            if (dt.Rows.Count > 0) Funciones.util.AutoSizeLVColumnas(ref CliNlistView);
+
+            CliNlistView.Visible = true;
+            dt = null;
+
+            CliNPnlMain.Enabled = true;
+            CliNPnlTop.Enabled = true;
+            CliNFechaDtp.Value = DateTime.Today.Date;
+            CliNidLbl.Text = "0";
+            CliNNovedadTxt.Text = "";
+        }
+
+        private void LimpiarNovedadCliente()
+        {
+            CliNPnlMain.Enabled = false;
+            CliNPnlTop.Enabled = false;
+            CliNFechaDtp.Value = DateTime.Today.Date;
+            CliNidLbl.Text = "0";
+            CliNNovedadTxt.Text = "";
         }
 
         private void CargarClienteDatos()
@@ -217,7 +264,7 @@ namespace Catalogo._recibos
                 }
                 else
                 {
-                    ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                    ItemX.BackColor = System.Drawing.SystemColors.Control; 
                 }
 
                 ItemX.Tag = "";
@@ -294,7 +341,7 @@ namespace Catalogo._recibos
 
           if (cvTipoValorCbo.SelectedIndex==1) 
           {  //Cheque
-              if (cvBancoCbo.SelectedIndex <= 0 | cvNroCuentaTxt.Text.Trim().Length == 0 | cvNroChequeTxt.Text.Trim().Length == 0)                      
+              if (cvBancoCbo.SelectedIndex <= 0 | cvCpaTxt.Text.Trim().Length == 0 | cvNroChequeTxt.Text.Trim().Length == 0)   //| cvNroCuentaTxt.Text.Trim().Length == 0
             {
                MessageBox.Show("Ingrese Datos del Cheque", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                wDatosValidos = false;
@@ -311,14 +358,15 @@ namespace Catalogo._recibos
             }
           }
 
-    
-    //if LCase(pCampo) = "clinovedad" Or LCase(pCampo) = "#all" Or LCase(pCampo) = "novedad" {
-    //    if Len(Trim(CliNovedad.Text)) = 0 {
-    //        MsgBox "Ingrese Novedad", vbExclamation, "Atención"
-    //        DatosValidos = False
-    //        CliNovedad.SetFocus
-    //    }
-    //}
+         if (pCampo.ToLower()=="clientenovedad") // | pCampo.ToLower()=="all" | pCampo.ToLower()=="recibo" )
+         {
+             if (CliNNovedadTxt.Text.Trim().Length == 0)
+             {
+                 MessageBox.Show("Ingrese Observación", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                 wDatosValidos = false;
+                 CliNNovedadTxt.Focus();
+             }
+         }
         
     //if LCase(pCampo) = "all" Or LCase(pCampo) = "aplicacion" Or LCase(pCampo) = "adeducir" {
     //    if BuscarIndiceEnListView(lvADeducir, "cascara:", 0) = -1 Or Left(Me.txtDeduConcepto.Text, 8) = "cascara:" {
@@ -465,7 +513,7 @@ namespace Catalogo._recibos
                     
                     HabilitarRecibo();
                     rTabsRecibo.SelectedIndex = 3;
-                    rTabsRecibo.Visible = true;
+                    //rTabsRecibo.Visible = true;
                 }
                 else
                 {
@@ -476,7 +524,7 @@ namespace Catalogo._recibos
 
                         InhabilitarRecibo();
 
-                        rTabsRecibo.Visible = false;
+                        //rTabsRecibo.Visible = false;
                         cboCliente.SelectedIndex = 0;
                         CerrarRecibo();                                                
                         TotalRecibo();
@@ -663,15 +711,20 @@ namespace Catalogo._recibos
         {
             adPnlTop.Enabled = true;
             adPnlMain.Enabled = true;
+
             apPnlTop.Enabled = true;
             apPnlMain.Enabled = true;
+
+            this.raPnlTop.Enabled = true;
+            this.raPnlMain.Enabled = true;
+            this.raPnlBotton.Enabled = true;
+
             btnImprimir.Enabled = true;
             btnVer.Enabled = true;
             btnResumen.Enabled = true;
             ralistView.Enabled = true;
             aplistView.Enabled = true;
             adlistView.Enabled = true;
-            raPnlBotton.Enabled = true;
             cboCliente.Enabled = false;
         }
 
@@ -681,13 +734,17 @@ namespace Catalogo._recibos
             adPnlMain.Enabled = false;
             apPnlTop.Enabled = false;
             apPnlMain.Enabled = false;
+            
+            this.raPnlTop.Enabled = false;
+            this.raPnlMain.Enabled = false;
+            this.raPnlBotton.Enabled = false;
+      
             btnImprimir.Enabled = false;
             btnVer.Enabled = false;
             btnResumen.Enabled = false;
             ralistView.Enabled = false;
             aplistView.Enabled = false;
             adlistView.Enabled = false;
-            raPnlBotton.Enabled = false;
             cboCliente.Enabled = true;
         }
 
@@ -753,6 +810,7 @@ namespace Catalogo._recibos
 
             if (tOk)
             {
+                Cursor.Current = Cursors.WaitCursor;
 
                 InhabilitarRecibo();
 
@@ -805,9 +863,11 @@ namespace Catalogo._recibos
                 }
 
                 rec.Guardar("GRABAR");   
+                
                 Recibo_Imprimir(Global01.NroImprimir);         
+
                 Global01.NroImprimir = "";
-                Cursor.Current = Cursors.Default;
+
                 CerrarRecibo();
             }
         }
@@ -1196,7 +1256,7 @@ namespace Catalogo._recibos
                 }
                 else
                 {
-                    ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                    ItemX.BackColor = System.Drawing.SystemColors.Control;  //System.Drawing.Color.FromArgb(255, 255, 192);
                 }
 
                 ItemX.Tag = "add";
@@ -1353,7 +1413,7 @@ namespace Catalogo._recibos
                 }
                 else
                 {
-                    ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                    ItemX.BackColor = System.Drawing.SystemColors.Control; 
                 }
 
                 ItemX.Tag = "add";
@@ -1389,8 +1449,7 @@ namespace Catalogo._recibos
 
         private void ralistView_DoubleClick(object sender, EventArgs e)
         {
-            //const string PROCNAME_ = "lvValores_DblClick";
-
+            
             if (ralistView.SelectedItems != null & ralistView.SelectedItems.Count > 0)
             {                
                 Funciones.util.BuscarIndiceEnCombo(ref cvTipoValorCbo, ralistView.SelectedItems[0].SubItems[10].Text.ToString(), false);
@@ -1528,6 +1587,48 @@ namespace Catalogo._recibos
         private void CliNAgregarBtn_Click(object sender, EventArgs e)
         {
 
+            if (datosvalidos("clientenovedad"))
+            {
+                ListViewItem ItemX;
+
+                if (CliNlistView.Tag.ToString() == "upd")
+                {
+                    if (CliNlistView.SelectedItems != null & CliNlistView.SelectedItems.Count > 0)
+                    {
+                        ItemX = CliNlistView.SelectedItems[0];
+                    }
+                    else
+                    {
+                        ItemX = new ListViewItem(string.Format("{0:dd/MM/yyyy}", CliNFechaDtp.Value));
+                        adlistView.Tag = "add";
+                    }
+                }
+                else
+                {
+                    ItemX = new ListViewItem(string.Format("{0:dd/MM/yyyy}", CliNFechaDtp.Value));
+                }
+
+                //alternate row color
+                if (CliNlistView.Items.Count % 2 == 0)
+                {
+                    ItemX.BackColor = Color.White;
+                }
+                else
+                {
+                    ItemX.BackColor = System.Drawing.SystemColors.Control;
+                }
+
+                ItemX.Tag = "add";
+                ItemX.SubItems.Add(CliNNovedadTxt.Text.ToUpper());
+                ItemX.SubItems.Add(CliNidLbl.Text);
+
+                CliNlistView.Items.Add(ItemX);
+
+                //Funciones.util.AutoSizeLVColumnas(ref CliNlistView);
+
+                CliNNovedadTxt.Text = "";
+                CliNidLbl.Text = "0";
+            }
         }
 
         private void EnviarBtn_Click(object sender, EventArgs e)
@@ -1558,6 +1659,48 @@ namespace Catalogo._recibos
 
             envio.run();
             ObtenerMovimientos();
+        }
+
+        private void CliNlistView_DoubleClick(object sender, EventArgs e)
+        {
+            if (CliNlistView.SelectedItems != null & CliNlistView.SelectedItems.Count > 0)
+            {
+                CliNFechaDtp.Value = DateTime.Parse(CliNlistView.SelectedItems[0].Text);
+                CliNNovedadTxt.Text = CliNlistView.SelectedItems[0].SubItems[1].Text;
+                CliNidLbl.Text = CliNlistView.SelectedItems[0].SubItems[2].Text;
+                
+                //CliNlistView.Items.Remove(CliNlistView.SelectedItems[0]);
+                //CliNlistView.SelectedItems.Clear();
+
+                CliNlistView.Tag = "upd";
+                CliNNovedadTxt.Focus();
+            }
+        }
+
+        private void CliNlistView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (CliNlistView.SelectedItems != null & CliNlistView.SelectedItems.Count > 0)
+            {
+                if (e.KeyCode == Keys.Delete)
+                {  //DEL
+                    if (Int16.Parse(CliNlistView.SelectedItems[0].SubItems[3].Text) > 0)
+                    {
+                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblClientesNovedades WHERE ID=" + CliNlistView.SelectedItems[0].SubItems[3].Text);
+                    }
+                    CliNlistView.Items.Remove(CliNlistView.SelectedItems[0]);
+                    CliNlistView.SelectedItems.Clear();
+                }
+            }
+        }
+
+        private void lblMandaEmail_Click(object sender, EventArgs e)
+        {
+            if (CliDEmailTxt.Text.Trim().Length > 0)
+            {
+                System.Diagnostics.Process proc = new System.Diagnostics.Process();
+                proc.StartInfo.FileName = "mailto:" + CliDEmailTxt.Text.Trim() + "?subject=" + "auto náutica sur - OdN n° " + Global01.NroUsuario.ToString() + "&body=" + "mi estimado...";
+                proc.Start();
+            }
         }
 
     } //fin clase

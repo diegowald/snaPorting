@@ -126,7 +126,7 @@ namespace Catalogo._interdeposito
             this.paDataGridView.AllowUserToAddRows = false;
             this.paDataGridView.AllowUserToDeleteRows = false;
             this.paDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.paDataGridView.BackgroundColor = System.Drawing.Color.WhiteSmoke;

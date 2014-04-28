@@ -194,6 +194,8 @@ namespace Catalogo._productos
             {
                 if (dtProducts != null && dtProducts.Rows.Count > 0)
                 {
+                    Cursor.Current = Cursors.WaitCursor;
+              
                     filterString = string.Empty;
                     FilterBuilder fb = new FilterBuilder();
 

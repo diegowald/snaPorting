@@ -94,7 +94,7 @@ namespace Catalogo._interdeposito
                 }
                 else
                 {
-                    ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                    ItemX.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(255, 255, 192);
                 }
 
                 ItemX.Tag = "";
@@ -288,7 +288,7 @@ namespace Catalogo._interdeposito
             btnImprimir.Enabled = true;
             btnVer.Enabled = true;
             ralistView.Enabled = true;
-            raPnlBotton.Enabled = true;
+            this.raPnlBotton.Enabled = true;
             cboCliente.Enabled = false;
         }
 
@@ -297,7 +297,7 @@ namespace Catalogo._interdeposito
             btnImprimir.Enabled = false;
             btnVer.Enabled = false;
             ralistView.Enabled = false;
-            raPnlBotton.Enabled = false;
+            this.raPnlBotton.Enabled = false;
             cboCliente.Enabled = true;
         }
 
@@ -318,34 +318,40 @@ namespace Catalogo._interdeposito
         
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            //' iNABILITO nUEVO iNGRESO
-
             if (datosvalidos("interdeposito") & (ralistView.Items.Count >0))
-            {
+            {                
+                Cursor.Current = Cursors.WaitCursor;
+
                 InhabilitarInterDeposito();
-
-                Catalogo._interdeposito.InterDeposito intDep = new Catalogo._interdeposito.InterDeposito(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));                
-
-                for (int i = 0; i < ralistView.Items.Count; i++)
-                {
-                    intDep.ADDFacturas(ralistView.Items[i].SubItems[1].Text.ToString(),
-                                    ralistView.Items[i].SubItems[2].Text.ToString(),
-                                    float.Parse("0" + ralistView.Items[i].SubItems[3].Text.ToString()));
-                }
-        
-                intDep.Bco_Dep_Tipo = ((bdTipoEfectivoRb.Checked) ?  "E" : "C");
-                intDep.Bco_Dep_Fecha = bdFechaDt.Value;
-                intDep.Bco_Dep_Numero = Int32.Parse(bdNumeroTxt.Text);
-                intDep.Bco_Dep_Monto = float.Parse(bdImporteTxt.Text);
-                intDep.Bco_Dep_Ch_Cantidad = byte.Parse("0" + bdCaChequesTxt.Text);
-                intDep.Bco_Dep_IdCta = byte.Parse(bdBancoCbo.SelectedValue.ToString());
-
-                intDep.NroImpresion = 0;
-                intDep.Observaciones = bdObservacionesTxt.Text;
 
                 try
                 {
+                    Catalogo._interdeposito.InterDeposito intDep = new Catalogo._interdeposito.InterDeposito(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+
+                    for (int i = 0; i < ralistView.Items.Count; i++)
+                    {
+                        intDep.ADDFacturas(ralistView.Items[i].SubItems[1].Text.ToString(),
+                                        ralistView.Items[i].SubItems[2].Text.ToString(),
+                                        float.Parse("0" + ralistView.Items[i].SubItems[3].Text.ToString()));
+                    }
+
+                    intDep.Bco_Dep_Tipo = ((bdTipoEfectivoRb.Checked) ? "E" : "C");
+                    intDep.Bco_Dep_Fecha = bdFechaDt.Value;
+                    intDep.Bco_Dep_Numero = Int32.Parse(bdNumeroTxt.Text);
+                    intDep.Bco_Dep_Monto = float.Parse(bdImporteTxt.Text);
+                    intDep.Bco_Dep_Ch_Cantidad = byte.Parse("0" + bdCaChequesTxt.Text);
+                    intDep.Bco_Dep_IdCta = byte.Parse(bdBancoCbo.SelectedValue.ToString());
+
+                    intDep.NroImpresion = 0;
+                    intDep.Observaciones = bdObservacionesTxt.Text;
+
                     intDep.Guardar("GRABAR");
+
+                    InterDeposito_Imprimir(Global01.NroImprimir);
+
+                    Global01.NroImprimir = "";
+
+                    CerrarInterDeposito();
                 }
                 catch (util.errorHandling.RegistroDuplicadoException ex)
                 {
@@ -356,9 +362,10 @@ namespace Catalogo._interdeposito
                 }
                 catch (System.Data.OleDb.OleDbException ex)
                 {
+                    Cursor.Current = Cursors.Default;
                     switch (ex.ErrorCode)
                     {
-                        case -2147467259:
+                        case -2147467259:                            
                             MessageBox.Show("Registro Duplicado", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             return;
                         default:
@@ -373,11 +380,6 @@ namespace Catalogo._interdeposito
                     util.errorHandling.ErrorForm.show();
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-
-                InterDeposito_Imprimir(Global01.NroImprimir);         
-                Global01.NroImprimir = "";
-                Cursor.Current = Cursors.Default;
-                CerrarInterDeposito();
             }
         }
 
@@ -385,6 +387,8 @@ namespace Catalogo._interdeposito
         {
             if (datosvalidos("interdeposito") & (ralistView.Items.Count > 0))
             {
+                Cursor.Current = Cursors.WaitCursor;
+                
                 Catalogo._interdeposito.InterDeposito intDep = new Catalogo._interdeposito.InterDeposito(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
 
                 for (int i = 0; i < ralistView.Items.Count; i++)

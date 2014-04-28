@@ -481,6 +481,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_devoluciones\ucDevolucion.resx">
       <DependentUpon>ucDevolucion.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="_interdeposito\ucInterDeposito.resx">
       <DependentUpon>ucInterDeposito.cs</DependentUpon>
