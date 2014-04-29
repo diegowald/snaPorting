@@ -116,14 +116,14 @@ namespace Catalogo._novedades
 
             dgvNovedades.Columns[2].Name = "F_Fin";
             dgvNovedades.Columns[2].HeaderText = "Fecha";
-            dgvNovedades.Columns[2].DataPropertyName = "F_Fin";            
-            //dgvNovedades.Columns[2].Visible = false;
+            dgvNovedades.Columns[2].DataPropertyName = "F_Fin";
+            dgvNovedades.Columns[2].Visible = false;
 
             dgvNovedades.Columns[3].Name = "N_Archivo";
             dgvNovedades.Columns[3].HeaderText = "N_Archivo";
             dgvNovedades.Columns[3].DataPropertyName = "N_Archivo";
             dgvNovedades.Columns[3].Width = 1440;
-            //dgvNovedades.Columns[3].Visible = false;
+            dgvNovedades.Columns[3].Visible = false;
 
             dgvNovedades.Columns[4].Name = "url";
             dgvNovedades.Columns[4].HeaderText = "url";
