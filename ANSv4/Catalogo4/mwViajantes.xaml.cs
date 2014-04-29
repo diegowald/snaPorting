@@ -22,6 +22,7 @@ namespace Catalogo
         private Catalogo._movimientos.ucMovimientos mov = null;
         private Catalogo._novedades.ucNovedades nov = null;
         private Catalogo.varios.FlashControl flash = null;
+        private Catalogo._registrofaltantes.ucFaltante faltantes = null;
 
         private bool _forcedToAutoHide;
 
@@ -254,6 +255,23 @@ namespace Catalogo
             this.grProductsArea.Children.Add(host);
 
             return gridViewControl;
+        }
+
+        private _registrofaltantes.ucFaltante addFaltantesArea()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            Catalogo._registrofaltantes.ucFaltante f = new _registrofaltantes.ucFaltante();
+            f.AutoScroll = false;
+            f.Location = new System.Drawing.Point(0, 0);
+            f.Dock = System.Windows.Forms.DockStyle.Fill;
+            f.Name = "Faltantes";
+
+            host.Child = f;
+            this.xRegFaltantesArea.Children.Add(host);
+
+            return f;
         }
 
         private Catalogo._novedades.ucNovedades addNovedadesArea()
@@ -535,6 +553,7 @@ namespace Catalogo
                 gv = addProductsArea();
                 ped = addPedidoArea();
                 dev = addDevolucionArea();
+                faltantes = addFaltantesArea();
 
                 sf.attachReceptor(gv);
                 sf.attachReceptor2(gv);
@@ -560,6 +579,8 @@ namespace Catalogo
                 ped.attachReceptor(dev);
             }
         }
+
+
 
         private void crearControlesInterDepositos()
         {
