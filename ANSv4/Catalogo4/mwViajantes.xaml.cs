@@ -531,16 +531,19 @@ namespace Catalogo
                 if (ped != null)
                 {
                     rec.attachReceptor(ped);
+                    rec.IDClienteSeleccionado = ped.IDClienteSeleccionado;
                 }
 
                 if (dev != null)
                 {
                     rec.attachReceptor(dev);
+                    rec.IDClienteSeleccionado = dev.IDClienteSeleccionado;
                 }
 
                 if (mov != null)
                 {
                     rec.attachReceptor(mov);
+                    rec.IDClienteSeleccionado = mov.IDClienteSeleccionado;
                 }
             }
         }
@@ -569,11 +572,13 @@ namespace Catalogo
                 if (mov != null)
                 {
                     ped.attachReceptor(mov);
+                    ped.IDClienteSeleccionado = mov.IDClienteSeleccionado;
                 }
 
                 if (rec != null)
                 {
                     ped.attachReceptor(rec);
+                    ped.IDClienteSeleccionado = rec.IDClienteSeleccionado;
                 }
 
                 ped.attachReceptor(dev);
@@ -599,6 +604,7 @@ namespace Catalogo
                 if (ped != null)
                 {
                     ped.attachReceptor(mov);
+                    mov.IDClienteSeleccionado = ped.IDClienteSeleccionado;
                 }
             }
         }

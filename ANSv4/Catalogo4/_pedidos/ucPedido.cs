@@ -956,6 +956,10 @@ namespace Catalogo._pedidos
                 if (cboCliente.SelectedValue != null) xClienteSelected = Int16.Parse(cboCliente.SelectedValue.ToString());
                 return xClienteSelected;
             }
+            set
+            {
+                cboCliente.SelectedValue = value;
+            }
         }
 
         private void nvTransporteBuscarBtn_Click(object sender, EventArgs e)

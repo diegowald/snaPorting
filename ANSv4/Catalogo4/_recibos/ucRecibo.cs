@@ -1731,5 +1731,20 @@ namespace Catalogo._recibos
 
         }
 
+
+        public int IDClienteSeleccionado
+        {
+            get
+            {
+                Int16 xClienteSelected = 0;
+                if (cboCliente.SelectedValue != null) xClienteSelected = Int16.Parse(cboCliente.SelectedValue.ToString());
+                return xClienteSelected;
+            }
+            set
+            {
+                cboCliente.SelectedValue = value;
+            }
+        }
+
     } //fin clase
 } //fin namespace

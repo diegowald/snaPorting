@@ -856,5 +856,20 @@ namespace Catalogo._devoluciones
             ObtenerMovimientos();
         }
 
+
+        public int IDClienteSeleccionado
+        {
+            get
+            {
+                Int16 xClienteSelected = 0;
+                if (cboCliente.SelectedValue != null) xClienteSelected = Int16.Parse(cboCliente.SelectedValue.ToString());
+                return xClienteSelected;
+            }
+            set
+            {
+                cboCliente.SelectedIndex = value;
+            }
+        }
+
     } //fin clase
 } //fin namespace
