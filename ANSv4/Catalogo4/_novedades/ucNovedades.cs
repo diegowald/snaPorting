@@ -588,12 +588,25 @@ namespace Catalogo._novedades
             if (doDownload)
             {
                 downloadFiles[dest] = DownloadStatus.Downloading;
-                util.FileDownloader download = new util.FileDownloader(url+ archivo, dest, id, util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
-                download.onFileDownloaded += onFileDownloaded;
+                util.FileDownloader download = new util.FileDownloader(url + archivo, dest, id, util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+                if (archivo == "banner.swf")
+                {
+                    download.onFileDownloaded += onBannerDownloaded;
+                }
+                else
+                {
+                    download.onFileDownloaded += onFileDownloaded;
+                }
                 download.onFileDownloading += onFileDownloading;
                 download.onFileProblem += onFileProblem;
                 download.run();
             }
+        }
+
+        private void onBannerDownloaded(object Tag, string Destino)
+        {
+            downloadFiles[Destino] = DownloadStatus.DownloadOK;
+            Catalogo.varios.NotificationCenter.instance.requestUpdateBanner(Destino);
         }
 
         private void onFileDownloaded(object Tag, string Destino)

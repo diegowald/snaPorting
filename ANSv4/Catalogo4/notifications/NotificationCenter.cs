@@ -18,9 +18,11 @@ namespace Catalogo.varios
         Funciones.emitter_receiver.IEmisor<complexMessage>,
         Funciones.emitter_receiver.ICancellableEmitter
     {
-        public delegate void refreshNovedadesHandler();
+        public delegate void refreshNovedadesDelegate();
+        public delegate void updateBannerDelegate(string filename);
 
-        public refreshNovedadesHandler refreshNovedades;
+        public refreshNovedadesDelegate refreshNovedades;
+        public updateBannerDelegate updateBanner;
 
         public void notificar(complexMessage msg)
         {
@@ -35,6 +37,14 @@ namespace Catalogo.varios
             }
         }
 
+        internal void requestUpdateBanner(string filename)
+        {
+            if (updateBanner != null)
+            {
+                updateBanner(filename);
+
+            }
+        }
 
         public void requestCancel(ref bool cancel)
         {
@@ -52,6 +62,7 @@ namespace Catalogo.varios
             get;
             set;
         }
+
 
     }
 }

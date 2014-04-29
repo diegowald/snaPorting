@@ -21,6 +21,7 @@ namespace Catalogo
         private Catalogo._rendiciones.ucRendiciones RenD = null;
         private Catalogo._movimientos.ucMovimientos mov = null;
         private Catalogo._novedades.ucNovedades nov = null;
+        private Catalogo.varios.FlashControl flash = null;
 
         private bool _forcedToAutoHide;
 
@@ -65,10 +66,25 @@ namespace Catalogo
 
             }
             this.Closing += mwViajantes_Closing;
+            Catalogo.varios.NotificationCenter.instance.updateBanner += updateBanner;
             crearControlesProductos();
         }
 
+        public void updateBanner(string filename)
+        {
+            if (flash != null)
+            {
+                flash.stop();
+            }
 
+            System.IO.File.Copy(filename, Global01.AppPath + "\\imagenes\\banner.swf");
+
+            if (flash != null)
+            {
+                flash.file = Global01.AppPath + "\\imagenes\\banner.swf";
+                flash.play();
+            }
+        }
 
         private void addFlashPlayer()
         {
@@ -76,7 +92,7 @@ namespace Catalogo
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
             // Create the MaskedTextBox control.
-            Catalogo.varios.FlashControl flash = new varios.FlashControl();
+            flash = new varios.FlashControl();
             flash.AutoScroll = true;
             flash.Dock = System.Windows.Forms.DockStyle.Top;
             flash.Location = new System.Drawing.Point(0, 0);
