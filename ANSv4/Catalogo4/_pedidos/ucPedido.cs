@@ -53,20 +53,18 @@ namespace Catalogo._pedidos
         {
             try
             {
-                paEnviosCbo.SelectedIndex = -1;
+                paEnviosCbo.SelectedIndex = 2;
 
                 if (cboCliente.SelectedIndex > 0)
                 {
                     toolStripStatusLabel1.Text = "Nota de Venta para el cliente: " + this.cboCliente.Text.ToString();
                     btnIniciar.Enabled = true;
-                    paEnviosCbo.SelectedIndex = 2;
                 }
                 else
                 {
                     if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Pedido para el cliente ..."; }
                     btnIniciar.Enabled = false;
                 }
-                //paEnviosCbo_SelectedIndexChanged(null, null);
                 this.emitir(cboCliente.SelectedIndex);
             }
             catch (Exception ex)
@@ -167,7 +165,7 @@ namespace Catalogo._pedidos
                                         ////alternate row color
                                         if (nvlistView.Items.Count % 2 != 0)
                                         {
-                                            ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                                            ItemX.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(255, 255, 192);
                                         }
 
                                         ItemX.SubItems.Add(dr["Descrip"].ToString());          //01
@@ -216,7 +214,7 @@ namespace Catalogo._pedidos
                                 CerrarPedido();
                                 InhabilitarPedido();
 
-                                if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
+                                //if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
                                 nvSimilarChk.Checked = false;
                                 nvEsOfertaChk.Checked = false;
                                 nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
@@ -339,7 +337,7 @@ namespace Catalogo._pedidos
                     nvCantidadTxt.Value++;
                     break;
                 case _pedidos.PedidosHelper.Acciones.DECREMENTAR:
-                    nvCantidadTxt.Value--;
+                    if (nvCantidadTxt.Value > 1) {nvCantidadTxt.Value--;}
                     break;
                 default:
                     break;
@@ -401,7 +399,7 @@ namespace Catalogo._pedidos
                         ////alternate row color
                         if (nvlistView.Items.Count % 2 != 0)
                         {
-                            ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                            ItemX.BackColor = System.Drawing.SystemColors.Control;  //System.Drawing.Color.FromArgb(255, 255, 192);
                         }
 
                         ItemX.SubItems.Add(ProductoSeleccionado.Cells["N_Producto"].Value.ToString());
@@ -604,8 +602,6 @@ namespace Catalogo._pedidos
         {
             try
             {
-                //const string PROCNAME_ = "btnImprimir_Click";
-
                 Cursor.Current = Cursors.WaitCursor;
 
                 if (nvlistView.Items.Count > 0)
@@ -634,7 +630,6 @@ namespace Catalogo._pedidos
                     ped.Guardar("grabar");
 
                     Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblPedido_Bkp");
-                    Cursor.Current = Cursors.Default;
 
                     Pedido_Imprimir(Global01.NroImprimir);
                     Global01.NroImprimir = "";
@@ -660,8 +655,6 @@ namespace Catalogo._pedidos
         {
             try
             {
-                //const string PROCNAME_ = "btnVer_Click";
-
                 Cursor.Current = Cursors.WaitCursor;
 
                 if (nvlistView.Items.Count > 0)
@@ -687,11 +680,9 @@ namespace Catalogo._pedidos
                     }
 
                     ped.Guardar("VER");
-                    Cursor.Current = Cursors.Default;
 
                     Pedido_Imprimir(Global01.NroImprimir);
                     Global01.NroImprimir = "";
-
                 }
             }
             catch (Exception ex)
@@ -882,7 +873,7 @@ namespace Catalogo._pedidos
                     ////alternate row color
                     if (nvlistView.Items.Count % 2 != 0)
                     {
-                        ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                        ItemX.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(255, 255, 192);
                     }
 
                     ItemX.SubItems.Add(dr["N_Producto"].ToString());          //01
@@ -961,7 +952,9 @@ namespace Catalogo._pedidos
         {
             get
             {
-                return Int16.Parse(cboCliente.SelectedValue.ToString());
+                Int16 xClienteSelected = 0;
+                if (cboCliente.SelectedValue != null) xClienteSelected = Int16.Parse(cboCliente.SelectedValue.ToString());
+                return xClienteSelected;
             }
         }
 

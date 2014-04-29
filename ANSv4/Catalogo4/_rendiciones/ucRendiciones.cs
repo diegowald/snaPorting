@@ -856,7 +856,7 @@ namespace Catalogo._rendiciones
                     }
                     else
                     {
-                        m.ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                        m.ItemX.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(255, 255, 192);
                     }
 
                     m.ItemX.Tag = "";

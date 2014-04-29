@@ -519,6 +519,7 @@ namespace Catalogo
                 {
                     rec.attachReceptor(dev);
                 }
+
                 if (mov != null)
                 {
                     rec.attachReceptor(mov);

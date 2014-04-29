@@ -383,10 +383,16 @@ namespace Catalogo._productos
 
         private string whereTxtBuscar(string txtBuscar)
         {
+            bool filtro2 = false;
+
+            if (txtBuscar.Trim().Substring(0, 1) == "+")
+            {
+                filtro2 = true;
+                txtBuscar = txtBuscar.Trim().Substring(1);
+            };
 
             string sqlWhere = null;
             string[] PalabrasClave = txtBuscar.Split(' ');
-            //int i = 0;
                
 	        if (!string.IsNullOrEmpty(txtBuscar)) 
             {
@@ -398,9 +404,18 @@ namespace Catalogo._productos
                         {
                             sqlWhere += " AND ";
                         }
-                        sqlWhere += " (MiCodigo  + ' ' +  c_producto + ' ' + Equivalencia + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' +  O_Producto + ' ' + Original + ' ' + Contiene + ' ' + ReemplazaA + ' ' + Motor  LIKE '%";
-                        sqlWhere += palabra;
-                        sqlWhere += "%')";
+                        if (filtro2)
+                        {
+                            sqlWhere += " (c_producto + ' ' +  Equivalencia + ' ' + Original LIKE '";
+                            sqlWhere += palabra;
+                            sqlWhere += "%')";
+                        }
+                        else
+                        {
+                            sqlWhere += " (MiCodigo  + ' ' +  c_producto + ' ' + Equivalencia + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' +  O_Producto + ' ' + Original + ' ' + Contiene + ' ' + ReemplazaA + ' ' + Motor  LIKE '%";
+                            sqlWhere += palabra;
+                            sqlWhere += "%')";
+                        }
                     }
                 }
 	        }

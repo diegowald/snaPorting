@@ -79,6 +79,7 @@
             this.crViewer1.TabIndex = 14;
             this.crViewer1.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             this.crViewer1.ToolPanelWidth = 0;
+            this.crViewer1.Visible = false;
             // 
             // TopPnl
             // 

@@ -15,13 +15,11 @@ namespace Catalogo._movimientos
         Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
      {
        
-        //private //const string m_sMODULENAME_ = "ucMovimientos";
-
         public ucMovimientos()
         {
             InitializeComponent();
 
-            if (!Global01.AppActiva)
+            if (!Global01.AppActiva | Global01.Conexion==null)
             {
                 this.Dispose();
             }
@@ -35,11 +33,12 @@ namespace Catalogo._movimientos
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
                 if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedValue = Global01.NroUsuario;
             }
-
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //paEnviosCbo.SelectedIndex = 2;
+
             if (cboCliente.SelectedIndex > 0)
             {
                 toolStripStatusLabel1.Text = "Movimientos para el cliente: " + this.cboCliente.Text.ToString();
@@ -48,14 +47,13 @@ namespace Catalogo._movimientos
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Movimientos para el cliente ..."; }
             }
-            ObtenerMovimientos();
-           // EnviosCbo.SelectedIndex = 0;
+            ObtenerMovimientos();            
         }
 
          private void ucMovimientos_Load(object sender, EventArgs e)
         {         
             DocTipoCbo.SelectedIndex = 0;
-            paEnviosCbo.SelectedIndex = 0;
+            paEnviosCbo.SelectedIndex = 2;
             ObtenerMovimientos();
         }
 
@@ -73,7 +71,10 @@ namespace Catalogo._movimientos
         {
             movDataGridView.Visible = false;
 
-            _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(cboCliente.SelectedValue.ToString()));
+            Int16 xClienteSelected = 0;
+            if (cboCliente.SelectedValue != null) xClienteSelected = Int16.Parse(cboCliente.SelectedValue.ToString());
+
+            _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, xClienteSelected);
             System.Data.OleDb.OleDbDataReader dr = null;
 
             if (paEnviosCbo.SelectedIndex == 0)

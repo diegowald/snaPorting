@@ -68,13 +68,12 @@ namespace Catalogo._devoluciones
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {            
-            paEnviosCbo.SelectedIndex = -1;
+            paEnviosCbo.SelectedIndex = 2;
 
             if (cboCliente.SelectedIndex > 0)
             {
                 toolStripStatusLabel1.Text = "Devolución para el cliente: " + this.cboCliente.Text.ToString();
                 btnIniciar.Enabled = true;
-                paEnviosCbo.SelectedIndex = 2;
             }
             else
             {
@@ -82,7 +81,6 @@ namespace Catalogo._devoluciones
                 btnIniciar.Enabled = false;
             }
             this.emitir(cboCliente.SelectedIndex);
-
         }
         
         private void paEnviosCbo_SelectedIndexChanged(object sender, EventArgs e)
@@ -184,7 +182,7 @@ namespace Catalogo._devoluciones
                             CerrarDevolucion();
                             InhabilitarDevolucion();
 
-                            cboCliente.SelectedIndex = 0;
+                            //cboCliente.SelectedIndex = 0;
 
                             devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
                             devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
@@ -281,11 +279,11 @@ namespace Catalogo._devoluciones
                 case _pedidos.PedidosHelper.Acciones.DECREMENTAR:
                     if (DevolucionTab.SelectedTab.Name.ToUpper() == "DEVTABMN")
                     {
-                        devMnCantidadTxt.Value--;
+                        if (devMnCantidadTxt.Value > 1) {devMnCantidadTxt.Value--;}
                     }
                     else if (DevolucionTab.SelectedTab.Name.ToUpper() == "DEVTABMF")
                     {
-                        devMfCantidadTxt.Value--;
+                        if (devMfCantidadTxt.Value > 1) {devMfCantidadTxt.Value--;}
                     }                    
                     break;
                 default:
@@ -377,8 +375,6 @@ namespace Catalogo._devoluciones
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-           //const string PROCNAME_ = "btnImprimir_Click";
-
             Cursor.Current = Cursors.WaitCursor;
 
             if (devMflistView.Items.Count > 0 | devMnlistView.Items.Count > 0)
@@ -387,7 +383,7 @@ namespace Catalogo._devoluciones
 
                 Catalogo._devoluciones.Devolucion dev = new Catalogo._devoluciones.Devolucion(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
                 dev.NroImpresion = 0;
-                
+                Cursor.Current = Cursors.Default; 
                 string wItemObservaciones = "";
                 if (Funciones.util.InputBox(" (Presione Cancelar para quitar la Observación)  ", "Observación para la devolución", 80, ref wItemObservaciones) == DialogResult.OK)
                 {
@@ -397,7 +393,7 @@ namespace Catalogo._devoluciones
                 { // Apreto Cancelar
                     dev.Observaciones = "";
                 }
-
+                Cursor.Current = Cursors.WaitCursor;
                 //Mercaderia Nueva
                 if (devMnlistView.Items.Count > 0)
                 {
@@ -436,8 +432,6 @@ namespace Catalogo._devoluciones
 
                 dev.Guardar("grabar");
 
-                Cursor.Current = Cursors.Default;
-
                 Devolucion_Imprimir(Global01.NroImprimir);
                 Global01.NroImprimir = "";
                 
@@ -455,54 +449,55 @@ namespace Catalogo._devoluciones
         private void btnVer_Click(object sender, EventArgs e)
         {
 
-            //const string PROCNAME_ = "btnVer_Click";
-
-            Cursor.Current = Cursors.WaitCursor;
-
-            Catalogo._devoluciones.Devolucion dev = new Catalogo._devoluciones.Devolucion(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
-            dev.NroImpresion = 0;
-
-            //Mercaderia Nueva
-            if (devMnlistView.Items.Count > 0)
+            if (devMflistView.Items.Count > 0 | devMnlistView.Items.Count > 0)
             {
-                for (int i = 0; i < devMnlistView.Items.Count; i++)
-                {                      
-                    dev.ADDItem(devMnlistView.Items[i].SubItems[11].Text.ToString(),
-                                Int16.Parse(devMnlistView.Items[i].SubItems[2].Text.ToString()),        
-                                byte.Parse(devMnlistView.Items[i].SubItems[8].Text.ToString()),
-                                devMnlistView.Items[i].SubItems[3].Text.ToString(),
-                                byte.Parse(devMnlistView.Items[i].SubItems[12].Text.ToString()),
-                                "",
-                                "",
-                                "",
-                                "",
-                                devMnlistView.Items[i].SubItems[9].Text.ToString());
-                }
-            }
+                Cursor.Current = Cursors.WaitCursor;
 
-            //Mercaderia Fallada
-            if (devMflistView.Items.Count > 0)
-            {
-                for (int i = 0; i < devMflistView.Items.Count; i++)
+                Catalogo._devoluciones.Devolucion dev = new Catalogo._devoluciones.Devolucion(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+                dev.NroImpresion = 0;
+                dev.Observaciones = "";
+
+                //Mercaderia Nueva
+                if (devMnlistView.Items.Count > 0)
                 {
-                    dev.ADDItem(devMflistView.Items[i].SubItems[11].Text.ToString(),
-                                Int16.Parse(devMflistView.Items[i].SubItems[2].Text.ToString()),        
-                                byte.Parse(devMflistView.Items[i].SubItems[8].Text.ToString()),
-                                devMflistView.Items[i].SubItems[3].Text.ToString(),
-                                byte.Parse(devMflistView.Items[i].SubItems[12].Text.ToString()),
-                                devMflistView.Items[i].SubItems[4].Text.ToString(),
-                                devMflistView.Items[i].SubItems[5].Text.ToString(),
-                                devMflistView.Items[i].SubItems[6].Text.ToString(),
-                                devMflistView.Items[i].SubItems[7].Text.ToString(),
-                                devMflistView.Items[i].SubItems[9].Text.ToString());
+                    for (int i = 0; i < devMnlistView.Items.Count; i++)
+                    {
+                        dev.ADDItem(devMnlistView.Items[i].SubItems[11].Text.ToString(),
+                                    Int16.Parse(devMnlistView.Items[i].SubItems[2].Text.ToString()),
+                                    byte.Parse(devMnlistView.Items[i].SubItems[8].Text.ToString()),
+                                    devMnlistView.Items[i].SubItems[3].Text.ToString(),
+                                    byte.Parse(devMnlistView.Items[i].SubItems[12].Text.ToString()),
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    devMnlistView.Items[i].SubItems[9].Text.ToString());
+                    }
                 }
-            }
 
-            dev.Guardar("VER");
-            Cursor.Current = Cursors.Default;
+                //Mercaderia Fallada
+                if (devMflistView.Items.Count > 0)
+                {
+                    for (int i = 0; i < devMflistView.Items.Count; i++)
+                    {
+                        dev.ADDItem(devMflistView.Items[i].SubItems[11].Text.ToString(),
+                                    Int16.Parse(devMflistView.Items[i].SubItems[2].Text.ToString()),
+                                    byte.Parse(devMflistView.Items[i].SubItems[8].Text.ToString()),
+                                    devMflistView.Items[i].SubItems[3].Text.ToString(),
+                                    byte.Parse(devMflistView.Items[i].SubItems[12].Text.ToString()),
+                                    devMflistView.Items[i].SubItems[4].Text.ToString(),
+                                    devMflistView.Items[i].SubItems[5].Text.ToString(),
+                                    devMflistView.Items[i].SubItems[6].Text.ToString(),
+                                    devMflistView.Items[i].SubItems[7].Text.ToString(),
+                                    devMflistView.Items[i].SubItems[9].Text.ToString());
+                    }
+                }
 
-            Devolucion_Imprimir(Global01.NroImprimir);
-            Global01.NroImprimir = "";
+                dev.Guardar("VER");
+
+                Devolucion_Imprimir(Global01.NroImprimir);
+                Global01.NroImprimir = "";
+            };
         }
 
         public static void Devolucion_Imprimir(string NroDevolucion)
@@ -624,7 +619,7 @@ namespace Catalogo._devoluciones
                         ////alternate row color
                         if (devMnlistView.Items.Count % 2 != 0)
                         {
-                            ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                            ItemX.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(255, 255, 192);
                         }
 
                         ItemX.SubItems.Add(ProductoSeleccionado.Cells["N_Producto"].Value.ToString());    //01
@@ -701,7 +696,7 @@ namespace Catalogo._devoluciones
                         ////alternate row color
                         if (devMflistView.Items.Count % 2 != 0)
                         {
-                            ItemX.BackColor = System.Drawing.Color.FromArgb(255, 255, 192);
+                            ItemX.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(255, 255, 192);
                         }
 
                         ItemX.SubItems.Add(ProductoSeleccionado.Cells["N_Producto"].Value.ToString());    //01
@@ -801,16 +796,6 @@ namespace Catalogo._devoluciones
         private void devMflistView_DoubleClick(object sender, EventArgs e)
         {
             devMflistView.SelectedItems[0].SubItems[6].Text = devMfDepositoCbo.Text; 
-        }
-
-        private void DevolucionTab_Selecting(object sender, TabControlCancelEventArgs e)
-        {
-
-        }
-
-        private void DevolucionTab_Selected(object sender, TabControlEventArgs e)
-        {
-
         }
 
         private void paDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

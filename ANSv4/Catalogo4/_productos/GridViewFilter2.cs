@@ -1,4 +1,4 @@
-﻿//#define usarSemaforoImagen
+﻿#define usarSemaforoImagen
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -86,6 +86,7 @@ namespace Catalogo._productos
             InitializeComponent();
 
             dataGridView1.RowPostPaint += OnRowPostPaint;
+
 #if usarSemaforoImagen
             dataGridView1.CellPainting += OnCellPainting;
 #endif
@@ -326,6 +327,8 @@ namespace Catalogo._productos
 
             // Show the counts in the toolstrip
             this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
+            
+            Cursor.Current = Cursors.Default;
 
             if (currentRowCount > 0)
             {
@@ -408,8 +411,6 @@ namespace Catalogo._productos
 
         private void ExistenciaFinished(string idProducto, string resultado, System.Windows.Forms.DataGridViewCell cell)
         {
-            
-
             if (resultado.IndexOf(";") > 0)
             {
 
@@ -444,7 +445,6 @@ namespace Catalogo._productos
                         cell.Value = "x";
                         break;
                 }
-
             }
 
             //System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", idProducto, resultado));
