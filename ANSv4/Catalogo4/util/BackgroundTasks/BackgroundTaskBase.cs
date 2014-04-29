@@ -17,6 +17,7 @@ namespace Catalogo.util.BackgroundTasks
         JOB_TYPE job_type;
 
         private bool cancellationByNewExecution = false;
+        private int _delayTime = -1;
 
         public BackgroundTaskBase(JOB_TYPE jobType)
         {
@@ -53,11 +54,21 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
+        internal void delayedRun(int sleepTime)
+        {
+            _delayTime = sleepTime;
+            run();
+        }
+
 
         void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             try
             {
+                if ((job_type == JOB_TYPE.Asincronico) && (_delayTime != -1))
+                {
+                    System.Threading.Thread.Sleep(_delayTime);
+                }
                 execute();
             }
             catch (Exception ex)

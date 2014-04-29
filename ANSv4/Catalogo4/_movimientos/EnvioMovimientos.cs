@@ -269,5 +269,6 @@ namespace Catalogo.util.BackgroundTasks
                     || (filtroRendicion.Count > 0);
             }
         }
+
     }
 }

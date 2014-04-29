@@ -12,6 +12,8 @@ namespace Catalogo
 
         public static void Main()
         {
+            checkFlashPlayer();
+
             valida_ubicacionDatos();
 
             update_mdb();
@@ -70,8 +72,8 @@ namespace Catalogo
             check.run();
 
             //Aca tiene que ir tambien el proceso que envia al server las transacciones.
-/*            Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, -1, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
-            envioMovs.run();*/
+            Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, -1, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
+            envioMovs.delayedRun(2 * 60 * 1000);
         }
 
         private static void ActivarApplicacion()
@@ -520,6 +522,34 @@ namespace Catalogo
             Global01.EmailAsunto = "";
 
             Global01.IPPing = Funciones.modINIs.ReadINI("DATOS", "IPPing", "8.8.8.8");
+        }
+
+        /// <summary>
+        /// <see cref="http://stackoverflow.com/questions/5039636/how-to-check-if-a-particular-version-of-flash-player-is-installed-or-not-in-c"/>
+        /// <seealso cref="http://stackoverflow.com/questions/4656814/how-can-i-make-my-application-check-if-adobe-flash-player-is-installed-on-a-pc"/>
+        /// </summary>
+        internal static void checkFlashPlayer()
+        {
+            Microsoft.Win32.RegistryKey regKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Macromedia\FlashPlayer");
+            if (regKey != null)
+            {
+                string flashVersion = Convert.ToString(regKey.GetValue("CurrentVersion"));
+                //                return flashVersion;
+                System.Diagnostics.Debug.WriteLine(flashVersion);
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Debe tener instalado Flash Player", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                miEnd();
+            }
+            // otra version que no anduvo en mi maquina.
+            /*
+            Microsoft.Win32.RegistryKey rk=Microsoft.Win32.Registry.CurrentUser.OpenSubKey("HKEY_LOCAL_MACHINE\\SOFTWARE\\Macromedia\\FlashPlayer");
+            if (rk == null)
+            {
+                System.Windows.Forms.MessageBox.Show("Debe tener instalado Flash Player", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                miEnd();
+            }*/
         }
 
     }
