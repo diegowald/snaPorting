@@ -68,8 +68,6 @@ namespace Catalogo
             crearControlesProductos();
         }
 
-
-
         private void addFlashPlayer()
         {
             // Create the interop host control.
@@ -503,6 +501,7 @@ namespace Catalogo
                 {
                     rec.attachReceptor(dev);
                 }
+
                 if (mov != null)
                 {
                     rec.attachReceptor(mov);

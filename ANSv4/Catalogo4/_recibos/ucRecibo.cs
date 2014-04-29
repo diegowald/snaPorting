@@ -53,19 +53,15 @@ namespace Catalogo._recibos
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            paEnviosCbo.SelectedIndex = -1;
+            paEnviosCbo.SelectedIndex = 2;
 
             if (cboCliente.SelectedIndex > 0)
-            {
-                
+            {                
                 toolStripStatusLabel1.Text = "Recibo para el cliente: " + this.cboCliente.Text.ToString();
                 CargarCtaCte();                
                 CargarClienteNovedades();                
                 CargarClienteDatos();
                 btnIniciar.Enabled = true;
-                paEnviosCbo.SelectedIndex = 2;
-
             }
             else 
             {
@@ -152,6 +148,7 @@ namespace Catalogo._recibos
 
             CliNlistView.Visible = false;
             CliNlistView.Items.Clear();
+            CliNlistView.Tag = "add";
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -525,7 +522,7 @@ namespace Catalogo._recibos
                         InhabilitarRecibo();
 
                         //rTabsRecibo.Visible = false;
-                        cboCliente.SelectedIndex = 0;
+                        //cboCliente.SelectedIndex = 0;
                         CerrarRecibo();                                                
                         TotalRecibo();
                         TotalADeducir();
@@ -1509,10 +1506,7 @@ namespace Catalogo._recibos
 
         private void btnResumen_Click(object sender, EventArgs e)
         {
-            if (btnIniciar.Tag.ToString() == "CANCELAR")
-            {
-                VerDetalleRecibo();
-            }
+            verResumen();
         }
 
         private void paEnviosCbo_SelectedIndexChanged(object sender, EventArgs e)
@@ -1584,53 +1578,6 @@ namespace Catalogo._recibos
                 cboCliente.SelectedIndex = dato;
         }
 
-        private void CliNAgregarBtn_Click(object sender, EventArgs e)
-        {
-
-            if (datosvalidos("clientenovedad"))
-            {
-                ListViewItem ItemX;
-
-                if (CliNlistView.Tag.ToString() == "upd")
-                {
-                    if (CliNlistView.SelectedItems != null & CliNlistView.SelectedItems.Count > 0)
-                    {
-                        ItemX = CliNlistView.SelectedItems[0];
-                    }
-                    else
-                    {
-                        ItemX = new ListViewItem(string.Format("{0:dd/MM/yyyy}", CliNFechaDtp.Value));
-                        adlistView.Tag = "add";
-                    }
-                }
-                else
-                {
-                    ItemX = new ListViewItem(string.Format("{0:dd/MM/yyyy}", CliNFechaDtp.Value));
-                }
-
-                //alternate row color
-                if (CliNlistView.Items.Count % 2 == 0)
-                {
-                    ItemX.BackColor = Color.White;
-                }
-                else
-                {
-                    ItemX.BackColor = System.Drawing.SystemColors.Control;
-                }
-
-                ItemX.Tag = "add";
-                ItemX.SubItems.Add(CliNNovedadTxt.Text.ToUpper());
-                ItemX.SubItems.Add(CliNidLbl.Text);
-
-                CliNlistView.Items.Add(ItemX);
-
-                //Funciones.util.AutoSizeLVColumnas(ref CliNlistView);
-
-                CliNNovedadTxt.Text = "";
-                CliNidLbl.Text = "0";
-            }
-        }
-
         private void EnviarBtn_Click(object sender, EventArgs e)
         {
             System.Collections.Generic.List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO> filtro
@@ -1668,11 +1615,9 @@ namespace Catalogo._recibos
                 CliNFechaDtp.Value = DateTime.Parse(CliNlistView.SelectedItems[0].Text);
                 CliNNovedadTxt.Text = CliNlistView.SelectedItems[0].SubItems[1].Text;
                 CliNidLbl.Text = CliNlistView.SelectedItems[0].SubItems[2].Text;
-                
-                //CliNlistView.Items.Remove(CliNlistView.SelectedItems[0]);
-                //CliNlistView.SelectedItems.Clear();
 
-                CliNlistView.Tag = "upd";
+                CliNlistView.Tag = "upd";                
+                CliNlistView.Enabled = false;
                 CliNNovedadTxt.Focus();
             }
         }
@@ -1683,9 +1628,9 @@ namespace Catalogo._recibos
             {
                 if (e.KeyCode == Keys.Delete)
                 {  //DEL
-                    if (Int16.Parse(CliNlistView.SelectedItems[0].SubItems[3].Text) > 0)
+                    if (Int16.Parse(CliNlistView.SelectedItems[0].SubItems[2].Text) > 0)
                     {
-                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblClientesNovedades WHERE ID=" + CliNlistView.SelectedItems[0].SubItems[3].Text);
+                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblClientesNovedades WHERE ID=" + CliNlistView.SelectedItems[0].SubItems[2].Text);
                     }
                     CliNlistView.Items.Remove(CliNlistView.SelectedItems[0]);
                     CliNlistView.SelectedItems.Clear();
@@ -1705,12 +1650,86 @@ namespace Catalogo._recibos
 
         internal void verResumen()
         {
-            if (btnIniciar.Tag.ToString() != "INICIAR")
+            if (btnIniciar.Tag.ToString() == "CANCELAR")
             {
-                System.Windows.Forms.MessageBox.Show("Aca tengo que mostrar el resumen de recibos");
+                VerDetalleRecibo();
             }
         }
 
+        private void CliNAgregarBtn_Click(object sender, EventArgs e)
+        {
+           
+            if (datosvalidos("clientenovedad"))
+            {
+                int xID = Int16.Parse(CliNidLbl.Text);   
+                if (CliNlistView.Tag.ToString() == "upd")
+                {
+                    if (CliNlistView.SelectedItems != null & CliNlistView.SelectedItems.Count > 0)
+                    {
+                        Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblClientesNovedades SET Novedad='" + CliNNovedadTxt.Text.ToUpper() + "', F_Carga=#" + string.Format("{0:dd/MM/yyyy}", CliNFechaDtp.Value) + "# WHERE ID=" + xID);
+
+                        CliNlistView.SelectedItems[0].Text = string.Format("{0:dd/MM/yyyy}", CliNFechaDtp.Value);
+                        CliNlistView.SelectedItems[0].SubItems[1].Text = CliNNovedadTxt.Text.ToUpper();
+                        CliNlistView.Tag = "add";
+                    }
+                }
+                else
+                {
+                    ClientesNovedades_add(Int16.Parse(cboCliente.SelectedValue.ToString()), CliNFechaDtp.Value, CliNNovedadTxt.Text.ToUpper(), ref xID);
+
+                    ListViewItem ItemX = new ListViewItem(string.Format("{0:dd/MM/yyyy}", CliNFechaDtp.Value));                 
+                    ItemX.BackColor = ((CliNlistView.Items.Count % 2 == 0) ? Color.White : ItemX.BackColor = System.Drawing.SystemColors.Control);
+                    ItemX.SubItems.Add(CliNNovedadTxt.Text.ToUpper());
+                    ItemX.SubItems.Add(xID.ToString());
+                    CliNlistView.Items.Add(ItemX);
+                }
+
+                CliNNovedadTxt.Text = "";
+                CliNidLbl.Text = "0";
+                CliNlistView.Enabled = true;
+            }
+        }
+
+        private void ClientesNovedades_add(int pIdCliente,DateTime pFecha, string pNovedad, ref int pID)
+        {
+            try
+            {
+                System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand();
+
+                cmd.Parameters.Add("pIdCliente", System.Data.OleDb.OleDbType.Integer).Value = pIdCliente;
+                cmd.Parameters.Add("pF_Carga", System.Data.OleDb.OleDbType.Date).Value = pFecha;
+                cmd.Parameters.Add("pNovedad", System.Data.OleDb.OleDbType.VarChar, 64).Value = pNovedad;
+                
+                cmd.Connection = Global01.Conexion;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "usp_ClientesNovedades_add";
+    
+                if (Global01.TranActiva != null)
+                {
+                    cmd.Transaction = Global01.TranActiva;
+                }
+                cmd.ExecuteNonQuery();
+                cmd = null;
+                
+                System.Data.OleDb.OleDbDataReader rec = null;
+                rec = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblClientesNovedades", "@@identity");
+                rec.Read();
+                pID = Int16.Parse(rec["ID"].ToString());
+                rec = null;
+            }
+
+            catch (System.Data.OleDb.OleDbException ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;
+            }
+
+        }
 
     } //fin clase
 } //fin namespace

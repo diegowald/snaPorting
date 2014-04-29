@@ -46,22 +46,20 @@ namespace Catalogo._interdeposito
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
             
-            paEnviosCbo.SelectedIndex = -1;
+            paEnviosCbo.SelectedIndex = 2;
 
             if (cboCliente.SelectedIndex > 0)
             {
                 
                 toolStripStatusLabel1.Text = "InterDeposito para el cliente: " + this.cboCliente.Text.ToString();
                 btnIniciar.Enabled = true;
-                paEnviosCbo.SelectedIndex = 2;
-
             }
             else 
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "InterDeposito para el cliente ..."; }
                 btnIniciar.Enabled = false;
             }
-//            this.emitir(cboCliente.SelectedIndex);
+            //this.emitir(cboCliente.SelectedIndex);
         }
 
         private void cvAgregarBtn_Click(object sender, EventArgs e)
@@ -236,7 +234,7 @@ namespace Catalogo._interdeposito
 
                         rTabsInterDeposito.Visible = false;
                         rTabsInterDeposito.SelectedIndex = 1;
-                        if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
+                        //if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
                         CerrarInterDeposito();                                                
                     }
                 }

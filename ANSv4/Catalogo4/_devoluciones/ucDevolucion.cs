@@ -68,13 +68,12 @@ namespace Catalogo._devoluciones
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {            
-            paEnviosCbo.SelectedIndex = -1;
+            paEnviosCbo.SelectedIndex = 2;
 
             if (cboCliente.SelectedIndex > 0)
             {
                 toolStripStatusLabel1.Text = "Devolución para el cliente: " + this.cboCliente.Text.ToString();
                 btnIniciar.Enabled = true;
-                paEnviosCbo.SelectedIndex = 2;
             }
             else
             {
@@ -82,7 +81,6 @@ namespace Catalogo._devoluciones
                 btnIniciar.Enabled = false;
             }
             this.emitir(cboCliente.SelectedIndex);
-
         }
         
         private void paEnviosCbo_SelectedIndexChanged(object sender, EventArgs e)
@@ -184,7 +182,7 @@ namespace Catalogo._devoluciones
                             CerrarDevolucion();
                             InhabilitarDevolucion();
 
-                            cboCliente.SelectedIndex = 0;
+                            //cboCliente.SelectedIndex = 0;
 
                             devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
                             devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));

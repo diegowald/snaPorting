@@ -314,6 +314,13 @@
     <Compile Include="_recibos\DeducirItem.cs" />
     <Compile Include="_recibos\Recibo.cs" />
     <Compile Include="_recibos\ReciboItem.cs" />
+    <Compile Include="_registrofaltantes\EnvioFaltante.cs" />
+    <Compile Include="_registrofaltantes\ucFaltante.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_registrofaltantes\ucFaltante.Designer.cs">
+      <DependentUpon>ucFaltante.cs</DependentUpon>
+    </Compile>
     <Compile Include="_registro\ActivarAplicacion.cs" />
     <Compile Include="_auditor\EnvioAuditoria.cs" />
     <Compile Include="_clientes\UpdateClientes.cs" />
@@ -501,6 +508,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\FiltroSearch.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_registrofaltantes\ucFaltante.resx">
+      <DependentUpon>ucFaltante.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_registro\fRegistro.resx">
       <DependentUpon>fRegistro.cs</DependentUpon>

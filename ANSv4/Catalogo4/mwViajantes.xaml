@@ -156,6 +156,14 @@
                                                     <Grid x:Name="xDevolucionArea" Grid.Row="0" />
                                                 </Grid>
                                             </ad:DockableContent>
+                                            <ad:DockableContent Title="Reg. Faltantes" Name="xRegFaltantesAreaDockC" IsCloseable="False">
+                                                <Grid x:Name="grRegFaltantes">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition  Height="*"/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid x:Name="xRegFaltantesArea" Grid.Row="0" />
+                                                </Grid>
+                                            </ad:DockableContent>                                            
                                         </ad:DocumentPane>
                                     </Grid>
                                 </Grid>

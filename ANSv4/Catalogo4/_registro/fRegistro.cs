@@ -9,8 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 namespace Catalogo._registro
-{
-    
+{    
     public partial class fRegistro : Form
     {
 

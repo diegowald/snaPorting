@@ -53,20 +53,18 @@ namespace Catalogo._pedidos
         {
             try
             {
-                paEnviosCbo.SelectedIndex = -1;
+                paEnviosCbo.SelectedIndex = 2;
 
                 if (cboCliente.SelectedIndex > 0)
                 {
                     toolStripStatusLabel1.Text = "Nota de Venta para el cliente: " + this.cboCliente.Text.ToString();
                     btnIniciar.Enabled = true;
-                    paEnviosCbo.SelectedIndex = 2;
                 }
                 else
                 {
                     if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Pedido para el cliente ..."; }
                     btnIniciar.Enabled = false;
                 }
-                //paEnviosCbo_SelectedIndexChanged(null, null);
                 this.emitir(cboCliente.SelectedIndex);
             }
             catch (Exception ex)
@@ -216,7 +214,7 @@ namespace Catalogo._pedidos
                                 CerrarPedido();
                                 InhabilitarPedido();
 
-                                if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
+                                //if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
                                 nvSimilarChk.Checked = false;
                                 nvEsOfertaChk.Checked = false;
                                 nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));

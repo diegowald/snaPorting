@@ -15,8 +15,6 @@ namespace Catalogo._movimientos
         Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
      {
        
-        //private //const string m_sMODULENAME_ = "ucMovimientos";
-
         public ucMovimientos()
         {
             InitializeComponent();
@@ -39,6 +37,8 @@ namespace Catalogo._movimientos
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //paEnviosCbo.SelectedIndex = 2;
+
             if (cboCliente.SelectedIndex > 0)
             {
                 toolStripStatusLabel1.Text = "Movimientos para el cliente: " + this.cboCliente.Text.ToString();
@@ -47,14 +47,13 @@ namespace Catalogo._movimientos
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Movimientos para el cliente ..."; }
             }
-            ObtenerMovimientos();
-           // EnviosCbo.SelectedIndex = 0;
+            ObtenerMovimientos();            
         }
 
          private void ucMovimientos_Load(object sender, EventArgs e)
         {         
             DocTipoCbo.SelectedIndex = 0;
-            paEnviosCbo.SelectedIndex = 0;
+            paEnviosCbo.SelectedIndex = 2;
             ObtenerMovimientos();
         }
 
