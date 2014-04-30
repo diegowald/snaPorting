@@ -34,6 +34,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -53,6 +54,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Catalogo.App</StartupObject>
@@ -79,8 +81,9 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup />
+  <PropertyGroup />
   <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -139,6 +142,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="reportes\CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -410,10 +418,6 @@
     <Compile Include="_recibos\ucRecibo.Designer.cs">
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </Compile>
-    <Page Include="CustomStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="mwViajantes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -451,11 +455,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -472,6 +471,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="reportes\CrystalReport1.rpt">
@@ -534,7 +534,6 @@
       <DependentUpon>ucRecibo.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Catalogo4_ClaveTemporal.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <None Include="Properties\Settings.settings">
@@ -782,22 +781,10 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <None Include="recursos\Nuevo-logo-Auto-nautica-blanco.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="recursos\Nuevo-logo-Auto-nautica-horizontal-blanco.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="recursos\Nuevo-logo-Auto-nautica-horizontal-original.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="recursos\Nuevo-logo-Auto-nautica-horizontal-rojo-y-blanco.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="recursos\Nuevo-logo-Auto-nautica-original.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="recursos\Nuevo-logo-Auto-nautica-rojo-y-blanco.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="recursos\LOGO-ANS-48X48.ico" />
@@ -807,23 +794,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="recursos\LOGO-ANS-32X32.ico" />
-    <Resource Include="recursos\LOGO-ANS-24X24.ico" />
-    <Resource Include="recursos\LOGO-ANS-16X16.ico" />
-    <Resource Include="recursos\top1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="recursos\cotizacion-redes.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>true</Install>
+      <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
+      <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="SAP.CrystalReports14.NET.2.0">
       <Visible>False</Visible>
@@ -836,7 +817,6 @@
     <Resource Include="recursos\logo.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="recursos\autonatica.swf" />
     <None Include="Web References\UpdateNovedadesCatalogoWS\catalogonovedades.disco" />
     <Resource Include="recursos\icnYoutube.png" />
     <Resource Include="recursos\icnTwitter.png" />

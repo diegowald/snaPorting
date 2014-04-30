@@ -35,16 +35,13 @@ namespace Catalogo
             load_header();
 
             //chequea comandos y mensajes desde el servidor
-            if (Funciones.modINIs.ReadINI("DATOS", "INFO", "1") == "1") //Or vg.RecienRegistrado Or vg.NoConn
+            if (Funciones.modINIs.ReadINI("DATOS", "INFO", "0") == "1") //Or vg.RecienRegistrado Or vg.NoConn
             {
                 util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig);
                 updater.run();
             }
 
             valida_appLogin();
-
-           // Funciones.oleDbFunciones.Comando(Global01.Conexion, "DELETE FROM ansNovedades");
-           // Funciones.oleDbFunciones.Comando(Global01.Conexion, "DELETE FROM tblNovedadLeido");
 
             if (Global01.AppActiva)
             {
@@ -370,7 +367,6 @@ namespace Catalogo
                 miEnd();
             }
 
-
             if (!System.IO.File.Exists(Global01.cstring))
             {
                 MessageBox.Show("Error en la instalación del archivo de Datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
@@ -446,12 +442,13 @@ namespace Catalogo
             Global01.Conexion = null;
             Global01.TranActiva = null;
 
+            string xLocAns = Environment.GetEnvironmentVariable("windir") + "\\locans" + ((int)(Global01.miSABOR)).ToString() + ".log";
         vadenuevo:
-            if (!System.IO.File.Exists(Environment.GetEnvironmentVariable("windir") + "\\locans.log"))
+            if (!System.IO.File.Exists(xLocAns))
             {
-                Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", "C:\\Catalogo ANS");
+                Funciones.modINIs.INIWrite(xLocAns, "ans", "path", "C:\\Catalogo ANS");
             }
-            Global01.AppPath = Funciones.modINIs.INIRead(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", "C:\\Catalogo ANS");
+        Global01.AppPath = Funciones.modINIs.INIRead(xLocAns, "ans", "path", "C:\\Catalogo ANS");
 
             Global01.PathAcrobat = Funciones.modINIs.ReadINI("Datos", "PathAcrobat", "");
             Global01.FileBak = "CopiaCata_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mdb";
@@ -471,7 +468,7 @@ namespace Catalogo
                 DialogResult result = folderBrowserDialog1.ShowDialog();
                 if (result == DialogResult.OK)
                 {
-                    Funciones.modINIs.INIWrite(Environment.GetEnvironmentVariable("windir") + "\\locans.log", "ans", "path", folderBrowserDialog1.SelectedPath.ToString());
+                    Funciones.modINIs.INIWrite(xLocAns, "ans", "path", folderBrowserDialog1.SelectedPath.ToString());
                 }
                 else if (result == DialogResult.Cancel)
                 {

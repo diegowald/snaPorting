@@ -44,7 +44,7 @@ namespace Catalogo.varios
                 wArchivoTxt = ((Global01.ListaPrecio==2) ? "update4Z2" : "update4Z1"); 
             }
 
-            vcUPDATECTL1.configFileURL = "http://" + Url + "/descargas320/" + wArchivoTxt + ".txt";
+            vcUPDATECTL1.configFileURL = "http://" + Url + "/descargas400/" + wArchivoTxt + ".txt";
 
         }
 

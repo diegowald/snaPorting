@@ -117,26 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Nuevo_logo_Auto_nautica_horizontal_original" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\recursos\Nuevo-logo-Auto-nautica-horizontal-original.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Nuevo_logo_Auto_nautica_original" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\recursos\Nuevo-logo-Auto-nautica-original.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Nuevo_logo_Auto_nautica_horizontal_rojo_y_blanco" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\recursos\Nuevo-logo-Auto-nautica-horizontal-rojo-y-blanco.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Nuevo_logo_Auto_nautica_blanco" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\recursos\Nuevo-logo-Auto-nautica-blanco.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Nuevo_logo_Auto_nautica_rojo_y_blanco" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\recursos\Nuevo-logo-Auto-nautica-rojo-y-blanco.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Nuevo_logo_Auto_nautica_horizontal_blanco" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\recursos\Nuevo-logo-Auto-nautica-horizontal-blanco.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\recursos\logo.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
