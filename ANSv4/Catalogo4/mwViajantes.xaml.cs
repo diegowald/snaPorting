@@ -41,10 +41,12 @@ namespace Catalogo
                 this.dcRecibos.IsCloseable = true;
                 this.dcRendiciones.IsCloseable = true;
                 this.xDevolucionesAreaDockC.IsCloseable = true;
+                this.xRegFaltantesAreaDockC.IsCloseable = true;
 
                 this.dcRecibos.Close();
                 this.dcRendiciones.Close();
                 this.xDevolucionesAreaDockC.Close();
+                this.xRegFaltantesAreaDockC.Close();
             }
 
             if (!Global01.AppActiva)
@@ -398,7 +400,7 @@ namespace Catalogo
                 return;
             }
 
-            if (ped.IDClienteSeleccionado != -1)
+            if (ped.IDClienteSeleccionado > 0 )
             {
                 _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, ped.IDClienteSeleccionado);
                 if (movimientos.preguntoAlSalir())
@@ -454,6 +456,11 @@ namespace Catalogo
         private void xMenu1_revista(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("http://www.autonauticasur-r.com.ar/revista/vigente/index2.html");
+        }
+
+        private void xMenu1_CtaCte(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.autonauticasur-r.com.ar/portals/0/w3/acc.html");
         }
 
         private void xMenu1_porcentajeL(object sender, RoutedEventArgs e)

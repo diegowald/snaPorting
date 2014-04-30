@@ -219,6 +219,7 @@
                                 <Menu x:Name="appMenu">
                                     <MenuItem Header="Sitio web de ANS" Click="xMenu1_web" Margin="0,20,0,0"/>
                                     <MenuItem Header="Revista Dígital" Click="xMenu1_revista"/>
+                                    <MenuItem Header="Apertura Cta. Cte." Click="xMenu1_CtaCte"/>
                                     <MenuItem Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
                                     <MenuItem Header="Configuración Aplic." Click="xMenu1_AppConfig"/>
                                 </Menu>

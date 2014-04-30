@@ -50,6 +50,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 4;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridView1.Size = new System.Drawing.Size(640, 480);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -61,12 +62,12 @@
             // Semaforo
             // 
             this.Semaforo.HeaderText = "Existencia";
-            this.Semaforo.MinimumWidth = 4;
+            this.Semaforo.MinimumWidth = 20;
             this.Semaforo.Name = "Semaforo";
             this.Semaforo.ReadOnly = true;
             this.Semaforo.Text = "E";
             this.Semaforo.ToolTipText = "ver existencia";
-            this.Semaforo.Width = 20;
+            this.Semaforo.Width = 26;
             // 
             // GridViewFilter2
             // 
