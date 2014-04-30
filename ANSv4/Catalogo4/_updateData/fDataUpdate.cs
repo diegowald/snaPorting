@@ -18,6 +18,7 @@ namespace Catalogo.varios
         public fDataUpdate()
         {
             InitializeComponent(); 
+
             vcUPDATECTL1.CloseRequest += vcUPDATECTL1_CloseRequest;
             vcUPDATECTL1.ConexionError += vcUPDATECTL1.ConexionError;
         }

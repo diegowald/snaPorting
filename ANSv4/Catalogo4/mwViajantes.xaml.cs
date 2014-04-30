@@ -32,6 +32,8 @@ namespace Catalogo
             InitializeComponent();
 
             setHotKeys();
+            this.iSB2.Content = "Catálogo Dígital de Productos - " + Global01.VersionApp + " - " + Global01.ApellidoNombre + " (" + Global01.NroUsuario + ") - " + string.Format("{0:dd/MM/yyyy HH:mm}", Global01.F_ActCatalogo) + " - (" + Global01.MiBuild + "." + Global01.ListaPrecio + ")";
+
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));

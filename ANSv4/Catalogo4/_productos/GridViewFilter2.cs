@@ -109,7 +109,6 @@ namespace Catalogo._productos
             loadDataGridView();
         }
 
-
         /// <summary>
         /// DIEGO PABLO OJO!!!!!!
         /// </summary>
@@ -378,7 +377,7 @@ namespace Catalogo._productos
 
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -404,6 +403,58 @@ namespace Catalogo._productos
             }
         }
 
+        //private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (e.ColumnIndex == (int)CCol.cSemaforo)
+        //        {
+
+        //            DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
+
+        //            if (cell != null)
+        //            {
+        //                DataGridViewRow row = cell.OwningRow;
+        //                Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+        //                existencia.onCancelled += ExistenciaCancelled;
+        //                existencia.onFinished += ExistenciaFinished;
+        //                existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        util.errorHandling.ErrorLogger.LogMessage(ex);
+        //        throw ex;  //util.errorHandling.ErrorForm.show();
+        //    }
+        //}
+
+        //private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (e.ColumnIndex == (int)CCol.cSemaforo)
+        //        {
+
+        //            DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
+
+        //            if (cell != null)
+        //            {
+        //                DataGridViewRow row = cell.OwningRow;
+        //                Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+        //                existencia.onCancelled += ExistenciaCancelled;
+        //                existencia.onFinished += ExistenciaFinished;
+        //                existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        util.errorHandling.ErrorLogger.LogMessage(ex);
+        //        throw ex;  //util.errorHandling.ErrorForm.show();
+        //    }
+        //}
+
         private void ExistenciaCancelled(System.Windows.Forms.DataGridViewCell cell)
         {
             throw new NotImplementedException();
@@ -413,41 +464,47 @@ namespace Catalogo._productos
         {
             if (resultado.IndexOf(";") > 0)
             {
-
                 string[] stringSeparators = new string[] { ";" };
                 string[] aResultado = resultado.Split(stringSeparators, StringSplitOptions.None);
-                cell.Tag = aResultado[0];
-                switch (aResultado[0])
+
+                if (aResultado[0].Trim().Length > 3)
                 {
-                    case "r":
+                    cell.ToolTipText = ((Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) ? aResultado[0] : ""); 
+                }
+                else
+                {
+                    switch (aResultado[0])
+                    {
+                        case "r":
 #if !usarSemaforoImagen
                         cell.Style.BackColor = Color.Red;
 #endif
-                        cell.ToolTipText = "NO Disponible";
-                        break;
-                    case "a":
+                            cell.ToolTipText = "NO Disponible";
+                            break;
+                        case "a":
 #if !usarSemaforoImagen
                         cell.Style.BackColor = Color.Yellow;
 #endif
-                        cell.ToolTipText = "Disponibilidad Parcial \n valor de referencia (" + aResultado[1] + ") unidades";
-                        break;
-                    case "v":
+                            cell.ToolTipText = "Disponibilidad Parcial" + ((Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) ? "\n valor de referencia (" + aResultado[1] + ") unidades" : "");
+                            break;
+                        case "v":
+#if !usarSemaforoImagen
+                        cell.Style.BackColor = Color.YellowGreen;
+                        cell.Value = "x";
+#endif
+                            cell.ToolTipText = "En Tránsito" + ((Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) ? "\n valor de referencia (" + aResultado[1] + ") unidades" : "");
+
+                            break;
+                        case "VV":
 #if !usarSemaforoImagen
                         cell.Style.BackColor = Color.Green;
 #endif
-                        cell.ToolTipText = "En Tránsito \n valor de referencia (" + aResultado[1] + ") unidades";
-                        break;
-                    case "VV":
-#if !usarSemaforoImagen
-                        cell.Style.BackColor = Color.YellowGreen;
-#endif
-                        cell.ToolTipText = "Disponible en 24 hs. \n valor de referencia (" + aResultado[1] + ") unidades";
-                        cell.Value = "x";
-                        break;
+                            //cell.ToolTipText = "Disponible en 24 hs." + ((Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) ? "\n valor de referencia (" + aResultado[1] + ") unidades" : "");
+                            cell.ToolTipText = ((Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) ? " valor de referencia (" + aResultado[1] + ") unidades" : "");
+                            break;
+                    }
                 }
             }
-
-            //System.Diagnostics.Debug.WriteLine(String.Format("{0}: {1}", idProducto, resultado));
         }
 
         private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
@@ -500,7 +557,6 @@ namespace Catalogo._productos
             //System.Data.DataRowView value = (System.Data.DataRowView)dataGridView1.Rows[e.RowIndex].DataBoundItem;
             //DataGridViewCellStyle style = dataGridView1.Rows[e.RowIndex].DefaultCellStyle;
 
-
             string s = " ";
             Color xColor = Color.Black;
             string xTipo = dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cTipo].Value.ToString();
@@ -540,7 +596,7 @@ namespace Catalogo._productos
         {
             if (e.ColumnIndex == 0 && e.RowIndex > -1)
             {
-                System.Windows.Forms.DataGridViewCell cell =dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                System.Windows.Forms.DataGridViewCell cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (cell != null)
                 {
                     Brush brush;
@@ -558,11 +614,11 @@ namespace Catalogo._productos
                                 break;
                             case "v":
                                 brush = Brushes.Green;
+                                dibujarCentro = true;
+                                //cell.Value = "x";
                                 break;
                             case "VV":
                                 brush = Brushes.Green;
-                                dibujarCentro = true;
-                                //cell.Value = "x";
                                 break;
                             default:
                                 brush = Brushes.DarkGray;
@@ -576,12 +632,12 @@ namespace Catalogo._productos
                     }
                     e.Paint(e.CellBounds, DataGridViewPaintParts.All);
                     Rectangle rect = e.CellBounds;
-                    rect.Inflate(-5, -5);
+                    rect.Inflate(-5, -4);
                     e.Graphics.FillEllipse(brush, rect);
                     if (dibujarCentro)
                     {
                         Rectangle r = rect;
-                        r.Inflate(-3, -3);
+                        r.Inflate(-3, -2);
                         e.Graphics.FillEllipse(Brushes.Black, r);
                     }
                     e.Handled = true;
@@ -589,33 +645,6 @@ namespace Catalogo._productos
             }
         }
 #endif
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.ColumnIndex == (int)CCol.cSemaforo)
-                {
-
-                    DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
-
-                    if (cell != null)
-                    {
-                        DataGridViewRow row = cell.OwningRow;
-                        Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
-                        existencia.onCancelled += ExistenciaCancelled;
-                        existencia.onFinished += ExistenciaFinished;
-                        existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
-                throw ex;  //util.errorHandling.ErrorForm.show();
-            }
-        }
-
 
         public void onRecibir(Keys dato)
         {
@@ -626,5 +655,6 @@ namespace Catalogo._productos
                 dataGridView1.Select();
             }
         }
+
     }
 }
