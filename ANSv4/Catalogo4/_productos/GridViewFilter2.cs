@@ -473,6 +473,7 @@ namespace Catalogo._productos
                 }
                 else
                 {
+                    cell.Tag = aResultado[0];
                     switch (aResultado[0])
                     {
                         case "r":
