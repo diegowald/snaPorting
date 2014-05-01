@@ -16,8 +16,11 @@ namespace Catalogo.varios
 
     public class NotificationCenter : Catalogo.util.singleton<NotificationCenter>,
         Funciones.emitter_receiver.IEmisor<complexMessage>,
-        Funciones.emitter_receiver.ICancellableEmitter
+        Funciones.emitter_receiver.ICancellableEmitter,
+        Funciones.emitter_receiver.IEmisor2<short> // Para emitir cambio de usuario
     {
+
+
         public delegate void refreshNovedadesDelegate();
         public delegate void updateBannerDelegate(string filename);
 
@@ -37,12 +40,30 @@ namespace Catalogo.varios
             }
         }
 
+        private short _idClienteSeleccionado = 0;
+        public short ClienteSeleccionado
+        {
+            get
+            {
+                return _idClienteSeleccionado;
+            }
+            set
+            {
+                if (value != _idClienteSeleccionado)
+                {
+                    _idClienteSeleccionado = value;
+                    this.emitir2(_idClienteSeleccionado);
+                }
+            }
+        }
+
+        
+
         internal void requestUpdateBanner(string filename)
         {
             if (updateBanner != null)
             {
                 updateBanner(filename);
-
             }
         }
 
@@ -63,6 +84,10 @@ namespace Catalogo.varios
             set;
         }
 
-
+        public emisorHandler<short> emisor2
+        {
+            get;
+            set;
+        }
     }
 }

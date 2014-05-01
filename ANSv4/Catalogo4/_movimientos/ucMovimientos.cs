@@ -12,7 +12,7 @@ using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo._movimientos
 {
     public partial class ucMovimientos : UserControl,
-        Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
+        Funciones.emitter_receiver.IReceptor<short> // Para recibir una notificacion de cambio del cliente seleccionado
      {
        
         public ucMovimientos()
@@ -24,6 +24,7 @@ namespace Catalogo._movimientos
                 this.Dispose();
             }
 
+            cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
@@ -33,6 +34,10 @@ namespace Catalogo._movimientos
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
                 if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedValue = Global01.NroUsuario;
             }
+            cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
+
+            Catalogo.varios.NotificationCenter.instance.attachReceptor2(this);
+            cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
@@ -47,7 +52,8 @@ namespace Catalogo._movimientos
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Movimientos para el cliente ..."; }
             }
-            ObtenerMovimientos();            
+            ObtenerMovimientos();
+            Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado = (short)cboCliente.SelectedValue;
         }
 
          private void ucMovimientos_Load(object sender, EventArgs e)
@@ -282,25 +288,11 @@ namespace Catalogo._movimientos
             set;
         }
 
-        public void onRecibir(int dato)
+        public void onRecibir(short dato)
         {
-           cboCliente.SelectedIndex = dato;
+           cboCliente.SelectedValue = dato;
         }
 
-
-        public int IDClienteSeleccionado
-        {
-            get
-            {
-                Int16 xClienteSelected = 0;
-                if (cboCliente.SelectedValue != null) xClienteSelected = Int16.Parse(cboCliente.SelectedValue.ToString());
-                return xClienteSelected;
-            }
-            set
-            {
-                cboCliente.SelectedValue = value;
-            }
-        }
 
      } //fin clase
 } //fin namespace

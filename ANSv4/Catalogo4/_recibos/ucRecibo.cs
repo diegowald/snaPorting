@@ -14,8 +14,7 @@ using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo._recibos
 {
     public partial class ucRecibo : UserControl,
-        Funciones.emitter_receiver.IEmisor<int>, // Para enviar el indice del cliente seleccionado en el combo
-        Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
+        Funciones.emitter_receiver.IReceptor<short> // Para recibir una notificacion de cambio del cliente seleccionado
     {
 
         ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
@@ -36,6 +35,7 @@ namespace Catalogo._recibos
                 this.Dispose();
             }
 
+            cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
@@ -44,11 +44,14 @@ namespace Catalogo._recibos
             {
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString(), "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
             }
+            cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
 
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cvTipoValorCbo, "v_TipoValor", "D_valor", "IDvalor", "ALL", "IDvalor", true, false, "NONE");
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cvBancoCbo, "tblBancos", "Banco", "ID", "Activo=0", "Format([ID],'000') & ' - ' & tblBancos.Nombre", true, false, "Format([ID],'000') & ' - ' & tblBancos.Nombre AS Banco, ID");
 
             rTabsRecibo.SelectedIndex = 3;
+            Catalogo.varios.NotificationCenter.instance.attachReceptor2(this);
+            cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
@@ -70,7 +73,7 @@ namespace Catalogo._recibos
                 LimpiarNovedadCliente();
                 btnIniciar.Enabled = false;
             }
-            this.emitir(cboCliente.SelectedIndex);
+            Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado = (short) cboCliente.SelectedValue;
         }
 
         private void LimpiarClienteDatos()
@@ -1572,10 +1575,10 @@ namespace Catalogo._recibos
             set;
         }
 
-        public void onRecibir(int dato)
+        public void onRecibir(short dato)
         {
             if (btnIniciar.Tag.ToString() == "INICIAR")
-                cboCliente.SelectedIndex = dato;
+                cboCliente.SelectedValue = dato;
         }
 
         private void EnviarBtn_Click(object sender, EventArgs e)
@@ -1731,20 +1734,6 @@ namespace Catalogo._recibos
 
         }
 
-
-        public int IDClienteSeleccionado
-        {
-            get
-            {
-                Int16 xClienteSelected = 0;
-                if (cboCliente.SelectedValue != null) xClienteSelected = Int16.Parse(cboCliente.SelectedValue.ToString());
-                return xClienteSelected;
-            }
-            set
-            {
-                cboCliente.SelectedValue = value;
-            }
-        }
 
     } //fin clase
 } //fin namespace

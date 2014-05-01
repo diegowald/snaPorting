@@ -75,6 +75,7 @@ namespace Catalogo
             crearControlesProductos();
         }
 
+
         public void updateBanner(string filename)
         {
             if (flash != null)
@@ -402,9 +403,9 @@ namespace Catalogo
                 return;
             }
 
-            if (ped.IDClienteSeleccionado > 0 )
+            if (Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado > 0 )
             {
-                _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, ped.IDClienteSeleccionado);
+                _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado);
                 if (movimientos.preguntoAlSalir())
                 {
                     // Si hay movimientos pendientes pregunto si quiere enviarlos
@@ -424,7 +425,7 @@ namespace Catalogo
                                 else
                                 {
                                     _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Comunicaciones,
-                                         _auditor.Auditor.AccionesAuditadas.FALLO, "Probar Conexion, TRANSMITIR_RECORDSET " + ped.IDClienteSeleccionado.ToString());
+                                         _auditor.Auditor.AccionesAuditadas.FALLO, "Probar Conexion, TRANSMITIR_RECORDSET " + Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado.ToString());
                                 }
                             }
                             break;
@@ -536,24 +537,6 @@ namespace Catalogo
             if (rec == null)
             {
                 rec = addReciboArea();
-
-                if (ped != null)
-                {
-                    rec.attachReceptor(ped);
-                    rec.IDClienteSeleccionado = ped.IDClienteSeleccionado;
-                }
-
-                if (dev != null)
-                {
-                    rec.attachReceptor(dev);
-                    rec.IDClienteSeleccionado = dev.IDClienteSeleccionado;
-                }
-
-                if (mov != null)
-                {
-                    rec.attachReceptor(mov);
-                    rec.IDClienteSeleccionado = mov.IDClienteSeleccionado;
-                }
             }
         }
 
@@ -578,19 +561,6 @@ namespace Catalogo
                 gv.attachReceptor3(ped);
                 gv.attachReceptor3(dev);
 
-                if (mov != null)
-                {
-                    ped.attachReceptor(mov);
-                    ped.IDClienteSeleccionado = mov.IDClienteSeleccionado;
-                }
-
-                if (rec != null)
-                {
-                    ped.attachReceptor(rec);
-                    ped.IDClienteSeleccionado = rec.IDClienteSeleccionado;
-                }
-
-                ped.attachReceptor(dev);
             }
         }
 
@@ -609,12 +579,6 @@ namespace Catalogo
             if (mov == null)
             {
                 mov = addMovimientosArea();
-
-                if (ped != null)
-                {
-                    ped.attachReceptor(mov);
-                    mov.IDClienteSeleccionado = ped.IDClienteSeleccionado;
-                }
             }
         }
 

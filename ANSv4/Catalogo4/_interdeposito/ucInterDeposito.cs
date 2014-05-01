@@ -30,6 +30,7 @@ namespace Catalogo._interdeposito
                 this.Dispose();
             }
 
+            cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
@@ -39,6 +40,8 @@ namespace Catalogo._interdeposito
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
                 if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedValue = Global01.NroUsuario;
             }
+            cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
+
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref bdBancoCbo, "tblBancosDepositosCtas", "BancoCta", "ID", "Activo=0", "Format([ID],'000') & ' - ' & tblBancosDepositosCtas.Nombre", true, false, "Format([ID],'000') & ' - ' & tblBancosDepositosCtas.Nombre AS BancoCta, ID");            
         
         }

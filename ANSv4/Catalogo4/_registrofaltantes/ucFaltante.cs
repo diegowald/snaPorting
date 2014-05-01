@@ -14,8 +14,7 @@ using Catalogo.Funciones.emitter_receiver;
 namespace Catalogo._registrofaltantes
 {
     public partial class ucFaltante : UserControl,
-        Funciones.emitter_receiver.IEmisor<int>, // Para enviar el indice del cliente seleccionado en el combo
-        Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
+        Funciones.emitter_receiver.IReceptor<short> // Para recibir una notificacion de cambio del cliente seleccionado
     {
 
         ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
@@ -31,6 +30,7 @@ namespace Catalogo._registrofaltantes
                 this.Dispose();
             }
 
+            cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
@@ -39,7 +39,10 @@ namespace Catalogo._registrofaltantes
             {
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString(), "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
             }
+            cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
 
+            Catalogo.varios.NotificationCenter.instance.attachReceptor2(this);
+            cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
@@ -56,7 +59,7 @@ namespace Catalogo._registrofaltantes
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Recibo para el cliente ..."; }
                 LimpiarNovedadCliente();
             }
-            this.emitir(cboCliente.SelectedIndex);
+            Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado = (short)cboCliente.SelectedValue;
         }
 
         private void CargarClienteNovedades()
@@ -153,9 +156,9 @@ namespace Catalogo._registrofaltantes
             set;
         }
 
-        public void onRecibir(int dato)
+        public void onRecibir(short dato)
         {
-                cboCliente.SelectedIndex = dato;
+                cboCliente.SelectedValue = dato;
         }
 
         private void RFlistView_DoubleClick(object sender, EventArgs e)

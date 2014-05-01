@@ -15,8 +15,7 @@ namespace Catalogo._devoluciones
     public partial class ucDevolucion : UserControl, 
         Funciones.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>, // Para recibir el producto seleccionado
         Funciones.emitter_receiver.IReceptor<_pedidos.PedidosHelper.Acciones>,// Para recibir acciones a la Devolucion desde la grilla de productos.
-        Funciones.emitter_receiver.IEmisor<int>, // Para enviar el indice del cliente seleccionado en el combo
-        Funciones.emitter_receiver.IReceptor<int> // Para recibir una notificacion de cambio del cliente seleccionado
+        Funciones.emitter_receiver.IReceptor<short> // Para recibir una notificacion de cambio del cliente seleccionado
 
     {
         //private //const string m_sMODULENAME_ = "ucDevolucion";
@@ -38,6 +37,7 @@ namespace Catalogo._devoluciones
                 this.Dispose();
             }
 
+            cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
             {
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
@@ -47,6 +47,7 @@ namespace Catalogo._devoluciones
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
                 if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedValue = Global01.NroUsuario;
             }
+            cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
 
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref devMfDepositoCbo, "v_Deposito", "D_Dep", "IdDep", "ALL", "D_Dep", true, false, "NONE");
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref devMnDepositoCbo, "v_Deposito", "D_Dep", "IdDep", "ALL", "D_Dep", true, false, "NONE");
@@ -64,6 +65,8 @@ namespace Catalogo._devoluciones
                 devMfVehiculoCbo.Items.AddRange(filterQuantityArray);
                 devMfVehiculoCbo.SelectedIndex = 0;
             }
+            Catalogo.varios.NotificationCenter.instance.attachReceptor2(this);
+            cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
@@ -80,7 +83,7 @@ namespace Catalogo._devoluciones
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Devolución para el cliente ..."; }
                 btnIniciar.Enabled = false;
             }
-            this.emitir(cboCliente.SelectedIndex);
+            Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado = (short) cboCliente.SelectedValue;
         }
         
         private void paEnviosCbo_SelectedIndexChanged(object sender, EventArgs e)
@@ -820,10 +823,10 @@ namespace Catalogo._devoluciones
             set;
         }
 
-        public void onRecibir(int dato)
+        public void onRecibir(short dato)
         {
             if (btnIniciar.Tag.ToString() == "INICIAR")            
-                cboCliente.SelectedIndex = dato;
+                cboCliente.SelectedValue = dato;
         }
 
         private void EnviarBtn_Click(object sender, EventArgs e)
@@ -854,21 +857,6 @@ namespace Catalogo._devoluciones
 
             envio.run();
             ObtenerMovimientos();
-        }
-
-
-        public int IDClienteSeleccionado
-        {
-            get
-            {
-                Int16 xClienteSelected = 0;
-                if (cboCliente.SelectedValue != null) xClienteSelected = Int16.Parse(cboCliente.SelectedValue.ToString());
-                return xClienteSelected;
-            }
-            set
-            {
-                cboCliente.SelectedIndex = value;
-            }
         }
 
     } //fin clase
