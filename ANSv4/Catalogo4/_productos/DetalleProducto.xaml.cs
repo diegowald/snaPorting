@@ -20,6 +20,8 @@ namespace Catalogo._productos
     public partial class DetalleProducto : UserControl, Funciones.emitter_receiver.IReceptor<System.Windows.Forms.DataGridViewRow>
     {
         string _Destino = "";
+        int _imgErrors = 0;
+        int maxDownloadSimultaneo = 15; // Esto podria venir desde el .ini
 
         public DetalleProducto()
         {
@@ -130,7 +132,7 @@ namespace Catalogo._productos
 
         private void descargarImagen(string Origen, string Destino, System.Windows.Forms.DataGridViewRow dato)
         {
-            if (!isImageDownloading(Destino))
+            if (!isImageDownloading(Destino) && canDownloadNewImage())
             {
                 setImageDownloading(Destino);
                 util.FileDownloader downloader = new util.FileDownloader(Origen, Destino, null, util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
@@ -205,6 +207,11 @@ namespace Catalogo._productos
             return _imgEnDescarga.Contains(file);
         }
 
+        private bool canDownloadNewImage()
+        {
+            return _imgEnDescarga.Count - _imgErrors < maxDownloadSimultaneo;
+        }
+
         private void setImageDownloading(string file)
         {
             if (!isImageDownloading(file))
@@ -255,6 +262,7 @@ namespace Catalogo._productos
         public void onFileProblem(object Tag, string Destino, string cause)
         {
             util.errorHandling.ErrorLogger.LogMessage("Problema al descargar imagen " + Destino + ". Causa; " + cause);
+            _imgErrors++;
         }
 
         public void onFileDownloading(object Tag, string Destino, int progress)
