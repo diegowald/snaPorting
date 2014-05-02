@@ -105,8 +105,10 @@ namespace Catalogo.util.BackgroundTasks
             if (Global01.EnviarAuditoria)
             {
                 enviarAuditoria2EnBloques();
+                enviarClientesNovedades();
             }
         }
+
 
         public override void cancelled()
         {
@@ -197,6 +199,81 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
+        private void enviarClientesNovedades()
+        {
+            try
+            {
+                Catalogo._clientesNovedades.EnvioClientesNovedades envNovedades = new _clientesNovedades.EnvioClientesNovedades(Global01.IDMaquina, Global01.URL_ANS2);
+                if (envNovedades.inicializado)
+                {
+                    if (Global01.TranActiva == null)
+                    {
+                        Global01.TranActiva = Global01.Conexion.BeginTransaction();
+                    }
+
+                    System.Data.OleDb.OleDbDataReader reader = Catalogo.Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_ClientesNovedades WHERE F_Transmicion is null");
+
+                    List<string> fechas = new List<string>();
+                    List<string> novedades = new List<string>();
+                    List<string> IDsClientes = new List<string>();
+                    List<string> IDs = new List<string>();
+
+                    while (reader.Read())
+                    {
+                        fechas.Add(reader["F_Carga"].ToString());
+                        novedades.Add(reader["Novedad"].ToString());
+                        IDsClientes.Add(reader["IdCliente"].ToString());
+                        IDs.Add(reader["ID"].ToString());
+
+                        if (fechas.Count == 10)
+                        {
+                            if (envNovedades.enviarNovedadesEnBloques(fechas, novedades, IDsClientes))
+                            {
+                                for (int i = 0; i < fechas.Count; i++)
+                                {
+                                    Catalogo.Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_ClienteNovedades_Transmicion_upd " + IDs[i]);
+                                }
+                            }
+                            fechas.Clear();
+                            novedades.Clear();
+                            IDsClientes.Clear();
+                            IDs.Clear();
+                        }
+                    }
+
+                    //   Envio el resto de las auditorias que pueden haber quedado
+                    if (fechas.Count != 0)
+                    {
+                        if (envNovedades.enviarNovedadesEnBloques(fechas, novedades, IDsClientes))
+                        {
+                            for (int i = 0; i < fechas.Count; i++)
+                            {
+                                Catalogo.Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_ClienteNovedades_Transmicion_upd  " + IDs[i]);
+                            }
+                        }
+
+                        if (Global01.TranActiva != null)
+                        {
+                            Global01.TranActiva.Commit();
+                            Global01.TranActiva = null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                if (Global01.TranActiva != null)
+                {
+                    Global01.TranActiva.Rollback();
+                    Global01.TranActiva = null;
+                }
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+
+                throw ex;
+            }
+        }
+                
+        
         public void onRecibir(Catalogo.varios.complexMessage msg)
         {
             //Catalogo.varios.NotificationCenter.instance.notificar(dato.first, dato.second);

@@ -204,6 +204,8 @@
     </Compile>
     <Compile Include="util\ListViewItemComparer.cs" />
     <Compile Include="util\singleton.cs" />
+    <Compile Include="_clientesNovedades\ClientesNovedades.cs" />
+    <Compile Include="_clientesNovedades\EnvioClientesNovedades.cs" />
     <Compile Include="_devoluciones\Devolucion.cs" />
     <Compile Include="_devoluciones\DevolucionItem.cs" />
     <Compile Include="_devoluciones\ucDevolucion.cs">
