@@ -8,7 +8,7 @@ namespace Catalogo.util.BackgroundTasks
     public sealed class ExistenciaProducto : BackgroundTaskBase
     {
         public ExistenciaProducto(JOB_TYPE jobType)
-            : base(jobType)
+            : base("ExistenciaProducto", jobType)
         {
         }
 

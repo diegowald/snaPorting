@@ -19,11 +19,12 @@ namespace Catalogo.util.BackgroundTasks
         private bool cancellationByNewExecution = false;
         private int _delayTime = -1;
 
-        public BackgroundTaskBase(JOB_TYPE jobType)
+        public BackgroundTaskBase(string taskName, JOB_TYPE jobType)
         {
             job_type = jobType;
             if (jobType == JOB_TYPE.Asincronico)
             {
+                BackgroundTaskCoordinator.instance.addTask(taskName, this);
                 worker = new System.ComponentModel.BackgroundWorker();
                 worker.DoWork += worker_DoWork;
                 worker.RunWorkerCompleted += worker_RunWorkerCompleted;
@@ -100,9 +101,15 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
+        internal void shutdown()
+        {
+            worker.CancelAsync();
+        }
+
         public abstract void execute(ref bool cancel);
         public abstract void cancelled();
         public abstract void finished();
+
 
     }
 }

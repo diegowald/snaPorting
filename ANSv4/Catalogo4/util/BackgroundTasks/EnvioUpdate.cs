@@ -8,7 +8,7 @@ namespace Catalogo.util.BackgroundTasks
     public sealed class EnvioUpdate : BackgroundTaskBase
     {
         public EnvioUpdate(JOB_TYPE jobType)
-            : base(jobType)
+            : base("EnvioUpdate", jobType)
         {
         }
 

@@ -24,7 +24,7 @@ namespace Catalogo.util.network
         }
   
         private IPCache(JOB_TYPE jobType)
-            : base(jobType)
+            : base("IPCache", jobType)
         {
             lockPing = new object();
             _conectado = checkPing();

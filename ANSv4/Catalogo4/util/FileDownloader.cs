@@ -13,7 +13,7 @@ namespace Catalogo.util
         bool downloadOK;
 
         public FileDownloader(string URL, string Destino, object Tag, JOB_TYPE jobType)
-            : base(jobType)
+            : base("FileDownloader", jobType)
         {
             _URL = URL;
             _Destino = Destino;

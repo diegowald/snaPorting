@@ -152,6 +152,7 @@
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="util\BackgroundTasks\BackgroundTaskCoordinator.cs" />
     <Compile Include="util\FlashWindow.cs" />
     <Compile Include="util\network\IPCache.cs" />
     <Compile Include="util\SimplePing.cs">

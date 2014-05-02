@@ -119,7 +119,7 @@ namespace Catalogo.util.BackgroundTasks
         }
 
         public Updater(JOB_TYPE jobType, UpdateType modo)
-            : base(jobType)
+            : base("Updater", jobType)
         {
             _modo = modo;
             result = true;

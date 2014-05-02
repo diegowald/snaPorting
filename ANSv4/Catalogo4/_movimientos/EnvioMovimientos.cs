@@ -32,7 +32,7 @@ namespace Catalogo.util.BackgroundTasks
 
         public EnvioMovimientos(JOB_TYPE jobType, int idCliente, MODOS_TRANSMISION modoTransmision,
             System.Collections.Generic.List<MOVIMIENTO_SELECCIONADO> filtro)
-            : base(jobType)
+            : base("EnvioMovimientos", jobType)
         {
             _idCliente = idCliente;
             _modoTransmision = modoTransmision;

@@ -11,7 +11,7 @@ namespace Catalogo.util.BackgroundTasks
         private bool _running;
 
         public ChequeoNovedades(JOB_TYPE jobType)
-            : base(jobType)
+            : base("ChequeoNovedades", jobType)
         {
             _running = true;
         }
