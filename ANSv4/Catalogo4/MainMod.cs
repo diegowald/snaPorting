@@ -384,6 +384,7 @@ namespace Catalogo
 
         public static void miEnd()
         {
+            Catalogo.util.BackgroundTasks.BackgroundTaskCoordinator.instance.shutdownTasks();
             System.Environment.Exit(0);
             Application.Exit();
             System.Diagnostics.Process.GetCurrentProcess().Kill();

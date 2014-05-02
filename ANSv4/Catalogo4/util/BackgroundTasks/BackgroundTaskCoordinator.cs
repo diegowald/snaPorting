@@ -7,18 +7,20 @@ namespace Catalogo.util.BackgroundTasks
 {
     internal class BackgroundTaskCoordinator : Catalogo.util.singleton<BackgroundTaskCoordinator>
     {
-        private System.Collections.Generic.Dictionary<string, Catalogo.util.BackgroundTasks.BackgroundTaskBase> _tasks;
+        private System.Collections.Generic.Dictionary<string, Catalogo.util.BackgroundTasks.BackgroundTaskBase> _tasks = new Dictionary<string,BackgroundTaskBase>();
         
         public void addTask(string taskName, BackgroundTaskBase task)
         {
+            util.errorHandling.ErrorLogger.LogMessage("Iniciando proceso " + taskName);
             _tasks[taskName]=task;
         }
 
         public void shutdownTasks()
         {
-            foreach(BackgroundTaskBase task in _tasks.Values)
+            foreach (string taskName in _tasks.Keys)
             {
-                task.shutdown();
+                util.errorHandling.ErrorLogger.LogMessage("Finalizando proceso " + taskName);
+                _tasks[taskName].shutdown();
             }
         }
     }
