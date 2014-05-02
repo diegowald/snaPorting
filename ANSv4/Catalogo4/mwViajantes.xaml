@@ -85,7 +85,7 @@
                                 <ImageBrush ImageSource="recursos/icnYoutube.png" Stretch="Fill" TileMode="None" />
                             </Button.Background>
                         </Button>
-                        <Button x:Name="btnTwitter" Height="27" Width="27"  Margin="0,0,4,0" Click="btnTwitter_Click" BorderThickness="0" Cursor="Hand">
+                        <Button x:Name="btnTwitter" Height="27" Width="27"  Margin="0,0,4,0" Click="btnTwitter_Click" BorderThickness="0" Cursor="Hand" Style="{DynamicResource BorderlessButton}">
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
                             </Button.BorderBrush>
@@ -93,7 +93,7 @@
                                 <ImageBrush ImageSource="recursos/icnTwitter.png" Stretch="Fill" TileMode="None" />
                             </Button.Background>
                         </Button>
-                        <Button x:Name="btnFacebook" Height="27" Width="27"  Margin="0,0,4,0" Click="btnFacebook_Click" BorderThickness="0" Cursor="Hand">
+                        <Button x:Name="btnFacebook" Height="27" Width="27"  Margin="0,0,4,0" Click="btnFacebook_Click" BorderThickness="0" Cursor="Hand" Style="{DynamicResource BorderlessButton}">
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
                             </Button.BorderBrush>
@@ -101,13 +101,13 @@
                                 <ImageBrush ImageSource="recursos/icnFacebook.png" Stretch="Fill" TileMode="None" />
                             </Button.Background>
                         </Button>
-                        <Button x:Name="btnLinkedin"  Height="27" Width="27"  Margin="0,0,4,0" Click="btnLinkedin_Click" BorderThickness="0" Cursor="Hand">
+                        <Button x:Name="btnLinkedin"  Height="27" Width="27"  Margin="0,0,4,0" Click="btnLinkedin_Click" BorderThickness="0" Cursor="Hand" Style="{DynamicResource BorderlessButton}">
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
                             </Button.BorderBrush>
                             <Button.Background>
                                 <ImageBrush ImageSource="recursos/icnLinkedin.png" Stretch="Fill" TileMode="None" />
-                            </Button.Background>
+                            </Button.Background>                            
                         </Button>
                     </StackPanel>
                 </Grid>
