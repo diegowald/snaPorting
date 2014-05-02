@@ -26,8 +26,14 @@ namespace Catalogo.util.BackgroundTasks
             base.run();
         }
 
-        public override void execute()
+        public override void execute(ref bool cancel)
         {
+            if (worker.CancellationPending)
+            {
+                cancel = true;
+                worker.CancelAsync();
+                return;
+            }
             try
             {
                 Catalogo._existencia.VerExistencia existencia = new Catalogo._existencia.VerExistencia();

@@ -12,7 +12,7 @@ namespace Catalogo.util.BackgroundTasks
         {
         }
 
-        public override void execute()
+        public override void execute(ref bool cancel)
         {
             throw new NotImplementedException();
         }

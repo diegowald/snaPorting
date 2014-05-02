@@ -30,10 +30,16 @@ namespace Catalogo.util.network
             _conectado = checkPing();
         }
 
-        public override void execute()
+        public override void execute(ref bool cancel)
         {
             while (true)
             {
+                if (worker.CancellationPending)
+                {
+                    cancel = true;
+                    worker.CancelAsync();
+                    return;
+                }
                 try
                 {
                     util.errorHandling.ErrorLogger.LogMessage("Chequeando conexion");

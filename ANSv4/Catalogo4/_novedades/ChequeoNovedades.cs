@@ -16,10 +16,16 @@ namespace Catalogo.util.BackgroundTasks
             _running = true;
         }
 
-        public override void execute()
+        public override void execute(ref bool cancel)
         {
             while (_running)
             {
+                if (worker.CancellationPending)
+                {
+                    cancel = true;
+                    worker.CancelAsync();
+                    break;
+                }
                 try
                 {
                     System.Diagnostics.Debug.WriteLine("CHEQUEANDO NOVEDADES");

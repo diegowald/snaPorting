@@ -13,7 +13,7 @@ namespace Catalogo.util.BackgroundTasks
             Asincronico
         }
 
-        System.ComponentModel.BackgroundWorker worker;
+        protected System.ComponentModel.BackgroundWorker worker;
         JOB_TYPE job_type;
 
         private bool cancellationByNewExecution = false;
@@ -63,13 +63,15 @@ namespace Catalogo.util.BackgroundTasks
 
         void worker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
+            bool cancel = false;
             try
             {
                 if ((job_type == JOB_TYPE.Asincronico) && (_delayTime != -1))
                 {
                     System.Threading.Thread.Sleep(_delayTime);
                 }
-                execute();
+                execute(ref cancel);
+                e.Cancel = cancel;
             }
             catch (Exception ex)
             {
@@ -98,7 +100,7 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
-        public abstract void execute();
+        public abstract void execute(ref bool cancel);
         public abstract void cancelled();
         public abstract void finished();
 

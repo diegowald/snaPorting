@@ -70,8 +70,14 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
-        public override void execute()
+        public override void execute(ref bool cancel)
         {
+            if (worker.CancellationPending)
+            {
+                cancel = true;
+                worker.CancelAsync();
+                return;
+            }
             enviarMovimientos();
         }
 

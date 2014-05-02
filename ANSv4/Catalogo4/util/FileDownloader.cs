@@ -78,8 +78,14 @@ namespace Catalogo.util
             }
         }
 
-        public override void execute()
+        public override void execute(ref bool cancel)
         {
+            if (worker.CancellationPending)
+            {
+                cancel = true;
+                worker.CancelAsync();
+                return;
+            }
             startDownload();
         }
 
