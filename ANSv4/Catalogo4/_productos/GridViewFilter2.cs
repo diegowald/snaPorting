@@ -466,6 +466,7 @@ namespace Catalogo._productos
             {
                 string[] stringSeparators = new string[] { ";" };
                 string[] aResultado = resultado.Split(stringSeparators, StringSplitOptions.None);
+                cell.Tag = aResultado[0];
 
                 if (aResultado[0].Trim().Length > 3)
                 {
@@ -473,7 +474,6 @@ namespace Catalogo._productos
                 }
                 else
                 {
-                    cell.Tag = aResultado[0];
                     switch (aResultado[0])
                     {
                         case "r":
@@ -622,7 +622,14 @@ namespace Catalogo._productos
                                 brush = Brushes.Green;
                                 break;
                             default:
-                                brush = Brushes.DarkGray;
+                                if (existencia.Trim().Length > 3)
+                                {
+                                    brush = Brushes.Cyan;
+                                }
+                                else
+                                {
+                                    brush = Brushes.DarkGray;
+                                }
                                 break;
                         }
                     }
@@ -631,6 +638,7 @@ namespace Catalogo._productos
                         // aca hay que dibujar sin informacion
                         brush = Brushes.DarkGray;
                     }
+
                     e.Paint(e.CellBounds, DataGridViewPaintParts.All);
                     Rectangle rect = e.CellBounds;
                     rect.Inflate(-5, -4);
