@@ -72,7 +72,10 @@ namespace Catalogo.util.BackgroundTasks
                     System.Threading.Thread.Sleep(_delayTime);
                 }
                 execute(ref cancel);
-                e.Cancel = cancel;
+                if (e != null)
+                {
+                    e.Cancel = cancel;
+                }
             }
             catch (Exception ex)
             {
