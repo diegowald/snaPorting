@@ -346,11 +346,11 @@ namespace Catalogo
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            if (Global01.Conexion != null)
+            /*if (Global01.Conexion != null)
             {
                 Global01.Conexion.Close();
                 Global01.Conexion = null;
-            }
+            }*/
 
             this.Close();
         }

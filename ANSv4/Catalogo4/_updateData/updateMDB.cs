@@ -20,6 +20,7 @@ namespace Catalogo.Funciones
             oleDbFunciones.CambiarLinks(db);
 
             Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
+            Catalogo._auditor.Auditor.instance.Conexion = Global01.Conexion;
 
             if (!(Global01.Conexion.State == System.Data.ConnectionState.Open)) 
             { 

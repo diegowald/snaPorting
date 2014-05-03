@@ -54,7 +54,7 @@ namespace Catalogo
 
         void Current_Exit(object sender, ExitEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }        
 
     }

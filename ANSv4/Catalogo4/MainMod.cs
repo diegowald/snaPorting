@@ -26,6 +26,7 @@ namespace Catalogo
 
             //-- Instancia la Conexión y un DataReader Global a la Rutina Main --
             Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
+            Catalogo._auditor.Auditor.instance.Conexion = Global01.Conexion;
 
             valida_appRegistro();
             
@@ -385,9 +386,9 @@ namespace Catalogo
         public static void miEnd()
         {
             Catalogo.util.BackgroundTasks.BackgroundTaskCoordinator.instance.shutdownTasks();
-            System.Environment.Exit(0);
-            Application.Exit();
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
+            //System.Environment.Exit(0);
+            //Application.Exit();
+            //System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
         private static bool PrevInstance()

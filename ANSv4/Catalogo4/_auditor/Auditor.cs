@@ -144,13 +144,10 @@ namespace Catalogo._auditor
             }
         }
 
-//            ' Define como se llama este modulo para el control de errores
-//    Private Const m_sMODULENAME_ As String = "clsAuditor"
         private System.Data.OleDb.OleDbConnection Conexion1;
 
         public Auditor()
         {
-            Conexion1=null;
         }
 
         public void guardar(ObjetosAuditados objeto, AccionesAuditadas accion)
@@ -164,7 +161,10 @@ namespace Catalogo._auditor
             if (Global01.AuditarProceso)
             {
                 if (!validarConexion())
+                {
+                    util.errorHandling.ErrorLogger.LogMessage("No se puede auditar. Conexion no valida");
                     return;
+                }
                 System.Data.OleDb.OleDbCommand adoCmd = new System.Data.OleDb.OleDbCommand();
                 
                 adoCmd.Parameters.Add("pDetalle",  System.Data.OleDb.OleDbType.VarChar, 128).Value = 
@@ -187,6 +187,14 @@ namespace Catalogo._auditor
 
         private bool validarConexion()
         {
+            if (Conexion1 == null)
+            {
+                throw new InvalidOperationException("No esta correctamente configurada la base de datos.");
+            }
+            if (Conexion1.State!= System.Data.ConnectionState.Open)
+            {
+                throw new InvalidOperationException("La conexion no esta abierta.");
+            }
             return Conexion1 != null;
         }
     }

@@ -20,5 +20,9 @@ namespace Catalogo.util
                 return _instance;
             }
         }
+
+        public void Dispose()
+        {
+        }
     }
 }
