@@ -67,19 +67,6 @@ namespace Catalogo._productos
         private int currentRowCount = 0;
         private int dataRowCount = 0;
 
-        // Dropdown Filter Collections
-        private System.Collections.Specialized.OrderedDictionary Filter_Linea =
-                   new System.Collections.Specialized.OrderedDictionary();
-        private System.Collections.Specialized.OrderedDictionary Filter_Familia =
-                          new System.Collections.Specialized.OrderedDictionary();
-        private System.Collections.Specialized.OrderedDictionary Filter_Marca =
-                         new System.Collections.Specialized.OrderedDictionary();
-        private System.Collections.Specialized.OrderedDictionary Filter_Modelo =
-                        new System.Collections.Specialized.OrderedDictionary();
-        private System.Collections.Specialized.OrderedDictionary Filter_Otros =
-                      new System.Collections.Specialized.OrderedDictionary();
-
-
         public GridViewFilter2()
         {
 
