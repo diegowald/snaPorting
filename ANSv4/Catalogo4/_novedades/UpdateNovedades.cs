@@ -151,6 +151,7 @@ namespace Catalogo._novedades
                     msg.progress1.first = "Sincronización de Novedades Finalizada";
                     msg.progress1.second = 100;
                     this.emitir(msg);
+                    this.emitir2("Hacer Refresh novedades");
                 }
             }
             catch (Exception ex)
@@ -299,7 +300,6 @@ namespace Catalogo._novedades
                             }
                             lastID = (int)row["ID"];
                         }
-                        this.emitir2("Hacer Refresh novedades");
                     }
                 }
             }

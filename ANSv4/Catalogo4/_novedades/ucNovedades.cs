@@ -181,7 +181,6 @@ namespace Catalogo._novedades
 
             // Save the row count in the original datatable
             dataRowCount = dtNovedades.Rows.Count;
-            
             dtNovedades = filter(dtNovedades);
 
             procesarYBorrarRegistrosCatalogo(dtNovedades);
