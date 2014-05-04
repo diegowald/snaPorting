@@ -166,7 +166,10 @@ namespace Catalogo._auditor
                     return;
                 }
                 System.Data.OleDb.OleDbCommand adoCmd = new System.Data.OleDb.OleDbCommand();
-                
+                if (Global01.TranActiva != null)
+                {
+                    adoCmd.Transaction = Global01.TranActiva;
+                }
                 adoCmd.Parameters.Add("pDetalle",  System.Data.OleDb.OleDbType.VarChar, 128).Value = 
                     ObjetoToString(objeto) + "|" + AccionesAuditadasToString(accion) + "|" + detalle;
                 

@@ -73,6 +73,7 @@ namespace Catalogo
             this.Closing += mwViajantes_Closing;
             Catalogo.varios.NotificationCenter.instance.updateBanner += updateBanner;
             crearControlesProductos();
+            Catalogo.varios.NotificationCenter.instance.refreshNovedades += refreshNovedades;
         }
 
 
@@ -379,7 +380,9 @@ namespace Catalogo
             {
                 try
                 {
-                    if (System.Windows.Forms.MessageBox.Show("Saliendo del Catálogo... ¿Está seguro?", "Cerrando la Aplicación", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
+                    System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show("Saliendo del Catálogo... ¿Está seguro?", "Cerrando la Aplicación", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Information, System.Windows.Forms.MessageBoxDefaultButton.Button1);
+
+                    if (result == System.Windows.Forms.DialogResult.No)
                     {
                         e.Cancel = true;
                         return;
@@ -468,7 +471,7 @@ namespace Catalogo
 
         private void xMenu1_porcentajeL(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void xMenu1_AppConfig(object sender, RoutedEventArgs e)
@@ -514,6 +517,7 @@ namespace Catalogo
                                 break;
                             case "Novedades en Línea":
                                 crearControlesNovedades();
+                                dcNovedades.SetValue(TextBlock.FontStyleProperty, FontStyles.Normal);
                                 break;
                             default:
                                 // Nothing
@@ -689,5 +693,21 @@ namespace Catalogo
             Application.Current.Dispatcher.Invoke(new System.Threading.ThreadStart(delegate { }),
                 System.Windows.Threading.DispatcherPriority.Background);
         }
+
+        private delegate void refreshNovedadesDelegate();
+        private void refreshNovedades()
+        {
+            if (!Dispatcher.CheckAccess())
+            {
+                Dispatcher.Invoke(new refreshNovedadesDelegate(refreshNovedades), null);
+                return;
+            }
+            if (dockPane.SelectedIndex != 5)
+            {
+                dcNovedades.SetValue(TextBlock.FontStyleProperty, FontStyles.Oblique);
+            }
+        }
+         
+
     }
 }
