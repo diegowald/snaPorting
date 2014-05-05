@@ -67,8 +67,8 @@ namespace Catalogo
         private static void lanzarProcesosSegundoPlano()
         {
             /// ELIMINAR ESTE CODIGO
-            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblNovedadLeido");
-            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM ansNovedades");
+//            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblNovedadLeido");
+//            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM ansNovedades");
             /// 
 
             Catalogo.util.BackgroundTasks.ChequeoNovedades check = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);

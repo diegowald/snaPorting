@@ -438,7 +438,9 @@ namespace Catalogo
                                     Global01.miSABOR != Global01.TiposDeCatalogo.Cliente &&
                                     Funciones.modINIs.ReadINI("DATOS", "EEA", "1") == "1")
                                 {
-
+                                    //Aca tiene que ir tambien el proceso que envia al server las transacciones.
+                                    Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, 0, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
+                                    envioMovs.run();
                                     //                    If Len(Trim(Dir(vg.Path & "\monitorE.exe"))) > 0 Then
                                     //                        Shell vg.Path & "\monitorE.exe", vbHide
                                     //                    End If
