@@ -47,7 +47,7 @@ namespace Catalogo.Funciones
             }
             else
             {
-                if (!Char.IsDigit(e.KeyChar) & e.KeyChar != ',' & e.KeyChar != '.' & e.KeyChar != '\b')
+                if (!Char.IsDigit(e.KeyChar) & e.KeyChar != ',' & e.KeyChar != '.' & e.KeyChar != '-' & e.KeyChar != '\b')
                 {
                     e.Handled = true;
                 };
