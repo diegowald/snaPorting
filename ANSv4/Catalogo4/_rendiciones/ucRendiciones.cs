@@ -234,7 +234,7 @@ namespace Catalogo._rendiciones
                             {
 			                    if (wOper == "add") 
                                 {
-                                    _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Rendicion,_auditor.Auditor.AccionesAuditadas.EXITOSO,"viajante:" + Global01.NroUsuario  + " rc:" + lblNroRendicion.Text + " tot:" + string.Format("{0:N2}",lblRecibosTotal.Text));
+                                    _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Rendicion,_auditor.Auditor.AccionesAuditadas.EXITOSO,"viajante:" + Global01.NroUsuario  + " rc:" + lblNroRendicion.Text + " tot:" + string.Format("{0:N2}",float.Parse(lblRecibosTotal.Text)));
 				                    MessageBox.Show("Rendición Grabada Con Éxito ! -> N°=" + lblNroRendicion.Text, "Datos Grabados", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			                    } 
                                 else 

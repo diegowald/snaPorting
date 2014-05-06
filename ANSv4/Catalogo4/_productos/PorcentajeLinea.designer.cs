@@ -31,11 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PorcentajeLinea));
             this.PnlFondoRojo = new System.Windows.Forms.Panel();
             this.MainPnl = new System.Windows.Forms.Panel();
-            this.idLbl = new System.Windows.Forms.Label();
             this.plistView = new System.Windows.Forms.ListView();
             this.pLineaLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pPorcentajeLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pIDLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pNadaLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cboLineas = new System.Windows.Forms.ComboBox();
             this.PorcentajeLineaTxt = new System.Windows.Forms.TextBox();
@@ -67,7 +65,6 @@
             // MainPnl
             // 
             this.MainPnl.BackColor = System.Drawing.Color.White;
-            this.MainPnl.Controls.Add(this.idLbl);
             this.MainPnl.Controls.Add(this.plistView);
             this.MainPnl.Controls.Add(this.cboLineas);
             this.MainPnl.Controls.Add(this.PorcentajeLineaTxt);
@@ -81,16 +78,6 @@
             this.MainPnl.Size = new System.Drawing.Size(546, 387);
             this.MainPnl.TabIndex = 12;
             // 
-            // idLbl
-            // 
-            this.idLbl.AutoSize = true;
-            this.idLbl.Location = new System.Drawing.Point(337, 26);
-            this.idLbl.Name = "idLbl";
-            this.idLbl.Size = new System.Drawing.Size(13, 13);
-            this.idLbl.TabIndex = 66;
-            this.idLbl.Text = "0";
-            this.idLbl.Visible = false;
-            // 
             // plistView
             // 
             this.plistView.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -98,7 +85,6 @@
             this.plistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.pLineaLv,
             this.pPorcentajeLv,
-            this.pIDLv,
             this.pNadaLv});
             this.plistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plistView.FullRowSelect = true;
@@ -127,13 +113,10 @@
             this.pPorcentajeLv.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.pPorcentajeLv.Width = 90;
             // 
-            // pIDLv
-            // 
-            this.pIDLv.Text = "ID";
-            this.pIDLv.Width = 0;
-            // 
             // cboLineas
             // 
+            this.cboLineas.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cboLineas.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboLineas.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.cboLineas.FormattingEnabled = true;
             this.cboLineas.Location = new System.Drawing.Point(15, 42);
@@ -146,13 +129,14 @@
             this.PorcentajeLineaTxt.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.PorcentajeLineaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PorcentajeLineaTxt.Location = new System.Drawing.Point(245, 41);
-            this.PorcentajeLineaTxt.MaxLength = 5;
+            this.PorcentajeLineaTxt.MaxLength = 7;
             this.PorcentajeLineaTxt.Name = "PorcentajeLineaTxt";
             this.PorcentajeLineaTxt.Size = new System.Drawing.Size(71, 22);
             this.PorcentajeLineaTxt.TabIndex = 1;
             this.PorcentajeLineaTxt.Text = "0,00";
             this.PorcentajeLineaTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.PorcentajeLineaTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PorcentajeLineaTxt_KeyPress);
+            this.PorcentajeLineaTxt.Leave += new System.EventHandler(this.PorcentajeLineaTxt_Leave);
             // 
             // label12
             // 
@@ -237,6 +221,7 @@
             this.btnCerrar.TabIndex = 0;
             this.btnCerrar.Text = "r";
             this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
             // PorcentajeLinea
             // 
@@ -248,6 +233,7 @@
             this.CancelButton = this.btnCerrar;
             this.ClientSize = new System.Drawing.Size(550, 427);
             this.Controls.Add(this.PnlFondoRojo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "PorcentajeLinea";
@@ -281,9 +267,7 @@
         private System.Windows.Forms.ListView plistView;
         private System.Windows.Forms.ColumnHeader pLineaLv;
         private System.Windows.Forms.ColumnHeader pPorcentajeLv;
-        private System.Windows.Forms.ColumnHeader pIDLv;
         private System.Windows.Forms.ColumnHeader pNadaLv;
-        private System.Windows.Forms.Label idLbl;
 
 
 

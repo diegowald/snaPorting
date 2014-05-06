@@ -476,7 +476,8 @@ namespace Catalogo
 
         private void xMenu1_porcentajeL(object sender, RoutedEventArgs e)
         {
-            
+            cambioPctEvt(null, null);
+
         }
 
         private void xMenu1_AppConfig(object sender, RoutedEventArgs e)
@@ -572,8 +573,6 @@ namespace Catalogo
 
             }
         }
-
-
 
         private void crearControlesInterDepositos()
         {
@@ -673,6 +672,7 @@ namespace Catalogo
                 _productos.PorcentajeLinea f = new _productos.PorcentajeLinea();
                 f.ShowDialog();
                 f.Dispose();
+                f = null;
             }
             catch (Exception ex)
             {

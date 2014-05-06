@@ -307,7 +307,7 @@ namespace Catalogo._pedidos
 
             if (nvlistView.Items.Count < 1)
             {
-                nvImporteTotalLbl.Text = string.Format("{0:N2}", "0,00");
+                nvImporteTotalLbl.Text = string.Format("{0:N2}", 0);
                 return;
             }
 

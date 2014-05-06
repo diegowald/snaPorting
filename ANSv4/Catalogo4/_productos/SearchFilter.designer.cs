@@ -238,7 +238,7 @@
             // txtPorcentajeLinea
             // 
             this.txtPorcentajeLinea.AutoSize = false;
-            this.txtPorcentajeLinea.MaxLength = 4;
+            this.txtPorcentajeLinea.MaxLength = 7;
             this.txtPorcentajeLinea.Name = "txtPorcentajeLinea";
             this.txtPorcentajeLinea.Size = new System.Drawing.Size(25, 23);
             this.txtPorcentajeLinea.Text = "0";
