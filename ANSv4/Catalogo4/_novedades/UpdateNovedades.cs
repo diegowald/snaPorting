@@ -180,6 +180,8 @@ namespace Catalogo._novedades
             try
             {
 
+                if (N_Archivo == "banner.swf") { activo = 0; }
+
                 System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand();
 
                 cmd.Parameters.Add("pID", System.Data.OleDb.OleDbType.Integer).Value = ID;
@@ -254,7 +256,7 @@ namespace Catalogo._novedades
                 long cantidadAImportar = cliente.GetTodasLasNovedades_Cantidad(_MacAddress, IdUltimaNovedad);
                 long restanImportar = cantidadAImportar;
 
-                long lastID = 0;
+                long lastID = IdUltimaNovedad;
                 long cantImportada = 0;
 
 

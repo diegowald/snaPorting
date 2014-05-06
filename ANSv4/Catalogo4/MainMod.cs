@@ -67,8 +67,8 @@ namespace Catalogo
         private static void lanzarProcesosSegundoPlano()
         {
             /// ELIMINAR ESTE CODIGO
-//            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblNovedadLeido");
-//            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM ansNovedades");
+            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblNovedadLeido WHERE IdNovedad > 23");
+            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM ansNovedades WHERE ID > 23");
             /// 
 
             Catalogo.util.BackgroundTasks.ChequeoNovedades check = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
@@ -76,7 +76,8 @@ namespace Catalogo
 
             //Aca tiene que ir tambien el proceso que envia al server las transacciones.
             Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico,0 , util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
-            envioMovs.delayedRun(2 * 60 * 1000);
+            int xMin = Int16.Parse("0" + Funciones.modINIs.ReadINI("DATOS", "DelayedEnv", "2"));
+            envioMovs.delayedRun(xMin * 60 * 1000);
         }
 
         private static void ActivarApplicacion()
@@ -334,9 +335,9 @@ namespace Catalogo
                 Global01.AppActiva = true;
                 //-------- BORRAR ESTA LINEA!!!!!!! ----------------------
                 //Sabor3 = 
-                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
                 //Sabor2 = 
-                //Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
+                Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
 
             }
             //--------------------------------------XX
@@ -438,9 +439,9 @@ namespace Catalogo
         {
 
             //#if SaborViajante
-            Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+          //  Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
             //#else
-            //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+            Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
             //#endif            
 
             Global01.NoConn = false;

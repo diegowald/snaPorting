@@ -658,7 +658,7 @@ namespace Catalogo._rendiciones
             this.lblRecibosTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lblRecibosTotal.Size = new System.Drawing.Size(31, 15);
             this.lblRecibosTotal.TabIndex = 41;
-            this.lblRecibosTotal.Text = "0.00";
+            this.lblRecibosTotal.Text = "0,00";
             this.lblRecibosTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // Label36

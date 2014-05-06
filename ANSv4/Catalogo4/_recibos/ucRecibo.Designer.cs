@@ -1015,7 +1015,7 @@ namespace Catalogo._recibos
             this.adTotalDeducirAlRestoLbl.Name = "adTotalDeducirAlRestoLbl";
             this.adTotalDeducirAlRestoLbl.Size = new System.Drawing.Size(31, 15);
             this.adTotalDeducirAlRestoLbl.TabIndex = 1;
-            this.adTotalDeducirAlRestoLbl.Text = "0.00";
+            this.adTotalDeducirAlRestoLbl.Text = "0,00";
             // 
             // adTotalDeducirLbl
             // 
@@ -1024,7 +1024,7 @@ namespace Catalogo._recibos
             this.adTotalDeducirLbl.Name = "adTotalDeducirLbl";
             this.adTotalDeducirLbl.Size = new System.Drawing.Size(31, 15);
             this.adTotalDeducirLbl.TabIndex = 0;
-            this.adTotalDeducirLbl.Text = "0.00";
+            this.adTotalDeducirLbl.Text = "0,00";
             // 
             // rTabAplicacion
             // 
@@ -1078,7 +1078,7 @@ namespace Catalogo._recibos
             this.apTotalPercepcionLbl.Name = "apTotalPercepcionLbl";
             this.apTotalPercepcionLbl.Size = new System.Drawing.Size(31, 15);
             this.apTotalPercepcionLbl.TabIndex = 1;
-            this.apTotalPercepcionLbl.Text = "0.00";
+            this.apTotalPercepcionLbl.Text = "0,00";
             // 
             // apTotalAplicacionLbl
             // 
@@ -1087,7 +1087,7 @@ namespace Catalogo._recibos
             this.apTotalAplicacionLbl.Name = "apTotalAplicacionLbl";
             this.apTotalAplicacionLbl.Size = new System.Drawing.Size(31, 15);
             this.apTotalAplicacionLbl.TabIndex = 0;
-            this.apTotalAplicacionLbl.Text = "0.00";
+            this.apTotalAplicacionLbl.Text = "0,00";
             // 
             // apPnlMain
             // 
@@ -1383,7 +1383,7 @@ namespace Catalogo._recibos
             this.raImporteTotalLbl.Name = "raImporteTotalLbl";
             this.raImporteTotalLbl.Size = new System.Drawing.Size(31, 15);
             this.raImporteTotalLbl.TabIndex = 4;
-            this.raImporteTotalLbl.Text = "0.00";
+            this.raImporteTotalLbl.Text = "0,00";
             // 
             // raObservacionesTxt
             // 
@@ -1471,7 +1471,7 @@ namespace Catalogo._recibos
             this.cvDivisasLbl.Size = new System.Drawing.Size(31, 15);
             this.cvDivisasLbl.TabIndex = 2;
             this.cvDivisasLbl.Tag = "";
-            this.cvDivisasLbl.Text = "0.00";
+            this.cvDivisasLbl.Text = "0,00";
             this.cvDivisasLbl.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // cvCpaTxt

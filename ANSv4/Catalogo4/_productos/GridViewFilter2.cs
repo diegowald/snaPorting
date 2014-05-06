@@ -289,6 +289,7 @@ namespace Catalogo._productos
                 {
                     drv["Precio"] = (float)drv["PrecioLista"] * pct;
                 }
+                dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = Color.Red;
             }
             else
             {
@@ -299,6 +300,7 @@ namespace Catalogo._productos
                     {
                         drv["Precio"] = drv["PrecioLista"];
                     }
+                    dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = System.Drawing.SystemColors.Control; 
                 }
             }
 
@@ -548,17 +550,17 @@ namespace Catalogo._productos
             string s = " ";
             Color xColor = Color.Black;
             string xTipo = dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cTipo].Value.ToString();
-            bool xBold = (float.Parse(dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cPorclinea].Value.ToString()) != 0 | xAplicoPorcentajeLinea);
+            bool xBold = (float.Parse(dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cPorclinea].Value.ToString()) != 0);
             bool xOferta = (dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cControl].Value.ToString() == "O");
 
             if (xTipo == "prod_n")
             {
-                xColor = Color.Green;
+                xColor = Color.Blue;
                 s += " prod. nuevo;";
             }
             else if (xTipo == "apli_n")
             {
-                xColor = Color.Blue;
+                xColor = Color.Green; 
                 s += " apli. nueva;";
             }
 

@@ -321,6 +321,12 @@
     <Compile Include="_productos\DetalleImagen.xaml.cs">
       <DependentUpon>DetalleImagen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="_productos\PorcentajeLinea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_productos\PorcentajeLinea.designer.cs">
+      <DependentUpon>PorcentajeLinea.cs</DependentUpon>
+    </Compile>
     <Compile Include="_recibos\AplicacionItem.cs" />
     <Compile Include="_recibos\DeducirItem.cs" />
     <Compile Include="_recibos\Recibo.cs" />
@@ -511,6 +517,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_productos\FiltroSearch.resx">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_productos\PorcentajeLinea.resx">
+      <DependentUpon>PorcentajeLinea.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_registrofaltantes\ucFaltante.resx">
       <DependentUpon>ucFaltante.cs</DependentUpon>

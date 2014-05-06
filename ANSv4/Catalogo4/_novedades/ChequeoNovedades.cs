@@ -34,7 +34,8 @@ namespace Catalogo.util.BackgroundTasks
                     updater.run();
 
                     // min x seg X milisegundos 
-                    System.Threading.Thread.Sleep(10 * 60 * 1000);
+                    int xMin = Int16.Parse("0" + Funciones.modINIs.ReadINI("DATOS", "CheckN", "10"));
+                    System.Threading.Thread.Sleep(xMin * 60 * 1000);
                 }
                 catch (Exception ex)
                 {

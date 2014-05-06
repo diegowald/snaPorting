@@ -79,18 +79,35 @@ namespace Catalogo
 
         public void updateBanner(string filename)
         {
-            if (flash != null)
+            if (Global01.miSABOR < Global01.TiposDeCatalogo.Viajante)
             {
-                flash.stop();
+                this.topBanner.Children.Clear();
             }
 
-            System.IO.File.Copy(filename, Global01.AppPath + "\\imagenes\\banner.swf");
+            //if (flash != null)
+            //{
+            //    flash.stop();
+            //}
 
-            if (flash != null)
+            //System.IO.File.Copy(filename, Global01.AppPath + "\\imagenes\\banner.swf", true);
+
+            //if (flash != null)
+            //{
+            //    flash.file = Global01.AppPath + "\\imagenes\\banner.swf";
+            //    flash.play();
+            //}
+
+            flash = null;
+            flash.Dispose();
+            
+            System.IO.File.Copy(filename, Global01.AppPath + "\\imagenes\\banner.swf", true);
+
+            if (Global01.miSABOR < Global01.TiposDeCatalogo.Viajante) 
             {
-                flash.file = Global01.AppPath + "\\imagenes\\banner.swf";
-                flash.play();
+               // this.topBanner.Children.Clear();
+                addFlashPlayer(); 
             }
+
         }
 
         private void addFlashPlayer()
@@ -667,7 +684,9 @@ namespace Catalogo
         {
             try
             {
-                System.Windows.Forms.MessageBox.Show("Implementar Cambio Porcentaje");
+                _productos.PorcentajeLinea f = new _productos.PorcentajeLinea();
+                f.ShowDialog();
+                f.Dispose();
             }
             catch (Exception ex)
             {
@@ -706,7 +725,10 @@ namespace Catalogo
             }
             if (dockPane.SelectedIndex != 5)
             {
-                dcNovedades.SetValue(TextBlock.FontStyleProperty, FontStyles.Oblique);
+                dcNovedades.SetValue(TextBlock.FontStyleProperty, FontStyles.Italic);
+                dcNovedades.Title = "Hay Novedades ... (atención!!)";
+                dcNovedades.FontSize= 14;
+                //dcNovedades.SetValue(TextBlock.ForegroundProperty, "Red");
             }
         }
          
