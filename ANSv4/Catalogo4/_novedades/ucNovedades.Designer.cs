@@ -103,6 +103,7 @@
             this.dgvNovedades.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgvNovedades.Size = new System.Drawing.Size(112, 443);
             this.dgvNovedades.TabIndex = 4;
+            this.dgvNovedades.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvNovedades_CellFormatting);
             this.dgvNovedades.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvNovedades_RowEnter);
             // 
             // ucNovedades

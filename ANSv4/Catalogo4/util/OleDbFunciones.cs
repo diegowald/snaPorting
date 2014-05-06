@@ -267,8 +267,11 @@ namespace Catalogo.Funciones
                 throw ex; //new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
             finally
-            {
-                cmd.Transaction = null;
+            {                
+                if (Global01.TranActiva != null)
+                {
+                    cmd.Transaction = null;
+                }
             }
 
         }

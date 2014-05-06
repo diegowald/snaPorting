@@ -21,7 +21,6 @@ namespace Catalogo._novedades
             TIPS
         }
 
-
         private int dataRowCount = 0;
         private bool dataGridIdle = false;
         private DataTable dtNovedades = new DataTable();
@@ -219,50 +218,9 @@ namespace Catalogo._novedades
             if (dataRowCount > 0)
             {
                 dgvNovedades.Rows[0].Selected = true;
-
-                //DataGridViewCell cell = dgvNovedades[0, 0];
-                //if (cell != null)
-                //{
-                //    DataGridViewRow row = cell.OwningRow;
-
-                //    mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
-                //                   row.Cells["N_Archivo"].Value.ToString(),
-                //                   row.Cells["url"].Value.ToString(),
-                //                   row.Cells["Origen"].Value.ToString(),
-                //                   row.Cells["Tipo"].Value.ToString(),
-                //                   int.Parse(row.Cells["id"].Value.ToString()),
-                //                   row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
-
-                //}
             }
  
         }
-
-        //private void dataGridView1_SelectionChanged(object sender, EventArgs e)
-        //{
-        //    if (dataGridIdle)
-        //    {
-        //        DataGridViewCell cell = null;
-        //        foreach (DataGridViewCell selectedCell in dgvNovedades.SelectedCells)
-        //        {
-        //            cell = selectedCell;
-        //            break;
-        //        }
-        //        if (cell != null)
-        //        {
-        //            DataGridViewRow row = cell.OwningRow;
-
-        //            mostrarNovedad(row.Cells["Descripcion"].Value.ToString(),
-        //                           row.Cells["N_Archivo"].Value.ToString(),
-        //                           row.Cells["url"].Value.ToString(),
-        //                           row.Cells["Origen"].Value.ToString(),
-        //                           row.Cells["Tipo"].Value.ToString(),
-        //                           int.Parse(row.Cells["id"].Value.ToString()),
-        //                           row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
-        //        }
-        //    }
-        //}
-
         private void dgvNovedades_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -280,7 +238,7 @@ namespace Catalogo._novedades
                                    row.Cells["Origen"].Value.ToString(),
                                    row.Cells["Tipo"].Value.ToString(),
                                    int.Parse(row.Cells["id"].Value.ToString()),
-                                   row.Cells["FLeido"].Value == null ? "" : row.Cells["FLeido"].Value.ToString());
+                                   row.Cells["FLeido"].Value == null ? " " : row.Cells["FLeido"].Value.ToString());
                 }
              
             }
@@ -563,13 +521,16 @@ namespace Catalogo._novedades
 
         private void dgvNovedades_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (this.dgvNovedades.Rows[e.RowIndex].Cells["FLeido"].Value.ToString().Length == 0)
+            if (e.ColumnIndex == 0)
             {
-                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
-            }
-            else
-            {
-                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
+                if (this.dgvNovedades.Rows[e.RowIndex].Cells["FLeido"].Value.ToString().Length == 0)
+                {
+                    e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                }
+                else
+                {
+                    e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Regular);
+                }
             }
         }
 
@@ -748,7 +709,7 @@ namespace Catalogo._novedades
                 if (System.IO.File.Exists(fileName))
                 {
                     System.IO.FileInfo fi = new System.IO.FileInfo(fileName);
-                    if (fi.Length == 0)
+                    if (fi.Length == 0 | fileName=="banner.swf")
                     {
                         fi.Delete();
                     }

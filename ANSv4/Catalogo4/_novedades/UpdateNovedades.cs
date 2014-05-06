@@ -180,7 +180,7 @@ namespace Catalogo._novedades
             try
             {
 
-                if (N_Archivo == "banner.swf") { activo = 0; }
+                //if (N_Archivo == "banner.swf") { activo = 0; }
 
                 System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand();
 

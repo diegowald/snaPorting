@@ -84,27 +84,13 @@ namespace Catalogo
                 this.topBanner.Children.Clear();
             }
 
-            //if (flash != null)
-            //{
-            //    flash.stop();
-            //}
-
-            //System.IO.File.Copy(filename, Global01.AppPath + "\\imagenes\\banner.swf", true);
-
-            //if (flash != null)
-            //{
-            //    flash.file = Global01.AppPath + "\\imagenes\\banner.swf";
-            //    flash.play();
-            //}
-
-            flash = null;
             flash.Dispose();
-            
+            flash = null;
+                       
             System.IO.File.Copy(filename, Global01.AppPath + "\\imagenes\\banner.swf", true);
 
             if (Global01.miSABOR < Global01.TiposDeCatalogo.Viajante) 
             {
-               // this.topBanner.Children.Clear();
                 addFlashPlayer(); 
             }
 
