@@ -120,6 +120,7 @@ namespace Catalogo._devoluciones
                         {
                             Global01.TranActiva.Rollback();
                             Global01.TranActiva = null;
+                            util.errorHandling.ErrorLogger.LogMessage("10 rollback");
                         }
                     }
 

@@ -326,6 +326,7 @@ namespace Catalogo._novedades
 
         private void marcarComoLeido(int id)
         {
+            System.Diagnostics.Debug.Assert(Global01.TranActiva == null);
             string sql = "UPDATE tblNovedadLeido SET F_Leido=Now() WHERE IdNovedad=" + id.ToString();
             Catalogo.Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, sql);
 

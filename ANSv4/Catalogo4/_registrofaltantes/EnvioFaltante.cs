@@ -79,6 +79,7 @@ namespace Catalogo._registrofaltantes
                     if (Global01.TranActiva == null)
                     {
                         Global01.TranActiva = Conexion1.BeginTransaction();
+                        util.errorHandling.ErrorLogger.LogMessage("7");
                     }
 
                     //resultado = cliente.EnviarFaltante(_MacAddress, _NroFaltante, _CodViajante, _CodCliente, _Fecha, _Observaciones);

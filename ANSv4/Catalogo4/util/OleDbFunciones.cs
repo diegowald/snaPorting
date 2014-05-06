@@ -101,10 +101,6 @@ namespace Catalogo.Funciones
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;  //throw new Exception(ex.Message.ToString());
             }
-            finally
-            {
-                cmd.Transaction = null;
-            }
 
             return table;
         }
@@ -157,10 +153,6 @@ namespace Catalogo.Funciones
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;  //throw new Exception(ex.Message.ToString());
             }
-            finally
-            {
-                cmd.Transaction = null;
-            }
 
             return dr;
             
@@ -187,10 +179,6 @@ namespace Catalogo.Funciones
             {
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw new Exception(ex.Message.ToString());
-            }
-            finally
-            {
-                cmd.Transaction = null;
             }
 
             return dr;
@@ -225,10 +213,6 @@ namespace Catalogo.Funciones
             {
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw new Exception(ex.Message.ToString());
-            }
-            finally
-            {
-                cmd.Transaction = null;
             }
 
             return sResultado;
@@ -265,13 +249,6 @@ namespace Catalogo.Funciones
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 throw ex; //new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
-            }
-            finally
-            {                
-                if (Global01.TranActiva != null)
-                {
-                    cmd.Transaction = null;
-                }
             }
 
         }

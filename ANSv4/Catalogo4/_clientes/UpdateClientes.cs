@@ -143,6 +143,7 @@ namespace Catalogo._clientes
                     {
                         Global01.TranActiva.Rollback();
                         Global01.TranActiva = null;
+                        util.errorHandling.ErrorLogger.LogMessage("11 rollback");
                     }
                     msg.progress1.first="Sincronización de Clientes con Errores";
                     msg.progress1.second=100;
@@ -165,13 +166,14 @@ namespace Catalogo._clientes
             }
             catch (Exception ex)
             {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
                 //.ErrorForm.show():
                 if (Global01.TranActiva != null)
                 {
                     Global01.TranActiva.Rollback();
                     Global01.TranActiva = null;
+                    util.errorHandling.ErrorLogger.LogMessage("11 rollback");
                 }
-                util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }

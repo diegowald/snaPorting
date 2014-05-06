@@ -185,6 +185,7 @@ namespace Catalogo._rendiciones
                         if (Global01.TranActiva==null)
                         {
                             Global01.TranActiva = Global01.Conexion.BeginTransaction();
+                            util.errorHandling.ErrorLogger.LogMessage("5");
                         }
 
                         try

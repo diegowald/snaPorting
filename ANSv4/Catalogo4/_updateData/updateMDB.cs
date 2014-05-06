@@ -30,6 +30,7 @@ namespace Catalogo.Funciones
             if (Global01.TranActiva==null)
             {
                 Global01.TranActiva = Global01.Conexion.BeginTransaction();
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage("4");
             }
 
             try

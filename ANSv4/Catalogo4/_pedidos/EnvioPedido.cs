@@ -90,6 +90,7 @@ namespace Catalogo._pedidos
                     if (Global01.TranActiva == null)
                     {
                         Global01.TranActiva = Conexion1.BeginTransaction();
+                        util.errorHandling.ErrorLogger.LogMessage("8");
                     }
 
                     resultado = cliente.EnviarPedido7(_MacAddress, _NroPedido, _CodCliente, _Fecha, _Observaciones, _Transporte, _Detalle);

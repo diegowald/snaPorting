@@ -191,6 +191,7 @@ namespace Catalogo._recibos
                     if (Global01.TranActiva == null)
                     {
                         Global01.TranActiva = Conexion1.BeginTransaction();
+                        util.errorHandling.ErrorLogger.LogMessage("6");
                     }
 
                     resultado = cliente.EnviarRecibo317(_MacAddress, _NroRecibo, _CodCliente, _Fecha, _Bahia, _Total, _Detalle, _Facturas, _NotasCredito);

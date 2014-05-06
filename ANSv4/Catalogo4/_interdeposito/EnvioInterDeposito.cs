@@ -108,6 +108,7 @@ namespace Catalogo._interdeposito
                     if (Global01.TranActiva == null)
                     {
                         Global01.TranActiva = Conexion1.BeginTransaction();
+                        util.errorHandling.ErrorLogger.LogMessage("9");
                     }
                     resultado = Cliente.EnviarInterDeposito(m_MacAddress, m_NroInterDeposito, m_CodCliente, m_Bco_Dep_Tipo, m_Bco_Dep_Fecha, m_Bco_Dep_Numero, m_Bco_Dep_Monto, m_Bco_Dep_Ch_Cantidad, m_Bco_Dep_IdCta, m_Observaciones,
                     m_Detalle);
