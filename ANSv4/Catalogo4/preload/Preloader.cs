@@ -43,8 +43,12 @@ namespace Catalogo.preload
             }
         }
 
-        internal void refresh()
+        internal void refresh(bool force = false)
         {
+            if (force)
+            {
+                productos.clear();
+            }
             productos.execute();
         }
     }

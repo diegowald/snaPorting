@@ -673,6 +673,7 @@ namespace Catalogo
                 f.ShowDialog();
                 f.Dispose();
                 f = null;
+                preload.Preloader.instance.refresh(true);
             }
             catch (Exception ex)
             {
