@@ -1670,7 +1670,7 @@ namespace Catalogo._recibos
             this.rTabsRecibo.Controls.Add(this.rTabAnteriores);
             this.rTabsRecibo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rTabsRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rTabsRecibo.ItemSize = new System.Drawing.Size(87, 23);
+            this.rTabsRecibo.ItemSize = new System.Drawing.Size(110, 23);
             this.rTabsRecibo.Location = new System.Drawing.Point(0, 32);
             this.rTabsRecibo.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.rTabsRecibo.Name = "rTabsRecibo";

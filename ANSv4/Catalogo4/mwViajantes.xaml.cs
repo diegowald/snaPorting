@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Catalogo.Funciones.emitter_receiver;
+using System.Windows.Media;
 
 namespace Catalogo
 {
@@ -36,7 +37,7 @@ namespace Catalogo
 
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
-            //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+            ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
 
             if (Global01.miSABOR <= Global01.TiposDeCatalogo.Cliente | !Global01.AppActiva)
             {

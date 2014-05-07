@@ -36,9 +36,6 @@ namespace Catalogo.Funciones
             string sAlcance = "";
             string sCampos = "*";
 
-            System.Data.OleDb.OleDbDataAdapter objAdapter = new System.Data.OleDb.OleDbDataAdapter();
-            System.Data.DataSet ObjDS = new System.Data.DataSet("miDataset");
-
             if (Alcance.Trim().Length > 0)
                 sAlcance = Alcance;
             if (Campos.Trim().Length > 0)
@@ -50,19 +47,18 @@ namespace Catalogo.Funciones
 
             sql = "SELECT " + sAlcance + sCampos + " FROM " + Tabla + sCondicion + sOrden;
             
-            if (!(conexion.State == ConnectionState.Open))
-            {
-                conexion.Open();
-            }
-
-            System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(sql, conexion);
-
-            if (tranActiva_ != null)
-            {
-                cmd.Transaction = tranActiva_;
-            }
+            System.Data.DataSet ObjDS = new System.Data.DataSet("miDataset");                
             try
             {
+                if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); }
+                System.Data.OleDb.OleDbDataAdapter objAdapter = new System.Data.OleDb.OleDbDataAdapter();
+                System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(sql, conexion);
+
+                if (tranActiva_ != null)
+                {
+                    cmd.Transaction = tranActiva_;
+                }
+
                 objAdapter.SelectCommand = cmd;
                 objAdapter.Fill(ObjDS);
             }
@@ -83,7 +79,6 @@ namespace Catalogo.Funciones
             string sAlcance = "";
             string sCampos = "*";
 
-            System.Data.OleDb.OleDbDataAdapter objAdapter = new System.Data.OleDb.OleDbDataAdapter();
             System.Data.DataTable table = new DataTable("miDataTable");
             table.Locale = System.Globalization.CultureInfo.InvariantCulture;
 
@@ -98,19 +93,17 @@ namespace Catalogo.Funciones
 
             sql = "SELECT " + sAlcance + sCampos + " FROM " + Tabla + sCondicion + sOrden;
 
-            if (!(conexion.State == ConnectionState.Open))
-            {
-                conexion.Open();
-            }
-            
-            System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(sql, conexion);
-
-            if (tranActiva_ != null)
-            {
-                cmd.Transaction = tranActiva_;
-            }
             try
             {
+                if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); }
+                System.Data.OleDb.OleDbDataAdapter objAdapter = new System.Data.OleDb.OleDbDataAdapter();
+                System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(sql, conexion);
+
+                if (tranActiva_ != null)
+                {
+                    cmd.Transaction = tranActiva_;
+                }
+                
                 objAdapter.SelectCommand = cmd;
                 objAdapter.Fill(table);      
             }
@@ -149,20 +142,18 @@ namespace Catalogo.Funciones
             else
             {
                 sql = "SELECT " + sAlcance + sCampos + " FROM " + Tabla + sCondicion + sOrden;
-            };            
+            };
 
-            if (!(conexion.State == ConnectionState.Open)) 
-            { 
-                conexion.Open(); 
-            }
-            System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(sql, conexion);
-
-            if (tranActiva_ != null)
-            {
-                cmd.Transaction = tranActiva_;
-            }
             try
             {
+                if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); }
+                System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(sql, conexion);
+
+                if (tranActiva_ != null)
+                {
+                    cmd.Transaction = tranActiva_;
+                }
+
                 dr = cmd.ExecuteReader();
                 //if (cmd.Transaction != null)
                 //{
@@ -187,16 +178,16 @@ namespace Catalogo.Funciones
         {
             System.Data.OleDb.OleDbDataReader dr = null;
 
-            if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); }
-
-            System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando,conexion);
-
-            if (tranActiva_ != null)
-            {
-                cmd.Transaction = tranActiva_;
-            }
             try
             {
+                if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); }                
+                System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando, conexion);
+
+                if (tranActiva_ != null)
+                {
+                    cmd.Transaction = tranActiva_;
+                }
+              
                 dr = cmd.ExecuteReader();
                 //if (cmd.Transaction != null)
                 //{
@@ -210,7 +201,7 @@ namespace Catalogo.Funciones
                 //    cmd.Transaction.Rollback();
                 //}              
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
-                throw new Exception(ex.Message.ToString());
+                throw ex;  //throw new Exception(ex.Message.ToString());
             }
 
             return dr;
@@ -220,20 +211,19 @@ namespace Catalogo.Funciones
         internal static string Comando(System.Data.OleDb.OleDbConnection conexion, string TextoComando, string Campos, bool Concatena = false, System.Data.OleDb.OleDbTransaction tranActiva_ = null)
         {
 
-            System.Data.OleDb.OleDbDataReader dr = null;
-
             string sResultado = "";
 
-            if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); }
-
-            System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando, conexion);
-
-            if (tranActiva_ != null)
-            {
-                cmd.Transaction = tranActiva_;
-            }
             try
             {
+                if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); }
+                System.Data.OleDb.OleDbDataReader dr = null;
+                System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando, conexion);
+
+                if (tranActiva_ != null)
+                {
+                    cmd.Transaction = tranActiva_;
+                }
+
                 dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
@@ -253,30 +243,24 @@ namespace Catalogo.Funciones
                 //    cmd.Transaction.Rollback();
                 //}
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
-                throw new Exception(ex.Message.ToString());
+                throw ex;  //throw new Exception(ex.Message.ToString());
             }
 
             return sResultado;
         }
 
-
         internal static void ComandoIU(System.Data.OleDb.OleDbConnection conexion, string TextoComando, System.Data.OleDb.OleDbTransaction tranActiva_ = null)
-        {
-         
-            if (!(conexion.State == ConnectionState.Open)) 
-            { 
-                conexion.Open();
-            }
-                   
-            System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando, conexion);
-
-            if (tranActiva_ != null)
-            {
-                cmd.Transaction = tranActiva_;
-            }
-
+        {         
             try 
             {
+                if (!(conexion.State == ConnectionState.Open)) { conexion.Open(); }                
+                System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand(TextoComando, conexion);
+
+                if (tranActiva_ != null)
+                {
+                    cmd.Transaction = tranActiva_;
+                }
+
                 cmd.ExecuteNonQuery();
 
                 //if (cmd.Transaction != null)
@@ -301,7 +285,6 @@ namespace Catalogo.Funciones
         internal static void CambiarLinks(string db)
         {
             //const string PROCNAME_ = "CambiarLinks";
-
             try
             {
                 ADODB.Connection adoCN = new ADODB.Connection();
@@ -322,10 +305,8 @@ namespace Catalogo.Funciones
         }
 
         private static void ProcesarTablasLinks(ADODB.Connection Conexion, string db)
-        {
-	     
+        {	     
 	        //const string PROCNAME_ = "ProcesarTablasLinks";
-
             try
             {
 	            ADOX.Catalog Adox_Cat = null;
@@ -381,12 +362,9 @@ namespace Catalogo.Funciones
             ObjetoDeConexion.Close();
         }
 
-
         public static void CompactDatabase(string dataBase)
         {
-
             //const string PROCNAME_ = "CompactDatabase";
-
             try
             {
                 JRO.JetEngine JRO = new JRO.JetEngine();
@@ -421,10 +399,8 @@ namespace Catalogo.Funciones
 
 
         internal static void CambiarQuery(string pQueryNombre, string pQueryComando)
-        {
-            
+        {           
             //const string PROCNAME_ = "CambiarQuery";
-
             try
             {
                 ADODB.Connection adoCN = new ADODB.Connection();

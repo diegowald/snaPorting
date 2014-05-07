@@ -366,41 +366,71 @@ namespace Catalogo._recibos
                  CliNNovedadTxt.Focus();
              }
          }
-         if (pCampo.ToLower() == "aplicacion" | pCampo.ToLower() == "adeducir" | pCampo.ToLower() == "cascara")
+
+         if (pCampo.ToLower() == "aplicacion")
          {
-             
-            if (adlistView.Items.Count > 0) 
-            {
-                ListViewItem ItemXa = new ListViewItem();
-                ItemXa = adlistView.FindItemWithText("cascara:", false, 0); 
+             for (int i = 0; i < adlistView.Items.Count; i++)
+             {
+                 if (adlistView.Items[i].Text.Trim().Substring(0, 8) == "CASCARA:")
+                 {
+                     MessageBox.Show("NO puede agregar aplicación, ni descuentos, \n para ello debe quitar la cascara", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                     wDatosValidos = false;
+                     break;
+                 }
+             }
 
-                if (ItemXa != null)
-                {
-                    MessageBox.Show("NO puede agregar aplicación, ni descuentos, \n para ello debe quitar la cascara", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    wDatosValidos = false;
-                }
-                ItemXa = null;
-            }
+             if (apConceptoTxt.Text.Trim().Length <= 0)
+             {
+                 MessageBox.Show("Ingrese Concepto", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                 wDatosValidos = false;
+                 apConceptoTxt.Focus();
+             }
 
-         }
-
-         if (pCampo.ToLower() == "apimportetxt" | pCampo.ToLower() == "aplicacion")
-         {
              if (float.Parse("0" + apImporteTxt.Text) <= 0)
              {
                  MessageBox.Show("Ingrese Importe", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                  wDatosValidos = false;
                  apImporteTxt.Focus();
-             }       
+             } 
          }
 
-         if (pCampo.ToLower() == "adimportetxt" | pCampo.ToLower() == "adeducir")
+         if (pCampo.ToLower() == "adeducir" | pCampo.ToLower() == "cascara")
          {
-             if (float.Parse("0" + adImporteTxt.Text) <= 0)
+             if (pCampo.ToLower() == "cascara")
              {
-                 MessageBox.Show("Ingrese Importe", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                 wDatosValidos = false;
-                 adImporteTxt.Focus();
+                 if (ralistView.Items.Count <= 0)
+                 {
+                     MessageBox.Show("Ingrese Valores", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                     wDatosValidos = false;
+                 }
+                 else
+                 {
+                     for (int i = 0; i < adlistView.Items.Count; i++)
+                     {
+                         if (adlistView.Items[i].Text.IndexOf("CASCARA:") != 0)
+                         {
+                             MessageBox.Show("NO puede agregar aplicación, ni descuentos, \n para ello debe quitar la cascara", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                             wDatosValidos = false;
+                             break;
+                         }
+                     }
+                 }
+             }
+             else
+             {
+                 if (adConceptoTxt.Text.Trim().Length <= 0)
+                 {
+                     MessageBox.Show("Ingrese Concepto", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                     wDatosValidos = false;
+                     adConceptoTxt.Focus();
+                 }
+
+                 if (float.Parse("0" + adImporteTxt.Text) <= 0)
+                 {
+                     MessageBox.Show("Ingrese Importe", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                     wDatosValidos = false;
+                     adImporteTxt.Focus();
+                 }
              }
          }
           
