@@ -67,8 +67,8 @@ namespace Catalogo
         private static void lanzarProcesosSegundoPlano()
         {
             /// ELIMINAR ESTE CODIGO
-            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblNovedadLeido WHERE IdNovedad > 23");
-            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM ansNovedades WHERE ID > 23");
+            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblNovedadLeido WHERE IdNovedad > 23");
+            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM ansNovedades WHERE ID > 23");
             /// 
 
             Catalogo.util.BackgroundTasks.ChequeoNovedades check = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
@@ -267,8 +267,8 @@ namespace Catalogo
 
             //- Registro y activación -------------XX
         AcaRegistro:
-            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            if (false)
+            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            //if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -335,7 +335,7 @@ namespace Catalogo
                 Global01.AppActiva = true;
                 //-------- BORRAR ESTA LINEA!!!!!!! ----------------------
                 //Sabor3 = 
-                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
                 //Sabor2 = 
                 //Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
 

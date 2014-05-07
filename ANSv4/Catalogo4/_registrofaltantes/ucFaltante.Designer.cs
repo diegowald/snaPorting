@@ -93,7 +93,7 @@ namespace Catalogo._registrofaltantes
             this.rTabRegistroFaltante.Name = "rTabRegistroFaltante";
             this.rTabRegistroFaltante.Size = new System.Drawing.Size(784, 395);
             this.rTabRegistroFaltante.TabIndex = 6;
-            this.rTabRegistroFaltante.Text = "Registro Faltantes";
+            this.rTabRegistroFaltante.Text = "Registro de Faltantes";
             // 
             // CliNPnlMain
             // 
@@ -140,7 +140,7 @@ namespace Catalogo._registrofaltantes
             // rfDetalleLv
             // 
             this.rfDetalleLv.Text = "Producto";
-            this.rfDetalleLv.Width = 680;
+            this.rfDetalleLv.Width = 480;
             // 
             // rfIDLv
             // 
@@ -237,13 +237,12 @@ namespace Catalogo._registrofaltantes
             this.rTabsRegFaltantes.Controls.Add(this.rTabRegistroFaltante);
             this.rTabsRegFaltantes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rTabsRegFaltantes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rTabsRegFaltantes.ItemSize = new System.Drawing.Size(87, 23);
+            this.rTabsRegFaltantes.ItemSize = new System.Drawing.Size(127, 23);
             this.rTabsRegFaltantes.Location = new System.Drawing.Point(0, 32);
             this.rTabsRegFaltantes.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.rTabsRegFaltantes.Name = "rTabsRegFaltantes";
             this.rTabsRegFaltantes.SelectedIndex = 0;
             this.rTabsRegFaltantes.Size = new System.Drawing.Size(792, 426);
-            this.rTabsRegFaltantes.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.rTabsRegFaltantes.TabIndex = 0;
             this.rTabsRegFaltantes.Tag = "nada";
             // 
@@ -271,7 +270,7 @@ namespace Catalogo._registrofaltantes
             this.btnVer.TabIndex = 5;
             this.btnVer.Text = "Ver";
             this.btnVer.UseVisualStyleBackColor = false;
-            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
+            this.btnVer.Visible = false;
             // 
             // cboCliente
             // 

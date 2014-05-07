@@ -330,7 +330,6 @@
     <Compile Include="_recibos\DeducirItem.cs" />
     <Compile Include="_recibos\Recibo.cs" />
     <Compile Include="_recibos\ReciboItem.cs" />
-    <Compile Include="_registrofaltantes\EnvioFaltante.cs" />
     <Compile Include="_registrofaltantes\ucFaltante.cs">
       <SubType>UserControl</SubType>
     </Compile>

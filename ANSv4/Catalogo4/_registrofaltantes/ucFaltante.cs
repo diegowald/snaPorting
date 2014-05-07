@@ -17,7 +17,8 @@ namespace Catalogo._registrofaltantes
         Funciones.emitter_receiver.IReceptor<short> // Para recibir una notificacion de cambio del cliente seleccionado
     {
 
-        ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
+        private ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
+        private string wCondicion = "Tipo='faltante'";
 
         public ucFaltante()
         {
@@ -29,6 +30,8 @@ namespace Catalogo._registrofaltantes
             {
                 this.Dispose();
             }
+
+            InhabilitarNovedadCliente();
 
             cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
@@ -43,28 +46,30 @@ namespace Catalogo._registrofaltantes
 
             Catalogo.varios.NotificationCenter.instance.attachReceptor2(this);
             cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
+            CargarClienteNovedades();                
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-//            paEnviosCbo.SelectedIndex = 2;
-
             if (cboCliente.SelectedIndex > 0)
             {                
                 toolStripStatusLabel1.Text = "Faltante a Pedido de: " + this.cboCliente.Text.ToString();
-                CargarClienteNovedades();                
+                HabilitarClienteNovedades();  
+                wCondicion = "Tipo='faltante' and IDCliente=" + cboCliente.SelectedValue.ToString();
             }
             else 
             {
-                if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Recibo para el cliente ..."; }
-                LimpiarNovedadCliente();
+                if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Faltante a Pedido de ..."; }
+                InhabilitarNovedadCliente();
+                wCondicion = "Tipo='faltante'";
             }
             Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado = (short)cboCliente.SelectedValue;
+            CargarClienteNovedades();                
         }
 
         private void CargarClienteNovedades()
         {
-            DataTable dt = Catalogo.Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "tblClientesNovedades", "IDCliente=" + cboCliente.SelectedValue.ToString(), "F_Carga DESC");
+            DataTable dt = Catalogo.Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "v_ClientesNovedades", wCondicion, "F_Carga, IdCliente DESC");
 
             RFlistView.Visible = false;
             RFlistView.Items.Clear();
@@ -75,23 +80,15 @@ namespace Catalogo._registrofaltantes
                 DataRow dr = dt.Rows[i];
 
                 ListViewItem ItemX = new ListViewItem(string.Format("{0:dd/MM/yyyy}", DateTime.Parse(dr["F_Carga"].ToString())));
-
-                //alternate row color
-                if (i % 2 == 0)
-                {
-                    ItemX.BackColor = Color.White;
-                }
-                else
-                {
-                    ItemX.BackColor = System.Drawing.SystemColors.Control;  //System.Drawing.Color.FromArgb(255, 255, 192);
-                }
+                ItemX.BackColor = ((RFlistView.Items.Count % 2 == 0) ? Color.White : ItemX.BackColor = System.Drawing.SystemColors.Control);
 
                 ItemX.SubItems.Add(dr["Novedad"].ToString());
                 ItemX.SubItems.Add(dr["ID"].ToString());
+                ItemX.SubItems.Add(dr["RazonSocial"].ToString() + " (" + dr["IdCliente"].ToString().PadLeft(5,'0') + ")");
                 RFlistView.Items.Add(ItemX);
             }
 
-            if (dt.Rows.Count > 0) Funciones.util.AutoSizeLVColumnas(ref RFlistView);
+            //if (dt.Rows.Count > 0) Funciones.util.AutoSizeLVColumnas(ref RFlistView);
 
             RFlistView.Visible = true;
             dt = null;
@@ -103,7 +100,16 @@ namespace Catalogo._registrofaltantes
             CliNNovedadTxt.Text = "";
         }
 
-        private void LimpiarNovedadCliente()
+        private void HabilitarClienteNovedades()
+        {
+            CliNPnlMain.Enabled = true;
+            CliNPnlTop.Enabled = true;
+            CliNFechaDtp.Value = DateTime.Today.Date;
+            CliNidLbl.Text = "0";
+            CliNNovedadTxt.Text = "";
+        }
+
+        private void InhabilitarNovedadCliente()
         {
             CliNPnlMain.Enabled = false;
             CliNPnlTop.Enabled = false;
@@ -119,35 +125,13 @@ namespace Catalogo._registrofaltantes
             {
                 if (CliNNovedadTxt.Text.Trim().Length == 0)
                 {
-                    MessageBox.Show("Ingrese Observación", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Ingrese Detalle", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     wDatosValidos = false;
                     CliNNovedadTxt.Focus();
                 }
             }
         
             return wDatosValidos;
-        }
-
-        public static void Faltante_Imprimir(string NroFaltante)
-        {
-            //string sReporte =  @"D:\Users\pablo\Documents\Visual Studio 2012\Projects\wf_35c_pruebas1\Recibo_Enc4.rpt";
-
-            string sReporte = Global01.AppPath + "\\Reportes\\Recibo_Enc3.rpt";
-            ReportDocument oReport = new ReportDocument();
-
-            oReport.Load(sReporte);
-            Funciones.util.ChangeReportConnectionInfo(ref oReport);
-
-            oReport.SetParameterValue("pNroRecibo", NroFaltante);
-
-            varios.fReporte f = new varios.fReporte();
-            f.Text = "Recibo n° " + NroFaltante;
-            f.DocumentoNro = "RE-" + NroFaltante;           
-            f.oRpt = oReport;
-            f.ShowDialog();
-            f.Dispose();
-            f = null;
-            oReport.Dispose();
         }
 
         public Funciones.emitter_receiver.emisorHandler<int> emisor
@@ -216,6 +200,7 @@ namespace Catalogo._registrofaltantes
                     ItemX.BackColor = ((RFlistView.Items.Count % 2 == 0) ? Color.White : ItemX.BackColor = System.Drawing.SystemColors.Control);
                     ItemX.SubItems.Add(CliNNovedadTxt.Text.ToUpper());
                     ItemX.SubItems.Add(xID.ToString());
+                    ItemX.SubItems.Add(this.cboCliente.Text.ToString());
                     RFlistView.Items.Add(ItemX);
                 }
 
@@ -234,15 +219,12 @@ namespace Catalogo._registrofaltantes
                 cmd.Parameters.Add("pIdCliente", System.Data.OleDb.OleDbType.Integer).Value = pIdCliente;
                 cmd.Parameters.Add("pF_Carga", System.Data.OleDb.OleDbType.Date).Value = pFecha;
                 cmd.Parameters.Add("pNovedad", System.Data.OleDb.OleDbType.VarChar, 64).Value = pNovedad;
+                cmd.Parameters.Add("pTipo", System.Data.OleDb.OleDbType.VarChar, 10).Value = "faltante";
                 
                 cmd.Connection = Global01.Conexion;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.CommandText = "usp_ClientesNovedades_add";
-    
-                //if (Global01.TranActiva != null)
-                //{
-                //    cmd.Transaction = Global01.TranActiva;
-                //}
+
                 cmd.ExecuteNonQuery();
                 cmd = null;
                 
@@ -263,11 +245,6 @@ namespace Catalogo._registrofaltantes
                 util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;
             }
-
-        }
-
-        private void btnVer_Click(object sender, EventArgs e)
-        {
 
         }
 

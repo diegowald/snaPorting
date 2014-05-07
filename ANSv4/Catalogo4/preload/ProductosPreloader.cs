@@ -19,7 +19,7 @@ namespace Catalogo.preload
 
         private LOAD_STATUS _status;
         private Object obj;
-      //   Format([c].[Precio]+(([c].[Precio]*[c].[LineaPorcentaje])/100),"fixed")
+
         private string strComando = "SELECT " +
        "mid(c.C_Producto,5) as C_Producto, c.Linea, " +
        "Format(c.Precio + ((c.Precio*c.LineaPorcentaje)/100),'fixed') AS Precio, " +
@@ -30,7 +30,6 @@ namespace Catalogo.preload
        "FROM v_CatVehProdLin AS c";
 
         private Funciones.BackgroundReader.BackgroundDataLoader backgroundWorker;
-
         private System.Data.DataTable table;
 
         public delegate void WorkFinishedHandler(System.Data.DataTable dataTable);
