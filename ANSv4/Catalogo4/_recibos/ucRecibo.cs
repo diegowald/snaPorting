@@ -777,7 +777,7 @@ namespace Catalogo._recibos
 
         private void cvImporteTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-             Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(cvImporteTxt.Text, ref e);
         }
 
         private void btnImprimir_Click(object sender, EventArgs e)
@@ -1489,22 +1489,22 @@ namespace Catalogo._recibos
 
         private void adImporteTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(adImporteTxt.Text, ref e);
         }
 
         private void apImporteTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(apImporteTxt.Text, ref e);
         }
 
         private void apPercepcionTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(apPercepcionTxt.Text, ref e);
         }
 
         private void cvTipoCambioTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(cvTipoCambioTxt.Text, ref e);
         }
 
         private void btnResumen_Click(object sender, EventArgs e)

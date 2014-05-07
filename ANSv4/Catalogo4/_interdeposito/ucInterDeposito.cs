@@ -304,17 +304,17 @@ namespace Catalogo._interdeposito
 
         private void bdImporteTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-             Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(bdImporteTxt.Text, ref e);
         }
 
         private void bdCaChequesTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(bdCaChequesTxt.Text, ref e);
         }
 
         private void bdNumeroTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(bdNumeroTxt.Text, ref e);
         }
         
         private void btnImprimir_Click(object sender, EventArgs e)

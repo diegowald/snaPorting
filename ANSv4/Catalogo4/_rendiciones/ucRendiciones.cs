@@ -1179,7 +1179,7 @@ namespace Catalogo._rendiciones
 
         private void txtLatCert_Monto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(txtLatCert_Monto.Text, ref e);
         }
 
         private void txtLatCert_Cantidad_Leave(object sender, EventArgs e)
@@ -1202,7 +1202,7 @@ namespace Catalogo._rendiciones
 
         private void txtLatCh_Monto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(txtLatCh_Monto.Text, ref e);
         }
 
         private void txtLatEfectivo_Monto_Leave(object sender, EventArgs e)
@@ -1213,12 +1213,12 @@ namespace Catalogo._rendiciones
 
         private void txtLatEfectivo_Monto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(txtLatEfectivo_Monto.Text, ref e);
         }
 
         private void txtBd_Monto_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(txtBd_Monto.Text, ref e);
         }
 
         private void txtBdCh_Cantidad_KeyPress(object sender, KeyPressEventArgs e)
@@ -1238,12 +1238,12 @@ namespace Catalogo._rendiciones
 
         private void txtLatDiv_dolar_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(txtLatDiv_dolar.Text, ref e);
         }
 
         private void txtLatDiv_euro_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(txtLatDiv_euro.Text, ref e);
         }
         private void txtLatDiv_dolar_Leave(object sender, EventArgs e)
         {

@@ -132,7 +132,7 @@ namespace Catalogo._productos
 
         private void PorcentajeLineaTxt_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(sender, ref e);
+            Funciones.util.EsImporte(PorcentajeLineaTxt.Text, ref e);
         }
 
         private void plistView_KeyDown(object sender, KeyEventArgs e)

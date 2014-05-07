@@ -350,12 +350,6 @@ namespace Catalogo
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            /*if (Global01.Conexion != null)
-            {
-                Global01.Conexion.Close();
-                Global01.Conexion = null;
-            }*/
-
             this.Close();
         }
 
@@ -376,8 +370,6 @@ namespace Catalogo
 
         void mwViajantes_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-
-            //    On Error GoTo ErrorGuardianLocalHandler
 
             if (Funciones.modINIs.ReadINI("DATOS", "ConfirmaSalida", "1") == "1")
             {
@@ -672,7 +664,7 @@ namespace Catalogo
                 _productos.PorcentajeLinea f = new _productos.PorcentajeLinea();
                 f.ShowDialog();
                 f.Dispose();
-                f = null;
+                f = null;                                
                 preload.Preloader.instance.refresh(true);
             }
             catch (Exception ex)

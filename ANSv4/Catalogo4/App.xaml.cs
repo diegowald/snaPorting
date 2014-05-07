@@ -1,5 +1,5 @@
 ﻿//#define SaborViajante
-#define SaborCliente
+//#define SaborCliente
 
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,6 @@ namespace Catalogo
     /// </summary>
     public partial class App : Application
     {
-
         //SplashScreenForm ssf = new Catalogo.SplashScreenForm();
 
         private void Application_Startup(object sender, StartupEventArgs e)
@@ -30,14 +29,10 @@ namespace Catalogo
 
             Catalogo.MainMod.Main();
 
-            //#if SaborViajante
-           mwViajantes wnd = new mwViajantes();
-            //#else
-                //mwClientes wnd1 = new mwClientes();
-            //#endif
+            mwViajantes wnd = new mwViajantes();
 
             Application.Current.Exit += Current_Exit;
-            //wnd1.Show();
+
             wnd.ShowDialog();
             
             if (Global01.Conexion != null)

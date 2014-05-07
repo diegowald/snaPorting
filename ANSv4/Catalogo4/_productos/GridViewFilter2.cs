@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using Catalogo.Funciones.emitter_receiver;
 
-
 namespace Catalogo._productos
 {
     public partial class GridViewFilter2 : UserControl,
@@ -54,16 +53,13 @@ namespace Catalogo._productos
             cVigencia = 27
         }
 
-        private bool dataGridIdle = false;
-
         private DataTable dtProducts = new DataTable();
         private DataView dvProducts = new DataView();
-        //private DataTable useTable = new DataTable();
+        
+        private bool dataGridIdle = false;
         private bool xAplicoPorcentajeLinea = false;
         private float porcentajeLinea;
-
         private string filterString = string.Empty;
-
         private int currentRowCount = 0;
         private int dataRowCount = 0;
 
@@ -83,7 +79,6 @@ namespace Catalogo._productos
 
         }
 
-
         public void onRecibir(string dato)
         {
             filterString = dato;
@@ -96,10 +91,6 @@ namespace Catalogo._productos
             loadDataGridView();
         }
 
-        /// <summary>
-        /// DIEGO PABLO OJO!!!!!!
-        /// </summary>
-        //private Funciones.emitter_receiver.emisorHandler<DataGridViewRow> _emisor;
         public Funciones.emitter_receiver.emisorHandler<DataGridViewRow> emisor
         {
             get;
@@ -129,10 +120,9 @@ namespace Catalogo._productos
 
         private void loadDataGridView()
         {
-            System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch();
-            watch.Start();
             dataGridIdle = false;
             dataGridView1.SuspendLayout();
+
             // If rows in grid already exist, clear them
             dataGridView1.DataSource = null;
             dataGridView1.Rows.Clear();
@@ -306,7 +296,6 @@ namespace Catalogo._productos
 
             // Bind Datagrid view to the DataView
             dataGridView1.DataSource = dvProducts;
-            //dataGridView1.Refresh();
 
             // Save the row count in the datagridview
             currentRowCount = dataGridView1.Rows.Count;
@@ -332,15 +321,14 @@ namespace Catalogo._productos
                 {
                     this.emitir(null);
                 };
+                dataGridView1.Visible = true;
             }
             else
             {
                 this.emitir(null);
             };
-            watch.Stop();
-            System.Diagnostics.Debug.WriteLine("Carga grilla: " + watch.ElapsedMilliseconds.ToString());
+  
         }
-
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
         {
@@ -544,9 +532,7 @@ namespace Catalogo._productos
 
         void OnRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            //System.Data.DataRowView value = (System.Data.DataRowView)dataGridView1.Rows[e.RowIndex].DataBoundItem;
-            //DataGridViewCellStyle style = dataGridView1.Rows[e.RowIndex].DefaultCellStyle;
-
+   
             string s = " ";
             Color xColor = Color.Black;
             string xTipo = dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cTipo].Value.ToString();

@@ -37,11 +37,9 @@ namespace Catalogo.preload
 
         public WorkFinishedHandler onWorkFinished;
 
-
         public ProductosPreloader()
         {
-            backgroundWorker = new Funciones.BackgroundReader.BackgroundDataLoader(Catalogo.Funciones.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico,
-                Global01.strConexionUs);
+            backgroundWorker = new Funciones.BackgroundReader.BackgroundDataLoader(Catalogo.Funciones.BackgroundReader.BackgroundDataLoader.JOB_TYPE.Asincronico, Global01.strConexionUs);
             backgroundWorker.onWorkFinishedHandler += dataReady;
             _status = LOAD_STATUS.UNLOADED;
             obj = new Object();

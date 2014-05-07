@@ -32,16 +32,18 @@ namespace Catalogo.Funciones
             return bResultado;
         }
 
-        internal static void EsImporte(object sender, ref System.Windows.Forms.KeyPressEventArgs e)
+        internal static void EsImporte(string s, ref System.Windows.Forms.KeyPressEventArgs e)
         {
-
             if (e.KeyChar == '.')
             {
                 e.KeyChar = ',';
             };
 
-            if (e.KeyChar == ',' & (sender as System.Windows.Forms.TextBox).Text.ToString().IndexOf(',') > 0 |
-                e.KeyChar == '.' & (sender as System.Windows.Forms.TextBox).Text.ToString().IndexOf('.') > 0)
+            if (e.KeyChar == ',' & s.IndexOf(',') > 0 )
+            {
+                e.Handled = true;
+            }
+            else if (e.KeyChar == '.' & s.IndexOf('.') > 0)
             {
                 e.Handled = true;
             }
@@ -52,7 +54,6 @@ namespace Catalogo.Funciones
                     e.Handled = true;
                 };
             };
-
         }
 
         internal static void BuscarIndiceEnCombo(ref System.Windows.Forms.ComboBox combo, string strBuscar, bool EsList)
