@@ -23,6 +23,8 @@ namespace Catalogo.util.BackgroundTasks
             ListaPrecio = 7,
             UpdateNovedadesCatalogo = 8
         }
+        
+        private System.Data.OleDb.OleDbTransaction _TranActiva = null;
 
         private UpdateType _modo;
  
@@ -135,9 +137,9 @@ namespace Catalogo.util.BackgroundTasks
                 Catalogo._auditor.EnvioAuditoria envAudit = new _auditor.EnvioAuditoria(Global01.IDMaquina, Global01.URL_ANS2);
                 if (envAudit.Inicializado)
                 {
-                    if (Global01.TranActiva == null)
+                    if (_TranActiva== null)
                     {
-                        Global01.TranActiva = Global01.Conexion.BeginTransaction();
+                        _TranActiva= Global01.Conexion.BeginTransaction();
                     }
 
                     System.Data.OleDb.OleDbDataReader reader = Catalogo.Funciones.oleDbFunciones.Comando(Global01.Conexion,
@@ -179,19 +181,19 @@ namespace Catalogo.util.BackgroundTasks
                             }
                         }
                     }
-                    if (Global01.TranActiva != null)
+                    if (_TranActiva!= null)
                     {
-                        Global01.TranActiva.Commit();
-                        Global01.TranActiva = null;
+                        _TranActiva.Commit();
+                        _TranActiva= null;
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (Global01.TranActiva != null)
+                if (_TranActiva!= null)
                 {
-                    Global01.TranActiva.Rollback();
-                    Global01.TranActiva = null;
+                    _TranActiva.Rollback();
+                    _TranActiva= null;
                 }
                 util.errorHandling.ErrorLogger.LogMessage(ex);
 
@@ -206,9 +208,9 @@ namespace Catalogo.util.BackgroundTasks
                 Catalogo._clientesNovedades.EnvioClientesNovedades envNovedades = new _clientesNovedades.EnvioClientesNovedades(Global01.IDMaquina, Global01.URL_ANS2);
                 if (envNovedades.inicializado)
                 {
-                    if (Global01.TranActiva == null)
+                    if (_TranActiva== null)
                     {
-                        Global01.TranActiva = Global01.Conexion.BeginTransaction();
+                        _TranActiva= Global01.Conexion.BeginTransaction();
                     }
 
                     System.Data.OleDb.OleDbDataReader reader = Catalogo.Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_ClientesNovedades WHERE F_Transmicion is null");
@@ -252,20 +254,20 @@ namespace Catalogo.util.BackgroundTasks
                             }
                         }
 
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Commit();
-                            Global01.TranActiva = null;
+                            _TranActiva.Commit();
+                            _TranActiva= null;
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (Global01.TranActiva != null)
+                if (_TranActiva!= null)
                 {
-                    Global01.TranActiva.Rollback();
-                    Global01.TranActiva = null;
+                    _TranActiva.Rollback();
+                    _TranActiva= null;
                 }
                 util.errorHandling.ErrorLogger.LogMessage(ex);
 

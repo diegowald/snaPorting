@@ -10,6 +10,8 @@ namespace Catalogo._rendiciones
     {
         // Esta clase realiza una consulta al servidor web y obtiene
         // el numero de ip del servidor privado.
+
+        private System.Data.OleDb.OleDbTransaction _TranActiva = null;
         private RendicionWS.Rendicion Cliente;
         private bool WebServiceInicializado;
         private string m_MacAddress;
@@ -131,9 +133,9 @@ namespace Catalogo._rendiciones
             {
                 if (!Cancel)
                 {
-                    if (Global01.TranActiva == null)
+                    if (_TranActiva== null)
                     {
-                        Global01.TranActiva = Conexion1.BeginTransaction();
+                        _TranActiva= Conexion1.BeginTransaction();
                     }
 
                     resultado = Cliente.EnviarRendicion(m_MacAddress, m_NroRendicion, m_IdViajante, m_F_Rendicion, m_Observaciones,
@@ -144,18 +146,18 @@ namespace Catalogo._rendiciones
                     if (resultado == 0)
                     {
                         Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Rendicion_Transmicion_Upd '" + m_NroRendicion.Substring(m_NroRendicion.Length - 8) + "'");
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Commit();
-                            Global01.TranActiva = null;
+                            _TranActiva.Commit();
+                            _TranActiva= null;
                         }
                     }
                     else
                     {
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Rollback();
-                            Global01.TranActiva = null;
+                            _TranActiva.Rollback();
+                            _TranActiva= null;
                         }
                     }
 

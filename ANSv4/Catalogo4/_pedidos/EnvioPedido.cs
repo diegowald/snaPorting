@@ -10,7 +10,7 @@ namespace Catalogo._pedidos
         /* Esta clase realiza una consulta al servidor web y obtiene
          * el numero de ip del servidor privado.
          **/
-
+        private System.Data.OleDb.OleDbTransaction _TranActiva = null;
         private PedidosWS.Pedidos cliente;
         private bool webServiceInicializado;
         private string _ip;
@@ -87,9 +87,9 @@ namespace Catalogo._pedidos
 
                 if (!cancel)
                 {
-                    if (Global01.TranActiva == null)
+                    if (_TranActiva== null)
                     {
-                        Global01.TranActiva = Conexion1.BeginTransaction();
+                        _TranActiva= Conexion1.BeginTransaction();
                         util.errorHandling.ErrorLogger.LogMessage("8");
                     }
 
@@ -98,18 +98,18 @@ namespace Catalogo._pedidos
                     if (resultado == 0)
                     {
                         Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Pedido_Transmicion_Upd '" + _NroPedido + "'");
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Commit();
-                            Global01.TranActiva = null;
+                            _TranActiva.Commit();
+                            _TranActiva= null;
                         }
                     }
                     else
                     {
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Rollback();
-                            Global01.TranActiva = null;
+                            _TranActiva.Rollback();
+                            _TranActiva= null;
                         }
                     }
 

@@ -15,6 +15,7 @@ namespace Catalogo._rendiciones
 
     {
         //private //const string m_sMODULENAME_ = "ucRendiciones";
+        private System.Data.OleDb.OleDbTransaction _TranActiva = null;
 
         // - Definiciones Globales -----------
         private enum tAccion : byte
@@ -182,9 +183,9 @@ namespace Catalogo._rendiciones
                         if (m.Accion == tAccion.Modificar) wOper = "upd";
 
 		                //Iniciar Transaccion
-                        if (Global01.TranActiva==null)
+                        if (_TranActiva==null)
                         {
-                            Global01.TranActiva = Global01.Conexion.BeginTransaction();
+                            _TranActiva= Global01.Conexion.BeginTransaction();
                             util.errorHandling.ErrorLogger.LogMessage("5");
                         }
 
@@ -224,9 +225,9 @@ namespace Catalogo._rendiciones
 			                    }
 		                    }
 
-                            if (Global01.TranActiva != null)
+                            if (_TranActiva!= null)
                             {
-                                Global01.TranActiva.Commit();
+                                _TranActiva.Commit();
                             }
 
 		                    Cursor.Current = Cursors.Default;
@@ -256,9 +257,9 @@ namespace Catalogo._rendiciones
                         }
                         catch (Exception ex)
                         {
-                            if (Global01.TranActiva != null)
+                            if (_TranActiva!= null)
                             {
-                                Global01.TranActiva.Rollback();
+                                _TranActiva.Rollback();
                             }
                             util.errorHandling.ErrorLogger.LogMessage(ex);
 
@@ -266,7 +267,7 @@ namespace Catalogo._rendiciones
                         }
                         finally
                         {
-                            Global01.TranActiva = null;
+                            _TranActiva= null;
                         }
 
 		                Cursor.Current = Cursors.Default;
@@ -642,9 +643,9 @@ namespace Catalogo._rendiciones
                 adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
                 adoCMD.CommandText = "usp_Rendicion_add";
 
-                if (Global01.TranActiva != null)
+                if (_TranActiva!= null)
                 {
-                    adoCMD.Transaction = Global01.TranActiva;
+                    adoCMD.Transaction = _TranActiva;
                 }
                 try
                 {
@@ -675,9 +676,9 @@ namespace Catalogo._rendiciones
                 adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
                 adoCMD.CommandText = "usp_Rendicion_upd";
 
-                if (Global01.TranActiva != null)
+                if (_TranActiva!= null)
                 {
-                    adoCMD.Transaction = Global01.TranActiva;
+                    adoCMD.Transaction = _TranActiva;
                 }
                 try
                 {
@@ -714,9 +715,9 @@ namespace Catalogo._rendiciones
                 adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
                 adoCMD.CommandText = "usp_RendicionValores_add";
                 
-                if (Global01.TranActiva != null)
+                if (_TranActiva!= null)
                 {
-                    adoCMD.Transaction = Global01.TranActiva;
+                    adoCMD.Transaction = _TranActiva;
                 }
                 try
                 {

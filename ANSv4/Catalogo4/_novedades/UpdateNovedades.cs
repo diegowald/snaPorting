@@ -8,6 +8,8 @@ namespace Catalogo._novedades
         Funciones.emitter_receiver.ICancellableEmitter
     {
         // Define como se llama este modulo para el control de errores
+        
+        private System.Data.OleDb.OleDbTransaction _TranActiva = null;
 
         private UpdateNovedadesCatalogoWS.CatalogoNovedades cliente;
         private bool webServiceInicializado;
@@ -82,9 +84,9 @@ namespace Catalogo._novedades
 
                 bool cancel = false;
 
-                if (Global01.TranActiva == null)
+                if (_TranActiva== null)
                 {
-                    Global01.TranActiva = conexion.BeginTransaction();
+                    _TranActiva= conexion.BeginTransaction();
                 }
 
                 Catalogo.varios.complexMessage msg;
@@ -108,7 +110,7 @@ namespace Catalogo._novedades
 
                 if (!cancel)
                 {
-                    int IdUltimaNovedad = Int16.Parse("0" + Funciones.oleDbFunciones.Comando(conexion, "SELECT TOP 1 ID FROM ansNovedades ORDER BY ID DESC", "ID"));
+                    int IdUltimaNovedad = Int16.Parse("0" + Funciones.oleDbFunciones.Comando(conexion, "SELECT TOP 1 ID FROM ansNovedades ORDER BY ID DESC", "ID", false, _TranActiva));
 
                     sincronizarTodasLasNovedades(IdUltimaNovedad, ref cancel, msg);
                 }
@@ -129,10 +131,10 @@ namespace Catalogo._novedades
 
                 if (cancel)
                 {
-                    if (Global01.TranActiva != null)
+                    if (_TranActiva!= null)
                     {
-                        Global01.TranActiva.Rollback();
-                        Global01.TranActiva = null;
+                        _TranActiva.Rollback();
+                        _TranActiva= null;
                     }
                     msg.progress1.first="Sincronización de Novedades con Errores";
                     msg.progress1.second=100;
@@ -141,10 +143,10 @@ namespace Catalogo._novedades
                 }
                 else
                 {
-                    if (Global01.TranActiva != null)
+                    if (_TranActiva!= null)
                     {
-                        Global01.TranActiva.Commit();
-                        Global01.TranActiva = null;
+                        _TranActiva.Commit();
+                        _TranActiva= null;
                     }
 
                     Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_Novedades_Anexar");
@@ -157,10 +159,10 @@ namespace Catalogo._novedades
             catch (Exception ex)
             {
                 //.ErrorForm.show():
-                if (Global01.TranActiva != null)
+                if (_TranActiva!= null)
                 {
-                    Global01.TranActiva.Rollback();
-                    Global01.TranActiva = null;
+                    _TranActiva.Rollback();
+                    _TranActiva= null;
                 }
                 util.errorHandling.ErrorLogger.LogMessage(ex);
 
@@ -168,7 +170,7 @@ namespace Catalogo._novedades
             }
             finally
             {
-                Global01.TranActiva = null;
+                _TranActiva= null;
             }
         }
 
@@ -200,10 +202,7 @@ namespace Catalogo._novedades
                 cmd.Connection = Conexion;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.CommandText = "usp_Novedades_add";
-                if (Global01.TranActiva != null)
-                {
-                    cmd.Transaction = Global01.TranActiva;
-                }
+
                 cmd.ExecuteNonQuery();
 
                 cmd = null;

@@ -14,7 +14,8 @@ namespace Catalogo._registrofaltantes
         // el numero de ip del servidor privado.
 
         // Define como se llama este modulo para el control de errores
-        
+
+        private System.Data.OleDb.OleDbTransaction _TranActiva = null;
         private RecibosWS.Recibos_v_303 cliente;
        // private FaltantesWS.Faltantes_v_101 cliente;
         private bool webServiceInicializado;
@@ -76,9 +77,9 @@ namespace Catalogo._registrofaltantes
             {
                 if (!Cancel)
                 {
-                    if (Global01.TranActiva == null)
+                    if (_TranActiva== null)
                     {
-                        Global01.TranActiva = Conexion1.BeginTransaction();
+                        _TranActiva= Conexion1.BeginTransaction();
                         util.errorHandling.ErrorLogger.LogMessage("7");
                     }
 
@@ -87,18 +88,18 @@ namespace Catalogo._registrofaltantes
                     if (resultado == 0)
                     {
                         Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Faltante_Transmicion_Upd '" + _NroFaltante + "'");
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Commit();
-                            Global01.TranActiva = null;
+                            _TranActiva.Commit();
+                            _TranActiva= null;
                         }
                     }
                     else
                     {
-                        if ((Global01.TranActiva != null))
+                        if ((_TranActiva!= null))
                         {
-                            Global01.TranActiva.Rollback();
-                            Global01.TranActiva = null;
+                            _TranActiva.Rollback();
+                            _TranActiva= null;
                         }
                     }
 

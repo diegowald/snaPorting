@@ -8,6 +8,7 @@ namespace Catalogo._clientes
     {
         // Define como se llama este modulo para el control de errores
 
+        private System.Data.OleDb.OleDbTransaction _TranActiva = null;
         private UpdateClientesWS.UpdateClientes cliente;
         private bool webServiceInicializado;
         private string _MacAddress;
@@ -80,9 +81,9 @@ namespace Catalogo._clientes
 
                 bool cancel = false;
 
-                if (Global01.TranActiva == null)
+                if (_TranActiva== null)
                 {
-                    Global01.TranActiva = conexion.BeginTransaction();
+                    _TranActiva= conexion.BeginTransaction();
                 }
 
                 Catalogo.varios.complexMessage msg;
@@ -139,10 +140,10 @@ namespace Catalogo._clientes
 
                 if (cancel)
                 {
-                    if (Global01.TranActiva != null)
+                    if (_TranActiva!= null)
                     {
-                        Global01.TranActiva.Rollback();
-                        Global01.TranActiva = null;
+                        _TranActiva.Rollback();
+                        _TranActiva= null;
                         util.errorHandling.ErrorLogger.LogMessage("11 rollback");
                     }
                     msg.progress1.first="Sincronización de Clientes con Errores";
@@ -152,10 +153,10 @@ namespace Catalogo._clientes
                 }
                 else
                 {
-                    if (Global01.TranActiva != null)
+                    if (_TranActiva!= null)
                     {
-                        Global01.TranActiva.Commit();
-                        Global01.TranActiva = null;
+                        _TranActiva.Commit();
+                        _TranActiva= null;
                     }
 
                     Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_appConfig_FActClientes_Upd");
@@ -168,10 +169,10 @@ namespace Catalogo._clientes
             {
                 util.errorHandling.ErrorLogger.LogMessage(ex);
                 //.ErrorForm.show():
-                if (Global01.TranActiva != null)
+                if (_TranActiva!= null)
                 {
-                    Global01.TranActiva.Rollback();
-                    Global01.TranActiva = null;
+                    _TranActiva.Rollback();
+                    _TranActiva= null;
                     util.errorHandling.ErrorLogger.LogMessage("11 rollback");
                 }
 
@@ -179,7 +180,7 @@ namespace Catalogo._clientes
             }
             finally
             {
-                Global01.TranActiva = null;
+                _TranActiva= null;
             }
         }
 
@@ -212,9 +213,9 @@ namespace Catalogo._clientes
                 cmd.Connection = Conexion;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.CommandText = "usp_Clientes_add";
-                if (Global01.TranActiva != null)
+                if (_TranActiva!= null)
                 {
-                    cmd.Transaction = Global01.TranActiva;
+                    cmd.Transaction = _TranActiva;
                 }
                 cmd.ExecuteNonQuery();
 
@@ -276,9 +277,9 @@ namespace Catalogo._clientes
             cmd.Connection = Conexion;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.CommandText = "usp_CtaCte_add";
-            if (Global01.TranActiva != null)
+            if (_TranActiva!= null)
             {
-                cmd.Transaction = Global01.TranActiva;
+                cmd.Transaction = _TranActiva;
             }
             cmd.ExecuteNonQuery();
 

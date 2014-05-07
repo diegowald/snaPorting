@@ -11,13 +11,14 @@ namespace Catalogo._devoluciones
 {
     public class EnvioDevolucion
     {
-
         // Esta clase realiza una consulta al servidor web y obtiene
         // el numero de ip del servidor privado.
+        private System.Data.OleDb.OleDbTransaction _TranActiva = null;
+
         private DevolucionWS.Devolucion Cliente;
         private bool WebServiceInicializado;
         private string m_MacAddress;
-
+       
         private string m_ip;
         private string m_NroDevolucion;
         private string m_CodCliente;
@@ -98,9 +99,9 @@ namespace Catalogo._devoluciones
             {
                 if (!Cancel)
                 {
-                    if (Global01.TranActiva == null)
+                    if (_TranActiva== null)
                     {
-                        Global01.TranActiva = Conexion1.BeginTransaction();
+                        _TranActiva= Conexion1.BeginTransaction();
                     }
 
                     resultado = Cliente.EnviarDevolucion(m_MacAddress, m_NroDevolucion, m_CodCliente, m_Fecha, m_Observaciones, m_Detalle);
@@ -108,18 +109,18 @@ namespace Catalogo._devoluciones
                     if (resultado == 0)
                     {
                         Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Devolucion_Transmicion_Upd '" + m_NroDevolucion + "'");
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Commit();
-                            Global01.TranActiva = null;
+                            _TranActiva.Commit();
+                            _TranActiva= null;
                         }
                     }
                     else
                     {
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Rollback();
-                            Global01.TranActiva = null;
+                            _TranActiva.Rollback();
+                            _TranActiva= null;
                             util.errorHandling.ErrorLogger.LogMessage("10 rollback");
                         }
                     }

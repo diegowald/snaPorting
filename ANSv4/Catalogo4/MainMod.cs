@@ -448,7 +448,7 @@ namespace Catalogo
             Global01.VersionApp = (int)(Global01.miSABOR) + ".3.2.0";
 
             Global01.Conexion = null;
-            Global01.TranActiva = null;
+            //Global01.TranActiva_ = null;
 
             string xLocAns = Environment.GetEnvironmentVariable("windir") + "\\locans" + ((int)(Global01.miSABOR)).ToString() + ".log";
         vadenuevo:

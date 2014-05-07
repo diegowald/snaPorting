@@ -8,6 +8,7 @@ namespace Catalogo.Funciones
     {
 
         //const string m_sMODULENAME_ = "updateMDB";
+        //private System.Data.OleDb.OleDbTransaction _TranActiva = null;
 
         internal static void Emergencia(string db)
         {
@@ -27,11 +28,11 @@ namespace Catalogo.Funciones
                 Global01.Conexion.Open(); 
             }
 
-            if (Global01.TranActiva==null)
-            {
-                Global01.TranActiva = Global01.Conexion.BeginTransaction();
-                Catalogo.util.errorHandling.ErrorLogger.LogMessage("4");
-            }
+            //if (Global01.TranActiva==null)
+            //{
+            //    Global01.TranActiva = Global01.Conexion.BeginTransaction();
+            //    Catalogo.util.errorHandling.ErrorLogger.LogMessage("4");
+            //}
 
             try
             {
@@ -74,27 +75,27 @@ namespace Catalogo.Funciones
 
                 //oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaCatalogoBAK");
 
-                if (Global01.TranActiva != null)
-                {
-                    Global01.TranActiva.Commit();
-                }
+                //if (Global01.TranActiva != null)
+                //{
+                //    Global01.TranActiva.Commit();
+                //}
             }
             catch (Exception ex)
             {
 
-                if (Global01.TranActiva != null)
-                {
-                    Global01.TranActiva.Rollback();
-                }
+                //if (Global01.TranActiva != null)
+                //{
+                //    Global01.TranActiva.Rollback();
+                //}
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 throw ex;
                 //throw new Exception(e.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
-            finally
-            {
-                Global01.TranActiva = null;
-            }
+            //finally
+            //{
+            //    Global01.TranActiva = null;
+            //}
       
             System.IO.File.Delete(Global01.AppPath + "\\Reportes\\Catalogo.mdb");
             System.IO.File.Delete(Global01.AppPath + "\\up201406.exe");

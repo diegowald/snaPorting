@@ -14,7 +14,8 @@ namespace Catalogo._recibos
         // el numero de ip del servidor privado.
 
         // Define como se llama este modulo para el control de errores
-
+        
+        private System.Data.OleDb.OleDbTransaction _TranActiva = null;
         private RecibosWS.Recibos_v_303 cliente;
         private bool webServiceInicializado;
         private string _MacAddress;
@@ -188,9 +189,9 @@ namespace Catalogo._recibos
             {
                 if (!Cancel)
                 {
-                    if (Global01.TranActiva == null)
+                    if (_TranActiva== null)
                     {
-                        Global01.TranActiva = Conexion1.BeginTransaction();
+                        _TranActiva= Conexion1.BeginTransaction();
                         util.errorHandling.ErrorLogger.LogMessage("6");
                     }
 
@@ -199,18 +200,18 @@ namespace Catalogo._recibos
                     if (resultado == 0)
                     {
                         Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Recibo_Transmicion_Upd '" + _NroRecibo + "'");
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Commit();
-                            Global01.TranActiva = null;
+                            _TranActiva.Commit();
+                            _TranActiva= null;
                         }
                     }
                     else
                     {
-                        if ((Global01.TranActiva != null))
+                        if ((_TranActiva!= null))
                         {
-                            Global01.TranActiva.Rollback();
-                            Global01.TranActiva = null;
+                            _TranActiva.Rollback();
+                            _TranActiva= null;
                         }
                     }
 

@@ -28,7 +28,7 @@ namespace Catalogo
        public const string up2014Us = ";User ID=inVent;Password=video80min";
 
        public static System.Data.OleDb.OleDbConnection Conexion;
-       public static System.Data.OleDb.OleDbTransaction TranActiva;
+       //public static System.Data.OleDb.OleDbTransaction TranActiva_;
        public static string AppPath;
        public static string PathAcrobat;
        public static string FileBak;

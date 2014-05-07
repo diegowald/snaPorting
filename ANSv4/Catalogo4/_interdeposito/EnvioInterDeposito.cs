@@ -10,6 +10,7 @@ namespace Catalogo._interdeposito
     {
         // Esta clase realiza una consulta al servidor web y obtiene
         // el numero de ip del servidor privado.
+        private System.Data.OleDb.OleDbTransaction _TranActiva = null;
         private InterDepositoWS.InterDeposito Cliente;
         private bool WebServiceInicializado;
         private string m_MacAddress;
@@ -105,9 +106,9 @@ namespace Catalogo._interdeposito
             {
                 if (!Cancel)
                 {
-                    if (Global01.TranActiva == null)
+                    if (_TranActiva== null)
                     {
-                        Global01.TranActiva = Conexion1.BeginTransaction();
+                        _TranActiva= Conexion1.BeginTransaction();
                         util.errorHandling.ErrorLogger.LogMessage("9");
                     }
                     resultado = Cliente.EnviarInterDeposito(m_MacAddress, m_NroInterDeposito, m_CodCliente, m_Bco_Dep_Tipo, m_Bco_Dep_Fecha, m_Bco_Dep_Numero, m_Bco_Dep_Monto, m_Bco_Dep_Ch_Cantidad, m_Bco_Dep_IdCta, m_Observaciones,
@@ -116,18 +117,18 @@ namespace Catalogo._interdeposito
                     if (resultado == 0)
                     {
                         Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_InterDeposito_Transmicion_Upd '" + m_NroInterDeposito + "'");
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Commit();
-                            Global01.TranActiva = null;
+                            _TranActiva.Commit();
+                            _TranActiva= null;
                         }
                     }
                     else
                     {
-                        if (Global01.TranActiva != null)
+                        if (_TranActiva!= null)
                         {
-                            Global01.TranActiva.Rollback();
-                            Global01.TranActiva = null;
+                            _TranActiva.Rollback();
+                            _TranActiva= null;
                         }
                     }
 

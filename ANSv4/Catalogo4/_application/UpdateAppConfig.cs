@@ -382,11 +382,11 @@ namespace Catalogo._application
 
                 if (wSalir)
                 {
-                    if (Global01.TranActiva != null)
-                    {
-                        Global01.TranActiva.Commit();
-                        Global01.TranActiva = null;
-                    }
+                    //if (Global01.TranActiva != null)
+                    //{
+                    //    Global01.TranActiva.Commit();
+                    //    Global01.TranActiva = null;
+                    //}
                     MessageBox.Show("Se han efectuado modificaciones en la aplicación, \n ésta de cerrará, luego re-ingrese nuevamente", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     Catalogo.MainMod.miEnd();
                 }
