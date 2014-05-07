@@ -185,7 +185,7 @@ namespace Catalogo._rendiciones
 		                //Iniciar Transaccion
                         if (_TranActiva==null)
                         {
-                            _TranActiva= Global01.Conexion.BeginTransaction();
+                            //@ _TranActiva =Global01.Conexion.BeginTransaction();
                             util.errorHandling.ErrorLogger.LogMessage("5");
                         }
 
@@ -267,7 +267,7 @@ namespace Catalogo._rendiciones
                         }
                         finally
                         {
-                            _TranActiva= null;
+                            _TranActiva = null;
                         }
 
 		                Cursor.Current = Cursors.Default;

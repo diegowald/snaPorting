@@ -191,7 +191,7 @@ namespace Catalogo._recibos
                 {
                     if (_TranActiva== null)
                     {
-                        _TranActiva= Conexion1.BeginTransaction();
+                        //@ _TranActiva =Conexion1.BeginTransaction();
                         util.errorHandling.ErrorLogger.LogMessage("6");
                     }
 
@@ -203,7 +203,7 @@ namespace Catalogo._recibos
                         if (_TranActiva!= null)
                         {
                             _TranActiva.Commit();
-                            _TranActiva= null;
+                            _TranActiva = null;
                         }
                     }
                     else
@@ -211,7 +211,7 @@ namespace Catalogo._recibos
                         if ((_TranActiva!= null))
                         {
                             _TranActiva.Rollback();
-                            _TranActiva= null;
+                            _TranActiva = null;
                         }
                     }
 

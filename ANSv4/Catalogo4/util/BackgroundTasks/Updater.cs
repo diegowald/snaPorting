@@ -139,7 +139,7 @@ namespace Catalogo.util.BackgroundTasks
                 {
                     if (_TranActiva== null)
                     {
-                        _TranActiva= Global01.Conexion.BeginTransaction();
+                        //@ _TranActiva =Global01.Conexion.BeginTransaction();
                     }
 
                     System.Data.OleDb.OleDbDataReader reader = Catalogo.Funciones.oleDbFunciones.Comando(Global01.Conexion,
@@ -184,7 +184,7 @@ namespace Catalogo.util.BackgroundTasks
                     if (_TranActiva!= null)
                     {
                         _TranActiva.Commit();
-                        _TranActiva= null;
+                        _TranActiva = null;
                     }
                 }
             }
@@ -193,7 +193,7 @@ namespace Catalogo.util.BackgroundTasks
                 if (_TranActiva!= null)
                 {
                     _TranActiva.Rollback();
-                    _TranActiva= null;
+                    _TranActiva = null;
                 }
                 util.errorHandling.ErrorLogger.LogMessage(ex);
 
@@ -210,7 +210,7 @@ namespace Catalogo.util.BackgroundTasks
                 {
                     if (_TranActiva== null)
                     {
-                        _TranActiva= Global01.Conexion.BeginTransaction();
+                        //@ _TranActiva =Global01.Conexion.BeginTransaction();
                     }
 
                     System.Data.OleDb.OleDbDataReader reader = Catalogo.Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_ClientesNovedades WHERE F_Transmicion is null");
@@ -257,7 +257,7 @@ namespace Catalogo.util.BackgroundTasks
                         if (_TranActiva!= null)
                         {
                             _TranActiva.Commit();
-                            _TranActiva= null;
+                            _TranActiva = null;
                         }
                     }
                 }
@@ -267,7 +267,7 @@ namespace Catalogo.util.BackgroundTasks
                 if (_TranActiva!= null)
                 {
                     _TranActiva.Rollback();
-                    _TranActiva= null;
+                    _TranActiva = null;
                 }
                 util.errorHandling.ErrorLogger.LogMessage(ex);
 

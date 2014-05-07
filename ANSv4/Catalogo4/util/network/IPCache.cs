@@ -34,7 +34,7 @@ namespace Catalogo.util.network
         {
             while (true)
             {
-                if (worker.CancellationPending)
+                if ((worker != null) && (worker.CancellationPending))
                 {
                     cancel = true;
                     worker.CancelAsync();

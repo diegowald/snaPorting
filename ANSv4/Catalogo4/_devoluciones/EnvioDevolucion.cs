@@ -101,7 +101,8 @@ namespace Catalogo._devoluciones
                 {
                     if (_TranActiva== null)
                     {
-                        _TranActiva= Conexion1.BeginTransaction();
+                        //@ _TranActiva =Conexion1.BeginTransaction();
+                        util.errorHandling.ErrorLogger.LogMessage("2");
                     }
 
                     resultado = Cliente.EnviarDevolucion(m_MacAddress, m_NroDevolucion, m_CodCliente, m_Fecha, m_Observaciones, m_Detalle);
@@ -112,7 +113,7 @@ namespace Catalogo._devoluciones
                         if (_TranActiva!= null)
                         {
                             _TranActiva.Commit();
-                            _TranActiva= null;
+                            _TranActiva = null;
                         }
                     }
                     else
@@ -120,7 +121,7 @@ namespace Catalogo._devoluciones
                         if (_TranActiva!= null)
                         {
                             _TranActiva.Rollback();
-                            _TranActiva= null;
+                            _TranActiva = null;
                             util.errorHandling.ErrorLogger.LogMessage("10 rollback");
                         }
                     }

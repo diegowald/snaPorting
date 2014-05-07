@@ -40,7 +40,8 @@ namespace Catalogo.util.BackgroundTasks
         {
             if (job_type == JOB_TYPE.Asincronico)
             {
-                if (worker.IsBusy)
+
+                if ((worker != null) && (worker.IsBusy))
                 {
                     cancellationByNewExecution = true;
                     worker.CancelAsync();

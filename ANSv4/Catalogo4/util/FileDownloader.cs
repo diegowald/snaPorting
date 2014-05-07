@@ -80,7 +80,7 @@ namespace Catalogo.util
 
         public override void execute(ref bool cancel)
         {
-            if (worker.CancellationPending)
+            if ((worker != null) && (worker.CancellationPending))
             {
                 cancel = true;
                 worker.CancelAsync();

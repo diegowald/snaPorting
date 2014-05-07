@@ -48,7 +48,7 @@ namespace Catalogo.Funciones.BackgroundReader
             dataTable = null;
             if (job_type == JOB_TYPE.Asincronico)
             {
-                if (worker.IsBusy)
+                if ((worker != null) && (worker.IsBusy))
                 {
                     cancellationByNewExecution = true;
                     worker.CancelAsync();

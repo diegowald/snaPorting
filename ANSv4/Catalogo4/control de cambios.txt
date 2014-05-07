@@ -17,3 +17,5 @@ en catalogo.mdb agregar vista "v_novedades1" que es "ansNovedad JOIN tblNovedadL
 1) "INTERDEPOSITOS" la v_interdepositos_rpt OJO relacion "uno a muchos"
 
 - Cambiar LOGO en todos los reportes
+
+1) "FALTANTES"

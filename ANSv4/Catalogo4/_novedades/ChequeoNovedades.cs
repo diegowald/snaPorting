@@ -20,7 +20,7 @@ namespace Catalogo.util.BackgroundTasks
         {
             while (_running)
             {
-                if (worker.CancellationPending)
+                if ((worker != null) && (worker.CancellationPending))
                 {
                     cancel = true;
                     worker.CancelAsync();

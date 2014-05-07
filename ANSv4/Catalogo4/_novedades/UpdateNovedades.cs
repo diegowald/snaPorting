@@ -76,7 +76,6 @@ namespace Catalogo._novedades
             return;
         }
 
-
         public void sincronizarNovedades()
         {
             try
@@ -86,7 +85,7 @@ namespace Catalogo._novedades
 
                 if (_TranActiva== null)
                 {
-                    _TranActiva= conexion.BeginTransaction();
+                    //@ _TranActiva = conexion.BeginTransaction();
                 }
 
                 Catalogo.varios.complexMessage msg;
@@ -134,7 +133,7 @@ namespace Catalogo._novedades
                     if (_TranActiva!= null)
                     {
                         _TranActiva.Rollback();
-                        _TranActiva= null;
+                        _TranActiva = null;
                     }
                     msg.progress1.first="Sincronización de Novedades con Errores";
                     msg.progress1.second=100;
@@ -146,7 +145,7 @@ namespace Catalogo._novedades
                     if (_TranActiva!= null)
                     {
                         _TranActiva.Commit();
-                        _TranActiva= null;
+                        _TranActiva = null;
                     }
 
                     Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_Novedades_Anexar");
@@ -162,7 +161,7 @@ namespace Catalogo._novedades
                 if (_TranActiva!= null)
                 {
                     _TranActiva.Rollback();
-                    _TranActiva= null;
+                    _TranActiva = null;
                 }
                 util.errorHandling.ErrorLogger.LogMessage(ex);
 
@@ -170,7 +169,7 @@ namespace Catalogo._novedades
             }
             finally
             {
-                _TranActiva= null;
+                _TranActiva = null;
             }
         }
 

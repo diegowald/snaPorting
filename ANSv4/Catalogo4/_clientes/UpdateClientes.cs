@@ -83,7 +83,8 @@ namespace Catalogo._clientes
 
                 if (_TranActiva== null)
                 {
-                    _TranActiva= conexion.BeginTransaction();
+                    //@ _TranActiva = conexion.BeginTransaction();
+                    util.errorHandling.ErrorLogger.LogMessage("3");
                 }
 
                 Catalogo.varios.complexMessage msg;
@@ -143,7 +144,7 @@ namespace Catalogo._clientes
                     if (_TranActiva!= null)
                     {
                         _TranActiva.Rollback();
-                        _TranActiva= null;
+                        _TranActiva = null;
                         util.errorHandling.ErrorLogger.LogMessage("11 rollback");
                     }
                     msg.progress1.first="Sincronización de Clientes con Errores";
@@ -156,7 +157,7 @@ namespace Catalogo._clientes
                     if (_TranActiva!= null)
                     {
                         _TranActiva.Commit();
-                        _TranActiva= null;
+                        _TranActiva = null;
                     }
 
                     Catalogo.Funciones.oleDbFunciones.ComandoIU(conexion, "EXEC usp_appConfig_FActClientes_Upd");
@@ -172,7 +173,7 @@ namespace Catalogo._clientes
                 if (_TranActiva!= null)
                 {
                     _TranActiva.Rollback();
-                    _TranActiva= null;
+                    _TranActiva = null;
                     util.errorHandling.ErrorLogger.LogMessage("11 rollback");
                 }
 
@@ -180,7 +181,7 @@ namespace Catalogo._clientes
             }
             finally
             {
-                _TranActiva= null;
+                _TranActiva = null;
             }
         }
 

@@ -79,7 +79,7 @@ namespace Catalogo._registrofaltantes
                 {
                     if (_TranActiva== null)
                     {
-                        _TranActiva= Conexion1.BeginTransaction();
+                        //@ _TranActiva =Conexion1.BeginTransaction();
                         util.errorHandling.ErrorLogger.LogMessage("7");
                     }
 
@@ -91,7 +91,7 @@ namespace Catalogo._registrofaltantes
                         if (_TranActiva!= null)
                         {
                             _TranActiva.Commit();
-                            _TranActiva= null;
+                            _TranActiva = null;
                         }
                     }
                     else
@@ -99,7 +99,7 @@ namespace Catalogo._registrofaltantes
                         if ((_TranActiva!= null))
                         {
                             _TranActiva.Rollback();
-                            _TranActiva= null;
+                            _TranActiva = null;
                         }
                     }
 

@@ -135,7 +135,8 @@ namespace Catalogo._rendiciones
                 {
                     if (_TranActiva== null)
                     {
-                        _TranActiva= Conexion1.BeginTransaction();
+                        //@ _TranActiva =Conexion1.BeginTransaction();
+                        util.errorHandling.ErrorLogger.LogMessage("1");
                     }
 
                     resultado = Cliente.EnviarRendicion(m_MacAddress, m_NroRendicion, m_IdViajante, m_F_Rendicion, m_Observaciones,
@@ -149,7 +150,7 @@ namespace Catalogo._rendiciones
                         if (_TranActiva!= null)
                         {
                             _TranActiva.Commit();
-                            _TranActiva= null;
+                            _TranActiva = null;
                         }
                     }
                     else
@@ -157,7 +158,7 @@ namespace Catalogo._rendiciones
                         if (_TranActiva!= null)
                         {
                             _TranActiva.Rollback();
-                            _TranActiva= null;
+                            _TranActiva = null;
                         }
                     }
 
