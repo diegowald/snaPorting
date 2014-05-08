@@ -77,7 +77,6 @@ namespace Catalogo
             Catalogo.varios.NotificationCenter.instance.refreshNovedades += refreshNovedades;
         }
 
-
         public void updateBanner(string filename)
         {
             if (Global01.miSABOR < Global01.TiposDeCatalogo.Viajante)
@@ -351,7 +350,8 @@ namespace Catalogo
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            //this.Close();
+            System.Windows.Application.Current.MainWindow.Close();
         }
 
         private void ChangeViewButton_Click(object sender, RoutedEventArgs e)
@@ -563,7 +563,6 @@ namespace Catalogo
                 gv.attachReceptor2(sf);
                 gv.attachReceptor3(ped);
                 gv.attachReceptor3(dev);
-
             }
         }
 
@@ -710,8 +709,6 @@ namespace Catalogo
                 dcNovedades.FontSize= 14;
                 //dcNovedades.SetValue(TextBlock.ForegroundProperty, "Red");
             }
-        }
-         
-
+        }         
     }
 }

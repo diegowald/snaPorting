@@ -57,7 +57,6 @@ namespace Catalogo
 
             lanzarProcesosSegundoPlano();
 
-
             //- ACA ESTA LA PAPA ----------------------
             //- Run mi APP MainWindow -----------------
             //- ** RETORNA AL app.XAML y sigue la EJECUCION NORMAL ** ---
@@ -86,7 +85,7 @@ namespace Catalogo
             dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_appConfig2");
             if (!dr.HasRows)
             {
-                MessageBox.Show("Aplicación NO inicializada! (error=Version y Tipo), Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true },"Aplicación NO inicializada! (error=Version y Tipo), Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
             else
@@ -95,7 +94,7 @@ namespace Catalogo
 
                 if (dr["appCVersion"].ToString().Substring(1, 3) != Global01.VersionApp.Substring(3, 3))
                 {
-                    MessageBox.Show("INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show(new Form() { TopMost = true },"INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     miEnd();
                 }
                 else
@@ -130,7 +129,7 @@ namespace Catalogo
             dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_appConfig2");
             if (!dr.HasRows)
             {
-                MessageBox.Show("Aplicación NO inicializada! (error=Version y Tipo), Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true },"Aplicación NO inicializada! (error=Version y Tipo), Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
             else
@@ -139,7 +138,7 @@ namespace Catalogo
 
                 if (dr["appCVersion"].ToString().Substring(1, 3) != Global01.VersionApp.Substring(3, 3))
                 {
-                    MessageBox.Show("INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show(new Form() { TopMost = true },"INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     miEnd();
                 }
 
@@ -194,13 +193,13 @@ namespace Catalogo
 
             if (DateTime.Today.Date > Global01.appCaduca.Date)
             {
-                MessageBox.Show("El uso de la aplicación EXPIRO!, Comuniquese con auto náutica sur", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true },"El uso de la aplicación EXPIRO!, Comuniquese con auto náutica sur", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
 
             if (Global01.F_UltimoAcceso.Date > DateTime.Today.Date)
             {
-                MessageBox.Show("Error con la hora del sistema, Comuniquese con auto náutica sur", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true },"Error con la hora del sistema, Comuniquese con auto náutica sur", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
             else
@@ -210,19 +209,19 @@ namespace Catalogo
 
             if (Int32.Parse(Global01.NroUsuario.ToString()) <= 0 | Int64.Parse(Global01.Cuit.ToString().Replace("-", "")) <= 1)
             {
-                MessageBox.Show("Error en nº de Cuenta ó Cuit, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true },"Error en nº de Cuenta ó Cuit, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
 
             if (DateTime.Today.Date > Global01.dbCaduca.Date)
             {
-                MessageBox.Show("La vigencia del Catálogo EXPIRO!, debe actualizar por internet o comuniquese con su viajante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(new Form() { TopMost = true },"La vigencia del Catálogo EXPIRO!, debe actualizar por internet o comuniquese con su viajante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
                 if (DateTime.Today.Date > Global01.dbCaduca.Date.AddDays(3).Date)
                 {
-                    MessageBox.Show("Quedan menos de 3 días para la validez del Catálogo, debe actualizar por internet o comuniquese con su viajante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true },"Quedan menos de 3 días para la validez del Catálogo, debe actualizar por internet o comuniquese con su viajante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
 
@@ -242,7 +241,7 @@ namespace Catalogo
             {
                 Global01.xError = false;
 
-                if (MessageBox.Show("Error de Conexión al Servidor, ¿quiere intentar de nuevo?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(new Form() { TopMost = true },"Error de Conexión al Servidor, ¿quiere intentar de nuevo?", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     ipAddress = Global01.URL_ANS2;
                     goto VadeNuevo;
@@ -256,10 +255,13 @@ namespace Catalogo
         {
             Catalogo.varios.fLogin f = new Catalogo.varios.fLogin();
             f.ShowDialog();
+            if (!f.TodoBien)
+            {
+                f.Dispose();
+                miEnd();
+            }
             f.Dispose();
-
-            if (!f.TodoBien) miEnd();
-
+            f = null;
         }
 
         internal static void valida_appRegistro()
@@ -267,8 +269,8 @@ namespace Catalogo
 
             //- Registro y activación -------------XX
         AcaRegistro:
-            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            //if (false)
+            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -277,6 +279,7 @@ namespace Catalogo
                     Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
                     Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
                     Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
+                    Global01.RecienRegistrado = false;
 
                     // a registrar
                     Catalogo._registro.fRegistro fRegistro = new Catalogo._registro.fRegistro();
@@ -292,7 +295,7 @@ namespace Catalogo
                     }
                     else
                     {
-                        MessageBox.Show("BIENVENIDO A NUESTRO CATALOGO!.", "REGISTRADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(new Form() { TopMost = true },"BIENVENIDO A NUESTRO CATALOGO!.", "REGISTRADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         goto AcaRegistro;
                     }
                 }
@@ -303,7 +306,7 @@ namespace Catalogo
                         Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
                         Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
                         Global01.IDMaquinaCRC = "no";
-                        MessageBox.Show("Código de registro adulterado \r\n Ahora debe registrar la aplicación nuevamente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show(new Form() { TopMost = true },"Código de registro adulterado \r\n Ahora debe registrar la aplicación nuevamente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         goto AcaRegistro;
                     }
                     else
@@ -314,13 +317,13 @@ namespace Catalogo
                             Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
                             Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
                             Global01.IDMaquinaCRC = "no";
-                            MessageBox.Show("Código de registro adulterado \r\n Ahora debe registrar la aplicación nuevamente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show(new Form() { TopMost = true },"Código de registro adulterado \r\n Ahora debe registrar la aplicación nuevamente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             goto AcaRegistro;
                         }
                         else
                         {
                             Global01.AppActiva = false;
-                            if (MessageBox.Show("¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if (MessageBox.Show(new Form() { TopMost = true },"¿ Desea ACTIVAR la aplicación ahora ? \r\n si la aplicación no se activa, NO se pueden realizar actualizaciones \r\n \r\n - DEBE ESTAR CONECTADO A INTERNET -", "Atención", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 ActivarApplicacion();
                                 goto AcaRegistro;
@@ -337,7 +340,7 @@ namespace Catalogo
                 //Sabor3 = 
                 //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
                 //Sabor2 = 
-                //Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
+                Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
 
             }
             //--------------------------------------XX
@@ -363,37 +366,41 @@ namespace Catalogo
             //--- Pregunta ¿ Está todo en su lugar ? ----------------------
             if (PrevInstance())
             {
-                MessageBox.Show("Hay otra instancia de la aplicación abierta", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true },"Hay otra instancia de la aplicación abierta", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
 
             if (!System.IO.File.Exists(Global01.dstring))
             {
                 //Cursor.Current = Cursors.Default;
-                MessageBox.Show("Error en la instalación del archivo Catalogo", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true },"Error en la instalación del archivo Catalogo", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
 
             if (!System.IO.File.Exists(Global01.cstring))
             {
-                MessageBox.Show("Error en la instalación del archivo de Datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true },"Error en la instalación del archivo de Datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
 
             if (!System.IO.File.Exists(Global01.sstring))
             {
-                MessageBox.Show("Error en la instalación del archivo de Seguridad", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true },"Error en la instalación del archivo de Seguridad", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
             //--- Fin de Pregunta -------------------------------
 
         }
 
-        public static void miEnd()
+        public static void miEnd(bool Halt=true)
         {
             Catalogo.util.BackgroundTasks.BackgroundTaskCoordinator.instance.shutdownTasks();
-            //System.Environment.Exit(0);
-            //Application.Exit();
+            Application.Exit();
+            if (Halt)           
+            { 
+                System.Environment.Exit(0);
+            }
+
             //System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
@@ -429,7 +436,7 @@ namespace Catalogo
             //if (!appNewInstance)
             //{
             //    // Already Once Instance Running
-            //    MessageBox.Show("One Instance Of This App Allowed.");
+            //    MessageBox.Show(new Form() { TopMost = true },"One Instance Of This App Allowed.");
             //    return;
             //}
             //GC.KeepAlive(m);
@@ -439,9 +446,9 @@ namespace Catalogo
         {
 
             //#if SaborViajante
-            Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+            //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
             //#else
-            //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+            Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
             //#endif            
 
             Global01.NoConn = false;
@@ -544,7 +551,7 @@ namespace Catalogo
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Debe tener instalado Flash Player", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(new Form() { TopMost = true },"Debe tener instalado Flash Player", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 miEnd();
             }
             // otra version que no anduvo en mi maquina.
@@ -552,7 +559,7 @@ namespace Catalogo
             Microsoft.Win32.RegistryKey rk=Microsoft.Win32.Registry.CurrentUser.OpenSubKey("HKEY_LOCAL_MACHINE\\SOFTWARE\\Macromedia\\FlashPlayer");
             if (rk == null)
             {
-                System.Windows.Forms.MessageBox.Show("Debe tener instalado Flash Player", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                System.Windows.Forms.MessageBox.Show(new Form() { TopMost = true },"Debe tener instalado Flash Player", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 miEnd();
             }*/
         }

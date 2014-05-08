@@ -155,77 +155,77 @@
             // rRazonSocialTxt
             // 
             this.rRazonSocialTxt.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.rRazonSocialTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rRazonSocialTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rRazonSocialTxt.Location = new System.Drawing.Point(159, 122);
             this.rRazonSocialTxt.MaxLength = 64;
             this.rRazonSocialTxt.Name = "rRazonSocialTxt";
-            this.rRazonSocialTxt.Size = new System.Drawing.Size(232, 22);
+            this.rRazonSocialTxt.Size = new System.Drawing.Size(232, 20);
             this.rRazonSocialTxt.TabIndex = 2;
             this.rRazonSocialTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rRazonSocialTxt_KeyPress);
             // 
             // rCuitTxt
             // 
             this.rCuitTxt.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.rCuitTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rCuitTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rCuitTxt.Location = new System.Drawing.Point(159, 155);
             this.rCuitTxt.MaxLength = 13;
             this.rCuitTxt.Name = "rCuitTxt";
-            this.rCuitTxt.Size = new System.Drawing.Size(104, 22);
+            this.rCuitTxt.Size = new System.Drawing.Size(104, 20);
             this.rCuitTxt.TabIndex = 3;
             this.rCuitTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rCuitTxt_KeyPress);
             // 
             // rEmailTxt
             // 
             this.rEmailTxt.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.rEmailTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rEmailTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rEmailTxt.Location = new System.Drawing.Point(159, 183);
             this.rEmailTxt.MaxLength = 64;
             this.rEmailTxt.Name = "rEmailTxt";
-            this.rEmailTxt.Size = new System.Drawing.Size(232, 22);
+            this.rEmailTxt.Size = new System.Drawing.Size(232, 20);
             this.rEmailTxt.TabIndex = 4;
             this.rEmailTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rEmailTxt_KeyPress);
             // 
             // rLlave2Txt
             // 
             this.rLlave2Txt.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.rLlave2Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rLlave2Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rLlave2Txt.Location = new System.Drawing.Point(159, 315);
             this.rLlave2Txt.MaxLength = 15;
             this.rLlave2Txt.Name = "rLlave2Txt";
             this.rLlave2Txt.PasswordChar = '*';
-            this.rLlave2Txt.Size = new System.Drawing.Size(135, 22);
+            this.rLlave2Txt.Size = new System.Drawing.Size(135, 20);
             this.rLlave2Txt.TabIndex = 10;
             // 
             // rZonaTxt
             // 
             this.rZonaTxt.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.rZonaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rZonaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rZonaTxt.Location = new System.Drawing.Point(159, 245);
             this.rZonaTxt.MaxLength = 5;
             this.rZonaTxt.Name = "rZonaTxt";
-            this.rZonaTxt.Size = new System.Drawing.Size(54, 22);
+            this.rZonaTxt.Size = new System.Drawing.Size(54, 20);
             this.rZonaTxt.TabIndex = 6;
             this.rZonaTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rZonaTxt_KeyPress);
             // 
             // rLlave1Txt
             // 
             this.rLlave1Txt.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.rLlave1Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rLlave1Txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rLlave1Txt.Location = new System.Drawing.Point(159, 287);
             this.rLlave1Txt.MaxLength = 15;
             this.rLlave1Txt.Name = "rLlave1Txt";
             this.rLlave1Txt.PasswordChar = '*';
-            this.rLlave1Txt.Size = new System.Drawing.Size(135, 22);
+            this.rLlave1Txt.Size = new System.Drawing.Size(135, 20);
             this.rLlave1Txt.TabIndex = 9;
             // 
             // rNroCuentaTxt
             // 
             this.rNroCuentaTxt.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.rNroCuentaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rNroCuentaTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rNroCuentaTxt.Location = new System.Drawing.Point(159, 217);
             this.rNroCuentaTxt.MaxLength = 5;
             this.rNroCuentaTxt.Name = "rNroCuentaTxt";
-            this.rNroCuentaTxt.Size = new System.Drawing.Size(53, 22);
+            this.rNroCuentaTxt.Size = new System.Drawing.Size(53, 20);
             this.rNroCuentaTxt.TabIndex = 5;
             this.rNroCuentaTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rNroCuentaTxt_KeyPress);
             // 
@@ -360,17 +360,18 @@
             // rApellidoTxt
             // 
             this.rApellidoTxt.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.rApellidoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rApellidoTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rApellidoTxt.Location = new System.Drawing.Point(159, 92);
             this.rApellidoTxt.MaxLength = 32;
             this.rApellidoTxt.Name = "rApellidoTxt";
-            this.rApellidoTxt.Size = new System.Drawing.Size(210, 22);
+            this.rApellidoTxt.Size = new System.Drawing.Size(210, 20);
             this.rApellidoTxt.TabIndex = 1;
             this.rApellidoTxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rApellidoTxt_KeyPress);
             // 
             // rNombreTxt
             // 
             this.rNombreTxt.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.rNombreTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rNombreTxt.Location = new System.Drawing.Point(159, 64);
             this.rNombreTxt.MaxLength = 32;
             this.rNombreTxt.Name = "rNombreTxt";

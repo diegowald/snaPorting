@@ -347,6 +347,5 @@ namespace Catalogo._registro
             rNombreTxt.Focus();
         }
 
-
     }
 }

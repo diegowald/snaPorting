@@ -43,8 +43,8 @@ namespace Catalogo
             
             System.Diagnostics.Debug.WriteLine("saliendo por acá....");
 
-            MainMod.miEnd();
-            Shutdown();
+            MainMod.miEnd(false);
+            Application.Current.Shutdown(0);
         }
 
         void Current_Exit(object sender, ExitEventArgs e)
