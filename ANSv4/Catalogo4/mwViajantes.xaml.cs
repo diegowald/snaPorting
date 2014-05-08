@@ -25,8 +25,6 @@ namespace Catalogo
         private Catalogo.varios.FlashControl flash = null;
         private Catalogo._registrofaltantes.ucFaltante faltantes = null;
 
-        //private bool _forcedToAutoHide;
-
         public mwViajantes()
         {
             this.Hide();
@@ -307,6 +305,7 @@ namespace Catalogo
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {
+            this.xContentMenu.ToggleAutoHide();
 
             if (Global01.miSABOR >= Global01.TiposDeCatalogo.Viajante)
             {
@@ -326,21 +325,6 @@ namespace Catalogo
 
             this.Show();
             Catalogo.varios.SplashScreen.CloseSplashScreen();
-        }
-
-        //private void dockManager_MouseDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (!_forcedToAutoHide)
-        //        return;
-        //    _forcedToAutoHide = false;
-        //    this.xContentMenu.Activate();
-        //    this.xContentMenu.ToggleAutoHide();
-        //}
-
-        private void Window_Loaded_1(object sender, RoutedEventArgs e)
-        {
-            this.xContentMenu.ToggleAutoHide();
-            //_forcedToAutoHide = true;
         }
 
         private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
@@ -689,8 +673,10 @@ namespace Catalogo
         {
             try
             {
-                System.Windows.Forms.MessageBox.Show("Implementar Check Registro app");
-                MainMod.valida_appRegistro();
+                util.BackgroundTasks.Updater xVerEstado = new util.BackgroundTasks.Updater(
+                   util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+                   util.BackgroundTasks.Updater.UpdateType.EstadoActual);
+                xVerEstado.run();
             }
             catch (Exception ex)
             {

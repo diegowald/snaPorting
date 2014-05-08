@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fDataUpdate));
             this.PnlFondoRojo = new System.Windows.Forms.Panel();
+            this.vcUPDATECTL1 = new Catalogo.varios.UpdateCtl();
             this.TopPnl = new System.Windows.Forms.Panel();
             this.btnCerrar = new System.Windows.Forms.Button();
-            this.vcUPDATECTL1 = new Catalogo.varios.UpdateCtl();
             this.PnlFondoRojo.SuspendLayout();
             this.TopPnl.SuspendLayout();
             this.SuspendLayout();
@@ -48,6 +48,19 @@
             this.PnlFondoRojo.Padding = new System.Windows.Forms.Padding(2);
             this.PnlFondoRojo.Size = new System.Drawing.Size(440, 227);
             this.PnlFondoRojo.TabIndex = 0;
+            // 
+            // vcUPDATECTL1
+            // 
+            this.vcUPDATECTL1.BackColor = System.Drawing.Color.White;
+            this.vcUPDATECTL1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.vcUPDATECTL1.configFileURL = null;
+            this.vcUPDATECTL1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.vcUPDATECTL1.Location = new System.Drawing.Point(2, 28);
+            this.vcUPDATECTL1.Margin = new System.Windows.Forms.Padding(0);
+            this.vcUPDATECTL1.Name = "vcUPDATECTL1";
+            this.vcUPDATECTL1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
+            this.vcUPDATECTL1.Size = new System.Drawing.Size(436, 197);
+            this.vcUPDATECTL1.TabIndex = 4;
             // 
             // TopPnl
             // 
@@ -75,19 +88,6 @@
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
             // 
-            // vcUPDATECTL1
-            // 
-            this.vcUPDATECTL1.BackColor = System.Drawing.Color.White;
-            this.vcUPDATECTL1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.vcUPDATECTL1.configFileURL = null;
-            this.vcUPDATECTL1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.vcUPDATECTL1.Location = new System.Drawing.Point(2, 28);
-            this.vcUPDATECTL1.Margin = new System.Windows.Forms.Padding(0);
-            this.vcUPDATECTL1.Name = "vcUPDATECTL1";
-            this.vcUPDATECTL1.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.vcUPDATECTL1.Size = new System.Drawing.Size(436, 197);
-            this.vcUPDATECTL1.TabIndex = 4;
-            // 
             // fDataUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -100,7 +100,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fDataUpdate";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Actualización del Catálogo Dígital de Productos";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.fDataUpdate_Load);

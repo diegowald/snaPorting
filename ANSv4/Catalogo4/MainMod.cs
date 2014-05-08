@@ -36,14 +36,14 @@ namespace Catalogo
             load_header();
 
             //chequea comandos y mensajes desde el servidor
-            if (Funciones.modINIs.ReadINI("DATOS", "INFO", "0") == "1") //Or vg.RecienRegistrado Or vg.NoConn
+            if ((Funciones.modINIs.ReadINI("DATOS", "INFO", "0") == "1") | (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente))
             {
                 util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig);
                 updater.run();
             }
 
-            valida_appLogin();
-
+            if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) valida_appLogin();
+            
             if (Global01.AppActiva)
             {
                 if (Global01.ActualizarClientes)
@@ -269,8 +269,8 @@ namespace Catalogo
 
             //- Registro y activación -------------XX
         AcaRegistro:
-            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            if (false)
+            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            //if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -340,7 +340,7 @@ namespace Catalogo
                 //Sabor3 = 
                 //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
                 //Sabor2 = 
-                Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
+                //Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
 
             }
             //--------------------------------------XX
@@ -445,12 +445,9 @@ namespace Catalogo
         public static void inicializaGlobales()
         {
 
-            //#if SaborViajante
             //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
-            //#else
             Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
-            //#endif            
-
+ 
             Global01.NoConn = false;
             Global01.VersionApp = (int)(Global01.miSABOR) + ".3.2.0";
 
