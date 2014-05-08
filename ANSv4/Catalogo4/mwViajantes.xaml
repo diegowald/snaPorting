@@ -4,14 +4,13 @@
         xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
         xmlns:_productos="clr-namespace:Catalogo._productos"          
         Height="600" Width="1024"
-        Title="Catálogo Dígital de Productos - Auto Náutica Sur s.r.l. - v4.0" 
-        Loaded="Window_Loaded_1" 
+        Title="Catálogo Dígital de Productos - Auto Náutica Sur s.r.l. - v4.0"        
+        Loaded="Window_Loaded_1"         
         WindowStartupLocation="CenterScreen"                
         BorderThickness="0"
         ResizeMode="CanResize"  Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFFFFF" >
-        <Border Grid.Row="0" x:Name="LayoutRoot" 
-          Background="White" BorderBrush="White" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">
-
+    
+    <Border Grid.Row="0" x:Name="LayoutRoot" Background="White" BorderBrush="White" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -214,18 +213,18 @@
                             </ad:DocumentContent>
                         </ad:DocumentPane>
 
-                        <ad:DockablePane ad:ResizingPanel.ResizeWidth="150"  ShowHeader="True">
-                            <ad:DockableContent Name="xContentMenu" Title="Menú"  DockableStyle="AutoHide" IsCloseable="False" >
-                                <Menu x:Name="appMenu">
-                                    <MenuItem Header="Sitio web de ANS" Click="xMenu1_web" Margin="0,20,0,0"/>
-                                    <MenuItem Header="Revista Dígital" Click="xMenu1_revista"/>
-                                    <MenuItem Header="Apertura Cta. Cte." Click="xMenu1_CtaCte"/>
-                                    <MenuItem Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
-                                    <MenuItem Header="Configuración Aplic." Click="xMenu1_AppConfig"/>
+                        <ad:DockablePane x:Name="rzMenu" ad:ResizingPanel.ResizeWidth="150">
+                            <ad:DockableContent Name="xContentMenu" Title="Menú">
+                                <Menu x:Name="appMenu" Background="White">
+                                    <MenuItem x:Name="mnu_web" Header="Sitio web de ANS" Click="xMenu1_web"/>
+                                    <MenuItem x:Name="mnu_revista" Header="Revista Dígital" Click="xMenu1_revista"/>
+                                    <MenuItem x:Name="mnu_apertura" Header="Apertura Cta. Cte." Click="xMenu1_CtaCte"/>
+                                    <MenuItem x:Name="mnu_porcentaje" Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
+                                    <MenuItem x:Name="mnu_config" Header="Configuración Aplic." Click="xMenu1_AppConfig"/>
                                 </Menu>
                             </ad:DockableContent>
                         </ad:DockablePane>
-
+                        
                     </ad:ResizingPanel>
                 </ad:ResizingPanel>
             </ad:DockingManager>

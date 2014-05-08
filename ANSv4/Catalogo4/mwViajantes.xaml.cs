@@ -25,7 +25,7 @@ namespace Catalogo
         private Catalogo.varios.FlashControl flash = null;
         private Catalogo._registrofaltantes.ucFaltante faltantes = null;
 
-        private bool _forcedToAutoHide;
+        //private bool _forcedToAutoHide;
 
         public mwViajantes()
         {
@@ -50,6 +50,8 @@ namespace Catalogo
                 this.dcRendiciones.Close();
                 this.xDevolucionesAreaDockC.Close();
                 this.xRegFaltantesAreaDockC.Close();
+                this.mnu_apertura.Visibility = System.Windows.Visibility.Collapsed;
+                this.mnu_config.Visibility = System.Windows.Visibility.Collapsed;
             }
 
             if (!Global01.AppActiva)
@@ -71,6 +73,7 @@ namespace Catalogo
                 //this.productDetalle.Height = 90;
 
             }
+
             this.Closing += mwViajantes_Closing;
             Catalogo.varios.NotificationCenter.instance.updateBanner += updateBanner;
             crearControlesProductos();
@@ -325,19 +328,19 @@ namespace Catalogo
             Catalogo.varios.SplashScreen.CloseSplashScreen();
         }
 
-        private void dockManager_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!_forcedToAutoHide)
-                return;
-            _forcedToAutoHide = false;
-            this.xContentMenu.Activate();
-            this.xContentMenu.ToggleAutoHide();
-        }
+        //private void dockManager_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (!_forcedToAutoHide)
+        //        return;
+        //    _forcedToAutoHide = false;
+        //    this.xContentMenu.Activate();
+        //    this.xContentMenu.ToggleAutoHide();
+        //}
 
         private void Window_Loaded_1(object sender, RoutedEventArgs e)
         {
             this.xContentMenu.ToggleAutoHide();
-            _forcedToAutoHide = true;
+            //_forcedToAutoHide = true;
         }
 
         private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
