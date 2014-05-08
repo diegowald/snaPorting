@@ -550,8 +550,11 @@ namespace Catalogo
                 sf = addSearchArea();
                 gv = addProductsArea();
                 ped = addPedidoArea();
-                dev = addDevolucionArea();
-                faltantes = addFaltantesArea();
+                if (!(Global01.miSABOR <= Global01.TiposDeCatalogo.Cliente | !Global01.AppActiva))
+                {
+                    dev = addDevolucionArea();
+                    faltantes = addFaltantesArea();
+                }
 
                 sf.attachReceptor(gv);
                 sf.attachReceptor2(gv);
@@ -559,10 +562,14 @@ namespace Catalogo
 
                 gv.attachReceptor(productDetalle);
                 gv.attachReceptor(ped);
-                gv.attachReceptor(dev);
+                if (!(Global01.miSABOR <= Global01.TiposDeCatalogo.Cliente | !Global01.AppActiva))
+                {
+                    gv.attachReceptor(dev);
+                    gv.attachReceptor3(dev);
+                }
                 gv.attachReceptor2(sf);
                 gv.attachReceptor3(ped);
-                gv.attachReceptor3(dev);
+                
             }
         }
 
@@ -664,7 +671,8 @@ namespace Catalogo
                 _productos.PorcentajeLinea f = new _productos.PorcentajeLinea();
                 f.ShowDialog();
                 f.Dispose();
-                f = null;                                
+                f = null;
+                gv.ocultarGrilla();
                 preload.Preloader.instance.refresh(true);
             }
             catch (Exception ex)
