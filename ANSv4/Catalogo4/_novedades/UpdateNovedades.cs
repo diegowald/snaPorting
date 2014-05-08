@@ -16,6 +16,7 @@ namespace Catalogo._novedades
         private string _MacAddress;
         private string _ipAddress;
 
+        private bool hacerRefresh = false;
         //    Public Event SincronizarNovedadesProgress(ByVal Detalle As String, ByVal Avance As Single, ByRef Cancel As Boolean)
         //    Public Event SincronizarNovedadesProgresoParcial(ByVal Detalle As String, ByVal Avance As Single, ByRef Cancel As Boolean)
 
@@ -80,7 +81,7 @@ namespace Catalogo._novedades
         {
             try
             {
-
+                hacerRefresh = false;
                 bool cancel = false;
 
                 if (_TranActiva== null)
@@ -152,7 +153,10 @@ namespace Catalogo._novedades
                     msg.progress1.first = "Sincronización de Novedades Finalizada";
                     msg.progress1.second = 100;
                     this.emitir(msg);
-                    this.emitir2("Hacer Refresh novedades");
+                    if (hacerRefresh)
+                    {
+                        this.emitir2("Hacer Refresh novedades");
+                    }
                 }
             }
             catch (Exception ex)
@@ -256,7 +260,7 @@ namespace Catalogo._novedades
 
                 long lastID = IdUltimaNovedad;
                 long cantImportada = 0;
-
+                hacerRefresh = (cantidadAImportar > 0);
 
                 while (restanImportar > 0)
                 {
