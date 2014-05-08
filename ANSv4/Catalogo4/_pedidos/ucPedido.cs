@@ -41,7 +41,6 @@ namespace Catalogo._pedidos
             else
             {
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
-                if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedValue = Global01.NroUsuario;
             }
             cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
 
@@ -49,9 +48,15 @@ namespace Catalogo._pedidos
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref nvDepositoCbo, "v_Deposito", "D_Dep", "IdDep", "ALL", "D_Dep", true, false, "NONE");
 
             Catalogo.varios.NotificationCenter.instance.attachReceptor2(this);
-            cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
+            if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente)
+            {
+                cboCliente.SelectedValue = Global01.NroUsuario;
+            }
+            else
+            {
+                cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
+            }
         }
-
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
