@@ -277,7 +277,8 @@ namespace Catalogo._productos
                 float pct = 1 + porcentajeLinea / 100;
                 foreach (DataRowView drv in dvProducts)
                 {
-                    drv["Precio"] = (float)drv["PrecioLista"] * pct;
+                    //drv["Precio"] = (float)drv["PrecioLista"] * pct;
+                    drv["Precio"] = string.Format("{0:N2}",float.Parse(drv["PrecioLista"].ToString()) * pct);
                 }
                 dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = Color.Red;
             }

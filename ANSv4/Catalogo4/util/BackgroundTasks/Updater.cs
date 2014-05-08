@@ -223,7 +223,7 @@ namespace Catalogo.util.BackgroundTasks
                     while (reader.Read())
                     {
                         fechas.Add(reader["F_Carga"].ToString());
-                        novedades.Add(reader["Novedad"].ToString());
+                        novedades.Add(reader["Tipo"].ToString() + " -- " + reader["Novedad"].ToString());
                         IDsClientes.Add(reader["IdCliente"].ToString());
                         IDs.Add(reader["ID"].ToString());
 

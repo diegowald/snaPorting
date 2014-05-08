@@ -39,11 +39,11 @@ namespace Catalogo.Funciones
                 e.KeyChar = ',';
             };
 
-            if (e.KeyChar == ',' & s.IndexOf(',') > 0 )
+            if (e.KeyChar == ',' & s.IndexOf(",") > 0 )
             {
                 e.Handled = true;
             }
-            else if (e.KeyChar == '.' & s.IndexOf('.') > 0)
+            else if (e.KeyChar == '.' & s.IndexOf(".") > 0)
             {
                 e.Handled = true;
             }

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Catalogo.Funciones.emitter_receiver;
+using System.Windows.Media;
 
 namespace Catalogo
 {
@@ -36,7 +37,7 @@ namespace Catalogo
 
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
-            //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
+            ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
 
             if (Global01.miSABOR <= Global01.TiposDeCatalogo.Cliente | !Global01.AppActiva)
             {
@@ -75,7 +76,6 @@ namespace Catalogo
             crearControlesProductos();
             Catalogo.varios.NotificationCenter.instance.refreshNovedades += refreshNovedades;
         }
-
 
         public void updateBanner(string filename)
         {
@@ -350,7 +350,8 @@ namespace Catalogo
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            //this.Close();
+            System.Windows.Application.Current.MainWindow.Close();
         }
 
         private void ChangeViewButton_Click(object sender, RoutedEventArgs e)
@@ -562,7 +563,6 @@ namespace Catalogo
                 gv.attachReceptor2(sf);
                 gv.attachReceptor3(ped);
                 gv.attachReceptor3(dev);
-
             }
         }
 
@@ -709,8 +709,6 @@ namespace Catalogo
                 dcNovedades.FontSize= 14;
                 //dcNovedades.SetValue(TextBlock.ForegroundProperty, "Red");
             }
-        }
-         
-
+        }         
     }
 }
