@@ -54,7 +54,7 @@ namespace Catalogo._novedades
 
         public void Cargar_Tips(string file)
         {
-            arrayTips = System.IO.File.ReadAllLines(file);
+            arrayTips = System.IO.File.ReadAllLines(file, Encoding.UTF7);
             mostrar_tip();
         }
 
