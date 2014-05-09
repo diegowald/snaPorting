@@ -219,17 +219,21 @@ namespace Catalogo.util.BackgroundTasks
                     List<string> novedades = new List<string>();
                     List<string> IDsClientes = new List<string>();
                     List<string> IDs = new List<string>();
+                    List<string> IDsViajantes = new List<string>();
+                    List<string> IDsTipos = new List<string>();
 
                     while (reader.Read())
                     {
                         fechas.Add(reader["F_Carga"].ToString());
-                        novedades.Add(reader["Tipo"].ToString() + " -- " + reader["Novedad"].ToString());
+                        novedades.Add(reader["Novedad"].ToString());
                         IDsClientes.Add(reader["IdCliente"].ToString());
                         IDs.Add(reader["ID"].ToString());
+                        IDsViajantes.Add(reader["IdViajante"].ToString());
+                        IDsTipos.Add(reader["IdTipo"].ToString());
 
                         if (fechas.Count == 10)
                         {
-                            if (envNovedades.enviarNovedadesEnBloques(fechas, novedades, IDsClientes))
+                            if (envNovedades.enviarNovedadesEnBloques(fechas, novedades, IDsClientes, IDsViajantes, IDsTipos))
                             {
                                 for (int i = 0; i < fechas.Count; i++)
                                 {
@@ -240,13 +244,15 @@ namespace Catalogo.util.BackgroundTasks
                             novedades.Clear();
                             IDsClientes.Clear();
                             IDs.Clear();
+                            IDsViajantes.Clear();
+                            IDsTipos.Clear();
                         }
                     }
 
                     //   Envio el resto de las auditorias que pueden haber quedado
                     if (fechas.Count != 0)
                     {
-                        if (envNovedades.enviarNovedadesEnBloques(fechas, novedades, IDsClientes))
+                        if (envNovedades.enviarNovedadesEnBloques(fechas, novedades, IDsClientes, IDsViajantes, IDsTipos))
                         {
                             for (int i = 0; i < fechas.Count; i++)
                             {

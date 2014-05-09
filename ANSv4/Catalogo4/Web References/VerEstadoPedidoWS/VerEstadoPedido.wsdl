@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="ObtenerEstado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDAns" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PedidoNro" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerEstadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerEstadoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerZonaCliente">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="IDAns" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ObtenerZonaClienteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ObtenerZonaClienteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ObtenerEstadoSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerEstado" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerEstadoSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerEstadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerZonaClienteSoapIn">
+    <wsdl:part name="parameters" element="tns:ObtenerZonaCliente" />
+  </wsdl:message>
+  <wsdl:message name="ObtenerZonaClienteSoapOut">
+    <wsdl:part name="parameters" element="tns:ObtenerZonaClienteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="VerEstadoPedidoSoap">
+    <wsdl:operation name="ObtenerEstado">
+      <wsdl:input message="tns:ObtenerEstadoSoapIn" />
+      <wsdl:output message="tns:ObtenerEstadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerZonaCliente">
+      <wsdl:input message="tns:ObtenerZonaClienteSoapIn" />
+      <wsdl:output message="tns:ObtenerZonaClienteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VerEstadoPedidoSoap" type="tns:VerEstadoPedidoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerEstado">
+      <soap:operation soapAction="http://tempuri.org/ObtenerEstado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerZonaCliente">
+      <soap:operation soapAction="http://tempuri.org/ObtenerZonaCliente" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="VerEstadoPedidoSoap12" type="tns:VerEstadoPedidoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerEstado">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerEstado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ObtenerZonaCliente">
+      <soap12:operation soapAction="http://tempuri.org/ObtenerZonaCliente" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VerEstadoPedido">
+    <wsdl:port name="VerEstadoPedidoSoap" binding="tns:VerEstadoPedidoSoap">
+      <soap:address location="http://190.3.78.12/wsOracle/VerEstadoPedido.asmx" />
+    </wsdl:port>
+    <wsdl:port name="VerEstadoPedidoSoap12" binding="tns:VerEstadoPedidoSoap12">
+      <soap12:address location="http://190.3.78.12/wsOracle/VerEstadoPedido.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

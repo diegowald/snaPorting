@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"                
         BorderThickness="0"
         ResizeMode="CanResize"  Icon="recursos/LOGO-ANS-32X32.ico" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFFFFF" >
-    
+
     <Border Grid.Row="0" x:Name="LayoutRoot" Background="White" BorderBrush="White" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">
         <Grid>
             <Grid.RowDefinitions>
@@ -74,7 +74,7 @@
                         Click="Exit"
                         />
                     </StackPanel>
-                    <StackPanel x:Name="topRedesSociales" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">                        
+                    <StackPanel x:Name="topRedesSociales" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                         <Button x:Name="btnYoutube" Height="27" Width="27"  Margin="0,0,4,0" Click="btnYoutube_Click" BorderThickness="0" Cursor="Hand" Style="{DynamicResource BorderlessButton}">
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
@@ -105,7 +105,7 @@
                             </Button.BorderBrush>
                             <Button.Background>
                                 <ImageBrush ImageSource="recursos/icnLinkedin.png" Stretch="Fill" TileMode="None" />
-                            </Button.Background>                            
+                            </Button.Background>
                         </Button>
                     </StackPanel>
                 </Grid>
@@ -130,14 +130,14 @@
                                             <RowDefinition Height="*"/>
                                             <RowDefinition Height="90"/>
                                         </Grid.RowDefinitions>
-                                        <Grid x:Name="grProductsArea" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"   Grid.Row="0"/>
-                                        <Grid x:Name="grProductsDetalle" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="1" Visibility="Visible">
-                                            <_productos:DetalleProducto x:Name="productDetalle" Visibility="Visible" />
+                                        <Grid x:Name="grProductsArea" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0"/>
+                                        <Grid x:Name="grProductsDetalle" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="1">
+                                            <_productos:DetalleProducto x:Name="productDetalle"/>
                                         </Grid>
                                     </Grid>
                                     <GridSplitter x:Name="grSpliter1" Grid.Row="2" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch" />
                                     <Grid x:Name="grPedidosDevolucionesArea" Grid.Row="3">
-                                        <ad:DocumentPane Name="xVtaDevDockP" SelectedIndex="0" ad:ResizingPanel.ResizeHeight="250">
+                                        <ad:DocumentPane Name="xVtaDevDockP" SelectedIndex="0" ad:ResizingPanel.ResizeHeight="250" ShowHeader="True" AllowDrop="False">
                                             <ad:DockableContent Title="Nota de Venta" Name="xNotaVentaAreaDockC" IsCloseable="False">
                                                 <Grid x:Name="grNotaVenta">
                                                     <Grid.RowDefinitions>
@@ -154,14 +154,14 @@
                                                     <Grid x:Name="xDevolucionArea" Grid.Row="0" />
                                                 </Grid>
                                             </ad:DockableContent>
-                                            <ad:DockableContent Title="Reg. Faltantes" Name="xRegFaltantesAreaDockC" IsCloseable="False">
+                                            <ad:DockableContent Title="Reg. de Novedades" Name="xRegFaltantesAreaDockC" IsCloseable="False">
                                                 <Grid x:Name="grRegFaltantes">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition  Height="*"/>
                                                     </Grid.RowDefinitions>
                                                     <Grid x:Name="xRegFaltantesArea" Grid.Row="0" />
                                                 </Grid>
-                                            </ad:DockableContent>                                            
+                                            </ad:DockableContent>
                                         </ad:DocumentPane>
                                     </Grid>
                                 </Grid>
@@ -223,7 +223,7 @@
                                 </Menu>
                             </ad:DockableContent>
                         </ad:DockablePane>
-                        
+
                     </ad:ResizingPanel>
                 </ad:ResizingPanel>
             </ad:DockingManager>

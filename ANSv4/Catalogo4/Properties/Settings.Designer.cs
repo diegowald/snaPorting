@@ -142,5 +142,15 @@ namespace Catalogo.Properties {
                 return ((string)(this["Catalogo_UpdateNovedadesCatalogoWS_CatalogoNovedades"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wsOracle/VerEstadoPedido.asmx")]
+        public string Catalogo_VerEstadoPedidoWS_VerEstadoPedido {
+            get {
+                return ((string)(this["Catalogo_VerEstadoPedidoWS_VerEstadoPedido"]));
+            }
+        }
     }
 }

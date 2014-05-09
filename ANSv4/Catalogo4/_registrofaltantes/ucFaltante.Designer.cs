@@ -38,18 +38,24 @@ namespace Catalogo._registrofaltantes
             this.btnVer = new System.Windows.Forms.Button();
             this.cboCliente = new System.Windows.Forms.ComboBox();
             this.CliNPnlMain = new System.Windows.Forms.Panel();
-            this.RFlistView = new System.Windows.Forms.ListView();
+            this.rflistView = new System.Windows.Forms.ListView();
             this.rfFechaLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.rfDetalleLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.rfIDLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.rfCliente = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.rfTipoLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.rfIdTipoLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.rIdClienteLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.rEnviadoLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CliNPnlTop = new System.Windows.Forms.Panel();
-            this.CliNidLbl = new System.Windows.Forms.Label();
-            this.CliNAgregarBtn = new System.Windows.Forms.Button();
-            this.CliNFechaDtp = new System.Windows.Forms.DateTimePicker();
+            this.rfTipoCbo = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.rfIDLbl = new System.Windows.Forms.Label();
+            this.rfAgregarBtn = new System.Windows.Forms.Button();
+            this.rfFechaDtp = new System.Windows.Forms.DateTimePicker();
             this.label13 = new System.Windows.Forms.Label();
-            this.CliNNovedadTxt = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.rfNovedadTxt = new System.Windows.Forms.TextBox();
+            this.rfDetalleLbl = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.ucPnlTop.SuspendLayout();
             this.CliNPnlMain.SuspendLayout();
@@ -66,9 +72,9 @@ namespace Catalogo._registrofaltantes
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 458);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 302);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(792, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(775, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
@@ -88,7 +94,7 @@ namespace Catalogo._registrofaltantes
             this.ucPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.ucPnlTop.Location = new System.Drawing.Point(0, 0);
             this.ucPnlTop.Name = "ucPnlTop";
-            this.ucPnlTop.Size = new System.Drawing.Size(792, 32);
+            this.ucPnlTop.Size = new System.Drawing.Size(775, 32);
             this.ucPnlTop.TabIndex = 5;
             // 
             // btnVer
@@ -113,7 +119,7 @@ namespace Catalogo._registrofaltantes
             this.cboCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCliente.FormattingEnabled = true;
-            this.cboCliente.Location = new System.Drawing.Point(402, 5);
+            this.cboCliente.Location = new System.Drawing.Point(385, 5);
             this.cboCliente.MaxDropDownItems = 16;
             this.cboCliente.Name = "cboCliente";
             this.cboCliente.Size = new System.Drawing.Size(368, 23);
@@ -123,37 +129,44 @@ namespace Catalogo._registrofaltantes
             // CliNPnlMain
             // 
             this.CliNPnlMain.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.CliNPnlMain.Controls.Add(this.RFlistView);
+            this.CliNPnlMain.Controls.Add(this.rflistView);
             this.CliNPnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CliNPnlMain.Enabled = false;
             this.CliNPnlMain.Location = new System.Drawing.Point(0, 88);
             this.CliNPnlMain.Name = "CliNPnlMain";
-            this.CliNPnlMain.Size = new System.Drawing.Size(792, 370);
+            this.CliNPnlMain.Size = new System.Drawing.Size(775, 214);
             this.CliNPnlMain.TabIndex = 8;
             // 
-            // RFlistView
+            // rflistView
             // 
-            this.RFlistView.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.RFlistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RFlistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.rflistView.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.rflistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rflistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.rfFechaLv,
             this.rfDetalleLv,
             this.rfIDLv,
-            this.rfCliente});
-            this.RFlistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RFlistView.FullRowSelect = true;
-            this.RFlistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.RFlistView.HideSelection = false;
-            this.RFlistView.Location = new System.Drawing.Point(6, 6);
-            this.RFlistView.MultiSelect = false;
-            this.RFlistView.Name = "RFlistView";
-            this.RFlistView.Size = new System.Drawing.Size(764, 317);
-            this.RFlistView.SmallImageList = this.imageList1;
-            this.RFlistView.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.RFlistView.TabIndex = 5;
-            this.RFlistView.Tag = "nada";
-            this.RFlistView.UseCompatibleStateImageBehavior = false;
-            this.RFlistView.View = System.Windows.Forms.View.Details;
+            this.rfCliente,
+            this.rfTipoLv,
+            this.rfIdTipoLv,
+            this.rIdClienteLv,
+            this.rEnviadoLv});
+            this.rflistView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rflistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rflistView.FullRowSelect = true;
+            this.rflistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.rflistView.HideSelection = false;
+            this.rflistView.Location = new System.Drawing.Point(0, 0);
+            this.rflistView.MultiSelect = false;
+            this.rflistView.Name = "rflistView";
+            this.rflistView.Size = new System.Drawing.Size(775, 214);
+            this.rflistView.SmallImageList = this.imageList1;
+            this.rflistView.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.rflistView.TabIndex = 5;
+            this.rflistView.Tag = "nada";
+            this.rflistView.UseCompatibleStateImageBehavior = false;
+            this.rflistView.View = System.Windows.Forms.View.Details;
+            this.rflistView.DoubleClick += new System.EventHandler(this.rflistView_DoubleClick);
+            this.rflistView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rflistView_KeyDown);
             // 
             // rfFechaLv
             // 
@@ -173,86 +186,126 @@ namespace Catalogo._registrofaltantes
             // rfCliente
             // 
             this.rfCliente.Text = "Cliente";
-            this.rfCliente.Width = 280;
+            this.rfCliente.Width = 220;
+            // 
+            // rfTipoLv
+            // 
+            this.rfTipoLv.Text = "Tipo";
+            this.rfTipoLv.Width = 40;
+            // 
+            // rfIdTipoLv
+            // 
+            this.rfIdTipoLv.Text = "IdTipo";
+            this.rfIdTipoLv.Width = 0;
+            // 
+            // rIdClienteLv
+            // 
+            this.rIdClienteLv.Text = "IdCliente";
+            this.rIdClienteLv.Width = 0;
+            // 
+            // rEnviadoLv
+            // 
+            this.rEnviadoLv.Text = "Enviado";
             // 
             // CliNPnlTop
             // 
             this.CliNPnlTop.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.CliNPnlTop.Controls.Add(this.CliNidLbl);
-            this.CliNPnlTop.Controls.Add(this.CliNAgregarBtn);
-            this.CliNPnlTop.Controls.Add(this.CliNFechaDtp);
+            this.CliNPnlTop.Controls.Add(this.rfTipoCbo);
+            this.CliNPnlTop.Controls.Add(this.label4);
+            this.CliNPnlTop.Controls.Add(this.rfIDLbl);
+            this.CliNPnlTop.Controls.Add(this.rfAgregarBtn);
+            this.CliNPnlTop.Controls.Add(this.rfFechaDtp);
             this.CliNPnlTop.Controls.Add(this.label13);
-            this.CliNPnlTop.Controls.Add(this.CliNNovedadTxt);
-            this.CliNPnlTop.Controls.Add(this.label14);
+            this.CliNPnlTop.Controls.Add(this.rfNovedadTxt);
+            this.CliNPnlTop.Controls.Add(this.rfDetalleLbl);
             this.CliNPnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.CliNPnlTop.Enabled = false;
             this.CliNPnlTop.Location = new System.Drawing.Point(0, 32);
             this.CliNPnlTop.Name = "CliNPnlTop";
-            this.CliNPnlTop.Size = new System.Drawing.Size(792, 56);
+            this.CliNPnlTop.Size = new System.Drawing.Size(775, 56);
             this.CliNPnlTop.TabIndex = 7;
             // 
-            // CliNidLbl
+            // rfTipoCbo
             // 
-            this.CliNidLbl.AutoSize = true;
-            this.CliNidLbl.Location = new System.Drawing.Point(613, 9);
-            this.CliNidLbl.Name = "CliNidLbl";
-            this.CliNidLbl.Size = new System.Drawing.Size(13, 13);
-            this.CliNidLbl.TabIndex = 65;
-            this.CliNidLbl.Text = "0";
-            this.CliNidLbl.Visible = false;
+            this.rfTipoCbo.FormattingEnabled = true;
+            this.rfTipoCbo.Location = new System.Drawing.Point(10, 27);
+            this.rfTipoCbo.Name = "rfTipoCbo";
+            this.rfTipoCbo.Size = new System.Drawing.Size(142, 21);
+            this.rfTipoCbo.TabIndex = 67;
+            this.rfTipoCbo.SelectedIndexChanged += new System.EventHandler(this.rfTipoCbo_SelectedIndexChanged);
             // 
-            // CliNAgregarBtn
+            // label4
             // 
-            this.CliNAgregarBtn.BackColor = System.Drawing.Color.Transparent;
-            this.CliNAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.CliNAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.CliNAgregarBtn.FlatAppearance.BorderSize = 0;
-            this.CliNAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
-            this.CliNAgregarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliNAgregarBtn.Location = new System.Drawing.Point(695, 25);
-            this.CliNAgregarBtn.Name = "CliNAgregarBtn";
-            this.CliNAgregarBtn.Size = new System.Drawing.Size(75, 25);
-            this.CliNAgregarBtn.TabIndex = 64;
-            this.CliNAgregarBtn.Text = "Agregar";
-            this.CliNAgregarBtn.UseVisualStyleBackColor = false;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 9);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 13);
+            this.label4.TabIndex = 66;
+            this.label4.Text = "Tipo";
             // 
-            // CliNFechaDtp
+            // rfIDLbl
             // 
-            this.CliNFechaDtp.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliNFechaDtp.CustomFormat = "dd/MM/yyyy";
-            this.CliNFechaDtp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliNFechaDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.CliNFechaDtp.Location = new System.Drawing.Point(569, 29);
-            this.CliNFechaDtp.Name = "CliNFechaDtp";
-            this.CliNFechaDtp.Size = new System.Drawing.Size(120, 21);
-            this.CliNFechaDtp.TabIndex = 17;
+            this.rfIDLbl.AutoSize = true;
+            this.rfIDLbl.Location = new System.Drawing.Point(757, 9);
+            this.rfIDLbl.Name = "rfIDLbl";
+            this.rfIDLbl.Size = new System.Drawing.Size(13, 13);
+            this.rfIDLbl.TabIndex = 65;
+            this.rfIDLbl.Text = "0";
+            this.rfIDLbl.Visible = false;
+            // 
+            // rfAgregarBtn
+            // 
+            this.rfAgregarBtn.BackColor = System.Drawing.Color.Transparent;
+            this.rfAgregarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.rfAgregarBtn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.rfAgregarBtn.FlatAppearance.BorderSize = 0;
+            this.rfAgregarBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray;
+            this.rfAgregarBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rfAgregarBtn.Location = new System.Drawing.Point(695, 25);
+            this.rfAgregarBtn.Name = "rfAgregarBtn";
+            this.rfAgregarBtn.Size = new System.Drawing.Size(75, 25);
+            this.rfAgregarBtn.TabIndex = 64;
+            this.rfAgregarBtn.Text = "Agregar";
+            this.rfAgregarBtn.UseVisualStyleBackColor = false;
+            this.rfAgregarBtn.Click += new System.EventHandler(this.rfAgregarBtn_Click);
+            // 
+            // rfFechaDtp
+            // 
+            this.rfFechaDtp.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rfFechaDtp.CustomFormat = "dd/MM/yyyy";
+            this.rfFechaDtp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rfFechaDtp.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.rfFechaDtp.Location = new System.Drawing.Point(591, 27);
+            this.rfFechaDtp.Name = "rfFechaDtp";
+            this.rfFechaDtp.Size = new System.Drawing.Size(98, 21);
+            this.rfFechaDtp.TabIndex = 17;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(566, 11);
+            this.label13.Location = new System.Drawing.Point(588, 11);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(37, 13);
             this.label13.TabIndex = 16;
             this.label13.Text = "Fecha";
             // 
-            // CliNNovedadTxt
+            // rfNovedadTxt
             // 
-            this.CliNNovedadTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CliNNovedadTxt.Location = new System.Drawing.Point(6, 29);
-            this.CliNNovedadTxt.MaxLength = 255;
-            this.CliNNovedadTxt.Name = "CliNNovedadTxt";
-            this.CliNNovedadTxt.Size = new System.Drawing.Size(557, 21);
-            this.CliNNovedadTxt.TabIndex = 3;
+            this.rfNovedadTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rfNovedadTxt.Location = new System.Drawing.Point(169, 27);
+            this.rfNovedadTxt.MaxLength = 255;
+            this.rfNovedadTxt.Name = "rfNovedadTxt";
+            this.rfNovedadTxt.Size = new System.Drawing.Size(394, 21);
+            this.rfNovedadTxt.TabIndex = 3;
             // 
-            // label14
+            // rfDetalleLbl
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 11);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(188, 13);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "Producto (Código; Línea; Descripción)";
+            this.rfDetalleLbl.AutoSize = true;
+            this.rfDetalleLbl.Location = new System.Drawing.Point(166, 11);
+            this.rfDetalleLbl.Name = "rfDetalleLbl";
+            this.rfDetalleLbl.Size = new System.Drawing.Size(63, 13);
+            this.rfDetalleLbl.TabIndex = 0;
+            this.rfDetalleLbl.Text = "Descripción";
             // 
             // ucFaltante
             // 
@@ -264,7 +317,7 @@ namespace Catalogo._registrofaltantes
             this.Controls.Add(this.ucPnlTop);
             this.Controls.Add(this.statusStrip1);
             this.Name = "ucFaltante";
-            this.Size = new System.Drawing.Size(792, 480);
+            this.Size = new System.Drawing.Size(775, 324);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ucPnlTop.ResumeLayout(false);
@@ -285,17 +338,23 @@ namespace Catalogo._registrofaltantes
         private System.Windows.Forms.ComboBox cboCliente;
         private System.Windows.Forms.Button btnVer;
         private System.Windows.Forms.Panel CliNPnlMain;
-        private System.Windows.Forms.ListView RFlistView;
+        private System.Windows.Forms.ListView rflistView;
         private System.Windows.Forms.ColumnHeader rfFechaLv;
         private System.Windows.Forms.ColumnHeader rfDetalleLv;
         private System.Windows.Forms.ColumnHeader rfIDLv;
         private System.Windows.Forms.ColumnHeader rfCliente;
         private System.Windows.Forms.Panel CliNPnlTop;
-        private System.Windows.Forms.Label CliNidLbl;
-        private System.Windows.Forms.Button CliNAgregarBtn;
-        private System.Windows.Forms.DateTimePicker CliNFechaDtp;
+        private System.Windows.Forms.Label rfIDLbl;
+        private System.Windows.Forms.Button rfAgregarBtn;
+        private System.Windows.Forms.DateTimePicker rfFechaDtp;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox CliNNovedadTxt;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox rfNovedadTxt;
+        private System.Windows.Forms.Label rfDetalleLbl;
+        private System.Windows.Forms.ColumnHeader rfTipoLv;
+        private System.Windows.Forms.ComboBox rfTipoCbo;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ColumnHeader rfIdTipoLv;
+        private System.Windows.Forms.ColumnHeader rIdClienteLv;
+        private System.Windows.Forms.ColumnHeader rEnviadoLv;
     }
 }

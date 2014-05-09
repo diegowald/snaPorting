@@ -644,7 +644,9 @@ namespace Catalogo._productos
 
         internal void ocultarGrilla()
         {
-            dataGridView1.Visible = false;
+            dataGridView1.ClearSelection();
+            dataGridView1.Visible = false;            
         }
+
     }
 }

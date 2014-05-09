@@ -75,22 +75,24 @@ namespace Catalogo.ClientesNovedadesWs {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ClientesNovedades", RequestElementName="ClientesNovedades", RequestNamespace="http://tempuri.org/", ResponseElementName="ClientesNovedadesResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("ClientesNovedadesResult")]
-        public long CallClientesNovedades(string MacAddress, string Fechas, string Novedades, string Clientes) {
+        public long CallClientesNovedades(string MacAddress, string Fechas, string Novedades, string Clientes, string Viajantes, string Tipos) {
             object[] results = this.Invoke("CallClientesNovedades", new object[] {
                         MacAddress,
                         Fechas,
                         Novedades,
-                        Clientes});
+                        Clientes,
+                        Viajantes,
+                        Tipos});
             return ((long)(results[0]));
         }
         
         /// <remarks/>
-        public void CallClientesNovedadesAsync(string MacAddress, string Fechas, string Novedades, string Clientes) {
-            this.CallClientesNovedadesAsync(MacAddress, Fechas, Novedades, Clientes, null);
+        public void CallClientesNovedadesAsync(string MacAddress, string Fechas, string Novedades, string Clientes, string Viajantes, string Tipos) {
+            this.CallClientesNovedadesAsync(MacAddress, Fechas, Novedades, Clientes, Viajantes, Tipos, null);
         }
         
         /// <remarks/>
-        public void CallClientesNovedadesAsync(string MacAddress, string Fechas, string Novedades, string Clientes, object userState) {
+        public void CallClientesNovedadesAsync(string MacAddress, string Fechas, string Novedades, string Clientes, string Viajantes, string Tipos, object userState) {
             if ((this.CallClientesNovedadesOperationCompleted == null)) {
                 this.CallClientesNovedadesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallClientesNovedadesOperationCompleted);
             }
@@ -98,7 +100,9 @@ namespace Catalogo.ClientesNovedadesWs {
                         MacAddress,
                         Fechas,
                         Novedades,
-                        Clientes}, this.CallClientesNovedadesOperationCompleted, userState);
+                        Clientes,
+                        Viajantes,
+                        Tipos}, this.CallClientesNovedadesOperationCompleted, userState);
         }
         
         private void OnCallClientesNovedadesOperationCompleted(object arg) {

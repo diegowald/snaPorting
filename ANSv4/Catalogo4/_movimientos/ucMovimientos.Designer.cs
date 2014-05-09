@@ -31,6 +31,7 @@ namespace Catalogo._movimientos
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.PnlTop = new System.Windows.Forms.Panel();
@@ -41,6 +42,7 @@ namespace Catalogo._movimientos
             this.EnviarBtn = new System.Windows.Forms.Button();
             this.paEnviosCbo = new System.Windows.Forms.ComboBox();
             this.movDataGridView = new System.Windows.Forms.DataGridView();
+            this.Estado = new System.Windows.Forms.DataGridViewButtonColumn();
             this.statusStrip1.SuspendLayout();
             this.PnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.movDataGridView)).BeginInit();
@@ -175,6 +177,8 @@ namespace Catalogo._movimientos
             this.movDataGridView.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.movDataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.movDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.movDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Estado});
             this.movDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.movDataGridView.GridColor = System.Drawing.SystemColors.Control;
             this.movDataGridView.Location = new System.Drawing.Point(0, 37);
@@ -186,6 +190,23 @@ namespace Catalogo._movimientos
             this.movDataGridView.TabIndex = 6;
             this.movDataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.movDataGridView_CellContentDoubleClick);
             this.movDataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.movDataGridView_KeyDown);
+            // 
+            // Estado
+            // 
+            this.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Transparent;
+            this.Estado.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Estado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Estado.HeaderText = "Estado";
+            this.Estado.MinimumWidth = 20;
+            this.Estado.Name = "Estado";
+            this.Estado.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Estado.Text = "E";
+            this.Estado.ToolTipText = "ver Estado";
+            this.Estado.Visible = false;
+            this.Estado.Width = 26;
             // 
             // ucMovimientos
             // 
@@ -220,5 +241,6 @@ namespace Catalogo._movimientos
         private System.Windows.Forms.DataGridView movDataGridView;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewButtonColumn Estado;
     }
 }

@@ -146,7 +146,7 @@ namespace Catalogo._recibos
 
         private void CargarClienteNovedades()
         {
-            DataTable dt = Catalogo.Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "tblClientesNovedades", "Tipo<>'faltante' and IDCliente=" + cboCliente.SelectedValue.ToString(), "F_Carga DESC");
+            DataTable dt = Catalogo.Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "tblClientesNovedades", "IdTipo=4 and IDCliente=" + cboCliente.SelectedValue.ToString(), "F_Carga DESC");
 
             CliNlistView.Visible = false;
             CliNlistView.Items.Clear();
@@ -1718,7 +1718,7 @@ namespace Catalogo._recibos
                 }
                 else
                 {
-                    ClientesNovedades_add(Int16.Parse(cboCliente.SelectedValue.ToString()), CliNFechaDtp.Value, CliNNovedadTxt.Text.ToUpper(), ref xID);
+                    ClientesNovedades_add(Int16.Parse(cboCliente.SelectedValue.ToString()), CliNFechaDtp.Value, CliNNovedadTxt.Text.ToUpper(),4, ref xID);
 
                     ListViewItem ItemX = new ListViewItem(string.Format("{0:dd/MM/yyyy}", CliNFechaDtp.Value));                 
                     ItemX.BackColor = ((CliNlistView.Items.Count % 2 == 0) ? Color.White : ItemX.BackColor = System.Drawing.SystemColors.Control);
@@ -1733,7 +1733,7 @@ namespace Catalogo._recibos
             }
         }
 
-        private void ClientesNovedades_add(int pIdCliente,DateTime pFecha, string pNovedad, ref int pID)
+        private void ClientesNovedades_add(int pIdCliente, DateTime pFecha, string pNovedad, byte pTipo, ref int pID)
         {
             try
             {
@@ -1742,8 +1742,8 @@ namespace Catalogo._recibos
                 cmd.Parameters.Add("pIdCliente", System.Data.OleDb.OleDbType.Integer).Value = pIdCliente;
                 cmd.Parameters.Add("pF_Carga", System.Data.OleDb.OleDbType.Date).Value = pFecha;
                 cmd.Parameters.Add("pNovedad", System.Data.OleDb.OleDbType.VarChar, 64).Value = pNovedad;
-                cmd.Parameters.Add("pTipo", System.Data.OleDb.OleDbType.VarChar, 10).Value = "novedad";
-                
+                cmd.Parameters.Add("pTipo", System.Data.OleDb.OleDbType.TinyInt).Value = pTipo;
+                    
                 cmd.Connection = Global01.Conexion;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.CommandText = "usp_ClientesNovedades_add";

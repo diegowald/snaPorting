@@ -35,6 +35,7 @@ namespace Catalogo._productos
             txtDetalle.Visibility = System.Windows.Visibility.Hidden;
             imgIzquierda.Visibility = System.Windows.Visibility.Hidden;
             imgDerecha.Visibility = System.Windows.Visibility.Hidden;
+            btnImagenAmpliada.Visibility = System.Windows.Visibility.Hidden;
 
             if (dato != null)
             {
@@ -126,6 +127,7 @@ namespace Catalogo._productos
                 txtDetalle.Visibility = System.Windows.Visibility.Visible;
                 imgIzquierda.Visibility = System.Windows.Visibility.Visible;
                 imgDerecha.Visibility = System.Windows.Visibility.Visible;
+                btnImagenAmpliada.Visibility = System.Windows.Visibility.Visible;
             }
 
         }
