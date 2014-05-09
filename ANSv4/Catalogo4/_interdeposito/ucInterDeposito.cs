@@ -38,9 +38,17 @@ namespace Catalogo._interdeposito
             else
             {
                 Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
-                if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedValue = Global01.NroUsuario;
             }
             cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
+
+            if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente)
+            {
+                cboCliente.SelectedValue = Global01.NroUsuario;
+            }
+            else
+            {
+                cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
+            }
 
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref bdBancoCbo, "tblBancosDepositosCtas", "BancoCta", "ID", "Activo=0", "Format([ID],'000') & ' - ' & tblBancosDepositosCtas.Nombre", true, false, "Format([ID],'000') & ' - ' & tblBancosDepositosCtas.Nombre AS BancoCta, ID");            
         

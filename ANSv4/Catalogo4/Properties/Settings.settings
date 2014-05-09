@@ -38,5 +38,8 @@
     <Setting Name="Catalogo_UpdateNovedadesCatalogoWS_CatalogoNovedades" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://190.3.78.12/wscatalogo4/catalogonovedades.asmx</Value>
     </Setting>
+    <Setting Name="Catalogo_VerEstadoPedidoWS_VerEstadoPedido" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://190.3.78.12/wsOracle/VerEstadoPedido.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

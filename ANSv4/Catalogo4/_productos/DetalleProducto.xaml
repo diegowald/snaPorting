@@ -16,7 +16,7 @@
         </Grid.ColumnDefinitions>
         <Image Margin="25,3,0,3" HorizontalAlignment="Left" VerticalAlignment="Center"  x:Name="imgIzquierda" Grid.Column="0" Stretch="UniformToFill"/>
         <TextBlock Margin="0,3,0,3" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Name="txtDetalle" Grid.Column="1" />
-        <Button Grid.Column="2" Margin="0,3,25,3" HorizontalAlignment="Right"  VerticalAlignment="Center" Click="Button_Click_1">
+        <Button x:Name="btnImagenAmpliada" Grid.Column="2" Margin="0,3,25,3" HorizontalAlignment="Right"  VerticalAlignment="Center" Click="Button_Click_1">
             <Image x:Name="imgDerecha" Stretch="UniformToFill"/>
         </Button>
         <!--<Image Margin="0,3,25,3" HorizontalAlignment="Right"  VerticalAlignment="Center"   x:Name="imgDerecha" Grid.Column="2" Stretch="UniformToFill"/>-->

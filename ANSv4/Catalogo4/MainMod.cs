@@ -66,8 +66,8 @@ namespace Catalogo
         private static void lanzarProcesosSegundoPlano()
         {
             /// ELIMINAR ESTE CODIGO
-            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblNovedadLeido WHERE IdNovedad > 21");
-            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM ansNovedades WHERE ID > 21");
+            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblNovedadLeido WHERE IdNovedad > 16");
+            //Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM ansNovedades WHERE ID > 16");
             /// 
 
             Catalogo.util.BackgroundTasks.ChequeoNovedades check = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
@@ -445,11 +445,11 @@ namespace Catalogo
         public static void inicializaGlobales()
         {
 
-            //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
-            Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+            Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+            //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
  
             Global01.NoConn = false;
-            Global01.VersionApp = (int)(Global01.miSABOR) + ".3.2.0";
+            Global01.VersionApp = (int)(Global01.miSABOR) + ".3.2.0"; //".4.0.1";
 
             Global01.Conexion = null;
             //Global01.TranActiva_ = null;

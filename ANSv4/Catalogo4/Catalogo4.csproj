@@ -163,6 +163,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\VerEstadoPedidoWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="_auditor\Auditor.cs" />
     <Compile Include="forms\frmReporte.cs">
       <SubType>Form</SubType>
@@ -204,8 +209,9 @@
     </Compile>
     <Compile Include="util\ListViewItemComparer.cs" />
     <Compile Include="util\singleton.cs" />
-    <Compile Include="_clientesNovedades\ClientesNovedades.cs" />
-    <Compile Include="_clientesNovedades\EnvioClientesNovedades.cs" />
+    <Compile Include="_clientesNovedades\EnvioClientesNovedades.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="_devoluciones\Devolucion.cs" />
     <Compile Include="_devoluciones\DevolucionItem.cs" />
     <Compile Include="_devoluciones\ucDevolucion.cs">
@@ -298,8 +304,16 @@
       <DependentUpon>ucTips.cs</DependentUpon>
     </Compile>
     <Compile Include="_novedades\UpdateNovedades.cs" />
+    <Compile Include="_pedidos\EstadoPedido.cs" />
     <Compile Include="_pedidos\Pedido.cs" />
     <Compile Include="_pedidos\PedidoItem.cs" />
+    <Compile Include="_pedidos\EstadoPedidoMostrar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_pedidos\EstadoPedidoMostrar.designer.cs">
+      <DependentUpon>EstadoPedidoMostrar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_pedidos\VerEstado.cs" />
     <Compile Include="_preferencias\CheckBoxINI.xaml.cs">
       <DependentUpon>CheckBoxINI.xaml</DependentUpon>
     </Compile>
@@ -510,6 +524,9 @@
     <EmbeddedResource Include="_novedades\ucTips.resx">
       <DependentUpon>ucTips.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="_pedidos\EstadoPedidoMostrar.resx">
+      <DependentUpon>EstadoPedidoMostrar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="_pedidos\ucPedido.resx">
       <DependentUpon>ucPedido.cs</DependentUpon>
     </EmbeddedResource>
@@ -606,6 +623,11 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\VerEstadoPedidoWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\VerEstadoPedidoWS\VerEstadoPedido.wsdl" />
     <None Include="Web References\VerExistenciaWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -778,6 +800,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Catalogo_UpdateClientesWS_UpdateClientes</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsOracle/VerEstadoPedido.asmx%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\VerEstadoPedidoWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsOracle/VerEstadoPedido.asmx%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo_VerEstadoPedidoWS_VerEstadoPedido</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://190.3.78.12/wsOracle/VerExistencia.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\VerExistenciaWS\</RelPath>
@@ -832,6 +865,18 @@
     <Resource Include="recursos\icnTwitter.png" />
     <Resource Include="recursos\icnLinkedin.png" />
     <Resource Include="recursos\icnFacebook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="recursos\a-procesar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="recursos\en-espera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="recursos\en-proceso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="recursos\en-transporte.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

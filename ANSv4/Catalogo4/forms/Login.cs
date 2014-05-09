@@ -39,7 +39,7 @@ namespace Catalogo.varios
             else
             {
                 btnIngresar.Enabled = true;
-                chkActualizarClientes.Enabled = true;
+                if (Global01.AppActiva) { chkActualizarClientes.Enabled = true; }
             }
         }
 
@@ -97,13 +97,13 @@ namespace Catalogo.varios
                 if (txtPIN.Text.Trim().ToUpper() == txtPIN2.Text.Trim().ToUpper())
                 {
                     btnIngresar.Enabled = true;
-                    chkActualizarClientes.Enabled = true;
+                    if (Global01.AppActiva) { chkActualizarClientes.Enabled = true; }
                     txtPIN2.Enabled = false;
                     btnNuevo.Enabled = false;
                     Global01.pin = Codificar(txtPIN.Text);
                     Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE appConfig SET PIN='" + Codificar(txtPIN.Text.Trim().ToUpper()) + "'");
                     MessageBox.Show("PIN generado con éxito!", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    btnIngresar_Click(null,null); 
+                    //btnIngresar_Click(null,null); 
                 }
                 else 
                 {

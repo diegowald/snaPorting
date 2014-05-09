@@ -7,12 +7,10 @@ namespace Catalogo._clientesNovedades
 {
     public class EnvioClientesNovedades
     {
-
         private string _MacAddress;
         private string _ipAddress;
         private ClientesNovedadesWs.ClientesNovedades cliente;
         private bool webServiceInicializado;
-
 
         public bool inicializado
         {
@@ -52,12 +50,13 @@ namespace Catalogo._clientesNovedades
             }
         }
 
-
-        public bool enviarNovedadesEnBloques(System.Collections.Generic.List<string> fechas, System.Collections.Generic.List<string> novedades, System.Collections.Generic.List<string> clientes)
+        public bool enviarNovedadesEnBloques(System.Collections.Generic.List<string> fechas, System.Collections.Generic.List<string> novedades, System.Collections.Generic.List<string> clientes, System.Collections.Generic.List<string> viajantes, System.Collections.Generic.List<string> tipos)
         {
             string sFechas;
             string sNovedades;
             string sClientes;
+            string sViajantes;
+            string sTipos;
 
             sFechas = "";
             sNovedades = "";
@@ -66,10 +65,12 @@ namespace Catalogo._clientesNovedades
             sFechas = string.Join(";", fechas.ToArray());
             sNovedades = string.Join(";", novedades.ToArray());
             sClientes = string.Join(";", clientes.ToArray());
+            sViajantes = string.Join(";", viajantes.ToArray());
+            sTipos = string.Join(";", tipos.ToArray());
 
             if (sFechas.Length > 0)
             {
-                long resultado = cliente.CallClientesNovedades(_MacAddress, sFechas, sNovedades, sClientes);
+                long resultado = cliente.CallClientesNovedades(_MacAddress, sFechas, sNovedades, sClientes, sViajantes, sTipos);
                 return resultado == 0;
             }
             else

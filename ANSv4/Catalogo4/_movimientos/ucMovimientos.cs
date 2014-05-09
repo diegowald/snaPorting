@@ -19,10 +19,14 @@ namespace Catalogo._movimientos
         {
             InitializeComponent();
 
-            if (!Global01.AppActiva | Global01.Conexion==null)
+            if (!Global01.AppActiva | Global01.Conexion == null)
             {
                 this.Dispose();
             }
+
+            //movDataGridView.RowPostPaint += OnRowPostPaint;
+
+            movDataGridView.CellPainting += OnCellPainting;
 
             cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
             if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
@@ -77,6 +81,8 @@ namespace Catalogo._movimientos
         {
             movDataGridView.Visible = false;
 
+            movDataGridView.Columns["Estado"].Visible = false;
+
             Int16 xClienteSelected = 0;
             if (cboCliente.SelectedValue != null) xClienteSelected = Int16.Parse(cboCliente.SelectedValue.ToString());
 
@@ -114,6 +120,10 @@ namespace Catalogo._movimientos
                         //if (movDataGridView.Columns.Count > 0) // Add Checkbox column only when records are present.
                         //    AddCheckBoxColumn();
                     }
+                    if (paEnviosCbo.Text.ToString().ToUpper() == "ENVIADOS")
+                    {
+                        movDataGridView.Columns["Estado"].Visible = true;
+                    }
                     else
                     {
                         movDataGridView.Columns["Selec"].Visible = false;
@@ -125,32 +135,29 @@ namespace Catalogo._movimientos
             }
         }
 
-
-        //private void AddCheckBoxColumn()
-        //{
-        //    DataGridViewCheckBoxColumn doWork = new DataGridViewCheckBoxColumn();
-        //    doWork.Name = "Select";
-        //    doWork.HeaderText = "Selec.";
-        //    doWork.FalseValue = 0;
-        //    doWork.TrueValue = 1;
-        //    movDataGridView.Columns.Insert(0, doWork);
-        //}
-
         private void movDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (Global01.AppActiva)
                 {
-
                     DataGridViewCell cell = movDataGridView[e.ColumnIndex, e.RowIndex];
-
                     if (cell != null)
                     {
                         DataGridViewRow row = cell.OwningRow;
                         if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "NOTA")
                         {
-                            _pedidos.ucPedido.Pedido_Imprimir(row.Cells["Nro"].Value.ToString());
+                            if ((paEnviosCbo.SelectedIndex == 1) && (e.ColumnIndex == 0))
+                            {
+                                Catalogo.util.BackgroundTasks.EstadoPedido Estado = new util.BackgroundTasks.EstadoPedido(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico);
+                                Estado.onCancelled += EstadoPedidoCancelled;
+                                Estado.onFinished += EstadoPedidoFinished;
+                                Estado.getEstado(row.Cells["Nro"].Value.ToString(), Global01.NroUsuario, cell);
+                            }
+                            else
+                            {
+                                _pedidos.ucPedido.Pedido_Imprimir(row.Cells["Nro"].Value.ToString());
+                            }        
                         }
                         else if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "RECI")
                         {
@@ -167,7 +174,7 @@ namespace Catalogo._movimientos
                         if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "REND")
                         {
                             _rendiciones.ucRendiciones.Rendicion_Imprimir(row.Cells["Nro"].Value.ToString());
-                        }
+                        }                        
                     }
                 }
             }
@@ -239,12 +246,11 @@ namespace Catalogo._movimientos
             {
                 if (Global01.AppActiva)
                 {
-
                     if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
                     {
                         if (movDataGridView.SelectedRows != null && movDataGridView.SelectedRows.Count > 0)
                         {
-                            if (MessageBox.Show("Tiene movimientos que aun no ha enviado. ¿QUIERE ENVIARLOS AHORA?", "Envio de Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if (MessageBox.Show("Debe estar conectado a Internet. ¿QUIERE ENVIARLOS AHORA?", "Envio de Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
                                 System.Collections.Generic.List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO> filtro = new List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>();
 
@@ -292,7 +298,106 @@ namespace Catalogo._movimientos
         {
            cboCliente.SelectedValue = dato;
         }
+  
+        void OnCellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex == 0 && e.RowIndex > -1)
+            {
+                System.Windows.Forms.DataGridViewCell cell = movDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                if (cell != null)
+                {
+                    Brush brush;
 
+                    if (cell.Tag != null)
+                    {
+                        string Estado = (string)cell.Tag;
+                        switch (Estado)
+                        {
+                            case "x":
+                                brush = Brushes.Red;
+                                break;
+                            case "y":
+                                brush = Brushes.Yellow;
+                                break;
+                            case "?":
+                                brush = Brushes.Green;
+                                break;
+                            default:
+                                if (Estado.Trim().Length > 3)
+                                {
+                                    brush = Brushes.Cyan;
+                                }
+                                else
+                                {
+                                    brush = Brushes.DarkGray;
+                                }
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        // aca hay que dibujar sin informacion
+                        brush = Brushes.DarkGray;
+                    }
+
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+                    Rectangle rect = e.CellBounds;
+                    rect.Inflate(-5, -4);
+                    e.Graphics.FillEllipse(brush, rect);
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void EstadoPedidoCancelled(System.Windows.Forms.DataGridViewCell cell)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void EstadoPedidoFinished(string PedidoNro, string resultado, System.Windows.Forms.DataGridViewCell cell)
+        {
+            if (resultado.IndexOf(";") > 0)
+            {
+                bool xMostrar = false;
+
+                string[] stringSeparators = new string[] { ";" };
+                string[] aResultado = resultado.Split(stringSeparators, StringSplitOptions.None);
+                cell.Tag = aResultado[0];
+
+                if (aResultado[0].Trim().Length > 3)
+                {
+                    cell.ToolTipText = ((Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) ? aResultado[0] : "");
+                }
+                else
+                {
+                    switch (aResultado[0])
+                    {
+                        case "x":
+                            cell.ToolTipText = "E3 -" + aResultado[1]; 
+                            break;
+                        case "y":
+                            cell.ToolTipText = "E2 -" + aResultado[1]; 
+                            break;
+                        case "?":
+                            cell.ToolTipText = "E1 -" + aResultado[1];
+                            xMostrar = true;
+                            break;
+                    }
+                }
+
+                if (xMostrar)
+                {
+                    _pedidos.EstadoPedidoMostrar fEstadoPedido = new _pedidos.EstadoPedidoMostrar();
+
+                    fEstadoPedido.EstadoMsg = cell.ToolTipText.ToString();
+
+                    fEstadoPedido.ShowDialog();
+                    fEstadoPedido.Dispose();
+                    fEstadoPedido = null;
+                };
+
+            }
+        }
 
      } //fin clase
 } //fin namespace

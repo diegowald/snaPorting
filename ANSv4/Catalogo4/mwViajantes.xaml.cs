@@ -36,7 +36,8 @@ namespace Catalogo
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
             //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
             ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-
+            //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FF00CC"));
+            
             if (Global01.miSABOR <= Global01.TiposDeCatalogo.Cliente | !Global01.AppActiva)
             {
                 this.dcRecibos.IsCloseable = true;
@@ -65,11 +66,9 @@ namespace Catalogo
 
                 this.appMenu.Visibility = System.Windows.Visibility.Collapsed;
 
-                //this.grProductosArea.Height = 400;
-                this.grProductsArea.Height = 310;
-                this.grProductsDetalle.Height = 90;
-                //this.productDetalle.Height = 90;
-
+                this.grProductosArea.Height = 400;                
+                this.grProductsArea.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                this.grProductsDetalle.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
             }
 
             this.Closing += mwViajantes_Closing;
@@ -395,7 +394,7 @@ namespace Catalogo
                 if (movimientos.preguntoAlSalir())
                 {
                     // Si hay movimientos pendientes pregunto si quiere enviarlos
-                    System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show("Tiene movimientos que aun no ha enviado. ¿QUIERE ENVIARLOS AHORA?", "ENVIO DE MOVIMIENTOS", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question);
+                    System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show("Debe estar conectado a Internet. ¿QUIERE ENVIARLOS AHORA?", "Envio de Movimientos", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question);
                     switch (result)
                     {
                         case System.Windows.Forms.DialogResult.Yes:
@@ -417,16 +416,10 @@ namespace Catalogo
                             break;
                         case System.Windows.Forms.DialogResult.No:
                             {
-                                if (Global01.miSABOR != Global01.TiposDeCatalogo.Invitado &&
-                                    Global01.miSABOR != Global01.TiposDeCatalogo.Cliente &&
-                                    Funciones.modINIs.ReadINI("DATOS", "EEA", "1") == "1")
+                                if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente && Funciones.modINIs.ReadINI("DATOS", "EEA", "1") == "1")
                                 {
-                                    //Aca tiene que ir tambien el proceso que envia al server las transacciones.
                                     Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, 0, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
                                     envioMovs.run();
-                                    //                    If Len(Trim(Dir(vg.Path & "\monitorE.exe"))) > 0 Then
-                                    //                        Shell vg.Path & "\monitorE.exe", vbHide
-                                    //                    End If
                                 }
                             }
                             break;
@@ -610,6 +603,8 @@ namespace Catalogo
             createHotKey(Key.D, ModifierKeys.Control, verResumenEvt);
             createHotKey(Key.P, ModifierKeys.Control, cambioPctEvt);
             createHotKey(Key.Z, ModifierKeys.Control, checkRregAppEvt);
+            createHotKey(Key.R, ModifierKeys.Control, verDetalleProductoEvt);
+            createHotKey(Key.T, ModifierKeys.Control, verTotalPedidoEvt);
         }
 
         private void createHotKey(System.Windows.Input.Key key, System.Windows.Input.ModifierKeys modifier, ExecutedRoutedEventHandler handler)
@@ -627,6 +622,51 @@ namespace Catalogo
                 doEvents();
                 sf.Focus();
                 this.sf.FocusOnSearch();
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+        }
+
+        private void verDetalleProductoEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                if (dockPane.SelectedIndex == 0)
+                {
+                    //if (productDetalle.Visibility == System.Windows.Visibility.Visible)
+                    if (grProductsDetalle.Height == 90)
+                    {
+                        //productDetalle.Visibility = System.Windows.Visibility.Hidden;                      
+                        grProductsDetalle.Height = 0;
+                        grProductosArea.RowDefinitions[1].Height = System.Windows.GridLength.Auto;
+                    }
+                    else
+                    {
+                        //productDetalle.Visibility = System.Windows.Visibility.Visible;
+                        grProductsDetalle.Height = 90;
+                    }
+                    grProductsArea.VerticalAlignment = System.Windows.VerticalAlignment.Stretch; 
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+        }
+
+
+        private void verTotalPedidoEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                if (dockPane.SelectedIndex == 0)
+                {
+                    ped.verTotal();
+                }
             }
             catch (Exception ex)
             {
