@@ -149,7 +149,7 @@ namespace Catalogo._movimientos
                         {
                             if ((paEnviosCbo.SelectedIndex == 1) && (e.ColumnIndex == 0))
                             {
-                                Catalogo.util.BackgroundTasks.EstadoPedido Estado = new util.BackgroundTasks.EstadoPedido(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+                                Catalogo.util.BackgroundTasks.EstadoPedido Estado = new util.BackgroundTasks.EstadoPedido(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico);
                                 Estado.onCancelled += EstadoPedidoCancelled;
                                 Estado.onFinished += EstadoPedidoFinished;
                                 Estado.getEstado(row.Cells["Nro"].Value.ToString(), Global01.NroUsuario, cell);
@@ -358,6 +358,8 @@ namespace Catalogo._movimientos
         {
             if (resultado.IndexOf(";") > 0)
             {
+                bool xMostrar = false;
+
                 string[] stringSeparators = new string[] { ";" };
                 string[] aResultado = resultado.Split(stringSeparators, StringSplitOptions.None);
                 cell.Tag = aResultado[0];
@@ -377,10 +379,23 @@ namespace Catalogo._movimientos
                             cell.ToolTipText = "E2 -" + aResultado[1]; 
                             break;
                         case "?":
-                            cell.ToolTipText = "E1 -" + aResultado[1]; 
+                            cell.ToolTipText = "E1 -" + aResultado[1];
+                            xMostrar = true;
                             break;
                     }
                 }
+
+                if (xMostrar)
+                {
+                    _pedidos.EstadoPedidoMostrar fEstadoPedido = new _pedidos.EstadoPedidoMostrar();
+
+                    fEstadoPedido.EstadoMsg = cell.ToolTipText.ToString();
+
+                    fEstadoPedido.ShowDialog();
+                    fEstadoPedido.Dispose();
+                    fEstadoPedido = null;
+                };
+
             }
         }
 

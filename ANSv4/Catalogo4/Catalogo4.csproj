@@ -307,6 +307,12 @@
     <Compile Include="_pedidos\EstadoPedido.cs" />
     <Compile Include="_pedidos\Pedido.cs" />
     <Compile Include="_pedidos\PedidoItem.cs" />
+    <Compile Include="_pedidos\EstadoPedidoMostrar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_pedidos\EstadoPedidoMostrar.designer.cs">
+      <DependentUpon>EstadoPedidoMostrar.cs</DependentUpon>
+    </Compile>
     <Compile Include="_pedidos\VerEstado.cs" />
     <Compile Include="_preferencias\CheckBoxINI.xaml.cs">
       <DependentUpon>CheckBoxINI.xaml</DependentUpon>
@@ -517,6 +523,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_novedades\ucTips.resx">
       <DependentUpon>ucTips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_pedidos\EstadoPedidoMostrar.resx">
+      <DependentUpon>EstadoPedidoMostrar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_pedidos\ucPedido.resx">
       <DependentUpon>ucPedido.cs</DependentUpon>
@@ -857,7 +866,18 @@
     <Resource Include="recursos\icnLinkedin.png" />
     <Resource Include="recursos\icnFacebook.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="recursos\a-procesar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="recursos\en-espera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="recursos\en-proceso.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="recursos\en-transporte.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
