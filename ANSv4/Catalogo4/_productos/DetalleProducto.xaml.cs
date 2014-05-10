@@ -39,6 +39,9 @@ namespace Catalogo._productos
 
             if (dato != null)
             {
+                string xTipo = dato.Cells["Tipo"].Value.ToString();
+                bool xOferta = (dato.Cells["Control"].Value.ToString() == "O");
+
                 txtDetalle.TextWrapping = TextWrapping.Wrap;
                 txtDetalle.Margin = new Thickness(5);
                 txtDetalle.Inlines.Add(new Run(dato.Cells["linea"].Value.ToString() + " - " + dato.Cells["C_Producto"].Value.ToString()) { FontWeight = FontWeights.Bold });
@@ -70,14 +73,29 @@ namespace Catalogo._productos
                 txtDetalle.Inlines.Add(new Run("Precio: ") { FontWeight = FontWeights.Bold });
                 txtDetalle.Inlines.Add(new Run(dato.Cells["precio"].Value.ToString()) { Foreground = Brushes.Red });
 
-                txtDetalle.Inlines.Add(new Run("  Precio de Oferta: ") { FontWeight = FontWeights.Bold });
-                txtDetalle.Inlines.Add(new Run(dato.Cells["preciooferta"].Value.ToString()) { Foreground = Brushes.Red });
-                txtDetalle.Inlines.Add(new Run("  Mínimo de oferta: ") { FontWeight = FontWeights.Bold });
-                txtDetalle.Inlines.Add(new Run(dato.Cells["ofertacantidad"].Value.ToString() + " unidades") { Foreground = Brushes.Blue });
-                txtDetalle.Inlines.Add(new Run("  -EN OFERTA-") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, Foreground = Brushes.Red });
-                txtDetalle.Inlines.Add(new Run("  -NUEVO-") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, Foreground = Brushes.Red });
-                txtDetalle.Inlines.Add(new Run("  Rotación: ") { FontWeight = FontWeights.Bold });
-                txtDetalle.Inlines.Add(new Run(dato.Cells["Abc"].Value.ToString()) { Foreground = Brushes.Blue });
+                if (xOferta)
+                {
+                    txtDetalle.Inlines.Add(new Run("  Precio de Oferta: ") { FontWeight = FontWeights.Bold });
+                    txtDetalle.Inlines.Add(new Run(dato.Cells["preciooferta"].Value.ToString()) { Foreground = Brushes.Red });
+                    txtDetalle.Inlines.Add(new Run("  Mínimo de oferta: ") { FontWeight = FontWeights.Bold });
+                    txtDetalle.Inlines.Add(new Run(dato.Cells["ofertacantidad"].Value.ToString() + " unidades") { Foreground = Brushes.Blue });
+                    txtDetalle.Inlines.Add(new Run("  -EN OFERTA-") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, Foreground = Brushes.Red });
+                }
+
+                if (xTipo == "prod_n")
+                {
+                    txtDetalle.Inlines.Add(new Run("  -NUEVO-") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, Foreground = Brushes.Red });
+                }
+                else if (xTipo == "apli_n")
+                {
+                    txtDetalle.Inlines.Add(new Run("  -APLI. NUEVA-") { FontWeight = FontWeights.Bold, FontStyle = FontStyles.Italic, Foreground = Brushes.Red });
+                }
+                
+                if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente)
+                {
+                    txtDetalle.Inlines.Add(new Run("  Rotación: ") { FontWeight = FontWeights.Bold });
+                    txtDetalle.Inlines.Add(new Run(dato.Cells["Abc"].Value.ToString()) { Foreground = Brushes.Blue });
+                }
 
                 string ImgLineaDefault = Global01.AppPath + "\\imagenes\\default.jpg";
                 string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
@@ -102,7 +120,7 @@ namespace Catalogo._productos
                     {
                         try
                         {
-                            if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "0") == "1")
+                            if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "1") == "1")
                             {
                                 descargarImagenUpdate(ImgProductoWeb, ImgProducto); //, dato);
                             }
