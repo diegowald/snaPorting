@@ -212,6 +212,7 @@ namespace Catalogo._devoluciones
 
             _ToolTip.SetToolTip(btnIniciar, "INICIAR Devolución");
 
+            paEnviosCbo.SelectedIndex = 2;
             ObtenerMovimientos();
         }
 

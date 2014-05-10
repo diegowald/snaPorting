@@ -65,7 +65,6 @@ namespace Catalogo._productos
 
         public GridViewFilter2()
         {
-
             InitializeComponent();
 
             dataGridView1.RowPostPaint += OnRowPostPaint;
@@ -76,7 +75,6 @@ namespace Catalogo._productos
             preload.Preloader.instance.productos.onWorkFinished += dataReady;
 
             xCargarDataControl();
-
         }
 
         public void onRecibir(string dato)
@@ -145,8 +143,10 @@ namespace Catalogo._productos
             dataGridView1.ColumnCount = 28;
 
             //Add Columns
+
             dataGridView1.Columns[(int)CCol.cSemaforo].Name = "Existencia";
             dataGridView1.Columns[(int)CCol.cSemaforo].HeaderText = "Existencia";
+            if (Global01.AppActiva) dataGridView1.Columns[(int)CCol.cSemaforo].Visible = true;
 
             dataGridView1.Columns[(int)CCol.cCodigo].Name = "C_Producto";
             dataGridView1.Columns[(int)CCol.cCodigo].HeaderText = "Código";
@@ -328,7 +328,6 @@ namespace Catalogo._productos
             {
                 this.emitir(null);
             };
-  
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -352,7 +351,6 @@ namespace Catalogo._productos
                     this.emitir(null);
                 }
             }
-
         }
 
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -380,58 +378,6 @@ namespace Catalogo._productos
                 throw ex;  //util.errorHandling.ErrorForm.show();
             }
         }
-
-        //private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (e.ColumnIndex == (int)CCol.cSemaforo)
-        //        {
-
-        //            DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
-
-        //            if (cell != null)
-        //            {
-        //                DataGridViewRow row = cell.OwningRow;
-        //                Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
-        //                existencia.onCancelled += ExistenciaCancelled;
-        //                existencia.onFinished += ExistenciaFinished;
-        //                existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        util.errorHandling.ErrorLogger.LogMessage(ex);
-        //        throw ex;  //util.errorHandling.ErrorForm.show();
-        //    }
-        //}
-
-        //private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (e.ColumnIndex == (int)CCol.cSemaforo)
-        //        {
-
-        //            DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
-
-        //            if (cell != null)
-        //            {
-        //                DataGridViewRow row = cell.OwningRow;
-        //                Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
-        //                existencia.onCancelled += ExistenciaCancelled;
-        //                existencia.onFinished += ExistenciaFinished;
-        //                existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        util.errorHandling.ErrorLogger.LogMessage(ex);
-        //        throw ex;  //util.errorHandling.ErrorForm.show();
-        //    }
-        //}
 
         private void ExistenciaCancelled(System.Windows.Forms.DataGridViewCell cell)
         {
@@ -532,8 +478,7 @@ namespace Catalogo._productos
         }
 
         void OnRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-   
+        {   
             string s = " ";
             Color xColor = Color.Black;
             string xTipo = dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cTipo].Value.ToString();
@@ -640,7 +585,6 @@ namespace Catalogo._productos
                 dataGridView1.Select();
             }
         }
-
 
         internal void ocultarGrilla()
         {

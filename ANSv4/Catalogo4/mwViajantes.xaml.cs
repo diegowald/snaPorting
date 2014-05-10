@@ -29,14 +29,20 @@ namespace Catalogo
         {
             this.Hide();
             InitializeComponent();
+            
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
+            if (System.Windows.Forms.SystemInformation.VirtualScreen.Height < 768) MaximizeButton_Click(null, null);
 
             setHotKeys();
             this.iSB2.Content = "Catálogo Dígital de Productos - " + Global01.VersionApp + " - " + Global01.ApellidoNombre + " (" + Global01.NroUsuario + ") - " + string.Format("{0:dd/MM/yyyy HH:mm}", Global01.F_ActCatalogo) + " - (" + Global01.MiBuild + "." + Global01.ListaPrecio + ")";
 
+
+            //gris = #CFD1D2
+            // rosa = #FF00CC
+            // blanco = 
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
-            //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#CFD1D2"));
             ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-            //ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FF00CC"));
             
             if (Global01.miSABOR <= Global01.TiposDeCatalogo.Cliente | !Global01.AppActiva)
             {
@@ -66,9 +72,12 @@ namespace Catalogo
 
                 this.appMenu.Visibility = System.Windows.Visibility.Collapsed;
 
-                this.grProductosArea.Height = 400;                
-                this.grProductsArea.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-                this.grProductsDetalle.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                //this.grProductosArea.Height = 400;   
+                //this.grProductsArea.Height = 400;
+                //this.grProductsDetalle.Height = 90;
+                //this.grProductsArea.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                //this.grProductsDetalle.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                //this.grProductosArea.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
             }
 
             this.Closing += mwViajantes_Closing;
@@ -315,7 +324,7 @@ namespace Catalogo
             }
             else
             {
-                this.header.Height = 90;
+                this.header.Height = 100;
                 topRedesSociales.Visibility = System.Windows.Visibility.Visible;
                 topBanner.Visibility = System.Windows.Visibility.Visible;
                 topLogo.Visibility = System.Windows.Visibility.Visible;
@@ -567,6 +576,10 @@ namespace Catalogo
             {
                 mov = addMovimientosArea();
             }
+            else
+            {
+                mov.actualizarMovimientos();
+            }
         }
 
         private void crearControlesNovedades()
@@ -637,7 +650,7 @@ namespace Catalogo
                 if (dockPane.SelectedIndex == 0)
                 {
                     //if (productDetalle.Visibility == System.Windows.Visibility.Visible)
-                    if (grProductsDetalle.Height == 90)
+                    if (grProductsDetalle.Height == 100)
                     {
                         //productDetalle.Visibility = System.Windows.Visibility.Hidden;                      
                         grProductsDetalle.Height = 0;
@@ -646,7 +659,7 @@ namespace Catalogo
                     else
                     {
                         //productDetalle.Visibility = System.Windows.Visibility.Visible;
-                        grProductsDetalle.Height = 90;
+                        grProductsDetalle.Height = 100;
                     }
                     grProductsArea.VerticalAlignment = System.Windows.VerticalAlignment.Stretch; 
                 }

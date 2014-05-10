@@ -102,6 +102,10 @@ namespace Catalogo._productos
                     {
                         try
                         {
+                            if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "0") == "1")
+                            {
+                                descargarImagenUpdate(ImgProductoWeb, ImgProducto); //, dato);
+                            }
                             imgDerecha.Source = new BitmapImage(new Uri(ImgProducto, UriKind.Absolute));
                         }
                         catch
@@ -113,9 +117,9 @@ namespace Catalogo._productos
                     {
                         imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
 
-                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "0") == "1")
+                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenNueva", "1") == "1")
                         {
-                            descargarImagen(ImgProductoWeb, ImgProducto, dato);
+                            descargarImagenNueva(ImgProductoWeb, ImgProducto); //, dato);
                         }
                     }
                 }
@@ -132,7 +136,7 @@ namespace Catalogo._productos
 
         }
 
-        private void descargarImagen(string Origen, string Destino, System.Windows.Forms.DataGridViewRow dato)
+        private void descargarImagenNueva(string Origen, string Destino) //, System.Windows.Forms.DataGridViewRow dato)
         {
             if (!isImageDownloading(Destino) && canDownloadNewImage())
             {
@@ -160,6 +164,39 @@ namespace Catalogo._productos
                     util.errorHandling.ErrorLogger.LogMessage(wex);
                 }
             }
+        }
+
+        private void descargarImagenUpdate(string Origen, string Destino) //, System.Windows.Forms.DataGridViewRow dato)
+        {
+                try
+                {
+                    string xModified_Time_File = "2000-12-01 23:59";
+            
+                    xModified_Time_File = Funciones.oleDbFunciones.Comando(Global01.Conexion,"SELECT Modified_Time FROM ansImagenes WHERE Full_Path='" + Destino.Replace(Global01.AppPath,"") + "'","Modified_Time",false,null);
+                    if (xModified_Time_File.Trim().Length > 0)
+                    {
+                        if (System.IO.File.Exists(Destino))
+                        {
+                            System.IO.FileInfo fi = new System.IO.FileInfo(Destino);
+                            string fiModified_Time = fi.LastWriteTime.Date.ToString("yyyy-MM-dd HH:mm");
+                            if (DateTime.Parse(xModified_Time_File) > DateTime.Parse(fiModified_Time))
+                            {
+                                descargarImagenNueva(Origen, Destino); //, dato);
+                            }
+                        }
+                    }
+
+                }
+                catch (System.Web.HttpException ex)
+                {
+                    //throw ex;
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+                }
+                catch (System.Net.WebException wex)
+                {
+                    //throw wex;
+                    util.errorHandling.ErrorLogger.LogMessage(wex);
+                }
         }
 
         private bool isValidImage(string fileName)

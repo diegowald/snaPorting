@@ -720,7 +720,8 @@ namespace Catalogo._recibos
             adTotalDeducirAlRestoLbl.Text = string.Format("{0:N2}", 0);
             apTotalPercepcionLbl.Text = string.Format("{0:N2}", 0);
             raImporteTotalLbl.Text = string.Format("{0:N2}", 0);
-            
+
+            paEnviosCbo.SelectedIndex = 2;
             ObtenerMovimientos();
 
             //cboEnvios_Click();

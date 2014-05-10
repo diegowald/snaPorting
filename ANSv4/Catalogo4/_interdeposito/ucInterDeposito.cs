@@ -276,7 +276,7 @@ namespace Catalogo._interdeposito
             _ToolTip.SetToolTip(btnIniciar, "INICIAR InterDeposito Nuevo");
 
             LimpiarIngresosValores();
-
+            paEnviosCbo.SelectedIndex = 2;
             ObtenerMovimientos();
 
             //cboEnvios_Click();

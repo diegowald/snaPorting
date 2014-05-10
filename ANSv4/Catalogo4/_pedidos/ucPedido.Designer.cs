@@ -397,7 +397,6 @@ namespace Catalogo._pedidos
             this.paDataGridView.Location = new System.Drawing.Point(3, 45);
             this.paDataGridView.MultiSelect = false;
             this.paDataGridView.Name = "paDataGridView";
-            this.paDataGridView.ReadOnly = true;
             this.paDataGridView.RowHeadersWidth = 4;
             this.paDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.paDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -417,7 +416,6 @@ namespace Catalogo._pedidos
             this.Estado.HeaderText = "Estado";
             this.Estado.MinimumWidth = 20;
             this.Estado.Name = "Estado";
-            this.Estado.ReadOnly = true;
             this.Estado.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Estado.Text = "E";
             this.Estado.ToolTipText = "ver Estado";

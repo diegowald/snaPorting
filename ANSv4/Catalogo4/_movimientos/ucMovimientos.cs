@@ -113,20 +113,16 @@ namespace Catalogo._movimientos
 
                     movDataGridView.AutoGenerateColumns = true;
                     movDataGridView.DataSource = dt;
+                    movDataGridView.Columns["Selec"].Width = 30;
+                    movDataGridView.Columns["Selec"].Visible = false;
                     
-                    if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
-                    {
-                        movDataGridView.Columns["Selec"].Visible = true;
-                        //if (movDataGridView.Columns.Count > 0) // Add Checkbox column only when records are present.
-                        //    AddCheckBoxColumn();
-                    }
                     if (paEnviosCbo.Text.ToString().ToUpper() == "ENVIADOS")
                     {
                         movDataGridView.Columns["Estado"].Visible = true;
                     }
-                    else
+                    else if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
                     {
-                        movDataGridView.Columns["Selec"].Visible = false;
+                        movDataGridView.Columns["Selec"].Visible = true;
                     }
 
                     movDataGridView.Refresh();
@@ -397,6 +393,12 @@ namespace Catalogo._movimientos
                 };
 
             }
+        }
+        
+        internal void actualizarMovimientos()
+        {
+            paEnviosCbo.SelectedIndex = 2;
+            ObtenerMovimientos();
         }
 
      } //fin clase
