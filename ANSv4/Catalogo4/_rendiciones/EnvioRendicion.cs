@@ -33,8 +33,6 @@ namespace Catalogo._rendiciones
 
         private string m_DetalleRecibos;
 
-        private bool DatosObtenidos;
-
         private System.Data.OleDb.OleDbConnection Conexion1;
 
         public EnvioRendicion(System.Data.OleDb.OleDbConnection conexcion, string ipAddress, string MacAddress)
@@ -51,8 +49,6 @@ namespace Catalogo._rendiciones
 
         public void ObtenerDatos(string NroRendicion)
         {
-            DatosObtenidos = false;
-
             System.Data.OleDb.OleDbDataReader Ren = null;
             System.Data.OleDb.OleDbDataReader RenValores = null;
             System.Data.OleDb.OleDbDataReader RenRecibos = null;
@@ -114,8 +110,6 @@ namespace Catalogo._rendiciones
             Ren = null;
             RenValores = null;
             RenRecibos = null;
-
-            DatosObtenidos = true;
 
         }
 

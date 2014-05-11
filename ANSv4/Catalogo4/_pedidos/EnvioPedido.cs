@@ -22,8 +22,6 @@ namespace Catalogo._pedidos
         private string _Transporte;
         private string _Detalle;
 
-        private bool DatosObtenidos;
-
         private System.Data.OleDb.OleDbConnection Conexion1;
 
         public EnvioPedido(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string MacAddress)
@@ -43,8 +41,6 @@ namespace Catalogo._pedidos
 
         public void obtenerDatos(string NroPedido)
         {
-            DatosObtenidos = false;
-
             System.Data.OleDb.OleDbDataReader enc = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Pedido_Enc '" + NroPedido + "'");
             System.Data.OleDb.OleDbDataReader det = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Pedido_Det '" + NroPedido + "'");
 
@@ -70,7 +66,6 @@ namespace Catalogo._pedidos
                 }
             }
 
-            DatosObtenidos = true;
         }
 
         public long enviarPedido()

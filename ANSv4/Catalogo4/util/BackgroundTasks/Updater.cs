@@ -28,8 +28,6 @@ namespace Catalogo.util.BackgroundTasks
 
         private UpdateType _modo;
  
-        private string resultMessage;
-        private bool result;
 
         public override void execute(ref bool cancel)
         {
@@ -126,8 +124,6 @@ namespace Catalogo.util.BackgroundTasks
             : base("Updater", jobType)
         {
             _modo = modo;
-            result = true;
-            resultMessage = "";
         }
 
         private void enviarAuditoria2EnBloques()

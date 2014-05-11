@@ -22,7 +22,6 @@ namespace Catalogo._novedades
         }
 
         private int dataRowCount = 0;
-        private bool dataGridIdle = false;
         private DataTable dtNovedades = new DataTable();
         private DataView dvNovedades = new DataView();
 
@@ -74,7 +73,6 @@ namespace Catalogo._novedades
 
         private void loadDataGridView()
         {
-            dataGridIdle = false;
 
             // If rows in grid already exist, clear them
             dgvNovedades.DataSource = null;
@@ -212,8 +210,6 @@ namespace Catalogo._novedades
             // Bind Datagrid view to the DataView
             dgvNovedades.DataSource = dvNovedades;
             dgvNovedades.Refresh();
-
-            dataGridIdle = true;
 
             if (dataRowCount > 0)
             {

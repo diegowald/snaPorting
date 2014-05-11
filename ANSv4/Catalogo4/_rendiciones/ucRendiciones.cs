@@ -45,7 +45,7 @@ namespace Catalogo._rendiciones
 
         private struct TVariablesDelFormulario
         {
-            public bool miError;
+            //public bool miError;
             public int ID;
             public bool escape;
             public System.Data.OleDb.OleDbDataReader DR;

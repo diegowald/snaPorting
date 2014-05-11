@@ -30,7 +30,6 @@ namespace Catalogo._recibos
         private string _Facturas = "";
         private string _NotasCredito = "";
 
-        private bool DatosObtenidos;
         private System.Data.OleDb.OleDbConnection Conexion1;
 
         public EnvioRecibo(System.Data.OleDb.OleDbConnection Conexion, string ipAddress, string MacAddress)
@@ -51,8 +50,6 @@ namespace Catalogo._recibos
 
         public void obtenerDatos(string nroRecibo)
         {
-            DatosObtenidos = false;
-
             System.Data.OleDb.OleDbDataReader Enc = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_Enc '" + nroRecibo + "'");
             System.Data.OleDb.OleDbDataReader Det = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_Det '" + nroRecibo + "'");
             System.Data.OleDb.OleDbDataReader Fac = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_App '" + nroRecibo + "'");
@@ -170,8 +167,6 @@ namespace Catalogo._recibos
             Fac = null;
             nCre = null;
 
-
-            DatosObtenidos = true;
 
         }
 
