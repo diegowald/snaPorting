@@ -222,7 +222,7 @@ namespace Catalogo._pedidos
 
                             nvSimilarChk.Checked = false;
                             nvEsOfertaChk.Checked = false;
-                            nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
+                            nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
                             PedidoTab.SelectedIndex = 0;
                             PedidoTab.Visible = true;
                         }
@@ -240,7 +240,7 @@ namespace Catalogo._pedidos
                                 //if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
                                 nvSimilarChk.Checked = false;
                                 nvEsOfertaChk.Checked = false;
-                                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
+                                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
                             }
                         }
 
@@ -643,7 +643,7 @@ namespace Catalogo._pedidos
                     TotalPedido();
                     nvSimilarChk.Checked = false;
                     nvEsOfertaChk.Checked = false;
-                    nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
+                    nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
 
                 }
             }
@@ -699,11 +699,12 @@ namespace Catalogo._pedidos
 
         public static void Pedido_Imprimir(string NroPedido)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             string sReporte = "";
 
             if ((int)Global01.miSABOR >= 3)
             {
-                //sReporte = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\reportes\Pedido_Enc4.rpt";
                sReporte = Global01.AppPath + "\\Reportes\\Pedido_Enc3.rpt";
             }
             else
@@ -905,7 +906,7 @@ namespace Catalogo._pedidos
 
                 nvSimilarChk.Checked = false;
                 nvEsOfertaChk.Checked = false;
-                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
+                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
                 PedidoTab.SelectedIndex = 0;
                 PedidoTab.Visible = true;
 

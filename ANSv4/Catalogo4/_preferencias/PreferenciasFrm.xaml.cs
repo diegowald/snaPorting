@@ -41,17 +41,36 @@ namespace Catalogo._preferencias
 
         private void createAndLoadCheckboxes()
         {
-            addCheckBox("Confirma Salida", "DATOS", "ConfirmaSalida", "1", "0", "1", true, password);
-            addCheckBox("EEA", "DATOS", "EEA", "1", "0", "1");
-            addCheckBox("Es gerente", "DATOS", "EsGerente", "1", "0", "0");
-            addCheckBox("Pedido NE", "DATOS", "PedidoNE", "1", "0", "1");
-            addCheckBox("Devolucion NE", "DATOS", "DevolucionNE", "1", "0", "0");
-            addCheckBox("Deposito", "PREFERENCIAS", "Deposito", "1", "0", "1");
-            addCheckBox("Solo Catalogo", "DATOS", "SoloCatalogo", "true", "false", "false");
-            addCheckBox("Usar Proxy", "DATOS", "proxy", "1", "0", "0");
-            addEditBox("IP", "DATOS", "IP");
-            addCheckBox("Descargar imagenes actualizadas", "DATOS", "chkImagenUpdate", "1", "0", "1");
-            addCheckBox("ICC", "DATOS", "ICC", "1", "0", "0");
+            string sValorActual = "0";
+
+            sValorActual = Funciones.modINIs.ReadINI("DATOS", "ConfirmaSalida", "1");
+            addCheckBox("Confirma Salida", "DATOS", "ConfirmaSalida", "1", "0",sValorActual, false, password);
+
+            sValorActual = Funciones.modINIs.ReadINI("DATOS", "EEA", "1");
+            addCheckBox("Envio Electrónico Automático", "DATOS", "EEA", "1", "0", sValorActual, true, password);
+
+            sValorActual = Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0");
+            addCheckBox("Es gerente", "DATOS", "EsGerente", "1", "0", sValorActual, true, password);
+
+            sValorActual = Funciones.modINIs.ReadINI("DATOS", "PedidoNE", "0");
+            addCheckBox("Usar Pedido NO Enviado", "DATOS", "PedidoNE", "1", "0", sValorActual, false, password);
+
+            sValorActual = Funciones.modINIs.ReadINI("DATOS", "Deposito", "0");
+            addEditBox("Depósito", "DATOS", "Deposito", sValorActual, false, password);
+
+            sValorActual = Funciones.modINIs.ReadINI("DATOS", "Deposito", "0");
+            addCheckBox("Descargar imagenes actualizadas", "DATOS", "chkImagenUpdate", "1", "0", sValorActual, false, password);
+
+            sValorActual = Funciones.modINIs.ReadINI("DATOS", "Deposito", "0");
+            addCheckBox("Descargar imagenes actualizadas", "DATOS", "chkImagenNueva", "1", "0", sValorActual, false, password);
+
+            //addCheckBox("Devolucion NE", "DATOS", "DevolucionNE", "1", "0", "0");
+            //addCheckBox("Deposito", "PREFERENCIAS", "Deposito", "1", "0", "1");
+            //addCheckBox("Solo Catalogo", "DATOS", "SoloCatalogo", "true", "false", "false");
+            //addCheckBox("Usar Proxy", "DATOS", "proxy", "1", "0", "0");
+            //addEditBox("IP", "DATOS", "IP");
+            //addCheckBox("ICC", "DATOS", "ICC", "1", "0", "0");
+
             if (doLoad != null)
             {
                 doLoad();

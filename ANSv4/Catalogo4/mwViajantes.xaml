@@ -75,6 +75,15 @@
                         />
                     </StackPanel>
                     <StackPanel x:Name="topRedesSociales" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button x:Name="btnCartilla" Height="27" Width="27"  Margin="0,0,4,0" Click="btnCartilla_Click" BorderThickness="0" Cursor="Hand" Style="{DynamicResource BorderlessButton}">
+                            <Button.BorderBrush>
+                                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
+                            </Button.BorderBrush>
+                            <Button.Background>
+                                <ImageBrush ImageSource="recursos/icnCartilla.png" Stretch="Fill" TileMode="None" />
+                            </Button.Background>
+                        </Button>
+
                         <Button x:Name="btnYoutube" Height="27" Width="27"  Margin="0,0,4,0" Click="btnYoutube_Click" BorderThickness="0" Cursor="Hand" Style="{DynamicResource BorderlessButton}">
                             <Button.BorderBrush>
                                 <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}"/>
@@ -216,7 +225,7 @@
                             <ad:DockableContent Name="xContentMenu" Title="Menú">
                                 <Menu x:Name="appMenu" Background="White">
                                     <MenuItem x:Name="mnu_web" Header="Sitio web de ANS" Click="xMenu1_web"/>
-                                    <MenuItem x:Name="mnu_revista" Header="Revista Dígital" Click="xMenu1_revista"/>
+                                    <MenuItem x:Name="mnu_revista" Header="Cartilla del Mes" Click="xMenu1_revista"/>
                                     <MenuItem x:Name="mnu_apertura" Header="Apertura Cta. Cte." Click="xMenu1_CtaCte"/>
                                     <MenuItem x:Name="mnu_porcentaje" Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
                                     <MenuItem x:Name="mnu_config" Header="Configuración Aplic." Click="xMenu1_AppConfig"/>

@@ -426,9 +426,10 @@ namespace Catalogo._interdeposito
 
         public static void InterDeposito_Imprimir(string NroInterDeposito)
         {
+            Cursor.Current = Cursors.WaitCursor;
+            
             string sReporte = Global01.AppPath + "\\Reportes\\InterDeposito1.rpt";
-            //string sReporte = @"D:\Desarrollos\GitHub\snaPorting\ANSv4\Catalogo4\reportes\InterDeposito1.rpt";
-
+      
             ReportDocument oReport = new ReportDocument();
 
             oReport.Load(sReporte);

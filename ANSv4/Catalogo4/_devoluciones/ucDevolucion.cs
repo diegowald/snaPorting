@@ -169,8 +169,8 @@ namespace Catalogo._devoluciones
                         IniciarDevolucion();
                         HabilitarDevolucion();
 
-                        devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
-                        devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
+                        devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                        devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
 
                         DevolucionTab.SelectedIndex = 0;
                         DevolucionTab.Visible = true;
@@ -188,8 +188,8 @@ namespace Catalogo._devoluciones
 
                             //cboCliente.SelectedIndex = 0;
 
-                            devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
-                            devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
+                            devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                            devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
                         }
                     }
 
@@ -444,8 +444,8 @@ namespace Catalogo._devoluciones
                 devMflistView.Items.Clear();
                 devMnlistView.Items.Clear();
 
-                devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));
-                devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("Preferencias", "Deposito", "0"));  
+                devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));  
             }
 
 
@@ -507,6 +507,8 @@ namespace Catalogo._devoluciones
 
         public static void Devolucion_Imprimir(string NroDevolucion)
         {
+            Cursor.Current = Cursors.WaitCursor;
+ 
             string sReporte = "";
 
             sReporte = Global01.AppPath + "\\Reportes\\Devolucion_Enc3.rpt";

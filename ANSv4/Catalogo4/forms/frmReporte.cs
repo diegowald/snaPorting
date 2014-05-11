@@ -45,6 +45,7 @@ namespace Catalogo.varios
             Cursor.Current = Cursors.Default;
             crViewer1.Visible = true;
             crViewer1.Show(); //.Refresh();
+            Cursor.Current = Cursors.Default;
         }
 
         private void btnVerPDF_Click(object sender, EventArgs e)

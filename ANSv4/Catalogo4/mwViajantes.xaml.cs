@@ -448,7 +448,7 @@ namespace Catalogo
 
         private void xMenu1_revista(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.autonauticasur-r.com.ar/revista/vigente/index2.html");
+            System.Diagnostics.Process.Start("http://www.autonauticasur-r.com.ar/revista/vigente/index3.html");
         }
 
         private void xMenu1_CtaCte(object sender, RoutedEventArgs e)
@@ -588,6 +588,11 @@ namespace Catalogo
             {
                 nov = addNovedadesArea();
             }
+        }
+
+        private void btnCartilla_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.autonauticasur-r.com.ar/revista/vigente/index3.html");
         }
 
         private void btnYoutube_Click(object sender, RoutedEventArgs e)

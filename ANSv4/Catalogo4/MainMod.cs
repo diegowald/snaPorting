@@ -273,8 +273,8 @@ namespace Catalogo
 
             //- Registro y activación -------------XX
         AcaRegistro:
-            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            if (false)
+            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            //if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -342,7 +342,7 @@ namespace Catalogo
                 Global01.AppActiva = true;
                 //-------- BORRAR ESTA LINEA!!!!!!! ----------------------
                 //Sabor3 = 
-                Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
+                //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
                 //Sabor2 = 
                 //Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
 
@@ -453,7 +453,7 @@ namespace Catalogo
             //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
  
             Global01.NoConn = false;
-            Global01.VersionApp = (int)(Global01.miSABOR) + ".3.2.0"; //".4.0.1";
+            Global01.VersionApp = (int)(Global01.miSABOR) + ".4.0.1";
 
             Global01.Conexion = null;
             //Global01.TranActiva_ = null;

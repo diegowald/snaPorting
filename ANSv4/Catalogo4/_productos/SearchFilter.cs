@@ -295,7 +295,16 @@ namespace Catalogo._productos
 
         private void txtPorcentajeLinea_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Funciones.util.EsImporte(txtPorcentajeLinea.Text, ref e);
+            if (e.KeyChar == '\r')
+            {
+                btnApply0.PerformClick();
+                e.Handled = true;
+            }
+            else
+            {
+                Funciones.util.EsImporte(txtPorcentajeLinea.Text, ref e);
+            }
+
         }
 
         internal delegate void FocusDelegate();

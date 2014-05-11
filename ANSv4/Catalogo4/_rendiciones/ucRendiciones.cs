@@ -232,8 +232,8 @@ namespace Catalogo._rendiciones
 
 		                    Cursor.Current = Cursors.Default;
 
-				            if (!(m.miError)) 
-                            {
+                            //if (!(m.miError)) 
+                            //{
 			                    if (wOper == "add") 
                                 {
                                     _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Rendicion,_auditor.Auditor.AccionesAuditadas.EXITOSO,"viajante:" + Global01.NroUsuario  + " rc:" + lblNroRendicion.Text + " tot:" + string.Format("{0:N2}",float.Parse(lblRecibosTotal.Text)));
@@ -253,7 +253,7 @@ namespace Catalogo._rendiciones
 		                        m.Accion = tAccion.Cancelar;
 		                        CambiarA(tEstado.Neutro);
 		                        Habilita(m.Accion);
-				            }
+                            //}
                         }
                         catch (Exception ex)
                         {
@@ -315,12 +315,12 @@ namespace Catalogo._rendiciones
 
 			                    LimpiarPantalla("all");
 
-                                if (!(m.miError))
-                                {
+                                //if (!(m.miError))
+                                //{
                                     MessageBox.Show("La Rendición fue eliminada con Éxito", "Actualizar Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     CambiarA(tEstado.Neutro);
 				                    Habilita(tAccion.Neutro);
-			                    }
+                                //}
 		                    }
 	                    }
                     }
@@ -333,8 +333,8 @@ namespace Catalogo._rendiciones
                         
 	                    m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "NroRendicion=" + m.ID.ToString());
 
-                        if (!(m.miError))
-                        {
+                        //if (!(m.miError))
+                        //{
 		                    if (m.DR.HasRows) {
 			                    m.Accion = tAccion.Neutro;
                                 CambiarA(tEstado.Vista);
@@ -342,10 +342,10 @@ namespace Catalogo._rendiciones
                                 m.DR.Read();
 			                    AsignarDatos();
                                 btnVer.Enabled = true;
-		                    }
-	                    } else {
-                            MessageBox.Show("Errores al abrie la Rendición", "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-	                    }
+                            }
+                        //} else {
+                        //    MessageBox.Show("Errores al abrir la Rendición", "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        //}
 	                    m.DR = null;
                         m.ItemX = null;
                     }
@@ -1057,6 +1057,8 @@ namespace Catalogo._rendiciones
 
         public static void Rendicion_Imprimir(string NroRendicion)
         {
+            Cursor.Current = Cursors.WaitCursor;
+           
             string sReporte = Global01.AppPath + "\\Reportes\\Rendicion1.rpt";
             ReportDocument oReport = new ReportDocument();
 

@@ -146,12 +146,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="reportes\CrystalReport1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CrystalReport1.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="util\BackgroundTasks\BackgroundTaskCoordinator.cs" />
     <Compile Include="util\FlashWindow.cs" />
     <Compile Include="util\network\IPCache.cs" />
@@ -494,10 +488,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="reportes\CrystalReport1.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="util\errorHandling\ErrorForm.resx">
       <DependentUpon>ErrorForm.cs</DependentUpon>
@@ -877,6 +867,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="recursos\en-transporte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="reportes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="recursos\icnCartilla.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

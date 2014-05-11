@@ -992,9 +992,10 @@ namespace Catalogo._recibos
 
         public static void Recibo_Imprimir(string NroRecibo)
         {
-            //string sReporte =  @"D:\Users\pablo\Documents\Visual Studio 2012\Projects\wf_35c_pruebas1\Recibo_Enc4.rpt";
-
+            Cursor.Current = Cursors.WaitCursor;
+  
             string sReporte = Global01.AppPath + "\\Reportes\\Recibo_Enc3.rpt";
+            
             ReportDocument oReport = new ReportDocument();
 
             oReport.Load(sReporte);
@@ -1348,6 +1349,8 @@ namespace Catalogo._recibos
 
         private void CtaCte_Imprimir(string pIdCliente)
         {
+            Cursor.Current = Cursors.WaitCursor;
+            
             string sReporte = "";
 
             sReporte = Global01.AppPath + "\\Reportes\\CtaCte3.rpt";
