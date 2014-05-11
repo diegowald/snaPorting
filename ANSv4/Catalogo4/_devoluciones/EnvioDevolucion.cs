@@ -18,7 +18,7 @@ namespace Catalogo._devoluciones
         private DevolucionWS.Devolucion Cliente;
         private bool WebServiceInicializado;
         private string m_MacAddress;
-       
+
         private string m_ip;
         private string m_NroDevolucion;
         private string m_CodCliente;
@@ -27,7 +27,6 @@ namespace Catalogo._devoluciones
 
         private string m_Detalle;
 
-        private bool DatosObtenidos;
 
         public EnvioDevolucion(System.Data.OleDb.OleDbConnection conexion, string ipAddress, string MacAddress)
         {
@@ -44,45 +43,43 @@ namespace Catalogo._devoluciones
         private System.Data.OleDb.OleDbConnection Conexion1;
 
         public void ObtenerDatos(string NroDevolucion)
-	{
-		DatosObtenidos = false;
-
-		System.Data.OleDb.OleDbDataReader Enc = null;
-		System.Data.OleDb.OleDbDataReader Det = null;
-
-		Enc = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Devolucion_Enc '" + NroDevolucion + "'");
-		Det = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Devolucion_Det '" + NroDevolucion + "'");
-
-		m_NroDevolucion = NroDevolucion;
-        Enc.Read();
-		m_CodCliente = Enc["IDCliente"].ToString().Trim().PadLeft(6,'0');
-        m_Fecha = string.Format("{0:yyyyMMdd}", DateTime.Parse(Enc["F_Devolucion"].ToString()));
-            
-		m_Observaciones = Enc["Observaciones"].ToString().Replace(",", " ");
-
-		if (Det.HasRows) 
         {
-			m_Detalle = "";
-			while (Det.Read()) 
-            {
-				m_Detalle += Det["C_Producto"].ToString() + ",";
-				m_Detalle += Det["Cantidad"].ToString().Trim().PadLeft(8,'0') + "00,";
-				m_Detalle += "NO" + ",";
-				m_Detalle += "NO" + ",";
-				m_Detalle += "NO" + ",";
-				m_Detalle += Det["miDeposito"].ToString() + ",";
-				m_Detalle += Det["Factura"].ToString() + ",";
-				m_Detalle += Det["TipoDev"].ToString().Trim().PadLeft(2,'0') + ",";
-				m_Detalle += Det["Vehiculo"].ToString() + ",";
-				m_Detalle += Det["Modelo"].ToString() + ",";
-				m_Detalle += Det["Motor"].ToString() + ",";
-				m_Detalle += Det["Km"].ToString() + ",";
-				m_Detalle += Det["Observaciones"].ToString() + ";";
-			}
-		}
 
-		DatosObtenidos = true;
-	}
+            System.Data.OleDb.OleDbDataReader Enc = null;
+            System.Data.OleDb.OleDbDataReader Det = null;
+
+            Enc = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Devolucion_Enc '" + NroDevolucion + "'");
+            Det = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Devolucion_Det '" + NroDevolucion + "'");
+
+            m_NroDevolucion = NroDevolucion;
+            Enc.Read();
+            m_CodCliente = Enc["IDCliente"].ToString().Trim().PadLeft(6, '0');
+            m_Fecha = string.Format("{0:yyyyMMdd}", DateTime.Parse(Enc["F_Devolucion"].ToString()));
+
+            m_Observaciones = Enc["Observaciones"].ToString().Replace(",", " ");
+
+            if (Det.HasRows)
+            {
+                m_Detalle = "";
+                while (Det.Read())
+                {
+                    m_Detalle += Det["C_Producto"].ToString() + ",";
+                    m_Detalle += Det["Cantidad"].ToString().Trim().PadLeft(8, '0') + "00,";
+                    m_Detalle += "NO" + ",";
+                    m_Detalle += "NO" + ",";
+                    m_Detalle += "NO" + ",";
+                    m_Detalle += Det["miDeposito"].ToString() + ",";
+                    m_Detalle += Det["Factura"].ToString() + ",";
+                    m_Detalle += Det["TipoDev"].ToString().Trim().PadLeft(2, '0') + ",";
+                    m_Detalle += Det["Vehiculo"].ToString() + ",";
+                    m_Detalle += Det["Modelo"].ToString() + ",";
+                    m_Detalle += Det["Motor"].ToString() + ",";
+                    m_Detalle += Det["Km"].ToString() + ",";
+                    m_Detalle += Det["Observaciones"].ToString() + ";";
+                }
+            }
+
+        }
 
         public long EnviarDevolucion()
         {
@@ -99,7 +96,7 @@ namespace Catalogo._devoluciones
             {
                 if (!Cancel)
                 {
-                    if (_TranActiva== null)
+                    if (_TranActiva == null)
                     {
                         //@ _TranActiva =Conexion1.BeginTransaction();
                         util.errorHandling.ErrorLogger.LogMessage("2");
@@ -110,7 +107,7 @@ namespace Catalogo._devoluciones
                     if (resultado == 0)
                     {
                         Funciones.oleDbFunciones.ComandoIU(Conexion1, "EXEC usp_Devolucion_Transmicion_Upd '" + m_NroDevolucion + "'");
-                        if (_TranActiva!= null)
+                        if (_TranActiva != null)
                         {
                             _TranActiva.Commit();
                             _TranActiva = null;
@@ -118,7 +115,7 @@ namespace Catalogo._devoluciones
                     }
                     else
                     {
-                        if (_TranActiva!= null)
+                        if (_TranActiva != null)
                         {
                             _TranActiva.Rollback();
                             _TranActiva = null;
@@ -187,7 +184,7 @@ namespace Catalogo._devoluciones
                 //}
                 //else
                 //{
-                    throw ex;
+                throw ex;
                 //}
             }
         }

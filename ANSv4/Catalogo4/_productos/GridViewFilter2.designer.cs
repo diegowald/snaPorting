@@ -87,6 +87,7 @@
             this.Semaforo.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Semaforo.Text = "E";
             this.Semaforo.ToolTipText = "ver existencia";
+            this.Semaforo.Visible = false;
             this.Semaforo.Width = 26;
             // 
             // GridViewFilter2
@@ -108,7 +109,7 @@
         #endregion
 
         private Catalogo._productos.CustomizedDataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewButtonColumn Semaforo;
         private System.Windows.Forms.Label lblWaitMessage;
+        private System.Windows.Forms.DataGridViewButtonColumn Semaforo;
     }
 }

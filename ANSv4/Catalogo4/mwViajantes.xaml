@@ -128,14 +128,14 @@
                                     <Grid x:Name="grProductosArea" Grid.Row="1"  >
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*"/>
-                                            <RowDefinition Height="90"/>
+                                            <RowDefinition Height="100"/>
                                         </Grid.RowDefinitions>
                                         <Grid x:Name="grProductsArea" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0"/>
                                         <Grid x:Name="grProductsDetalle" HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="1">
                                             <_productos:DetalleProducto x:Name="productDetalle"/>
                                         </Grid>
                                     </Grid>
-                                    <GridSplitter x:Name="grSpliter1" Grid.Row="2" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch" />
+                                    <GridSplitter x:Name="grSpliter1" Grid.Row="2" ResizeDirection="Rows"  ResizeBehavior="BasedOnAlignment" HorizontalAlignment="Stretch" Background="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
                                     <Grid x:Name="grPedidosDevolucionesArea" Grid.Row="3">
                                         <ad:DocumentPane Name="xVtaDevDockP" SelectedIndex="0" ad:ResizingPanel.ResizeHeight="250" ShowHeader="True" AllowDrop="False">
                                             <ad:DockableContent Title="Nota de Venta" Name="xNotaVentaAreaDockC" IsCloseable="False">

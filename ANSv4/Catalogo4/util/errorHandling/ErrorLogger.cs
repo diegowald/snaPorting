@@ -66,7 +66,7 @@ namespace Catalogo.util.errorHandling
                 "Object: " + pException.Source + Environment.NewLine +
                 "Function Call: " + pException.TargetSite.Name;
             }
-            catch (Exception ex)
+            catch 
             {
             }
 

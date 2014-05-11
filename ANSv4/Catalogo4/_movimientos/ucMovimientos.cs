@@ -117,6 +117,8 @@ namespace Catalogo._movimientos
                     movDataGridView.Columns["Selec"].Visible = (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS");
                     movDataGridView.Columns["Estado"].Visible = (paEnviosCbo.Text.ToString().ToUpper() == "ENVIADOS");
 
+                    movDataGridView.Columns["Selec"].Width = 30;
+
                     movDataGridView.Refresh();
                     movDataGridView.Visible = true;
                 }
@@ -385,6 +387,12 @@ namespace Catalogo._movimientos
                 };
 
             }
+        }
+        
+        internal void actualizarMovimientos()
+        {
+            paEnviosCbo.SelectedIndex = 2;
+            ObtenerMovimientos();
         }
 
      } //fin clase

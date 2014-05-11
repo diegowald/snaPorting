@@ -720,7 +720,8 @@ namespace Catalogo._recibos
             adTotalDeducirAlRestoLbl.Text = string.Format("{0:N2}", 0);
             apTotalPercepcionLbl.Text = string.Format("{0:N2}", 0);
             raImporteTotalLbl.Text = string.Format("{0:N2}", 0);
-            
+
+            paEnviosCbo.SelectedIndex = 2;
             ObtenerMovimientos();
 
             //cboEnvios_Click();
@@ -1624,30 +1625,50 @@ namespace Catalogo._recibos
 
         private void EnviarBtn_Click(object sender, EventArgs e)
         {
-            System.Collections.Generic.List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO> filtro
-                = new List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>();
-
-            foreach (DataGridViewRow row in paDataGridView.Rows)
+            try
             {
-                if (row.Cells["Selec"].Value != null && row.Cells["Selec"].Value.ToString() != "" && (bool)row.Cells["Selec"].Value)
+                if (Global01.AppActiva)
                 {
-                    util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO item = new util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO();
-                    System.Diagnostics.Debug.WriteLine(row.Cells["Nro"].Value);
-                    item.nro = row.Cells["Nro"].Value.ToString();
-                    item.origen = row.Cells["Origen"].Value.ToString();
-                    filtro.Add(item);
+                    if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
+                    {
+                        if (paDataGridView.SelectedRows != null && paDataGridView.SelectedRows.Count > 0)
+                        {
+                            if (MessageBox.Show("Debe estar conectado a Internet. ¿QUIERE ENVIARLOS AHORA?", "Envio de Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                System.Collections.Generic.List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO> filtro = new List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>();
+
+                                foreach (DataGridViewRow row in paDataGridView.Rows)
+                                {
+                                    if (row.Cells["Selec"].Value != null && row.Cells["Selec"].Value.ToString() != "" && (bool)row.Cells["Selec"].Value)
+                                    {
+                                        util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO item = new util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO();
+                                        System.Diagnostics.Debug.WriteLine(row.Cells["Nro"].Value);
+                                        item.nro = row.Cells["Nro"].Value.ToString();
+                                        item.origen = row.Cells["Origen"].Value.ToString();
+                                        filtro.Add(item);
+                                    }
+                                }
+
+                                Catalogo.util.BackgroundTasks.EnvioMovimientos envio =
+                                    new util.BackgroundTasks.EnvioMovimientos(
+                                        util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+                                        int.Parse(this.cboCliente.SelectedValue.ToString()),
+                                        util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_LISTVIEW,
+                                        filtro);
+
+                                envio.run();
+
+                                ObtenerMovimientos();
+                            }
+                        }
+                    }
                 }
             }
-
-            Catalogo.util.BackgroundTasks.EnvioMovimientos envio =
-                new util.BackgroundTasks.EnvioMovimientos(
-                    util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
-                    int.Parse(this.cboCliente.SelectedValue.ToString()),
-                    util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_LISTVIEW,
-                    filtro);
-
-            envio.run();
-            ObtenerMovimientos();
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;  //util.errorHandling.ErrorForm.show();
+            }
         }
 
         private void CliNlistView_DoubleClick(object sender, EventArgs e)

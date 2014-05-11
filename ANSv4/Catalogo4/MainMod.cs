@@ -210,6 +210,10 @@ namespace Catalogo
             if (Int32.Parse(Global01.NroUsuario.ToString()) <= 0 | Int64.Parse(Global01.Cuit.ToString().Replace("-", "")) <= 1)
             {
                 MessageBox.Show(new Form() { TopMost = true },"Error en nº de Cuenta ó Cuit, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(Global01.IDMaquina);
+                Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
+                Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
+                Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
                 miEnd();
             }
 
