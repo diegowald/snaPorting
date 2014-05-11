@@ -113,21 +113,9 @@ namespace Catalogo._movimientos
 
                     movDataGridView.AutoGenerateColumns = true;
                     movDataGridView.DataSource = dt;
-                    
-                    if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
-                    {
-                        movDataGridView.Columns["Selec"].Visible = true;
-                        //if (movDataGridView.Columns.Count > 0) // Add Checkbox column only when records are present.
-                        //    AddCheckBoxColumn();
-                    }
-                    if (paEnviosCbo.Text.ToString().ToUpper() == "ENVIADOS")
-                    {
-                        movDataGridView.Columns["Estado"].Visible = true;
-                    }
-                    else
-                    {
-                        movDataGridView.Columns["Selec"].Visible = false;
-                    }
+
+                    movDataGridView.Columns["Selec"].Visible = (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS");
+                    movDataGridView.Columns["Estado"].Visible = (paEnviosCbo.Text.ToString().ToUpper() == "ENVIADOS");
 
                     movDataGridView.Refresh();
                     movDataGridView.Visible = true;

@@ -478,13 +478,14 @@ namespace Catalogo._interdeposito
                 if (dr.HasRows)
                 {
                     DataTable dt = new DataTable();
-
+                    dt.Columns.Add("Selec", System.Type.GetType("System.Boolean"));
                     dt.Load(dr);
                     paDataGridView.AutoGenerateColumns = true;
                     paDataGridView.DataSource = dt;
                     paDataGridView.Refresh();
                     paDataGridView.Visible = true;
                     paDataGridView.ClearSelection();
+                    paDataGridView.Columns["Selec"].Visible = (paEnviosCbo.Text.ToUpper() == "NO ENVIADOS");
                 }
             }
         }
@@ -528,19 +529,18 @@ namespace Catalogo._interdeposito
             System.Collections.Generic.List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO> filtro 
                 = new List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>();
 
-            _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(cboCliente.SelectedValue.ToString()));
-            System.Data.OleDb.OleDbDataReader dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "InterDeposito");
-            if (dr.HasRows)
+            foreach (DataGridViewRow row in paDataGridView.Rows)
             {
-                while (dr.Read())
+                if (row.Cells["Selec"].Value != null && row.Cells["Selec"].Value.ToString() != "" && (bool)row.Cells["Selec"].Value)
                 {
-                    util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO mov = new util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO();
-                    mov.origen = "InterDeposito";
-                    mov.nro = (string)dr["Nro"];
-                    filtro.Add(mov);
+                    util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO item = new util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO();
+                    System.Diagnostics.Debug.WriteLine(row.Cells["Nro"].Value);
+                    item.nro = row.Cells["Nro"].Value.ToString();
+                    item.origen = row.Cells["Origen"].Value.ToString();
+                    filtro.Add(item);
                 }
             }
-
+  
             Catalogo.util.BackgroundTasks.EnvioMovimientos envio =
                 new util.BackgroundTasks.EnvioMovimientos(
                     util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,

@@ -763,7 +763,6 @@ namespace Catalogo._devoluciones
             this.paDataGridView.Location = new System.Drawing.Point(3, 45);
             this.paDataGridView.MultiSelect = false;
             this.paDataGridView.Name = "paDataGridView";
-            this.paDataGridView.ReadOnly = true;
             this.paDataGridView.RowHeadersWidth = 4;
             this.paDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.paDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
