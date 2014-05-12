@@ -66,14 +66,14 @@ namespace Catalogo.Funciones
                 oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaInterDeposito_Fac");
                 Application.DoEvents();
 
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaCatalogoBAK");
                 oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xIDsCatalogoBAK_Pedidos_Anexa");
                 oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xIDsCatalogoBAK_Devolucion_Anexa");
                 Application.DoEvents();
 
-                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaAuditor");
+                //oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaAuditor");
+                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Novedades_Anexar");                
                 Application.DoEvents();
-
-                //oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaCatalogoBAK");
 
                 //if (Global01.TranActiva != null)
                 //{

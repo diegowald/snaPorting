@@ -197,19 +197,19 @@ namespace Catalogo.Funciones
         {
             System.Windows.Forms.ColumnHeader lvwColumn = default(System.Windows.Forms.ColumnHeader);
             System.Windows.Forms.ListViewItem itmListItem = default(System.Windows.Forms.ListViewItem);
-            string strTest = null;
+            string strTest = "";
             int i = 0;
-            short shtCntr = 0;
+            //short shtCntr = 0;
 
             MyListview1.Clear();
 
-            for (shtCntr = 0; shtCntr < Convert.ToInt16(MyData.FieldCount); shtCntr++)
+            for (short shtCntr = 0; shtCntr < Convert.ToInt16(MyData.FieldCount); shtCntr++)
             {
                 lvwColumn = new System.Windows.Forms.ColumnHeader();
 
                 switch (MyData.GetProviderSpecificFieldType(shtCntr).FullName.ToLower())
                 {
-                   //System.Data.OleDb.OleDbType.VarChar 
+                    //System.Data.OleDb.OleDbType.VarChar 
                     case "system.data.sqltypes.sqlstring":
                         lvwColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
                         break;
@@ -236,7 +236,7 @@ namespace Catalogo.Funciones
 
                 itmListItem.Text = strTest;
 
-                for (shtCntr = 1; shtCntr < Convert.ToInt16(MyData.FieldCount); shtCntr++)
+                for (short shtCntr = 1; shtCntr < Convert.ToInt16(MyData.FieldCount); shtCntr++)
                 {
                     if (MyData.IsDBNull(shtCntr))
                     {
@@ -269,7 +269,7 @@ namespace Catalogo.Funciones
 
             }
 
-            LeerLVColumnas(ref MyListview1);
+            //LeerLVColumnas(ref MyListview1);
 
         }
 

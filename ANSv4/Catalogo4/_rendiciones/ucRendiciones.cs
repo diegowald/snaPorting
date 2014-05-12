@@ -514,16 +514,16 @@ namespace Catalogo._rendiciones
 		        m.ID = 0;
 		        lblEfectivoC.Text = "0,00";
 		        lblChequesTotalC.Text = "0,00";
-		        lblChequesCantidadC.Text = "0,00";
+		        lblChequesCantidadC.Text = "0";
 		        lblDivEuroC.Text = "0,00";
 		        lblDivDolarC.Text = "0,00";
-		        lblCertificadosCantidadC.Text = "0,00";
+		        lblCertificadosCantidadC.Text = "0";
 		        lblCertificadosTotalC.Text = "0,00";
 		    }
 
 		    if ((Modo == "datos" | Modo == "all")) 
             {
-		        this.txtRecDesde.Text = "0";
+                //this.txtRecDesde.Text = "0";
 		        this.txtRecHasta.Text = "0";
 		        cboRecibos.SelectedIndex = -1;
 		        lblIdValor.Text = "0";
@@ -803,34 +803,73 @@ namespace Catalogo._rendiciones
 
         private void cmdReciboAdd_Click(object sender, EventArgs e)
         {
-                //const string PROCNAME_ = "cmdReciboAdd_Click";
+            //const string PROCNAME_ = "cmdReciboAdd_Click";
+            //If cboRecibos.ListIndex < 0 Then
+            if (Convert.ToInt32(this.txtRecDesde.Text) > Convert.ToInt32(this.txtRecHasta.Text))
+            {
+                //cboObraSoc.SetFocus
+            }
+            else
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                CargarRecibosLV();
+                               
+                cboCheques.Items.Clear();
+                Funciones.util.CargaCombo(Global01.Conexion, ref cboCheques,"v_Recibo_Det_Cheques_Detalle","Descrip", "NewIndex","NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'","NONE",false,false,"Descrip");
 
-                //If cboRecibos.ListIndex < 0 Then
-                if (Convert.ToInt32(this.txtRecDesde.Text) > Convert.ToInt32(this.txtRecHasta.Text))
+                TotalRecibos();
+                TotalControles();
+
+                //LimpiarPantalla "datos"
+            }
+        }
+
+        private void CargarRecibosLV()
+        {
+            //Set m.adoREC = xGetRSMDB(vg.Conexion, "v_Recibo_Enc_noR_lv", "NroRecibo LIKE '%" & padLR(cboRecibos.ItemData(cboRecibos.ListIndex), 8, "0", 1) & "'", "NONE")
+            DataTable dt = Catalogo.Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "v_Recibo_Enc_noR_lv", "NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'");
+
+            lvRecibos.Visible = false;
+            lvRecibos.Items.Clear();
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                DataRow dr = dt.Rows[i];
+
+                ListViewItem ItemX = new ListViewItem(dr["NroRecibo"].ToString());
+
+                //alternate row color
+                if (i % 2 == 0)
                 {
-                    //cboObraSoc.SetFocus
+                    ItemX.BackColor = Color.White;
                 }
                 else
                 {
-
-                    //Set m.adoREC = xGetRSMDB(vg.Conexion, "v_Recibo_Enc_noR_lv", "NroRecibo LIKE '%" & padLR(cboRecibos.ItemData(cboRecibos.ListIndex), 8, "0", 1) & "'", "NONE")
-
-                    m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "v_Recibo_Enc_noR_lv", "NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'");
-                    if (m.DR.HasRows)
-                    {
-                        lvRecibos.Items.Clear();
-                        Funciones.util.CargarLV(ref lvRecibos, m.DR);
-
-                        cboCheques.Items.Clear();
-                        //m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "v_Recibo_Det_Cheques_Detalle", "NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'" "NONE");
-                        Funciones.util.CargaCombo(Global01.Conexion, ref cboCheques,"v_Recibo_Det_Cheques_Detalle","Descrip", "NewIndex","NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'","NONE",false,false,"Descrip");
-
-                        TotalRecibos();
-                        TotalControles();
-                    }
-
-                    //LimpiarPantalla "datos"
+                    ItemX.BackColor = System.Drawing.SystemColors.Control;  //System.Drawing.Color.FromArgb(255, 255, 192);
                 }
+
+
+                ItemX.SubItems.Add(string.Format("{0:dd/MM/yyyy}", DateTime.Parse(dr["F_Recibo"].ToString())));
+                ItemX.SubItems.Add(dr["Nro_Cuenta"].ToString());
+                ItemX.SubItems.Add(dr["Cliente"].ToString());
+                ItemX.SubItems.Add(string.Format("{0:N2}", float.Parse(dr["Efectivo"].ToString())));
+                ItemX.SubItems.Add(string.Format("{0:N2}", float.Parse(dr["Divisas_Dolares"].ToString())));
+                ItemX.SubItems.Add(string.Format("{0:N2}", float.Parse(dr["Divisas_Euros"].ToString())));
+                ItemX.SubItems.Add(string.Format("{0:N2}", float.Parse(dr["Cheques_Total"].ToString())));       
+                ItemX.SubItems.Add(dr["Cheques_Cantidad"].ToString());
+                ItemX.SubItems.Add(string.Format("{0:N2}", float.Parse(dr["Certificados_Total"].ToString())));
+                ItemX.SubItems.Add(dr["Certificados_Cantidad"].ToString());
+                ItemX.SubItems.Add(string.Format("{0:N2}", float.Parse(dr["TotalRecibo"].ToString())));
+                ItemX.SubItems.Add(dr["NroRendicion"].ToString());     
+
+                lvRecibos.Items.Add(ItemX);
+            }
+
+            if (dt.Rows.Count > 0) Funciones.util.AutoSizeLVColumnas(ref lvRecibos);
+
+            lvRecibos.Visible = true;
+            dt = null;
+
         }
 
         private void cmdValorAdd_Click(object sender, EventArgs e)
@@ -971,9 +1010,9 @@ namespace Catalogo._rendiciones
 		        lblDivDolarCantidad.Text = string.Format("{0:N2}",float.Parse("0" + lblDivDolarCantidad.Text) + float.Parse("0" + lvRecibos.Items[m.i].SubItems[5].Text));
 		        lblDivEuroCantidad.Text = string.Format("{0:N2}",float.Parse("0" + lblDivEuroCantidad.Text) + float.Parse("0" + lvRecibos.Items[m.i].SubItems[6].Text));
 		        lblChequesTotal.Text = string.Format("{0:N2}",float.Parse("0" + lblChequesTotal.Text) + float.Parse("0" + lvRecibos.Items[m.i].SubItems[7].Text));
-		        lblChequesCantidad.Text = string.Format("{0:N2}",float.Parse("0" + lblChequesCantidad.Text) + float.Parse("0" + lvRecibos.Items[m.i].SubItems[8].Text));
+		        lblChequesCantidad.Text = string.Format("{0:N0}",Int16.Parse("0" + lblChequesCantidad.Text) + Int16.Parse("0" + lvRecibos.Items[m.i].SubItems[8].Text));
 		        lblCertificadosTotal.Text = string.Format("{0:N2}",float.Parse("0" + lblCertificadosTotal.Text) + float.Parse("0" + lvRecibos.Items[m.i].SubItems[9].Text));
-		        lblCertificadosCantidad.Text = string.Format("{0:N2}",float.Parse("0" + lblCertificadosCantidad.Text) + float.Parse("0" + lvRecibos.Items[m.i].SubItems[10].Text));
+		        lblCertificadosCantidad.Text = string.Format("{0:N0}",Int16.Parse("0" + lblCertificadosCantidad.Text) + Int16.Parse("0" + lvRecibos.Items[m.i].SubItems[10].Text));
 		        lblRecibosTotal.Text = string.Format("{0:N2}",float.Parse("0" + lblRecibosTotal.Text) + float.Parse("0" + lvRecibos.Items[m.i].SubItems[11].Text));
 	        }
         }

@@ -200,6 +200,7 @@ namespace Catalogo.Funciones
                 //{
                 //    cmd.Transaction.Rollback();
                 //}              
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(TextoComando);
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;  //throw new Exception(ex.Message.ToString());
             }
@@ -242,6 +243,7 @@ namespace Catalogo.Funciones
                 //{
                 //    cmd.Transaction.Rollback();
                 //}
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(TextoComando);
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
                 throw ex;  //throw new Exception(ex.Message.ToString());
             }
@@ -274,7 +276,7 @@ namespace Catalogo.Funciones
                 //{
                 //    cmd.Transaction.Rollback();
                 //}
-                
+                Catalogo.util.errorHandling.ErrorLogger.LogMessage(TextoComando);
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
                 throw ex; //new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);

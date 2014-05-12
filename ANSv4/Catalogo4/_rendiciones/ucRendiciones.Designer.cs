@@ -310,41 +310,49 @@ namespace Catalogo._rendiciones
             // _lvRecibos_ColumnHeader_5
             // 
             this._lvRecibos_ColumnHeader_5.Text = "Efectivo $";
+            this._lvRecibos_ColumnHeader_5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this._lvRecibos_ColumnHeader_5.Width = 170;
             // 
             // _lvRecibos_ColumnHeader_6
             // 
             this._lvRecibos_ColumnHeader_6.Text = "Dólares";
+            this._lvRecibos_ColumnHeader_6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this._lvRecibos_ColumnHeader_6.Width = 170;
             // 
             // _lvRecibos_ColumnHeader_7
             // 
             this._lvRecibos_ColumnHeader_7.Text = "Euros";
+            this._lvRecibos_ColumnHeader_7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this._lvRecibos_ColumnHeader_7.Width = 170;
             // 
             // _lvRecibos_ColumnHeader_8
             // 
             this._lvRecibos_ColumnHeader_8.Text = "Cheques $";
+            this._lvRecibos_ColumnHeader_8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this._lvRecibos_ColumnHeader_8.Width = 170;
             // 
             // _lvRecibos_ColumnHeader_9
             // 
             this._lvRecibos_ColumnHeader_9.Text = "Cheques Cantidad";
+            this._lvRecibos_ColumnHeader_9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this._lvRecibos_ColumnHeader_9.Width = 170;
             // 
             // _lvRecibos_ColumnHeader_10
             // 
             this._lvRecibos_ColumnHeader_10.Text = "Certificados Tot. $";
+            this._lvRecibos_ColumnHeader_10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this._lvRecibos_ColumnHeader_10.Width = 170;
             // 
             // _lvRecibos_ColumnHeader_11
             // 
             this._lvRecibos_ColumnHeader_11.Text = "Certificados Cantidad";
+            this._lvRecibos_ColumnHeader_11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this._lvRecibos_ColumnHeader_11.Width = 170;
             // 
             // _lvRecibos_ColumnHeader_12
             // 
             this._lvRecibos_ColumnHeader_12.Text = "Tot. Recibo";
+            this._lvRecibos_ColumnHeader_12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this._lvRecibos_ColumnHeader_12.Width = 170;
             // 
             // _lvRecibos_ColumnHeader_13
@@ -364,7 +372,7 @@ namespace Catalogo._rendiciones
             this.txtRecHasta.BackColor = System.Drawing.SystemColors.Window;
             this.txtRecHasta.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtRecHasta.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtRecHasta.Location = new System.Drawing.Point(452, 22);
+            this.txtRecHasta.Location = new System.Drawing.Point(452, 24);
             this.txtRecHasta.MaxLength = 8;
             this.txtRecHasta.Name = "txtRecHasta";
             this.txtRecHasta.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -380,7 +388,7 @@ namespace Catalogo._rendiciones
             this.txtRecDesde.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtRecDesde.Enabled = false;
             this.txtRecDesde.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtRecDesde.Location = new System.Drawing.Point(374, 22);
+            this.txtRecDesde.Location = new System.Drawing.Point(374, 24);
             this.txtRecDesde.MaxLength = 8;
             this.txtRecDesde.Name = "txtRecDesde";
             this.txtRecDesde.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -394,7 +402,7 @@ namespace Catalogo._rendiciones
             this.cboRecibos.Cursor = System.Windows.Forms.Cursors.Default;
             this.cboRecibos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRecibos.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.cboRecibos.Location = new System.Drawing.Point(13, 21);
+            this.cboRecibos.Location = new System.Drawing.Point(13, 22);
             this.cboRecibos.Name = "cboRecibos";
             this.cboRecibos.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.cboRecibos.Size = new System.Drawing.Size(341, 23);
@@ -1944,7 +1952,7 @@ namespace Catalogo._rendiciones
             this.paDataGridView.AllowUserToAddRows = false;
             this.paDataGridView.AllowUserToDeleteRows = false;
             this.paDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.paDataGridView.BackgroundColor = System.Drawing.Color.WhiteSmoke;
@@ -2003,7 +2011,7 @@ namespace Catalogo._rendiciones
             // 
             this.devAnterioresDataGridView.AllowUserToAddRows = false;
             this.devAnterioresDataGridView.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control; //System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             this.devAnterioresDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.devAnterioresDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.devAnterioresDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2151,19 +2159,6 @@ namespace Catalogo._rendiciones
         private System.Windows.Forms.TabPage rTabBuscar;
         private System.Windows.Forms.Panel fraDatos;
         public System.Windows.Forms.ListView lvRecibos;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_1;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_2;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_3;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_4;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_5;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_6;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_7;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_8;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_9;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_10;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_11;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_12;
-        public System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_13;
         public System.Windows.Forms.TextBox txtRecHasta;
         public System.Windows.Forms.TextBox txtRecDesde;
         public System.Windows.Forms.ComboBox cboRecibos;
@@ -2283,5 +2278,18 @@ namespace Catalogo._rendiciones
         private System.Windows.Forms.Button cmdReciboAdd;
         private System.Windows.Forms.Button cmdValorAdd;
         private System.Windows.Forms.Button cmdBuscar;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_1;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_2;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_3;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_4;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_5;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_6;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_7;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_8;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_9;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_10;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_11;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_12;
+        private System.Windows.Forms.ColumnHeader _lvRecibos_ColumnHeader_13;
     }
 }
