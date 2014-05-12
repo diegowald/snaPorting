@@ -1,7 +1,4 @@
-﻿//#define SaborViajante
-//#define SaborCliente
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -16,11 +13,8 @@ namespace Catalogo
     /// </summary>
     public partial class App : Application
     {
-        //SplashScreenForm ssf = new Catalogo.SplashScreenForm();
-
         private void Application_Startup(object sender, StartupEventArgs e)
         {
- 
             Catalogo.MainMod.inicializaGlobales();
  
             Thread splashthread = new Thread(new ThreadStart(Catalogo.varios.SplashScreen.ShowSplashScreen));
@@ -44,7 +38,7 @@ namespace Catalogo
             System.Diagnostics.Debug.WriteLine("saliendo por acá....");
 
             MainMod.miEnd(false);
-            Application.Current.Shutdown(0);
+            Application.Current.Shutdown();
         }
 
         void Current_Exit(object sender, ExitEventArgs e)

@@ -404,7 +404,6 @@ namespace Catalogo
             { 
                 System.Environment.Exit(0);
             }
-
             //System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
@@ -448,7 +447,6 @@ namespace Catalogo
 
         public static void inicializaGlobales()
         {
-
             Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
             //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
  
@@ -464,7 +462,7 @@ namespace Catalogo
             {
                 Funciones.modINIs.INIWrite(xLocAns, "ans", "path", "C:\\Catalogo ANS");
             }
-        Global01.AppPath = Funciones.modINIs.INIRead(xLocAns, "ans", "path", "C:\\Catalogo ANS");
+            Global01.AppPath = Funciones.modINIs.INIRead(xLocAns, "ans", "path", "C:\\Catalogo ANS");
 
             Global01.PathAcrobat = Funciones.modINIs.ReadINI("Datos", "PathAcrobat", "");
             Global01.FileBak = "CopiaCata_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mdb";

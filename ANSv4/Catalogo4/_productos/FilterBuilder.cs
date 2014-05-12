@@ -384,12 +384,18 @@ namespace Catalogo._productos
         private string whereTxtBuscar(string txtBuscar)
         {
             bool filtro2 = false;
+            bool filtro3 = false;
 
-            if (txtBuscar.Trim().Substring(0, 1) == "+")
+            if (txtBuscar.Trim().Substring(0, 2) == "++")
+            {
+                filtro3 = true;
+                txtBuscar = txtBuscar.Trim().Substring(2);
+            } 
+            else if (txtBuscar.Trim().Substring(0, 1) == "+")
             {
                 filtro2 = true;
                 txtBuscar = txtBuscar.Trim().Substring(1);
-            };
+            }
 
             string sqlWhere = null;
             string[] PalabrasClave = txtBuscar.Split(' ');
@@ -407,6 +413,12 @@ namespace Catalogo._productos
                         if (filtro2)
                         {
                             sqlWhere += " (c_producto + ' ' +  Equivalencia + ' ' + Original LIKE '";
+                            sqlWhere += palabra;
+                            sqlWhere += "%')";
+                        }
+                        else if (filtro3)
+                        {
+                            sqlWhere += " (c_producto + ' ' +  Equivalencia + ' ' + Original LIKE '%";
                             sqlWhere += palabra;
                             sqlWhere += "%')";
                         }

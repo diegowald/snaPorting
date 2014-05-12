@@ -37,10 +37,8 @@ namespace Catalogo
             setHotKeys();
             this.iSB2.Content = "Catálogo Dígital de Productos - " + Global01.VersionApp + " - " + Global01.ApellidoNombre + " (" + Global01.NroUsuario + ") - " + string.Format("{0:dd/MM/yyyy HH:mm}", Global01.F_ActCatalogo) + " - (" + Global01.MiBuild + "." + Global01.ListaPrecio + ")";
 
+            //gris = #CFD1D2    // rosa = #FF00CC   // blanco = 
 
-            //gris = #CFD1D2
-            // rosa = #FF00CC
-            // blanco = 
             //System.Windows.Application.Current.Resources["ThemeDictionary"] = new ResourceDictionary();
             ThemeFactory.ChangeColors((Color)ColorConverter.ConvertFromString("#FFFFFF"));
             
@@ -675,7 +673,6 @@ namespace Catalogo
                 util.errorHandling.ErrorForm.show();
             }
         }
-
 
         private void verTotalPedidoEvt(object sender, ExecutedRoutedEventArgs e)
         {
