@@ -29,7 +29,7 @@ namespace Catalogo._productos
             _imgEnDescarga = new List<string>();
         }
 
-        internal void onRecibir(System.Windows.Forms.DataGridViewRow dato)
+        public void onRecibir(System.Windows.Forms.DataGridViewRow dato)
         {
             txtDetalle.Inlines.Clear();
             txtDetalle.Visibility = System.Windows.Visibility.Hidden;

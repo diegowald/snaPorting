@@ -320,7 +320,7 @@ namespace Catalogo._pedidos
             nvImporteTotalLbl.Text = string.Format("{0:N2}", Aux);
         }
 
-        internal void onRecibir(DataGridViewRow dato)
+        public void onRecibir(DataGridViewRow dato)
         {
             ProductoSeleccionado = dato;
         }
@@ -330,7 +330,7 @@ namespace Catalogo._pedidos
             cmdProductoAgregar();
         }
 
-        internal void onRecibir(_pedidos.PedidosHelper.Acciones dato)
+        public void onRecibir(_pedidos.PedidosHelper.Acciones dato)
         {
             switch (dato)
             {
@@ -940,7 +940,7 @@ namespace Catalogo._pedidos
             set;
         }
 
-        internal void onRecibir(short dato)
+        public void onRecibir(short dato)
         {
             if (btnIniciar.Tag.ToString() == "INICIAR")            
                 cboCliente.SelectedValue = dato;

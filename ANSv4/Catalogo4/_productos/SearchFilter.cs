@@ -282,13 +282,13 @@ namespace Catalogo._productos
             set;
         }
 
-        emisorHandler<float> IEmisor2<float>.emisor2
+        public emisorHandler<float> emisor2
         {
             get;
             set;
         }
 
-        internal void onRecibir(util.Pair<int, int> dato)
+        public void onRecibir(util.Pair<int, int> dato)
         {
             showItemCounts(dato.first, dato.second);
         }

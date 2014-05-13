@@ -77,13 +77,13 @@ namespace Catalogo._productos
             xCargarDataControl();
         }
 
-        internal void onRecibir(string dato)
+        public void onRecibir(string dato)
         {
             filterString = dato;
             loadDataGridView();
         }
 
-        internal void onRecibir(float dato)
+        public void onRecibir(float dato)
         {
             porcentajeLinea = dato;
             loadDataGridView();
@@ -576,7 +576,7 @@ namespace Catalogo._productos
         }
 #endif
 
-        internal void onRecibir(Keys dato)
+        public void onRecibir(Keys dato)
         {
             if (dato == Keys.Tab)
             {

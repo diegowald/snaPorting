@@ -148,7 +148,7 @@ namespace Catalogo.varios
                 e.Cancel = true;
         }
 
-        internal void onRecibir(Catalogo.varios.complexMessage dato)
+        public void onRecibir(Catalogo.varios.complexMessage dato)
         {
             if (InvokeRequired)
             {
@@ -192,7 +192,7 @@ namespace Catalogo.varios
             btnCancel.Show();
         }
 
-        internal void onRequestCancel(ref bool cancel)
+        public void onRequestCancel(ref bool cancel)
         {
             cancel = doCancel;
             if (InvokeRequired)

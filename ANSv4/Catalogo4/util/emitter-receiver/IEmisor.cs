@@ -32,14 +32,14 @@ namespace Catalogo
             }
 
 
-            public static class emisorExtension
+            internal static class emisorExtension
             {
-                public static void attachReceptor<T>(this IEmisor<T> baseEmisor, IReceptor<T> receptor)
+                internal static void attachReceptor<T>(this IEmisor<T> baseEmisor, IReceptor<T> receptor)
                 {
                     baseEmisor.emisor+=receptor.onRecibir;
                 }
 
-                public static void emitir<T>(this IEmisor<T> baseEmisor, T dato)
+                internal static void emitir<T>(this IEmisor<T> baseEmisor, T dato)
                 {
                     if (baseEmisor.emisor != null)
                     {
@@ -47,12 +47,12 @@ namespace Catalogo
                     }
                 }
 
-                public static void attachReceptor2<T>(this IEmisor2<T> baseEmisor, IReceptor<T> receptor)
+                internal static void attachReceptor2<T>(this IEmisor2<T> baseEmisor, IReceptor<T> receptor)
                 {
                     baseEmisor.emisor2 += receptor.onRecibir;
                 }
 
-                public static void emitir2<T>(this IEmisor2<T> baseEmisor, T dato)
+                internal static void emitir2<T>(this IEmisor2<T> baseEmisor, T dato)
                 {
                     if (baseEmisor.emisor2 != null)
                     {
@@ -60,12 +60,12 @@ namespace Catalogo
                     }
                 }
 
-                public static void attachReceptor3<T>(this IEmisor3<T> baseEmisor, IReceptor<T> receptor)
+                internal static void attachReceptor3<T>(this IEmisor3<T> baseEmisor, IReceptor<T> receptor)
                 {
                     baseEmisor.emisor3 += receptor.onRecibir;
                 }
 
-                public static void emitir3<T>(this IEmisor3<T> baseEmisor, T dato)
+                internal static void emitir3<T>(this IEmisor3<T> baseEmisor, T dato)
                 {
                     if (baseEmisor.emisor3 != null)
                     {
@@ -73,12 +73,12 @@ namespace Catalogo
                     }
                 }
 
-                public static void attachReceptor4<T>(this IEmisor4<T> baseEmisor, IReceptor<T> receptor)
+                internal static void attachReceptor4<T>(this IEmisor4<T> baseEmisor, IReceptor<T> receptor)
                 {
                     baseEmisor.emisor4 += receptor.onRecibir;
                 }
 
-                public static void emitir4<T>(this IEmisor4<T> baseEmisor, T dato)
+                internal static void emitir4<T>(this IEmisor4<T> baseEmisor, T dato)
                 {
                     if (baseEmisor.emisor4 != null)
                     {

@@ -49,8 +49,8 @@ namespace Catalogo._rendiciones
 
         internal void ObtenerDatos(string NroRendicion)
         {
-            
-            m_NroRendicion = NroRendicion.Substring(NroRendicion.Length - 8) // NroRendicion;
+
+            m_NroRendicion = NroRendicion.Substring(NroRendicion.Length - 8);// NroRendicion;
 
             System.Data.OleDb.OleDbDataReader Ren = null;
             System.Data.OleDb.OleDbDataReader RenValores = null;
