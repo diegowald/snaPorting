@@ -49,16 +49,16 @@ namespace Catalogo._rendiciones
 
         internal void ObtenerDatos(string NroRendicion)
         {
-            
-            m_NroRendicion = NroRendicion.Substring(NroRendicion.Length - 8) // NroRendicion;
+
+            m_NroRendicion = NroRendicion; //NroRendicion.Substring(NroRendicion.Length - 8) // ;
 
             System.Data.OleDb.OleDbDataReader Ren = null;
             System.Data.OleDb.OleDbDataReader RenValores = null;
             System.Data.OleDb.OleDbDataReader RenRecibos = null;
 
-            Ren = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT * FROM v_Rendicion WHERE Nro='" + m_NroRendicion + "'");
-            RenValores = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT * FROM  v_RendicionValores1 WHERE Nro='" + m_NroRendicion + "'");
-            RenRecibos = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Rendicion_Recibos_rpt '" + m_NroRendicion + "'");
+            Ren = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT * FROM v_Rendicion WHERE Nro='" + NroRendicion + "'");
+            RenValores = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT * FROM  v_RendicionValores1 WHERE Nro='" + NroRendicion + "'");
+            RenRecibos = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Rendicion_Recibos_rpt '" + NroRendicion.Substring(NroRendicion.Length - 8) + "'");
 
             Ren.Read();
             m_IdViajante = Ren["IDCliente"].ToString().Trim().PadLeft(6, '0');

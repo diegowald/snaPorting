@@ -542,33 +542,37 @@ namespace Catalogo._rendiciones
 
             if (pOper == "add") 
             {
-                adoCMD.Parameters.Add("pF_Rendicion", System.Data.OleDb.OleDbType.Date).Value = pF_Rendicion;
-                adoCMD.Parameters.Add("pDescripcion", System.Data.OleDb.OleDbType.VarChar, 128).Value = pDescripcion.Trim();
-                adoCMD.Parameters.Add("pEfectivo_Monto",System.Data.OleDb.OleDbType.Single).Value =  pEfectivo_Monto;
-                adoCMD.Parameters.Add("pDolar_Cantidad", System.Data.OleDb.OleDbType.Single).Value =  pDolar_Cantidad;
-                adoCMD.Parameters.Add("pEuros_Cantidad", System.Data.OleDb.OleDbType.Single).Value =  pEuros_Cantidad;
-                adoCMD.Parameters.Add("pCheques_Monto", System.Data.OleDb.OleDbType.Single).Value =  pCheques_Monto;
-                adoCMD.Parameters.Add("pCheques_Cantidad", System.Data.OleDb.OleDbType.TinyInt).Value =  pCheques_Cantidad;
-                adoCMD.Parameters.Add("pCertificados_Monto", System.Data.OleDb.OleDbType.Single).Value =  pCertificados_Monto;
-                adoCMD.Parameters.Add("pCertificados_Cantidad", System.Data.OleDb.OleDbType.TinyInt).Value =  pCertificados_Cantidad;
-
-                adoCMD.Connection = Global01.Conexion;
-                adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
-                adoCMD.CommandText = "usp_Rendicion_add";
-
                 if (_TranActiva!= null)
                 {
                     adoCMD.Transaction = _TranActiva;
                 }
                 try
                 {
-                    adoCMD.ExecuteNonQuery();
-
-                    System.Data.OleDb.OleDbDataReader rec = null;
-                    rec = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "@@identity");
-                    rec.Read();
-                    pID = Int16.Parse(rec["ID"].ToString());
+                    pID = 1;
+                    OleDbDataReader rec = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT TOP 1 NroRendicion FROM tblRendicion ORDER BY NroRendicion DESC");
+                    if (rec.HasRows)
+                    {
+                        rec.Read();
+                        pID = Int16.Parse(rec["NroRendicion"].ToString() + 1);
+                    }
                     rec = null;
+
+                    adoCMD.Parameters.Add("pID", System.Data.OleDb.OleDbType.Integer).Value = pID;
+                    adoCMD.Parameters.Add("pF_Rendicion", System.Data.OleDb.OleDbType.Date).Value = pF_Rendicion;
+                    adoCMD.Parameters.Add("pDescripcion", System.Data.OleDb.OleDbType.VarChar, 128).Value = pDescripcion.Trim();
+                    adoCMD.Parameters.Add("pEfectivo_Monto", System.Data.OleDb.OleDbType.Single).Value = pEfectivo_Monto;
+                    adoCMD.Parameters.Add("pDolar_Cantidad", System.Data.OleDb.OleDbType.Single).Value = pDolar_Cantidad;
+                    adoCMD.Parameters.Add("pEuros_Cantidad", System.Data.OleDb.OleDbType.Single).Value = pEuros_Cantidad;
+                    adoCMD.Parameters.Add("pCheques_Monto", System.Data.OleDb.OleDbType.Single).Value = pCheques_Monto;
+                    adoCMD.Parameters.Add("pCheques_Cantidad", System.Data.OleDb.OleDbType.TinyInt).Value = pCheques_Cantidad;
+                    adoCMD.Parameters.Add("pCertificados_Monto", System.Data.OleDb.OleDbType.Single).Value = pCertificados_Monto;
+                    adoCMD.Parameters.Add("pCertificados_Cantidad", System.Data.OleDb.OleDbType.TinyInt).Value = pCertificados_Cantidad;
+
+                    adoCMD.Connection = Global01.Conexion;
+                    adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
+                    adoCMD.CommandText = "usp_Rendicion_add";
+
+                    adoCMD.ExecuteNonQuery();
 
                 }
                 catch (Exception ex)
@@ -581,20 +585,19 @@ namespace Catalogo._rendiciones
 	        } 
             else if (pOper == "upd") 
             {
-		        adoCMD.Parameters.Add("pF_Rendicion", System.Data.OleDb.OleDbType.Date).Value =  pF_Rendicion;
-		        adoCMD.Parameters.Add("pDescripcion", System.Data.OleDb.OleDbType.VarChar, 128).Value = pDescripcion.Trim();
-		        adoCMD.Parameters.Add("pID", System.Data.OleDb.OleDbType.Integer).Value =  pID;
-
-                adoCMD.Connection = Global01.Conexion;
-                adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
-                adoCMD.CommandText = "usp_Rendicion_upd";
-
                 if (_TranActiva!= null)
                 {
                     adoCMD.Transaction = _TranActiva;
                 }
                 try
                 {
+                    adoCMD.Parameters.Add("pF_Rendicion", System.Data.OleDb.OleDbType.Date).Value = pF_Rendicion;
+                    adoCMD.Parameters.Add("pDescripcion", System.Data.OleDb.OleDbType.VarChar, 128).Value = pDescripcion.Trim();
+                    adoCMD.Parameters.Add("pID", System.Data.OleDb.OleDbType.Integer).Value = pID;
+
+                    adoCMD.Connection = Global01.Conexion;
+                    adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
+                    adoCMD.CommandText = "usp_Rendicion_upd";
                     adoCMD.ExecuteNonQuery();
                 }
                 catch (Exception ex)
@@ -614,24 +617,25 @@ namespace Catalogo._rendiciones
 
             if (pOper == "add") 
             {		
-	            adoCMD.Parameters.Add("pNroRendicion", System.Data.OleDb.OleDbType.Integer).Value =  pNroRendicion;
-	            adoCMD.Parameters.Add("pBco_Dep_Tipo", System.Data.OleDb.OleDbType.VarChar, 1).Value = pBco_Dep_Tipo;
-	            adoCMD.Parameters.Add("pBco_Dep_Fecha",  System.Data.OleDb.OleDbType.Date).Value =  pBco_Dep_Fecha;
-	            adoCMD.Parameters.Add("pBco_Dep_Numero", System.Data.OleDb.OleDbType.Integer).Value =  pBco_Dep_Numero;
-	            adoCMD.Parameters.Add("pBco_Dep_Monto", System.Data.OleDb.OleDbType.Single).Value =  pBco_Dep_Monto;
-	            adoCMD.Parameters.Add("pBco_Dep_Ch_Cantidad", System.Data.OleDb.OleDbType.TinyInt).Value =  pBco_Dep_Ch_Cantidad;
-	            adoCMD.Parameters.Add("pDetalle", System.Data.OleDb.OleDbType.VarChar, 128).Value = pDetalle;
-
-                adoCMD.Connection = Global01.Conexion;
-                adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
-                adoCMD.CommandText = "usp_RendicionValores_add";
-                
+               
                 if (_TranActiva!= null)
                 {
                     adoCMD.Transaction = _TranActiva;
                 }
                 try
                 {
+                    adoCMD.Parameters.Add("pNroRendicion", System.Data.OleDb.OleDbType.Integer).Value = pNroRendicion;
+                    adoCMD.Parameters.Add("pBco_Dep_Tipo", System.Data.OleDb.OleDbType.VarChar, 1).Value = pBco_Dep_Tipo;
+                    adoCMD.Parameters.Add("pBco_Dep_Fecha", System.Data.OleDb.OleDbType.Date).Value = pBco_Dep_Fecha;
+                    adoCMD.Parameters.Add("pBco_Dep_Numero", System.Data.OleDb.OleDbType.Integer).Value = pBco_Dep_Numero;
+                    adoCMD.Parameters.Add("pBco_Dep_Monto", System.Data.OleDb.OleDbType.Single).Value = pBco_Dep_Monto;
+                    adoCMD.Parameters.Add("pBco_Dep_Ch_Cantidad", System.Data.OleDb.OleDbType.TinyInt).Value = pBco_Dep_Ch_Cantidad;
+                    adoCMD.Parameters.Add("pDetalle", System.Data.OleDb.OleDbType.VarChar, 128).Value = pDetalle;
+
+                    adoCMD.Connection = Global01.Conexion;
+                    adoCMD.CommandType = System.Data.CommandType.StoredProcedure;
+                    adoCMD.CommandText = "usp_RendicionValores_add";
+
                     adoCMD.ExecuteNonQuery();
                 }
                 catch (Exception ex)
@@ -644,10 +648,10 @@ namespace Catalogo._rendiciones
             adoCMD = null;
         }
   
-	    private void CerrarToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
-	    {
-		    Accion_Click(tAccion.Cerrar);
-	    }
+        //private void CerrarToolStripMenuItem_Click(System.Object sender, System.EventArgs e)
+        //{
+        //    Accion_Click(tAccion.Cerrar);
+        //}
 
         //private void AccionMenu(string menuItemText)
         //{
@@ -853,9 +857,7 @@ namespace Catalogo._rendiciones
 
             m.Accion = tAccion.Neutro;
             CambiarA(tEstado.Neutro);        
-            Habilita(m.Accion);
-
-		    
+            Habilita(m.Accion);	    
         }	
 
         private void TotalRecibos()
