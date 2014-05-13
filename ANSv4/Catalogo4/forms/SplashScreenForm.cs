@@ -51,7 +51,7 @@ namespace Catalogo.varios
         /// <summary>
         /// Displays the splashscreen
         /// </summary>
-        public void ShowSplashScreen()
+        internal void ShowSplashScreen()
         {
             if (InvokeRequired)
             {
@@ -67,7 +67,7 @@ namespace Catalogo.varios
         /// <summary>
         /// Closes the SplashScreen
         /// </summary>
-        public void CloseSplashScreen()
+        internal void CloseSplashScreen()
         {
             if (InvokeRequired)
             {
@@ -83,7 +83,7 @@ namespace Catalogo.varios
         /// Update text in default green color of success message
         /// </summary>
         /// <param name="Text">Message</param>
-        public void UdpateStatusText(string Text)
+        internal void UdpateStatusText(string Text)
         {
             if (InvokeRequired)
             {
@@ -96,7 +96,7 @@ namespace Catalogo.varios
             label1.Text = Text;
         }
 
-        public void UpdateStatusText2(string Text)
+        internal void UpdateStatusText2(string Text)
         {
             if (InvokeRequired)
             {
@@ -113,7 +113,7 @@ namespace Catalogo.varios
         /// </summary>
         /// <param name="Text">Message</param>
         /// <param name="tom">Type of Message</param>
-        public void UdpateStatusTextWithStatus(string Text, TypeOfMessage tom)
+        internal void UdpateStatusTextWithStatus(string Text, TypeOfMessage tom)
         {
             if (InvokeRequired)
             {
@@ -148,7 +148,7 @@ namespace Catalogo.varios
                 e.Cancel = true;
         }
 
-        public void onRecibir(Catalogo.varios.complexMessage dato)
+        internal void onRecibir(Catalogo.varios.complexMessage dato)
         {
             if (InvokeRequired)
             {
@@ -192,7 +192,7 @@ namespace Catalogo.varios
             btnCancel.Show();
         }
 
-        public void onRequestCancel(ref bool cancel)
+        internal void onRequestCancel(ref bool cancel)
         {
             cancel = doCancel;
             if (InvokeRequired)

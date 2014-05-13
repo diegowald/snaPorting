@@ -94,12 +94,12 @@ namespace Catalogo.RendicionWS {
         }
         
         /// <remarks/>
-        public void EnviarRendicionAsync(string MacAddress, string NroRendicion, string IdViajante, string F_Rendicion, string Observaciones, string Efectivo, string Dolares, string Euros, string ChequesCant, string ChequesMonto, string CertificadosCant, string CertificadosMonto, string DetalleValores, string DetalleRecibos) {
+        internal void EnviarRendicionAsync(string MacAddress, string NroRendicion, string IdViajante, string F_Rendicion, string Observaciones, string Efectivo, string Dolares, string Euros, string ChequesCant, string ChequesMonto, string CertificadosCant, string CertificadosMonto, string DetalleValores, string DetalleRecibos) {
             this.EnviarRendicionAsync(MacAddress, NroRendicion, IdViajante, F_Rendicion, Observaciones, Efectivo, Dolares, Euros, ChequesCant, ChequesMonto, CertificadosCant, CertificadosMonto, DetalleValores, DetalleRecibos, null);
         }
         
         /// <remarks/>
-        public void EnviarRendicionAsync(string MacAddress, string NroRendicion, string IdViajante, string F_Rendicion, string Observaciones, string Efectivo, string Dolares, string Euros, string ChequesCant, string ChequesMonto, string CertificadosCant, string CertificadosMonto, string DetalleValores, string DetalleRecibos, object userState) {
+        internal void EnviarRendicionAsync(string MacAddress, string NroRendicion, string IdViajante, string F_Rendicion, string Observaciones, string Efectivo, string Dolares, string Euros, string ChequesCant, string ChequesMonto, string CertificadosCant, string CertificadosMonto, string DetalleValores, string DetalleRecibos, object userState) {
             if ((this.EnviarRendicionOperationCompleted == null)) {
                 this.EnviarRendicionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarRendicionOperationCompleted);
             }

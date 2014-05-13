@@ -84,7 +84,7 @@ namespace Catalogo
             Catalogo.varios.NotificationCenter.instance.refreshNovedades += refreshNovedades;
         }
 
-        public void updateBanner(string filename)
+        internal void updateBanner(string filename)
         {
             if (Global01.miSABOR < Global01.TiposDeCatalogo.Viajante)
             {
@@ -343,8 +343,8 @@ namespace Catalogo
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            //this.Close();
-            System.Windows.Application.Current.MainWindow.Close();
+            this.Close();
+            //System.Windows.Application.Current.MainWindow.Close();
         }
 
         private void ChangeViewButton_Click(object sender, RoutedEventArgs e)
@@ -740,7 +740,7 @@ namespace Catalogo
             }
         }
 
-        public void doEvents()
+        internal void doEvents()
         {
             Application.Current.Dispatcher.Invoke(new System.Threading.ThreadStart(delegate { }),
                 System.Windows.Threading.DispatcherPriority.Background);

@@ -60,7 +60,7 @@ namespace Catalogo._productos
         /// </para>
         /// </remarks>
         /// 
-        public void PopulateFilterColumns(ref ComboBox comboBox, DataTable dataTable, string colName)
+        internal void PopulateFilterColumns(ref ComboBox comboBox, DataTable dataTable, string colName)
         {
             // Make sure all components exist
             if (comboBox == null) { return; }
@@ -209,7 +209,7 @@ namespace Catalogo._productos
         /// </para>
         /// </remarks>
         /// 
-        public void RemoveFilter(ref string filterString, string columnName)
+        internal void RemoveFilter(ref string filterString, string columnName)
         {
             int index1;
             int index2;
@@ -266,7 +266,7 @@ namespace Catalogo._productos
         /// </para>
         /// </remarks>
         /// 
-        public void ApplyFilter(ref string filterString, string colName, object colValue)
+        internal void ApplyFilter(ref string filterString, string colName, object colValue)
         {
             // Catch all - if value is "(All") just return, nothing to filter
             if ((Convert.ToString(colValue) == "(todos)")) { return; }
@@ -285,7 +285,7 @@ namespace Catalogo._productos
             }
         }
         
-        public void ApplyFilterStartDate(ref string filterString, string colName, object colValue)
+        internal void ApplyFilterStartDate(ref string filterString, string colName, object colValue)
         {
             string colFilter = addFilterStartDate(colName, colValue);
             if (string.IsNullOrEmpty(filterString))
@@ -298,7 +298,7 @@ namespace Catalogo._productos
             }
         }
 
-        public void ReplaceFilterStartDate(ref string filterString, string colName, object colValue)
+        internal void ReplaceFilterStartDate(ref string filterString, string colName, object colValue)
         {
             string foundFilter = GetFilter(filterString, colName);
             if (foundFilter == "(todos)")
@@ -436,7 +436,7 @@ namespace Catalogo._productos
         }
 
 
-        public void ApplyFilter(ref string filterString, string colName, object colValue, object colValue2)
+        internal void ApplyFilter(ref string filterString, string colName, object colValue, object colValue2)
         {
             string colFilter = addFilter(colName, colValue, colValue2);
             if (string.IsNullOrEmpty(filterString))
@@ -591,7 +591,7 @@ namespace Catalogo._productos
         /// </para>
         /// </remarks>
         /// 
-        public void PopulateFilter(ref System.Collections.Specialized.OrderedDictionary filters, DataTable dtSource, string columnName)
+        internal void PopulateFilter(ref System.Collections.Specialized.OrderedDictionary filters, DataTable dtSource, string columnName)
         {
             string addValue;
             string xMarca = "";

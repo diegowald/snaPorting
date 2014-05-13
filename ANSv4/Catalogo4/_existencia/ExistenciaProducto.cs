@@ -18,7 +18,7 @@ namespace Catalogo.util.BackgroundTasks
 
         private string _semaforo;
 
-        public void getExistencia(string idProducto, string idUsuario, System.Windows.Forms.DataGridViewCell cell)
+        internal void getExistencia(string idProducto, string idUsuario, System.Windows.Forms.DataGridViewCell cell)
         {
             _idProducto = idProducto;
             _idUsuario = idUsuario;

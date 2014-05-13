@@ -91,12 +91,12 @@ namespace Catalogo.InterDepositoWS {
         }
         
         /// <remarks/>
-        public void EnviarInterDepositoAsync(string MacAddress, string NroInterDeposito, string CodCliente, string Bco_Dep_Tipo, string Bco_Dep_Fecha, string Bco_Dep_Numero, string Bco_Dep_Monto, string Bco_Dep_Ch_Cantidad, string Bco_Dep_IdCta, string Observaciones, string Detalle) {
+        internal void EnviarInterDepositoAsync(string MacAddress, string NroInterDeposito, string CodCliente, string Bco_Dep_Tipo, string Bco_Dep_Fecha, string Bco_Dep_Numero, string Bco_Dep_Monto, string Bco_Dep_Ch_Cantidad, string Bco_Dep_IdCta, string Observaciones, string Detalle) {
             this.EnviarInterDepositoAsync(MacAddress, NroInterDeposito, CodCliente, Bco_Dep_Tipo, Bco_Dep_Fecha, Bco_Dep_Numero, Bco_Dep_Monto, Bco_Dep_Ch_Cantidad, Bco_Dep_IdCta, Observaciones, Detalle, null);
         }
         
         /// <remarks/>
-        public void EnviarInterDepositoAsync(string MacAddress, string NroInterDeposito, string CodCliente, string Bco_Dep_Tipo, string Bco_Dep_Fecha, string Bco_Dep_Numero, string Bco_Dep_Monto, string Bco_Dep_Ch_Cantidad, string Bco_Dep_IdCta, string Observaciones, string Detalle, object userState) {
+        internal void EnviarInterDepositoAsync(string MacAddress, string NroInterDeposito, string CodCliente, string Bco_Dep_Tipo, string Bco_Dep_Fecha, string Bco_Dep_Numero, string Bco_Dep_Monto, string Bco_Dep_Ch_Cantidad, string Bco_Dep_IdCta, string Observaciones, string Detalle, object userState) {
             if ((this.EnviarInterDepositoOperationCompleted == null)) {
                 this.EnviarInterDepositoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarInterDepositoOperationCompleted);
             }

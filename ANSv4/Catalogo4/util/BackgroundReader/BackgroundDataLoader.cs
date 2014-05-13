@@ -42,7 +42,7 @@ namespace Catalogo.Funciones.BackgroundReader
 
         public WorkFinishedHandler onWorkFinishedHandler;
 
-        public void executeQuery(string sqlCommand)
+        internal void executeQuery(string sqlCommand)
         {
             this.sqlCommand = sqlCommand;
             dataTable = null;

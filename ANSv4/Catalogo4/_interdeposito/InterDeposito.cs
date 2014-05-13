@@ -121,7 +121,7 @@ namespace Catalogo._interdeposito
             return (mvarConexion != null);
         }
 
-        public void Guardar(string Origen)
+        internal void Guardar(string Origen)
         {
             if (!(ValidarConexion()))
                 return;
@@ -232,7 +232,7 @@ namespace Catalogo._interdeposito
             }
         }
 
-        public void ADDFacturas(string T_Comprobante, string N_Comprobante, float Importe)
+        internal void ADDFacturas(string T_Comprobante, string N_Comprobante, float Importe)
 	    {
 		    InterDepositoFacturas mvarItem = new InterDepositoFacturas();
 

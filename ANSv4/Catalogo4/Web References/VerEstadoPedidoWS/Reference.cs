@@ -88,12 +88,12 @@ namespace Catalogo.VerEstadoPedidoWS {
         }
         
         /// <remarks/>
-        public void ObtenerEstadoAsync(string MacAddress, string IDAns, string PedidoNro) {
+        internal void ObtenerEstadoAsync(string MacAddress, string IDAns, string PedidoNro) {
             this.ObtenerEstadoAsync(MacAddress, IDAns, PedidoNro, null);
         }
         
         /// <remarks/>
-        public void ObtenerEstadoAsync(string MacAddress, string IDAns, string PedidoNro, object userState) {
+        internal void ObtenerEstadoAsync(string MacAddress, string IDAns, string PedidoNro, object userState) {
             if ((this.ObtenerEstadoOperationCompleted == null)) {
                 this.ObtenerEstadoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerEstadoOperationCompleted);
             }
@@ -120,12 +120,12 @@ namespace Catalogo.VerEstadoPedidoWS {
         }
         
         /// <remarks/>
-        public void ObtenerZonaClienteAsync(string MacAddress, string IDAns) {
+        internal void ObtenerZonaClienteAsync(string MacAddress, string IDAns) {
             this.ObtenerZonaClienteAsync(MacAddress, IDAns, null);
         }
         
         /// <remarks/>
-        public void ObtenerZonaClienteAsync(string MacAddress, string IDAns, object userState) {
+        internal void ObtenerZonaClienteAsync(string MacAddress, string IDAns, object userState) {
             if ((this.ObtenerZonaClienteOperationCompleted == null)) {
                 this.ObtenerZonaClienteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerZonaClienteOperationCompleted);
             }

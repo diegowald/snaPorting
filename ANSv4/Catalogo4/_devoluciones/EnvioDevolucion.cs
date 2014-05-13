@@ -42,7 +42,7 @@ namespace Catalogo._devoluciones
 
         private System.Data.OleDb.OleDbConnection Conexion1;
 
-        public void ObtenerDatos(string NroDevolucion)
+        internal void ObtenerDatos(string NroDevolucion)
         {
 
             System.Data.OleDb.OleDbDataReader Enc = null;
@@ -138,7 +138,7 @@ namespace Catalogo._devoluciones
         }
 
 
-        public void Inicializar(string ipAddress, string MacAddress)
+        internal void Inicializar(string ipAddress, string MacAddress)
         {
             bool Conectado = util.network.IPCache.instance.conectado;
 

@@ -278,7 +278,7 @@ namespace Catalogo.util.BackgroundTasks
         }
                 
         
-        public void onRecibir(Catalogo.varios.complexMessage msg)
+        internal void onRecibir(Catalogo.varios.complexMessage msg)
         {
             //Catalogo.varios.NotificationCenter.instance.notificar(dato.first, dato.second);
             Catalogo.varios.NotificationCenter.instance.notificar(msg);
@@ -290,12 +290,12 @@ namespace Catalogo.util.BackgroundTasks
             set;
         }
 
-        public void onRequestCancel(ref bool cancel)
+        internal void onRequestCancel(ref bool cancel)
         {
             Catalogo.varios.NotificationCenter.instance.requestCancel(ref cancel);
         }
 
-        public void onRecibir(string dato)
+        internal void onRecibir(string dato)
         {
             Catalogo.varios.NotificationCenter.instance.requestRefreshNovedades();
         }

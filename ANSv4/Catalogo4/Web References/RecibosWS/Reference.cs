@@ -93,12 +93,12 @@ namespace Catalogo.RecibosWS {
         }
         
         /// <remarks/>
-        public void EnviarReciboAsync(string MacAddress, string NroRecibo, string CodCliente, string Fecha, string Bahia, string Total, string Detalle, string Facturas) {
+        internal void EnviarReciboAsync(string MacAddress, string NroRecibo, string CodCliente, string Fecha, string Bahia, string Total, string Detalle, string Facturas) {
             this.EnviarReciboAsync(MacAddress, NroRecibo, CodCliente, Fecha, Bahia, Total, Detalle, Facturas, null);
         }
         
         /// <remarks/>
-        public void EnviarReciboAsync(string MacAddress, string NroRecibo, string CodCliente, string Fecha, string Bahia, string Total, string Detalle, string Facturas, object userState) {
+        internal void EnviarReciboAsync(string MacAddress, string NroRecibo, string CodCliente, string Fecha, string Bahia, string Total, string Detalle, string Facturas, object userState) {
             if ((this.EnviarReciboOperationCompleted == null)) {
                 this.EnviarReciboOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarReciboOperationCompleted);
             }
@@ -137,12 +137,12 @@ namespace Catalogo.RecibosWS {
         }
         
         /// <remarks/>
-        public void EnviarRecibo317Async(string MacAddress, string NroRecibo, string CodCliente, string Fecha, string Bahia, string Total, string Detalle, string Facturas, string NotasCredito) {
+        internal void EnviarRecibo317Async(string MacAddress, string NroRecibo, string CodCliente, string Fecha, string Bahia, string Total, string Detalle, string Facturas, string NotasCredito) {
             this.EnviarRecibo317Async(MacAddress, NroRecibo, CodCliente, Fecha, Bahia, Total, Detalle, Facturas, NotasCredito, null);
         }
         
         /// <remarks/>
-        public void EnviarRecibo317Async(string MacAddress, string NroRecibo, string CodCliente, string Fecha, string Bahia, string Total, string Detalle, string Facturas, string NotasCredito, object userState) {
+        internal void EnviarRecibo317Async(string MacAddress, string NroRecibo, string CodCliente, string Fecha, string Bahia, string Total, string Detalle, string Facturas, string NotasCredito, object userState) {
             if ((this.EnviarRecibo317OperationCompleted == null)) {
                 this.EnviarRecibo317OperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarRecibo317OperationCompleted);
             }

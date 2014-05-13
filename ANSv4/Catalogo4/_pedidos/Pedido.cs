@@ -88,7 +88,7 @@ namespace Catalogo._pedidos
             return (mvarConexion != null);
         }
 
-        public void Guardar(string Origen)
+        internal void Guardar(string Origen)
         {
             if (!(ValidarConexion()))
                 return;
@@ -187,7 +187,7 @@ namespace Catalogo._pedidos
 
         }
 
-        public void ADDItem(string IDCatalogo, float Precio, int cantidad, bool Similar, byte Deposito, bool Oferta, string Observaciones)
+        internal void ADDItem(string IDCatalogo, float Precio, int cantidad, bool Similar, byte Deposito, bool Oferta, string Observaciones)
         {
             //OJO chkEsOfertaBahia===Bahia
 

@@ -88,7 +88,7 @@ namespace Catalogo._devoluciones
             return (mvarConexion != null);
         }
 
-        public void Guardar(string Origen)
+        internal void Guardar(string Origen)
         {
             if (!(ValidarConexion()))
                 return;
@@ -176,7 +176,7 @@ namespace Catalogo._devoluciones
             }
         }
 
-        public void ADDItem(string IDCatalogo, int cantidad, byte Deposito, string Factura, byte TipoDev, string Vehiculo, string Modelo, string Motor, string KM, string Observaciones)
+        internal void ADDItem(string IDCatalogo, int cantidad, byte Deposito, string Factura, byte TipoDev, string Vehiculo, string Modelo, string Motor, string KM, string Observaciones)
         {
             DevolucionItem mvarItem = new DevolucionItem();
 

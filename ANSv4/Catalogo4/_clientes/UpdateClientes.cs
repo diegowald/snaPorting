@@ -74,7 +74,7 @@ namespace Catalogo._clientes
         }
 
 
-        public void sincronizarClientes()
+        internal void sincronizarClientes()
         {
             try
             {

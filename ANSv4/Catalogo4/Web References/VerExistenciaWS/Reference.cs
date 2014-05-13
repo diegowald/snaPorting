@@ -88,12 +88,12 @@ namespace Catalogo.VerExistenciaWS {
         }
         
         /// <remarks/>
-        public void ObtenerExistenciaAsync(string MacAddress, string IDAns, string IdProducto) {
+        internal void ObtenerExistenciaAsync(string MacAddress, string IDAns, string IdProducto) {
             this.ObtenerExistenciaAsync(MacAddress, IDAns, IdProducto, null);
         }
         
         /// <remarks/>
-        public void ObtenerExistenciaAsync(string MacAddress, string IDAns, string IdProducto, object userState) {
+        internal void ObtenerExistenciaAsync(string MacAddress, string IDAns, string IdProducto, object userState) {
             if ((this.ObtenerExistenciaOperationCompleted == null)) {
                 this.ObtenerExistenciaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerExistenciaOperationCompleted);
             }
@@ -120,12 +120,12 @@ namespace Catalogo.VerExistenciaWS {
         }
         
         /// <remarks/>
-        public void ObtenerZonaClienteAsync(string MacAddress, string IDAns) {
+        internal void ObtenerZonaClienteAsync(string MacAddress, string IDAns) {
             this.ObtenerZonaClienteAsync(MacAddress, IDAns, null);
         }
         
         /// <remarks/>
-        public void ObtenerZonaClienteAsync(string MacAddress, string IDAns, object userState) {
+        internal void ObtenerZonaClienteAsync(string MacAddress, string IDAns, object userState) {
             if ((this.ObtenerZonaClienteOperationCompleted == null)) {
                 this.ObtenerZonaClienteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerZonaClienteOperationCompleted);
             }

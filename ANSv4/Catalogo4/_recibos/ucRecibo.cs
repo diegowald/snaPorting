@@ -1620,7 +1620,7 @@ namespace Catalogo._recibos
             set;
         }
 
-        public void onRecibir(short dato)
+        internal void onRecibir(short dato)
         {
             if (btnIniciar.Tag.ToString() == "INICIAR")
                 cboCliente.SelectedValue = dato;

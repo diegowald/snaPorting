@@ -44,7 +44,7 @@ namespace Catalogo.util
         [DllImport("user32.dll", CharSet = CharSet.Ansi, SetLastError = true, ExactSpelling = true)]
 	    public static extern bool FlashWindowEx(ref FlashWindowInfo pInfo);
 
-	    public void FlashWindow1(Form frmForm, enuFlashOptions FlashWindowInfoFlags, uint intFlashTimes = 5)
+	    internal void FlashWindow1(Form frmForm, enuFlashOptions FlashWindowInfoFlags, uint intFlashTimes = 5)
 	    {
 		    if ((frmForm.WindowState == FormWindowState.Minimized) | FlashWindowInfoFlags == enuFlashOptions.FLASHW_STOP) {
 			    FlashWindowInfo info = default(FlashWindowInfo);

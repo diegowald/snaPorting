@@ -27,7 +27,7 @@ namespace Catalogo.varios
         public refreshNovedadesDelegate refreshNovedades;
         public updateBannerDelegate updateBanner;
 
-        public void notificar(complexMessage msg)
+        internal void notificar(complexMessage msg)
         {
             this.emitir(msg);
         }
@@ -67,7 +67,7 @@ namespace Catalogo.varios
             }
         }
 
-        public void requestCancel(ref bool cancel)
+        internal void requestCancel(ref bool cancel)
         {
             this.askCancel(ref cancel);
         }

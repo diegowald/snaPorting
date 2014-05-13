@@ -94,7 +94,7 @@ namespace Catalogo.Funciones
 
             System.Data.DataTable dt = null;
 
-            if (Campo2.ToLower() == "NewIndex")
+            if (Campo2.ToLower() == "newindex")
             {
                 DataColumn column = new DataColumn("newindex");
                 column.DataType = System.Type.GetType("System.Int32");
@@ -118,7 +118,9 @@ namespace Catalogo.Funciones
             if (AceptaNulo)
             {
                 System.Data.DataRow dr = dt.NewRow();
-                dr[1] = 0;
+                
+                if (Campo2.ToLower() != "newindex") dr[1] = 0;
+
                 if (Tabla=="v_Deposito")
                 {
                     dr[0] = "- DEP -";

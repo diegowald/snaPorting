@@ -39,7 +39,7 @@ namespace Catalogo._pedidos
         }
 
 
-        public void obtenerDatos(string NroPedido)
+        internal void obtenerDatos(string NroPedido)
         {
             System.Data.OleDb.OleDbDataReader enc = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Pedido_Enc '" + NroPedido + "'");
             System.Data.OleDb.OleDbDataReader det = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Pedido_Det '" + NroPedido + "'");
@@ -123,7 +123,7 @@ namespace Catalogo._pedidos
         }
 
 
-        public void inicializar(string ipAddress, string MacAddress)
+        internal void inicializar(string ipAddress, string MacAddress)
         {
             bool conectado = util.network.IPCache.instance.conectado;
 

@@ -90,7 +90,7 @@ namespace Catalogo.varios
             }
         }
       
-        //public void SendSupportEmail(string emailAddress, string subject, string body)
+        //internal void SendSupportEmail(string emailAddress, string subject, string body)
         //{
         //    Process.Start("mailto:" + emailAddress + "?subject=" + subject + "&body="
         //       + body + "&Attach=" + Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");

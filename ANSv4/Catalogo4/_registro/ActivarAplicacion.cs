@@ -30,7 +30,7 @@ namespace Catalogo._Application
             }
         }
 
-        public void inicializar(string MacAddress, string ipAddress)
+        internal void inicializar(string MacAddress, string ipAddress)
         {
             bool conectado = util.network.IPCache.instance.conectado;
 
@@ -107,7 +107,7 @@ namespace Catalogo._Application
             }
         }
 
-        public void activar()
+        internal void activar()
         {
             bool cancel = false;
             int estado;
@@ -213,7 +213,7 @@ namespace Catalogo._Application
             }
         }
 
-        public void estadoActual()
+        internal void estadoActual()
         {
             bool cancel = false;
             byte estado;
@@ -278,7 +278,7 @@ namespace Catalogo._Application
         }
 
 
-        public void listaPrecio()
+        internal void listaPrecio()
         {
             byte wListaPrecio;
             bool cancel = false;

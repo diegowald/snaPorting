@@ -84,12 +84,12 @@ namespace Catalogo.AuditWS {
         }
         
         /// <remarks/>
-        public void AuditInBlock304Async(string MacAddress, string Fechas, string Descripciones, string IDs) {
+        internal void AuditInBlock304Async(string MacAddress, string Fechas, string Descripciones, string IDs) {
             this.AuditInBlock304Async(MacAddress, Fechas, Descripciones, IDs, null);
         }
         
         /// <remarks/>
-        public void AuditInBlock304Async(string MacAddress, string Fechas, string Descripciones, string IDs, object userState) {
+        internal void AuditInBlock304Async(string MacAddress, string Fechas, string Descripciones, string IDs, object userState) {
             if ((this.AuditInBlock304OperationCompleted == null)) {
                 this.AuditInBlock304OperationCompleted = new System.Threading.SendOrPostCallback(this.OnAuditInBlock304OperationCompleted);
             }

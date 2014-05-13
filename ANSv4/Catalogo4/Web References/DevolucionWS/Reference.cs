@@ -86,12 +86,12 @@ namespace Catalogo.DevolucionWS {
         }
         
         /// <remarks/>
-        public void EnviarDevolucionAsync(string MacAddress, string NroDevolucion, string CodCliente, string Fecha, string Observaciones, string Detalle) {
+        internal void EnviarDevolucionAsync(string MacAddress, string NroDevolucion, string CodCliente, string Fecha, string Observaciones, string Detalle) {
             this.EnviarDevolucionAsync(MacAddress, NroDevolucion, CodCliente, Fecha, Observaciones, Detalle, null);
         }
         
         /// <remarks/>
-        public void EnviarDevolucionAsync(string MacAddress, string NroDevolucion, string CodCliente, string Fecha, string Observaciones, string Detalle, object userState) {
+        internal void EnviarDevolucionAsync(string MacAddress, string NroDevolucion, string CodCliente, string Fecha, string Observaciones, string Detalle, object userState) {
             if ((this.EnviarDevolucionOperationCompleted == null)) {
                 this.EnviarDevolucionOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarDevolucionOperationCompleted);
             }

@@ -288,7 +288,7 @@ namespace Catalogo._productos
             set;
         }
 
-        public void onRecibir(util.Pair<int, int> dato)
+        internal void onRecibir(util.Pair<int, int> dato)
         {
             showItemCounts(dato.first, dato.second);
         }

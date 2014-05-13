@@ -60,7 +60,7 @@ namespace Catalogo.preload
             }
         }
 
-        public void execute()
+        internal void execute()
         {
             if (table == null)
             {

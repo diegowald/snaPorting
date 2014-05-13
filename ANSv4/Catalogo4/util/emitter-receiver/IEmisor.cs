@@ -93,12 +93,12 @@ namespace Catalogo
                 protected emisorHandler emisor;
                 protected delegate void emisorHandler(T dato);
 
-                public void attachReceptor(IReceptor<T> receptor)
+                internal void attachReceptor(IReceptor<T> receptor)
                 {
                     emisor += receptor.onRecibir;
                 }
 
-                public void emitir(T dato)
+                internal void emitir(T dato)
                 {
                     if (emisor != null)
                     {
@@ -112,12 +112,12 @@ namespace Catalogo
                 protected emisorHandler emisor;
                 protected delegate void emisorHandler(T dato);
 
-                public void attachReceptor(IReceptor<T> receptor)
+                internal void attachReceptor(IReceptor<T> receptor)
                 {
                     emisor += receptor.onRecibir;
                 }
 
-                public void emitir(T dato)
+                internal void emitir(T dato)
                 {
                     if (emisor != null)
                     {
@@ -131,12 +131,12 @@ namespace Catalogo
                 protected emisorHandler2 emisor2;
                 protected delegate void emisorHandler2(T2 dato);
 
-                public void attachReceptor(IReceptor<T2> receptor)
+                internal void attachReceptor(IReceptor<T2> receptor)
                 {
                     emisor2 += receptor.onRecibir;
                 }
 
-                public void emitir2(T2 dato)
+                internal void emitir2(T2 dato)
                 {
                     if (emisor2 != null)
                     {
@@ -150,12 +150,12 @@ namespace Catalogo
                 protected emisorHandler3 emisor3;
                 protected delegate void emisorHandler3(T3 dato);
 
-                public void attachReceptor(IReceptor<T3> receptor)
+                internal void attachReceptor(IReceptor<T3> receptor)
                 {
                     emisor3 += receptor.onRecibir;
                 }
 
-                public void emitir3(T3 dato)
+                internal void emitir3(T3 dato)
                 {
                     if (emisor3 != null)
                     {

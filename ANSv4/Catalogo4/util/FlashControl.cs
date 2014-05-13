@@ -28,7 +28,7 @@ namespace Catalogo.varios
             }
         }
 
-        public void play()
+        internal void play()
         {
             try
             {

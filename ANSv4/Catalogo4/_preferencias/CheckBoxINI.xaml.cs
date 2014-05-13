@@ -113,7 +113,7 @@ namespace Catalogo._preferencias
                 _displayName = value;
             }
         }
-        public void setDisplayName(string displayName)
+        internal void setDisplayName(string displayName)
         {
             check.Content = displayName;
         }

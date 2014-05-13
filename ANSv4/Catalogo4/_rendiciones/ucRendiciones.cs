@@ -14,7 +14,6 @@ namespace Catalogo._rendiciones
     public partial class ucRendiciones : UserControl
 
     {
-        //private //const string m_sMODULENAME_ = "ucRendiciones";
         private System.Data.OleDb.OleDbTransaction _TranActiva = null;
 
         // - Definiciones Globales -----------
@@ -45,7 +44,7 @@ namespace Catalogo._rendiciones
 
         private struct TVariablesDelFormulario
         {
-            //public bool miError;
+          //public bool miError;
             public int ID;
             public bool escape;
             public System.Data.OleDb.OleDbDataReader DR;
@@ -66,7 +65,7 @@ namespace Catalogo._rendiciones
 
             _ToolTip.SetToolTip(btnIniciar, "INICIAR Rendición");
             _ToolTip.SetToolTip(btnImprimir, "Graba e Imprime la Rendición ...");
-            _ToolTip.SetToolTip(btnVer, "ver ...");
+
 
             if (!Global01.AppActiva)
             {
@@ -77,7 +76,6 @@ namespace Catalogo._rendiciones
 
         private bool DatosValidos(string pCampo)
         {
-
             bool sResultado = true;
 
             if (!(m.escape))
@@ -93,29 +91,21 @@ namespace Catalogo._rendiciones
 
                 if (pCampo.ToLower() == "valores")
                 {
-                    if (txtBd_Nro.Text.ToString().Trim().Length > 0)
-                    {
-                        if (float.Parse("0" + txtBd_Nro.Text) <= 0)
-                        {
-                            sResultado = false;
-                            MessageBox.Show("Debe ingresar Nro. de Boleta de Depósito", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        }
-                    }
-                    else
+                    if (float.Parse("0" + txtBd_Nro.Text) <= 0 & sResultado)
                     {
                         sResultado = false;
                         MessageBox.Show("Debe ingresar Nro. de Boleta de Depósito", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
 
-                    if (float.Parse("0" + txtBd_Monto.Text) <= 0)
+                    if (float.Parse("0" + txtBd_Monto.Text) <= 0 & sResultado)
                     {
                         sResultado = false;
                         MessageBox.Show("Debe ingresar monto del comprobante", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
 
-                    if (_opTipoDeposito_1.Checked == true)
+                    if (_opTipoDeposito_1.Checked & sResultado)
                     {
-                        if (cboCheques.SelectedIndex < 0)
+                        if (cboCheques.SelectedIndex <= 0)
                         {
                             sResultado = false;
                             MessageBox.Show("Debe elegir el cheque a rendir", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -125,6 +115,22 @@ namespace Catalogo._rendiciones
                         {
                             MessageBox.Show("Debe ingresar cantidad de cheques", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             sResultado = false;
+                        }
+                    }
+
+                    if (cboCheques.SelectedIndex > 0 & sResultado)
+                    {
+                        for (int i = 0; i < lvValores.Items.Count; i++)
+                        {
+                            if (lvValores.Items[i].SubItems[1].Text == "C")
+                            {
+                                if (lvValores.Items[i].SubItems[7].Text.Substring(lvValores.Items[i].SubItems[7].Text.IndexOf("-"), 12) == cboCheques.Text.Substring(cboCheques.Text.IndexOf("-"), 12))
+                                {
+                                    MessageBox.Show("El cheque, ya está cargado", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    sResultado = false;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
@@ -137,42 +143,32 @@ namespace Catalogo._rendiciones
 	    {		
             switch (Accion) {
 			    case tAccion.Nuevo:
+                    
+                    m.Accion = tAccion.Nuevo;
+				    CambiarA(tEstado.Nuevo);
+				    Habilita(m.Accion);
+
                     m.ID = 0;
 
-                    //if (cboRecibos.Items.Count > 0) cboRecibos.Items.Clear();
                     Funciones.util.CargaCombo(Global01.Conexion, ref cboRecibos, "v_Recibo_Enc_noR_cbo", "Descrip", "ID");
 
                     if (cboRecibos.Items.Count > 0) 
                     {
                         cboRecibos.SelectedIndex = cboRecibos.Items.Count-1; 
 	                    this.txtRecDesde.Text = cboRecibos.SelectedValue.ToString(); 
-	                    //cboRecibos.RemoveItem cboRecibos.ListCount - 1
+                        cboRecibos.SelectedIndex = 0;
                     };
                     
                     if (sTAB.SelectedIndex == 0)
                     {//Recibos
-	                    // dtF_Rendicion.SetFocus
 	                    txtDescripcion.Focus();
                     } 
                     else if (sTAB.SelectedIndex == 1)
                     {//Valores
 		                dtBd_Fecha.Focus();
                     };
-				    
-                    m.Accion = tAccion.Nuevo;
-				    CambiarA(tEstado.Nuevo);
-				    Habilita(m.Accion);
 
 				    break;
-			    case tAccion.Modificar:
-
-                //    CambiarA(tEstado.Nuevo);
-                //    m.Accion = tAccion.Modificar;
-                //    Habilita(m.Accion);
-
-                //    break;
-                ////cboClientes.SetFocus
-
 			    case tAccion.Guardar:
 	            
                     if (DatosValidos("grabar")) {
@@ -243,16 +239,15 @@ namespace Catalogo._rendiciones
                                 {
 				                    MessageBox.Show("La Rendición fue Actualizada con Éxito", "Datos Guardados", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			                    }
-					            m.Accion = tAccion.Guardar;
-					            CambiarA(tEstado.Neutro);
-					            Habilita(tAccion.Neutro);
+    
+                                m.Accion = tAccion.Neutro;
+                                CambiarA(tEstado.Neutro);
+                                Habilita(m.Accion);                    
 
 		                        m.ID  = 0;
-                                Rendicion_Imprimir(lblNroRendicion.Text.Substring(lblNroRendicion.Text.Length - 8));
+                                Rendicion_Imprimir(lblNroRendicion.Text);
 
-		                        m.Accion = tAccion.Cancelar;
-		                        CambiarA(tEstado.Neutro);
-		                        Habilita(m.Accion);
+                                LimpiarPantalla("all");
                             //}
                         }
                         catch (Exception ex)
@@ -277,18 +272,15 @@ namespace Catalogo._rendiciones
 			    case tAccion.Cancelar:
 
                     m.escape = true;
-                    CambiarA(tEstado.Neutro);
-				    m.Accion = tAccion.Cancelar;
-				    Habilita(m.Accion);
-
+                    m.Accion = tAccion.Neutro;
+                    CambiarA(tEstado.Neutro);        
+                    Habilita(m.Accion);
+                    LimpiarPantalla("all");
+                  
 				    break;
-			    case tAccion.Buscar:
-
-				    CambiarA(tEstado.Buscar);
-				    m.Accion = tAccion.Buscar;
-				    Habilita(m.Accion);
-
-				    break;
+                case tAccion.Buscar:
+                    sTAB.SelectedIndex = 2;
+                    break;
 			    case tAccion.Imprimir:
 
                     if (lblNroRendicion.Text.Trim().Length > 0)
@@ -296,7 +288,7 @@ namespace Catalogo._rendiciones
                         m.Accion = tAccion.Cancelar;
                         CambiarA(tEstado.Neutro);
 				        Habilita(m.Accion);                    
-                        Rendicion_Imprimir(lblNroRendicion.Text.Substring(lblNroRendicion.Text.Length - 8));
+                        Rendicion_Imprimir(lblNroRendicion.Text);
                     };
 
 				    break;
@@ -325,41 +317,7 @@ namespace Catalogo._rendiciones
 	                    }
                     }
 				    break;
-			    case tAccion.Neutro:
-                    if (lvBuscar.Items.Count > 0) {
-
-	                    sTAB.SelectedIndex = 0;
-	                    m.ID = Int16.Parse(m.ItemX.Text);
-                        
-	                    m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "NroRendicion=" + m.ID.ToString());
-
-                        //if (!(m.miError))
-                        //{
-		                    if (m.DR.HasRows) {
-			                    m.Accion = tAccion.Neutro;
-                                CambiarA(tEstado.Vista);
-			                    Habilita(m.Accion);
-                                m.DR.Read();
-			                    AsignarDatos();
-                                btnVer.Enabled = true;
-                            }
-                        //} else {
-                        //    MessageBox.Show("Errores al abrir la Rendición", "Error Crítico", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        //}
-	                    m.DR = null;
-                        m.ItemX = null;
-                    }
-				    break;
-			    case tAccion.Listas:
-				    break;
-			    case tAccion.Cerrar:
-
-				    m.Accion = tAccion.Cerrar;
-				    CambiarA(tEstado.Neutro);
-                    //this.Close();
-				    this.Dispose();
-				    break;
-		    }
+		        }
 
 	    }
 
@@ -372,9 +330,9 @@ namespace Catalogo._rendiciones
 					btnIniciar.Enabled = true;
 					btnImprimir.Enabled = false;
 					btnBuscar.Enabled = true;
-                    btnVer.Enabled = false;
-					btnEliminar.Enabled = false;
-                    sTAB.Visible = false;
+                    //btnVer.Enabled = false;
+                    //btnEliminar.Enabled = false;
+                    //sTAB.Visible = false;
 
 				    break;
 			    case tEstado.Nuevo:
@@ -382,8 +340,8 @@ namespace Catalogo._rendiciones
                     btnIniciar.Enabled = true;
 				    btnImprimir.Enabled = true;
 				    btnBuscar.Enabled = false;
-				    btnVer.Enabled = false;
-				    btnEliminar.Enabled = false;
+                    //btnVer.Enabled = false;
+                    //btnEliminar.Enabled = false;
 
 				    break;
 			    case tEstado.Modificar:
@@ -391,8 +349,8 @@ namespace Catalogo._rendiciones
 				    btnIniciar.Enabled = true;
 				    btnImprimir.Enabled = false;
 				    btnBuscar.Enabled = true;
-				    btnVer.Enabled = true;
-				    btnEliminar.Enabled = true;
+                    //btnVer.Enabled = true;
+                    //btnEliminar.Enabled = true;
 
 				    break;
 			    case tEstado.Buscar:
@@ -400,8 +358,8 @@ namespace Catalogo._rendiciones
 				    btnIniciar.Enabled = true;
 				    btnImprimir.Enabled = false;
 				    btnBuscar.Enabled = false;
-                    btnVer.Enabled = false;
-				    btnEliminar.Enabled = false;
+                    //btnVer.Enabled = false;
+                    //btnEliminar.Enabled = false;
 
 				    break;
 			    case tEstado.Imprimir:
@@ -409,8 +367,8 @@ namespace Catalogo._rendiciones
                     btnIniciar.Enabled = true;
 				    btnImprimir.Enabled = false;
 				    btnBuscar.Enabled = false;
-                    btnVer.Enabled = false;
-				    btnEliminar.Enabled = false;
+                    //btnVer.Enabled = false;
+                    //btnEliminar.Enabled = false;
 
 				    break;
 			    case tEstado.Eliminar:
@@ -418,8 +376,8 @@ namespace Catalogo._rendiciones
                     btnIniciar.Enabled = true;
 				    btnImprimir.Enabled = false;
 				    btnBuscar.Enabled = false;
-				    btnVer.Enabled = false;
-				    btnEliminar.Enabled = false;
+                    //btnVer.Enabled = false;
+                    //btnEliminar.Enabled = false;
 
 				    break;
 			    case tEstado.Vista:
@@ -427,8 +385,8 @@ namespace Catalogo._rendiciones
 				    btnIniciar.Enabled = true;
 				    btnImprimir.Enabled = false;
 				    btnBuscar.Enabled = true;
-                    btnVer.Enabled = false;
-				    btnEliminar.Enabled = true;
+                    //btnVer.Enabled = false;
+                    //btnEliminar.Enabled = true;
 
 				    break;
 		    }
@@ -443,12 +401,12 @@ namespace Catalogo._rendiciones
                     fraDatos1.Enabled = true;
                     fraLVRecibos.Enabled = true;
                     fraLVValores.Enabled = true;
-                    fraBuscar.Enabled = false;
+                    //fraBuscar.Enabled = false;
 
                     LimpiarPantalla("all");
 
 				    sTAB.SelectTab(0);
-                    sTAB.Visible = true;
+                    //sTAB.Visible = true;
 
 				    break;
 			    case tAccion.Modificar:
@@ -457,7 +415,7 @@ namespace Catalogo._rendiciones
                     fraDatos1.Enabled = true;
                     fraLVRecibos.Enabled = true;
                     fraLVValores.Enabled = true;
-                    fraBuscar.Enabled = false;
+                    //fraBuscar.Enabled = false;
 
 				    sTAB.SelectTab(0);
 
@@ -469,10 +427,10 @@ namespace Catalogo._rendiciones
                     fraLVRecibos.Enabled = false;
                     fraLVValores.Enabled = false;
 
-                    fraBuscar.Enabled = true;
+                    //fraBuscar.Enabled = true;
 				    LimpiarPantalla("buscar");
 				    sTAB.SelectTab(2);
-                    sTAB.Visible = true;
+                    //sTAB.Visible = true;
 
 				    break;
 			    case tAccion.Imprimir:
@@ -493,8 +451,8 @@ namespace Catalogo._rendiciones
                     fraDatos1.Enabled = false;
                     fraLVRecibos.Enabled = false;
                     fraLVValores.Enabled = false;
-                    fraBuscar.Enabled = false;
-                    lvBuscar.Visible = false;
+                    //fraBuscar.Enabled = false;
+                    //lvBuscar.Visible = false;
 
 				    break;
 			    case tAccion.Cancelar:
@@ -523,19 +481,23 @@ namespace Catalogo._rendiciones
 
 		    if ((Modo == "datos" | Modo == "all")) 
             {
-                //this.txtRecDesde.Text = "0";
+                this.txtRecDesde.Text = "0";
 		        this.txtRecHasta.Text = "0";
 		        cboRecibos.SelectedIndex = -1;
 		        lblIdValor.Text = "0";
+                cboCheques.Enabled = false;
+                cboCheques.DataSource = null;
+                cboCheques.Items.Clear();
 		    }
 
 		    if ((Modo == "valores" | Modo == "all")) 
             {
-		        dtBd_Fecha.Value = DateTime.Today.Date;
+                
+                dtBd_Fecha.Value = DateTime.Today.Date;
 
 		        txtBd_Monto.Text = "0,00";
 
-		        if (_opTipoDeposito_0.Checked == true) 
+		        if (_opTipoDeposito_0.Checked) 
                 {
 			        txtBdCh_Cantidad.Text = "0";
 			        txtBd_Nro.Text = "0";
@@ -546,29 +508,6 @@ namespace Catalogo._rendiciones
 
 		    //Me.opTipoDeposito.Item(0).value = True
 	        }
-
-		    if ((Modo == "buscar")) {
-		        txtBuscar.Text = "";
-		        mskFbuscar.Value = DateTime.Today.Date;
-		        lvBuscar.Items.Clear();
-                //gbBuscar.Text = " Buscar ... ";
-			    cmdBuscar.Text = "Buscar";
-
-			    _optBuscar_0.Checked = true;
-			    //mskFbuscar.Text = "__/__/____";
-			    txtBuscar.Text = "";
-			    //lvBuscar.ListItems.Clear;
-		    }
-
-		    if ((Modo == "imprimir")) {
-                //gbBuscar.Text = " Imprimir ... ";
-			    cmdBuscar.Text = "Imprimir";
-
-			    _optBuscar_0.Checked = true;
-			    //mskFbuscar.Text = "__/__/____"
-			    txtBuscar.Text = "";
-			    //lvBuscar.ListItems.Clear
-		    }
 
 		    if ((Modo == "all")) {
 	            lblEfectivoC.ForeColor = Color.Red;
@@ -595,32 +534,6 @@ namespace Catalogo._rendiciones
             }
 
 	    }
-
-        private bool ValidarBuscar()
-        {
-	        bool functionReturnValue = false;
-
-	        functionReturnValue = true;
-
-	        if (_optBuscar_0.Checked) {
-		        if (txtBuscar.Text.ToString().Trim().Length == 0) 
-                {
-			        MessageBox.Show("Debe ingresarse el valor a buscar!", "Datos Válidos", MessageBoxButtons.OK, MessageBoxIcon.Information );
-			        functionReturnValue = false;
-			        txtBuscar.Focus();
-		        }
-	        } 
-            else if (_optBuscar_1.Checked) 
-            {
-		        //            If Len(mskFbuscar.Text) = 0 Or Trim(mskFbuscar.Text) = "__/__/____" Then
-		        //                MsgBox "Debe ingresarse el valor a buscar!", vbOKOnly + vbInformation, "Datos Válidos"
-		        //                ValidarBuscar = False
-		        //                mskFbuscar.SetFocus
-		        //            End If
-	        }
-	        return functionReturnValue;
-
-        }
 
         private void addupdRendicion(string pOper, System.Data.OleDb.OleDbConnection Conexion, DateTime pF_Rendicion, string pDescripcion, float pEfectivo_Monto, float pDolar_Cantidad, float pEuros_Cantidad, byte pCheques_Cantidad, float pCheques_Monto, byte pCertificados_Cantidad, float pCertificados_Monto, ref int pID)
         {
@@ -692,9 +605,7 @@ namespace Catalogo._rendiciones
                 }                   
 
 	        }
-
 	        adoCMD = null;
-
         }
 
         private void addupdValores(string pOper, System.Data.OleDb.OleDbConnection Conexion, int pNroRendicion, string pBco_Dep_Tipo, System.DateTime pBco_Dep_Fecha, int pBco_Dep_Numero, float pBco_Dep_Monto, byte pBco_Dep_Ch_Cantidad, string pDetalle)
@@ -738,29 +649,29 @@ namespace Catalogo._rendiciones
 		    Accion_Click(tAccion.Cerrar);
 	    }
 
-	    private void AccionMenu(string menuItemText)
-	    {
-		    switch (menuItemText) {
-			    case "&Nuevo":
-				    // Simulate creating a new document by merely clearing the existing text.
-				    MessageBox.Show("nuevo");
-				    break; // TODO: might not be correct. Was : Exit Select
-			    case "&Open":
-				    break; // TODO: might not be correct. Was : Exit Select
-			    case "&Save":
-				    break; // TODO: might not be correct. Was : Exit Select
-			    case "C&errar":
-                    //this.Close();
-				    this.Dispose();
-				    break;
-		    }
+        //private void AccionMenu(string menuItemText)
+        //{
+        //    switch (menuItemText) {
+        //        case "&Nuevo":
+        //            // Simulate creating a new document by merely clearing the existing text.
+        //            MessageBox.Show("nuevo");
+        //            break; // TODO: might not be correct. Was : Exit Select
+        //        case "&Open":
+        //            break; // TODO: might not be correct. Was : Exit Select
+        //        case "&Save":
+        //            break; // TODO: might not be correct. Was : Exit Select
+        //        case "C&errar":
+        //            //this.Close();
+        //            this.Dispose();
+        //            break;
+        //    }
 
-	    }
+        //}
 
-	    private void MenuStrip1_ItemClicked(System.Object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)
-	    {
-		    AccionMenu(((ToolStripItem)e.ClickedItem).Text);
-	    }
+        //private void MenuStrip1_ItemClicked(System.Object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)
+        //{
+        //    AccionMenu(((ToolStripItem)e.ClickedItem).Text);
+        //}
 
 	
         private void AsignarDatos()
@@ -813,10 +724,13 @@ namespace Catalogo._rendiciones
             {
                 Cursor.Current = Cursors.WaitCursor;
                 CargarRecibosLV();
-                               
-                cboCheques.Items.Clear();
-                Funciones.util.CargaCombo(Global01.Conexion, ref cboCheques,"v_Recibo_Det_Cheques_Detalle","Descrip", "NewIndex","NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'","NONE",false,false,"Descrip");
 
+                cboCheques.DataSource = null;              
+                cboCheques.Items.Clear();
+
+                Funciones.util.CargaCombo(Global01.Conexion, ref cboCheques,"v_Recibo_Det_Cheques_Detalle","Descrip", "NewIndex","NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'","NONE",true,false,"Descrip");
+                cboCheques.Enabled = false;
+                txtBd_Monto.Text = "0,00";
                 TotalRecibos();
                 TotalControles();
 
@@ -902,16 +816,15 @@ namespace Catalogo._rendiciones
 
                     m.ItemX.Tag = "";
                     m.ItemX.SubItems.Add(((_opTipoDeposito_0.Checked == true) ? "E" : "C"));
-                    m.ItemX.SubItems.Add(dtBd_Fecha.Value.ToString());
+                    m.ItemX.SubItems.Add(dtBd_Fecha.Value.ToString("dd/MM/yyyy"));
                     m.ItemX.SubItems.Add(txtBd_Nro.Text);
                     m.ItemX.SubItems.Add(txtBd_Monto.Text);
                     m.ItemX.SubItems.Add(txtBdCh_Cantidad.Text);
                     m.ItemX.SubItems.Add("0"); //NroRendicion
 
-                    if (_opTipoDeposito_1.Checked == true)
+                    if (_opTipoDeposito_1.Checked)
                     {
-                        m.ItemX.SubItems.Add(cboCheques.SelectedText);
-                        // PABLO // cboCheques.Items.RemoveAt(cboCheques.SelectedIndex);
+                        m.ItemX.SubItems.Add(cboCheques.Text);
                     }
                     else
                     {
@@ -929,61 +842,19 @@ namespace Catalogo._rendiciones
             }
         }
 
-        private void cmdBuscar_Click(object sender, EventArgs e)
-        {
-            //const string PROCNAME_ = "cmdBuscar_Click";
-
-            if (ValidarBuscar())
-            {
-                lvBuscar.Items.Clear();
-
-                if (m.Accion == tAccion.Imprimir)
-                {
-
-                }
-                else
-                {
-                    if (_optBuscar_0.Checked)
-                    {
-                        // por nº de remito
-                        m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "NroRendicion= " + txtBuscar.Text.Trim());
-                    }
-                    else if (_optBuscar_1.Checked)
-                    {
-                        // por fecha
-                        m.DR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblRendicion", "F_Rendicion >= #" + mskFbuscar.Value.ToString("yyyy/MM/dd") + "# and F_Rendicion <= #" + mskFbuscar.Value.AddDays(60).ToString("yyyy/MM/dd") + "#", "F_Rendicion");
-                    }
-
-                    if (m.DR.HasRows)
-                    {
-                        Funciones.util.CargarLV(ref lvBuscar, m.DR);
-                        lvBuscar.Visible = true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("No se encontraron coincidencias con el valor buscado","Busqueda",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
-                        //txtBuscar.SetFocus
-                    }
-
-                    m.DR = null;
-                }
-            }
-        }
-
         private void ucRendiciones_Load(object sender, EventArgs e)
         {
-            //Funciones.util.SizeLastColumn(lvRecibos);
-            //Funciones.util.SizeLastColumn(lvValores);
-  
+            
+            ObtenerMovimientos();
+
             cboRecibos.SelectedIndex = -1;    
-            txtBuscar.Text = "";
-            mskFbuscar.Value = DateTime.Today.Date;
     
 		    LimpiarPantalla("all");
 
             m.Accion = tAccion.Neutro;
             CambiarA(tEstado.Neutro);        
             Habilita(m.Accion);
+
 		    
         }	
 
@@ -1039,7 +910,7 @@ namespace Catalogo._rendiciones
                 {
 			        lblChequesTotalV.Text = string.Format("{0:N2}",float.Parse("0" + lblChequesTotalV.Text) + float.Parse("0" + lvValores.Items[m.i].SubItems[4].Text));
 		        }
-		        lblChequesCantidadV.Text = string.Format("{0:N2}",float.Parse("0" + lblChequesCantidadV.Text) + float.Parse("0" + lvValores.Items[m.i].SubItems[5].Text));
+		        lblChequesCantidadV.Text = string.Format("{0:N0}",Int16.Parse("0" + lblChequesCantidadV.Text) + Int16.Parse("0" + lvValores.Items[m.i].SubItems[5].Text));
 		        lblTotalV.Text = string.Format("{0:N2}",float.Parse("0" + lblTotalV.Text) + float.Parse("0" + lvValores.Items[m.i].SubItems[4].Text));
 	        }
 
@@ -1064,8 +935,8 @@ namespace Catalogo._rendiciones
 
 	        lblEfectivoC.Text = string.Format("{0:N2}",float.Parse("0" + lblEfectivo.Text) - float.Parse("0" + lblEfectivoV.Text) - float.Parse(txtLatEfectivo_Monto.Text));
 	        lblChequesTotalC.Text = string.Format("{0:N2}",float.Parse("0" + lblChequesTotal.Text) - float.Parse("0" + lblChequesTotalV.Text) - float.Parse(txtLatCh_Monto.Text));
-	        lblChequesCantidadC.Text = string.Format("{0:N0}",float.Parse("0" + lblChequesCantidad.Text) - float.Parse("0" + lblChequesCantidadV.Text) - float.Parse(txtLatCh_Cantidad.Text));
-	        lblCertificadosCantidadC.Text = string.Format("{0:N0}",float.Parse("0" + lblCertificadosCantidad.Text) - float.Parse(txtLatCert_Cantidad.Text));
+	        lblChequesCantidadC.Text = string.Format("{0:N0}",Int16.Parse("0" + lblChequesCantidad.Text) - Int16.Parse("0" + lblChequesCantidadV.Text) - float.Parse(txtLatCh_Cantidad.Text));
+	        lblCertificadosCantidadC.Text = string.Format("{0:N0}",Int16.Parse("0" + lblCertificadosCantidad.Text) - Int16.Parse(txtLatCert_Cantidad.Text));
 	        lblCertificadosTotalC.Text = string.Format("{0:N2}",float.Parse("0" + lblCertificadosTotal.Text) - float.Parse(txtLatCert_Monto.Text));
 
 	        lblDivDolarC.Text = string.Format("{0:N2}",float.Parse("0" + lblDivDolarCantidad.Text) - float.Parse(txtLatDiv_dolar.Text));
@@ -1082,29 +953,17 @@ namespace Catalogo._rendiciones
 
         }
 
-        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
-        {
-	        if (_optBuscar_0.Checked == true) 
-            {
-		       e.Handled = Funciones.util.SoloDigitos(e);
-	        } 
-            else 
-            {
-		        e.KeyChar = char.ToUpper(e.KeyChar);
-	        }       
-        }
-
         public static void Rendicion_Imprimir(string NroRendicion)
         {
             Cursor.Current = Cursors.WaitCursor;
-           
+                       
             string sReporte = Global01.AppPath + "\\Reportes\\Rendicion1.rpt";
             ReportDocument oReport = new ReportDocument();
 
             oReport.Load(sReporte);
             Funciones.util.ChangeReportConnectionInfo(ref oReport);
 
-            oReport.SetParameterValue("pNroRendicion", NroRendicion);
+            oReport.SetParameterValue("pNroRendicion", NroRendicion.Substring(NroRendicion.Length - 8));
 
             oReport.DataDefinition.FormulaFields["fZona"].Text = "'" + Global01.NroUsuario + "'";
             oReport.DataDefinition.FormulaFields["fViajante"].Text = "'" + Global01.ApellidoNombre + "'"; 
@@ -1121,8 +980,11 @@ namespace Catalogo._rendiciones
 
         private void cboCheques_Leave(System.Object eventSender, System.EventArgs eventArgs)
         {
-            string s = cboCheques.SelectedText;
-            if (s.Length > 0 ) txtBd_Monto.Text = s.Substring(s.IndexOf("$") + 2).Replace(")", "");
+            if (cboCheques.SelectedIndex > 0)
+            {
+                string s = cboCheques.Text;//cboCheques.SelectedText;
+                if (s.Length > 0) txtBd_Monto.Text = s.Substring(s.IndexOf("$") + 2).Replace(")", "");
+            }
         }
 
         private void cboRecibos_Leave(System.Object eventSender, System.EventArgs eventArgs)
@@ -1144,72 +1006,68 @@ namespace Catalogo._rendiciones
             }
         }
 
-        private void lvValores_DoubleClick(System.Object eventSender, System.EventArgs eventArgs)
+        private void lvValores_KeyDown(object sender, KeyEventArgs e)
         {
-
-            if (m.Accion == tAccion.Nuevo | m.Accion == tAccion.Modificar)
+            if (lvValores.SelectedItems != null & lvValores.SelectedItems.Count > 0)
             {
-
-                if (lvValores.SelectedItems != null & lvValores.SelectedItems.Count > 0)
-                {
-
-                    lblIdValor.Text = lvValores.SelectedItems[0].Text;
-
-                    _opTipoDeposito_0.Checked = ((lvValores.SelectedItems[0].SubItems[1].Text=="E") ? true : false);
-                    //_opTipoDeposito_1.Checked = ((lvValores.SelectedItems[0].SubItems[1].Text == "C") ? true : false);
-                    dtBd_Fecha.Value = DateTime.Parse(lvValores.SelectedItems[0].SubItems[2].Text);
-                    txtBd_Nro.Text = lvValores.SelectedItems[0].SubItems[3].Text;
-                    txtBd_Monto.Text = lvValores.SelectedItems[0].SubItems[4].Text;
-                    txtBdCh_Cantidad.Text = lvValores.SelectedItems[0].SubItems[5].Text;
-
-                    // PABLO // cboCheques.Items.Add(new VB6.ListBoxItem((lvValores.FocusedItem.SubItems(7).Text), cboCheques.NewIndex));
-
-                    cboCheques.Items.Insert(0,lvValores.SelectedItems[0].SubItems[7].Text);
-                    cboCheques.SelectedIndex = 0;
-
-                    //Funciones.util.BuscarIndiceEnCombo(ref cboCheques, lvValores.SelectedItems[0].SubItems[7].Text, false);
-
+                if (e.KeyCode == Keys.Delete)
+                {  //DEL
                     Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblRendicionValores WHERE ID=" + lvValores.SelectedItems[0].Text);
 
                     lvValores.Items.Remove(lvValores.SelectedItems[0]);
-                    lvValores.SelectedItems.Clear(); 
-                    
+                    lvValores.SelectedItems.Clear();
+
                     TotalValores();
                     TotalControles();
-                };
-            };
-        }
-
-        private void _optBuscar_0_CheckedChanged(object sender, EventArgs e)
-        {
-            if (_optBuscar_0.Checked)
-            {//TxtBuscar
-                txtBuscar.Enabled = true;
-                mskFbuscar.Enabled = false;
-                txtBuscar.Focus();
-            }
-            else
-            {//Fecha
-                txtBuscar.Enabled = false;
-                mskFbuscar.Enabled = true;
-                mskFbuscar.Focus();
+                }
             }
         }
 
-        private void _opTipoDeposito_0_CheckedChanged(object sender, EventArgs e)
+        //private void lvValores_DoubleClick(System.Object eventSender, System.EventArgs eventArgs)
+        //{
+        //    if (m.Accion == tAccion.Nuevo | m.Accion == tAccion.Modificar)
+        //    {
+
+        //        if (lvValores.SelectedItems != null & lvValores.SelectedItems.Count > 0)
+        //        {
+        //            //lblIdValor.Text = lvValores.SelectedItems[0].Text;
+
+        //            //_opTipoDeposito_0.Checked = ((lvValores.SelectedItems[0].SubItems[1].Text=="E") ? true : false);
+        //            //_opTipoDeposito_1.Checked = ((lvValores.SelectedItems[0].SubItems[1].Text == "C") ? true : false);
+        //            //dtBd_Fecha.Value = DateTime.Parse(lvValores.SelectedItems[0].SubItems[2].Text);
+        //            //txtBd_Nro.Text = lvValores.SelectedItems[0].SubItems[3].Text;
+        //            //txtBd_Monto.Text = lvValores.SelectedItems[0].SubItems[4].Text;
+        //            //txtBdCh_Cantidad.Text = lvValores.SelectedItems[0].SubItems[5].Text;
+
+        //            //Funciones.util.BuscarIndiceEnCombo(ref cboCheques, lvValores.SelectedItems[0].SubItems[7].Text, false);
+
+        //            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "DELETE FROM tblRendicionValores WHERE ID=" + lvValores.SelectedItems[0].Text);
+
+        //            lvValores.Items.Remove(lvValores.SelectedItems[0]);
+        //            lvValores.SelectedItems.Clear(); 
+                    
+        //            TotalValores();
+        //            TotalControles();
+        //        };
+        //    };
+        //}
+
+        private void _opTipoDeposito_1_CheckedChanged(object sender, EventArgs e)
         {
-            //Me.txtBdCh_Cantidad.Enabled = Me.opTipoDeposito.Item(1).value
             txtBd_Monto.Enabled = _opTipoDeposito_0.Checked;
             cboCheques.Enabled = _opTipoDeposito_1.Checked;
 
             if (_opTipoDeposito_0.Checked)
             {
+                this.txtBd_Monto.Text = "0,00";
                 this.txtBdCh_Cantidad.Text = "0";
+                cboCheques.SelectedIndex = 0;
             }
-            else
+            else if (_opTipoDeposito_1.Checked)
             {
+                if (cboCheques.SelectedIndex > 0 && cboCheques.Text.Length > 0) txtBd_Monto.Text = cboCheques.Text.Substring(cboCheques.Text.IndexOf("$") + 2).Replace(")", "");
                 this.txtBdCh_Cantidad.Text = "1";
-            }
+            }      
         }
 
         private void txtLatCert_Monto_Leave(object sender, EventArgs e)
@@ -1225,13 +1083,13 @@ namespace Catalogo._rendiciones
 
         private void txtLatCert_Cantidad_Leave(object sender, EventArgs e)
         {
-                txtLatCert_Cantidad.Text = string.Format("{0:N0}", float.Parse("0" + this.txtLatCert_Cantidad.Text));
+                txtLatCert_Cantidad.Text = string.Format("{0:N0}", Int16.Parse("0" + this.txtLatCert_Cantidad.Text));
                 TotalControles();
         }
 
         private void txtLatCh_Cantidad_Leave(object sender, EventArgs e)
         {
-                txtLatCh_Cantidad.Text = string.Format("{0:N0}", float.Parse("0" + txtLatCh_Cantidad.Text));
+                txtLatCh_Cantidad.Text = string.Format("{0:N0}", Int16.Parse("0" + txtLatCh_Cantidad.Text));
                 TotalControles();
         }
 
@@ -1329,6 +1187,7 @@ namespace Catalogo._rendiciones
             if (DatosValidos("all"))
             {
                 Accion_Click(tAccion.Guardar);
+                ObtenerMovimientos();
             }
         }
 
@@ -1362,10 +1221,124 @@ namespace Catalogo._rendiciones
             }                       
         }
 
-        private void lvBuscar_DoubleClick(object sender, EventArgs e)
+        private void cboCheques_SelectedIndexChanged(object sender, EventArgs e)
         {
-            m.ItemX = lvBuscar.SelectedItems[0];
-            Accion_Click(tAccion.Neutro);
+            if (cboCheques.SelectedIndex > 0)
+            {
+                string s = cboCheques.Text;
+                if (s.Length > 0) txtBd_Monto.Text = s.Substring(s.IndexOf("$") + 2).Replace(")", "");
+            }
+        }
+
+        private void paEnviosCbo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ObtenerMovimientos();
+        }
+
+        private void ObtenerMovimientos()
+        {
+            paDataGridView.Visible = false;
+
+            _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(Global01.NroUsuario));
+            System.Data.OleDb.OleDbDataReader dr = null;
+
+            if (paEnviosCbo.SelectedIndex == 0)
+            {
+                dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.TODOS, "Rendicion");
+            }
+            else if (paEnviosCbo.SelectedIndex == 1)
+            {
+                dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.ENVIADOS, "Rendicion");
+            }
+            else if (paEnviosCbo.SelectedIndex == 2)
+            {
+                dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "Rendicion");
+            }
+
+            if (dr != null)
+            {
+                if (dr.HasRows)
+                {
+                    DataTable dt = new DataTable();
+                    dt.Columns.Add("Selec", System.Type.GetType("System.Boolean"));
+                    dt.Load(dr);
+                    paDataGridView.AutoGenerateColumns = true;
+                    paDataGridView.DataSource = dt;
+                    paDataGridView.Refresh();
+                    paDataGridView.Visible = true;
+                    paDataGridView.ClearSelection();
+                    paDataGridView.Columns["Selec"].Visible = (paEnviosCbo.Text.ToUpper() == "NO ENVIADOS");
+                }
+            }
+        }
+
+        private void paDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void EnviarBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Global01.AppActiva)
+                {
+                    if (paEnviosCbo.Text.ToString().ToUpper() == "NO ENVIADOS")
+                    {
+                        if (paDataGridView.SelectedRows != null && paDataGridView.SelectedRows.Count > 0)
+                        {
+                            if (MessageBox.Show("Debe estar conectado a Internet. ¿QUIERE ENVIARLOS AHORA?", "Envio de Movimientos", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                System.Collections.Generic.List<Catalogo.util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO> filtro = new List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>();
+
+                                foreach (DataGridViewRow row in paDataGridView.Rows)
+                                {
+                                    if (row.Cells["Selec"].Value != null && row.Cells["Selec"].Value.ToString() != "" && (bool)row.Cells["Selec"].Value)
+                                    {
+                                        util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO item = new util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO();
+                                        System.Diagnostics.Debug.WriteLine(row.Cells["Nro"].Value);
+                                        item.nro = row.Cells["Nro"].Value.ToString();
+                                        item.origen = row.Cells["Origen"].Value.ToString();
+                                        filtro.Add(item);
+                                    }
+                                }
+
+                                Catalogo.util.BackgroundTasks.EnvioMovimientos envio =
+                                    new util.BackgroundTasks.EnvioMovimientos(
+                                        util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+                                        int.Parse(Global01.NroUsuario),
+                                        util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_LISTVIEW,
+                                        filtro);
+
+                                envio.run();
+
+                                ObtenerMovimientos();
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;  //util.errorHandling.ErrorForm.show();
+            }
+        }
+
+        private void paDataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Global01.AppActiva)
+            {
+                DataGridViewCell cell = paDataGridView[e.ColumnIndex, e.RowIndex];
+                if (cell != null)
+                {
+                    DataGridViewRow row = cell.OwningRow;
+                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "REND")
+                    {
+                        Rendicion_Imprimir(row.Cells["Nro"].Value.ToString());
+                    }
+                }
+            }
         }
 
     } //fin clase

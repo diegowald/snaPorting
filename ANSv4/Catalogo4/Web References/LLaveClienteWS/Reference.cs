@@ -98,12 +98,12 @@ namespace Catalogo.LLaveClienteWS {
         }
         
         /// <remarks/>
-        public void ObtenerListaPrecioAsync(string MacAddress, string Cuit, string IDAns) {
+        internal void ObtenerListaPrecioAsync(string MacAddress, string Cuit, string IDAns) {
             this.ObtenerListaPrecioAsync(MacAddress, Cuit, IDAns, null);
         }
         
         /// <remarks/>
-        public void ObtenerListaPrecioAsync(string MacAddress, string Cuit, string IDAns, object userState) {
+        internal void ObtenerListaPrecioAsync(string MacAddress, string Cuit, string IDAns, object userState) {
             if ((this.ObtenerListaPrecioOperationCompleted == null)) {
                 this.ObtenerListaPrecioOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerListaPrecioOperationCompleted);
             }
@@ -131,12 +131,12 @@ namespace Catalogo.LLaveClienteWS {
         }
         
         /// <remarks/>
-        public void ObtenerEstadoActualAsync(string MacAddress, string Cuit, string IDAns) {
+        internal void ObtenerEstadoActualAsync(string MacAddress, string Cuit, string IDAns) {
             this.ObtenerEstadoActualAsync(MacAddress, Cuit, IDAns, null);
         }
         
         /// <remarks/>
-        public void ObtenerEstadoActualAsync(string MacAddress, string Cuit, string IDAns, object userState) {
+        internal void ObtenerEstadoActualAsync(string MacAddress, string Cuit, string IDAns, object userState) {
             if ((this.ObtenerEstadoActualOperationCompleted == null)) {
                 this.ObtenerEstadoActualOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerEstadoActualOperationCompleted);
             }
@@ -162,12 +162,12 @@ namespace Catalogo.LLaveClienteWS {
         }
         
         /// <remarks/>
-        public void ObtenerLLaveViajanteAsync(string IdViajante) {
+        internal void ObtenerLLaveViajanteAsync(string IdViajante) {
             this.ObtenerLLaveViajanteAsync(IdViajante, null);
         }
         
         /// <remarks/>
-        public void ObtenerLLaveViajanteAsync(string IdViajante, object userState) {
+        internal void ObtenerLLaveViajanteAsync(string IdViajante, object userState) {
             if ((this.ObtenerLLaveViajanteOperationCompleted == null)) {
                 this.ObtenerLLaveViajanteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerLLaveViajanteOperationCompleted);
             }
@@ -194,12 +194,12 @@ namespace Catalogo.LLaveClienteWS {
         }
         
         /// <remarks/>
-        public void ObtenerLLaveCatalogoAsync(string MacAddress, string Cuit, string IDAns, string IDViajante) {
+        internal void ObtenerLLaveCatalogoAsync(string MacAddress, string Cuit, string IDAns, string IDViajante) {
             this.ObtenerLLaveCatalogoAsync(MacAddress, Cuit, IDAns, IDViajante, null);
         }
         
         /// <remarks/>
-        public void ObtenerLLaveCatalogoAsync(string MacAddress, string Cuit, string IDAns, string IDViajante, object userState) {
+        internal void ObtenerLLaveCatalogoAsync(string MacAddress, string Cuit, string IDAns, string IDViajante, object userState) {
             if ((this.ObtenerLLaveCatalogoOperationCompleted == null)) {
                 this.ObtenerLLaveCatalogoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerLLaveCatalogoOperationCompleted);
             }

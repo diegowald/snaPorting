@@ -118,7 +118,7 @@ namespace Catalogo._recibos
             return DetalleRecibo["_" + Numero];
         }
 
-        public void Leer(string NrodeRecibo)
+        internal void Leer(string NrodeRecibo)
         {
             if (!(ValidarConexion()))
                 return;
@@ -187,7 +187,7 @@ namespace Catalogo._recibos
             return (mvarConexion != null);
         }
 
-        public void Guardar(string Origen)
+        internal void Guardar(string Origen)
         {
             if (!(ValidarConexion()))
                 return;
@@ -274,7 +274,7 @@ namespace Catalogo._recibos
         }
 
 
-        public void ADDItem(byte TipoValor, float Importe, System.DateTime F_EmiCheque, System.DateTime F_CobroCheque, string N_Cheque, string NrodeCuenta, int Banco, string Cpa, bool ChequePropio, float T_Cambio)
+        internal void ADDItem(byte TipoValor, float Importe, System.DateTime F_EmiCheque, System.DateTime F_CobroCheque, string N_Cheque, string NrodeCuenta, int Banco, string Cpa, bool ChequePropio, float T_Cambio)
         {
             ReciboItem mvarItem = new ReciboItem();
 
@@ -292,7 +292,7 @@ namespace Catalogo._recibos
             DetalleRecibo["_" + (DetalleRecibo.Count + 1).ToString()] = mvarItem;
         }
 
-        public void ADDItemDedu(string Concepto, float Importe, bool Porcentaje, bool DeduAlResto)
+        internal void ADDItemDedu(string Concepto, float Importe, bool Porcentaje, bool DeduAlResto)
         {
             DeducirItem mvarItemDedu = new DeducirItem();
 
@@ -303,7 +303,7 @@ namespace Catalogo._recibos
             DeducirRecibo["_" + (DeducirRecibo.Count + 1).ToString()] = mvarItemDedu;
         }
 
-        public void ADDItemApli(string Concepto, float Importe)
+        internal void ADDItemApli(string Concepto, float Importe)
         {
             AplicacionItem mvarItemApli = new AplicacionItem();
 

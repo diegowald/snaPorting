@@ -23,7 +23,7 @@ namespace Catalogo.util.SendFileTo
             return AddRecipient(email, HowTo.MAPI_TO);
         }
 
-        public void AddAttachment(string strAttachmentFileName)
+        internal void AddAttachment(string strAttachmentFileName)
         {
             m_attachments.Add(strAttachmentFileName);
         }

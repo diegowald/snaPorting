@@ -87,12 +87,12 @@ namespace Catalogo.PedidosWS {
         }
         
         /// <remarks/>
-        public void EnviarPedido7Async(string MacAddress, string NroPedido, string CodCliente, string Fecha, string Observaciones, string Transporte, string Detalle) {
+        internal void EnviarPedido7Async(string MacAddress, string NroPedido, string CodCliente, string Fecha, string Observaciones, string Transporte, string Detalle) {
             this.EnviarPedido7Async(MacAddress, NroPedido, CodCliente, Fecha, Observaciones, Transporte, Detalle, null);
         }
         
         /// <remarks/>
-        public void EnviarPedido7Async(string MacAddress, string NroPedido, string CodCliente, string Fecha, string Observaciones, string Transporte, string Detalle, object userState) {
+        internal void EnviarPedido7Async(string MacAddress, string NroPedido, string CodCliente, string Fecha, string Observaciones, string Transporte, string Detalle, object userState) {
             if ((this.EnviarPedido7OperationCompleted == null)) {
                 this.EnviarPedido7OperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarPedido7OperationCompleted);
             }

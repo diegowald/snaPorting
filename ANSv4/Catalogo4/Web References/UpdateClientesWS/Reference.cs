@@ -107,12 +107,12 @@ namespace Catalogo.UpdateClientesWS {
         }
         
         /// <remarks/>
-        public void GetTodosLosClientes_CantidadAsync(string MacAddress) {
+        internal void GetTodosLosClientes_CantidadAsync(string MacAddress) {
             this.GetTodosLosClientes_CantidadAsync(MacAddress, null);
         }
         
         /// <remarks/>
-        public void GetTodosLosClientes_CantidadAsync(string MacAddress, object userState) {
+        internal void GetTodosLosClientes_CantidadAsync(string MacAddress, object userState) {
             if ((this.GetTodosLosClientes_CantidadOperationCompleted == null)) {
                 this.GetTodosLosClientes_CantidadOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTodosLosClientes_CantidadOperationCompleted);
             }
@@ -137,12 +137,12 @@ namespace Catalogo.UpdateClientesWS {
         }
         
         /// <remarks/>
-        public void GetTodosLosClientes_Datos_RegistrosAsync(string MacAddress, long LastID) {
+        internal void GetTodosLosClientes_Datos_RegistrosAsync(string MacAddress, long LastID) {
             this.GetTodosLosClientes_Datos_RegistrosAsync(MacAddress, LastID, null);
         }
         
         /// <remarks/>
-        public void GetTodosLosClientes_Datos_RegistrosAsync(string MacAddress, long LastID, object userState) {
+        internal void GetTodosLosClientes_Datos_RegistrosAsync(string MacAddress, long LastID, object userState) {
             if ((this.GetTodosLosClientes_Datos_RegistrosOperationCompleted == null)) {
                 this.GetTodosLosClientes_Datos_RegistrosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTodosLosClientes_Datos_RegistrosOperationCompleted);
             }
@@ -167,12 +167,12 @@ namespace Catalogo.UpdateClientesWS {
         }
         
         /// <remarks/>
-        public void GetTodasLasCtasCtes_CantidadAsync(string MacAddress) {
+        internal void GetTodasLasCtasCtes_CantidadAsync(string MacAddress) {
             this.GetTodasLasCtasCtes_CantidadAsync(MacAddress, null);
         }
         
         /// <remarks/>
-        public void GetTodasLasCtasCtes_CantidadAsync(string MacAddress, object userState) {
+        internal void GetTodasLasCtasCtes_CantidadAsync(string MacAddress, object userState) {
             if ((this.GetTodasLasCtasCtes_CantidadOperationCompleted == null)) {
                 this.GetTodasLasCtasCtes_CantidadOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTodasLasCtasCtes_CantidadOperationCompleted);
             }
@@ -197,12 +197,12 @@ namespace Catalogo.UpdateClientesWS {
         }
         
         /// <remarks/>
-        public void GetTodasLasCtasCtes_Datos_RegistrosAsync(string MacAddress, long LastID) {
+        internal void GetTodasLasCtasCtes_Datos_RegistrosAsync(string MacAddress, long LastID) {
             this.GetTodasLasCtasCtes_Datos_RegistrosAsync(MacAddress, LastID, null);
         }
         
         /// <remarks/>
-        public void GetTodasLasCtasCtes_Datos_RegistrosAsync(string MacAddress, long LastID, object userState) {
+        internal void GetTodasLasCtasCtes_Datos_RegistrosAsync(string MacAddress, long LastID, object userState) {
             if ((this.GetTodasLasCtasCtes_Datos_RegistrosOperationCompleted == null)) {
                 this.GetTodasLasCtasCtes_Datos_RegistrosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTodasLasCtasCtes_Datos_RegistrosOperationCompleted);
             }
@@ -220,18 +220,18 @@ namespace Catalogo.UpdateClientesWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SincronizacionClientesCompletada", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SincronizacionClientesCompletada(string MacAddress) {
+        internal void SincronizacionClientesCompletada(string MacAddress) {
             this.Invoke("SincronizacionClientesCompletada", new object[] {
                         MacAddress});
         }
         
         /// <remarks/>
-        public void SincronizacionClientesCompletadaAsync(string MacAddress) {
+        internal void SincronizacionClientesCompletadaAsync(string MacAddress) {
             this.SincronizacionClientesCompletadaAsync(MacAddress, null);
         }
         
         /// <remarks/>
-        public void SincronizacionClientesCompletadaAsync(string MacAddress, object userState) {
+        internal void SincronizacionClientesCompletadaAsync(string MacAddress, object userState) {
             if ((this.SincronizacionClientesCompletadaOperationCompleted == null)) {
                 this.SincronizacionClientesCompletadaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSincronizacionClientesCompletadaOperationCompleted);
             }
@@ -248,18 +248,18 @@ namespace Catalogo.UpdateClientesWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SincronizacionCtasCtesCompletada", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SincronizacionCtasCtesCompletada(string MacAddress) {
+        internal void SincronizacionCtasCtesCompletada(string MacAddress) {
             this.Invoke("SincronizacionCtasCtesCompletada", new object[] {
                         MacAddress});
         }
         
         /// <remarks/>
-        public void SincronizacionCtasCtesCompletadaAsync(string MacAddress) {
+        internal void SincronizacionCtasCtesCompletadaAsync(string MacAddress) {
             this.SincronizacionCtasCtesCompletadaAsync(MacAddress, null);
         }
         
         /// <remarks/>
-        public void SincronizacionCtasCtesCompletadaAsync(string MacAddress, object userState) {
+        internal void SincronizacionCtasCtesCompletadaAsync(string MacAddress, object userState) {
             if ((this.SincronizacionCtasCtesCompletadaOperationCompleted == null)) {
                 this.SincronizacionCtasCtesCompletadaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSincronizacionCtasCtesCompletadaOperationCompleted);
             }

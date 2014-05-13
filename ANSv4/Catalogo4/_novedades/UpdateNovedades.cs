@@ -77,7 +77,7 @@ namespace Catalogo._novedades
             return;
         }
 
-        public void sincronizarNovedades()
+        internal void sincronizarNovedades()
         {
             try
             {

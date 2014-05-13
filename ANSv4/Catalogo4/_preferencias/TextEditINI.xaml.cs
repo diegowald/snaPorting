@@ -100,7 +100,7 @@ namespace Catalogo._preferencias
             }
         }
 
-        public void setDisplayName(string displayName)
+        internal void setDisplayName(string displayName)
         {
             Label1.Content = displayName;
         }

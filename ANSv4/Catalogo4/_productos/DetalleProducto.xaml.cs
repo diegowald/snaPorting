@@ -29,7 +29,7 @@ namespace Catalogo._productos
             _imgEnDescarga = new List<string>();
         }
 
-        public void onRecibir(System.Windows.Forms.DataGridViewRow dato)
+        internal void onRecibir(System.Windows.Forms.DataGridViewRow dato)
         {
             txtDetalle.Inlines.Clear();
             txtDetalle.Visibility = System.Windows.Visibility.Hidden;
@@ -278,7 +278,7 @@ namespace Catalogo._productos
         }
 
 
-        public void onFileDownloaded(object Tag, string Destino)
+        internal void onFileDownloaded(object Tag, string Destino)
         {
             
             //validateImagefile(_Destino);
@@ -316,13 +316,13 @@ namespace Catalogo._productos
             }
         }
 
-        public void onFileProblem(object Tag, string Destino, string cause)
+        internal void onFileProblem(object Tag, string Destino, string cause)
         {
             util.errorHandling.ErrorLogger.LogMessage("Problema al descargar imagen " + Destino + ". Causa; " + cause);
             _imgErrors++;
         }
 
-        public void onFileDownloading(object Tag, string Destino, int progress)
+        internal void onFileDownloading(object Tag, string Destino, int progress)
         {
         }
 

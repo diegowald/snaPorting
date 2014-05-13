@@ -18,7 +18,7 @@ namespace Catalogo._pedidos
 		    get { return WebServiceInicializado; }
 	    }
 
-	    public void Inicializar(string MacAddress, string ipAddress)
+	    internal void Inicializar(string MacAddress, string ipAddress)
 	    {
             bool Conectado = util.network.IPCache.instance.conectado;
 
@@ -55,7 +55,7 @@ namespace Catalogo._pedidos
 
        }
 
-	    public void EstadoPedido(string pPedidoNro, string pNroUsuario, ref string pEstado)
+	    internal void EstadoPedido(string pPedidoNro, string pNroUsuario, ref string pEstado)
 	    {
 		    bool Cancel = false;
 

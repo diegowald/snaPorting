@@ -26,7 +26,7 @@ namespace Catalogo._auditor
             }
         }
 
-        public void inicializar(string MacAddress, string ipAddress)
+        internal void inicializar(string MacAddress, string ipAddress)
         {
             bool conectado = util.network.IPCache.instance.conectado;
 

@@ -24,7 +24,7 @@ namespace Catalogo._existencia
 	    }
 
 
-	    public void Inicializar(string MacAddress, string ipAddress)
+	    internal void Inicializar(string MacAddress, string ipAddress)
 	    {
 
             bool Conectado = util.network.IPCache.instance.conectado;
@@ -79,7 +79,7 @@ namespace Catalogo._existencia
 
        }
 
-	    public void ExistenciaSemaforo(string pIdProducto, string pNroUsuario, ref string pSemaforo)
+	    internal void ExistenciaSemaforo(string pIdProducto, string pNroUsuario, ref string pSemaforo)
 	    {
 		    bool Cancel = false;
 

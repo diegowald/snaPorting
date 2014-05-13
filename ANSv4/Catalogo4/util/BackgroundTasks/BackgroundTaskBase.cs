@@ -36,7 +36,7 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
-        public void run()
+        internal void run()
         {
             if (job_type == JOB_TYPE.Asincronico)
             {

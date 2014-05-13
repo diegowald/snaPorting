@@ -251,12 +251,12 @@ namespace Catalogo._devoluciones
             cboCliente.Enabled = true;
         }
 
-        public void onRecibir(DataGridViewRow dato)
+        internal void onRecibir(DataGridViewRow dato)
         {
             ProductoSeleccionado = dato;
         }
 
-        public void onRecibir(_pedidos.PedidosHelper.Acciones dato)
+        internal void onRecibir(_pedidos.PedidosHelper.Acciones dato)
         {
             switch (dato)
             {
@@ -827,7 +827,7 @@ namespace Catalogo._devoluciones
             set;
         }
 
-        public void onRecibir(short dato)
+        internal void onRecibir(short dato)
         {
             if (btnIniciar.Tag.ToString() == "INICIAR")            
                 cboCliente.SelectedValue = dato;

@@ -18,7 +18,7 @@ namespace Catalogo.util.BackgroundTasks
 
         private string _estado;
 
-        public void getEstado(string pedidoNro, string idUsuario, System.Windows.Forms.DataGridViewCell cell)
+        internal void getEstado(string pedidoNro, string idUsuario, System.Windows.Forms.DataGridViewCell cell)
         {
             _pedidoNro = pedidoNro;
             _idUsuario = idUsuario;

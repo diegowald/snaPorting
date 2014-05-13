@@ -48,7 +48,7 @@ namespace Catalogo._recibos
         }
 
 
-        public void obtenerDatos(string nroRecibo)
+        internal void obtenerDatos(string nroRecibo)
         {
             System.Data.OleDb.OleDbDataReader Enc = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_Enc '" + nroRecibo + "'");
             System.Data.OleDb.OleDbDataReader Det = Funciones.oleDbFunciones.Comando(Conexion1, "EXEC v_Recibo_Det '" + nroRecibo + "'");
@@ -224,7 +224,7 @@ namespace Catalogo._recibos
             }
         }
 
-        public void Inicializar(string ipAddress, string MacAddress)
+        internal void Inicializar(string ipAddress, string MacAddress)
         {
             // ERROR: Not supported in C#: OnErrorStatement
             try

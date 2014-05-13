@@ -93,7 +93,7 @@ namespace Catalogo._application
             cliente.SincronizacionAppConfigCompletada(_macAddress);
         }
 
-        public void sincronizarApp()
+        internal void sincronizarApp()
         {
             bool cancel = false;
 
@@ -324,7 +324,7 @@ namespace Catalogo._application
 
         }
 
-        public void obtenerComandos(ref bool cancel)
+        internal void obtenerComandos(ref bool cancel)
         {  
             if (!util.network.IPCache.instance.conectado)
             {

@@ -150,12 +150,12 @@ namespace Catalogo._auditor
         {
         }
 
-        public void guardar(ObjetosAuditados objeto, AccionesAuditadas accion)
+        internal void guardar(ObjetosAuditados objeto, AccionesAuditadas accion)
         {
             guardar(objeto, accion, "");
         }
 
-        public void guardar(ObjetosAuditados objeto,
+        internal void guardar(ObjetosAuditados objeto,
             AccionesAuditadas accion, string detalle)
         {
             if (Global01.AuditarProceso)

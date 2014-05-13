@@ -284,7 +284,7 @@ namespace Catalogo._movimientos
             set;
         }
 
-        public void onRecibir(short dato)
+        internal void onRecibir(short dato)
         {
            cboCliente.SelectedValue = dato;
         }

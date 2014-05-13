@@ -21,7 +21,7 @@ namespace Catalogo.util
             }
         }
 
-        public void Dispose()
+        internal void Dispose()
         {
         }
     }

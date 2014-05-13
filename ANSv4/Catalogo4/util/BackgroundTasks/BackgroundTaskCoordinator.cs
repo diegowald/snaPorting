@@ -9,13 +9,13 @@ namespace Catalogo.util.BackgroundTasks
     {
         private System.Collections.Generic.Dictionary<string, Catalogo.util.BackgroundTasks.BackgroundTaskBase> _tasks = new Dictionary<string,BackgroundTaskBase>();
         
-        public void addTask(string taskName, BackgroundTaskBase task)
+        internal void addTask(string taskName, BackgroundTaskBase task)
         {
             util.errorHandling.ErrorLogger.LogMessage("Iniciando proceso " + taskName);
             _tasks[taskName]=task;
         }
 
-        public void shutdownTasks()
+        internal void shutdownTasks()
         {
             foreach (string taskName in _tasks.Keys)
             {

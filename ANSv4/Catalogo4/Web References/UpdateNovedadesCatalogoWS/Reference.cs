@@ -88,12 +88,12 @@ namespace Catalogo.UpdateNovedadesCatalogoWS {
         }
         
         /// <remarks/>
-        public void GetTodasLasNovedades_CantidadAsync(string MacAddress, int IdNovedad) {
+        internal void GetTodasLasNovedades_CantidadAsync(string MacAddress, int IdNovedad) {
             this.GetTodasLasNovedades_CantidadAsync(MacAddress, IdNovedad, null);
         }
         
         /// <remarks/>
-        public void GetTodasLasNovedades_CantidadAsync(string MacAddress, int IdNovedad, object userState) {
+        internal void GetTodasLasNovedades_CantidadAsync(string MacAddress, int IdNovedad, object userState) {
             if ((this.GetTodasLasNovedades_CantidadOperationCompleted == null)) {
                 this.GetTodasLasNovedades_CantidadOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTodasLasNovedades_CantidadOperationCompleted);
             }
@@ -119,12 +119,12 @@ namespace Catalogo.UpdateNovedadesCatalogoWS {
         }
         
         /// <remarks/>
-        public void GetTodasLasNovedades_Datos_RegistrosAsync(string MacAddress, long LastID) {
+        internal void GetTodasLasNovedades_Datos_RegistrosAsync(string MacAddress, long LastID) {
             this.GetTodasLasNovedades_Datos_RegistrosAsync(MacAddress, LastID, null);
         }
         
         /// <remarks/>
-        public void GetTodasLasNovedades_Datos_RegistrosAsync(string MacAddress, long LastID, object userState) {
+        internal void GetTodasLasNovedades_Datos_RegistrosAsync(string MacAddress, long LastID, object userState) {
             if ((this.GetTodasLasNovedades_Datos_RegistrosOperationCompleted == null)) {
                 this.GetTodasLasNovedades_Datos_RegistrosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetTodasLasNovedades_Datos_RegistrosOperationCompleted);
             }

@@ -44,7 +44,7 @@ namespace Catalogo._interdeposito
         }
 
 
-        public void ObtenerDatos(string NroInterDeposito)
+        internal void ObtenerDatos(string NroInterDeposito)
         {
             DatosObtenidos = false;
 
@@ -146,7 +146,7 @@ namespace Catalogo._interdeposito
             }
         }
 
-        public void Inicializar(string ipAddress, string MacAddress)
+        internal void Inicializar(string ipAddress, string MacAddress)
         {
             bool Conectado = util.network.IPCache.instance.conectado;
    

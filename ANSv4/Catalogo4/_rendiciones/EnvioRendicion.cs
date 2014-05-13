@@ -47,17 +47,19 @@ namespace Catalogo._rendiciones
         }
 
 
-        public void ObtenerDatos(string NroRendicion)
+        internal void ObtenerDatos(string NroRendicion)
         {
+            
+            m_NroRendicion = NroRendicion.Substring(NroRendicion.Length - 8) // NroRendicion;
+
             System.Data.OleDb.OleDbDataReader Ren = null;
             System.Data.OleDb.OleDbDataReader RenValores = null;
             System.Data.OleDb.OleDbDataReader RenRecibos = null;
 
-            Ren = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT * FROM v_Rendicion WHERE Nro='" + NroRendicion + "'");
-            RenValores = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT * FROM  v_RendicionValores1 WHERE Nro='" + NroRendicion + "'");
-            RenRecibos = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Rendicion_Recibos_rpt '" + NroRendicion.Substring(NroRendicion.Length - 8) + "'");
+            Ren = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT * FROM v_Rendicion WHERE Nro='" + m_NroRendicion + "'");
+            RenValores = Funciones.oleDbFunciones.Comando(Conexion1, "SELECT * FROM  v_RendicionValores1 WHERE Nro='" + m_NroRendicion + "'");
+            RenRecibos = Funciones.oleDbFunciones.Comando(Conexion1, "EXECUTE v_Rendicion_Recibos_rpt '" + m_NroRendicion + "'");
 
-            m_NroRendicion = NroRendicion;
             Ren.Read();
             m_IdViajante = Ren["IDCliente"].ToString().Trim().PadLeft(6, '0');
             m_F_Rendicion = string.Format("{0:yyyyMMdd}", DateTime.Parse(Ren["F_Rendicion"].ToString()));
@@ -171,7 +173,7 @@ namespace Catalogo._rendiciones
         }
 
 
-        public void Inicializar(string ipAddress, string MacAddress)
+        internal void Inicializar(string ipAddress, string MacAddress)
         {
             bool Conectado = util.network.IPCache.instance.conectado;
 

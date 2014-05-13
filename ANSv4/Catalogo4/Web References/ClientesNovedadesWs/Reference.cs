@@ -87,12 +87,12 @@ namespace Catalogo.ClientesNovedadesWs {
         }
         
         /// <remarks/>
-        public void CallClientesNovedadesAsync(string MacAddress, string Fechas, string Novedades, string Clientes, string Viajantes, string Tipos) {
+        internal void CallClientesNovedadesAsync(string MacAddress, string Fechas, string Novedades, string Clientes, string Viajantes, string Tipos) {
             this.CallClientesNovedadesAsync(MacAddress, Fechas, Novedades, Clientes, Viajantes, Tipos, null);
         }
         
         /// <remarks/>
-        public void CallClientesNovedadesAsync(string MacAddress, string Fechas, string Novedades, string Clientes, string Viajantes, string Tipos, object userState) {
+        internal void CallClientesNovedadesAsync(string MacAddress, string Fechas, string Novedades, string Clientes, string Viajantes, string Tipos, object userState) {
             if ((this.CallClientesNovedadesOperationCompleted == null)) {
                 this.CallClientesNovedadesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallClientesNovedadesOperationCompleted);
             }

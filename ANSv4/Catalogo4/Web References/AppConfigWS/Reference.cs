@@ -119,12 +119,12 @@ namespace Catalogo.AppConfigWS {
         }
         
         /// <remarks/>
-        public void ObtenerListaPrecioV2Async(string MacAddress, string Cuit, string IDAns) {
+        internal void ObtenerListaPrecioV2Async(string MacAddress, string Cuit, string IDAns) {
             this.ObtenerListaPrecioV2Async(MacAddress, Cuit, IDAns, null);
         }
         
         /// <remarks/>
-        public void ObtenerListaPrecioV2Async(string MacAddress, string Cuit, string IDAns, object userState) {
+        internal void ObtenerListaPrecioV2Async(string MacAddress, string Cuit, string IDAns, object userState) {
             if ((this.ObtenerListaPrecioV2OperationCompleted == null)) {
                 this.ObtenerListaPrecioV2OperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerListaPrecioV2OperationCompleted);
             }
@@ -150,12 +150,12 @@ namespace Catalogo.AppConfigWS {
         }
         
         /// <remarks/>
-        public void TenerQueEnviarInfoAsync(string MacAddress) {
+        internal void TenerQueEnviarInfoAsync(string MacAddress) {
             this.TenerQueEnviarInfoAsync(MacAddress, null);
         }
         
         /// <remarks/>
-        public void TenerQueEnviarInfoAsync(string MacAddress, object userState) {
+        internal void TenerQueEnviarInfoAsync(string MacAddress, object userState) {
             if ((this.TenerQueEnviarInfoOperationCompleted == null)) {
                 this.TenerQueEnviarInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTenerQueEnviarInfoOperationCompleted);
             }
@@ -220,7 +220,7 @@ namespace Catalogo.AppConfigWS {
         }
         
         /// <remarks/>
-        public void EnviarInfoAsync(
+        internal void EnviarInfoAsync(
                     string MacAddress, 
                     string Cuit, 
                     string RazonSocial, 
@@ -246,7 +246,7 @@ namespace Catalogo.AppConfigWS {
         }
         
         /// <remarks/>
-        public void EnviarInfoAsync(
+        internal void EnviarInfoAsync(
                     string MacAddress, 
                     string Cuit, 
                     string RazonSocial, 
@@ -312,12 +312,12 @@ namespace Catalogo.AppConfigWS {
         }
         
         /// <remarks/>
-        public void ObtenerInfoDSAsync(string MacAddress) {
+        internal void ObtenerInfoDSAsync(string MacAddress) {
             this.ObtenerInfoDSAsync(MacAddress, null);
         }
         
         /// <remarks/>
-        public void ObtenerInfoDSAsync(string MacAddress, object userState) {
+        internal void ObtenerInfoDSAsync(string MacAddress, object userState) {
             if ((this.ObtenerInfoDSOperationCompleted == null)) {
                 this.ObtenerInfoDSOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerInfoDSOperationCompleted);
             }
@@ -341,12 +341,12 @@ namespace Catalogo.AppConfigWS {
         }
         
         /// <remarks/>
-        public void ObtenerInfoAsync(string MacAddress) {
+        internal void ObtenerInfoAsync(string MacAddress) {
             this.ObtenerInfoAsync(MacAddress, null);
         }
         
         /// <remarks/>
-        public void ObtenerInfoAsync(string MacAddress, object userState) {
+        internal void ObtenerInfoAsync(string MacAddress, object userState) {
             if ((this.ObtenerInfoOperationCompleted == null)) {
                 this.ObtenerInfoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerInfoOperationCompleted);
             }
@@ -370,12 +370,12 @@ namespace Catalogo.AppConfigWS {
         }
         
         /// <remarks/>
-        public void ObtenerComandosDSAsync(string MacAddress) {
+        internal void ObtenerComandosDSAsync(string MacAddress) {
             this.ObtenerComandosDSAsync(MacAddress, null);
         }
         
         /// <remarks/>
-        public void ObtenerComandosDSAsync(string MacAddress, object userState) {
+        internal void ObtenerComandosDSAsync(string MacAddress, object userState) {
             if ((this.ObtenerComandosDSOperationCompleted == null)) {
                 this.ObtenerComandosDSOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerComandosDSOperationCompleted);
             }
@@ -399,12 +399,12 @@ namespace Catalogo.AppConfigWS {
         }
         
         /// <remarks/>
-        public void ObtenerComandosAsync(string MacAddress) {
+        internal void ObtenerComandosAsync(string MacAddress) {
             this.ObtenerComandosAsync(MacAddress, null);
         }
         
         /// <remarks/>
-        public void ObtenerComandosAsync(string MacAddress, object userState) {
+        internal void ObtenerComandosAsync(string MacAddress, object userState) {
             if ((this.ObtenerComandosOperationCompleted == null)) {
                 this.ObtenerComandosOperationCompleted = new System.Threading.SendOrPostCallback(this.OnObtenerComandosOperationCompleted);
             }
@@ -421,18 +421,18 @@ namespace Catalogo.AppConfigWS {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/SincronizacionAppConfigCompletada", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void SincronizacionAppConfigCompletada(string MacAddress) {
+        internal void SincronizacionAppConfigCompletada(string MacAddress) {
             this.Invoke("SincronizacionAppConfigCompletada", new object[] {
                         MacAddress});
         }
         
         /// <remarks/>
-        public void SincronizacionAppConfigCompletadaAsync(string MacAddress) {
+        internal void SincronizacionAppConfigCompletadaAsync(string MacAddress) {
             this.SincronizacionAppConfigCompletadaAsync(MacAddress, null);
         }
         
         /// <remarks/>
-        public void SincronizacionAppConfigCompletadaAsync(string MacAddress, object userState) {
+        internal void SincronizacionAppConfigCompletadaAsync(string MacAddress, object userState) {
             if ((this.SincronizacionAppConfigCompletadaOperationCompleted == null)) {
                 this.SincronizacionAppConfigCompletadaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSincronizacionAppConfigCompletadaOperationCompleted);
             }
