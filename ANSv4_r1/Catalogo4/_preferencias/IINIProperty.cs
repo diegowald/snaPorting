@@ -41,5 +41,7 @@ namespace Catalogo._preferencias
         }
 
         void setDisplayName(string displayName);
+
+        void onEnablePasswrodProtectedControl();
     }
 }

@@ -26,9 +26,11 @@ namespace Catalogo._preferencias
 
         public delegate void SaveDelegate();
         public delegate void LoadDelegate();
+        public delegate void PasswordValidDelegate();
 
         private SaveDelegate doSave;
         private LoadDelegate doLoad;
+        private PasswordValidDelegate doEnablePasswordProtectedControls;
 
         private string password
         {
@@ -37,7 +39,7 @@ namespace Catalogo._preferencias
                 return "chiclana917" + ((int)(System.DateTime.Now.Minute / 10)).ToString();
             }
         }
-
+        bool passwordOK = false;
 
         private void createAndLoadCheckboxes()
         {
@@ -79,13 +81,13 @@ namespace Catalogo._preferencias
 
         private void addEditBox(string DisplayName, string SectionName, string KeyName, string DefaultValue = null, bool RequiresPasswordToEdit = false, string Password = "")
         {
-            IINIProperty ctrl = new TextEditINI(DisplayName, SectionName, KeyName, DefaultValue, RequiresPasswordToEdit, Password);
+            IINIProperty ctrl = new TextEditINI(DisplayName, SectionName, KeyName, DefaultValue, RequiresPasswordToEdit);
             addControl(ctrl);
         }
 
         private void addCheckBox(string DisplayName, string SectionName, string KeyName, string TrueValue, string FalseValue, string DefaultValue = null, bool RequiresPasswordToEdit = false, string Password = "")
         {
-            IINIProperty chk = new CheckBoxINI(DisplayName, SectionName, KeyName, TrueValue, FalseValue, DefaultValue, RequiresPasswordToEdit, Password);
+            IINIProperty chk = new CheckBoxINI(DisplayName, SectionName, KeyName, TrueValue, FalseValue, DefaultValue, RequiresPasswordToEdit);
             addControl(chk);
         }
 
@@ -93,6 +95,7 @@ namespace Catalogo._preferencias
         {
             doSave += ctrl.onSave;
             doLoad += ctrl.onLoad;
+            doEnablePasswordProtectedControls += ctrl.onEnablePasswrodProtectedControl;
             stack.Children.Add(ctrl as UserControl);
         }
         private void OKButton_Click_1(object sender, RoutedEventArgs e)
@@ -143,6 +146,17 @@ namespace Catalogo._preferencias
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Maximized;
+        }
+
+        private void PasswordButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            passwordFrm frm = new passwordFrm(password);
+            bool? result = frm.ShowDialog();
+            passwordOK = result.HasValue ? result.Value : false;
+            if (passwordOK && doEnablePasswordProtectedControls != null)
+            {
+                doEnablePasswordProtectedControls();
+            }
         }
 
     }

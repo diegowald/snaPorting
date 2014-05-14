@@ -37,15 +37,17 @@
                 <!--<StackPanel Name="stack" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"/>-->
                 <WrapPanel Name="stack" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
 
-                <Grid Margin="0,0,0,0" Grid.Row="2" Width="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid Margin="0,0,0,0" Grid.Row="2" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
                         <ColumnDefinition Width="90"/>
                         <ColumnDefinition Width="90"/>
                         <ColumnDefinition Width="90" />
                     </Grid.ColumnDefinitions>
-                    <Button Name="OKButton" Content="OK" Width="75" Grid.Column="0" Click="OKButton_Click_1"/>
-                    <Button Name="ResetButton" Content="Reset" Width="75" Grid.Column="1" Click="ResetButton_Click_1"/>
-                    <Button Name="CancelButton" Content="Cancel" Width="75" Grid.Column="2" Click="CancelButton_Click_1"/>
+                    <Button Name="PasswordButton" Content="Clave" Width="75" Grid.Column="0" Click="PasswordButton_Click_1" />
+                    <Button Name="OKButton" Content="OK" Width="75" Grid.Column="1" Click="OKButton_Click_1"/>
+                    <Button Name="ResetButton" Content="Reset" Width="75" Grid.Column="2" Click="ResetButton_Click_1"/>
+                    <Button Name="CancelButton" Content="Cancel" Width="75" Grid.Column="3" Click="CancelButton_Click_1"/>
                 </Grid>
                 <Image HorizontalAlignment="Left" Height="100" Margin="501,33,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Source="/Catalogo;component/recursos/logo.jpg"/>
             </Grid>

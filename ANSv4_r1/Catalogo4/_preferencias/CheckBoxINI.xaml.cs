@@ -26,11 +26,10 @@ namespace Catalogo._preferencias
         private string _trueValue;
         private string _falseValue;
         private bool _requiresPasswordToEdit;
-        private string _password;
 
         private bool _loading;
 
-        public CheckBoxINI(string DisplayName, string SectionName, string KeyName, string TrueValue, string FalseValue, string DefaultValue = null, bool RequiresPasswordToEdit = false, string Password = "")
+        public CheckBoxINI(string DisplayName, string SectionName, string KeyName, string TrueValue, string FalseValue, string DefaultValue = null, bool RequiresPasswordToEdit = false)
         {
             _loading = false;
             _displayName = DisplayName;
@@ -41,7 +40,11 @@ namespace Catalogo._preferencias
             _trueValue = TrueValue;
             _falseValue = FalseValue;
             _requiresPasswordToEdit = RequiresPasswordToEdit;
-            _password = Password;
+            if (_requiresPasswordToEdit)
+            {
+                Visibility = System.Windows.Visibility.Hidden;
+            }
+
         }
 
         private void check_Checked(object sender, RoutedEventArgs e)
@@ -127,6 +130,15 @@ namespace Catalogo._preferencias
         private void check_Unchecked_1(object sender, RoutedEventArgs e)
         {
 
+        }
+
+
+        public void onEnablePasswrodProtectedControl()
+        {
+            if (_requiresPasswordToEdit)
+            {
+                Visibility = System.Windows.Visibility.Visible;
+            }
         }
     }
 }

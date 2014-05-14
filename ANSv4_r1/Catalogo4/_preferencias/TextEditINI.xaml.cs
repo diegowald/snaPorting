@@ -24,11 +24,10 @@ namespace Catalogo._preferencias
         private string _keyName;
         private string _defaultValue;
         private bool _requiresPasswordToEdit;
-        private string _password;
 
         private bool _loading;
 
-        public TextEditINI(string DisplayName, string SectionName, string KeyName, string DefaultValue = null, bool RequiresPasswordToEdit = false, string Password = "")
+        public TextEditINI(string DisplayName, string SectionName, string KeyName, string DefaultValue = null, bool RequiresPasswordToEdit = false)
         {
             _loading = false;
             _displayName = DisplayName;
@@ -37,7 +36,11 @@ namespace Catalogo._preferencias
             _keyName = KeyName;
             _defaultValue = DefaultValue;
             _requiresPasswordToEdit = RequiresPasswordToEdit;
-            _password = Password;
+            if (_requiresPasswordToEdit)
+            {
+                Visibility = System.Windows.Visibility.Hidden;
+            }
+
         }
 
         public string value
@@ -103,6 +106,15 @@ namespace Catalogo._preferencias
         public void setDisplayName(string displayName)
         {
             Label1.Content = displayName;
+        }
+
+
+        public void onEnablePasswrodProtectedControl()
+        {
+            if (_requiresPasswordToEdit)
+            {
+                Visibility = System.Windows.Visibility.Visible;
+            }
         }
     }
 }
