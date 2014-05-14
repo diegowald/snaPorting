@@ -1,0 +1,789 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9AD0A6C9-1125-4D99-AE61-7CE81DB218E8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Catalogo</RootNamespace>
+    <AssemblyName>Catalogo</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Catalogo.App</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AvalonDock">
+      <HintPath>..\..\_Recursos\lib\AvalonDock_DLLs_NET35\AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.ShockwaveFlashObjects">
+      <HintPath>..\..\_Recursos\AxInterop.ShockwaveFlashObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Controllers, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.DataDefModel, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="forms\frmReporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmReporte.designer.cs">
+      <DependentUpon>frmReporte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\Login.designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forms\SplashScreen.cs" />
+    <Compile Include="forms\SplashScreenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\SplashScreenForm.designer.cs">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Global01.cs" />
+    <Compile Include="MainMod.cs" />
+    <Compile Include="mwViajantes.xaml.cs">
+      <DependentUpon>mwViajantes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="notifications\NotificationCenter.cs" />
+    <Compile Include="preload\Preloader.cs" />
+    <Compile Include="preload\ProductosPreloader.cs" />
+    <Compile Include="util\BackgroundReader\BackgroundDataLoader.cs" />
+    <Compile Include="util\BackgroundTasks\BackgroundTaskBase.cs" />
+    <Compile Include="util\BackgroundTasks\BackgroundTaskCoordinator.cs" />
+    <Compile Include="util\BackgroundTasks\EnvioUpdate.cs" />
+    <Compile Include="util\BackgroundTasks\Updater.cs" />
+    <Compile Include="util\emitter-receiver\ICancellableEmitter.cs" />
+    <Compile Include="util\emitter-receiver\IEmisor.cs" />
+    <Compile Include="util\emitter-receiver\IReceptor.cs" />
+    <Compile Include="util\errorHandling\ErrorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="util\errorHandling\ErrorForm.Designer.cs">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="util\errorHandling\ErrorLogger.cs" />
+    <Compile Include="util\errorHandling\RegistroDuplicadoException.cs" />
+    <Compile Include="util\FileDownloader.cs" />
+    <Compile Include="util\FlashControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="util\FlashControl.Designer.cs">
+      <DependentUpon>FlashControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="util\FlashWindow.cs" />
+    <Compile Include="util\ListViewItemComparer.cs" />
+    <Compile Include="util\ModINIs.cs" />
+    <Compile Include="util\network\IPCache.cs" />
+    <Compile Include="util\OleDbFunciones.cs" />
+    <Compile Include="util\Pair.cs" />
+    <Compile Include="util\SendFileTo.cs" />
+    <Compile Include="util\SimplePing.cs" />
+    <Compile Include="util\singleton.cs" />
+    <Compile Include="util\Util.cs" />
+    <Compile Include="Web References\AppConfigWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\AuditorWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\CatalogoNovedadesWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ClientesNovedadesWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\DevolucionWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\InterDepositoWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\LLaveClienteWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PedidosWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\RecibosWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\RendicionWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\UpdateClientesWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\VerEstadoPedidoWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\VerExistenciaWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="_application\UpdateAppConfig.cs" />
+    <Compile Include="_auditor\Auditor.cs" />
+    <Compile Include="_auditor\EnvioAuditoria.cs" />
+    <Compile Include="_clientesNovedades\EnvioClientesNovedades.cs" />
+    <Compile Include="_clientes\UpdateClientes.cs" />
+    <Compile Include="_devoluciones\Devolucion.cs" />
+    <Compile Include="_devoluciones\DevolucionItem.cs" />
+    <Compile Include="_devoluciones\EnvioDevolucion.cs" />
+    <Compile Include="_devoluciones\ucDevolucion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_devoluciones\ucDevolucion.Designer.cs">
+      <DependentUpon>ucDevolucion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_existencia\ExistenciaProducto.cs" />
+    <Compile Include="_existencia\VerExistencia.cs" />
+    <Compile Include="_interdeposito\EnvioInterDeposito.cs" />
+    <Compile Include="_interdeposito\InterDeposito.cs" />
+    <Compile Include="_interdeposito\InterDepositoFacturas.cs" />
+    <Compile Include="_interdeposito\ucInterDeposito.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_interdeposito\ucInterDeposito.Designer.cs">
+      <DependentUpon>ucInterDeposito.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_movimientos\EnvioMovimientos.cs" />
+    <Compile Include="_movimientos\Movimientos.cs" />
+    <Compile Include="_movimientos\ucMovimientos.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_movimientos\ucMovimientos.Designer.cs">
+      <DependentUpon>ucMovimientos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_novedades\ChequeoNovedades.cs" />
+    <Compile Include="_novedades\ucNovedades.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_novedades\ucNovedades.Designer.cs">
+      <DependentUpon>ucNovedades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_novedades\ucTips.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_novedades\ucTips.Designer.cs">
+      <DependentUpon>ucTips.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_novedades\UpdateNovedades.cs" />
+    <Compile Include="_pedidos\EnvioPedido.cs" />
+    <Compile Include="_pedidos\EstadoPedido.cs" />
+    <Compile Include="_pedidos\EstadoPedidoMostrar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_pedidos\EstadoPedidoMostrar.designer.cs">
+      <DependentUpon>EstadoPedidoMostrar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_pedidos\Pedido.cs" />
+    <Compile Include="_pedidos\PedidoItem.cs" />
+    <Compile Include="_pedidos\PedidosHelper.cs" />
+    <Compile Include="_pedidos\ucPedido.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_pedidos\ucPedido.Designer.cs">
+      <DependentUpon>ucPedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_pedidos\VerEstado.cs" />
+    <Compile Include="_preferencias\CheckBoxINI.xaml.cs">
+      <DependentUpon>CheckBoxINI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_preferencias\IINIProperty.cs" />
+    <Compile Include="_preferencias\INIPropertyHandler.cs" />
+    <Compile Include="_preferencias\passwordFrm.xaml.cs">
+      <DependentUpon>passwordFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_preferencias\PreferenciasFrm.xaml.cs">
+      <DependentUpon>PreferenciasFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_preferencias\TextEditINI.xaml.cs">
+      <DependentUpon>TextEditINI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_productos\CustomizedDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="_productos\DetalleImagen.xaml.cs">
+      <DependentUpon>DetalleImagen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_productos\DetalleProducto.xaml.cs">
+      <DependentUpon>DetalleProducto.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="_productos\FilterBuilder.cs" />
+    <Compile Include="_productos\GridViewFilter2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_productos\GridViewFilter2.designer.cs">
+      <DependentUpon>GridViewFilter2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_productos\PorcentajeLinea.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_productos\PorcentajeLinea.designer.cs">
+      <DependentUpon>PorcentajeLinea.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_productos\SearchFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_productos\SearchFilter.designer.cs">
+      <DependentUpon>SearchFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_recibos\AplicacionItem.cs" />
+    <Compile Include="_recibos\DeducirItem.cs" />
+    <Compile Include="_recibos\EnvioRecibo.cs" />
+    <Compile Include="_recibos\Recibo.cs" />
+    <Compile Include="_recibos\ReciboItem.cs" />
+    <Compile Include="_recibos\ucRecibo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_recibos\ucRecibo.Designer.cs">
+      <DependentUpon>ucRecibo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_registrofaltantes\ucFaltante.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_registrofaltantes\ucFaltante.Designer.cs">
+      <DependentUpon>ucFaltante.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_registro\ActivarAplicacion.cs" />
+    <Compile Include="_registro\AppRegistro.cs" />
+    <Compile Include="_registro\fRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_registro\fRegistro.designer.cs">
+      <DependentUpon>fRegistro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_rendiciones\EnvioRendicion.cs" />
+    <Compile Include="_rendiciones\ucRendiciones.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_rendiciones\ucRendiciones.Designer.cs">
+      <DependentUpon>ucRendiciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_updateData\fDataUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_updateData\fDataUpdate.Designer.cs">
+      <DependentUpon>fDataUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_updateData\UpdateCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_updateData\UpdateCtl.Designer.cs">
+      <DependentUpon>UpdateCtl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_updateData\updateMDB.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="forms\frmReporte.resx">
+      <DependentUpon>frmReporte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="forms\SplashScreenForm.resx">
+      <DependentUpon>SplashScreenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="util\errorHandling\ErrorForm.resx">
+      <DependentUpon>ErrorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="util\FlashControl.resx">
+      <DependentUpon>FlashControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_devoluciones\ucDevolucion.resx">
+      <DependentUpon>ucDevolucion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_interdeposito\ucInterDeposito.resx">
+      <DependentUpon>ucInterDeposito.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_movimientos\ucMovimientos.resx">
+      <DependentUpon>ucMovimientos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_novedades\ucNovedades.resx">
+      <DependentUpon>ucNovedades.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_novedades\ucTips.resx">
+      <DependentUpon>ucTips.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_pedidos\EstadoPedidoMostrar.resx">
+      <DependentUpon>EstadoPedidoMostrar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_pedidos\ucPedido.resx">
+      <DependentUpon>ucPedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_productos\FiltroSearch.resx" />
+    <EmbeddedResource Include="_productos\GridViewFilter2.resx">
+      <DependentUpon>GridViewFilter2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_productos\PorcentajeLinea.resx">
+      <DependentUpon>PorcentajeLinea.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_productos\SearchFilter.resx">
+      <DependentUpon>SearchFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_recibos\ucRecibo.resx">
+      <DependentUpon>ucRecibo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_registrofaltantes\ucFaltante.resx">
+      <DependentUpon>ucFaltante.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_registro\fRegistro.resx">
+      <DependentUpon>fRegistro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_rendiciones\ucRendiciones.resx">
+      <DependentUpon>ucRendiciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_updateData\fDataUpdate.resx">
+      <DependentUpon>fDataUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_updateData\UpdateCtl.resx">
+      <DependentUpon>UpdateCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Web References\AppConfigWS\appConfig.wsdl" />
+    <None Include="Web References\AppConfigWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\AuditorWS\audit_v_304.wsdl" />
+    <None Include="Web References\AuditorWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\CatalogoNovedadesWS\catalogonovedades.wsdl" />
+    <None Include="Web References\CatalogoNovedadesWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ClientesNovedadesWS\clientesnovedades.wsdl" />
+    <None Include="Web References\ClientesNovedadesWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\DevolucionWS\Devolucion.wsdl" />
+    <None Include="Web References\DevolucionWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\InterDepositoWS\InterDeposito.wsdl" />
+    <None Include="Web References\InterDepositoWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\LLaveClienteWS\LLaveCliente.wsdl" />
+    <None Include="Web References\LLaveClienteWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PedidosWS\Pedidos.wsdl" />
+    <None Include="Web References\PedidosWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\RecibosWS\Recibos_v_303.wsdl" />
+    <None Include="Web References\RecibosWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\RendicionWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\RendicionWS\Rendicion.wsdl" />
+    <None Include="Web References\UpdateClientesWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\UpdateClientesWS\UpdateClientes.wsdl" />
+    <None Include="Web References\VerEstadoPedidoWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\VerEstadoPedidoWS\VerEstadoPedido.wsdl" />
+    <None Include="Web References\VerExistenciaWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\VerExistenciaWS\VerExistencia.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="mwViajantes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="_preferencias\CheckBoxINI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="_preferencias\passwordFrm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="_preferencias\PreferenciasFrm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="_preferencias\TextEditINI.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="_productos\DetalleImagen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="_productos\DetalleProducto.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="ADODB">
+      <Guid>{2A75196C-D9EB-4129-B803-931327F72D5C}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="ADOX">
+      <Guid>{00000600-0000-0010-8000-00AA006D2EA4}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="JRO">
+      <Guid>{AC3B8B4C-B6CA-11D1-9F31-00C04FC29D52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/appConfig.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AppConfigWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsCatalogo4/appConfig.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_AppConfigWS_appConfig</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/audit_v_304.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AuditorWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsCatalogo4/audit_v_304.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_AuditorWS_audit_v_304</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wscatalogo4/catalogonovedades.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\CatalogoNovedadesWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wscatalogo4/catalogonovedades.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_CatalogoNovedadesWS_CatalogoNovedades</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wscatalogo4/clientesnovedades.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ClientesNovedadesWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wscatalogo4/clientesnovedades.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo_ClientesNovedadesWS_ClientesNovedades</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/Devolucion.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\DevolucionWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsCatalogo4/Devolucion.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_DevolucionWS_Devolucion</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/InterDeposito.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\InterDepositoWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsCatalogo4/InterDeposito.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_InterDepositoWS_InterDeposito</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/LLaveCliente.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\LLaveClienteWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsCatalogo4/LLaveCliente.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_LLaveClienteWS_LLaveCliente</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/Pedidos.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PedidosWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsCatalogo4/Pedidos.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_PedidosWS_Pedidos</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/Recibos_v_303.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\RecibosWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsCatalogo4/Recibos_v_303.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_RecibosWS_Recibos_v_303</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/Rendicion.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\RendicionWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsCatalogo4/Rendicion.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_RendicionWS_Rendicion</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/UpdateClientes.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\UpdateClientesWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsCatalogo4/UpdateClientes.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_UpdateClientesWS_UpdateClientes</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsOracle/VerEstadoPedido.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\VerEstadoPedidoWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsOracle/VerEstadoPedido.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_VerEstadoPedidoWS_VerEstadoPedido</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wsOracle/VerExistencia.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\VerExistenciaWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wsOracle/VerExistencia.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo4_VerExistenciaWS_VerExistencia</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\VerExistenciaWS\VerExistencia.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\VerEstadoPedidoWS\VerEstadoPedido.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\UpdateClientesWS\UpdateClientes.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\AppConfigWS\appConfig.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\LLaveClienteWS\LLaveCliente.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\AuditorWS\audit_v_304.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\DevolucionWS\Devolucion.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\InterDepositoWS\InterDeposito.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\PedidosWS\Pedidos.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\RecibosWS\Recibos_v_303.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\RendicionWS\Rendicion.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\CatalogoNovedadesWS\catalogonovedades.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ClientesNovedadesWS\clientesnovedades.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="recursos\a-procesar.png" />
+    <Resource Include="recursos\ans32X32.ico" />
+    <Resource Include="recursos\ans48X48.ico" />
+    <Resource Include="recursos\ans_nl.png" />
+    <Resource Include="recursos\ans_nlh.png" />
+    <Resource Include="recursos\en-espera.png" />
+    <Resource Include="recursos\en-proceso.png" />
+    <Resource Include="recursos\en-transporte.png" />
+    <Resource Include="recursos\icnCartilla.png" />
+    <Resource Include="recursos\icnFacebook.png" />
+    <Resource Include="recursos\icnLinkedin.png" />
+    <Resource Include="recursos\icnTwitter.png" />
+    <Resource Include="recursos\icnYoutube.png" />
+    <Resource Include="recursos\logo.jpg" />
+    <Resource Include="recursos\para-despacho.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
