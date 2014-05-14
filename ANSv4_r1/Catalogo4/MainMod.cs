@@ -441,8 +441,9 @@ namespace Catalogo
 
         public static void inicializaGlobales()
         {
-           Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
-           //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+           //xxxSabor
+           //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+           Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
  
             Global01.NoConn = false;
             Global01.VersionApp = (int)(Global01.miSABOR) + ".4.0.1";
