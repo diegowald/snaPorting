@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Reflection;
+//using System.Deployment.Application;
 
 namespace Catalogo._Application
 {
@@ -34,7 +36,6 @@ namespace Catalogo._Application
         {
             bool conectado = util.network.IPCache.instance.conectado;
 
- 
             try
             {
                 if (!webServiceInicializado)
@@ -113,16 +114,11 @@ namespace Catalogo._Application
             int estado;
             string sResultado = String.Empty;
 
-//RaiseEvent SincronizarActivarAppProgress("Iniciando Servicio Web", 0, Cancel)
+            //RaiseEvent SincronizarActivarAppProgress("Iniciando Servicio Web", 0, Cancel)
 
             if (!webServiceInicializado)
             {
                 cancel = true;
-            }
-
-            if (!cancel)
-            {
-//RaiseEvent SincronizarActivarAppProgress("Verificando Estado Viajante/Cliente", 40, Cancel)
             }
 
             if (!cancel)
@@ -218,16 +214,12 @@ namespace Catalogo._Application
             bool cancel = false;
             byte estado;
             string sResultado = String.Empty;
+            MessageBoxIcon xIconMsg = MessageBoxIcon.Error;
 
             //RaiseEvent SincronizarActivarAppProgress("Iniciando Servicio Web", 0, Cancel)
             if (!webServiceInicializado)
             {
                 cancel = true;
-            }
-
-            if (!cancel)
-            {
-              //RaiseEvent SincronizarActivarAppProgress("Estado Actual del Catálogo", 40, Cancel)
             }
 
             if (!cancel)
@@ -245,6 +237,7 @@ namespace Catalogo._Application
                         sResultado = "ERROR: Esa PC NO está Registrada, Comunicarse con auto náutica sur";
                         break;
                     case 4:
+                        xIconMsg = MessageBoxIcon.Information; 
                         sResultado = "El estado de registro del catálogo está correcto";
                         break;
                     default:
@@ -252,16 +245,27 @@ namespace Catalogo._Application
                         break;
                 }
 
-                if (!cancel)
-                {
-                    //RaiseEvent SincronizarActivarAppProgress("Un momento por favor...", 70, Cancel)
-                }
             }
 
             if (sResultado != String.Empty)
             {
-                //RaiseEvent SincronizarActivarAppProgress(sResultado, 100, Cancel)
-                MessageBox.Show(sResultado + "\n\nID: " + _MacAddress, "Estado Actual del Catálogo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                System.Reflection.Assembly CurrentAssembly = Assembly.GetExecutingAssembly();
+                System.Diagnostics.FileVersionInfo fileVersionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(CurrentAssembly.Location);
+                string xVersion = Assembly
+                     .GetExecutingAssembly()
+                     .GetReferencedAssemblies()
+                     .Where(x => x.Name == "System.Core").First().Version.ToString();
+
+                sResultado += "\n\nID: " + _MacAddress;
+                sResultado += "\n";
+                sResultado += "\n" + "1) Framework " + xVersion.Trim();              
+                sResultado += "\n" + "2) Environment.Version " + Environment.Version.ToString().Trim() + " -- " + System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion().Trim();
+                sResultado += "\n" + "3) Application.ProductVersion " + Application.ProductVersion.Trim();
+                sResultado += "\n" + "4) File Versión " + fileVersionInfo.FileVersion.ToString();
+                sResultado += "\n" + "5) Application.ExecutablePath " + Application.ExecutablePath.ToString().Trim() + " - Application.StartupPath" + Application.StartupPath.ToString().Trim();
+                sResultado += "\n";
+
+                MessageBox.Show(sResultado, "Estado Actual del Catálogo", MessageBoxButtons.OK, xIconMsg);
             }
         }
 
@@ -276,7 +280,6 @@ namespace Catalogo._Application
                 return cliente.ObtenerEstadoActual(_MacAddress, Cuit, IDAns);
             }
         }
-
 
         internal void listaPrecio()
         {

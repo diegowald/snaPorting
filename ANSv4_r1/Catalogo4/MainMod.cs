@@ -1,9 +1,15 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.OleDb;
+using System.Reflection;
+//using System.Deployment;
 //using System.Threading;
+//using System.Deployment.Application;
 
 namespace Catalogo
 {
@@ -12,6 +18,8 @@ namespace Catalogo
 
         public static void Main()
         {
+            checkEnviroment();
+
             checkFlashPlayer();
 
             valida_ubicacionDatos();
@@ -61,6 +69,38 @@ namespace Catalogo
             //- Run mi APP MainWindow -----------------
             //- ** RETORNA AL app.XAML y sigue la EJECUCION NORMAL ** ---
             //- Fin Main ---
+        }
+
+        private static void checkEnviroment()
+        {
+            string sResultado = "";
+            //char ctrln = (char)0x0E;
+
+            System.Reflection.Assembly CurrentAssembly = Assembly.GetExecutingAssembly();
+            System.Diagnostics.FileVersionInfo fileVersionInfo = System.Diagnostics.FileVersionInfo.GetVersionInfo(CurrentAssembly.Location);
+
+            string xVersion = Assembly
+                 .GetExecutingAssembly()
+                 .GetReferencedAssemblies()
+                 .Where(x => x.Name == "System.Core").First().Version.ToString();
+
+            sResultado += "\r\n" + "1) Framework " + xVersion.Trim();
+            sResultado += "\r\n" + "2) Environment.Version " + Environment.Version.ToString().Trim() + " -- " + System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion().Trim();
+            sResultado += "\r\n" + "3) Application.ProductVersion " + Application.ProductVersion.Trim();
+            sResultado += "\r\n" + "4) File Versión " + fileVersionInfo.FileVersion.ToString();
+            sResultado += "\r\n" + "5) Application.ExecutablePath " + Application.ExecutablePath.ToString().Trim() + " - Application.StartupPath" + Application.StartupPath.ToString().Trim();
+            sResultado += "\r\n";
+
+            //sResultado += "\r\n" + "4) Assembly.GetExecutingAssembly " + Assembly.GetExecutingAssembly().GetName().Version.ToString().Trim() 
+
+            util.errorHandling.ErrorLogger.LogMessage(sResultado);
+
+            if (byte.Parse(xVersion.Trim().Substring(0, 4).Replace(".","")) < 35)
+            {
+                MessageBox.Show(new Form() { TopMost = true },"El Framework 3.5-SP1 es REQUERIDO para el uso de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                miEnd();
+            }
+
         }
 
         private static void lanzarProcesosSegundoPlano()
@@ -348,9 +388,10 @@ namespace Catalogo
         {
             //--- Verifico si hay actualización de Emergencia de la MDB - Update MDB ----------
             if (Funciones.modINIs.ReadINI("UPDATE", "mdb") == "up201406")
-            {
+            {                
                 System.IO.File.Copy(Global01.AppPath + "\\Datos\\Catalogo.mdb", Global01.AppPath + "\\Datos\\" + Global01.FileBak, false);
                 Application.DoEvents();
+
                 System.IO.File.Copy(Global01.AppPath + "\\Reportes\\Catalogo.mdb", Global01.AppPath + "\\Datos\\Catalogo.mdb", true);
                 Application.DoEvents();
 
@@ -367,24 +408,40 @@ namespace Catalogo
                 MessageBox.Show(new Form() { TopMost = true },"Hay otra instancia de la aplicación abierta", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
-
-            if (!System.IO.File.Exists(Global01.dstring))
+            
+            if (!System.IO.File.Exists(Global01.sstring))
             {
-                //Cursor.Current = Cursors.Default;
-                MessageBox.Show(new Form() { TopMost = true },"Error en la instalación del archivo Catalogo", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true }, "Error en la instalación del archivo de Seguridad", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
 
             if (!System.IO.File.Exists(Global01.cstring))
             {
-                MessageBox.Show(new Form() { TopMost = true },"Error en la instalación del archivo de Datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show(new Form() { TopMost = true }, "Error en la instalación del archivo de Datos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 miEnd();
             }
 
-            if (!System.IO.File.Exists(Global01.sstring))
+            if (!System.IO.File.Exists(Global01.dstring))
             {
-                MessageBox.Show(new Form() { TopMost = true },"Error en la instalación del archivo de Seguridad", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                miEnd();
+                if (Funciones.modINIs.ReadINI("UPDATE", "mdb") == "up201406")
+                {
+                    Funciones.modINIs.DeleteKeyINI("UPDATE", "mdb");
+                    if (System.IO.File.Exists(Global01.AppPath + "\\Reportes\\Catalogo.mdb"))
+                    {
+                        System.IO.File.Copy(Global01.AppPath + "\\Reportes\\Catalogo.mdb", Global01.AppPath + "\\Datos\\Catalogo.mdb", true);
+                        System.IO.File.Delete(Global01.AppPath + "\\Reportes\\Catalogo.mdb");
+                        System.IO.File.Delete(Global01.AppPath + "\\up201406.exe");
+                    }
+                    Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(Global01.IDMaquina);
+                    Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
+                    Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");                    
+                    Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
+                }
+                else
+                {
+                    MessageBox.Show(new Form() { TopMost = true }, "Error en la instalación del archivo Catalogo", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);                    
+                    miEnd();
+                }
             }
             //--- Fin de Pregunta -------------------------------
 
@@ -442,11 +499,11 @@ namespace Catalogo
         public static void inicializaGlobales()
         {
            //xxxSabor
-           //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
-           Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+            //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+            Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
  
             Global01.NoConn = false;
-            Global01.VersionApp = (int)(Global01.miSABOR) + ".4.0.1";
+            Global01.VersionApp = (int)(Global01.miSABOR) + "." + Application.ProductVersion.Trim();
 
             Global01.Conexion = null;
             //Global01.TranActiva_ = null;

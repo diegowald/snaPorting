@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucNovedades));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitC1 = new System.Windows.Forms.SplitContainer();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
@@ -87,8 +87,8 @@
             this.dgvNovedades.AllowUserToAddRows = false;
             this.dgvNovedades.AllowUserToDeleteRows = false;
             this.dgvNovedades.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            this.dgvNovedades.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            this.dgvNovedades.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvNovedades.BackgroundColor = System.Drawing.Color.White;
             this.dgvNovedades.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvNovedades.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;

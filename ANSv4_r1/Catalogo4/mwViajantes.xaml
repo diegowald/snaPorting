@@ -26,7 +26,7 @@
                 <Grid x:Name="LeftBanner" HorizontalAlignment="Left" Grid.Column="0">
                     <Image x:Name="topLogo" VerticalAlignment="Bottom" Source="recursos/ans_nl.png" Margin="0,1,1,0"/>
                 </Grid>
-                <Grid x:Name="topBanner"  Grid.Column="1"/>
+                <Grid x:Name="topBanner"  Grid.Column="1" Width="600" Height="90" HorizontalAlignment="Center"  />
                 <Grid x:Name="RightBanner" HorizontalAlignment="Right" Grid.Column="2">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <Button Content="2" BorderBrush="White" x:Name="ChangeViewButton"

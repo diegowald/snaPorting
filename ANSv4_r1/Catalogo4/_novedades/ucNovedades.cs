@@ -32,6 +32,11 @@ namespace Catalogo._novedades
         {
             InitializeComponent();
             flash = new varios.FlashControl();
+            flash.AutoScroll = false;
+            //flash.Dock = System.Windows.Forms.DockStyle.Fill
+            //flash.Location = new System.Drawing.Point(0, 0);
+            flash.Name = "novflash";
+
             this.splitC1.Panel1.Controls.Add(this.flash);
 
             tips = new ucTips();
@@ -39,7 +44,7 @@ namespace Catalogo._novedades
 
             pictureBox.Dock = DockStyle.Fill;
             webBrowser.Dock = DockStyle.Fill;
-            flash.Dock = DockStyle.Fill;
+            //flash.Dock = DockStyle.Fill;
             tips.Dock = DockStyle.Fill;
 
             downloadFiles = new Dictionary<string, DownloadStatus>();
@@ -305,7 +310,19 @@ namespace Catalogo._novedades
                     break;
                 case "flash":
                     {
+                        varios.SwfParser swfParser = new varios.SwfParser();
+                        Rectangle rectangle = swfParser.GetDimensions(localFile);
+                        flash.Width = rectangle.Width;
+                        flash.Height = rectangle.Height;
+
+                        int miX = (this.splitC1.Panel1.Width / 2) - (flash.Width / 2);
+                        int miY = (this.splitC1.Panel1.Height / 2) - (flash.Height / 2);
+                        flash.Location = new System.Drawing.Point(miX, miY);
+
+                        flash.Anchor = System.Windows.Forms.AnchorStyles.None;
+
                         mostrarControl(CONTROL.FLASH);
+
                         flash.file = localFile;
                         flash.play();
                     }
