@@ -35,7 +35,16 @@ namespace Catalogo.varios
                 if (axShockwaveFlash1.Movie.Length != 0)
                 {
                     axShockwaveFlash1.Loop = true;
-                    axShockwaveFlash1.LoadMovie(0, file); 
+                    axShockwaveFlash1.LoadMovie(0, file);
+
+                    //if (file.IndexOf("banner") <= 0)
+                    //{
+                    //SwfParser swfParser = new SwfParser();
+                    //Rectangle rectangle = swfParser.GetDimensions(file);
+                    //axShockwaveFlash1.Width = rectangle.Width;
+                    //axShockwaveFlash1.Height = rectangle.Height;
+                    //}
+
                     axShockwaveFlash1.Play();
                 }
             }

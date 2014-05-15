@@ -110,8 +110,8 @@ namespace Catalogo
 
             // Create the MaskedTextBox control.
             flash = new varios.FlashControl();
-            flash.AutoScroll = true;
-            flash.Dock = System.Windows.Forms.DockStyle.Top;
+            flash.AutoScroll = false;
+            //flash.Dock = System.Windows.Forms.DockStyle.Top;
             flash.Location = new System.Drawing.Point(0, 0);
             flash.Name = "flash";
 

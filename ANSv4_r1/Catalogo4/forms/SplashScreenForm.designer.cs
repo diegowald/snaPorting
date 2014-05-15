@@ -139,6 +139,7 @@
             this.progressBar2.MarqueeAnimationSpeed = 50;
             this.progressBar2.Name = "progressBar2";
             this.progressBar2.Size = new System.Drawing.Size(345, 11);
+            this.progressBar2.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar2.TabIndex = 5;
             this.progressBar2.UseWaitCursor = true;
             this.progressBar2.Visible = false;
@@ -149,6 +150,7 @@
             this.progressBar1.MarqueeAnimationSpeed = 50;
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(345, 11);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 7;
             this.progressBar1.UseWaitCursor = true;
             this.progressBar1.Visible = false;
