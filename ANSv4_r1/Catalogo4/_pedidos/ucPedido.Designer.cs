@@ -170,6 +170,7 @@ namespace Catalogo._pedidos
             // nvPrecioU
             // 
             this.nvPrecioU.Text = "Precio U.";
+            this.nvPrecioU.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // nvCantidadLv
             // 

@@ -41,6 +41,7 @@ namespace Catalogo.varios
                 btnIngresar.Enabled = true;
                 if (Global01.AppActiva) { chkActualizarClientes.Enabled = true; }
             }
+            lblPIN.Focus();
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)

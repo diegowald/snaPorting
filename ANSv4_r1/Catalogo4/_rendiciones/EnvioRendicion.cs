@@ -73,9 +73,9 @@ namespace Catalogo._rendiciones
             m_ChequesCant = byte.Parse(Ren["Cheques_Cantidad"].ToString());
             m_CertificadosCant = byte.Parse(Ren["Certificados_Cantidad"].ToString());
 
+            m_DetalleValores = "";
             if (RenValores.HasRows)
-            {
-                m_DetalleValores = "";
+            {                
                 while (RenValores.Read())
                 {
                     m_DetalleValores += RenValores["Bco_Dep_Tipo"].ToString() + ",";
@@ -90,9 +90,9 @@ namespace Catalogo._rendiciones
                 }
             }
 
+            m_DetalleRecibos = "";
             if (RenRecibos.HasRows)
             {
-                m_DetalleRecibos = "";
                 while (RenRecibos.Read())
                 {
                     m_DetalleRecibos += RenRecibos["nroRecibo"].ToString() + ",";

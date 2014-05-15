@@ -233,7 +233,7 @@ namespace Catalogo._rendiciones
 			                    if (wOper == "add") 
                                 {
                                     _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Rendicion,_auditor.Auditor.AccionesAuditadas.EXITOSO,"viajante:" + Global01.NroUsuario  + " rc:" + lblNroRendicion.Text + " tot:" + string.Format("{0:N2}",float.Parse(lblRecibosTotal.Text)));
-				                    MessageBox.Show("Rendición Grabada Con Éxito ! -> N°=" + lblNroRendicion.Text, "Datos Grabados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				                    MessageBox.Show("Rendición grabada con Éxito! -> N° " + lblNroRendicion.Text, "Datos Grabados", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			                    } 
                                 else 
                                 {
@@ -242,12 +242,17 @@ namespace Catalogo._rendiciones
     
                                 m.Accion = tAccion.Neutro;
                                 CambiarA(tEstado.Neutro);
-                                Habilita(m.Accion);                    
+                                Habilita(m.Accion);
+
+                                btnIniciar.Text = "Iniciar";
+                                btnIniciar.Tag = "INICIAR";
+                                _ToolTip.SetToolTip(btnIniciar, "INICIAR Rendición Nueva");
 
 		                        m.ID  = 0;
                                 Rendicion_Imprimir(lblNroRendicion.Text);
 
                                 LimpiarPantalla("all");
+
                             //}
                         }
                         catch (Exception ex)
@@ -279,6 +284,7 @@ namespace Catalogo._rendiciones
                   
 				    break;
                 case tAccion.Buscar:
+                    paEnviosCbo.SelectedIndex = 0;
                     sTAB.SelectedIndex = 2;
                     break;
 			    case tAccion.Imprimir:
@@ -553,7 +559,7 @@ namespace Catalogo._rendiciones
                     if (rec.HasRows)
                     {
                         rec.Read();
-                        pID = Int16.Parse(rec["NroRendicion"].ToString() + 1);
+                        pID = Int16.Parse(rec["NroRendicion"].ToString()) + 1;
                     }
                     rec = null;
 
@@ -848,8 +854,8 @@ namespace Catalogo._rendiciones
 
         private void ucRendiciones_Load(object sender, EventArgs e)
         {
-            
-            ObtenerMovimientos();
+
+            paEnviosCbo.SelectedIndex = 2;
 
             cboRecibos.SelectedIndex = -1;    
     
@@ -944,8 +950,8 @@ namespace Catalogo._rendiciones
 	        lblDivDolarC.Text = string.Format("{0:N2}",float.Parse("0" + lblDivDolarCantidad.Text) - float.Parse(txtLatDiv_dolar.Text));
 	        lblDivEuroC.Text = string.Format("{0:N2}",float.Parse("0" + lblDivEuroCantidad.Text) - float.Parse(txtLatDiv_euro.Text));
 
-	        if (float.Parse(lblEfectivoC.Text) != 0) lblEfectivoC.ForeColor = Color.Red;
-	        if (System.Math.Abs(float.Parse(lblChequesTotalC.Text)) > 0.05) lblChequesTotalC.ForeColor = Color.Red;
+	        if (Math.Abs(float.Parse(lblEfectivoC.Text)) > 0.05) lblEfectivoC.ForeColor = Color.Red;
+	        if (Math.Abs(float.Parse(lblChequesTotalC.Text)) > 0.05) lblChequesTotalC.ForeColor = Color.Red;
 	        if (Int16.Parse(lblChequesCantidadC.Text) != 0) lblChequesCantidadC.ForeColor = Color.Red;
 	        if (float.Parse(lblCertificadosTotalC.Text) != 0) lblCertificadosTotalC.ForeColor = Color.Red;
 	        if (Int16.Parse(lblCertificadosCantidadC.Text) != 0) lblCertificadosCantidadC.ForeColor = Color.Red;
@@ -1063,7 +1069,7 @@ namespace Catalogo._rendiciones
             {
                 this.txtBd_Monto.Text = "0,00";
                 this.txtBdCh_Cantidad.Text = "0";
-                cboCheques.SelectedIndex = 0;
+                if (cboCheques.Items.Count  > 0) cboCheques.SelectedIndex = 0;
             }
             else if (_opTipoDeposito_1.Checked)
             {
@@ -1186,10 +1192,10 @@ namespace Catalogo._rendiciones
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            if (DatosValidos("all"))
+            if (DatosValidos("grabar"))
             {
                 Accion_Click(tAccion.Guardar);
-                ObtenerMovimientos();
+                paEnviosCbo.SelectedIndex = 2;
             }
         }
 
@@ -1214,7 +1220,7 @@ namespace Catalogo._rendiciones
                     
                     btnIniciar.Text = "Iniciar";
                     btnIniciar.Tag = "INICIAR";
-                    _ToolTip.SetToolTip(btnIniciar, "INICIAR Recibo Nuevo");
+                    _ToolTip.SetToolTip(btnIniciar, "INICIAR Rendición Nueva");
 
                     Accion_Click(tAccion.Cancelar);
                     
@@ -1314,7 +1320,7 @@ namespace Catalogo._rendiciones
 
                                 envio.run();
 
-                                ObtenerMovimientos();
+                                paEnviosCbo.SelectedIndex = 1;
                             }
                         }
                     }

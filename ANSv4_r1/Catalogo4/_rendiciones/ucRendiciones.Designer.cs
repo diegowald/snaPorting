@@ -481,6 +481,7 @@ namespace Catalogo._rendiciones
             this.lblNroRendicion.Size = new System.Drawing.Size(102, 15);
             this.lblNroRendicion.TabIndex = 8;
             this.lblNroRendicion.Text = "00000-00000000";
+            this.lblNroRendicion.Visible = false;
             // 
             // Label9
             // 

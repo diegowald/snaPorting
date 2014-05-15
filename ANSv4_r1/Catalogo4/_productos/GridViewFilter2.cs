@@ -371,6 +371,11 @@ namespace Catalogo._productos
                         existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
                     }
                 }
+                else
+                {
+                    this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);                
+                }
+
             }
             catch (Exception ex)
             {
@@ -458,18 +463,18 @@ namespace Catalogo._productos
             }
         }
 
-        private void dataGridView1_DoubleClick(object sender, EventArgs e)
-        {
-            try
-            {
-                this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);
-            }
-            catch (Exception ex)
-            {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
-                throw ex;  //util.errorHandling.ErrorForm.show();
-            }
-        }
+        //private void dataGridView1_DoubleClick(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        util.errorHandling.ErrorLogger.LogMessage(ex);
+        //        throw ex;  //util.errorHandling.ErrorForm.show();
+        //    }
+        //}
 
         public emisorHandler<_pedidos.PedidosHelper.Acciones> emisor3
         {
