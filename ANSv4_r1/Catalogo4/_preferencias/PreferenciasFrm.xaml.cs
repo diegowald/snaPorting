@@ -157,6 +157,7 @@ namespace Catalogo._preferencias
             {
                 doEnablePasswordProtectedControls();
             }
+            PasswordButton.Visibility = passwordOK ? System.Windows.Visibility.Hidden : System.Windows.Visibility.Visible;
         }
 
     }
