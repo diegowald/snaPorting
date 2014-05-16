@@ -46,11 +46,14 @@ namespace Catalogo
             {
                 this.dcRecibos.IsCloseable = true;
                 this.dcRendiciones.IsCloseable = true;
+                this.dcVisitas.IsCloseable = true;
+
                 this.xDevolucionesAreaDockC.IsCloseable = true;
                 this.xRegFaltantesAreaDockC.IsCloseable = true;
 
                 this.dcRecibos.Close();
                 this.dcRendiciones.Close();
+                this.dcVisitas.Close();
                 this.xDevolucionesAreaDockC.Close();
                 this.xRegFaltantesAreaDockC.Close();
                 this.mnu_apertura.Visibility = System.Windows.Visibility.Collapsed;

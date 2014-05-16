@@ -219,6 +219,16 @@
                                     <Grid x:Name="xNovedadesArea" Grid.Row="0" />
                                 </Grid>
                             </ad:DocumentContent>
+                            
+                            <ad:DocumentContent Name="dcVisitas" Title="Form. Visita a Clientes" IsCloseable="False" IsFloatingAllowed="False">
+                                <Grid x:Name="grFormVisitas">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition  Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid x:Name="xFormVisitasArea" Grid.Row="0" />
+                                </Grid>
+                            </ad:DocumentContent>
+                            
                         </ad:DocumentPane>
 
                         <ad:DockablePane x:Name="rzMenu" ad:ResizingPanel.ResizeWidth="150">
