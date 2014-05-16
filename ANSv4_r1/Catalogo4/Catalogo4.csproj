@@ -405,6 +405,12 @@
       <DependentUpon>UpdateCtl.cs</DependentUpon>
     </Compile>
     <Compile Include="_updateData\updateMDB.cs" />
+    <Compile Include="_clientesNovedades\ucVisita.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_clientesNovedades\ucVisita.Designer.cs">
+      <DependentUpon>ucVisita.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -488,6 +494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_updateData\UpdateCtl.resx">
       <DependentUpon>UpdateCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_clientesNovedades\ucVisita.resx">
+      <DependentUpon>ucVisita.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Catalogo4_ClaveTemporal.pfx" />

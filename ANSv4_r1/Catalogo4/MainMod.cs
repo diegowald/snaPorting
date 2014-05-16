@@ -90,7 +90,7 @@ namespace Catalogo
                  .GetExecutingAssembly()
                  .GetReferencedAssemblies()
                  .Where(x => x.Name == "System.Core").First().Version.ToString();
-
+          
             sResultado += "\r\n" + "1) Framework " + xVersion.Trim();
             sResultado += "\r\n" + "2) Environment.Version " + Environment.Version.ToString().Trim() + " -- " + System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion().Trim();
             sResultado += "\r\n" + "3) Application.ProductVersion " + Application.ProductVersion.Trim();
@@ -442,25 +442,25 @@ namespace Catalogo
 
             if (!System.IO.File.Exists(Global01.dstring))
             {
-                //if (Funciones.modINIs.ReadINI("UPDATE", "mdb") == "up201406")
-                //{
-                //    Funciones.modINIs.DeleteKeyINI("UPDATE", "mdb");
-                //    if (System.IO.File.Exists(Global01.AppPath + "\\Reportes\\Catalogo.mdb"))
-                //    {
-                //        System.IO.File.Copy(Global01.AppPath + "\\Reportes\\Catalogo.mdb", Global01.AppPath + "\\Datos\\Catalogo.mdb", true);
-                //        System.IO.File.Delete(Global01.AppPath + "\\Reportes\\Catalogo.mdb");
-                //        System.IO.File.Delete(Global01.AppPath + "\\up201406.exe");
-                //    }
-                //    Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(Global01.IDMaquina);
-                //    Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
-                //    Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");                    
-                //    Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
-                //}
-                //else
-                //{
-                    MessageBox.Show(new Form() { TopMost = true }, "Error en la instalación del archivo Catalogo", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);                    
+                if (Funciones.modINIs.ReadINI("UPDATE", "mdb") == "new201406")
+                {
+                    Funciones.modINIs.DeleteKeyINI("UPDATE", "mdb");
+                    if (System.IO.File.Exists(Global01.AppPath + "\\Reportes\\Catalogo.mdb"))
+                    {                    
+                        System.IO.File.Copy(Global01.AppPath + "\\Reportes\\Catalogo.mdb", Global01.AppPath + "\\Datos\\Catalogo.mdb", true);
+                        System.IO.File.Delete(Global01.AppPath + "\\Reportes\\Catalogo.mdb");
+                        System.IO.File.Delete(Global01.AppPath + "\\up201406.exe");
+                    }
+                    //Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(Global01.IDMaquina);
+                    Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
+                    Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
+                    //Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
+                }
+                else
+                {
+                    MessageBox.Show(new Form() { TopMost = true }, "Error en la instalación del archivo Catalogo", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     miEnd();
-                //}
+                }
             }
             //--- Fin de Pregunta -------------------------------
 
@@ -540,7 +540,9 @@ namespace Catalogo
 
             Global01.cstring = Global01.AppPath + "\\datos\\ans.mdb";
             Global01.dstring = Global01.AppPath + "\\datos\\catalogo.mdb";
+
             Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
+            //Global01.sstring = Application.StartupPath.ToString().Trim() + "\\en-UK\\AvalonDock.resources.dll";
 
             if (!System.IO.File.Exists(Global01.dstring))
             {
