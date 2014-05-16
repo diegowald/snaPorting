@@ -27,35 +27,39 @@ namespace Catalogo._novedades
 
         private void mostrar_tip()
         {
-            Random r = new Random();
-            int n = 0;
-           
-            Random rnd = new Random();
+                Random r = new Random();
+                int n = 0;
 
-            n = r.Next(arrayTips.Length);
+                Random rnd = new Random();
 
-            if (arrayTips.Length > 0)
-            {
+                n = r.Next(arrayTips.Length);
 
-                while (n == tipActual)
+                if (arrayTips.Length > 0)
                 {
-                    n = r.Next(arrayTips.Length);
-                    System.Windows.Forms.Application.DoEvents();
-                }
 
-                lblTip.Text = arrayTips[n];
-                tipActual = n;
-            }
-            else
-            {
-                fireRequestClose();
-            }
+                    while (n == tipActual)
+                    {
+                        n = r.Next(arrayTips.Length);
+                        System.Windows.Forms.Application.DoEvents();
+                    }
+
+                    lblTip.Text = arrayTips[n];
+                    tipActual = n;
+                }
+                else
+                {
+                    fireRequestClose();
+                }
+            
         }
 
         internal void Cargar_Tips(string file)
         {
-            arrayTips = System.IO.File.ReadAllLines(file, Encoding.UTF7);
-            mostrar_tip();
+            if (System.IO.File.Exists(file))
+            {
+                arrayTips = System.IO.File.ReadAllLines(file, Encoding.UTF7);
+                mostrar_tip();
+            }
         }
 
         private void fireRequestClose()

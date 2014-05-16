@@ -281,8 +281,11 @@ namespace Catalogo._novedades
         
         private void mostrarNovedad(string pDescripcion, string pArchivo, string pUrl, string pOrigen, string pTipo, int id, string FLeido)
         {
-
+            bool tOk = false;
             string localFile = String.Format("{0}\\imagenes\\Novedades\\{1}", Global01.AppPath, pArchivo);
+            
+            if (System.IO.File.Exists(localFile))  tOk = true;
+
             switch (pTipo)
             {
                 case "url":
@@ -292,46 +295,55 @@ namespace Catalogo._novedades
                     break;
                 case "texto":
                     {
-                        mostrarControl(CONTROL.TIPS);
-                        //webBrowser.DocumentText = System.IO.File.ReadAllText(localFile);
-                        tips.mostrarTips(localFile);
+                        if (tOk)
+                        {
+                            mostrarControl(CONTROL.TIPS);
+                            //webBrowser.DocumentText = System.IO.File.ReadAllText(localFile);
+                            tips.mostrarTips(localFile);
+                        }
                     }
                     break;
                 case "pdf":
                     {
-                        System.Diagnostics.Process.Start(localFile);
+                        if (tOk) System.Diagnostics.Process.Start(localFile);
                     }
                     break;
                 case "imagen":
                     {
-                        mostrarControl(CONTROL.IMAGEN);
-                        pictureBox.ImageLocation = localFile;
+                        if (tOk)
+                        {
+                            mostrarControl(CONTROL.IMAGEN);
+                            pictureBox.ImageLocation = localFile;
+                        }
                     }
                     break;
                 case "flash":
                     {
-                        varios.SwfParser swfParser = new varios.SwfParser();
-                        Rectangle rectangle = swfParser.GetDimensions(localFile);
-                        flash.Width = rectangle.Width;
-                        flash.Height = rectangle.Height;
+                        if (tOk)
+                        {
+                            varios.SwfParser swfParser = new varios.SwfParser();
+                            Rectangle rectangle = swfParser.GetDimensions(localFile);
+                            flash.Width = rectangle.Width;
+                            flash.Height = rectangle.Height;
 
-                        int miX = (this.splitC1.Panel1.Width / 2) - (flash.Width / 2);
-                        int miY = (this.splitC1.Panel1.Height / 2) - (flash.Height / 2);
-                        flash.Location = new System.Drawing.Point(miX, miY);
+                            int miX = (this.splitC1.Panel1.Width / 2) - (flash.Width / 2);
+                            int miY = (this.splitC1.Panel1.Height / 2) - (flash.Height / 2);
+                            flash.Location = new System.Drawing.Point(miX, miY);
 
-                        flash.Anchor = System.Windows.Forms.AnchorStyles.None;
+                            flash.Anchor = System.Windows.Forms.AnchorStyles.None;
 
-                        mostrarControl(CONTROL.FLASH);
+                            mostrarControl(CONTROL.FLASH);
 
-                        flash.file = localFile;
-                        flash.play();
+                            flash.file = localFile;
+                            flash.play();
+                        }
                     }
                     break;
                 default: 
                     break;
             }
 
-            if (FLeido.Trim().Length == 0)
+            if (tOk && FLeido.Trim().Length == 0)
             {
                 marcarComoLeido(id);
             }

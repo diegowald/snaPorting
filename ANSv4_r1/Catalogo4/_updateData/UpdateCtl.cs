@@ -181,7 +181,7 @@ namespace Catalogo.varios
         {
             try
             {
-                System.IO.StreamReader file = new System.IO.StreamReader(tempFolder + vclu);
+                System.IO.StreamReader file = new System.IO.StreamReader(tempFolder + vclu, Encoding.UTF7);
                 name = "";
                 webVer = "";
                 updateURL = "";

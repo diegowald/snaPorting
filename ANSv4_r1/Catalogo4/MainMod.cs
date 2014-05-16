@@ -36,13 +36,20 @@ namespace Catalogo
             Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
             Catalogo._auditor.Auditor.instance.Conexion = Global01.Conexion;
 
+            load_header(0);
+
             valida_appRegistro();
-            
+
+            if (Global01.AppActiva)
+            {
+                update_productos();
+            }
+
+            load_header(1);
+
             // Carga tabla de Productos en Segundo Plano
             preload.Preloader.instance.refresh();
-
-            load_header();
-
+           
             //chequea comandos y mensajes desde el servidor
             if ((Funciones.modINIs.ReadINI("DATOS", "INFO", "1") == "1") | (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente))
             {
@@ -60,7 +67,7 @@ namespace Catalogo
                     updater.run();
                 }
 
-                update_productos();
+                //update_productos();
             }
 
             lanzarProcesosSegundoPlano();
@@ -116,48 +123,54 @@ namespace Catalogo
 
         private static void ActivarApplicacion()
         {
-            OleDbDataReader dr = null;
-            dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_appConfig2");
-            if (!dr.HasRows)
-            {
-                MessageBox.Show(new Form() { TopMost = true },"Aplicación NO inicializada! (error=Version y Tipo), Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                miEnd();
-            }
-            else
-            {
-                dr.Read();
 
-                if (dr["appCVersion"].ToString().Substring(1, 3) != Global01.VersionApp.Substring(3, 3))
-                {
-                    MessageBox.Show(new Form() { TopMost = true },"INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    miEnd();
-                }
-                else
-                {
-                    Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP", "0.0.0.0");
-                    if (Global01.URL_ANS == "0.0.0.0")
-                    {
-                        Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString();
-                    }
+            util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
+               util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+               util.BackgroundTasks.Updater.UpdateType.ActivarApp);
+            updater.run();
 
-                    Global01.URL_ANS2 = Funciones.modINIs.ReadINI("DATOS", "IP2", "0.0.0.0");
-                    if (Global01.URL_ANS2 == "0.0.0.0")
-                    {
-                        Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
-                    }
+            //OleDbDataReader dr = null;
+            //dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_appConfig2");
+            //if (!dr.HasRows)
+            //{
+            //    MessageBox.Show(new Form() { TopMost = true }, "Aplicación NO inicializada! (error=Version y Tipo), Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //    miEnd();
+            //}
+            //else
+            //{
+            //    dr.Read();
 
-                    Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
+            //    if (dr["appCVersion"].ToString().Substring(1, 3) != Global01.VersionApp.Substring(3, 3))
+            //    {
+            //        MessageBox.Show(new Form() { TopMost = true }, "INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            //        miEnd();
+            //    }
+            //    else
+            //    {
+            //        Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP", "0.0.0.0");
+            //        if (Global01.URL_ANS == "0.0.0.0")
+            //        {
+            //            Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString();
+            //        }
 
-                    util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
-                       util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
-                       util.BackgroundTasks.Updater.UpdateType.ActivarApp);
-                    updater.run();
-                }
-            }
-            dr = null;
+            //        Global01.URL_ANS2 = Funciones.modINIs.ReadINI("DATOS", "IP2", "0.0.0.0");
+            //        if (Global01.URL_ANS2 == "0.0.0.0")
+            //        {
+            //            Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
+            //        }
+
+            //        Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
+
+            //        util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
+            //           util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+            //           util.BackgroundTasks.Updater.UpdateType.ActivarApp);
+            //        updater.run();
+            //    }
+            //}
+            //dr = null;
         }
 
-        private static void load_header()
+        private static void load_header(byte Paso)
         {
             //- acá sigo con el código de main --
             OleDbDataReader dr = null;
@@ -177,6 +190,8 @@ namespace Catalogo
                     miEnd();
                 }
 
+                Global01.MiBuild = DBNull.Value.Equals(dr["Build"]) ? (int)(0) : Int32.Parse(dr["Build"].ToString());
+
                 Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP", "0.0.0.0");
                 if (Global01.URL_ANS == "0.0.0.0")
                 {
@@ -191,34 +206,38 @@ namespace Catalogo
 
                 Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
 
-                Global01.ListaPrecio = DBNull.Value.Equals(dr["appCListaPrecio"]) ? (byte)(0) : (byte)(dr["appCListaPrecio"]);
-                Global01.MiBuild = DBNull.Value.Equals(dr["Build"]) ? (int)(0) : Int32.Parse(dr["Build"].ToString());
-                Global01.NroUsuario = DBNull.Value.Equals(dr["IDAns"]) ? "00000" : dr["IDAns"].ToString();
-                Global01.Zona = DBNull.Value.Equals(dr["Zona"]) ? "000" : dr["Zona"].ToString();
-                Global01.Cuit = DBNull.Value.Equals(dr["Cuit"]) ? "0" : dr["Cuit"].ToString();
-                Global01.dbCaduca = DBNull.Value.Equals(dr["dbCaduca"]) ? DateTime.Parse("01/01/1900") : DateTime.Parse(dr["dbCaduca"].ToString());
-                Global01.appCaduca = DBNull.Value.Equals(dr["appCaduca"]) ? DateTime.Parse("01/01/1900") : DateTime.Parse(dr["appCaduca"].ToString());
-                Global01.F_ActCatalogo = DBNull.Value.Equals(dr["F_ActCatalogo"]) ? DateTime.Parse("01/01/1900") : DateTime.Parse(dr["F_ActCatalogo"].ToString());
-                Global01.F_ActClientes = DBNull.Value.Equals(dr["F_ActClientes"]) ? DateTime.Parse("01/01/1900") : DateTime.Parse(dr["F_ActClientes"].ToString());
-                Global01.F_UltimoAcceso = DBNull.Value.Equals(dr["FechaUltimoAcceso"]) ? DateTime.Today.Date : DateTime.Parse(dr["FechaUltimoAcceso"].ToString());
-                Global01.EnviarAuditoria = DBNull.Value.Equals(dr["EnviarAuditoria"]) ? (bool)(true) : (bool)(dr["EnviarAuditoria"]);
-                Global01.AuditarProceso = DBNull.Value.Equals(dr["Auditor"]) ? (bool)(true) : (bool)(dr["Auditor"]);
+                if (Paso == 1)
+                {
+                    Global01.ListaPrecio = DBNull.Value.Equals(dr["appCListaPrecio"]) ? (byte)(0) : (byte)(dr["appCListaPrecio"]);
+                    //Global01.MiBuild = DBNull.Value.Equals(dr["Build"]) ? (int)(0) : Int32.Parse(dr["Build"].ToString());
+                    Global01.NroUsuario = DBNull.Value.Equals(dr["IDAns"]) ? "00000" : dr["IDAns"].ToString();
+                    Global01.Zona = DBNull.Value.Equals(dr["Zona"]) ? "000" : dr["Zona"].ToString();
+                    Global01.Cuit = DBNull.Value.Equals(dr["Cuit"]) ? "0" : dr["Cuit"].ToString();
+                    Global01.dbCaduca = DBNull.Value.Equals(dr["dbCaduca"]) ? DateTime.Parse("01/01/1900") : DateTime.Parse(dr["dbCaduca"].ToString());
+                    Global01.appCaduca = DBNull.Value.Equals(dr["appCaduca"]) ? DateTime.Parse("01/01/1900") : DateTime.Parse(dr["appCaduca"].ToString());
+                    Global01.F_ActCatalogo = DBNull.Value.Equals(dr["F_ActCatalogo"]) ? DateTime.Parse("01/01/1900") : DateTime.Parse(dr["F_ActCatalogo"].ToString());
+                    Global01.F_ActClientes = DBNull.Value.Equals(dr["F_ActClientes"]) ? DateTime.Parse("01/01/1900") : DateTime.Parse(dr["F_ActClientes"].ToString());
+                    Global01.F_UltimoAcceso = DBNull.Value.Equals(dr["FechaUltimoAcceso"]) ? DateTime.Today.Date : DateTime.Parse(dr["FechaUltimoAcceso"].ToString());
+                    Global01.EnviarAuditoria = DBNull.Value.Equals(dr["EnviarAuditoria"]) ? (bool)(true) : (bool)(dr["EnviarAuditoria"]);
+                    Global01.AuditarProceso = DBNull.Value.Equals(dr["Auditor"]) ? (bool)(true) : (bool)(dr["Auditor"]);
 
-                Global01.RazonSocial = DBNull.Value.Equals(dr["RazonSocial"]) ? "" : dr["RazonSocial"].ToString();
-                Global01.ApellidoNombre = DBNull.Value.Equals(dr["ApellidoNombre"]) ? "" : dr["ApellidoNombre"].ToString();
+                    Global01.RazonSocial = DBNull.Value.Equals(dr["RazonSocial"]) ? "" : dr["RazonSocial"].ToString();
+                    Global01.ApellidoNombre = DBNull.Value.Equals(dr["ApellidoNombre"]) ? "" : dr["ApellidoNombre"].ToString();
 
-                Global01.pin  = DBNull.Value.Equals(dr["PIN"]) ? "" : dr["PIN"].ToString();
-                Global01.EmailTO = DBNull.Value.Equals(dr["Email"]) ? "" : dr["Email"].ToString();
+                    Global01.pin = DBNull.Value.Equals(dr["PIN"]) ? "" : dr["PIN"].ToString();
+                    Global01.EmailTO = DBNull.Value.Equals(dr["Email"]) ? "" : dr["Email"].ToString();
 
-                //Global01.Domicilio = DBNull.Value.Equals(dr["Domicilio"]) ? "" : dr["Domicilio"];
-                //Global01.Ciudad = DBNull.Value.Equals(dr["Ciudad"]) ? "" : dr["Ciudad"];
+                    //Global01.Domicilio = DBNull.Value.Equals(dr["Domicilio"]) ? "" : dr["Domicilio"];
+                    //Global01.Ciudad = DBNull.Value.Equals(dr["Ciudad"]) ? "" : dr["Ciudad"];
 
-                valida_header();
-
+                    valida_header();
+                }
+                else
+                {
+                    if (Global01.Conexion.State == ConnectionState.Open) { Global01.Conexion.Close(); }
+                }
             }
             dr = null;
-            //if (Global01.Conexion.State == ConnectionState.Open) { Global01.Conexion.Close(); }
-
         }
 
         private static void valida_header()
@@ -307,8 +326,8 @@ namespace Catalogo
         {
             //- Registro y activación -------------XX
         AcaRegistro:
-            //if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
-            if (false)
+            if (!Catalogo._registro.AppRegistro.ValidateRegistration(Global01.IDMaquinaREG))
+            //if (false)
             {
                 if (Global01.IDMaquinaCRC == "no")
                 {
@@ -378,7 +397,7 @@ namespace Catalogo
                 //Sabor3 = 
                 //Global01.IDMaquina = "391887A0B0AC683CDB99E45117855B0CE";
                 //Sabor2 = 
-                Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
+                //Global01.IDMaquina = "291887A0B0AC683CDB99E45117855B0CE";
 
             }
             //--------------------------------------XX
