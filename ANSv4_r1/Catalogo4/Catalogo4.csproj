@@ -257,6 +257,7 @@
     <Compile Include="_auditor\Auditor.cs" />
     <Compile Include="_auditor\EnvioAuditoria.cs" />
     <Compile Include="_clientesNovedades\EnvioClientesNovedades.cs" />
+    <Compile Include="_clientesNovedades\EnvioVisitasClientes.cs" />
     <Compile Include="_clientes\UpdateClientes.cs" />
     <Compile Include="_devoluciones\Devolucion.cs" />
     <Compile Include="_devoluciones\DevolucionItem.cs" />

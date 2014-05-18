@@ -29,6 +29,7 @@ namespace Catalogo.util.BackgroundTasks
         System.Collections.Generic.List<string> filtroDevolucion;
         System.Collections.Generic.List<string> filtroInterdeposito;
         System.Collections.Generic.List<string> filtroRendicion;
+        System.Collections.Generic.List<string> filtroVisita;
 
         public EnvioMovimientos(JOB_TYPE jobType, int idCliente, MODOS_TRANSMISION modoTransmision,
             System.Collections.Generic.List<MOVIMIENTO_SELECCIONADO> filtro)
@@ -41,6 +42,7 @@ namespace Catalogo.util.BackgroundTasks
             filtroDevolucion = new List<string>();
             filtroInterdeposito = new List<string>();
             filtroRendicion = new List<string>();
+            filtroVisita = new List<string>();
 
             if (filtro != null)
             {
@@ -62,6 +64,9 @@ namespace Catalogo.util.BackgroundTasks
                             break;
                         case "RENDICION":
                             filtroRendicion.Add(ms.nro);
+                            break;
+                        case "VISITA":
+                            filtroVisita.Add(ms.nro);
                             break;
                         default:
                             break;
@@ -111,6 +116,7 @@ namespace Catalogo.util.BackgroundTasks
             bool fallaEnvioDevolucion = false;
             bool fallaEnvioInterDeposito = false;
             bool fallaEnvioRendicion = false;
+            bool fallaEnvioVisita = false;
 
             _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, _idCliente);
             System.Data.OleDb.OleDbDataReader movs = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "(todos)");
@@ -247,6 +253,30 @@ namespace Catalogo.util.BackgroundTasks
                                 }
                             }
                             break;
+                        case "VISITA":
+                            {
+                                bool enviar = usarFiltros && filtroVisita.Contains(Nro);
+                                if (enviar)
+                                {
+                                    _clientesNovedades.EnvioVisitasClientes envio = new _clientesNovedades.EnvioVisitasClientes(Global01.Conexion, Global01.URL_ANS2, Global01.IDMaquina);
+                                    if (envio.Inicializado)
+                                    {
+                                        envio.ObtenerDatos(Nro);
+                                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.InterDeposito, _auditor.Auditor.AccionesAuditadas.TRANSMITE, "ID1= " + movs["Nro"]);
+                                        if (envio.EnviarVisitacliente() != 0)
+                                        {
+                                            fallaEnvioVisita = true;
+                                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.InterDeposito, _auditor.Auditor.AccionesAuditadas.FALLO, "ID1 " + movs["Nro"]);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        fallaEnvioVisita = true;
+                                    }
+                                    envio = null;
+                                }
+                            }
+                            break;
                         default:
                             break;
                     }
@@ -254,7 +284,7 @@ namespace Catalogo.util.BackgroundTasks
             }
 
             if (fallaEnvioPedido || fallaEnvioRecibo || fallaEnvioDevolucion ||
-                fallaEnvioInterDeposito || fallaEnvioRendicion)
+                fallaEnvioInterDeposito || fallaEnvioRendicion || fallaEnvioVisita)
             {
                 _resultado = false;
             }

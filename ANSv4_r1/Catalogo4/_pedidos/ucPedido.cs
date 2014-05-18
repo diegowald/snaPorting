@@ -62,6 +62,7 @@ namespace Catalogo._pedidos
                 cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
             }
         }
+
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
             try

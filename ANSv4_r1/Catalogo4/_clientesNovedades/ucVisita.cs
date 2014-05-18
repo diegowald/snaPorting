@@ -47,8 +47,8 @@ namespace Catalogo._clientesNovedades
             cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
 
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref rfTipoCbo, "ansTipoNovedades", "Descrip", "ID", "Activo<>1", "ID", true, false, "NONE");
-
-            CargarClienteNovedades();                
+            
+            CargarClienteNovedades();
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)

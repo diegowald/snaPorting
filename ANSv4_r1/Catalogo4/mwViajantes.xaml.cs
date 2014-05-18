@@ -24,6 +24,7 @@ namespace Catalogo
         private Catalogo._novedades.ucNovedades nov = null;
         private Catalogo.varios.FlashControl flash = null;
         private Catalogo._registrofaltantes.ucFaltante faltantes = null;
+        private Catalogo._clientesNovedades.ucVisita visita = null;
 
         public mwViajantes()
         {
@@ -256,6 +257,23 @@ namespace Catalogo
             this.xInterDepositoArea.Children.Add(host);
 
             return xInterDeposito;
+        }
+
+        private Catalogo._clientesNovedades.ucVisita addVisitaAClientesArea()
+        {
+            // Create the interop host control.
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+
+            Catalogo._clientesNovedades.ucVisita xVisita = new _clientesNovedades.ucVisita();
+            xVisita.AutoScroll = false;
+            xVisita.Location = new System.Drawing.Point(0, 0);
+            xVisita.Dock = System.Windows.Forms.DockStyle.Fill;
+            xVisita.Name = "Visita";
+
+            host.Child = xVisita;
+            this.xFormVisitasArea.Children.Add(host);
+
+            return xVisita;
         }
 
         private Catalogo._productos.GridViewFilter2 addProductsArea()
@@ -508,6 +526,9 @@ namespace Catalogo
                                 crearControlesNovedades();
                                 dcNovedades.SetValue(TextBlock.FontStyleProperty, FontStyles.Normal);
                                 break;
+                            case "Form. Visita a Clientes":
+                                crearControlesVisitaAClientes();
+                                break;
                             default:
                                 // Nothing
                                 break;
@@ -568,6 +589,14 @@ namespace Catalogo
             if (IntDep == null)
             {
                 IntDep = addInterDepositoArea();
+            }
+        }
+
+        private void crearControlesVisitaAClientes()
+        {
+            if (visita == null)
+            {
+                visita = addVisitaAClientesArea();
             }
         }
 
