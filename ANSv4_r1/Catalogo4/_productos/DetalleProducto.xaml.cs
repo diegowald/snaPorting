@@ -284,28 +284,39 @@ namespace Catalogo._productos
             //validateImagefile(_Destino);
             if (isValidImage(Destino))
             {
-                try
+                // Esta verificacion puede parecer rara.
+                // if (_Destino == Destino)
+                // Que significa?
+                // Destino: es la imagen que se acaba de descargar
+                // _Destino es la imagen que se deberia estar mostrando (es la correspondiente al producto seleccionado en la grilla)
+                // Si me desplazo hacia rapidamente, se generan varios threads que van descargando la imagen.
+                // Entonces puede suceder que se termine de descargar una imagen en un mommento en el que se
+                // esta visualizando o se desea visualizar la imagen de otro producto.
+                if (_Destino == Destino)
                 {
-                    if (imgDerecha.Dispatcher.CheckAccess())
+                    try
                     {
-                        imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
-                        _imgEnDescarga.Remove(_Destino);
+                        if (imgDerecha.Dispatcher.CheckAccess())
+                        {
+                            imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
+                            _imgEnDescarga.Remove(Destino);
+                        }
+                        else
+                        {
+                            imgDerecha.Dispatcher.Invoke(new Action(() =>
+                                {
+                                    imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
+                                    _imgEnDescarga.Remove(Destino);
+                                }));
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        imgDerecha.Dispatcher.Invoke(new Action(() =>
-                            {
-                                imgDerecha.Source = new BitmapImage(new Uri(_Destino, UriKind.Absolute));
-                                _imgEnDescarga.Remove(_Destino);
-                            }));
+                        string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
+                        imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
+                        //throw ex;
+                        util.errorHandling.ErrorLogger.LogMessage(ex);
                     }
-                }
-                catch (Exception ex)
-                {
-                    string ImgProductoDefault = Global01.AppPath + "\\imagenes\\default.jpg";
-                    imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
-                    //throw ex;
-                    util.errorHandling.ErrorLogger.LogMessage(ex);
                 }
             }
             else
