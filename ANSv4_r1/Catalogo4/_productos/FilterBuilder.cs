@@ -272,15 +272,18 @@ namespace Catalogo._productos
             if ((Convert.ToString(colValue) == "(todos)")) { return; }
 
             string colFilter = addFilter(colName, colValue);
-            if (colFilter.Length > 0)
+            if (colFilter != null)
             {
-                if (string.IsNullOrEmpty(filterString))
+                if (colFilter.Length > 0)
                 {
-                    filterString += colFilter;
-                }
-                else
-                {
-                    filterString += " AND " + colFilter;
+                    if (string.IsNullOrEmpty(filterString))
+                    {
+                        filterString += colFilter;
+                    }
+                    else
+                    {
+                        filterString += " AND " + colFilter;
+                    }
                 }
             }
         }
@@ -383,54 +386,77 @@ namespace Catalogo._productos
 
         private string whereTxtBuscar(string txtBuscar)
         {
-            bool filtro2 = false;
-            bool filtro3 = false;
-
-            if (txtBuscar.Trim().Substring(0, 2) == "++")
-            {
-                filtro3 = true;
-                txtBuscar = txtBuscar.Trim().Substring(2);
-            } 
-            else if (txtBuscar.Trim().Substring(0, 1) == "+")
-            {
-                filtro2 = true;
-                txtBuscar = txtBuscar.Trim().Substring(1);
-            }
-
             string sqlWhere = null;
-            string[] PalabrasClave = txtBuscar.Split(' ');
-               
-	        if (!string.IsNullOrEmpty(txtBuscar)) 
+            string campos1 = "MiCodigo + ' ' + c_producto + ' ' + Equivalencia + ' ' + Original + ' ' + Motor + ' ' + ReemplazaA + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' + O_Producto + ' ' + Contiene";            
+            //clientes
+            string campos2 = "c_producto Equivalencia Original Motor ReemplazaA";            
+            if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente)
+            {//viajantes
+                campos2 = "MiCodigo Equivalencia Original Motor ReemplazaA";
+            }
+            string alcance = "=";
+            string comodin1 = "";
+            string comodin2 = "";
+
+            if (!string.IsNullOrEmpty(txtBuscar.Trim()))
             {
-                foreach (string palabra in PalabrasClave)
+                if (txtBuscar.Trim().Substring(0, 1) == "+")
+                { 
+                    alcance = "LIKE";
+                    comodin1 = "%";
+                }
+
+                if (txtBuscar.Trim().Substring(1).IndexOf("+") > 0)
                 {
-                    if (!string.IsNullOrEmpty(palabra))
+                    alcance = "LIKE";
+                    comodin2 = "%";
+                }
+
+                string[] PalabrasClave = txtBuscar.Trim().Replace("+","").Split(' ');
+
+                byte Num;
+                bool isNum = byte.TryParse(txtBuscar.Trim().Replace("+", "").Substring(0, 1), out Num);
+
+                if (PalabrasClave.GetLongLength(0) > 1 | !(isNum))
+                {
+                    alcance = "LIKE";
+                    comodin1 = "%";
+                    comodin2 = "%";
+                    foreach (string palabra in PalabrasClave)
                     {
-                        if (!string.IsNullOrEmpty(sqlWhere))
+                        if (!string.IsNullOrEmpty(palabra))
                         {
-                            sqlWhere += " AND ";
-                        }
-                        if (filtro2)
-                        {
-                            sqlWhere += " (c_producto + ' ' +  Equivalencia + ' ' + Original LIKE '";
+                            if (!string.IsNullOrEmpty(sqlWhere))
+                            {
+                                sqlWhere += " AND ";
+                            }
+
+                            //sqlWhere += " (" + campos1 + " LIKE '%";
+                            //sqlWhere += palabra;
+                            //sqlWhere += "%')";
+
+                            sqlWhere += " (" + campos1 + " " + alcance + " '" + comodin1;
                             sqlWhere += palabra;
-                            sqlWhere += "%')";
-                        }
-                        else if (filtro3)
-                        {
-                            sqlWhere += " (c_producto + ' ' +  Equivalencia + ' ' + Original LIKE '%";
-                            sqlWhere += palabra;
-                            sqlWhere += "%')";
-                        }
-                        else
-                        {
-                            sqlWhere += " (MiCodigo  + ' ' +  c_producto + ' ' + Equivalencia + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' +  O_Producto + ' ' + Original + ' ' + Contiene + ' ' + ReemplazaA + ' ' + Motor  LIKE '%";
-                            sqlWhere += palabra;
-                            sqlWhere += "%')";
+                            sqlWhere += comodin2 + "') "; 
                         }
                     }
                 }
-	        }
+                else
+                {// una sola palabra
+                    string[] CamposClave = campos2.Trim().Split(' ');
+                    foreach (string campo in CamposClave)
+                    {
+                        if (!string.IsNullOrEmpty(sqlWhere))
+                        {
+                            sqlWhere += " OR ";
+                        }
+                        sqlWhere += " (" + campo + " " + alcance + " '" + comodin1;
+                        sqlWhere += PalabrasClave[0].Trim();
+                        sqlWhere += comodin2 + "') "; 
+                    }
+                }
+
+            }
 
             return sqlWhere;
         }

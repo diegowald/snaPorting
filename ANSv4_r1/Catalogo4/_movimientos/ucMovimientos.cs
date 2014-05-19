@@ -303,13 +303,19 @@ namespace Catalogo._movimientos
                         string Estado = (string)cell.Tag;
                         switch (Estado)
                         {
-                            case "x":
+                            case "1":
                                 brush = Brushes.Red;
                                 break;
-                            case "y":
+                            case "2":
                                 brush = Brushes.Yellow;
                                 break;
-                            case "?":
+                            case "3":
+                                brush = Brushes.Green;
+                                break;
+                            case "4":
+                                brush = Brushes.Green;
+                                break;
+                            case "5":
                                 brush = Brushes.Green;
                                 break;
                             default:
@@ -360,17 +366,23 @@ namespace Catalogo._movimientos
                 }
                 else
                 {
+                    xMostrar = true;
                     switch (aResultado[0])
                     {
-                        case "x":
-                            cell.ToolTipText = "E3 -" + aResultado[1]; 
+                        case "1":
+                            cell.ToolTipText = "E1 -" + aResultado[1]; 
                             break;
-                        case "y":
+                        case "2":
                             cell.ToolTipText = "E2 -" + aResultado[1]; 
                             break;
-                        case "?":
-                            cell.ToolTipText = "E1 -" + aResultado[1];
-                            xMostrar = true;
+                        case "3":
+                            cell.ToolTipText = "E3 -" + aResultado[1];
+                            break;
+                        case "4":
+                            cell.ToolTipText = "E4 -" + aResultado[1];
+                            break;
+                        case "5":
+                            cell.ToolTipText = "E5 -" + aResultado[1];
                             break;
                     }
                 }
@@ -380,6 +392,7 @@ namespace Catalogo._movimientos
                     _pedidos.EstadoPedidoMostrar fEstadoPedido = new _pedidos.EstadoPedidoMostrar();
 
                     fEstadoPedido.EstadoMsg = cell.ToolTipText.ToString();
+                    fEstadoPedido.EstadoActivo = cell.Tag.ToString();
 
                     fEstadoPedido.ShowDialog();
                     fEstadoPedido.Dispose();

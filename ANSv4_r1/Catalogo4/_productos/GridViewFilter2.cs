@@ -453,6 +453,17 @@ namespace Catalogo._productos
                         this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);
                         break;
                     default:
+                        if (Char.IsLetterOrDigit(e.KeyChar))
+                        {
+                            for (int i = 0; i < (dataGridView1.Rows.Count); i++)
+                            {
+                                if (dataGridView1.Rows[i].Cells["C_Producto"].Value.ToString().StartsWith(e.KeyChar.ToString(), true, System.Globalization.CultureInfo.InvariantCulture))
+                                {
+                                    dataGridView1.Rows[i].Cells[0].Selected = true;
+                                    return; // stop looping
+                                }
+                            }
+                        }
                         break;
                 }
             }
@@ -596,6 +607,5 @@ namespace Catalogo._productos
             dataGridView1.ClearSelection();
             dataGridView1.Visible = false;            
         }
-
     }
 }
