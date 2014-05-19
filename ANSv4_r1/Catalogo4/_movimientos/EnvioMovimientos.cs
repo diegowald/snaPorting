@@ -302,7 +302,8 @@ namespace Catalogo.util.BackgroundTasks
                     || (filtroRecibo.Count > 0)
                     || (filtroDevolucion.Count > 0)
                     || (filtroInterdeposito.Count > 0)
-                    || (filtroRendicion.Count > 0);
+                    || (filtroRendicion.Count > 0)
+                    || (filtroVisita.Count > 0);
             }
         }
 
