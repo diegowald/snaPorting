@@ -519,7 +519,7 @@ namespace Catalogo
         {
            //xxxSabor
             Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
-            //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+           // Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
  
             Global01.NoConn = false;
             Global01.VersionApp = (int)(Global01.miSABOR) + "." + Application.ProductVersion.Trim();
@@ -541,8 +541,8 @@ namespace Catalogo
             Global01.cstring = Global01.AppPath + "\\datos\\ans.mdb";
             Global01.dstring = Global01.AppPath + "\\datos\\catalogo.mdb";
 
-            Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
-            //Global01.sstring = Application.StartupPath.ToString().Trim() + "\\en-UK\\AvalonDock.resources.dll";
+            //Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
+            Global01.sstring = Application.StartupPath.ToString().Trim() + "\\AvallonDock.resources.dll";
 
             if (!System.IO.File.Exists(Global01.dstring))
             {
