@@ -14,7 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>C:\Catalogo ANS.viajante\Catalogo4.publicar\viajantes\</PublishUrl>
+    <PublishUrl>C:\Catalogo ANS.viajantes\Catalogo4.publicar\viajantes\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -26,16 +26,19 @@
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://192.168.30.110:8080/catalogo4/instalar/viajantes/</InstallUrl>
     <UpdateUrl>http://192.168.30.110:8080/catalogo4/instalar/viajantes/</UpdateUrl>
-    <ProductName>Catálogo</ProductName>
+    <ProductName>Catálogo Digital de Productos v4 - ANS</ProductName>
     <PublisherName>Auto Náutica Sur s.r.l.</PublisherName>
     <SuiteName>Catálogo Digital de Productos</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>13</ApplicationRevision>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>30</ApplicationRevision>
     <ApplicationVersion>4.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>false</BootstrapperEnabled>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -258,6 +261,12 @@
     <Compile Include="_auditor\EnvioAuditoria.cs" />
     <Compile Include="_clientesNovedades\EnvioClientesNovedades.cs" />
     <Compile Include="_clientesNovedades\EnvioVisitasClientes.cs" />
+    <Compile Include="_clientesNovedades\ucVisitas.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="_clientesNovedades\ucVisitas.Designer.cs">
+      <DependentUpon>ucVisitas.cs</DependentUpon>
+    </Compile>
     <Compile Include="_clientes\UpdateClientes.cs" />
     <Compile Include="_devoluciones\Devolucion.cs" />
     <Compile Include="_devoluciones\DevolucionItem.cs" />
@@ -324,9 +333,6 @@
     </Compile>
     <Compile Include="_preferencias\IINIProperty.cs" />
     <Compile Include="_preferencias\INIPropertyHandler.cs" />
-    <Compile Include="_preferencias\passwordFrm.xaml.cs">
-      <DependentUpon>passwordFrm.xaml</DependentUpon>
-    </Compile>
     <Compile Include="_preferencias\PreferenciasFrm.xaml.cs">
       <DependentUpon>PreferenciasFrm.xaml</DependentUpon>
     </Compile>
@@ -406,12 +412,6 @@
       <DependentUpon>UpdateCtl.cs</DependentUpon>
     </Compile>
     <Compile Include="_updateData\updateMDB.cs" />
-    <Compile Include="_clientesNovedades\ucVisita.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="_clientesNovedades\ucVisita.Designer.cs">
-      <DependentUpon>ucVisita.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -445,6 +445,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="util\FlashControl.resx">
       <DependentUpon>FlashControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_clientesNovedades\ucVisitas.resx">
+      <DependentUpon>ucVisitas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="_devoluciones\ucDevolucion.resx">
       <DependentUpon>ucDevolucion.cs</DependentUpon>
@@ -496,9 +499,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="_updateData\UpdateCtl.resx">
       <DependentUpon>UpdateCtl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="_clientesNovedades\ucVisita.resx">
-      <DependentUpon>ucVisita.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Catalogo4_ClaveTemporal.pfx" />
@@ -579,10 +579,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="_preferencias\CheckBoxINI.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="_preferencias\passwordFrm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -843,6 +839,16 @@
     <Resource Include="ans48X48.ico" />
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include="Ans.Catalogo.4.0">
+      <Visible>False</Visible>
+      <ProductName>Catálogo Digital de Productos 4.0 - Auto Náutica Sur s.r.l.</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Data.Access.Components.2.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft Data Access Components 2.8</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
@@ -851,7 +857,12 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="SAP.CrystalReports14.NET.2.0">
+      <Visible>False</Visible>
+      <ProductName>SAP Crystal Reports Runtime Engine for .NET Framework</ProductName>
+      <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
@@ -898,6 +909,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AvallonDock.resources.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

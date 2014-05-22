@@ -131,21 +131,6 @@ namespace Catalogo._productos
             }
         }
 
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //xCargarDataControl();           
-            }
-            catch (Exception ex)
-            {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
-                throw ex;   //util.errorHandling.ErrorForm.show();
-            }
-        }
-
-
         private void cboMarca_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -295,16 +280,7 @@ namespace Catalogo._productos
 
         private void txtPorcentajeLinea_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == '\r')
-            {
-                btnApply0.PerformClick();
-                e.Handled = true;
-            }
-            else
-            {
-                Funciones.util.EsImporte(txtPorcentajeLinea.Text, ref e);
-            }
-
+            Funciones.util.EsImporte(txtPorcentajeLinea.Text, ref e);
         }
 
         internal delegate void FocusDelegate();
@@ -319,13 +295,24 @@ namespace Catalogo._productos
             txtBuscar.Clear();
         }
 
-        private void txtBuscar_KeyPress(object sender, KeyPressEventArgs e)
+        internal void FocusOnLinea()
         {
-            if (e.KeyChar == '\r')
+            if (InvokeRequired)
             {
-                btnApply0.PerformClick();
-                e.Handled = true;
+                BeginInvoke(new FocusDelegate(FocusOnLinea));
+                return;
             }
+            this.ActiveControl = cboLinea.Control;
+        }
+
+        internal void ResetOnFilter()
+        {
+            if (InvokeRequired)
+            {
+                BeginInvoke(new FocusDelegate(ResetOnFilter));
+                return;
+            }
+            btnClearFilters.PerformClick();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -335,6 +322,17 @@ namespace Catalogo._productos
                 this.emitir3(keyData);
                 return true;
             }
+            else if ((keyData == Keys.Tab) && ((ActiveControl == cboLinea.Control) | (ActiveControl == cboFamilia.Control) | (ActiveControl == cboMarca.Control) | (ActiveControl == cboModelo.Control)))
+            {
+                btnApply0.PerformClick();
+                return true;
+            }
+            else if ((keyData == Keys.Enter) && ((ActiveControl == txtBuscar.Control) | (ActiveControl == txtPorcentajeLinea.Control)))
+            {
+                btnApply0.PerformClick();
+                return true;
+            }
+
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -343,5 +341,6 @@ namespace Catalogo._productos
             get;
             set;
         }
+
     }
 }

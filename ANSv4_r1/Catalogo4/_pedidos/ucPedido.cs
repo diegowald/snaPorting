@@ -39,14 +39,7 @@ namespace Catalogo._pedidos
             paDataGridView.CellPainting += OnCellPainting;
 
             cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
-            if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
-            }
-            else
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
-            }
+            Funciones.util.load_clientes(ref cboCliente);
             cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
 
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref nvTransporteCbo, "ansTransportes", "Nombre", "ID", "Activo=1", "Nombre", true, false, "NONE");
@@ -158,10 +151,14 @@ namespace Catalogo._pedidos
                             _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Pedido,
                                 _auditor.Auditor.AccionesAuditadas.INICIA, "");
                             nvlistView.Items.Clear();
+            
+                            //--ORDENAR --
+                            //nvlistView.ListViewItemSorter = new util.ListViewItemComparer(10);
+                            //nvlistView.Sort();
 
                             OleDbDataReader dr = null;
 
-                            if (Funciones.modINIs.ReadINI("DATOS", "PedidoNE", "1") == "1")
+                            if (Funciones.modINIs.ReadINI("DATOS", "PED_abierto_ne", Global01.setDef_PED_abierto_ne) == "1")
                             {
                                 _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(cboCliente.SelectedValue.ToString()));
                                 dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "NOTA DE VENTA");
@@ -202,8 +199,9 @@ namespace Catalogo._pedidos
                                         ItemX.SubItems.Add(dr["IdCatalogo"].ToString());       //08
                                         ItemX.SubItems.Add(dr["Codigo"].ToString());           //09
                                         ItemX.SubItems.Add(dr["Observaciones"].ToString());    //10
-
-                                        nvlistView.Items.Add(ItemX);
+                                        ItemX.SubItems.Add((nvlistView.Items.Count+1).ToString());    //11
+                              
+                                        nvlistView.Items.Insert(0,ItemX);
                                     }
                                     Funciones.util.AutoSizeLVColumnas(ref nvlistView);
                                 }
@@ -223,7 +221,7 @@ namespace Catalogo._pedidos
 
                             nvSimilarChk.Checked = false;
                             nvEsOfertaChk.Checked = false;
-                            nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                            nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
                             PedidoTab.SelectedIndex = 0;
                             PedidoTab.Visible = true;
                         }
@@ -241,7 +239,7 @@ namespace Catalogo._pedidos
                                 //if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
                                 nvSimilarChk.Checked = false;
                                 nvEsOfertaChk.Checked = false;
-                                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
                             }
                         }
 
@@ -418,11 +416,15 @@ namespace Catalogo._pedidos
                         ItemX.SubItems.Add(ProductoSeleccionado.Cells["ID"].Value.ToString());          //08
                         ItemX.SubItems.Add(ProductoSeleccionado.Cells["CodigoAns"].Value.ToString());   //09    
                         ItemX.SubItems.Add(nvObservacionesTxt.Text);                                    //10
+                        ItemX.SubItems.Add((nvlistView.Items.Count + 1).ToString());                    //11
 
-                        nvlistView.Items.Add(ItemX);
-                        nvlistView.Items[ItemX.Index].Selected = true;
+                        nvlistView.Visible = false;
+
+                        nvlistView.Items.Insert(0, ItemX);
+
+                        nvlistView.Items[ItemX.Index].Selected = true;                        
                         Funciones.util.AutoSizeLVColumnas(ref nvlistView);
-
+                        nvlistView.Visible = true;
                     }
 
                     Pedido_bkp(Global01.Conexion,
@@ -644,7 +646,7 @@ namespace Catalogo._pedidos
                     TotalPedido();
                     nvSimilarChk.Checked = false;
                     nvEsOfertaChk.Checked = false;
-                    nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                    nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
 
                 }
             }
@@ -886,7 +888,8 @@ namespace Catalogo._pedidos
                     ItemX.SubItems.Add(dr["IdCatalogo"].ToString());       //08
                     ItemX.SubItems.Add(dr["C_Producto"].ToString());           //09
                     ItemX.SubItems.Add(dr["Observaciones"].ToString());    //10
-       
+                    ItemX.SubItems.Add((nvlistView.Items.Count + 1).ToString());    //11
+                           
                     nvDepositoCbo.SelectedValue = Int16.Parse(dr["Deposito"].ToString());
 
                     if (dr["DisCont"].ToString()=="1" | wC_Producto=="?")
@@ -895,7 +898,7 @@ namespace Catalogo._pedidos
                         ItemX.SubItems[1].Font = new Font(nvlistView.Font, FontStyle.Bold);
                         wDisCont = wDisCont + 1;
                     }
-                    nvlistView.Items.Add(ItemX);
+                    nvlistView.Items.Insert(0, ItemX);
                 }
                 Funciones.util.AutoSizeLVColumnas(ref nvlistView);
                 
@@ -907,7 +910,7 @@ namespace Catalogo._pedidos
 
                 nvSimilarChk.Checked = false;
                 nvEsOfertaChk.Checked = false;
-                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
                 PedidoTab.SelectedIndex = 0;
                 PedidoTab.Visible = true;
 
@@ -1024,9 +1027,15 @@ namespace Catalogo._pedidos
             }
         }
 
+        internal void irCliente()
+        {
+            cboCliente.Focus();
+        }
+
         void OnCellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.ColumnIndex == 0 && e.RowIndex > -1)
+
+            if (e.RowIndex > -1 && e.ColumnIndex == 0)
             {
                 System.Windows.Forms.DataGridViewCell cell = paDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (cell != null)

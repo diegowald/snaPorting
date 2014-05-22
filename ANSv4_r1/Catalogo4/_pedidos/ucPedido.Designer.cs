@@ -48,6 +48,7 @@ namespace Catalogo._pedidos
             this.nvIDLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nvCodigoAnsLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nvObservacionesLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.nvNroRenglon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nvPnlTop = new System.Windows.Forms.Panel();
             this.nvEsOfertaChk = new System.Windows.Forms.CheckBox();
             this.nvTransporteBuscarBtn = new System.Windows.Forms.Button();
@@ -140,7 +141,8 @@ namespace Catalogo._pedidos
             this.nvOfertaLv,
             this.nvIDLv,
             this.nvCodigoAnsLv,
-            this.nvObservacionesLv});
+            this.nvObservacionesLv,
+            this.nvNroRenglon});
             this.nvlistView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nvlistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nvlistView.FullRowSelect = true;
@@ -209,6 +211,12 @@ namespace Catalogo._pedidos
             // 
             this.nvObservacionesLv.Text = "Observaciones";
             this.nvObservacionesLv.Width = 300;
+            // 
+            // nvNroRenglon
+            // 
+            this.nvNroRenglon.Text = "#items";
+            this.nvNroRenglon.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.nvNroRenglon.Width = 0;
             // 
             // nvPnlTop
             // 
@@ -657,5 +665,6 @@ namespace Catalogo._pedidos
         private System.Windows.Forms.Button EnviarBtn;
         private System.Windows.Forms.ToolStripStatusLabel nvImporteTotalLbl;
         private System.Windows.Forms.DataGridViewButtonColumn Estado;
+        private System.Windows.Forms.ColumnHeader nvNroRenglon;
     }
 }

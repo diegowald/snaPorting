@@ -1,15 +1,13 @@
 ﻿<Window x:Class="Catalogo._productos.DetalleImagen" x:Name="nDetalleImagen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Height="400" Width="400"
+        Height="400" Width="480"
         Title="Detalle de la Imágen - Auto Náutica Sur s.r.l." 
         WindowStartupLocation="CenterScreen"                
         BorderThickness="0"
-        ResizeMode="CanResize"  AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFFFFF" Icon="/Catalogo;component/recursos/ans48X48.ico" >
+        ResizeMode="CanResize"  AllowsTransparency="False" WindowStyle="None" Icon="/Catalogo;component/recursos/ans48X48.ico">
 
-    <Border Grid.Row="0" x:Name="LayoutRoot" 
-          Background="White" BorderBrush="White" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">
-
+    <Border Grid.Row="0" x:Name="LayoutRoot" Background="White" MouseLeftButtonDown="Title_MouseLeftButtonDown">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="28"/>
@@ -18,7 +16,7 @@
 
             <Grid Grid.Row="0">
                 <Grid Name="RightBanner" HorizontalAlignment="Right">
-                        <Button Content="r" BorderBrush="White"
+                    <Button Content="r" BorderBrush="White"
                         x:Name="CloseButton"                            
                         FontFamily="Webdings"                        
                         FontSize="12"
@@ -30,12 +28,10 @@
                         HorizontalAlignment="Right"
                         Click="Exit"
                         />
-                 </Grid>
+                </Grid>
             </Grid>
             <Grid Grid.Row="1">
-                <Button HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Click="Button_Click_1">
-                    <Image HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Name="ImagenDetalle" Stretch="UniformToFill"/>
-                </Button>
+                    <Image HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="Auto" Name="ImagenDetalle" Stretch="Fill"  />
             </Grid>
         </Grid>
     </Border>

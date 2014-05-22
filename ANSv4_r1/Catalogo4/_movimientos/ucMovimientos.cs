@@ -29,15 +29,7 @@ namespace Catalogo._movimientos
             movDataGridView.CellPainting += OnCellPainting;
 
             cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
-            if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
-            }
-            else
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
-                if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedValue = Global01.NroUsuario;
-            }
+            Funciones.util.load_clientes(ref cboCliente);
             cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
 
             Catalogo.varios.NotificationCenter.instance.attachReceptor2(this);
@@ -291,7 +283,17 @@ namespace Catalogo._movimientos
   
         void OnCellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.ColumnIndex == 0 && e.RowIndex > -1)
+
+            if (e.RowIndex > -1 && paEnviosCbo.SelectedIndex == 0)
+            {// TODOS
+                if (movDataGridView.Rows[e.RowIndex].Cells["F_Transmicion"].Value.ToString().Trim().Length <= 0)
+                {
+                    movDataGridView.Rows[e.RowIndex].Cells["Nro"].Style.Font = new Font(movDataGridView.Font, FontStyle.Bold);
+                    movDataGridView.Rows[e.RowIndex].Cells["Nro"].ToolTipText = "no enviado";
+                }
+            }
+
+            if (e.RowIndex > -1 && e.ColumnIndex == 0 )
             {
                 System.Windows.Forms.DataGridViewCell cell = movDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (cell != null)
@@ -407,6 +409,18 @@ namespace Catalogo._movimientos
             paEnviosCbo.SelectedIndex = 2;
             ObtenerMovimientos();
         }
+
+        //void OnRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        //{
+        //    if (paEnviosCbo.SelectedIndex == 0)
+        //    {// TODOS
+        //        if (movDataGridView.Rows[e.RowIndex].Cells["F_Transmicion"].Value.ToString().Trim().Length <= 0) ;
+        //        {
+        //            movDataGridView.Rows[e.RowIndex].Cells["Nro"].Style.Font = new Font(movDataGridView.Font, FontStyle.Bold);
+        //            movDataGridView.Rows[e.RowIndex].Cells["Nro"].ToolTipText = "no enviado";
+        //        }
+        //    }
+        //}
 
      } //fin clase
 } //fin namespace

@@ -55,7 +55,7 @@ namespace Catalogo._novedades
             webBrowser.Visible = false;
             flash.Visible = false;
             tips.Visible = false;
-
+            
             Catalogo.varios.NotificationCenter.instance.refreshNovedades += refreshNovedades;
         }
 

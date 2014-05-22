@@ -387,13 +387,15 @@ namespace Catalogo._productos
         private string whereTxtBuscar(string txtBuscar)
         {
             string sqlWhere = null;
-            string campos1 = "MiCodigo + ' ' + c_producto + ' ' + Equivalencia + ' ' + Original + ' ' + Motor + ' ' + ReemplazaA + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' + O_Producto + ' ' + Contiene";            
+            //string campos1 = "MiCodigo + ' ' + C_Producto + ' ' + Equivalencia + ' ' + Original + ' ' + Motor + ' ' + ReemplazaA + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' + O_Producto + ' ' + Contiene";            
+            string campos1 =  "C_Producto + ' ' + Equivalencia + ' ' + Original + ' ' + Motor + ' ' + ReemplazaA + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' + O_Producto + ' ' + Contiene";            
             //clientes
-            string campos2 = "c_producto Equivalencia Original Motor ReemplazaA";            
+            string campos2 = "C_Producto Equivalencia Original Motor ReemplazaA";            
             if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente)
             {//viajantes
-                campos2 = "MiCodigo Equivalencia Original Motor ReemplazaA";
+                campos2 = "MiCodigo C_Producto Equivalencia Original Motor ReemplazaA";
             }
+
             string alcance = "=";
             string comodin1 = "";
             string comodin2 = "";
@@ -454,6 +456,7 @@ namespace Catalogo._productos
                         sqlWhere += PalabrasClave[0].Trim();
                         sqlWhere += comodin2 + "') "; 
                     }
+                    sqlWhere = " (" + sqlWhere + ") ";
                 }
 
             }

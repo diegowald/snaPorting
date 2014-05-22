@@ -21,12 +21,12 @@ namespace Catalogo.preload
         private Object obj;
 
         private string strComando = "SELECT " +
-       "mid(c.C_Producto,5) as C_Producto, c.Linea, " +
+       "c.C_Producto, c.Linea, " +
        "Format(c.Precio + ((c.Precio*c.LineaPorcentaje)/100),'fixed') AS Precio, " +
        "c.PrecioOferta, " +
        "Format(c.Precio + ((c.Precio*c.LineaPorcentaje)/100),'fixed') AS PrecioLista, " + 
        "c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
-       "c.LineaPorcentaje, c.ID, c.Control, c.C_Producto as CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
+       "c.LineaPorcentaje, c.ID, c.Control, CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
        "FROM v_CatVehProdLin AS c";
 
         private Funciones.BackgroundReader.BackgroundDataLoader backgroundWorker;

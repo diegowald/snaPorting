@@ -38,15 +38,7 @@ namespace Catalogo._devoluciones
             }
 
             cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
-            if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
-            }
-            else
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
-                if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedValue = Global01.NroUsuario;
-            }
+            Funciones.util.load_clientes(ref cboCliente);
             cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
 
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref devMfDepositoCbo, "v_Deposito", "D_Dep", "IdDep", "ALL", "D_Dep", true, false, "NONE");
@@ -148,8 +140,8 @@ namespace Catalogo._devoluciones
                         devMnlistView.Items.Clear();
 
                         OleDbDataReader dr = null;
-     
-                        if (Funciones.modINIs.ReadINI("DATOS", "DevolucionNE", "0") == "1")
+
+                        if (Funciones.modINIs.ReadINI("DATOS", "DEV_abierta_ne", Global01.setDef_DEV_abierta_ne) == "1")
                         {
                             _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(cboCliente.SelectedValue.ToString()));
                             dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS,"DEVOLUCION");
@@ -169,8 +161,8 @@ namespace Catalogo._devoluciones
                         IniciarDevolucion();
                         HabilitarDevolucion();
 
-                        devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
-                        devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                        devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
+                        devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
 
                         DevolucionTab.SelectedIndex = 0;
                         DevolucionTab.Visible = true;
@@ -188,8 +180,8 @@ namespace Catalogo._devoluciones
 
                             //cboCliente.SelectedIndex = 0;
 
-                            devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
-                            devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                            devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
+                            devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
                         }
                     }
 
@@ -444,8 +436,8 @@ namespace Catalogo._devoluciones
                 devMflistView.Items.Clear();
                 devMnlistView.Items.Clear();
 
-                devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
-                devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));  
+                devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
+                devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));  
             }
 
 

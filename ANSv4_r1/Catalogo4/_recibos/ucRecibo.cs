@@ -36,14 +36,7 @@ namespace Catalogo._recibos
             }
 
             cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
-            if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
-            }
-            else
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and IdViajante=" + Global01.NroUsuario.ToString(), "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
-            }
+            Funciones.util.load_clientes(ref cboCliente);
             cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
 
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cvTipoValorCbo, "v_TipoValor", "D_valor", "IDvalor", "ALL", "IDvalor", true, false, "NONE");
@@ -1338,7 +1331,7 @@ namespace Catalogo._recibos
             {
                 if (e.KeyCode==Keys.I && e.Modifiers==Keys.Control)
                 {
-                    if (Funciones.modINIs.ReadINI("DATOS", "ICC", "0") == "1")
+                    if (Funciones.modINIs.ReadINI("DATOS", "ICC", Global01.setDef_ICC) == "1")
                     {
                         //'Imprimir la cta. cte.
                         CtaCte_Imprimir(cboCliente.SelectedValue.ToString());

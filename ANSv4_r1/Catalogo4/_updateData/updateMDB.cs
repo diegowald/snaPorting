@@ -6,7 +6,6 @@ namespace Catalogo.Funciones
 {
     class updateMDB
     {
-
         //const string m_sMODULENAME_ = "updateMDB";
         //private System.Data.OleDb.OleDbTransaction _TranActiva = null;
 
@@ -72,8 +71,9 @@ namespace Catalogo.Funciones
                 Application.DoEvents();
 
                 //oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaAuditor");
-                oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Novedades_Anexar");                
-                Application.DoEvents();
+                //oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Novedades_Anexar");                
+
+                //Application.DoEvents();
 
                 //if (Global01.TranActiva != null)
                 //{

@@ -15,7 +15,23 @@ namespace Catalogo.Funciones
     class util
     {
 
-        //const string m_sMODULENAME_ = "util";
+        internal static void load_clientes(ref System.Windows.Forms.ComboBox cboCliente)
+        {
+            string sCamposCbo = "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID";
+            string sCondicion = "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")";
+
+            if (Global01.miSABOR <= Global01.TiposDeCatalogo.Cliente)
+            {
+                sCondicion = "Activo<>1 and ID=" + Global01.NroUsuario.ToString();
+            }
+            else
+            {
+                if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", Global01.setDef_EsGerente) == "1") sCondicion = "Activo<>1";
+                if (Funciones.modINIs.ReadINI("DATOS", "CCC", Global01.setDef_CCC) == "1") sCamposCbo = "Format([ID],'00000') & ' - ' &  Trim(RazonSocial) AS Cliente, ID";
+            }
+
+            CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", sCondicion, "RazonSocial", true, true, sCamposCbo);
+        }
 
         internal static void aMayuscula(ref KeyPressEventArgs e)
         {
@@ -90,7 +106,10 @@ namespace Catalogo.Funciones
         //acá el combo debe ser System.Windows.Forms.ComboBox
         internal static void CargaCombo(System.Data.OleDb.OleDbConnection conexion, ref System.Windows.Forms.ComboBox combo, string Tabla, string Campo1, string Campo2, string Condicion = "ALL", string Orden = "NONE", bool AceptaNulo = false, bool Concatena = false, string OtrosCampos = "NONE")
         {
+
             combo.Enabled = false;
+
+            //combo.Items.Clear();
 
             System.Data.DataTable dt = null;
 

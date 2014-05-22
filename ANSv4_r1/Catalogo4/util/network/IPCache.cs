@@ -44,7 +44,7 @@ namespace Catalogo.util.network
                 {
                     util.errorHandling.ErrorLogger.LogMessage("Chequeando conexion");
                     setConectado(checkPing());
-                    int xMin = Int16.Parse("0" + Funciones.modINIs.ReadINI("DATOS", "CheckConectado", "1"));
+                    int xMin = Int16.Parse("0" + Funciones.modINIs.ReadINI("DATOS", "checkConectadoMinutos", Global01.setDef_checkConectadoMinutos));
                     System.Threading.Thread.Sleep(xMin * 60 * 1000);
                 }
                 catch (Exception ex)

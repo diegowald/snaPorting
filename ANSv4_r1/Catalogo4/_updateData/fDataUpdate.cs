@@ -74,9 +74,6 @@ namespace Catalogo.varios
                     {
                         exeProcess.WaitForExit();
                     }
-                    
-                    Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC usp_Novedades_Anexar");
-
                 }
                 catch (Exception ex)
                 {

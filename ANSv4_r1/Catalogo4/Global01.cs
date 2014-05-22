@@ -30,7 +30,7 @@ namespace Catalogo
        public static System.Data.OleDb.OleDbConnection Conexion;
        //public static System.Data.OleDb.OleDbTransaction TranActiva_;
        public static string AppPath;
-       public static string PathAcrobat;
+       //public static string PathAcrobat;
        public static string FileBak;
          
        public static string cstring;        
@@ -82,5 +82,26 @@ namespace Catalogo
 
        public static string NroImprimir;
        public static string IPPing;
+
+       // -- DEFAULT de Setting ------
+       public static string setDef_INFO = "0";                  //control catalogo online
+       public static string setDef_DEP  = "0";                  //deposito
+       public static string setDef_DEV_abierta_ne = "1";        //Devolucion Abierta no enviada
+       public static string setDef_PED_abierto_ne = "1";        //Pedido Abierto no enviado
+       public static string setDef_checkNovedades = "10";       //tiempo de chequeo de novedades
+       public static string setDef_checkConectadoMinutos = "1"; //tiempo de chequeo de conectado
+       public static string setDef_checkImagenUpdate = "0";     //Imagen Existe PERO busca nueva
+       public static string setDef_checkImagenNueva = "1";      //Imagen NO Existe
+       public static string setDef_ICC = "0";                   //Imprime Cta. Cte.
+       public static string setDef_CCC = "0";                   //Combo Cliente x Nro. de Cuenta
+       public static string setDef_DelayedEnviar = "2";         //tiempo de demora para envios
+       public static string setDef_SiempreEnviar = "0";         //enviar siempre
+       public static string setDef_IP =  "0.0.0.0";             //
+       public static string setDef_IP2 = "0.0.0.0";             //
+       public static string setDef_ProxyServer = "0.0.0.0";     //
+       public static string setDef_IPPing = "8.8.8.8";          //
+       public static string setDef_ConfirmaSalida = "1";
+       public static string setDef_EsGerente = "0";
+
     }
 }

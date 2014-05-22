@@ -96,7 +96,6 @@
             this.txtBuscar.MaxLength = 32;
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(102, 27);
-            this.txtBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscar_KeyPress);
             // 
             // toolStripSeparator1
             // 

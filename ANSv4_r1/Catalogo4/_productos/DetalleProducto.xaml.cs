@@ -103,8 +103,8 @@ namespace Catalogo._productos
                 if (dato.Cells["linea"].Value.ToString().Length > 0)
                 {
                     string ImgLinea = Global01.AppPath + "\\imagenes\\lineas\\" + dato.Cells["linea"].Value.ToString() + ".jpg";
-                    string ImgProductoWeb = "http://" + Global01.URL_ANS + "/IMAGENES/" + dato.Cells["linea"].Value.ToString() + "/ARTICULOS/" + dato.Cells["c_producto"].Value.ToString().Replace("/", " ") + ".jpg";
-                    string ImgProducto = Global01.AppPath + "\\imagenes\\" + dato.Cells["linea"].Value.ToString() + "\\Articulos\\" + dato.Cells["c_producto"].Value.ToString().Replace("/", " ") + ".jpg";
+                    string ImgProductoWeb = "http://" + Global01.URL_ANS + "/imagenes/" + dato.Cells["linea"].Value.ToString() + "/articulos/" + dato.Cells["c_producto"].Value.ToString().Replace("/", " ") + ".jpg";
+                    string ImgProducto = Global01.AppPath + "\\imagenes\\" + dato.Cells["linea"].Value.ToString() + "\\articulos\\" + dato.Cells["c_producto"].Value.ToString().Replace("/", " ") + ".jpg";
 
                     if (System.IO.File.Exists(ImgLinea))
                     {
@@ -115,12 +115,18 @@ namespace Catalogo._productos
                         imgIzquierda.Source = new BitmapImage(new Uri(ImgLineaDefault, UriKind.Absolute));
                     }
 
+                    if (!System.IO.Directory.Exists(Global01.AppPath + "\\imagenes\\" + dato.Cells["linea"].Value.ToString() + "\\articulos" ))
+                    {
+                        System.IO.Directory.CreateDirectory(Global01.AppPath + "\\imagenes\\" + dato.Cells["linea"].Value.ToString() + "\\articulos");
+                        System.IO.Directory.CreateDirectory(Global01.AppPath + "\\imagenes\\" + dato.Cells["linea"].Value.ToString() + "\\esquemas");
+                    }
+
                     //validateImagefile(ImgProducto);
                     if (isValidImage(ImgProducto) && !isImageDownloading(ImgProducto))
                     {
                         try
                         {
-                            if (Funciones.modINIs.ReadINI("DATOS", "chkImagenUpdate", "1") == "1")
+                            if (Funciones.modINIs.ReadINI("DATOS", "checkImagenUpdate", Global01.setDef_checkImagenUpdate) == "1")
                             {
                                 descargarImagenUpdate(ImgProductoWeb, ImgProducto); //, dato);
                             }
@@ -135,7 +141,7 @@ namespace Catalogo._productos
                     {
                         imgDerecha.Source = new BitmapImage(new Uri(ImgProductoDefault, UriKind.Absolute));
 
-                        if (Funciones.modINIs.ReadINI("DATOS", "chkImagenNueva", "1") == "1")
+                        if (Funciones.modINIs.ReadINI("DATOS", "checkImagenNueva", Global01.setDef_checkImagenNueva) == "1")
                         {
                             descargarImagenNueva(ImgProductoWeb, ImgProducto); //, dato);
                         }
