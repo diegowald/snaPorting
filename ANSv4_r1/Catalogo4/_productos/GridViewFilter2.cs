@@ -103,7 +103,6 @@ namespace Catalogo._productos
 
         private void xCargarDataControl()
         {
-            Cursor.Current = Cursors.WaitCursor;
             preload.Preloader.instance.productos.execute();
         }
 
@@ -113,7 +112,6 @@ namespace Catalogo._productos
 
             // Load the DataGridView            
             loadDataGridView();
-            Cursor.Current = Cursors.Default;
         }
 
         private void loadDataGridView()
@@ -278,7 +276,7 @@ namespace Catalogo._productos
                 foreach (DataRowView drv in dvProducts)
                 {
                     //drv["Precio"] = (float)drv["PrecioLista"] * pct;
-                    drv["Precio"] = string.Format("{0:N2}",float.Parse(drv["PrecioLista"].ToString()) * pct);
+                    drv["Precio"] = string.Format("{0:N2}", float.Parse(drv["PrecioLista"].ToString()) * pct);
                 }
                 dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = Color.Red;
             }
@@ -291,7 +289,7 @@ namespace Catalogo._productos
                     {
                         drv["Precio"] = drv["PrecioLista"];
                     }
-                    dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = System.Drawing.SystemColors.Control; 
+                    dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = System.Drawing.SystemColors.Control;
                 }
             }
 
@@ -305,8 +303,6 @@ namespace Catalogo._productos
 
             // Show the counts in the toolstrip
             this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
-            
-            Cursor.Current = Cursors.Default;
 
             if (currentRowCount > 0)
             {
@@ -323,6 +319,7 @@ namespace Catalogo._productos
                     this.emitir(null);
                 };
                 dataGridView1.Visible = true;
+                dataGridView1.Focus();
             }
             else
             {
@@ -353,6 +350,32 @@ namespace Catalogo._productos
             }
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (e.ColumnIndex == (int)CCol.cSemaforo)
+                {
+
+                    DataGridViewCell cell = dataGridView1[e.ColumnIndex, e.RowIndex];
+
+                    if (cell != null)
+                    {
+                        DataGridViewRow row = cell.OwningRow;
+                        Catalogo.util.BackgroundTasks.ExistenciaProducto existencia = new util.BackgroundTasks.ExistenciaProducto(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+                        existencia.onCancelled += ExistenciaCancelled;
+                        existencia.onFinished += ExistenciaFinished;
+                        existencia.getExistencia(row.Cells["CodigoAns"].Value.ToString(), Global01.NroUsuario, cell);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;  //util.errorHandling.ErrorForm.show();
+            }
+        }
+
         private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -373,7 +396,7 @@ namespace Catalogo._productos
                 }
                 else
                 {
-                    this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);                
+                    this.emitir3(_pedidos.PedidosHelper.Acciones.COMPRAR);
                 }
 
             }
@@ -532,7 +555,7 @@ namespace Catalogo._productos
 #if usarSemaforoImagen
         void OnCellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            if (e.ColumnIndex == 0 && e.RowIndex > -1)
+            if (e.RowIndex > -1 && e.ColumnIndex == 0)
             {
                 System.Windows.Forms.DataGridViewCell cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 if (cell != null)
@@ -578,7 +601,11 @@ namespace Catalogo._productos
 
                     e.Paint(e.CellBounds, DataGridViewPaintParts.All);
                     Rectangle rect = e.CellBounds;
+                   
                     rect.Inflate(-5, -4);
+           
+                    //rect = new SolidBrush(Color.Blue);
+
                     e.Graphics.FillEllipse(brush, rect);
                     if (dibujarCentro)
                     {
@@ -607,5 +634,6 @@ namespace Catalogo._productos
             dataGridView1.ClearSelection();
             dataGridView1.Visible = false;            
         }
+
     }
 }

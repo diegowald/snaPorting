@@ -24,7 +24,9 @@ namespace Catalogo
         private Catalogo._novedades.ucNovedades nov = null;
         private Catalogo.varios.FlashControl flash = null;
         private Catalogo._registrofaltantes.ucFaltante faltantes = null;
-        private Catalogo._clientesNovedades.ucVisita visita = null;
+        private Catalogo._clientesNovedades.ucVisitas visita = null;
+        
+        private bool _forcedToAutoHide;
 
         public mwViajantes()
         {
@@ -58,7 +60,7 @@ namespace Catalogo
                 this.xDevolucionesAreaDockC.Close();
                 this.xRegFaltantesAreaDockC.Close();
                 this.mnu_apertura.Visibility = System.Windows.Visibility.Collapsed;
-                this.mnu_config.Visibility = System.Windows.Visibility.Collapsed;
+                //this.mnu_config.Visibility = System.Windows.Visibility.Collapsed;
             }
 
             if (!Global01.AppActiva)
@@ -259,12 +261,12 @@ namespace Catalogo
             return xInterDeposito;
         }
 
-        private Catalogo._clientesNovedades.ucVisita addVisitaAClientesArea()
+        private Catalogo._clientesNovedades.ucVisitas addVisitaAClientesArea()
         {
             // Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
-            Catalogo._clientesNovedades.ucVisita xVisita = new _clientesNovedades.ucVisita();
+            Catalogo._clientesNovedades.ucVisitas xVisita = new _clientesNovedades.ucVisitas();
             xVisita.AutoScroll = false;
             xVisita.Location = new System.Drawing.Point(0, 0);
             xVisita.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -332,8 +334,6 @@ namespace Catalogo
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {
-            this.xContentMenu.ToggleAutoHide();
-
             if (Global01.miSABOR >= Global01.TiposDeCatalogo.Viajante)
             {
                 this.header.Height = 26;
@@ -364,13 +364,36 @@ namespace Catalogo
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            //if (Global01.Conexion != null)
+            //{
+            //    if (Global01.Conexion.State == System.Data.ConnectionState.Open) { Global01.Conexion.Close(); }
+            //    Global01.Conexion = null;
+            //}
+            //this.Close();
             //System.Windows.Application.Current.MainWindow.Close();
+            
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {                
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Application.Current.Shutdown();
+            }
         }
 
         private void ChangeViewButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Normal;
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+            }
+            else if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
@@ -380,13 +403,20 @@ namespace Catalogo
 
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Maximized;
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+            }
+            else if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
         }
 
         void mwViajantes_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
-            if (Funciones.modINIs.ReadINI("DATOS", "ConfirmaSalida", "1") == "1")
+            if (Funciones.modINIs.ReadINI("DATOS", "ConfirmaSalida", Global01.setDef_ConfirmaSalida) == "1")
             {
                 try
                 {
@@ -444,7 +474,7 @@ namespace Catalogo
                             break;
                         case System.Windows.Forms.DialogResult.No:
                             {
-                                if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente && Funciones.modINIs.ReadINI("DATOS", "EEA", "1") == "1")
+                                if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente && Funciones.modINIs.ReadINI("DATOS", "SiempreEnviar", Global01.setDef_SiempreEnviar) == "1")
                                 {
                                     Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, 0, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
                                     envioMovs.run();
@@ -487,6 +517,7 @@ namespace Catalogo
             {
                 _preferencias.PreferenciasFrm pref = new _preferencias.PreferenciasFrm();
                 pref.ShowDialog();
+                pref = null;
             }
             catch (Exception ex)
             {
@@ -647,12 +678,20 @@ namespace Catalogo
 
         private void setHotKeys()
         {
-            createHotKey(Key.B, ModifierKeys.Control, buscarEvt);
-            createHotKey(Key.D, ModifierKeys.Control, verResumenEvt);
+            if (Global01.miSABOR >= Global01.TiposDeCatalogo.Viajante)
+            {
+                createHotKey(Key.F, ModifierKeys.Control, buscarClienteEvt);
+                createHotKey(Key.D, ModifierKeys.Control, verResumenEvt);
+                createHotKey(Key.C, ModifierKeys.Control, irClientePedidoEvt);
+            }
+            createHotKey(Key.L, ModifierKeys.Control, irLineaEvt);
+            createHotKey(Key.B, ModifierKeys.Control, buscarEvt);            
+            createHotKey(Key.R, ModifierKeys.Control, resetFilterEvt);
             createHotKey(Key.P, ModifierKeys.Control, cambioPctEvt);
             createHotKey(Key.Z, ModifierKeys.Control, checkRregAppEvt);
-            createHotKey(Key.R, ModifierKeys.Control, verDetalleProductoEvt);
+            createHotKey(Key.H, ModifierKeys.Control, verDetalleProductoEvt);
             createHotKey(Key.T, ModifierKeys.Control, verTotalPedidoEvt);
+            createHotKey(Key.N, ModifierKeys.Control, checkNovedadesEvt);
         }
 
         private void createHotKey(System.Windows.Input.Key key, System.Windows.Input.ModifierKeys modifier, ExecutedRoutedEventHandler handler)
@@ -678,6 +717,44 @@ namespace Catalogo
             }
         }
 
+        private void irLineaEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                this.dockPane.SelectedIndex = 0;
+                doEvents();
+                sf.Focus();
+                this.sf.FocusOnLinea();
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+        }
+
+        private void resetFilterEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            try
+            {
+                this.dockPane.SelectedIndex = 0;
+                doEvents();
+                sf.Focus();
+                this.sf.ResetOnFilter();
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+            finally
+            {
+                Mouse.OverrideCursor = null;
+            }
+
+        }
+
         private void verDetalleProductoEvt(object sender, ExecutedRoutedEventArgs e)
         {
             try
@@ -697,6 +774,22 @@ namespace Catalogo
                         grProductsDetalle.Height = 100;
                     }
                     grProductsArea.VerticalAlignment = System.Windows.VerticalAlignment.Stretch; 
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+        }
+
+        private void irClientePedidoEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                if (dockPane.SelectedIndex == 0)
+                {
+                    ped.irCliente();
                 }
             }
             catch (Exception ex)
@@ -738,8 +831,30 @@ namespace Catalogo
             }
         }
 
+        private void buscarClienteEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                varios.frmClientesFnd fcf = new varios.frmClientesFnd();
+                fcf.ShowDialog();
+                fcf.Dispose();
+                fcf = null;
+                if (dockPane.SelectedIndex == 0)
+                {
+                    ped.irCliente();
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+        }
+
+
         private void cambioPctEvt(object sender, ExecutedRoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 _productos.PorcentajeLinea f = new _productos.PorcentajeLinea();
@@ -754,16 +869,40 @@ namespace Catalogo
                 util.errorHandling.ErrorLogger.LogMessage(ex);
                 util.errorHandling.ErrorForm.show();
             }
+            finally
+            {
+                Mouse.OverrideCursor = null;
+            }
+
         }
 
         private void checkRregAppEvt(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
-                util.BackgroundTasks.Updater xVerEstado = new util.BackgroundTasks.Updater(
-                   util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
-                   util.BackgroundTasks.Updater.UpdateType.EstadoActual);
-                xVerEstado.run();
+                //using (OverrideCursor cursor = new OverrideCursor(Cursors.Wait))
+                //using (varios.UiServices.SetBusyState())
+                using (new varios.WaitCursor())                
+                {
+                    util.BackgroundTasks.Updater xVerEstado = new util.BackgroundTasks.Updater(
+                       util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+                       util.BackgroundTasks.Updater.UpdateType.EstadoActual);
+                    xVerEstado.run();
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+        }
+
+        private void checkNovedadesEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                Catalogo.util.BackgroundTasks.ChequeoNovedades checkN = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
+                checkN.run();
             }
             catch (Exception ex)
             {
@@ -793,6 +932,22 @@ namespace Catalogo
                 dcNovedades.FontSize= 14;
                 //dcNovedades.SetValue(TextBlock.ForegroundProperty, "Red");
             }
-        }         
+        }
+
+        private void OnDockManagerLoaded(object sender, RoutedEventArgs e)
+        {
+            menuDockablePane.ToggleAutoHide();
+            _forcedToAutoHide = true;
+        }
+
+        private void dockingManager_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //if (!_forcedToAutoHide)
+            //    return;
+            //_forcedToAutoHide = false;
+            //menuDockableContent.Activate();
+            //menuDockablePane.ToggleAutoHide();
+        }
     }
+
 }

@@ -5,52 +5,54 @@
     Title="Configuración de la Aplicación - Catálogo Dígital de Productos - Auto Náutica Sur s.r.l. - v4.0" 
     WindowStartupLocation="CenterScreen"              
     BorderThickness="0"
-    ResizeMode="CanResize" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFFFFF" Icon="/Catalogo;component/ans48X48.ico">
+    ResizeMode="CanResize" AllowsTransparency="False" WindowStyle="None" BorderBrush="#FFFFFF" Icon="/ans48X48.ico">
 
     <Border Grid.Row="0" x:Name="LayoutRoot" 
           Background="White" BorderBrush="White" BorderThickness="1"  MouseLeftButtonDown="Title_MouseLeftButtonDown">
-        <Grid>            
+        <Grid>
             <Grid x:Name="grilla">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30px" />
+                    <RowDefinition Height="100px" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="60px"/>
                 </Grid.RowDefinitions>
                 <Grid Name="header" Visibility="Visible" Grid.Row="0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
                         <Button Content="r" BorderBrush="White"
-                        x:Name="CloseButton"                            
-                        FontFamily="Webdings"                        
-                        FontSize="12"
-                        Width="25"
-                        Height="25"
-                        Margin="1,0,0,0"                        
-                        Background="White"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        HorizontalAlignment="Right"
-                        Click="Exit"
+                    		x:Name="CloseButton"                            
+                    		FontFamily="Webdings"                        
+                    		FontSize="12"
+                    		Width="25"
+                    		Height="25"
+                    		Margin="1,0,0,0"                        
+                    		Background="White"
+                    		HorizontalContentAlignment="Center"
+                    		VerticalContentAlignment="Center"
+                    		HorizontalAlignment="Right"
+                    		Click="Exit" RenderTransformOrigin="-0.52,0.44"
                         />
                     </StackPanel>
                 </Grid>
-                <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,5,0,0" Name="textBlockHeading" Text="Configuración y Preferencias de la Aplicación:" VerticalAlignment="Top" Width="364"  FontSize="17" FontStretch="ExtraCondensed"/>
-                <!--<StackPanel Name="stack" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"/>-->
-                <WrapPanel Name="stack" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
+                <Grid Name="miEncab" Margin="0,0,0,0" Grid.Row="1">
+                    <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Source="/logo.jpg"/>
+                    <TextBlock Height="23"  Name="textBlockHeading" Text="Configuración y Preferencias de la Aplicación" Width="364"  FontSize="17" FontStretch="ExtraCondensed" Margin="0"/>
+                </Grid>                
+                <WrapPanel Name="stack" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" />
 
-                <Grid Margin="0,0,0,0" Grid.Row="2" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid Margin="0,0,0,0" Grid.Row="3" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition Width="110" />
                         <ColumnDefinition Width="90"/>
                         <ColumnDefinition Width="90"/>
                         <ColumnDefinition Width="90" />
                     </Grid.ColumnDefinitions>
-                    <Button Name="PasswordButton" Content="Clave" Width="75" Grid.Column="0" Click="PasswordButton_Click_1" />
+                    <Button Name="PasswordButton" Content="Op. Restringidas" Width="105" Grid.Column="0" Click="PasswordButton_Click_1" />
                     <Button Name="OKButton" Content="OK" Width="75" Grid.Column="1" Click="OKButton_Click_1"/>
                     <Button Name="ResetButton" Content="Reset" Width="75" Grid.Column="2" Click="ResetButton_Click_1"/>
                     <Button Name="CancelButton" Content="Cancel" Width="75" Grid.Column="3" Click="CancelButton_Click_1"/>
                 </Grid>
-                <Image HorizontalAlignment="Left" Height="100" Margin="501,33,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Source="/Catalogo;component/recursos/logo.jpg"/>
-            </Grid>
+            </Grid>            
         </Grid>
     </Border>
 </Window>

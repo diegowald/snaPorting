@@ -26,51 +26,88 @@ namespace Catalogo._preferencias
 
         public delegate void SaveDelegate();
         public delegate void LoadDelegate();
+        public delegate void ResetDelegate();
         public delegate void PasswordValidDelegate();
 
         private SaveDelegate doSave;
         private LoadDelegate doLoad;
+        private ResetDelegate doReset;
         private PasswordValidDelegate doEnablePasswordProtectedControls;
 
         private string password
         {
             get
             {
-                return "chiclana917" + ((int)(System.DateTime.Now.Minute / 10)).ToString();
+                int MinutoDecena = (int)(System.DateTime.Now.Minute / 10);
+                string xPassword = "chiclana917";
+
+                switch (MinutoDecena)
+                {
+                    case 0:
+                        xPassword = "Chiclana917";
+                        break;
+                    case 1:
+                        xPassword = "cHiclana917";
+                        break;
+                    case 2:
+                        xPassword = "chIclana917";
+                        break;
+                    case 3:
+                        xPassword = "chiClana917";
+                        break;
+                    case 4:
+                        xPassword = "chicLana917";
+                        break;
+                    case 5:
+                        xPassword = "chiclAna917";
+                        break;
+                };
+
+                return xPassword + MinutoDecena.ToString();
+
             }
         }
         bool passwordOK = false;
 
         private void createAndLoadCheckboxes()
         {
-            string sValorActual = "0";
+            // -- DEFAULT de Setting ------
+            //setDef_INFO = "0";                  //control catalogo online
+            //setDef_DEP  = "0";                  //deposito
+            //setDef_DEV_abierta_ne = "1";        //Devolucion Abierta no enviada
+            //setDef_PED_abierto_ne = "1";        //Pedido Abierto no enviado
+            //setDef_checkNovedades = "10";       //tiempo de chequeo de novedades
+            //setDef_checkConectadoMinutos = "1"; //tiempo de chequeo de conectado
+            //setDef_checkImagenUpdate = "0";     //Imagen Existe PERO busca nueva
+            //setDef_checkImagenNueva = "1";      //Imagen NO Existe
+            //setDef_ICC = "0";                   //Imprime Cta. Cte.
+            //setDef_CCC = "0";                   //Combo Cliente x Nro. de Cuenta
+            //setDef_DelayedEnviar = "2";         //tiempo de demora para envios
+            //setDef_SiempreEnviar = "0";         //enviar siempre
+            //setDef_IP =  "0.0.0.0";             //
+            //setDef_IP2 = "0.0.0.0";             //
+            //setDef_ProxyServer = "0.0.0.0";     //
+            //setDef_IPPing = "8.8.8.8";          //
+            //setDef_ConfirmaSalida = "1";
+            //setDef_EsGerente = "0";
 
-            sValorActual = Funciones.modINIs.ReadINI("DATOS", "ConfirmaSalida", "1");
-            addCheckBox("Confirma Salida", "DATOS", "ConfirmaSalida", "1", "0",sValorActual, false, password);
+            addCheckBox("Confirma Salida", "DATOS", "ConfirmaSalida", "1", "0", Global01.setDef_ConfirmaSalida, false, password);
+            addCheckBox("Usar Pedido NO Enviado", "DATOS", "PED_abierto_ne", "1", "0", Global01.setDef_PED_abierto_ne, false, password);
+            addCheckBox("Actualizar imágenes que tengo con Nuevas", "DATOS", "chkImagenUpdate", "1", "0", Global01.setDef_checkImagenUpdate, false, password);
+            addCheckBox("Descargar imágenes que NO tengo", "DATOS", "chkImagenNueva", "1", "0", Global01.setDef_checkImagenNueva, false, password);
+            addCheckBox("Lista de Clientes x Nro. Cuenta", "DATOS", "CCC", "1", "0", Global01.setDef_CCC, false, password);
+            addEditBox("Depósito", "DATOS", "Deposito", Global01.setDef_DEP, false, password);
+            addEditBox("Transporte", "DATOS", "Transporte", Global01.setDef_Transporte, false, password);
+            addEditBox("IP Ping", "DATOS", "IPPing", Global01.setDef_IPPing, false, password);
+            addEditBox("Proxy", "DATOS", "ProxyServer", Global01.setDef_ProxyServer, false, password);
 
-            sValorActual = Funciones.modINIs.ReadINI("DATOS", "EEA", "1");
-            addCheckBox("Envio Electrónico Automático", "DATOS", "EEA", "1", "0", sValorActual, true, password);
+            addEditBox("IP 1", "DATOS", "IP", Global01.setDef_IP, true, password);
+            addEditBox("IP 2", "DATOS", "IP2", Global01.setDef_IP2, true, password);
+            addCheckBox("Envio Electrónico Automático", "DATOS", "SiempreEnviar", "1", "0", Global01.setDef_SiempreEnviar, true, password);
+            addCheckBox("Es Gerente", "DATOS", "EsGerente", "1", "0", Global01.setDef_EsGerente, true, password);
 
-            sValorActual = Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0");
-            addCheckBox("Es gerente", "DATOS", "EsGerente", "1", "0", sValorActual, true, password);
-
-            sValorActual = Funciones.modINIs.ReadINI("DATOS", "PedidoNE", "0");
-            addCheckBox("Usar Pedido NO Enviado", "DATOS", "PedidoNE", "1", "0", sValorActual, false, password);
-
-            sValorActual = Funciones.modINIs.ReadINI("DATOS", "Deposito", "0");
-            addEditBox("Depósito", "DATOS", "Deposito", sValorActual, false, password);
-
-            sValorActual = Funciones.modINIs.ReadINI("DATOS", "Deposito", "0");
-            addCheckBox("Descargar imagenes actualizadas", "DATOS", "chkImagenUpdate", "1", "0", sValorActual, false, password);
-
-            sValorActual = Funciones.modINIs.ReadINI("DATOS", "Deposito", "0");
-            addCheckBox("Descargar imagenes actualizadas", "DATOS", "chkImagenNueva", "1", "0", sValorActual, false, password);
 
             //addCheckBox("Devolucion NE", "DATOS", "DevolucionNE", "1", "0", "0");
-            //addCheckBox("Deposito", "PREFERENCIAS", "Deposito", "1", "0", "1");
-            //addCheckBox("Solo Catalogo", "DATOS", "SoloCatalogo", "true", "false", "false");
-            //addCheckBox("Usar Proxy", "DATOS", "proxy", "1", "0", "0");
-            //addEditBox("IP", "DATOS", "IP");
             //addCheckBox("ICC", "DATOS", "ICC", "1", "0", "0");
 
             if (doLoad != null)
@@ -95,6 +132,8 @@ namespace Catalogo._preferencias
         {
             doSave += ctrl.onSave;
             doLoad += ctrl.onLoad;
+            doReset += ctrl.onReset;
+
             doEnablePasswordProtectedControls += ctrl.onEnablePasswrodProtectedControl;
             stack.Children.Add(ctrl as UserControl);
         }
@@ -109,9 +148,9 @@ namespace Catalogo._preferencias
 
         private void ResetButton_Click_1(object sender, RoutedEventArgs e)
         {
-            if (doLoad != null)
+            if (doReset != null)
             {
-                doLoad();
+                doReset();
             }
         }
 
@@ -150,14 +189,17 @@ namespace Catalogo._preferencias
 
         private void PasswordButton_Click_1(object sender, RoutedEventArgs e)
         {
-            passwordFrm frm = new passwordFrm(password);
-            bool? result = frm.ShowDialog();
-            passwordOK = result.HasValue ? result.Value : false;
-            if (passwordOK && doEnablePasswordProtectedControls != null)
-            {
-                doEnablePasswordProtectedControls();
-            }
-            PasswordButton.Visibility = passwordOK ? System.Windows.Visibility.Hidden : System.Windows.Visibility.Visible;
+           string wPassword = "";
+           if (Funciones.util.InputBox(" Contraseña ", "Ingrese Clave", 15, ref wPassword) == System.Windows.Forms.DialogResult.OK)
+           {
+               passwordOK = (wPassword == password);
+               if (passwordOK && doEnablePasswordProtectedControls != null)
+               {
+                   doEnablePasswordProtectedControls();
+               }
+               PasswordButton.Visibility = passwordOK ? System.Windows.Visibility.Hidden : System.Windows.Visibility.Visible;
+           }
+
         }
 
     }

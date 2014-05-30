@@ -41,5 +41,8 @@
     <Setting Name="Catalogo_ClientesNovedadesWS_ClientesNovedades" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://190.3.78.12/wscatalogo4/clientesnovedades.asmx</Value>
     </Setting>
+    <Setting Name="Catalogo_ClientesVisitasWS_ClientesVisitas" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://190.3.78.12/wscatalogo4/clientesvisitas.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

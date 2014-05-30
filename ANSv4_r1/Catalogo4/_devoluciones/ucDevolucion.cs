@@ -19,7 +19,7 @@ namespace Catalogo._devoluciones
 
     {
         //private //const string m_sMODULENAME_ = "ucDevolucion";
-        ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
+        private ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
         DataGridViewRow ProductoSeleccionado = null;
 
         private System.Collections.Specialized.OrderedDictionary Filter_Marca = new System.Collections.Specialized.OrderedDictionary();
@@ -38,15 +38,7 @@ namespace Catalogo._devoluciones
             }
 
             cboCliente.SelectedIndexChanged -= cboCliente_SelectedIndexChanged;
-            if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", "0") == "1")
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Trim(cstr(ID)) & ')' as Cliente, ID");
-            }
-            else
-            {
-                Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref cboCliente, "tblClientes", "Cliente", "ID", "Activo<>1 and (IdViajante=" + Global01.NroUsuario.ToString() + " or IdViajante=" + Global01.Zona.ToString() + ")", "RazonSocial", true, true, "Trim(RazonSocial) & '  (' & Format([ID],'00000') & ')' AS Cliente, ID");
-                if (Global01.miSABOR == Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedValue = Global01.NroUsuario;
-            }
+            Funciones.util.load_clientes(ref cboCliente);
             cboCliente.SelectedIndexChanged += cboCliente_SelectedIndexChanged;
 
             Catalogo.Funciones.util.CargaCombo(Global01.Conexion, ref devMfDepositoCbo, "v_Deposito", "D_Dep", "IdDep", "ALL", "D_Dep", true, false, "NONE");
@@ -148,8 +140,8 @@ namespace Catalogo._devoluciones
                         devMnlistView.Items.Clear();
 
                         OleDbDataReader dr = null;
-     
-                        if (Funciones.modINIs.ReadINI("DATOS", "DevolucionNE", "0") == "1")
+
+                        if (Funciones.modINIs.ReadINI("DATOS", "DEV_abierta_ne", Global01.setDef_DEV_abierta_ne) == "1")
                         {
                             _movimientos.Movimientos movimientos = new _movimientos.Movimientos(Global01.Conexion, int.Parse(cboCliente.SelectedValue.ToString()));
                             dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS,"DEVOLUCION");
@@ -169,8 +161,8 @@ namespace Catalogo._devoluciones
                         IniciarDevolucion();
                         HabilitarDevolucion();
 
-                        devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
-                        devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                        devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
+                        devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
 
                         DevolucionTab.SelectedIndex = 0;
                         DevolucionTab.Visible = true;
@@ -188,8 +180,8 @@ namespace Catalogo._devoluciones
 
                             //cboCliente.SelectedIndex = 0;
 
-                            devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
-                            devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
+                            devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
+                            devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
                         }
                     }
 
@@ -380,74 +372,72 @@ namespace Catalogo._devoluciones
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-
             if (devMflistView.Items.Count > 0 | devMnlistView.Items.Count > 0)
             {
                 InhabilitarDevolucion();
 
                 Catalogo._devoluciones.Devolucion dev = new Catalogo._devoluciones.Devolucion(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
                 dev.NroImpresion = 0;
-                Cursor.Current = Cursors.Default; 
+                dev.Observaciones = "";
+
                 string wItemObservaciones = "";
                 if (Funciones.util.InputBox(" (Presione Cancelar para quitar la Observación)  ", "Observación para la devolución", 80, ref wItemObservaciones) == DialogResult.OK)
                 {
                     dev.Observaciones = wItemObservaciones;
                 }
-                else
-                { // Apreto Cancelar
-                    dev.Observaciones = "";
-                }
-                Cursor.Current = Cursors.WaitCursor;
-                //Mercaderia Nueva
-                if (devMnlistView.Items.Count > 0)
+
+                using (new varios.WaitCursor())
                 {
-                    for (int i = 0; i < devMnlistView.Items.Count; i++)
+
+                    //Mercaderia Nueva
+                    if (devMnlistView.Items.Count > 0)
                     {
-                        dev.ADDItem(devMnlistView.Items[i].SubItems[11].Text.ToString(),
-                                    Int16.Parse(devMnlistView.Items[i].SubItems[2].Text.ToString()),
-                                    byte.Parse(devMnlistView.Items[i].SubItems[8].Text.ToString()),
-                                    devMnlistView.Items[i].SubItems[3].Text.ToString(),
-                                    byte.Parse(devMnlistView.Items[i].SubItems[12].Text.ToString()),
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    devMnlistView.Items[i].SubItems[9].Text.ToString());
+                        for (int i = 0; i < devMnlistView.Items.Count; i++)
+                        {
+                            dev.ADDItem(devMnlistView.Items[i].SubItems[11].Text.ToString(),
+                                        Int16.Parse(devMnlistView.Items[i].SubItems[2].Text.ToString()),
+                                        byte.Parse(devMnlistView.Items[i].SubItems[8].Text.ToString()),
+                                        devMnlistView.Items[i].SubItems[3].Text.ToString(),
+                                        byte.Parse(devMnlistView.Items[i].SubItems[12].Text.ToString()),
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        devMnlistView.Items[i].SubItems[9].Text.ToString());
+                        }
                     }
-                }
 
-                //Mercaderia Fallada
-                if (devMflistView.Items.Count > 0)
-                {
-                    for (int i = 0; i < devMflistView.Items.Count; i++)
+                    //Mercaderia Fallada
+                    if (devMflistView.Items.Count > 0)
                     {
-                        dev.ADDItem(devMflistView.Items[i].SubItems[11].Text.ToString(),
-                                    Int16.Parse(devMflistView.Items[i].SubItems[2].Text.ToString()),
-                                    byte.Parse(devMflistView.Items[i].SubItems[8].Text.ToString()),
-                                    devMflistView.Items[i].SubItems[3].Text.ToString(),
-                                    byte.Parse(devMflistView.Items[i].SubItems[12].Text.ToString()),
-                                    devMflistView.Items[i].SubItems[4].Text.ToString(),
-                                    devMflistView.Items[i].SubItems[5].Text.ToString(),
-                                    devMflistView.Items[i].SubItems[6].Text.ToString(),
-                                    devMflistView.Items[i].SubItems[7].Text.ToString(),
-                                    devMflistView.Items[i].SubItems[9].Text.ToString());
+                        for (int i = 0; i < devMflistView.Items.Count; i++)
+                        {
+                            dev.ADDItem(devMflistView.Items[i].SubItems[11].Text.ToString(),
+                                        Int16.Parse(devMflistView.Items[i].SubItems[2].Text.ToString()),
+                                        byte.Parse(devMflistView.Items[i].SubItems[8].Text.ToString()),
+                                        devMflistView.Items[i].SubItems[3].Text.ToString(),
+                                        byte.Parse(devMflistView.Items[i].SubItems[12].Text.ToString()),
+                                        devMflistView.Items[i].SubItems[4].Text.ToString(),
+                                        devMflistView.Items[i].SubItems[5].Text.ToString(),
+                                        devMflistView.Items[i].SubItems[6].Text.ToString(),
+                                        devMflistView.Items[i].SubItems[7].Text.ToString(),
+                                        devMflistView.Items[i].SubItems[9].Text.ToString());
+                        }
                     }
+
+                    dev.Guardar("grabar");
+
+                    Devolucion_Imprimir(Global01.NroImprimir);
+                    Global01.NroImprimir = "";
+
+                    CerrarDevolucion();
+                    devMflistView.Items.Clear();
+                    devMnlistView.Items.Clear();
+
+                    devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
+                    devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
                 }
-
-                dev.Guardar("grabar");
-
-                Devolucion_Imprimir(Global01.NroImprimir);
-                Global01.NroImprimir = "";
-                
-                CerrarDevolucion();
-                devMflistView.Items.Clear();
-                devMnlistView.Items.Clear();
-
-                devMfDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));
-                devMnDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", "0"));  
             }
-
 
         }
 
@@ -456,53 +446,55 @@ namespace Catalogo._devoluciones
 
             if (devMflistView.Items.Count > 0 | devMnlistView.Items.Count > 0)
             {
-                Cursor.Current = Cursors.WaitCursor;
-
-                Catalogo._devoluciones.Devolucion dev = new Catalogo._devoluciones.Devolucion(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
-                dev.NroImpresion = 0;
-                dev.Observaciones = "";
-
-                //Mercaderia Nueva
-                if (devMnlistView.Items.Count > 0)
+                using (new varios.WaitCursor())
                 {
-                    for (int i = 0; i < devMnlistView.Items.Count; i++)
+
+                    Catalogo._devoluciones.Devolucion dev = new Catalogo._devoluciones.Devolucion(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+                    dev.NroImpresion = 0;
+                    dev.Observaciones = "";
+
+                    //Mercaderia Nueva
+                    if (devMnlistView.Items.Count > 0)
                     {
-                        dev.ADDItem(devMnlistView.Items[i].SubItems[11].Text.ToString(),
-                                    Int16.Parse(devMnlistView.Items[i].SubItems[2].Text.ToString()),
-                                    byte.Parse(devMnlistView.Items[i].SubItems[8].Text.ToString()),
-                                    devMnlistView.Items[i].SubItems[3].Text.ToString(),
-                                    byte.Parse(devMnlistView.Items[i].SubItems[12].Text.ToString()),
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    devMnlistView.Items[i].SubItems[9].Text.ToString());
+                        for (int i = 0; i < devMnlistView.Items.Count; i++)
+                        {
+                            dev.ADDItem(devMnlistView.Items[i].SubItems[11].Text.ToString(),
+                                        Int16.Parse(devMnlistView.Items[i].SubItems[2].Text.ToString()),
+                                        byte.Parse(devMnlistView.Items[i].SubItems[8].Text.ToString()),
+                                        devMnlistView.Items[i].SubItems[3].Text.ToString(),
+                                        byte.Parse(devMnlistView.Items[i].SubItems[12].Text.ToString()),
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        devMnlistView.Items[i].SubItems[9].Text.ToString());
+                        }
                     }
-                }
 
-                //Mercaderia Fallada
-                if (devMflistView.Items.Count > 0)
-                {
-                    for (int i = 0; i < devMflistView.Items.Count; i++)
+                    //Mercaderia Fallada
+                    if (devMflistView.Items.Count > 0)
                     {
-                        dev.ADDItem(devMflistView.Items[i].SubItems[11].Text.ToString(),
-                                    Int16.Parse(devMflistView.Items[i].SubItems[2].Text.ToString()),
-                                    byte.Parse(devMflistView.Items[i].SubItems[8].Text.ToString()),
-                                    devMflistView.Items[i].SubItems[3].Text.ToString(),
-                                    byte.Parse(devMflistView.Items[i].SubItems[12].Text.ToString()),
-                                    devMflistView.Items[i].SubItems[4].Text.ToString(),
-                                    devMflistView.Items[i].SubItems[5].Text.ToString(),
-                                    devMflistView.Items[i].SubItems[6].Text.ToString(),
-                                    devMflistView.Items[i].SubItems[7].Text.ToString(),
-                                    devMflistView.Items[i].SubItems[9].Text.ToString());
+                        for (int i = 0; i < devMflistView.Items.Count; i++)
+                        {
+                            dev.ADDItem(devMflistView.Items[i].SubItems[11].Text.ToString(),
+                                        Int16.Parse(devMflistView.Items[i].SubItems[2].Text.ToString()),
+                                        byte.Parse(devMflistView.Items[i].SubItems[8].Text.ToString()),
+                                        devMflistView.Items[i].SubItems[3].Text.ToString(),
+                                        byte.Parse(devMflistView.Items[i].SubItems[12].Text.ToString()),
+                                        devMflistView.Items[i].SubItems[4].Text.ToString(),
+                                        devMflistView.Items[i].SubItems[5].Text.ToString(),
+                                        devMflistView.Items[i].SubItems[6].Text.ToString(),
+                                        devMflistView.Items[i].SubItems[7].Text.ToString(),
+                                        devMflistView.Items[i].SubItems[9].Text.ToString());
+                        }
                     }
+
+                    dev.Guardar("VER");
+
+                    Devolucion_Imprimir(Global01.NroImprimir);
+                    Global01.NroImprimir = "";
                 }
-
-                dev.Guardar("VER");
-
-                Devolucion_Imprimir(Global01.NroImprimir);
-                Global01.NroImprimir = "";
-            };
+            }
         }
 
         public static void Devolucion_Imprimir(string NroDevolucion)

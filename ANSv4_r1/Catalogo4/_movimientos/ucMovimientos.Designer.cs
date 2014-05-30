@@ -195,7 +195,6 @@ namespace Catalogo._movimientos
             // 
             this.Estado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Transparent;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Transparent;
             this.Estado.DefaultCellStyle = dataGridViewCellStyle2;
             this.Estado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

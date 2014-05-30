@@ -59,6 +59,7 @@
             this.TopPnl = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
+            this.lblAppVersion = new System.Windows.Forms.Label();
             this.PnlFondoRojo.SuspendLayout();
             this.MainPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -107,9 +108,9 @@
             this.MainPnl.Controls.Add(this.rApellidoTxt);
             this.MainPnl.Controls.Add(this.rNombreTxt);
             this.MainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPnl.Location = new System.Drawing.Point(2, 38);
+            this.MainPnl.Location = new System.Drawing.Point(2, 43);
             this.MainPnl.Name = "MainPnl";
-            this.MainPnl.Size = new System.Drawing.Size(546, 387);
+            this.MainPnl.Size = new System.Drawing.Size(546, 382);
             this.MainPnl.TabIndex = 12;
             // 
             // btnCancelar
@@ -240,7 +241,7 @@
             // 
             // label11
             // 
-            this.label11.Location = new System.Drawing.Point(4, 8);
+            this.label11.Location = new System.Drawing.Point(4, 14);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(412, 37);
             this.label11.TabIndex = 29;
@@ -383,20 +384,21 @@
             // 
             this.TopPnl.BackColor = System.Drawing.Color.White;
             this.TopPnl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.TopPnl.Controls.Add(this.lblAppVersion);
             this.TopPnl.Controls.Add(this.label1);
             this.TopPnl.Controls.Add(this.btnCerrar);
             this.TopPnl.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPnl.Location = new System.Drawing.Point(2, 2);
             this.TopPnl.Name = "TopPnl";
-            this.TopPnl.Size = new System.Drawing.Size(546, 36);
+            this.TopPnl.Size = new System.Drawing.Size(546, 41);
             this.TopPnl.TabIndex = 13;
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 16);
+            this.label1.Location = new System.Drawing.Point(4, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(445, 20);
+            this.label1.Size = new System.Drawing.Size(433, 23);
             this.label1.TabIndex = 11;
             this.label1.Text = "Formulario de Registro de la Aplicación - Catálogo Dígital de Productos";
             // 
@@ -407,12 +409,22 @@
             this.btnCerrar.FlatAppearance.BorderSize = 0;
             this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrar.Font = new System.Drawing.Font("Webdings", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnCerrar.Location = new System.Drawing.Point(517, 3);
+            this.btnCerrar.Location = new System.Drawing.Point(526, -2);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(20, 25);
             this.btnCerrar.TabIndex = 0;
             this.btnCerrar.Text = "r";
             this.btnCerrar.UseVisualStyleBackColor = true;
+            // 
+            // lblAppVersion
+            // 
+            this.lblAppVersion.AutoSize = true;
+            this.lblAppVersion.Location = new System.Drawing.Point(3, 1);
+            this.lblAppVersion.Name = "lblAppVersion";
+            this.lblAppVersion.Size = new System.Drawing.Size(22, 13);
+            this.lblAppVersion.TabIndex = 24;
+            this.lblAppVersion.Text = ". . .";
+            this.lblAppVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // fRegistro
             // 
@@ -439,6 +451,7 @@
             this.MainPnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.TopPnl.ResumeLayout(false);
+            this.TopPnl.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -475,6 +488,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblAppVersion;
 
 
 

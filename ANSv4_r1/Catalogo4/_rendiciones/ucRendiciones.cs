@@ -57,7 +57,7 @@ namespace Catalogo._rendiciones
     
         // - Fin Def. Globales ---------------
 
-        ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
+        private ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
 
         public ucRendiciones()
         {
@@ -172,61 +172,64 @@ namespace Catalogo._rendiciones
 			    case tAccion.Guardar:
 	            
                     if (DatosValidos("grabar")) {
+                                string wOper = "add";
+                                if (m.Accion == tAccion.Modificar) wOper = "upd";
 
-		                Cursor.Current = Cursors.WaitCursor;
+		                        //Iniciar Transaccion
+                                if (_TranActiva==null)
+                                {
+                                    //@ _TranActiva =Global01.Conexion.BeginTransaction();
+                                    util.errorHandling.ErrorLogger.LogMessage("5");
+                                }
 
-                        string wOper = "add";
-                        if (m.Accion == tAccion.Modificar) wOper = "upd";
+                                try
+                                {
+                                    using (new varios.WaitCursor())
+                                    {
 
-		                //Iniciar Transaccion
-                        if (_TranActiva==null)
-                        {
-                            //@ _TranActiva =Global01.Conexion.BeginTransaction();
-                            util.errorHandling.ErrorLogger.LogMessage("5");
-                        }
+                                        addupdRendicion(wOper, Global01.Conexion,
+                                            dtF_Rendicion.Value,
+                                            txtDescripcion.Text,
+                                            float.Parse(txtLatEfectivo_Monto.Text),
+                                            float.Parse(txtLatDiv_dolar.Text),
+                                            float.Parse(txtLatDiv_euro.Text),
+                                            byte.Parse(txtLatCh_Cantidad.Text),
+                                            float.Parse(txtLatCh_Monto.Text),
+                                            byte.Parse(txtLatCert_Cantidad.Text),
+                                            float.Parse(txtLatCert_Monto.Text),
+                                            ref m.ID);
 
-                        try
-                        {
-		                    addupdRendicion(wOper, Global01.Conexion,  
-                                dtF_Rendicion.Value, 
-                                txtDescripcion.Text, 
-                                float.Parse(txtLatEfectivo_Monto.Text), 
-                                float.Parse(txtLatDiv_dolar.Text),
-                                float.Parse(txtLatDiv_euro.Text), 
-                                byte.Parse(txtLatCh_Cantidad.Text), 
-                                float.Parse(txtLatCh_Monto.Text), 
-                                byte.Parse(txtLatCert_Cantidad.Text),
-		                        float.Parse(txtLatCert_Monto.Text), 
-                                ref m.ID);
+                                        lblNroRendicion.Text = Global01.NroUsuario + "-" + m.ID.ToString().PadLeft(8, '0');
 
-		                    lblNroRendicion.Text = Global01.NroUsuario + "-" + m.ID.ToString().PadLeft(8,'0');
+                                        //-- Actualiza tblRecibos_Enc -> Nro Rendicion --
+                                        for (m.i = 0; m.i < lvRecibos.Items.Count; m.i++)
+                                        {
+                                            Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblRecibo_Enc SET NroRendicion=" + m.ID + " WHERE NroRecibo='" + lvRecibos.Items[m.i].Text + "'");
+                                        }
 
-		                    //-- Actualiza tblRecibos_Enc -> Nro Rendicion --
-		                    for (m.i = 0; m.i < lvRecibos.Items.Count; m.i++) {
-			                    Funciones.oleDbFunciones.ComandoIU(Global01.Conexion, "UPDATE tblRecibo_Enc SET NroRendicion=" + m.ID + " WHERE NroRecibo='" + lvRecibos.Items[m.i].Text + "'");
-		                    }
+                                        for (m.i = 0; m.i < lvValores.Items.Count; m.i++)
+                                        {
 
-		                    for (m.i = 0; m.i < lvValores.Items.Count; m.i++) {
-			                
-			                    if (Int16.Parse(lvValores.Items[m.i].Text.ToString())==0) {
-				                    //- Agrega Registro a la Base de Datos -
-				                    wOper = "add";
-				                    addupdValores(wOper, Global01.Conexion, m.ID, 
-                                        lvValores.Items[m.i].SubItems[1].Text, 
-                                        DateTime.Parse(lvValores.Items[m.i].SubItems[2].Text), 
-                                        Int16.Parse(lvValores.Items[m.i].SubItems[3].Text), 
-                                        float.Parse(lvValores.Items[m.i].SubItems[4].Text), 
-                                        byte.Parse(lvValores.Items[m.i].SubItems[5].Text), 
-                                        lvValores.Items[m.i].SubItems[7].Text);
-			                    }
-		                    }
+                                            if (Int16.Parse(lvValores.Items[m.i].Text.ToString()) == 0)
+                                            {
+                                                //- Agrega Registro a la Base de Datos -
+                                                wOper = "add";
+                                                addupdValores(wOper, Global01.Conexion, m.ID,
+                                                    lvValores.Items[m.i].SubItems[1].Text,
+                                                    DateTime.Parse(lvValores.Items[m.i].SubItems[2].Text),
+                                                    Int16.Parse(lvValores.Items[m.i].SubItems[3].Text),
+                                                    float.Parse(lvValores.Items[m.i].SubItems[4].Text),
+                                                    byte.Parse(lvValores.Items[m.i].SubItems[5].Text),
+                                                    lvValores.Items[m.i].SubItems[7].Text);
+                                            }
+                                        }
 
-                            if (_TranActiva!= null)
-                            {
-                                _TranActiva.Commit();
-                            }
-
-		                    Cursor.Current = Cursors.Default;
+                                        if (_TranActiva != null)
+                                        {
+                                            _TranActiva.Commit();
+                                        }
+                                    }
+                               
 
                             //if (!(m.miError)) 
                             //{
@@ -269,8 +272,6 @@ namespace Catalogo._rendiciones
                         {
                             _TranActiva = null;
                         }
-
-		                Cursor.Current = Cursors.Default;
 	                }			
 
   			        break;
@@ -732,18 +733,20 @@ namespace Catalogo._rendiciones
             }
             else
             {
-                Cursor.Current = Cursors.WaitCursor;
-                CargarRecibosLV();
+                using (new varios.WaitCursor())
+                {
 
-                cboCheques.DataSource = null;              
-                cboCheques.Items.Clear();
+                    CargarRecibosLV();
 
-                Funciones.util.CargaCombo(Global01.Conexion, ref cboCheques,"v_Recibo_Det_Cheques_Detalle","Descrip", "NewIndex","NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'","NONE",true,false,"Descrip");
-                cboCheques.Enabled = false;
-                txtBd_Monto.Text = "0,00";
-                TotalRecibos();
-                TotalControles();
+                    cboCheques.DataSource = null;
+                    cboCheques.Items.Clear();
 
+                    Funciones.util.CargaCombo(Global01.Conexion, ref cboCheques, "v_Recibo_Det_Cheques_Detalle", "Descrip", "NewIndex", "NroRecibo >='" + Global01.NroUsuario + "-" + txtRecDesde.Text.PadLeft(8, '0') + "' and NroRecibo<='" + Global01.NroUsuario + "-" + txtRecHasta.Text.PadLeft(8, '0') + "'", "NONE", true, false, "Descrip");
+                    cboCheques.Enabled = false;
+                    txtBd_Monto.Text = "0,00";
+                    TotalRecibos();
+                    TotalControles();
+                }
                 //LimpiarPantalla "datos"
             }
         }

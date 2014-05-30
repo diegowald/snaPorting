@@ -51,7 +51,7 @@ namespace Catalogo
             preload.Preloader.instance.refresh();
            
             //chequea comandos y mensajes desde el servidor
-            if ((Funciones.modINIs.ReadINI("DATOS", "INFO", "1") == "1") | (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente))
+            if ((Funciones.modINIs.ReadINI("DATOS", "INFO", Global01.setDef_INFO) == "1") | (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente))
             {
                 util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, util.BackgroundTasks.Updater.UpdateType.UpdateAppConfig);
                 updater.run();
@@ -66,11 +66,9 @@ namespace Catalogo
                     util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, util.BackgroundTasks.Updater.UpdateType.UpdateCuentas);
                     updater.run();
                 }
-
-                //update_productos();
+                
+                lanzarProcesosSegundoPlano();
             }
-
-            lanzarProcesosSegundoPlano();
 
             //- ACA ESTA LA PAPA ----------------------
             //- Run mi APP MainWindow -----------------
@@ -117,57 +115,16 @@ namespace Catalogo
 
             //Aca tiene que ir tambien el proceso que envia al server las transacciones.
             Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico,0 , util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
-            int xMin = Int16.Parse("0" + Funciones.modINIs.ReadINI("DATOS", "DelayedEnv", "2"));
+            int xMin = Int16.Parse("0" + Funciones.modINIs.ReadINI("DATOS", "DelayedEnviar", Global01.setDef_DelayedEnviar));
             envioMovs.delayedRun(xMin * 60 * 1000);
         }
 
         private static void ActivarApplicacion()
         {
-
             util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
                util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
                util.BackgroundTasks.Updater.UpdateType.ActivarApp);
             updater.run();
-
-            //OleDbDataReader dr = null;
-            //dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_appConfig2");
-            //if (!dr.HasRows)
-            //{
-            //    MessageBox.Show(new Form() { TopMost = true }, "Aplicación NO inicializada! (error=Version y Tipo), Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            //    miEnd();
-            //}
-            //else
-            //{
-            //    dr.Read();
-
-            //    if (dr["appCVersion"].ToString().Substring(1, 3) != Global01.VersionApp.Substring(3, 3))
-            //    {
-            //        MessageBox.Show(new Form() { TopMost = true }, "INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            //        miEnd();
-            //    }
-            //    else
-            //    {
-            //        Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP", "0.0.0.0");
-            //        if (Global01.URL_ANS == "0.0.0.0")
-            //        {
-            //            Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString();
-            //        }
-
-            //        Global01.URL_ANS2 = Funciones.modINIs.ReadINI("DATOS", "IP2", "0.0.0.0");
-            //        if (Global01.URL_ANS2 == "0.0.0.0")
-            //        {
-            //            Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
-            //        }
-
-            //        Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
-
-            //        util.BackgroundTasks.Updater updater = new util.BackgroundTasks.Updater(
-            //           util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
-            //           util.BackgroundTasks.Updater.UpdateType.ActivarApp);
-            //        updater.run();
-            //    }
-            //}
-            //dr = null;
         }
 
         private static void load_header(byte Paso)
@@ -184,27 +141,27 @@ namespace Catalogo
             {
                 dr.Read();
 
-                if (dr["appCVersion"].ToString().Substring(1, 3) != Global01.VersionApp.Substring(3, 3))
+                if (dr["appCVersion"].ToString().Substring(3, 2) + "." != Global01.VersionApp.Substring(5, 3))
                 {
-                    MessageBox.Show(new Form() { TopMost = true },"INCONSISTENCIA en la versión de la Aplicación!, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    MessageBox.Show(new Form() { TopMost = true },"INCONSISTENCIA en la versión de la Aplicación! (APP vs DB), Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     miEnd();
                 }
 
                 Global01.MiBuild = DBNull.Value.Equals(dr["Build"]) ? (int)(0) : Int32.Parse(dr["Build"].ToString());
 
-                Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP", "0.0.0.0");
+                Global01.URL_ANS = Funciones.modINIs.ReadINI("DATOS", "IP", Global01.setDef_IP);
                 if (Global01.URL_ANS == "0.0.0.0")
                 {
                     Global01.URL_ANS = DBNull.Value.Equals(dr["url"]) ? "0.0.0.0" : dr["url"].ToString();
                 }
 
-                Global01.URL_ANS2 = Funciones.modINIs.ReadINI("DATOS", "IP2", "0.0.0.0");
+                Global01.URL_ANS2 = Funciones.modINIs.ReadINI("DATOS", "IP2", Global01.setDef_IP2);
                 if (Global01.URL_ANS2 == "0.0.0.0")
                 {
                     Global01.URL_ANS2 = DBNull.Value.Equals(dr["url2"]) ? "0.0.0.0" : dr["url2"].ToString();
                 }
 
-                Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", "0.0.0.0");
+                Global01.proxyServerAddress = Funciones.modINIs.ReadINI("DATOS", "ProxyServer", Global01.setDef_ProxyServer);
 
                 if (Paso == 1)
                 {
@@ -283,12 +240,14 @@ namespace Catalogo
                 }
             }
 
+            if (Global01.IDMaquina == "30C3D7F6D9BA6EABFB5CB0F54EF5B35D8") Global01.IDMaquina = "30C3D7F6D9BA6EABFB5CB0F54EF5B35D8-" + Global01.NroUsuario;
+
         }
 
         public static void update_productos()
         {
             Catalogo.varios.fDataUpdate fu = new Catalogo.varios.fDataUpdate();
-            fu.SoloCatalogo = Convert.ToBoolean(Funciones.modINIs.ReadINI("DATOS", "SoloCatalogo", "false"));
+            fu.SoloCatalogo = false; //Convert.ToBoolean(Funciones.modINIs.ReadINI("DATOS", "SoloCatalogo", "false"));
             string ipAddress = Global01.URL_ANS;
 
         VadeNuevo:
@@ -469,11 +428,29 @@ namespace Catalogo
         public static void miEnd(bool Halt=true)
         {
             Catalogo.util.BackgroundTasks.BackgroundTaskCoordinator.instance.shutdownTasks();
-            Application.Exit();
-            if (Halt)           
-            { 
-                System.Environment.Exit(0);
+
+            if (Global01.Conexion != null)
+            {
+                if (Global01.Conexion.State == System.Data.ConnectionState.Open) { Global01.Conexion.Close(); }
+                Global01.Conexion = null;
             }
+
+            if (System.Windows.Forms.Application.MessageLoop)
+            {
+              // Use this since we are a WinForms app
+                System.Windows.Forms.Application.Exit();
+            }
+            else
+            {
+              // Use this since we are a console app
+              System.Environment.Exit(1);
+            }
+            //Application.Exit();
+            
+            //if (Halt)           
+            //{ 
+            //    System.Environment.Exit(0);
+            //}
             //System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
 
@@ -517,95 +494,103 @@ namespace Catalogo
 
         public static void inicializaGlobales()
         {
-           //xxxSabor
-            Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
-           // Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
- 
-            Global01.NoConn = false;
-            Global01.VersionApp = (int)(Global01.miSABOR) + "." + Application.ProductVersion.Trim();
-
-            Global01.Conexion = null;
-            //Global01.TranActiva_ = null;
-
-            string xLocAns = Environment.GetEnvironmentVariable("windir") + "\\locans" + ((int)(Global01.miSABOR)).ToString() + ".log";
-        vadenuevo:
-            if (!System.IO.File.Exists(xLocAns))
+            try
             {
-                Funciones.modINIs.INIWrite(xLocAns, "ans", "path", "C:\\Catalogo ANS");
+                //xxxSabor
+                Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+                //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+
+                Global01.NoConn = false;
+                Global01.VersionApp = (int)(Global01.miSABOR) + "." + Application.ProductVersion.Trim();
+
+                Global01.Conexion = null;
+                //Global01.TranActiva_ = null;
+
+                string xLocAns = Environment.GetEnvironmentVariable("appdata") + "\\locans" + ((int)(Global01.miSABOR)).ToString() + ".log";
+            vadenuevo:
+                if (!System.IO.File.Exists(xLocAns))
+                {
+                    Funciones.modINIs.INIWrite(xLocAns, "ans", "path", "C:\\Catalogo ANS");
+                }
+                Global01.AppPath = Funciones.modINIs.INIRead(xLocAns, "ans", "path", "C:\\Catalogo ANS");
+
+                //Global01.PathAcrobat = Funciones.modINIs.ReadINI("Datos", "PathAcrobat", "");
+                Global01.FileBak = "CopiaCata_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mdb";
+
+                Global01.cstring = Global01.AppPath + "\\datos\\ans.mdb";
+                Global01.dstring = Global01.AppPath + "\\datos\\catalogo.mdb";
+
+                //Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
+                Global01.sstring = Application.StartupPath.ToString().Trim() + "\\AvallonDock.resources.dll";
+
+                if (!System.IO.File.Exists(Global01.cstring))
+                {
+                    OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                    FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+
+                    folderBrowserDialog1.Description = "Seleccione la ubicación donde está instalado el Catálogo de Auto Náutica Sur.";
+                    folderBrowserDialog1.ShowNewFolderButton = false;
+                    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
+                    DialogResult result = folderBrowserDialog1.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        Funciones.modINIs.INIWrite(xLocAns, "ans", "path", folderBrowserDialog1.SelectedPath.ToString());
+                    }
+                    else if (result == DialogResult.Cancel)
+                    {
+                        miEnd();
+                    }
+                    goto vadenuevo;
+                }
+
+                Global01.strConexionUs = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Us + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
+                Global01.strConexionAd = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Ad + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
+
+                Global01.IDMaquina = Catalogo._registro.AppRegistro.ObtenerIDMaquina();
+                Global01.IDMaquinaCRC = Funciones.modINIs.ReadINI("DATOS", "MachineId", "no");
+                Global01.LLaveViajante = Funciones.modINIs.ReadINI("DATOS", "LlaveViajante", "no");
+                Global01.IDMaquinaREG = Funciones.modINIs.ReadINI("DATOS", "RegistrationKey", "no");
+                Global01.RecienRegistrado = false;
+                Global01.AppActiva = false;
+
+                Global01.OperacionActivada = "nada";
+                Global01.NroDocumentoAbierto = "";
+                Global01.NroUsuario = "00000";
+                Global01.Zona = "000";
+                Global01.Cuit = "0";
+                Global01.pin = "";
+                Global01.RazonSocial = "";
+                Global01.ApellidoNombre = "";
+
+                Global01.dbCaduca = DateTime.Today.Date;
+                Global01.appCaduca = DateTime.Today.Date;
+                Global01.F_ActCatalogo = DateTime.Today.Date;
+                Global01.F_ActClientes = DateTime.Today.Date;
+                Global01.F_UltimoAcceso = DateTime.Today.Date;
+
+                Global01.EnviarAuditoria = false;
+                Global01.AuditarProceso = false;
+                Global01.xError = false;
+                Global01.URL_ANS = "0.0.0.0";
+                Global01.URL_ANS2 = "0.0.0.0";
+                Global01.MainWindowCaption = "Catálogo Dígital de Productos - v4.0";
+
+                Global01.MiBuild = 0;
+                Global01.ListaPrecio = 1;
+                Global01.Dolar = float.Parse(Funciones.modINIs.INIRead(Global01.AppPath + "\\Cambio.ini", "General", "Dolar", "1"));
+                Global01.Euro = float.Parse(Funciones.modINIs.INIRead(Global01.AppPath + "\\Cambio.ini", "General", "Euro", "1"));
+
+                Global01.EmailTO = "";
+                Global01.EmailBody = "";
+                Global01.EmailAsunto = "";
+
+                Global01.IPPing = Funciones.modINIs.ReadINI("DATOS", "IPPing", Global01.setDef_IPPing);
             }
-            Global01.AppPath = Funciones.modINIs.INIRead(xLocAns, "ans", "path", "C:\\Catalogo ANS");
-
-            Global01.PathAcrobat = Funciones.modINIs.ReadINI("Datos", "PathAcrobat", "");
-            Global01.FileBak = "CopiaCata_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mdb";
-
-            Global01.cstring = Global01.AppPath + "\\datos\\ans.mdb";
-            Global01.dstring = Global01.AppPath + "\\datos\\catalogo.mdb";
-
-            //Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
-            Global01.sstring = Application.StartupPath.ToString().Trim() + "\\AvallonDock.resources.dll";
-
-            if (!System.IO.File.Exists(Global01.dstring))
+            catch (Exception ex)
             {
-                OpenFileDialog openFileDialog1 = new OpenFileDialog();
-                FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-
-                folderBrowserDialog1.Description = "Seleccione la ubicación donde está instalado el Catálogo de Auto Náutica Sur.";
-                folderBrowserDialog1.ShowNewFolderButton = false;
-                folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
-                DialogResult result = folderBrowserDialog1.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    Funciones.modINIs.INIWrite(xLocAns, "ans", "path", folderBrowserDialog1.SelectedPath.ToString());
-                }
-                else if (result == DialogResult.Cancel)
-                {
-                    miEnd();
-                }
-                goto vadenuevo;
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                //throw ex;
             }
-
-            Global01.strConexionUs = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Us + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
-            Global01.strConexionAd = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Global01.dstring + Global01.up2014Ad + ";Persist Security Info=True;Jet OLEDB:System database=" + Global01.sstring;
-
-            Global01.IDMaquina = Catalogo._registro.AppRegistro.ObtenerIDMaquina();
-            Global01.IDMaquinaCRC = Funciones.modINIs.ReadINI("DATOS", "MachineId", "no");
-            Global01.LLaveViajante = Funciones.modINIs.ReadINI("DATOS", "LlaveViajante", "no");
-            Global01.IDMaquinaREG = Funciones.modINIs.ReadINI("DATOS", "RegistrationKey", "no");
-            Global01.RecienRegistrado = false;
-            Global01.AppActiva = false;
-
-            Global01.OperacionActivada = "nada";
-            Global01.NroDocumentoAbierto = "";
-            Global01.NroUsuario = "00000";
-            Global01.Zona = "000";
-            Global01.Cuit = "0";
-            Global01.pin = "";
-            Global01.RazonSocial = "";
-            Global01.ApellidoNombre = "";
-
-            Global01.dbCaduca = DateTime.Today.Date;
-            Global01.appCaduca = DateTime.Today.Date;
-            Global01.F_ActCatalogo = DateTime.Today.Date;
-            Global01.F_ActClientes = DateTime.Today.Date;
-            Global01.F_UltimoAcceso = DateTime.Today.Date;
-
-            Global01.EnviarAuditoria = false;
-            Global01.AuditarProceso = false;
-            Global01.xError = false;
-            Global01.URL_ANS = "0.0.0.0";
-            Global01.URL_ANS2 = "0.0.0.0";
-            Global01.MainWindowCaption = "Catálogo Dígital de Productos - v4.0";
-
-            Global01.MiBuild = 0;
-            Global01.ListaPrecio = 1;
-            Global01.Dolar = float.Parse(Funciones.modINIs.INIRead(Global01.AppPath + "\\Cambio.ini", "General", "Dolar", "1"));
-            Global01.Euro = float.Parse(Funciones.modINIs.INIRead(Global01.AppPath + "\\Cambio.ini", "General", "Euro", "1"));
-
-            Global01.EmailTO = "";
-            Global01.EmailBody = "";
-            Global01.EmailAsunto = "";
-
-            Global01.IPPing = Funciones.modINIs.ReadINI("DATOS", "IPPing", "8.8.8.8");
         }
 
         /// <summary>

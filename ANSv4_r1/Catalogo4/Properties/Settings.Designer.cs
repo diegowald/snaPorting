@@ -152,5 +152,15 @@ namespace Catalogo.Properties {
                 return ((string)(this["Catalogo_ClientesNovedadesWS_ClientesNovedades"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://190.3.78.12/wscatalogo4/clientesvisitas.asmx")]
+        public string Catalogo_ClientesVisitasWS_ClientesVisitas {
+            get {
+                return ((string)(this["Catalogo_ClientesVisitasWS_ClientesVisitas"]));
+            }
+        }
     }
 }

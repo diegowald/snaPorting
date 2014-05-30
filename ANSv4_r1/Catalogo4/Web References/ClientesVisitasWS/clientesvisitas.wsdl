@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="EnviarDatos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MacAddress" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pNroVisita" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pIdCliente" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pFecha" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pQRecibe" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCCompras" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCPagos" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pRamoLiviano" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pRamoPesado" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pRamoAgricola" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEsMononarca" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pMarca" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCatRepGral" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCatLubricentro" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCatEstServicio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCatMotos" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCatEspecialista" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEspMotor" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEspFrenos" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEspSuspension" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEspElectricidad" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEspAccesorios" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pDetalle1" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pDetalle2" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pIdViajante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pRazonSocial" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCuit" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pDomicilio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pCiudad" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pTelefono" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EnviarDatosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="EnviarDatosResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="EnviarDatosSoapIn">
+    <wsdl:part name="parameters" element="tns:EnviarDatos" />
+  </wsdl:message>
+  <wsdl:message name="EnviarDatosSoapOut">
+    <wsdl:part name="parameters" element="tns:EnviarDatosResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ClientesVisitasSoap">
+    <wsdl:operation name="EnviarDatos">
+      <wsdl:input message="tns:EnviarDatosSoapIn" />
+      <wsdl:output message="tns:EnviarDatosSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ClientesVisitasSoap" type="tns:ClientesVisitasSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EnviarDatos">
+      <soap:operation soapAction="http://tempuri.org/EnviarDatos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ClientesVisitasSoap12" type="tns:ClientesVisitasSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EnviarDatos">
+      <soap12:operation soapAction="http://tempuri.org/EnviarDatos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ClientesVisitas">
+    <wsdl:port name="ClientesVisitasSoap" binding="tns:ClientesVisitasSoap">
+      <soap:address location="http://190.3.78.12/wscatalogo4/clientesvisitas.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ClientesVisitasSoap12" binding="tns:ClientesVisitasSoap12">
+      <soap12:address location="http://190.3.78.12/wscatalogo4/clientesvisitas.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
