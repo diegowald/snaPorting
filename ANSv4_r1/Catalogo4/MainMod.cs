@@ -240,6 +240,8 @@ namespace Catalogo
                 }
             }
 
+            if (Global01.IDMaquina == "30C3D7F6D9BA6EABFB5CB0F54EF5B35D8") Global01.IDMaquina = "30C3D7F6D9BA6EABFB5CB0F54EF5B35D8-" + Global01.NroUsuario;
+
         }
 
         public static void update_productos()
@@ -495,8 +497,8 @@ namespace Catalogo
             try
             {
                 //xxxSabor
-                //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
-                Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+                Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+                //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
 
                 Global01.NoConn = false;
                 Global01.VersionApp = (int)(Global01.miSABOR) + "." + Application.ProductVersion.Trim();
@@ -521,7 +523,7 @@ namespace Catalogo
                 //Global01.sstring = Environment.GetEnvironmentVariable("windir") + "\\Help\\KbAppCat.hlp";
                 Global01.sstring = Application.StartupPath.ToString().Trim() + "\\AvallonDock.resources.dll";
 
-                if (!System.IO.File.Exists(Global01.dstring))
+                if (!System.IO.File.Exists(Global01.cstring))
                 {
                     OpenFileDialog openFileDialog1 = new OpenFileDialog();
                     FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();

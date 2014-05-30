@@ -20,6 +20,7 @@ namespace Catalogo._registro
            this.pictureBox1.BackColor = Color.Transparent;
            this.errormessage.BackColor = Color.Transparent;
            this.errormessage.ForeColor = Color.Red;
+           lblAppVersion.Text = Global01.VersionApp;
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)

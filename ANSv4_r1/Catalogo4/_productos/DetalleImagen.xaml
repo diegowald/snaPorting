@@ -5,7 +5,7 @@
         Title="Detalle de la Imágen - Auto Náutica Sur s.r.l." 
         WindowStartupLocation="CenterScreen"                
         BorderThickness="0"
-        ResizeMode="CanResize"  AllowsTransparency="False" WindowStyle="None" Icon="/Catalogo;component/recursos/ans48X48.ico">
+        ResizeMode="CanResize"  AllowsTransparency="False" WindowStyle="None" Icon="/ans48X48.ico" >
 
     <Border Grid.Row="0" x:Name="LayoutRoot" Background="White" MouseLeftButtonDown="Title_MouseLeftButtonDown">
         <Grid>

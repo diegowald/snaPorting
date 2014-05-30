@@ -54,38 +54,40 @@ namespace Catalogo.varios
     
             if (DownloadedFile != "") //'they did download an update
             {
-                Cursor.Current = Cursors.WaitCursor;
-              
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                //startInfo.FileName = DownloadedFile; 
-                startInfo.FileName = "\"" + DownloadedFile + "\" -d\"" + Global01.AppPath.ToString() + "\""; 
-
-                startInfo.CreateNoWindow = false;
-                startInfo.UseShellExecute = false;
-                startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-
-                try
+                using (new varios.WaitCursor())
                 {
-                    //Process.Start(startInfo);
 
-                    // Start the process with the info we specified.
-                    // Call WaitForExit and then the using statement will close.
-                    using (Process exeProcess = Process.Start(startInfo))
+
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    //startInfo.FileName = DownloadedFile; 
+                    startInfo.FileName = "\"" + DownloadedFile + "\" -d\"" + Global01.AppPath.ToString() + "\"";
+
+                    startInfo.CreateNoWindow = false;
+                    startInfo.UseShellExecute = false;
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+                    try
                     {
-                        exeProcess.WaitForExit();
+                        //Process.Start(startInfo);
+
+                        // Start the process with the info we specified.
+                        // Call WaitForExit and then the using statement will close.
+                        using (Process exeProcess = Process.Start(startInfo))
+                        {
+                            exeProcess.WaitForExit();
+                        }
                     }
+                    catch (Exception ex)
+                    {
+                        util.errorHandling.ErrorLogger.LogMessage(ex);
+
+                        throw ex;
+                        // Log error.
+                    }
+
+                    System.IO.File.Delete(DownloadedFile);
+
                 }
-                catch (Exception ex)
-                {
-                    util.errorHandling.ErrorLogger.LogMessage(ex);
-
-                    throw ex;
-                    // Log error.
-                }
-
-                System.IO.File.Delete(DownloadedFile);
-
-                Cursor.Current = Cursors.Default;
             }
 
             this.Close();

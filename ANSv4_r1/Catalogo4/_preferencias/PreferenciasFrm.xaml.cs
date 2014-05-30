@@ -26,10 +26,12 @@ namespace Catalogo._preferencias
 
         public delegate void SaveDelegate();
         public delegate void LoadDelegate();
+        public delegate void ResetDelegate();
         public delegate void PasswordValidDelegate();
 
         private SaveDelegate doSave;
         private LoadDelegate doLoad;
+        private ResetDelegate doReset;
         private PasswordValidDelegate doEnablePasswordProtectedControls;
 
         private string password
@@ -95,6 +97,7 @@ namespace Catalogo._preferencias
             addCheckBox("Descargar imágenes que NO tengo", "DATOS", "chkImagenNueva", "1", "0", Global01.setDef_checkImagenNueva, false, password);
             addCheckBox("Lista de Clientes x Nro. Cuenta", "DATOS", "CCC", "1", "0", Global01.setDef_CCC, false, password);
             addEditBox("Depósito", "DATOS", "Deposito", Global01.setDef_DEP, false, password);
+            addEditBox("Transporte", "DATOS", "Transporte", Global01.setDef_Transporte, false, password);
             addEditBox("IP Ping", "DATOS", "IPPing", Global01.setDef_IPPing, false, password);
             addEditBox("Proxy", "DATOS", "ProxyServer", Global01.setDef_ProxyServer, false, password);
 
@@ -129,6 +132,8 @@ namespace Catalogo._preferencias
         {
             doSave += ctrl.onSave;
             doLoad += ctrl.onLoad;
+            doReset += ctrl.onReset;
+
             doEnablePasswordProtectedControls += ctrl.onEnablePasswrodProtectedControl;
             stack.Children.Add(ctrl as UserControl);
         }
@@ -143,9 +148,9 @@ namespace Catalogo._preferencias
 
         private void ResetButton_Click_1(object sender, RoutedEventArgs e)
         {
-            if (doLoad != null)
+            if (doReset != null)
             {
-                doLoad();
+                doReset();
             }
         }
 

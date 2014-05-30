@@ -49,23 +49,48 @@ namespace Catalogo._productos
                 txtDetalle.Inlines.Add(new LineBreak());
                 txtDetalle.Inlines.Add(new Run("Para: ") { FontWeight = FontWeights.Bold });
                 txtDetalle.Inlines.Add(new Run(dato.Cells["marca"].Value.ToString() + " " + dato.Cells["modelo"].Value.ToString()) { Foreground = Brushes.Blue });
-                txtDetalle.Inlines.Add(new Run("  Año/Modelo: ") { FontWeight = FontWeights.Bold });
-                txtDetalle.Inlines.Add(new Run(dato.Cells["año"].Value.ToString()) { Foreground = Brushes.Blue });
 
-                txtDetalle.Inlines.Add(new Run("  Motor: ") { FontWeight = FontWeights.Bold });
-                txtDetalle.Inlines.Add(new Run(dato.Cells["motor"].Value.ToString()) { Foreground = Brushes.Blue });
+                if (dato.Cells["año"].Value.ToString().Trim().Length > 0)
+                {
+                    txtDetalle.Inlines.Add(new Run("  Año/Modelo: ") { FontWeight = FontWeights.Bold });
+                    txtDetalle.Inlines.Add(new Run(dato.Cells["año"].Value.ToString()) { Foreground = Brushes.Blue });
+                }
 
-                txtDetalle.Inlines.Add(new Run("  Descripción: ") { FontWeight = FontWeights.Bold });
-                txtDetalle.Inlines.Add(new Run(dato.Cells["n_producto"].Value.ToString()) { Foreground = Brushes.Blue });
+                if (dato.Cells["motor"].Value.ToString().Trim().Length > 0)
+                {
+                    txtDetalle.Inlines.Add(new Run("  Motor: ") { FontWeight = FontWeights.Bold });
+                    txtDetalle.Inlines.Add(new Run(dato.Cells["motor"].Value.ToString()) { Foreground = Brushes.Blue });
+                }
+
+                if (dato.Cells["n_producto"].Value.ToString().Trim().Length > 0)
+                {
+                    txtDetalle.Inlines.Add(new Run("  Descripción: ") { FontWeight = FontWeights.Bold });
+                    txtDetalle.Inlines.Add(new Run(dato.Cells["n_producto"].Value.ToString()) { Foreground = Brushes.Blue });
+                }
+
                 txtDetalle.Inlines.Add(new LineBreak());
 
                 txtDetalle.Inlines.Add(new Run("Medidas: ") { FontWeight = FontWeights.Bold });
                 txtDetalle.Inlines.Add(new Run(dato.Cells["o_producto"].Value.ToString()) { Foreground = Brushes.Blue });
 
-                txtDetalle.Inlines.Add(new Run("  Reemplaza a: ") { FontWeight = FontWeights.Bold });
-                txtDetalle.Inlines.Add(new Run(dato.Cells["reemplazaa"].Value.ToString()) { Foreground = Brushes.Blue });
-                txtDetalle.Inlines.Add(new Run("  Equivalencia: ") { FontWeight = FontWeights.Bold });
-                txtDetalle.Inlines.Add(new Run(dato.Cells["equivalencia"].Value.ToString()) { Foreground = Brushes.Blue });
+                if (dato.Cells["contiene"].Value.ToString().Trim().Length > 0)
+                {
+                    txtDetalle.Inlines.Add(new Run("  Contiene: ") { FontWeight = FontWeights.Bold });
+                    txtDetalle.Inlines.Add(new Run(dato.Cells["contiene"].Value.ToString()) { Foreground = Brushes.Blue });
+                }
+
+                if (dato.Cells["reemplazaa"].Value.ToString().Trim().Length > 0)
+                {
+                    txtDetalle.Inlines.Add(new Run("  Reemplaza a: ") { FontWeight = FontWeights.Bold });
+                    txtDetalle.Inlines.Add(new Run(dato.Cells["reemplazaa"].Value.ToString()) { Foreground = Brushes.Blue });
+                }
+
+                if (dato.Cells["equivalencia"].Value.ToString().Trim().Length > 0)
+                {
+                    txtDetalle.Inlines.Add(new Run("  Equivalencia: ") { FontWeight = FontWeights.Bold });
+                    txtDetalle.Inlines.Add(new Run(dato.Cells["equivalencia"].Value.ToString()) { Foreground = Brushes.Blue });
+                }
+
                 txtDetalle.Inlines.Add(new Run("  Original: ") { FontWeight = FontWeights.Bold });
                 txtDetalle.Inlines.Add(new Run(dato.Cells["original"].Value.ToString()) { Foreground = Brushes.Blue });
                 txtDetalle.Inlines.Add(new LineBreak());

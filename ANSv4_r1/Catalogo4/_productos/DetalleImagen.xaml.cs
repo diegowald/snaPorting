@@ -30,11 +30,16 @@ namespace Catalogo._productos
                 this.Height = imageSource.Height * 5.5;
 
             }
-            else if (imageSource.Height > 400)
+            else if (imageSource.Height > 400 & imageSource.Height < 600)
             {
                 this.Width = imageSource.Width * 1.5;
                 this.Height = imageSource.Height * 1.5;
 
+            }
+            else if (imageSource.Height > 600 )
+            {
+                this.Width = 640;
+                this.Height = 480;
             }
             else
             {

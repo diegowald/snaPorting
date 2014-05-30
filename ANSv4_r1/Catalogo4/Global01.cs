@@ -102,6 +102,7 @@ namespace Catalogo
        public static string setDef_IPPing = "8.8.8.8";          //
        public static string setDef_ConfirmaSalida = "1";
        public static string setDef_EsGerente = "0";
+       public static string setDef_Transporte = "0";
 
     }
 }

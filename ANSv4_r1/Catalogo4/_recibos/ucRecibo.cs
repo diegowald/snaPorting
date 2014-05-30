@@ -841,146 +841,149 @@ namespace Catalogo._recibos
 
             if (tOk)
             {
-                Cursor.Current = Cursors.WaitCursor;
-
-                InhabilitarRecibo();
-
-                Catalogo._recibos.Recibo rec = new Catalogo._recibos.Recibo(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));                
-
-                for (int i = 0; i < ralistView.Items.Count; i++)
+                using (new varios.WaitCursor())
                 {
-                    wDeTerceroChk = (ralistView.Items[i].SubItems[8].Text.ToString() == "0" ? (bool)(true) : (bool)(false));
-                    wABahiaChk = (ralistView.Items[i].SubItems[9].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
 
-                    rec.ADDItem(byte.Parse(ralistView.Items[i].SubItems[10].Text.ToString()),
-                                    float.Parse(ralistView.Items[i].SubItems[1].Text.ToString()),
-                                    DateTime.Parse(ralistView.Items[i].SubItems[2].Text.ToString()),
-                                    DateTime.Parse(ralistView.Items[i].SubItems[3].Text.ToString()),
-                                    ralistView.Items[i].SubItems[4].Text.ToString(),
-                                    ralistView.Items[i].SubItems[5].Text.ToString(),
-                                    Int16.Parse(ralistView.Items[i].SubItems[11].Text.ToString()),
-                                    ralistView.Items[i].SubItems[7].Text.ToString(),
-                                    wDeTerceroChk,
-                                    float.Parse("0" + ralistView.Items[i].SubItems[12].Text.ToString()));
+                    InhabilitarRecibo();
 
-                    if (ralistView.Items[i].SubItems[10].Text.ToString() == "3" | ralistView.Items[i].SubItems[10].Text.ToString() == "4")
+                    Catalogo._recibos.Recibo rec = new Catalogo._recibos.Recibo(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+
+                    for (int i = 0; i < ralistView.Items.Count; i++)
                     {
-                        tImporte = tImporte + float.Parse(ralistView.Items[i].SubItems[1].Text.ToString()) * float.Parse(ralistView.Items[i].SubItems[12].Text.ToString());
+                        wDeTerceroChk = (ralistView.Items[i].SubItems[8].Text.ToString() == "0" ? (bool)(true) : (bool)(false));
+                        wABahiaChk = (ralistView.Items[i].SubItems[9].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
+
+                        rec.ADDItem(byte.Parse(ralistView.Items[i].SubItems[10].Text.ToString()),
+                                        float.Parse(ralistView.Items[i].SubItems[1].Text.ToString()),
+                                        DateTime.Parse(ralistView.Items[i].SubItems[2].Text.ToString()),
+                                        DateTime.Parse(ralistView.Items[i].SubItems[3].Text.ToString()),
+                                        ralistView.Items[i].SubItems[4].Text.ToString(),
+                                        ralistView.Items[i].SubItems[5].Text.ToString(),
+                                        Int16.Parse(ralistView.Items[i].SubItems[11].Text.ToString()),
+                                        ralistView.Items[i].SubItems[7].Text.ToString(),
+                                        wDeTerceroChk,
+                                        float.Parse("0" + ralistView.Items[i].SubItems[12].Text.ToString()));
+
+                        if (ralistView.Items[i].SubItems[10].Text.ToString() == "3" | ralistView.Items[i].SubItems[10].Text.ToString() == "4")
+                        {
+                            tImporte = tImporte + float.Parse(ralistView.Items[i].SubItems[1].Text.ToString()) * float.Parse(ralistView.Items[i].SubItems[12].Text.ToString());
+                        }
+                        else
+                        {
+                            tImporte = tImporte + float.Parse(ralistView.Items[i].SubItems[1].Text.ToString());
+                        }
                     }
-                    else
+
+                    rec.NroImpresion = 0;
+                    rec.Bahia = wABahiaChk;
+                    rec.Observaciones = raObservacionesTxt.Text;
+                    rec.Total = tImporte;
+                    rec.Percepciones = float.Parse(apTotalPercepcionLbl.Text);
+
+                    for (int i = 0; i < aplistView.Items.Count; i++)
                     {
-                        tImporte = tImporte + float.Parse(ralistView.Items[i].SubItems[1].Text.ToString());
+                        rec.ADDItemApli(aplistView.Items[i].Text.ToString(),
+                                        float.Parse(aplistView.Items[i].SubItems[1].Text.ToString()));
                     }
+
+                    for (int i = 0; i < adlistView.Items.Count; i++)
+                    {
+                        rec.ADDItemDedu(adlistView.Items[i].Text.ToString(),
+                                             float.Parse(adlistView.Items[i].SubItems[1].Text.ToString()),
+                                             ((adlistView.Items[i].SubItems[2].Text.ToString() == "1") ? (bool)(true) : (bool)(false)),
+                                             ((adlistView.Items[i].SubItems[3].Text.ToString() == "1") ? (bool)(true) : (bool)(false)));
+                    }
+
+                    rec.Guardar("GRABAR");
+
+                    Recibo_Imprimir(Global01.NroImprimir);
+
+                    Global01.NroImprimir = "";
+
+                    CerrarRecibo();
                 }
-
-                rec.NroImpresion = 0;
-                rec.Bahia = wABahiaChk;
-                rec.Observaciones = raObservacionesTxt.Text;
-                rec.Total = tImporte;
-                rec.Percepciones = float.Parse(apTotalPercepcionLbl.Text);
-
-                for (int i = 0; i < aplistView.Items.Count; i++)
-                {
-                    rec.ADDItemApli(aplistView.Items[i].Text.ToString(), 
-                                    float.Parse(aplistView.Items[i].SubItems[1].Text.ToString()));
-                }
-
-                for (int i = 0; i < adlistView.Items.Count; i++)
-                {
-                    rec.ADDItemDedu(adlistView.Items[i].Text.ToString(),
-                                         float.Parse(adlistView.Items[i].SubItems[1].Text.ToString()),
-                                         ((adlistView.Items[i].SubItems[2].Text.ToString() == "1") ? (bool)(true) : (bool)(false)),
-                                         ((adlistView.Items[i].SubItems[3].Text.ToString() == "1") ? (bool)(true) : (bool)(false)));             
-                }
-
-                rec.Guardar("GRABAR");   
-                
-                Recibo_Imprimir(Global01.NroImprimir);         
-
-                Global01.NroImprimir = "";
-
-                CerrarRecibo();
             }
         }
 
         private void btnVer_Click(object sender, EventArgs e)
         {
             if (ralistView.Items.Count > 0)
-            {                
-                Cursor.Current = Cursors.WaitCursor;
-
-                float tImporte = 0;
-                bool wDeTerceroChk = false;
-                bool wABahiaChk = false;
-
-                //' iNABILITO nUEVO iNGRESO
-                //InhabilitarRecibo();
-
-                Catalogo._recibos.Recibo rec = new Catalogo._recibos.Recibo(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));                
-
-                for (int i = 0; i < ralistView.Items.Count; i++)
+            {
+                using (new varios.WaitCursor())
                 {
-                    wDeTerceroChk = (ralistView.Items[i].SubItems[8].Text.ToString() == "0" ? (bool)(true) : (bool)(false));
-                    wABahiaChk = (ralistView.Items[i].SubItems[9].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
 
-                    rec.ADDItem(byte.Parse(ralistView.Items[i].SubItems[10].Text.ToString()),
-                                    float.Parse(ralistView.Items[i].SubItems[1].Text.ToString()),
-                                    DateTime.Parse(ralistView.Items[i].SubItems[2].Text.ToString()),
-                                    DateTime.Parse(ralistView.Items[i].SubItems[3].Text.ToString()),
-                                    ralistView.Items[i].SubItems[4].Text.ToString(),
-                                    ralistView.Items[i].SubItems[5].Text.ToString(),
-                                    Int16.Parse(ralistView.Items[i].SubItems[11].Text.ToString()),
-                                    ralistView.Items[i].SubItems[7].Text.ToString(),
-                                    wDeTerceroChk,
-                                    float.Parse("0" + ralistView.Items[i].SubItems[12].Text.ToString()));
+                    float tImporte = 0;
+                    bool wDeTerceroChk = false;
+                    bool wABahiaChk = false;
 
-                    if (ralistView.Items[i].SubItems[10].Text.ToString() == "3" | ralistView.Items[i].SubItems[10].Text.ToString() == "4")
+                    //' iNABILITO nUEVO iNGRESO
+                    //InhabilitarRecibo();
+
+                    Catalogo._recibos.Recibo rec = new Catalogo._recibos.Recibo(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
+
+                    for (int i = 0; i < ralistView.Items.Count; i++)
                     {
-                        tImporte = tImporte + float.Parse(ralistView.Items[i].SubItems[1].Text.ToString()) * float.Parse(ralistView.Items[i].SubItems[12].Text.ToString());
+                        wDeTerceroChk = (ralistView.Items[i].SubItems[8].Text.ToString() == "0" ? (bool)(true) : (bool)(false));
+                        wABahiaChk = (ralistView.Items[i].SubItems[9].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
+
+                        rec.ADDItem(byte.Parse(ralistView.Items[i].SubItems[10].Text.ToString()),
+                                        float.Parse(ralistView.Items[i].SubItems[1].Text.ToString()),
+                                        DateTime.Parse(ralistView.Items[i].SubItems[2].Text.ToString()),
+                                        DateTime.Parse(ralistView.Items[i].SubItems[3].Text.ToString()),
+                                        ralistView.Items[i].SubItems[4].Text.ToString(),
+                                        ralistView.Items[i].SubItems[5].Text.ToString(),
+                                        Int16.Parse(ralistView.Items[i].SubItems[11].Text.ToString()),
+                                        ralistView.Items[i].SubItems[7].Text.ToString(),
+                                        wDeTerceroChk,
+                                        float.Parse("0" + ralistView.Items[i].SubItems[12].Text.ToString()));
+
+                        if (ralistView.Items[i].SubItems[10].Text.ToString() == "3" | ralistView.Items[i].SubItems[10].Text.ToString() == "4")
+                        {
+                            tImporte = tImporte + float.Parse(ralistView.Items[i].SubItems[1].Text.ToString()) * float.Parse(ralistView.Items[i].SubItems[12].Text.ToString());
+                        }
+                        else
+                        {
+                            tImporte = tImporte + float.Parse(ralistView.Items[i].SubItems[1].Text.ToString());
+                        }
                     }
-                    else
+
+                    rec.NroImpresion = 0;
+                    rec.Bahia = wABahiaChk;
+                    rec.Observaciones = raObservacionesTxt.Text;
+                    rec.Total = tImporte;
+                    rec.Percepciones = float.Parse(apTotalPercepcionLbl.Text);
+
+                    for (int i = 0; i < aplistView.Items.Count; i++)
                     {
-                        tImporte = tImporte + float.Parse(ralistView.Items[i].SubItems[1].Text.ToString());
+                        rec.ADDItemApli(aplistView.Items[i].Text.ToString(),
+                                        float.Parse(aplistView.Items[i].SubItems[1].Text.ToString()));
                     }
-                }
 
-                rec.NroImpresion = 0;
-                rec.Bahia = wABahiaChk;
-                rec.Observaciones = raObservacionesTxt.Text;
-                rec.Total = tImporte;
-                rec.Percepciones = float.Parse(apTotalPercepcionLbl.Text);
+                    for (int i = 0; i < adlistView.Items.Count; i++)
+                    {
+                        rec.ADDItemDedu(adlistView.Items[i].Text.ToString(),
+                                        float.Parse(adlistView.Items[i].SubItems[1].Text.ToString()),
+                                        ((adlistView.Items[i].SubItems[2].Text.ToString() == "1") ? (bool)(true) : (bool)(false)),
+                                        ((adlistView.Items[i].SubItems[3].Text.ToString() == "1") ? (bool)(true) : (bool)(false)));
 
-                for (int i = 0; i < aplistView.Items.Count; i++)
-                {
-                    rec.ADDItemApli(aplistView.Items[i].Text.ToString(), 
-                                    float.Parse(aplistView.Items[i].SubItems[1].Text.ToString()));
-                }
+                    }
 
-                for (int i = 0; i < adlistView.Items.Count; i++)
-                {
-                    rec.ADDItemDedu(adlistView.Items[i].Text.ToString(),
-                                    float.Parse(adlistView.Items[i].SubItems[1].Text.ToString()),
-                                    ((adlistView.Items[i].SubItems[2].Text.ToString() == "1") ? (bool)(true) : (bool)(false)),
-                                    ((adlistView.Items[i].SubItems[3].Text.ToString() == "1") ? (bool)(true) : (bool)(false)));             
+                    rec.Guardar("VER");
+
+                    if (adCascaraBtn.Tag.ToString() != "Cascara")
+                    {
+                        Recibo_Imprimir(Global01.NroImprimir);
+                    }
+
+                    Global01.NroImprimir = "";
 
                 }
-
-                rec.Guardar("VER");
-
-                if (adCascaraBtn.Tag.ToString() != "Cascara") 
-                {
-                    Recibo_Imprimir(Global01.NroImprimir);
-                }
-
-                Global01.NroImprimir = "";
-
-                Cursor.Current = Cursors.Default;
             }
             else
             {
                 VerDetalleRecibo();
             }
-
+            
         }
 
         public static void Recibo_Imprimir(string NroRecibo)
@@ -1340,27 +1343,24 @@ namespace Catalogo._recibos
             }
         }
 
-        private void CtaCte_Imprimir(string pIdCliente)
+        private void CtaCte_Imprimir(string sIdCliente)
         {
             Cursor.Current = Cursors.WaitCursor;
-            
-            string sReporte = "";
 
-            sReporte = Global01.AppPath + "\\Reportes\\CtaCte3.rpt";
+            sIdCliente = sIdCliente.PadLeft(10, '0');
+
+            string sReporte = Global01.AppPath + "\\Reportes\\CtaCte3.rpt";
 
             ReportDocument oReport = new ReportDocument();
 
             oReport.Load(sReporte);
-
             Funciones.util.ChangeReportConnectionInfo(ref oReport);
 
-            oReport.SetParameterValue("pIdCliente", pIdCliente);
-
-            //oReport.TiTle = "P - " + NroPedido;
+            oReport.SetParameterValue("[pIdCliente]", sIdCliente);
 
             varios.fReporte f = new varios.fReporte();
-            f.Text = "Cta. Cte. del Cliente n° " + pIdCliente;
-            f.DocumentoNro = "CC-" + pIdCliente;
+            f.Text = "Cliente n° " + sIdCliente;
+            f.DocumentoNro = "CC-" + sIdCliente;
             f.oRpt = oReport;
             f.ShowDialog();
             f.Dispose();

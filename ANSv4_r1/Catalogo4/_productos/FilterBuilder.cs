@@ -387,18 +387,18 @@ namespace Catalogo._productos
         private string whereTxtBuscar(string txtBuscar)
         {
             string sqlWhere = null;
-            //string campos1 = "MiCodigo + ' ' + C_Producto + ' ' + Equivalencia + ' ' + Original + ' ' + Motor + ' ' + ReemplazaA + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' + O_Producto + ' ' + Contiene";            
-            string campos1 =  "C_Producto + ' ' + Equivalencia + ' ' + Original + ' ' + Motor + ' ' + ReemplazaA + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' + O_Producto + ' ' + Contiene";            
+            string campos1 =   "MiCodigo + ' ' + C_Producto + ' ' + Equivalencia + ' ' + Original + ' ' + Motor + ' ' + ReemplazaA + ' ' + Marca + ' ' + Modelo + ' ' + Familia + ' ' + Linea + ' ' + n_producto + ' ' + O_Producto + ' ' + Contiene";            
+
             //clientes
-            string campos2 = "C_Producto Equivalencia Original Motor ReemplazaA";            
-            if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente)
-            {//viajantes
-                campos2 = "MiCodigo C_Producto Equivalencia Original Motor ReemplazaA";
-            }
+            string campos2 = "C_Producto Equivalencia Original Motor ReemplazaA";
+
+            //viajantes
+            if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) campos2 = "MiCodigo C_Producto Equivalencia Original Motor ReemplazaA";
 
             string alcance = "=";
             string comodin1 = "";
             string comodin2 = "";
+            bool _exacto = false;
 
             if (!string.IsNullOrEmpty(txtBuscar.Trim()))
             {
@@ -412,14 +412,34 @@ namespace Catalogo._productos
                 {
                     alcance = "LIKE";
                     comodin2 = "%";
+                    _exacto = true;
                 }
 
                 string[] PalabrasClave = txtBuscar.Trim().Replace("+","").Split(' ');
 
-                byte Num;
-                bool isNum = byte.TryParse(txtBuscar.Trim().Replace("+", "").Substring(0, 1), out Num);
+                _exacto = (PalabrasClave.GetLongLength(0) <= 1 & comodin1 == "%"); 
 
-                if (PalabrasClave.GetLongLength(0) > 1 | !(isNum))
+                //byte Num;
+                //bool isNum = byte.TryParse(txtBuscar.Trim().Replace("+", "").Substring(0, 1), out Num);
+                //if (PalabrasClave.GetLongLength(0) > 1 | !(isNum) | !(_exacto))
+
+                if (_exacto)
+                {// una sola palabra
+                    comodin1 = "";
+                    string[] CamposClave = campos2.Trim().Split(' ');
+                    foreach (string campo in CamposClave)
+                    {
+                        if (!string.IsNullOrEmpty(sqlWhere))
+                        {
+                            sqlWhere += " OR ";
+                        }
+                        sqlWhere += " (" + campo + " " + alcance + " '" + comodin1;
+                        sqlWhere += PalabrasClave[0].Trim();
+                        sqlWhere += comodin2 + "') ";
+                    }
+                    sqlWhere = " (" + sqlWhere + ") ";
+                }
+                else
                 {
                     alcance = "LIKE";
                     comodin1 = "%";
@@ -442,21 +462,6 @@ namespace Catalogo._productos
                             sqlWhere += comodin2 + "') "; 
                         }
                     }
-                }
-                else
-                {// una sola palabra
-                    string[] CamposClave = campos2.Trim().Split(' ');
-                    foreach (string campo in CamposClave)
-                    {
-                        if (!string.IsNullOrEmpty(sqlWhere))
-                        {
-                            sqlWhere += " OR ";
-                        }
-                        sqlWhere += " (" + campo + " " + alcance + " '" + comodin1;
-                        sqlWhere += PalabrasClave[0].Trim();
-                        sqlWhere += comodin2 + "') "; 
-                    }
-                    sqlWhere = " (" + sqlWhere + ") ";
                 }
 
             }

@@ -75,15 +75,11 @@ namespace Catalogo.varios
             {
                 if (configFileURL.Length > 0)
                 {
-                    Cursor.Current = Cursors.WaitCursor;
-
-                    BeginDownload(configFileURL, tempFolder + vclu);
-
-                    //System.Net.WebClient txtVersionFile = new System.Net.WebClient();
-                    //txtVersionFile.DownloadFileCompleted += txtVersionFile_DownloadFileCompleted;
-                    //txtVersionFile.DownloadFile(configFileURL, tempFolder + vclu);
-
-                    Cursor.Current = Cursors.Default;
+                    using (new varios.WaitCursor())
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                        BeginDownload(configFileURL, tempFolder + vclu);
+                    }
 
                 }
                 else
@@ -98,6 +94,7 @@ namespace Catalogo.varios
             {
                 lblUpdate.Text = lblUpdate.Text.Replace("$n", "\n" + name)
                     + "\n\n Esperar un momento, por favor...";
+                Cursor.Current = Cursors.WaitCursor;
                 BeginDownload(updateURL, desktop + outFile);
             }
         }
@@ -139,13 +136,14 @@ namespace Catalogo.varios
 
         private void client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
+            Cursor.Current = Cursors.Default;
             if (downloadingFile.EndsWith(vclu))
             {
                 getConfigValues();
                 lblVersion.Text = String.Format("Version actual: {0}. Version disponible: {1}.", thisVer, webVer);
                 if (thisVer.CompareTo(webVer) >= 0)
                 {
-                   lblStep2.Visible = false;
+                    lblStep2.Visible = false;
                     lblNo.Visible = true;
                     cmdCancel.Left = cmdNext.Left + 10 ;
 

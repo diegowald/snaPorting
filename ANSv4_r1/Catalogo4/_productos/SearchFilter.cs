@@ -18,7 +18,6 @@ namespace Catalogo._productos
         Funciones.emitter_receiver.IEmisor3<Keys>, // Para emitir el tab en la grilla
         Funciones.emitter_receiver.IReceptor<util.Pair<int, int>> // Para recibir la cantidad de registros encontrados
     {
-
         private DataTable dtProducts = new DataTable();
         private DataView dvProducts = new DataView();
         private DataTable useTable = new DataTable();
@@ -49,7 +48,6 @@ namespace Catalogo._productos
 
         private void xCargarDataControl()
         {
-            Cursor.Current = Cursors.WaitCursor;
             preload.Preloader.instance.productos.execute();          
         }
 
@@ -62,7 +60,6 @@ namespace Catalogo._productos
             // Load the Combo Filters
             SetFilters();
 
-            Cursor.Current = Cursors.Default;
         }
 
         
@@ -175,61 +172,66 @@ namespace Catalogo._productos
 
         private void btnApply0_Click(object sender, EventArgs e)
         {
-            try
+            using (new varios.WaitCursor())
             {
-                if (dtProducts != null && dtProducts.Rows.Count > 0)
+                try
                 {
-                    Cursor.Current = Cursors.WaitCursor;
-              
-                    filterString = string.Empty;
-                    FilterBuilder fb = new FilterBuilder();
-
-                    System.Diagnostics.Debug.WriteLine(cboLinea.SelectedText);
-                    System.Diagnostics.Debug.WriteLine(cboMarca.SelectedText);
-                    System.Diagnostics.Debug.WriteLine(cboModelo.SelectedText);
-
-                    string sLinea = ((cboLinea.SelectedItem != null) ? cboLinea.SelectedItem.ToString() : "");
-                    string sFamilia = ((cboFamilia.SelectedItem != null) ? cboFamilia.SelectedItem.ToString() : "");
-                    string sMarca = ((cboMarca.SelectedItem != null) ? cboMarca.SelectedItem.ToString() : "");
-                    string sModelo = ((cboModelo.SelectedItem != null) ? cboModelo.SelectedItem.ToString() : "");
-                    string sOtros = ((cboOtros.SelectedItem != null) ? cboOtros.SelectedItem.ToString() : "");
-
-                    fb.ApplyFilter(ref filterString, "Linea", sLinea);
-                    fb.ApplyFilter(ref filterString, "Familia", sFamilia);
-                    fb.ApplyFilter(ref filterString, "Marca", sMarca);
-                    fb.ApplyFilter(ref filterString, "Modelo", sModelo);
-
-                    string discontinuedValue = string.Empty;
-                    string controlValue = string.Empty;
-
-                    if (sOtros == "(todos)") { controlValue = null; }
-
-                    if (sOtros == "Ofertas") { controlValue = "O"; }
-
-                    if (!string.IsNullOrEmpty(controlValue))
+                    if (dtProducts != null && dtProducts.Rows.Count > 0)
                     {
-                        fb.ApplyFilter(ref filterString, "Control", controlValue);
-                    }
+                        filterString = string.Empty;
+                        FilterBuilder fb = new FilterBuilder();
 
-                    if (!string.IsNullOrEmpty(txtBuscar.Text))
-                    {
-                        fb.ApplyFilter(ref filterString, "(txtBuscar)", txtBuscar.Text.ToUpper());
-                    }
+                        System.Diagnostics.Debug.WriteLine(cboLinea.SelectedText);
+                        System.Diagnostics.Debug.WriteLine(cboMarca.SelectedText);
+                        System.Diagnostics.Debug.WriteLine(cboModelo.SelectedText);
 
-                    if (sOtros == "Nuevos")
-                    {
-                        fb.ApplyFilter(ref filterString, "Vigencia", "30");
-                    }
+                        string sLinea = ((cboLinea.SelectedItem != null) ? cboLinea.SelectedItem.ToString() : "");
+                        string sFamilia = ((cboFamilia.SelectedItem != null) ? cboFamilia.SelectedItem.ToString() : "");
+                        string sMarca = ((cboMarca.SelectedItem != null) ? cboMarca.SelectedItem.ToString() : "");
+                        string sModelo = ((cboModelo.SelectedItem != null) ? cboModelo.SelectedItem.ToString() : "");
+                        string sOtros = ((cboOtros.SelectedItem != null) ? cboOtros.SelectedItem.ToString() : "");
 
-                    fb = null;
-                    this.emitir(filterString);
-                    this.emitir2(float.Parse("0" + txtPorcentajeLinea.Text));
+                        fb.ApplyFilter(ref filterString, "Linea", sLinea);
+                        fb.ApplyFilter(ref filterString, "Familia", sFamilia);
+                        fb.ApplyFilter(ref filterString, "Marca", sMarca);
+                        fb.ApplyFilter(ref filterString, "Modelo", sModelo);
+
+                        string discontinuedValue = string.Empty;
+                        string controlValue = string.Empty;
+
+                        if (sOtros == "(todos)") { controlValue = null; }
+
+                        if (sOtros == "Ofertas") { controlValue = "O"; }
+
+                        if (!string.IsNullOrEmpty(controlValue))
+                        {
+                            fb.ApplyFilter(ref filterString, "Control", controlValue);
+                        }
+
+                        if (!string.IsNullOrEmpty(txtBuscar.Text))
+                        {
+                            fb.ApplyFilter(ref filterString, "(txtBuscar)", txtBuscar.Text.ToUpper());
+                        }
+
+                        if (sOtros == "Nuevos")
+                        {
+                            fb.ApplyFilter(ref filterString, "Vigencia", "30");
+                        }
+
+                        fb = null;
+                        this.emitir(filterString);
+
+                        float xPorcentaje = 0;
+                        if (txtPorcentajeLinea.Text.Trim().Length > 0) xPorcentaje = float.Parse(txtPorcentajeLinea.Text);
+
+                        this.emitir2(xPorcentaje);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                util.errorHandling.ErrorLogger.LogMessage(ex);
-                throw ex;  //util.errorHandling.ErrorForm.show();
+                catch (Exception ex)
+                {
+                    util.errorHandling.ErrorLogger.LogMessage(ex);
+                    throw ex;  //util.errorHandling.ErrorForm.show();
+                }
             }
         }
 
@@ -313,6 +315,11 @@ namespace Catalogo._productos
                 return;
             }
             btnClearFilters.PerformClick();
+
+            if (float.Parse(txtPorcentajeLinea.Text.ToString()) != 0)
+            {
+                btnApply0.PerformClick();
+            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

@@ -15,7 +15,8 @@ namespace Catalogo._clientesNovedades
     public partial class ucVisitas : UserControl
     
     {
-        ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
+        private ToolTip _ToolTip = new System.Windows.Forms.ToolTip();
+        private System.Collections.Specialized.OrderedDictionary Filter_Marca = new System.Collections.Specialized.OrderedDictionary();
 
         public ucVisitas()
         {
@@ -40,32 +41,40 @@ namespace Catalogo._clientesNovedades
             else
             {
                 cboCliente.SelectedValue = Catalogo.varios.NotificationCenter.instance.ClienteSeleccionado;
+            }      
+        }
+
+        private void ucVisitas_Load(object sender, EventArgs e)
+        {
+            _productos.FilterBuilder fb = new _productos.FilterBuilder();
+            if (viMarcaCbo.Items.Count < 1)
+            {
+                DataTable dtVehiculos = new DataTable();
+                dtVehiculos = Funciones.oleDbFunciones.xGetDt(Global01.Conexion, "tblMarcas");
+                fb.PopulateFilter(ref Filter_Marca, dtVehiculos, "Marca");
+                String[] filterQuantityArray = new String[Filter_Marca.Count];
+                Filter_Marca.Keys.CopyTo(filterQuantityArray, 0);
+                viMarcaCbo.Items.Clear();
+                viMarcaCbo.Items.AddRange(filterQuantityArray);
+                viMarcaCbo.SelectedIndex = 0;
             }
-      
         }
 
         private void cboCliente_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-            paEnviosCbo.SelectedIndex = 2;
-
+        {                      
             if (cboCliente.SelectedIndex > 0)
-            {
-                
+            {                
                 toolStripStatusLabel1.Text = "Visita para el cliente: " + this.cboCliente.Text.ToString();
                 btnIniciar.Enabled = true;
+                CargarClienteDatos();
             }
             else 
             {
                 if (!(this.Parent == null)) { toolStripStatusLabel1.Text = "Visita para el cliente ..."; }
                 btnIniciar.Enabled = false;
+                LimpiarPantalla("clientes");
             }
-        }
-
-        private void cvAgregarBtn_Click(object sender, EventArgs e)
-        {
-
-            
+            ObtenerMovimientos();
         }
 
         private bool datosvalidos(string pCampo)
@@ -85,30 +94,46 @@ namespace Catalogo._clientesNovedades
             return wDatosValidos;
         }
   
-        private void cvCancelarBtn_Click(object sender, EventArgs e)
+        private void LimpiarPantalla(string queLimpio)
         {
-               LimpiarIngresosValores();
-        }
+            if (queLimpio.ToLower() == "clientes" | queLimpio.ToLower() == "#all")
+            {
+                viMarcaCbo.SelectedIndex = 0;
+                viCuitTxt.Text = "";
+                viDomicilioTxt.Text = "";
+                viEmailTxt.Text = "";
+                viCiudadTxt.Text = "";
+                viRazonSocialTxt.Text = "";
+                viTelefonoTxt.Text = "";
+            }
 
-        private void LimpiarIngresosValores()
-        {
-            viObservacionesTxt.Text =
-                "Temas tratados con el cliente: \r\n\r\n" +
-                "Ventas Logradas/Acciones de Marketing/Plazo/Cobranza: \r\n\r\n" +
-                "Comentarios y Observaciones (Líneas/Precios/Distribuidores/Competidores): \r\n";
+            if (queLimpio.ToLower() == "datos" | queLimpio.ToLower() == "all")
+            {
+                viObservacionesTxt.Text =
+                    "Temas tratados con el cliente: \r\n\r\n" +
+                    "Ventas Logradas/Acciones de Marketing/Plazo/Cobranza: \r\n\r\n" +
+                    "Comentarios y Observaciones (Líneas/Precios/Distribuidores/Competidores): \r\n";
 
-            //bdTipoEfectivoRb.Checked = false;
-            //bdTipoChequesRb.Checked = false;
-            //bdCaChequesTxt.Enabled = false;
-            //bdBancoCbo.Enabled = false;
-            //bdFechaDt.Value = DateTime.Today.Date;
-            //bdImporteTxt.Text = "0,00";
-            //bdNumeroTxt.Text = "";
-            //bdCaChequesTxt.Text = "";
-            //bdFacturasTxt.Text = "";
-            //viQRecibeTxt.Text = "";
-            //bdBancoCbo.SelectedIndex  = 0;
-            //ralistView.Items.Clear();
+                viQRecibeTxt.Text = "";
+                viCComprasTxt.Text = "";
+                viCPagosTxt.Text = "";
+
+                viRamoLivCb.Checked = false;
+                viRamoPesCb.Checked = false;
+                viRamoAgrCb.Checked = false;
+
+                viCatRepGralCb.Checked = false;
+                viCatLubricentroCb.Checked = false;
+                viCatEstServicioCb.Checked = false;
+                viCatMotosCb.Checked = false;
+                viCatEspecialistaCb.Checked = false;
+
+                viEspMotorCb.Checked = false;
+                viEspFrenosCb.Checked = false;
+                viEspSuspCb.Checked = false;
+                viEspElectricidadCb.Checked = false;
+                viEspAccesoriosCb.Checked = false;
+            }
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
@@ -137,7 +162,6 @@ namespace Catalogo._clientesNovedades
 
                         rTabsVisita.Visible = false;
                         rTabsVisita.SelectedIndex = 1;
-                        //if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
                         CerrarVisita();                                                
                     }
                 }
@@ -156,11 +180,9 @@ namespace Catalogo._clientesNovedades
             
             _ToolTip.SetToolTip(btnIniciar, "INICIAR Visita Nuevo");
 
-            LimpiarIngresosValores();
+            LimpiarPantalla("all");
             paEnviosCbo.SelectedIndex = 2;
             ObtenerMovimientos();
-
-            //cboEnvios_Click();
         }
 
         private void AbrirVisita()
@@ -168,8 +190,8 @@ namespace Catalogo._clientesNovedades
             btnIniciar.Text = "CANCELAR";
             btnIniciar.Tag = "CANCELAR";
             _ToolTip.SetToolTip(btnIniciar, "CANCELAR éste Visita");
-            
-            LimpiarIngresosValores();
+
+            LimpiarPantalla("all");
             
         }
 
@@ -177,8 +199,6 @@ namespace Catalogo._clientesNovedades
         {
             btnImprimir.Enabled = true;
             btnVer.Enabled = true;
-            //ralistView.Enabled = true;
-            //this.raPnlBotton.Enabled = true;
             cboCliente.Enabled = false;
         }
 
@@ -186,58 +206,150 @@ namespace Catalogo._clientesNovedades
         {
             btnImprimir.Enabled = false;
             btnVer.Enabled = false;
-            //ralistView.Enabled = false;
-            //this.raPnlBotton.Enabled = false;
             cboCliente.Enabled = true;
         }
-
         
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            if (datosvalidos("Visita"))
-            {                
-                //Cursor.Current = Cursors.WaitCursor;
+            if (datosvalidos("grabar"))
+            {
+                using (new varios.WaitCursor())
+                {
 
-                //InhabilitarVisita();
+                    InhabilitarVisita();
 
-                //try
-                //{
+                    try
+                    {
 
-                //    Visita_Imprimir(Global01.NroImprimir);
+                        int xID = 0;
+                        ClientesVisitas_add(Int16.Parse(cboCliente.SelectedValue.ToString()), DateTime.Now.Date,
+                                            viQRecibeTxt.Text, viCComprasTxt.Text, viCPagosTxt.Text,
+                                            viRamoLivCb.Checked, viRamoPesCb.Checked, viRamoAgrCb.Checked,
+                                            viMonoMarcaNO.Checked, viMarcaCbo.Text,
+                                            viCatRepGralCb.Checked, viCatLubricentroCb.Checked, viCatEstServicioCb.Checked, viCatMotosCb.Checked, viCatEspecialistaCb.Checked,
+                                            viEspMotorCb.Checked, viEspFrenosCb.Checked, viEspSuspCb.Checked, viEspElectricidadCb.Checked, viEspAccesoriosCb.Checked,
+                                            viObservacionesTxt.Text, "", Global01.NroUsuario,
+                                            viRazonSocialTxt.Text, viCuitTxt.Text, viEmailTxt.Text, viDomicilioTxt.Text, viCiudadTxt.Text, viTelefonoTxt.Text,
+                                            ref xID);
 
-                //    Global01.NroImprimir = "";
+                        Visita_Imprimir(xID.ToString());
 
-                //    CerrarVisita();
-                //}
-                //catch (util.errorHandling.RegistroDuplicadoException ex)
-                //{
-                //    HabilitarVisita();
-                //    util.errorHandling.ErrorLogger.LogMessage(ex);
-                //    System.Windows.Forms.MessageBox.Show(ex.Message);
-                //    return;
-                //}
-                //catch (System.Data.OleDb.OleDbException ex)
-                //{
-                //    Cursor.Current = Cursors.Default;
-                //    switch (ex.ErrorCode)
-                //    {
-                //        case -2147467259:                            
-                //            MessageBox.Show("Registro Duplicado", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //            return;
-                //        default:
-                //             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //             util.errorHandling.ErrorLogger.LogMessage(ex);
-                //             util.errorHandling.ErrorForm.show();
-                //             return;
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    util.errorHandling.ErrorForm.show();
-                //    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                //}
+                        Global01.NroImprimir = "";
+
+                        CerrarVisita();
+                    }
+                    catch (util.errorHandling.RegistroDuplicadoException ex)
+                    {
+                        HabilitarVisita();
+                        util.errorHandling.ErrorLogger.LogMessage(ex);
+                        System.Windows.Forms.MessageBox.Show(ex.Message);
+                        return;
+                    }
+                    catch (System.Data.OleDb.OleDbException ex)
+                    {
+                        switch (ex.ErrorCode)
+                        {
+                            case -2147467259:
+                                MessageBox.Show("Registro Duplicado", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                return;
+                            default:
+                                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                util.errorHandling.ErrorLogger.LogMessage(ex);
+                                util.errorHandling.ErrorForm.show();
+                                return;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        util.errorHandling.ErrorForm.show();
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
             }
         }
+
+        private void ClientesVisitas_add(int pIdCliente, DateTime pFecha, 
+                                        string pQRecibe, string pCCompras, string pCPagos,
+                                        bool pRamoLiviano, 
+                                        bool pRamoPesado, 
+                                        bool pRamoAgricola, 
+                                        bool pEsMononarca, 
+                                        string pMarca, 
+                                        bool pCatRepGral, 
+                                        bool pCatLubricentro, 
+                                        bool pCatEstServicio, 
+                                        bool pCatMotos, 
+                                        bool pCatEspecialista, 
+                                        bool pEspMotor, 
+                                        bool pEspFrenos, 
+                                        bool pEspSuspension, 
+                                        bool pEspElectricidad, 
+                                        bool pEspAccesorios, 
+                                        string pDetalle1, string pDetalle2, string pIdViajante, 
+                                        string pRazonSocial, string pCuit, string pEmail, string pDomicilio, string pCiudad, string pTelefono,
+                                        ref int pID)
+        {
+            try
+            {
+                System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand();
+
+                cmd.Parameters.Add("pIdCliente", System.Data.OleDb.OleDbType.Integer).Value = pIdCliente;
+                cmd.Parameters.Add("pF_Carga", System.Data.OleDb.OleDbType.Date).Value = pFecha;
+                cmd.Parameters.Add("pQRecibe", System.Data.OleDb.OleDbType.VarChar, 50).Value = pQRecibe;
+                cmd.Parameters.Add("pCCompras", System.Data.OleDb.OleDbType.VarChar, 50).Value = pCCompras;
+                cmd.Parameters.Add("pCPagos", System.Data.OleDb.OleDbType.VarChar, 50).Value = pCPagos;
+                cmd.Parameters.Add("pRamoLiviano", System.Data.OleDb.OleDbType.Boolean).Value = pRamoLiviano;
+                cmd.Parameters.Add("pRamoPesado", System.Data.OleDb.OleDbType.Boolean).Value = pRamoPesado;
+                cmd.Parameters.Add("pRamoAgricola", System.Data.OleDb.OleDbType.Boolean).Value = pRamoAgricola;
+                cmd.Parameters.Add("pEsMonomarca", System.Data.OleDb.OleDbType.Boolean).Value = pEsMononarca;
+                cmd.Parameters.Add("pMarca", System.Data.OleDb.OleDbType.VarChar, 25).Value = pMarca;
+                cmd.Parameters.Add("pCatRepGral", System.Data.OleDb.OleDbType.Boolean).Value = pCatRepGral;
+                cmd.Parameters.Add("pCatLubricentro", System.Data.OleDb.OleDbType.Boolean).Value = pCatLubricentro;
+                cmd.Parameters.Add("pCatEstServicio", System.Data.OleDb.OleDbType.Boolean).Value = pCatEstServicio;
+                cmd.Parameters.Add("pCatMotos", System.Data.OleDb.OleDbType.Boolean).Value = pCatMotos;
+                cmd.Parameters.Add("pCatEspecialista", System.Data.OleDb.OleDbType.Boolean).Value = pCatEspecialista;
+                cmd.Parameters.Add("pEspMotor", System.Data.OleDb.OleDbType.Boolean).Value = pEspMotor;
+                cmd.Parameters.Add("pEspFrenos", System.Data.OleDb.OleDbType.Boolean).Value = pEspFrenos;
+                cmd.Parameters.Add("pEspSuspension", System.Data.OleDb.OleDbType.Boolean).Value = pEspSuspension;
+                cmd.Parameters.Add("pEspElectricidad", System.Data.OleDb.OleDbType.Boolean).Value = pEspElectricidad;
+                cmd.Parameters.Add("pEspAccesorios", System.Data.OleDb.OleDbType.Boolean).Value = pEspAccesorios;
+
+                cmd.Parameters.Add("pRazonSocial", System.Data.OleDb.OleDbType.VarChar, 255).Value = pDetalle1;
+                cmd.Parameters.Add("pRazonSocial", System.Data.OleDb.OleDbType.VarChar, 255).Value = pDetalle2;
+                cmd.Parameters.Add("pIdViajante", System.Data.OleDb.OleDbType.Integer).Value = pIdViajante;
+                cmd.Parameters.Add("pRazonSocial", System.Data.OleDb.OleDbType.VarChar, 40).Value = pRazonSocial;
+                cmd.Parameters.Add("pCuit", System.Data.OleDb.OleDbType.VarChar, 13).Value = pCuit;
+                cmd.Parameters.Add("pEmail", System.Data.OleDb.OleDbType.VarChar, 64).Value = pEmail;
+                cmd.Parameters.Add("pDomicilio", System.Data.OleDb.OleDbType.VarChar, 40).Value = pDomicilio;
+                cmd.Parameters.Add("pCiudad", System.Data.OleDb.OleDbType.VarChar, 40).Value = pCiudad;
+                cmd.Parameters.Add("pTelefono", System.Data.OleDb.OleDbType.VarChar, 40).Value = pTelefono;                
+
+                cmd.Connection = Global01.Conexion;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandText = "usp_ClientesVisitas_add";
+
+                cmd.ExecuteNonQuery();
+                cmd = null;
+
+                System.Data.OleDb.OleDbDataReader rec = null;
+                rec = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "tblClientesVisitas", "@@identity");
+                rec.Read();
+                pID = Int16.Parse(rec["ID"].ToString());
+                rec = null;
+            }
+
+            catch (System.Data.OleDb.OleDbException ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                throw ex;
+            }
+        }
+
 
         private void btnVer_Click(object sender, EventArgs e)
         {
@@ -256,25 +368,29 @@ namespace Catalogo._clientesNovedades
 
         public static void Visita_Imprimir(string NroVisita)
         {
-            Cursor.Current = Cursors.WaitCursor;
+            using (new varios.WaitCursor())
+            {
+                NroVisita = NroVisita.PadLeft(10, '0');
+
+                string sReporte = Global01.AppPath + "\\Reportes\\Visitas1.rpt";
+
+                ReportDocument oReport = new ReportDocument();
+
+                oReport.Load(sReporte);
+                Funciones.util.ChangeReportConnectionInfo(ref oReport);
+
+                oReport.SetParameterValue("pNroVisita", NroVisita);
+
+                varios.fReporte f = new varios.fReporte();
+                f.Text = "Visita n° " + NroVisita;
+                f.DocumentoNro = "VI-" + NroVisita;
+                f.oRpt = oReport;
             
-            string sReporte = Global01.AppPath + "\\Reportes\\Visita1.rpt";
-      
-            ReportDocument oReport = new ReportDocument();
-
-            oReport.Load(sReporte);
-            Funciones.util.ChangeReportConnectionInfo(ref oReport);
-      
-            oReport.SetParameterValue("pNroVisita", NroVisita);
-
-            varios.fReporte f = new varios.fReporte();
-            f.Text = "Visita n° " + NroVisita;
-            f.DocumentoNro = "VI-" + NroVisita;
-            f.oRpt = oReport;
-            f.ShowDialog();
-            f.Dispose();
-            f = null;
-            oReport.Dispose();
+                f.ShowDialog();
+                f.Dispose();
+                f = null;
+                oReport.Dispose();
+            }
         }
 
         private void paEnviosCbo_SelectedIndexChanged(object sender, EventArgs e)
@@ -327,13 +443,70 @@ namespace Catalogo._clientesNovedades
                 if (cell != null)
                 {
                     DataGridViewRow row = cell.OwningRow;
-                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "INTE")
+                    if (row.Cells["Origen"].Value.ToString().Substring(0, 4).ToUpper() == "VISI")
                     {
                         Visita_Imprimir(row.Cells["Nro"].Value.ToString());
                     }
                 }
             }
         }
+
+        //private void ObtenerMovimientos()
+        //{
+        //    paDataGridView.Visible = false;
+
+        //    string wOrden = "F_Carga DESC";
+        //    string wCampos = "ID as Nro, F_Carga as Fecha, RazonSocial, F_Transmicion, 'Visita' as Origen, IdCliente, ' ' as Observaciones";
+        //    string wCondicion = "IdViajante=" + Global01.NroUsuario ;
+
+        //    wCondicion += " and IdCliente=" + cboCliente.SelectedValue.ToString();             
+
+        //    System.Data.OleDb.OleDbDataReader dr = null;
+
+        //    if (paEnviosCbo.SelectedIndex == 0)
+        //    {
+        //        //TODOS
+        //    }
+        //    else if (paEnviosCbo.SelectedIndex == 1)
+        //    {
+        //         wCondicion +=  " and not (F_Transmicion is null)";
+        //    }
+        //    else if (paEnviosCbo.SelectedIndex == 2)
+        //    {
+        //        wCondicion +=  " and (F_Transmicion is null)";
+        //    }
+
+        //    dr = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "v_ClientesVisitas", wCondicion, wOrden, wCampos);
+
+        //    if (dr != null)
+        //    {
+        //        if (dr.HasRows)
+        //        {
+        //            DataTable dt = new DataTable();
+        //            dt.Columns.Add("Selec", System.Type.GetType("System.Boolean"));
+        //            dt.Load(dr);
+        //            paDataGridView.AutoGenerateColumns = true;
+        //            paDataGridView.DataSource = dt;
+        //            paDataGridView.Refresh();
+        //            paDataGridView.Visible = true;
+        //            paDataGridView.ClearSelection();
+        //            paDataGridView.Columns["Selec"].Visible = (paEnviosCbo.Text.ToUpper() == "NO ENVIADOS");
+        //        }
+        //    }
+        //}
+
+        //private void paDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (Global01.AppActiva)
+        //    {
+        //        DataGridViewCell cell = paDataGridView[e.ColumnIndex, e.RowIndex];
+        //        if (cell != null)
+        //        {
+        //            DataGridViewRow row = cell.OwningRow;
+        //            Visita_Imprimir(row.Cells["Nro"].Value.ToString());
+        //        }
+        //    }
+        //}
 
         private void EnviarBtn_Click(object sender, EventArgs e)
         {
@@ -386,6 +559,39 @@ namespace Catalogo._clientesNovedades
         private void viCatEspecialistaCb_CheckedChanged(object sender, EventArgs e)
         {
             viCategoriaPnl.Visible = (bool)viCatEspecialistaCb.Checked;
+        }
+
+        private void viMonoMarcaSI_CheckedChanged(object sender, EventArgs e)
+        {
+            if (viMonoMarcaSI.Checked)
+            {
+                viMarcaCbo.Enabled = true;
+            }
+            else
+            {
+                viMarcaCbo.Enabled = false;
+                viMarcaCbo.SelectedIndex = 0;
+            }
+        }
+
+        private void CargarClienteDatos()
+        {
+
+            LimpiarPantalla("clientes");
+
+            OleDbDataReader dr = null;
+            dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM tblClientes WHERE ID=" + cboCliente.SelectedValue.ToString());
+            if (dr.HasRows)
+            {
+                dr.Read();
+
+                viCuitTxt.Text = dr["cuit"].ToString();
+                viDomicilioTxt.Text = dr["domicilio"].ToString();
+                viEmailTxt.Text = dr["email"].ToString();
+                viCiudadTxt.Text = dr["ciudad"].ToString();
+                viRazonSocialTxt.Text = dr["razonsocial"].ToString();
+                viTelefonoTxt.Text = dr["telefono"].ToString();
+            }
         }
 
     } //fin clase

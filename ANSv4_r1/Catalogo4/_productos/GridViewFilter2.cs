@@ -103,7 +103,6 @@ namespace Catalogo._productos
 
         private void xCargarDataControl()
         {
-            Cursor.Current = Cursors.WaitCursor;
             preload.Preloader.instance.productos.execute();
         }
 
@@ -113,7 +112,6 @@ namespace Catalogo._productos
 
             // Load the DataGridView            
             loadDataGridView();
-            Cursor.Current = Cursors.Default;
         }
 
         private void loadDataGridView()
@@ -278,7 +276,7 @@ namespace Catalogo._productos
                 foreach (DataRowView drv in dvProducts)
                 {
                     //drv["Precio"] = (float)drv["PrecioLista"] * pct;
-                    drv["Precio"] = string.Format("{0:N2}",float.Parse(drv["PrecioLista"].ToString()) * pct);
+                    drv["Precio"] = string.Format("{0:N2}", float.Parse(drv["PrecioLista"].ToString()) * pct);
                 }
                 dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = Color.Red;
             }
@@ -291,7 +289,7 @@ namespace Catalogo._productos
                     {
                         drv["Precio"] = drv["PrecioLista"];
                     }
-                    dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = System.Drawing.SystemColors.Control; 
+                    dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = System.Drawing.SystemColors.Control;
                 }
             }
 
@@ -305,8 +303,6 @@ namespace Catalogo._productos
 
             // Show the counts in the toolstrip
             this.emitir2(new util.Pair<int, int>(currentRowCount, dataRowCount));
-            
-            Cursor.Current = Cursors.Default;
 
             if (currentRowCount > 0)
             {

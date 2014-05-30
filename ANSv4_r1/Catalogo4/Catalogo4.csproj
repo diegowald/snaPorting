@@ -8,13 +8,13 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Catalogo</RootNamespace>
-    <AssemblyName>Catalogo</AssemblyName>
+    <AssemblyName>ansCatalogo3400</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>C:\Catalogo ANS.viajantes\Catalogo4.publicar\viajantes\</PublishUrl>
+    <PublishUrl>C:\Catalogo ANS.viajantes\Catalogo4.publicar\viajantes-w\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -24,15 +24,15 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://192.168.30.110:8080/catalogo4/instalar/viajantes/</InstallUrl>
-    <UpdateUrl>http://192.168.30.110:8080/catalogo4/instalar/viajantes/</UpdateUrl>
+    <InstallUrl>http://www.autonauticasur-r.com.ar/catalogo4/instalar/viajantes/</InstallUrl>
+    <UpdateUrl>http://www.autonauticasur-r.com.ar/catalogo4/instalar/viajantes/</UpdateUrl>
     <ProductName>Catálogo Digital de Productos v4 - ANS</ProductName>
     <PublisherName>Auto Náutica Sur s.r.l.</PublisherName>
     <SuiteName>Catálogo Digital de Productos</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>30</ApplicationRevision>
+    <ApplicationRevision>38</ApplicationRevision>
     <ApplicationVersion>4.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -142,6 +142,12 @@
     <Compile Include="forms\Login.designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="forms\frmClientesFnd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="forms\frmClientesFnd.designer.cs">
+      <DependentUpon>frmClientesFnd.cs</DependentUpon>
+    </Compile>
     <Compile Include="forms\SplashScreen.cs" />
     <Compile Include="forms\SplashScreenForm.cs">
       <SubType>Form</SubType>
@@ -191,6 +197,9 @@
     <Compile Include="util\singleton.cs" />
     <Compile Include="util\SwfParser.cs" />
     <Compile Include="util\Util.cs" />
+    <Compile Include="util\WaitCursor.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Web References\AppConfigWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -207,6 +216,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\ClientesNovedadesWS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ClientesVisitasWS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -260,7 +274,7 @@
     <Compile Include="_auditor\Auditor.cs" />
     <Compile Include="_auditor\EnvioAuditoria.cs" />
     <Compile Include="_clientesNovedades\EnvioClientesNovedades.cs" />
-    <Compile Include="_clientesNovedades\EnvioVisitasClientes.cs" />
+    <Compile Include="_clientesNovedades\EnvioClientesVisitas.cs" />
     <Compile Include="_clientesNovedades\ucVisitas.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -433,6 +447,9 @@
     <EmbeddedResource Include="forms\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="forms\frmClientesFnd.resx">
+      <DependentUpon>frmClientesFnd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="forms\SplashScreenForm.resx">
       <DependentUpon>SplashScreenForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -524,6 +541,11 @@
     </None>
     <None Include="Web References\ClientesNovedadesWS\clientesnovedades.wsdl" />
     <None Include="Web References\ClientesNovedadesWS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ClientesVisitasWS\clientesvisitas.wsdl" />
+    <None Include="Web References\ClientesVisitasWS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -678,6 +700,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Catalogo_ClientesNovedadesWS_ClientesNovedades</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://190.3.78.12/wscatalogo4/clientesvisitas.asmx%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ClientesVisitasWS\</RelPath>
+      <UpdateFromURL>http://190.3.78.12/wscatalogo4/clientesvisitas.asmx%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Catalogo_ClientesVisitasWS_ClientesVisitas</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://190.3.78.12/wsCatalogo4/Devolucion.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -836,17 +869,14 @@
     <Resource Include="recursos\para-despacho.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ans48X48.ico" />
+    <Resource Include="ans48X48.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include="Ans.Catalogo.4.0">
+    <BootstrapperPackage Include="Ans.Catalogo-update.4.0.up">
       <Visible>False</Visible>
-      <ProductName>Catálogo Digital de Productos 4.0 - Auto Náutica Sur s.r.l.</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Data.Access.Components.2.8">
-      <Visible>False</Visible>
-      <ProductName>Microsoft Data Access Components 2.8</ProductName>
+      <ProductName>Catálogo Digital de Productos 4.0 - Auto Náutica Sur s.r.l. - ACTUALIZACION</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -857,12 +887,7 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="SAP.CrystalReports14.NET.2.0">
-      <Visible>False</Visible>
-      <ProductName>SAP Crystal Reports Runtime Engine for .NET Framework</ProductName>
-      <Install>true</Install>
+      <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
@@ -909,6 +934,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AvallonDock.resources.dll" />
+    <Resource Include="logo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

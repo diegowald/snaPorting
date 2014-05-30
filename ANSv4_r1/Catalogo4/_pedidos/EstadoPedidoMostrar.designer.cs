@@ -75,6 +75,8 @@
             // MainPnl
             // 
             this.MainPnl.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.MainPnl.Controls.Add(this.gris_en_proceso);
+            this.MainPnl.Controls.Add(this.pb_en_proceso);
             this.MainPnl.Controls.Add(this.l_en_transporte);
             this.MainPnl.Controls.Add(this.l_para_despacho);
             this.MainPnl.Controls.Add(this.l_en_proceso);
@@ -82,14 +84,12 @@
             this.MainPnl.Controls.Add(this.gris_en_transporte);
             this.MainPnl.Controls.Add(this.l_a_procesar);
             this.MainPnl.Controls.Add(this.gris_para_despacho);
-            this.MainPnl.Controls.Add(this.gris_en_proceso);
             this.MainPnl.Controls.Add(this.gris_en_espera);
             this.MainPnl.Controls.Add(this.gris_a_procesar);
             this.MainPnl.Controls.Add(this.errormessage);
             this.MainPnl.Controls.Add(this.pb_para_despacho);
             this.MainPnl.Controls.Add(this.pb_a_procesar);
             this.MainPnl.Controls.Add(this.pb_en_transporte);
-            this.MainPnl.Controls.Add(this.pb_en_proceso);
             this.MainPnl.Controls.Add(this.pb_en_espera);
             this.MainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPnl.Location = new System.Drawing.Point(2, 35);
@@ -102,7 +102,7 @@
             this.l_en_transporte.AutoSize = true;
             this.l_en_transporte.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.l_en_transporte.ForeColor = System.Drawing.Color.Red;
-            this.l_en_transporte.Location = new System.Drawing.Point(429, 3);
+            this.l_en_transporte.Location = new System.Drawing.Point(426, 117);
             this.l_en_transporte.Name = "l_en_transporte";
             this.l_en_transporte.Size = new System.Drawing.Size(86, 16);
             this.l_en_transporte.TabIndex = 33;
@@ -114,7 +114,7 @@
             this.l_para_despacho.AutoSize = true;
             this.l_para_despacho.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.l_para_despacho.ForeColor = System.Drawing.Color.Red;
-            this.l_para_despacho.Location = new System.Drawing.Point(320, 3);
+            this.l_para_despacho.Location = new System.Drawing.Point(320, 117);
             this.l_para_despacho.Name = "l_para_despacho";
             this.l_para_despacho.Size = new System.Drawing.Size(100, 16);
             this.l_para_despacho.TabIndex = 32;
@@ -126,7 +126,7 @@
             this.l_en_proceso.AutoSize = true;
             this.l_en_proceso.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.l_en_proceso.ForeColor = System.Drawing.Color.Red;
-            this.l_en_proceso.Location = new System.Drawing.Point(231, 3);
+            this.l_en_proceso.Location = new System.Drawing.Point(126, 117);
             this.l_en_proceso.Name = "l_en_proceso";
             this.l_en_proceso.Size = new System.Drawing.Size(76, 16);
             this.l_en_proceso.TabIndex = 31;
@@ -138,7 +138,7 @@
             this.l_en_espera.AutoSize = true;
             this.l_en_espera.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.l_en_espera.ForeColor = System.Drawing.Color.Red;
-            this.l_en_espera.Location = new System.Drawing.Point(133, 3);
+            this.l_en_espera.Location = new System.Drawing.Point(236, 117);
             this.l_en_espera.Name = "l_en_espera";
             this.l_en_espera.Size = new System.Drawing.Size(69, 16);
             this.l_en_espera.TabIndex = 30;
@@ -161,7 +161,7 @@
             this.l_a_procesar.AutoSize = true;
             this.l_a_procesar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.l_a_procesar.ForeColor = System.Drawing.Color.Red;
-            this.l_a_procesar.Location = new System.Drawing.Point(29, 3);
+            this.l_a_procesar.Location = new System.Drawing.Point(28, 117);
             this.l_a_procesar.Name = "l_a_procesar";
             this.l_a_procesar.Size = new System.Drawing.Size(73, 16);
             this.l_a_procesar.TabIndex = 11;
@@ -185,7 +185,7 @@
             this.gris_en_proceso.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("gris_en_proceso.BackgroundImage")));
             this.gris_en_proceso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.gris_en_proceso.Enabled = false;
-            this.gris_en_proceso.Location = new System.Drawing.Point(222, 22);
+            this.gris_en_proceso.Location = new System.Drawing.Point(119, 22);
             this.gris_en_proceso.Name = "gris_en_proceso";
             this.gris_en_proceso.Size = new System.Drawing.Size(95, 92);
             this.gris_en_proceso.TabIndex = 27;
@@ -196,7 +196,7 @@
             this.gris_en_espera.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("gris_en_espera.BackgroundImage")));
             this.gris_en_espera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.gris_en_espera.Enabled = false;
-            this.gris_en_espera.Location = new System.Drawing.Point(120, 22);
+            this.gris_en_espera.Location = new System.Drawing.Point(220, 22);
             this.gris_en_espera.Name = "gris_en_espera";
             this.gris_en_espera.Size = new System.Drawing.Size(95, 92);
             this.gris_en_espera.TabIndex = 26;
@@ -269,7 +269,7 @@
             this.pb_en_proceso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pb_en_proceso.Enabled = false;
             this.pb_en_proceso.Image = ((System.Drawing.Image)(resources.GetObject("pb_en_proceso.Image")));
-            this.pb_en_proceso.Location = new System.Drawing.Point(222, 22);
+            this.pb_en_proceso.Location = new System.Drawing.Point(119, 22);
             this.pb_en_proceso.Name = "pb_en_proceso";
             this.pb_en_proceso.Size = new System.Drawing.Size(95, 92);
             this.pb_en_proceso.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -282,7 +282,7 @@
             this.pb_en_espera.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pb_en_espera.Enabled = false;
             this.pb_en_espera.Image = ((System.Drawing.Image)(resources.GetObject("pb_en_espera.Image")));
-            this.pb_en_espera.Location = new System.Drawing.Point(120, 22);
+            this.pb_en_espera.Location = new System.Drawing.Point(220, 22);
             this.pb_en_espera.Name = "pb_en_espera";
             this.pb_en_espera.Size = new System.Drawing.Size(95, 92);
             this.pb_en_espera.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;

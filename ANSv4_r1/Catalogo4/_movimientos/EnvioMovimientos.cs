@@ -258,15 +258,15 @@ namespace Catalogo.util.BackgroundTasks
                                 bool enviar = usarFiltros && filtroVisita.Contains(Nro);
                                 if (enviar)
                                 {
-                                    _clientesNovedades.EnvioVisitasClientes envio = new _clientesNovedades.EnvioVisitasClientes(Global01.Conexion, Global01.URL_ANS2, Global01.IDMaquina);
+                                    _clientesNovedades.EnvioClientesVisitas envio = new _clientesNovedades.EnvioClientesVisitas(Global01.Conexion, Global01.URL_ANS2, Global01.IDMaquina);
                                     if (envio.Inicializado)
                                     {
                                         envio.ObtenerDatos(Nro);
-                                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.InterDeposito, _auditor.Auditor.AccionesAuditadas.TRANSMITE, "ID1= " + movs["Nro"]);
+                                        _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Visita, _auditor.Auditor.AccionesAuditadas.TRANSMITE, "ID1= " + movs["Nro"]);
                                         if (envio.EnviarVisitacliente() != 0)
                                         {
                                             fallaEnvioVisita = true;
-                                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.InterDeposito, _auditor.Auditor.AccionesAuditadas.FALLO, "ID1 " + movs["Nro"]);
+                                            _auditor.Auditor.instance.guardar(_auditor.Auditor.ObjetosAuditados.Visita, _auditor.Auditor.AccionesAuditadas.FALLO, "ID1 " + movs["Nro"]);
                                         }
                                     }
                                     else
@@ -302,7 +302,8 @@ namespace Catalogo.util.BackgroundTasks
                     || (filtroRecibo.Count > 0)
                     || (filtroDevolucion.Count > 0)
                     || (filtroInterdeposito.Count > 0)
-                    || (filtroRendicion.Count > 0);
+                    || (filtroRendicion.Count > 0)
+                    || (filtroVisita.Count > 0);
             }
         }
 

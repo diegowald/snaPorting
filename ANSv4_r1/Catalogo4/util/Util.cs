@@ -235,7 +235,7 @@ namespace Catalogo.Funciones
                         lvwColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
                         break;
                     default:
-                        lvwColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+                        lvwColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
                         break;
                 }
 

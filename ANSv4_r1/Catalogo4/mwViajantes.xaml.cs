@@ -25,6 +25,8 @@ namespace Catalogo
         private Catalogo.varios.FlashControl flash = null;
         private Catalogo._registrofaltantes.ucFaltante faltantes = null;
         private Catalogo._clientesNovedades.ucVisitas visita = null;
+        
+        private bool _forcedToAutoHide;
 
         public mwViajantes()
         {
@@ -332,8 +334,6 @@ namespace Catalogo
 
         private void DocumentPane_Loaded_1(object sender, RoutedEventArgs e)
         {
-            this.xContentMenu.ToggleAutoHide();
-
             if (Global01.miSABOR >= Global01.TiposDeCatalogo.Viajante)
             {
                 this.header.Height = 26;
@@ -369,13 +369,31 @@ namespace Catalogo
             //    if (Global01.Conexion.State == System.Data.ConnectionState.Open) { Global01.Conexion.Close(); }
             //    Global01.Conexion = null;
             //}
-            this.Close();
+            //this.Close();
             //System.Windows.Application.Current.MainWindow.Close();
+            
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {                
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                Application.Current.Shutdown();
+            }
         }
 
         private void ChangeViewButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Normal;
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+            }
+            else if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
@@ -385,7 +403,14 @@ namespace Catalogo
 
         private void MaximizeButton_Click(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Maximized;
+            if (WindowState == WindowState.Normal)
+            {
+                WindowState = WindowState.Maximized;
+            }
+            else if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
         }
 
         void mwViajantes_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -492,6 +517,7 @@ namespace Catalogo
             {
                 _preferencias.PreferenciasFrm pref = new _preferencias.PreferenciasFrm();
                 pref.ShowDialog();
+                pref = null;
             }
             catch (Exception ex)
             {
@@ -652,15 +678,19 @@ namespace Catalogo
 
         private void setHotKeys()
         {
+            if (Global01.miSABOR >= Global01.TiposDeCatalogo.Viajante)
+            {
+                createHotKey(Key.F, ModifierKeys.Control, buscarClienteEvt);
+                createHotKey(Key.D, ModifierKeys.Control, verResumenEvt);
+                createHotKey(Key.C, ModifierKeys.Control, irClientePedidoEvt);
+            }
             createHotKey(Key.L, ModifierKeys.Control, irLineaEvt);
-            createHotKey(Key.B, ModifierKeys.Control, buscarEvt);
+            createHotKey(Key.B, ModifierKeys.Control, buscarEvt);            
             createHotKey(Key.R, ModifierKeys.Control, resetFilterEvt);
-            createHotKey(Key.D, ModifierKeys.Control, verResumenEvt);
             createHotKey(Key.P, ModifierKeys.Control, cambioPctEvt);
             createHotKey(Key.Z, ModifierKeys.Control, checkRregAppEvt);
             createHotKey(Key.H, ModifierKeys.Control, verDetalleProductoEvt);
             createHotKey(Key.T, ModifierKeys.Control, verTotalPedidoEvt);
-            createHotKey(Key.F, ModifierKeys.Control, irClientePedidoEvt);
             createHotKey(Key.N, ModifierKeys.Control, checkNovedadesEvt);
         }
 
@@ -705,6 +735,7 @@ namespace Catalogo
 
         private void resetFilterEvt(object sender, ExecutedRoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 this.dockPane.SelectedIndex = 0;
@@ -717,6 +748,11 @@ namespace Catalogo
                 util.errorHandling.ErrorLogger.LogMessage(ex);
                 util.errorHandling.ErrorForm.show();
             }
+            finally
+            {
+                Mouse.OverrideCursor = null;
+            }
+
         }
 
         private void verDetalleProductoEvt(object sender, ExecutedRoutedEventArgs e)
@@ -795,8 +831,30 @@ namespace Catalogo
             }
         }
 
+        private void buscarClienteEvt(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                varios.frmClientesFnd fcf = new varios.frmClientesFnd();
+                fcf.ShowDialog();
+                fcf.Dispose();
+                fcf = null;
+                if (dockPane.SelectedIndex == 0)
+                {
+                    ped.irCliente();
+                }
+            }
+            catch (Exception ex)
+            {
+                util.errorHandling.ErrorLogger.LogMessage(ex);
+                util.errorHandling.ErrorForm.show();
+            }
+        }
+
+
         private void cambioPctEvt(object sender, ExecutedRoutedEventArgs e)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             try
             {
                 _productos.PorcentajeLinea f = new _productos.PorcentajeLinea();
@@ -811,16 +869,26 @@ namespace Catalogo
                 util.errorHandling.ErrorLogger.LogMessage(ex);
                 util.errorHandling.ErrorForm.show();
             }
+            finally
+            {
+                Mouse.OverrideCursor = null;
+            }
+
         }
 
         private void checkRregAppEvt(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
-                util.BackgroundTasks.Updater xVerEstado = new util.BackgroundTasks.Updater(
-                   util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
-                   util.BackgroundTasks.Updater.UpdateType.EstadoActual);
-                xVerEstado.run();
+                //using (OverrideCursor cursor = new OverrideCursor(Cursors.Wait))
+                //using (varios.UiServices.SetBusyState())
+                using (new varios.WaitCursor())                
+                {
+                    util.BackgroundTasks.Updater xVerEstado = new util.BackgroundTasks.Updater(
+                       util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico,
+                       util.BackgroundTasks.Updater.UpdateType.EstadoActual);
+                    xVerEstado.run();
+                }
             }
             catch (Exception ex)
             {
@@ -864,6 +932,22 @@ namespace Catalogo
                 dcNovedades.FontSize= 14;
                 //dcNovedades.SetValue(TextBlock.ForegroundProperty, "Red");
             }
-        }         
+        }
+
+        private void OnDockManagerLoaded(object sender, RoutedEventArgs e)
+        {
+            menuDockablePane.ToggleAutoHide();
+            _forcedToAutoHide = true;
+        }
+
+        private void dockingManager_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //if (!_forcedToAutoHide)
+            //    return;
+            //_forcedToAutoHide = false;
+            //menuDockableContent.Activate();
+            //menuDockablePane.ToggleAutoHide();
+        }
     }
+
 }
