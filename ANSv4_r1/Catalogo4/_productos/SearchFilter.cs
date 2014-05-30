@@ -253,7 +253,11 @@ namespace Catalogo._productos
                     cboOtros.SelectedIndex = 0;
 
                     this.emitir(filterString);
-                    this.emitir2(0);
+                    
+                    float xPorcentaje = 0;
+                    if (txtPorcentajeLinea.Text.Trim().Length > 0) xPorcentaje = float.Parse(txtPorcentajeLinea.Text);
+
+                    this.emitir2(xPorcentaje);
                 }
             }
             catch (Exception ex)
@@ -315,11 +319,6 @@ namespace Catalogo._productos
                 return;
             }
             btnClearFilters.PerformClick();
-
-            if (float.Parse(txtPorcentajeLinea.Text.ToString()) != 0)
-            {
-                btnApply0.PerformClick();
-            }
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

@@ -435,7 +435,6 @@ namespace Catalogo
                 }
             }
 
-            //  #If Sabor = 3 Or Sabor = 4 Then
 
             if (Global01.OperacionActivada == "PEDIDO")
             {
@@ -476,7 +475,7 @@ namespace Catalogo
                             {
                                 if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente && Funciones.modINIs.ReadINI("DATOS", "SiempreEnviar", Global01.setDef_SiempreEnviar) == "1")
                                 {
-                                    Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, 0, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
+                                    Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, 0, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, null);
                                     envioMovs.run();
                                 }
                             }
@@ -944,9 +943,9 @@ namespace Catalogo
         {
             //if (!_forcedToAutoHide)
             //    return;
-            //_forcedToAutoHide = false;
+            _forcedToAutoHide = false;
             //menuDockableContent.Activate();
-            //menuDockablePane.ToggleAutoHide();
+            menuDockablePane.ToggleAutoHide();
         }
     }
 

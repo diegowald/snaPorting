@@ -90,11 +90,13 @@ namespace Catalogo._preferencias
             //setDef_IPPing = "8.8.8.8";          //
             //setDef_ConfirmaSalida = "1";
             //setDef_EsGerente = "0";
+            //setDef_Turbo = "0";
 
             addCheckBox("Confirma Salida", "DATOS", "ConfirmaSalida", "1", "0", Global01.setDef_ConfirmaSalida, false, password);
             addCheckBox("Usar Pedido NO Enviado", "DATOS", "PED_abierto_ne", "1", "0", Global01.setDef_PED_abierto_ne, false, password);
             addCheckBox("Actualizar imágenes que tengo con Nuevas", "DATOS", "chkImagenUpdate", "1", "0", Global01.setDef_checkImagenUpdate, false, password);
             addCheckBox("Descargar imágenes que NO tengo", "DATOS", "chkImagenNueva", "1", "0", Global01.setDef_checkImagenNueva, false, password);
+            addCheckBox("Quitar Cosmetica a Prod.", "DATOS", "Turbo", "1", "0", Global01.setDef_Turbo, false, password);
             addCheckBox("Lista de Clientes x Nro. Cuenta", "DATOS", "CCC", "1", "0", Global01.setDef_CCC, false, password);
             addEditBox("Depósito", "DATOS", "Deposito", Global01.setDef_DEP, false, password);
             addEditBox("Transporte", "DATOS", "Transporte", Global01.setDef_Transporte, false, password);

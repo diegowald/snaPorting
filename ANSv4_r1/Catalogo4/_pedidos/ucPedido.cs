@@ -189,9 +189,9 @@ namespace Catalogo._pedidos
                                         }
 
                                         ItemX.SubItems.Add(dr["Descrip"].ToString());          //01
-                                        ItemX.SubItems.Add(dr["Precio"].ToString());           //02
+                                        ItemX.SubItems.Add(string.Format("{0:N2}",dr["Precio"]));           //02
                                         ItemX.SubItems.Add(dr["Cantidad"].ToString());         //03
-                                        ItemX.SubItems.Add(dr["SubTotal"].ToString());         //04
+                                        ItemX.SubItems.Add(string.Format("{0:N2}",dr["SubTotal"]));         //04
                                         ItemX.SubItems.Add(dr["Similar"].ToString());          //05
                                         ItemX.SubItems.Add(dr["Deposito"].ToString());         //06
                                         ItemX.SubItems.Add(dr["Oferta"].ToString());           //07
@@ -407,7 +407,7 @@ namespace Catalogo._pedidos
                         }
 
                         ItemX.SubItems.Add(ProductoSeleccionado.Cells["N_Producto"].Value.ToString());
-                        ItemX.SubItems.Add(ProductoSeleccionado.Cells["PrecioLista"].Value.ToString());
+                        ItemX.SubItems.Add(string.Format("{0:N2}",(double)ProductoSeleccionado.Cells["PrecioLista"].Value));
                         ItemX.SubItems.Add(nvCantidadTxt.Value.ToString());
                         float pTotal = float.Parse(nvCantidadTxt.Value.ToString()) * float.Parse(ProductoSeleccionado.Cells["PrecioLista"].Value.ToString());
                         ItemX.SubItems.Add(pTotal.ToString());                                          //04
@@ -883,9 +883,9 @@ namespace Catalogo._pedidos
                     }
 
                     ItemX.SubItems.Add(dr["N_Producto"].ToString());          //01
-                    ItemX.SubItems.Add(dr["PUnit"].ToString());           //02
+                    ItemX.SubItems.Add(string.Format("{0:N2}",dr["PUnit"]));           //02
                     ItemX.SubItems.Add(dr["Cantidad"].ToString());         //03
-                    ItemX.SubItems.Add(dr["SubTotal"].ToString());         //04
+                    ItemX.SubItems.Add(string.Format("{0:N2}",dr["SubTotal"]));         //04
                     ItemX.SubItems.Add(dr["miSimilar"].ToString());          //05
                     ItemX.SubItems.Add(dr["Deposito"].ToString());         //06
                     ItemX.SubItems.Add(dr["miOferta"].ToString());           //07

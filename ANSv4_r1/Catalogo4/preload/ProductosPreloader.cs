@@ -22,9 +22,15 @@ namespace Catalogo.preload
 
         private string strComando = "SELECT " +
        "c.C_Producto, c.Linea, " +
-       "Format(c.Precio + ((c.Precio*c.LineaPorcentaje)/100),'fixed') AS Precio, " +
+       
+       //"CSng(Format(c.Precio + ((c.Precio*c.LineaPorcentaje)/100),'fixed')) AS Precio, " +
+       "(c.Precio + ((c.Precio*c.LineaPorcentaje)/100)) AS Precio, " +
+
        "c.PrecioOferta, " +
-       "Format(c.Precio + ((c.Precio*c.LineaPorcentaje)/100),'fixed') AS PrecioLista, " + 
+       
+       //"CSng(Format(c.Precio + ((c.Precio*c.LineaPorcentaje)/100),'fixed')) AS PrecioLista, " +
+       "(c.Precio + ((c.Precio*c.LineaPorcentaje)/100)) AS PrecioLista, " + 
+
        "c.Familia, c.Marca, c.Modelo, c.N_Producto, c.Motor, c.Año, c.O_Producto, c.ReemplazaA, c.Contiene, c.Equivalencia, c.Original, c.Abc, c.Alerta, " +
        "c.LineaPorcentaje, c.ID, c.Control, CodigoAns,  c.MiCodigo,  c.Suspendido, c.OfertaCantidad, c.Tipo, DateDiff('d',c.Vigencia,Date()) as Vigencia " +
        "FROM v_CatVehProdLin AS c";

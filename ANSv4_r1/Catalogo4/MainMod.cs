@@ -115,6 +115,9 @@ namespace Catalogo
 
             //Aca tiene que ir tambien el proceso que envia al server las transacciones.
             Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico,0 , util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
+
+
+
             int xMin = Int16.Parse("0" + Funciones.modINIs.ReadINI("DATOS", "DelayedEnviar", Global01.setDef_DelayedEnviar));
             envioMovs.delayedRun(xMin * 60 * 1000);
         }
@@ -129,6 +132,8 @@ namespace Catalogo
 
         private static void load_header(byte Paso)
         {
+          try
+          {
             //- acá sigo con el código de main --
             OleDbDataReader dr = null;
             dr = Funciones.oleDbFunciones.Comando(Global01.Conexion, "SELECT * FROM v_appConfig2");
@@ -195,6 +200,17 @@ namespace Catalogo
                 }
             }
             dr = null;
+          }
+          catch (Exception ex)
+          {
+              Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
+              MessageBox.Show(new Form() { TopMost = true }, "Encabezado de Datos NO válido, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+              Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
+              Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
+              Global01.IDMaquinaCRC = "no";
+              miEnd();
+          }
+
         }
 
         private static void valida_header()
@@ -221,10 +237,9 @@ namespace Catalogo
             if (Int32.Parse(Global01.NroUsuario.ToString()) <= 0 | Int64.Parse(Global01.Cuit.ToString().Replace("-", "")) <= 1)
             {
                 MessageBox.Show(new Form() { TopMost = true },"Error en nº de Cuenta ó Cuit, Comuniquese con auto náutica sur", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(Global01.IDMaquina);
                 Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
                 Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
-                Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
+                Global01.IDMaquinaCRC = "no";
                 miEnd();
             }
 
@@ -410,10 +425,9 @@ namespace Catalogo
                         System.IO.File.Delete(Global01.AppPath + "\\Reportes\\Catalogo.mdb");
                         System.IO.File.Delete(Global01.AppPath + "\\up201406.exe");
                     }
-                    //Global01.IDMaquinaCRC = Catalogo._registro.AppRegistro.ObtenerCRC(Global01.IDMaquina);
                     Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
                     Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
-                    //Funciones.modINIs.WriteINI("DATOS", "MachineId", Global01.IDMaquinaCRC);
+                    Global01.IDMaquinaCRC = "no";
                 }
                 else
                 {
@@ -497,8 +511,8 @@ namespace Catalogo
             try
             {
                 //xxxSabor
-                Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
-                //Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
+                //Global01.miSABOR = Global01.TiposDeCatalogo.Viajante;
+                Global01.miSABOR = Global01.TiposDeCatalogo.Cliente;
 
                 Global01.NoConn = false;
                 Global01.VersionApp = (int)(Global01.miSABOR) + "." + Application.ProductVersion.Trim();
@@ -579,6 +593,7 @@ namespace Catalogo
                 Global01.ListaPrecio = 1;
                 Global01.Dolar = float.Parse(Funciones.modINIs.INIRead(Global01.AppPath + "\\Cambio.ini", "General", "Dolar", "1"));
                 Global01.Euro = float.Parse(Funciones.modINIs.INIRead(Global01.AppPath + "\\Cambio.ini", "General", "Euro", "1"));
+                Global01.xAplicoPorcentajeLinea = false;
 
                 Global01.EmailTO = "";
                 Global01.EmailBody = "";
