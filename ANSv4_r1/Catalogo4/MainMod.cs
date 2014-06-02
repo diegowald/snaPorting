@@ -113,10 +113,13 @@ namespace Catalogo
             Catalogo.util.BackgroundTasks.ChequeoNovedades check = new util.BackgroundTasks.ChequeoNovedades(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico);
             check.run();
 
-            //Aca tiene que ir tambien el proceso que envia al server las transacciones.
-            Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico,0 , util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
-            int xMin = Int16.Parse("0" + Funciones.modINIs.ReadINI("DATOS", "DelayedEnviar", Global01.setDef_DelayedEnviar));
-            envioMovs.delayedRun(xMin * 60 * 1000);
+            if (Funciones.modINIs.ReadINI("DATOS", "SiempreEnviar", Global01.setDef_SiempreEnviar) != "0")
+            {
+                //Aca tiene que ir tambien el proceso que envia al server las transacciones.
+                Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Asincronico, 0, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
+                int xMin = Int16.Parse("0" + Funciones.modINIs.ReadINI("DATOS", "DelayedEnviar", Global01.setDef_DelayedEnviar));
+                envioMovs.delayedRun(xMin * 60 * 1000);
+            }
         }
 
         private static void ActivarApplicacion()

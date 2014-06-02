@@ -35,6 +35,7 @@ namespace Catalogo.util.BackgroundTasks
             System.Collections.Generic.List<MOVIMIENTO_SELECCIONADO> filtro)
             : base("EnvioMovimientos", jobType)
         {
+            _running = true;
             _idCliente = idCliente;
             _modoTransmision = modoTransmision;
             filtroNotaVenta = new List<string>();
@@ -75,15 +76,29 @@ namespace Catalogo.util.BackgroundTasks
             }
         }
 
+        private bool _running = false;
+
         public override void execute(ref bool cancel)
         {
-            if ((worker != null) && (worker.CancellationPending))
+            if (job_type == JOB_TYPE.Asincronico)
             {
-                cancel = true;
-                worker.CancelAsync();
-                return;
+                while (_running)
+                {
+                    if ((worker != null) && (worker.CancellationPending))
+                    {
+                        cancel = true;
+                        worker.CancelAsync();
+                        return;
+                    }
+                    enviarMovimientos();
+                    int esperaMinutos= int.Parse(Funciones.modINIs.ReadINI("DATOS", "SiempreEnviar", Global01.setDef_SiempreEnviar));
+                    System.Threading.Thread.Sleep(1000 * 60 * esperaMinutos);
+                }
             }
-            enviarMovimientos();
+            else
+            {
+                enviarMovimientos();
+            }
         }
 
         public delegate void FinishedHandler(bool OK);
@@ -98,6 +113,7 @@ namespace Catalogo.util.BackgroundTasks
             {
                 onCancelled();
             }
+            _running = false;
         }
 
         public override void finished()
@@ -110,7 +126,6 @@ namespace Catalogo.util.BackgroundTasks
 
         private void enviarMovimientos()
         {
-
             bool fallaEnvioPedido = false;
             bool fallaEnvioRecibo = false;
             bool fallaEnvioDevolucion = false;

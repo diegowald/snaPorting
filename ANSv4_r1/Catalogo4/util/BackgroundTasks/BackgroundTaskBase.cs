@@ -14,7 +14,7 @@ namespace Catalogo.util.BackgroundTasks
         }
 
         protected System.ComponentModel.BackgroundWorker worker;
-        JOB_TYPE job_type;
+        protected JOB_TYPE job_type;
 
         private bool cancellationByNewExecution = false;
         private int _delayTime = -1;

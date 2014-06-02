@@ -474,7 +474,7 @@ namespace Catalogo
                             break;
                         case System.Windows.Forms.DialogResult.No:
                             {
-                                if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente && Funciones.modINIs.ReadINI("DATOS", "SiempreEnviar", Global01.setDef_SiempreEnviar) == "1")
+                                if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente && Funciones.modINIs.ReadINI("DATOS", "SiempreEnviar", Global01.setDef_SiempreEnviar) != "0")
                                 {
                                     Catalogo.util.BackgroundTasks.EnvioMovimientos envioMovs = new util.BackgroundTasks.EnvioMovimientos(util.BackgroundTasks.BackgroundTaskBase.JOB_TYPE.Sincronico, 0, util.BackgroundTasks.EnvioMovimientos.MODOS_TRANSMISION.TRANSMITIR_RECORDSET_OCULTO, new System.Collections.Generic.List<util.BackgroundTasks.EnvioMovimientos.MOVIMIENTO_SELECCIONADO>());
                                     envioMovs.run();
