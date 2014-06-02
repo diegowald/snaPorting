@@ -57,7 +57,6 @@ namespace Catalogo._productos
         private DataView dvProducts = new DataView();
         
         private bool dataGridIdle = false;
-        private bool xAplicoPorcentajeLinea = false;
         private float porcentajeLinea;
         private string filterString = string.Empty;
         private int currentRowCount = 0;
@@ -201,18 +200,24 @@ namespace Catalogo._productos
             dataGridView1.Columns[(int)CCol.cPrecio].Name = "Precio";
             dataGridView1.Columns[(int)CCol.cPrecio].HeaderText = "Precio";
             dataGridView1.Columns[(int)CCol.cPrecio].DataPropertyName = "Precio";
+            dataGridView1.Columns[(int)CCol.cPrecio].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView1.Columns[(int)CCol.cPrecio].DefaultCellStyle.Format = "N2";
 
             dataGridView1.Columns[(int)CCol.cPlista].Name = "PrecioLista";
             dataGridView1.Columns[(int)CCol.cPlista].HeaderText = "$ Lista";
             dataGridView1.Columns[(int)CCol.cPlista].DataPropertyName = "PrecioLista";
+            dataGridView1.Columns[(int)CCol.cPlista].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dataGridView1.Columns[(int)CCol.cPlista].DefaultCellStyle.Format = "N2";
 
             dataGridView1.Columns[(int)CCol.cPoferta].Name = "PrecioOferta";
             dataGridView1.Columns[(int)CCol.cPoferta].HeaderText = "$ Oferta";
             dataGridView1.Columns[(int)CCol.cPoferta].DataPropertyName = "PrecioOferta";
+            dataGridView1.Columns[(int)CCol.cPoferta].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             dataGridView1.Columns[(int)CCol.cPorclinea].Name = "LineaPorcentaje";
             dataGridView1.Columns[(int)CCol.cPorclinea].HeaderText = "% Línea";
             dataGridView1.Columns[(int)CCol.cPorclinea].DataPropertyName = "LineaPorcentaje";
+            dataGridView1.Columns[(int)CCol.cPorclinea].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
             dataGridView1.Columns[(int)CCol.cRotacion].Name = "Abc";
             dataGridView1.Columns[(int)CCol.cRotacion].HeaderText = "Rotación";
@@ -263,7 +268,7 @@ namespace Catalogo._productos
             dataGridView1.Columns[(int)CCol.cTipo].Visible = false;
 
             // Save the row count in the original datatable
-            dataRowCount = dtProducts.Rows.Count;
+            dataRowCount = dtProducts.Rows.Count;            
             // Create a dataview of the datatable
             dvProducts.Table = dtProducts;
             // Filter the dataview
@@ -271,27 +276,47 @@ namespace Catalogo._productos
 
             if (porcentajeLinea != 0)
             {
-                xAplicoPorcentajeLinea = true;
-                float pct = 1 + porcentajeLinea / 100;
-                foreach (DataRowView drv in dvProducts)
-                {
-                    //drv["Precio"] = (float)drv["PrecioLista"] * pct;
-                    drv["Precio"] = string.Format("{0:N2}", float.Parse(drv["PrecioLista"].ToString()) * pct);
-                }
+                Global01.xAplicoPorcentajeLinea = true;
                 dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = Color.Red;
             }
             else
             {
-                if (xAplicoPorcentajeLinea)
-                {
-                    xAplicoPorcentajeLinea = false;
-                    foreach (DataRowView drv in dvProducts)
-                    {
-                        drv["Precio"] = drv["PrecioLista"];
-                    }
-                    dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = System.Drawing.SystemColors.Control;
-                }
+                dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = System.Drawing.SystemColors.Control;
             }
+
+            if (Global01.xAplicoPorcentajeLinea)
+            {
+                double pct = 1 + porcentajeLinea / 100;
+                foreach (DataRowView drv in dvProducts)
+                {
+                    drv["Precio"] = (double)drv["PrecioLista"] * pct;
+                }
+                if (pct == 1) Global01.xAplicoPorcentajeLinea = false;
+            }
+
+            ////if (porcentajeLinea != 0)
+            ////{
+            ////    Global01.xAplicoPorcentajeLinea = true;
+            ////    float pct = 1 + porcentajeLinea / 100;
+            ////    foreach (DataRowView drv in dvProducts)
+            ////    {
+            ////        drv["Precio"] = (float)drv["PrecioLista"] * pct;
+            ////        //drv["Precio"] = string.Format("{0:N2}", float.Parse(drv["PrecioLista"].ToString()) * pct);
+            ////    }
+            ////    dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = Color.Red;
+            ////}
+            ////else
+            ////{
+            ////    if (Global01.xAplicoPorcentajeLinea)
+            ////    {
+            ////        Global01.xAplicoPorcentajeLinea = false;
+            ////        foreach (DataRowView drv in dvProducts)
+            ////        {
+            ////            drv["Precio"] = drv["PrecioLista"];
+            ////        }
+            ////        dataGridView1.Columns[(int)CCol.cPrecio].HeaderCell.Style.BackColor = System.Drawing.SystemColors.Control;
+            ////    }
+            ////}
 
             // Bind Datagrid view to the DataView
             dataGridView1.DataSource = dvProducts;
@@ -517,39 +542,41 @@ namespace Catalogo._productos
         }
 
         void OnRowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {   
-            string s = " ";
-            Color xColor = Color.Black;
-            string xTipo = dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cTipo].Value.ToString();
-            bool xBold = (float.Parse(dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cPorclinea].Value.ToString()) != 0);
-            bool xOferta = (dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cControl].Value.ToString() == "O");
-
-            if (xTipo == "prod_n")
+        {
+            if (Funciones.modINIs.ReadINI("DATOS", "Turbo", Global01.setDef_Turbo) == "0")
             {
-                xColor = Color.Blue;
-                s += " prod. nuevo;";
-            }
-            else if (xTipo == "apli_n")
-            {
-                xColor = Color.Green; 
-                s += " apli. nueva;";
-            }
+                string s = " ";
+                Color xColor = Color.Black;
+                string xTipo = dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cTipo].Value.ToString();
+                bool xBold = (float.Parse(dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cPorclinea].Value.ToString()) != 0);
+                bool xOferta = (dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cControl].Value.ToString() == "O");
 
-            if (xOferta)
-            {
-                xColor = Color.Red;
-                s += " Oferta!;";
+                if (xTipo == "prod_n")
+                {
+                    xColor = Color.Blue;
+                    s += " prod. nuevo;";
+                }
+                else if (xTipo == "apli_n")
+                {
+                    xColor = Color.Green;
+                    s += " apli. nueva;";
+                }
+
+                if (xOferta)
+                {
+                    xColor = Color.Red;
+                    s += " Oferta!;";
+                }
+
+                if (xBold)
+                {
+                    dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cCodigo].Style.Font = new Font(dataGridView1.Font, FontStyle.Bold);
+                    s += " $ modificado;";
+                }
+
+                if (xColor != Color.Black) dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cCodigo].Style.ForeColor = xColor;
+                if (s.Trim().Length > 0) dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cCodigo].ToolTipText = s.Trim();
             }
-
-            if (xBold)
-            {
-                dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cCodigo].Style.Font = new Font(dataGridView1.Font, FontStyle.Bold);
-                s += " $ modificado;";
-            }
-
-            if (xColor != Color.Black) dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cCodigo].Style.ForeColor = xColor;
-            if (s.Trim().Length > 0) dataGridView1.Rows[e.RowIndex].Cells[(int)CCol.cCodigo].ToolTipText = s.Trim();
-
         }
 
 #if usarSemaforoImagen

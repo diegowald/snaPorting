@@ -96,7 +96,7 @@ namespace Catalogo._productos
                 txtDetalle.Inlines.Add(new LineBreak());
 
                 txtDetalle.Inlines.Add(new Run("Precio: ") { FontWeight = FontWeights.Bold });
-                txtDetalle.Inlines.Add(new Run(dato.Cells["precio"].Value.ToString()) { Foreground = Brushes.Red });
+                txtDetalle.Inlines.Add(new Run(string.Format("{0:N2}",(double)dato.Cells["precio"].Value)) { Foreground = Brushes.Red });
 
                 if (xOferta)
                 {

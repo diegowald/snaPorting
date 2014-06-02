@@ -17,8 +17,14 @@ namespace Catalogo.Funciones
             {
 
                 Funciones.modINIs.DeleteKeyINI("UPDATE", "mdb");
-
-                oleDbFunciones.CambiarLinks(db);
+                try
+                {
+                    oleDbFunciones.CambiarLinks(db);
+                }
+                catch (Exception ex)
+                {
+                    Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
+                }
 
                 Global01.Conexion = Funciones.oleDbFunciones.GetConn(Catalogo.Global01.strConexionUs);
                 Catalogo._auditor.Auditor.instance.Conexion = Global01.Conexion;
@@ -36,6 +42,29 @@ namespace Catalogo.Funciones
 
                 try
                 {
+                    System.Data.OleDb.OleDbDataReader xDR = Funciones.oleDbFunciones.xGetDr(Global01.Conexion, "bkpAppConfig1");
+
+                    bool _Rompio = false;
+
+                    if (xDR.HasRows)
+                    {
+                        xDR.Read();
+                        _Rompio = ((DBNull.Value.Equals(xDR["IDAns"]) | DBNull.Value.Equals(xDR["Cuit"])) || (Int32.Parse(xDR["IDans"].ToString()) <= 0) || (Int64.Parse(xDR["Cuit"].ToString().Replace("-", "")) <= 1) );
+                    }
+                    else
+                    {
+                        _Rompio = true;
+                    }
+
+                    if (_Rompio)
+                    {
+                        MessageBox.Show(new Form() { TopMost = true }, "Error en nº de Cuenta ó Cuit. La versíon anterior NO es Actualizable", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        Funciones.modINIs.DeleteKeyINI("DATOS", "MachineId");
+                        Funciones.modINIs.DeleteKeyINI("DATOS", "RegistrationKey");
+                        Global01.IDMaquinaCRC = "no";            
+                        goto acaSeguimos;
+                    }
+
                     oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaAppConfig");
 
                     oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaPedidoEnc");
@@ -70,13 +99,13 @@ namespace Catalogo.Funciones
                         Application.DoEvents();
                     }
 
-                    oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaInterDeposito");
-                    oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaInterDeposito_Fac");
-                    Application.DoEvents();
-
                     oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaCatalogoBAK");
                     oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xIDsCatalogoBAK_Pedidos_Anexa");
                     oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xIDsCatalogoBAK_Devolucion_Anexa");
+                    Application.DoEvents();
+
+                    oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaInterDeposito");
+                    oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaInterDeposito_Fac");
                     Application.DoEvents();
 
                     //oleDbFunciones.ComandoIU(Global01.Conexion, "EXEC xAnexaAuditor");
@@ -105,6 +134,8 @@ namespace Catalogo.Funciones
                 //{
                 //    Global01.TranActiva = null;
                 //}
+
+            acaSeguimos:
                 oleDbFunciones.Desconectar(Global01.Conexion);
 
                 System.IO.File.Delete(Global01.AppPath + "\\Reportes\\Catalogo.mdb");

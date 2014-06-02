@@ -302,7 +302,7 @@ namespace Catalogo.Funciones
             {
                 Catalogo.util.errorHandling.ErrorLogger.LogMessage(ex);
 
-                throw ex; // new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
+                //throw ex; // new Exception(ex.Message.ToString() + ' ' + m_sMODULENAME_ + ' ' + PROCNAME_);
             }
         }
 

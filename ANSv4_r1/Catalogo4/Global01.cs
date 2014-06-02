@@ -66,6 +66,7 @@ namespace Catalogo
        public static string proxyServerAddress;
        public static string MainWindowCaption;
        public static bool NoConn;
+       public static bool xAplicoPorcentajeLinea;
        public static int MiBuild;
        public static byte ListaPrecio;
        public static float Dolar;
@@ -95,7 +96,7 @@ namespace Catalogo
        public static string setDef_ICC = "0";                   //Imprime Cta. Cte.
        public static string setDef_CCC = "0";                   //Combo Cliente x Nro. de Cuenta
        public static string setDef_DelayedEnviar = "2";         //tiempo de demora para envios
-       public static string setDef_SiempreEnviar = "0";         //enviar siempre
+       public static string setDef_SiempreEnviar = "0";         //enviar siempre cada "n" minutos
        public static string setDef_IP =  "0.0.0.0";             //
        public static string setDef_IP2 = "0.0.0.0";             //
        public static string setDef_ProxyServer = "0.0.0.0";     //
@@ -103,6 +104,7 @@ namespace Catalogo
        public static string setDef_ConfirmaSalida = "1";
        public static string setDef_EsGerente = "0";
        public static string setDef_Transporte = "0";
+       public static string setDef_Turbo = "0";
 
     }
 }
