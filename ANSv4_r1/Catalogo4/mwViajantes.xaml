@@ -253,16 +253,14 @@
                         </ad:DocumentPane>
 
                         <ad:DockablePane x:Name="menuDockablePane" ad:ResizingPanel.ResizeWidth="150">
-                            <ad:DockableContent Name="menuDockableContent" Title="Menú" IsCloseable="False"  DockableStyle="AutoHide">
-                                <StackPanel Width="160">
-                                    <Menu x:Name="appMenu" Background="White">
-                                        <MenuItem x:Name="mnu_web" Header="Sitio web de ANS" Click="xMenu1_web"/>
-                                        <MenuItem x:Name="mnu_revista" Header="Cartilla del Mes" Click="xMenu1_revista"/>
-                                        <MenuItem x:Name="mnu_apertura" Header="Apertura Cta. Cte." Click="xMenu1_CtaCte"/>
-                                        <MenuItem x:Name="mnu_porcentaje" Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
-                                        <MenuItem x:Name="mnu_config" Header="Configuración Aplic." Click="xMenu1_AppConfig"/>
-                                    </Menu>
-                                </StackPanel>
+                            <ad:DockableContent Name="menuDockableContent" Title="Menú" IsCloseable="False">
+                                <Menu x:Name="appMenu" Background="White">
+                                    <MenuItem x:Name="mnu_web" Header="Sitio web de ANS" Click="xMenu1_web"/>
+                                    <MenuItem x:Name="mnu_revista" Header="Cartilla del Mes" Click="xMenu1_revista"/>
+                                    <MenuItem x:Name="mnu_apertura" Header="Apertura Cta. Cte." Click="xMenu1_CtaCte"/>
+                                    <MenuItem x:Name="mnu_porcentaje" Header="Porcentajes Líneas"  Click="xMenu1_porcentajeL"/>
+                                    <MenuItem x:Name="mnu_config" Header="Configuración Aplic." Click="xMenu1_AppConfig"/>
+                                </Menu>
                             </ad:DockableContent>
                         </ad:DockablePane>
                         

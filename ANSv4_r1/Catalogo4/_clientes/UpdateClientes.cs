@@ -409,12 +409,12 @@ namespace Catalogo._clientes
                                 row["T_Comprobante"].ToString(),
                                 row["N_Comprobante"].ToString(),
                                 DBNull.Value.Equals(row["Det_Comprobante"]) ? "" : row["Det_Comprobante"].ToString(),
-                                int.Parse(row["Importe"].ToString()) / 100,
-                                int.Parse(row["Saldo"].ToString()) / 100,
-                                int.Parse(row["ImpOferta"].ToString()) / 100,
+                                float.Parse(row["Importe"].ToString()) / 100,
+                                float.Parse(row["Saldo"].ToString()) / 100,
+                                float.Parse(row["ImpOferta"].ToString()) / 100,
                                 row["TextoOferta"].ToString(),
                                 (byte)row["Vencida"],
-                                int.Parse(row["ImpPercep"].ToString()) / 100,
+                                float.Parse(row["ImpPercep"].ToString()) / 100,
                                 (byte)row["EsContado"]);
                             CantidadImportada++;
                             if (CantidadImportada % 31 == 0)

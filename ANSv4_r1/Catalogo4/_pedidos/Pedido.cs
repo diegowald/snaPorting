@@ -46,6 +46,7 @@ namespace Catalogo._pedidos
        {
            DetallePedido = new Dictionary<string, PedidoItem>();
            mvarNroPedido = "";
+           mvarTransporte = "";
            mvarF_Pedido = System.DateTime.Today;
            mvarConexion = conexion;
 
@@ -146,8 +147,8 @@ namespace Catalogo._pedidos
             cmd.Parameters.Add("pF_Pedido", System.Data.OleDb.OleDbType.Date).Value = mvarF_Pedido;
             cmd.Parameters.Add("pIdCliente", System.Data.OleDb.OleDbType.Integer).Value = mvarIdCliente;
             cmd.Parameters.Add("pNroImpresion", System.Data.OleDb.OleDbType.Integer).Value = 0;
-            cmd.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 128).Value = " "; // mvarObservaciones;
-            cmd.Parameters.Add("pTransporte", System.Data.OleDb.OleDbType.VarChar, 128).Value = " "; // mvarTransporte;
+            cmd.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 128).Value =  mvarObservaciones;
+            cmd.Parameters.Add("pTransporte", System.Data.OleDb.OleDbType.VarChar, 128).Value =  mvarTransporte;
 
             cmd.Connection = mvarConexion;
             cmd.CommandType = System.Data.CommandType.StoredProcedure;

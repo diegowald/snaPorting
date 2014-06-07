@@ -109,10 +109,13 @@ namespace Catalogo._clientesNovedades
 
             if (queLimpio.ToLower() == "datos" | queLimpio.ToLower() == "all")
             {
-                viObservacionesTxt.Text =
-                    "Temas tratados con el cliente: \r\n\r\n" +
-                    "Ventas Logradas/Acciones de Marketing/Plazo/Cobranza: \r\n\r\n" +
-                    "Comentarios y Observaciones (Líneas/Precios/Distribuidores/Competidores): \r\n";
+                viDetalle1Txt.Text = "";
+                viDetalle2Txt.Text = "";
+                viDetalle3Txt.Text = "";
+
+                    //"Temas tratados con el cliente: \r\n\r\n" +
+                    //"Ventas Logradas/Acciones de Marketing/Plazo/Cobranza: \r\n\r\n" +
+                    //"Comentarios y Observaciones (Líneas/Precios/Distribuidores/Competidores): \r\n";
 
                 viQRecibeTxt.Text = "";
                 viCComprasTxt.Text = "";
@@ -228,7 +231,7 @@ namespace Catalogo._clientesNovedades
                                             viMonoMarcaNO.Checked, viMarcaCbo.Text,
                                             viCatRepGralCb.Checked, viCatLubricentroCb.Checked, viCatEstServicioCb.Checked, viCatMotosCb.Checked, viCatEspecialistaCb.Checked,
                                             viEspMotorCb.Checked, viEspFrenosCb.Checked, viEspSuspCb.Checked, viEspElectricidadCb.Checked, viEspAccesoriosCb.Checked,
-                                            viObservacionesTxt.Text, "", Global01.NroUsuario,
+                                            viDetalle1Txt.Text, viDetalle2Txt.Text, viDetalle3Txt.Text, Global01.NroUsuario,
                                             viRazonSocialTxt.Text, viCuitTxt.Text, viEmailTxt.Text, viDomicilioTxt.Text, viCiudadTxt.Text, viTelefonoTxt.Text,
                                             ref xID);
 
@@ -284,8 +287,8 @@ namespace Catalogo._clientesNovedades
                                         bool pEspFrenos, 
                                         bool pEspSuspension, 
                                         bool pEspElectricidad, 
-                                        bool pEspAccesorios, 
-                                        string pDetalle1, string pDetalle2, string pIdViajante, 
+                                        bool pEspAccesorios,
+                                        string pDetalle1, string pDetalle2, string pDetalle3, string pIdViajante, 
                                         string pRazonSocial, string pCuit, string pEmail, string pDomicilio, string pCiudad, string pTelefono,
                                         ref int pID)
         {
@@ -314,8 +317,9 @@ namespace Catalogo._clientesNovedades
                 cmd.Parameters.Add("pEspElectricidad", System.Data.OleDb.OleDbType.Boolean).Value = pEspElectricidad;
                 cmd.Parameters.Add("pEspAccesorios", System.Data.OleDb.OleDbType.Boolean).Value = pEspAccesorios;
 
-                cmd.Parameters.Add("pRazonSocial", System.Data.OleDb.OleDbType.VarChar, 255).Value = pDetalle1;
-                cmd.Parameters.Add("pRazonSocial", System.Data.OleDb.OleDbType.VarChar, 255).Value = pDetalle2;
+                cmd.Parameters.Add("pDetalle1", System.Data.OleDb.OleDbType.VarChar, 255).Value = pDetalle1;
+                cmd.Parameters.Add("pDetalle2", System.Data.OleDb.OleDbType.VarChar, 255).Value = pDetalle2;
+                cmd.Parameters.Add("pDetalle3", System.Data.OleDb.OleDbType.VarChar, 255).Value = pDetalle3;
                 cmd.Parameters.Add("pIdViajante", System.Data.OleDb.OleDbType.Integer).Value = pIdViajante;
                 cmd.Parameters.Add("pRazonSocial", System.Data.OleDb.OleDbType.VarChar, 40).Value = pRazonSocial;
                 cmd.Parameters.Add("pCuit", System.Data.OleDb.OleDbType.VarChar, 13).Value = pCuit;

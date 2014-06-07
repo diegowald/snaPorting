@@ -66,33 +66,33 @@ namespace Catalogo._recibos
             {
                 while (Det.Read())
                 {
-                    _Detalle += Det["D_Valor"].ToString().Trim().PadLeft(30, ' ') + ",";
+                    _Detalle += Det["D_Valor"].ToString().Trim().PadLeft(30, ' ') + ","; //0
 
                     if ((byte)Det["TipoValor"] == 3 | (byte)Det["TipoValor"] == 4)
                     {
-                        _Detalle += (float.Parse(Det["Divisas"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
+                        _Detalle += (float.Parse(Det["Divisas"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ","; //1
                     }
                     else
                     {
-                        _Detalle += (float.Parse(Det["Importe"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ",";
+                        _Detalle += (float.Parse(Det["Importe"].ToString()) * 100).ToString().Trim().PadLeft(17, '0') + ","; //1
                     }
 
                     if (object.ReferenceEquals(Det["N_Cheque"], DBNull.Value))
                     {
-                        _Detalle += new string(' ', 20) + ",";
+                        _Detalle += new string(' ', 20) + ","; //2
                     }
                     else
                     {
-                        _Detalle += Det["N_Cheque"].ToString().Trim().PadLeft(20, ' ') + ",";
+                        _Detalle += Det["N_Cheque"].ToString().Trim().PadLeft(20, ' ') + ","; //2
                     }
 
                     if (object.ReferenceEquals(Det["F_EmiCheque"], DBNull.Value))
                     {
-                        _Detalle += new string(' ', 10) + ",";
+                        _Detalle += new string(' ', 10) + ","; //3
                     }
                     else
                     {
-                        _Detalle += string.Format("{0:yyyyMMdd}", DateTime.Parse(Det["F_EmiCheque"].ToString())) + ",";
+                        _Detalle += string.Format("{0:yyyyMMdd}", DateTime.Parse(Det["F_EmiCheque"].ToString())) + ","; //3
                     }
 
                     if (object.ReferenceEquals(Det["F_CobroCheque"], DBNull.Value))

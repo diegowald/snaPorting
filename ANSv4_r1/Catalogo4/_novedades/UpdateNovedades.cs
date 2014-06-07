@@ -184,27 +184,19 @@ namespace Catalogo._novedades
         {
             try
             {
-
-                //if (N_Archivo == "banner.swf") { activo = 0; }
-
                 System.Data.OleDb.OleDbCommand cmd = new System.Data.OleDb.OleDbCommand();
 
-                cmd.Parameters.Add("pID", System.Data.OleDb.OleDbType.Integer).Value = ID;
-                cmd.Parameters.Add("pFecha", System.Data.OleDb.OleDbType.Date).Value = Fecha;
-                cmd.Parameters.Add("pDescripcion", System.Data.OleDb.OleDbType.VarChar, 128).Value = Descripcion;
-                cmd.Parameters.Add("pDestino", System.Data.OleDb.OleDbType.VarChar, 10).Value = Destino;
-                cmd.Parameters.Add("pOrigen", System.Data.OleDb.OleDbType.VarChar, 15).Value = Origen;
-                cmd.Parameters.Add("pTipo", System.Data.OleDb.OleDbType.VarChar, 15).Value = Tipo;
-                cmd.Parameters.Add("pF_Inicio", System.Data.OleDb.OleDbType.Date).Value = F_Inicio;
-                cmd.Parameters.Add("pF_Fin", System.Data.OleDb.OleDbType.Date).Value = F_Fin;
-                cmd.Parameters.Add("pN_Archivo", System.Data.OleDb.OleDbType.VarChar, 64).Value = N_Archivo;
-                cmd.Parameters.Add("pUrl", System.Data.OleDb.OleDbType.VarChar, 128).Value = url;
-                cmd.Parameters.Add("pZonas", System.Data.OleDb.OleDbType.VarChar, 128).Value = zonas;
-                cmd.Parameters.Add("pActivo", System.Data.OleDb.OleDbType.TinyInt).Value = activo;
+
+                cmd.Parameters.Add("pNroPedido", System.Data.OleDb.OleDbType.VarChar, 14).Value = mvarNroPedido;
+                cmd.Parameters.Add("pF_Pedido", System.Data.OleDb.OleDbType.Date).Value = mvarF_Pedido;
+                cmd.Parameters.Add("pIdCliente", System.Data.OleDb.OleDbType.Integer).Value = mvarIdCliente;
+                cmd.Parameters.Add("pNroImpresion", System.Data.OleDb.OleDbType.Integer).Value = 0;
+                cmd.Parameters.Add("pObservaciones", System.Data.OleDb.OleDbType.VarChar, 128).Value = mvarObservaciones;
+                cmd.Parameters.Add("pTransporte", System.Data.OleDb.OleDbType.VarChar, 128).Value = mvarTransporte;
 
                 cmd.Connection = Conexion;
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.CommandText = "usp_Novedades_add";
+                cmd.CommandText = "usp_Pedido_OdN_add";
 
                 cmd.ExecuteNonQuery();
 

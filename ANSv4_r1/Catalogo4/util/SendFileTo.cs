@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Catalogo.util.SendFileTo
 {
-    class MAPI
+    public class MAPI
     {
         public bool AddRecipientTo(string email)
         {
@@ -23,7 +23,7 @@ namespace Catalogo.util.SendFileTo
             return AddRecipient(email, HowTo.MAPI_TO);
         }
 
-        internal void AddAttachment(string strAttachmentFileName)
+        public void AddAttachment(string strAttachmentFileName)
         {
             m_attachments.Add(strAttachmentFileName);
         }
@@ -61,11 +61,11 @@ namespace Catalogo.util.SendFileTo
 
         bool AddRecipient(string email, HowTo howTo)
         {
-		    MapiRecipDesc recipient = new MapiRecipDesc();
+            MapiRecipDesc recipient = new MapiRecipDesc();
 
             recipient.recipClass = (int)howTo;
-    		recipient.name = email;
-		    m_recipients.Add(recipient);
+            recipient.name = email;
+            m_recipients.Add(recipient);
 
             return true;
         }
@@ -105,7 +105,7 @@ namespace Catalogo.util.SendFileTo
             MapiFileDesc mapiFileDesc = new MapiFileDesc();
             mapiFileDesc.position = -1;
             int ptr = (int)intPtr;
-            
+
             foreach (string strAttachment in m_attachments)
             {
                 mapiFileDesc.name = Path.GetFileName(strAttachment);
@@ -146,20 +146,20 @@ namespace Catalogo.util.SendFileTo
                 }
                 Marshal.FreeHGlobal(msg.files);
             }
-            
+
             m_recipients.Clear();
             m_attachments.Clear();
             m_lastError = 0;
         }
-        
-        public string GetLastError()
-		{
-		    if (m_lastError <= 26)
-			    return errors[ m_lastError ];
-		    return "MAPI error [" + m_lastError.ToString() + "]";
-		}
 
-	    readonly string[] errors = new string[] {
+        public string GetLastError()
+        {
+            if (m_lastError <= 26)
+                return errors[m_lastError];
+            return "MAPI error [" + m_lastError + "]";
+        }
+
+        readonly string[] errors = new string[] {
 		"OK [0]", "User abort [1]", "General MAPI failure [2]", "MAPI login failure [3]",
 		"Disk full [4]", "Insufficient memory [5]", "Access denied [6]", "-unknown- [7]",
 		"Too many sessions [8]", "Too many files were specified [9]", "Too many recipients were specified [10]", "A specified attachment was not found [11]",
@@ -170,19 +170,19 @@ namespace Catalogo.util.SendFileTo
 		};
 
 
-        List<MapiRecipDesc> m_recipients	= new List<MapiRecipDesc>();
-        List<string> m_attachments	= new List<string>();
-        int m_lastError = 0;
+        List<MapiRecipDesc> m_recipients = new List<MapiRecipDesc>();
+        List<string> m_attachments = new List<string>();
+        int m_lastError;
 
         const int MAPI_LOGON_UI = 0x00000001;
         const int MAPI_DIALOG = 0x00000008;
         const int maxAttachments = 20;
 
-        enum HowTo{MAPI_ORIG=0, MAPI_TO, MAPI_CC, MAPI_BCC};
+        enum HowTo { MAPI_ORIG = 0, MAPI_TO, MAPI_CC, MAPI_BCC };
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public class MapiMessage
+    class MapiMessage
     {
         public int reserved;
         public string subject;
@@ -199,7 +199,7 @@ namespace Catalogo.util.SendFileTo
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    public class MapiFileDesc
+    class MapiFileDesc
     {
         public int reserved;
         public int flags;
@@ -209,14 +209,14 @@ namespace Catalogo.util.SendFileTo
         public IntPtr type;
     }
 
-    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Ansi)]
-    public class MapiRecipDesc
-	{
-	    public int		reserved;
-	    public int		recipClass;
-	    public string	name;
-	    public string	address;
-	    public int		eIDSize;
-	    public IntPtr	entryID;
-	}
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    class MapiRecipDesc
+    {
+        public int reserved;
+        public int recipClass;
+        public string name;
+        public string address;
+        public int eIDSize;
+        public IntPtr entryID;
+    }
 }

@@ -56,13 +56,13 @@ namespace Catalogo._pedidos
                 _Detalle = "";
                 while (det.Read())
                 {
-                    _Detalle += det["C_Producto"].ToString() + ","
-                        + det["Cantidad"].ToString().Trim().PadLeft(8, '0') + "00,"
-                        + det["miSimilar"].ToString() + ","
-                        + det["miOferta"].ToString() + ","
-                        + det["miBahia"].ToString() + ","
-                        + (det["miDeposito"] == null ? "   " : det["miDeposito"]) + ","
-                        + det["Observaciones"].ToString() + ";";
+                _Detalle += det["C_Producto"].ToString() + ",";                            //0
+                _Detalle += det["Cantidad"].ToString().Trim().PadLeft(8, '0') + "00,";     //1
+                _Detalle += det["miSimilar"].ToString() + ",";                             //2
+                _Detalle += det["miOferta"].ToString() + ",";                              //3    
+                _Detalle += det["miBahia"].ToString() + ",";                               //4
+                _Detalle += (det["miDeposito"] == null ? "   " : det["miDeposito"]) + ","; //5
+                _Detalle += det["Observaciones"].ToString() + ";";                         //6
                 }
             }
 

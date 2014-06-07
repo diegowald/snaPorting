@@ -352,6 +352,8 @@ namespace Catalogo
 
             this.Show();
             Catalogo.varios.SplashScreen.CloseSplashScreen();
+
+            menuDockablePane.ToggleAutoHide();
         }
 
         private void Title_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
@@ -941,10 +943,10 @@ namespace Catalogo
 
         private void dockingManager_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //if (!_forcedToAutoHide)
-            //    return;
+            if (!_forcedToAutoHide)
+                return;
             _forcedToAutoHide = false;
-            //menuDockableContent.Activate();
+            menuDockableContent.Activate();
             menuDockablePane.ToggleAutoHide();
         }
     }

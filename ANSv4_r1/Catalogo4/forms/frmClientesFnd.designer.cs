@@ -32,10 +32,6 @@
             this.PnlFondoRojo = new System.Windows.Forms.Panel();
             this.MainPnl = new System.Windows.Forms.Panel();
             this.plistView = new System.Windows.Forms.ListView();
-            this.IDlv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.RazonSocialLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CuitLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.nadaLv = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.txtBuscar = new System.Windows.Forms.TextBox();
             this.errormessage = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -57,7 +53,7 @@
             this.PnlFondoRojo.Location = new System.Drawing.Point(0, 0);
             this.PnlFondoRojo.Name = "PnlFondoRojo";
             this.PnlFondoRojo.Padding = new System.Windows.Forms.Padding(2);
-            this.PnlFondoRojo.Size = new System.Drawing.Size(418, 427);
+            this.PnlFondoRojo.Size = new System.Drawing.Size(612, 427);
             this.PnlFondoRojo.TabIndex = 0;
             // 
             // MainPnl
@@ -70,27 +66,22 @@
             this.MainPnl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPnl.Location = new System.Drawing.Point(2, 38);
             this.MainPnl.Name = "MainPnl";
-            this.MainPnl.Size = new System.Drawing.Size(414, 387);
+            this.MainPnl.Size = new System.Drawing.Size(608, 387);
             this.MainPnl.TabIndex = 12;
             // 
             // plistView
             // 
             this.plistView.BackColor = System.Drawing.Color.WhiteSmoke;
             this.plistView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.plistView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.IDlv,
-            this.RazonSocialLv,
-            this.CuitLv,
-            this.nadaLv});
             this.plistView.Enabled = false;
             this.plistView.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.plistView.FullRowSelect = true;
             this.plistView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.plistView.HideSelection = false;
-            this.plistView.Location = new System.Drawing.Point(15, 72);
+            this.plistView.Location = new System.Drawing.Point(10, 72);
             this.plistView.MultiSelect = false;
             this.plistView.Name = "plistView";
-            this.plistView.Size = new System.Drawing.Size(382, 293);
+            this.plistView.Size = new System.Drawing.Size(588, 293);
             this.plistView.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.plistView.TabIndex = 3;
             this.plistView.Tag = "nada";
@@ -99,27 +90,11 @@
             this.plistView.SelectedIndexChanged += new System.EventHandler(this.plistView_SelectedIndexChanged);
             this.plistView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.plistView_KeyPress);
             // 
-            // IDlv
-            // 
-            this.IDlv.Text = "n° Cuenta";
-            // 
-            // RazonSocialLv
-            // 
-            this.RazonSocialLv.Text = "Razón social";
-            // 
-            // CuitLv
-            // 
-            this.CuitLv.Text = "Cuit";
-            // 
-            // nadaLv
-            // 
-            this.nadaLv.Text = "...";
-            // 
             // txtBuscar
             // 
             this.txtBuscar.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.txtBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBuscar.Location = new System.Drawing.Point(15, 41);
+            this.txtBuscar.Location = new System.Drawing.Point(10, 41);
             this.txtBuscar.MaxLength = 7;
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(301, 22);
@@ -164,7 +139,7 @@
             this.TopPnl.Dock = System.Windows.Forms.DockStyle.Top;
             this.TopPnl.Location = new System.Drawing.Point(2, 2);
             this.TopPnl.Name = "TopPnl";
-            this.TopPnl.Size = new System.Drawing.Size(414, 36);
+            this.TopPnl.Size = new System.Drawing.Size(608, 36);
             this.TopPnl.TabIndex = 13;
             // 
             // label1
@@ -183,7 +158,7 @@
             this.btnCerrar.FlatAppearance.BorderSize = 0;
             this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrar.Font = new System.Drawing.Font("Webdings", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnCerrar.Location = new System.Drawing.Point(394, 0);
+            this.btnCerrar.Location = new System.Drawing.Point(585, 0);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(20, 25);
             this.btnCerrar.TabIndex = 0;
@@ -199,7 +174,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.CancelButton = this.btnCerrar;
-            this.ClientSize = new System.Drawing.Size(418, 427);
+            this.ClientSize = new System.Drawing.Size(612, 427);
             this.Controls.Add(this.PnlFondoRojo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -229,10 +204,6 @@
         private System.Windows.Forms.TextBox txtBuscar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView plistView;
-        private System.Windows.Forms.ColumnHeader IDlv;
-        private System.Windows.Forms.ColumnHeader RazonSocialLv;
-        private System.Windows.Forms.ColumnHeader CuitLv;
-        private System.Windows.Forms.ColumnHeader nadaLv;
 
 
 

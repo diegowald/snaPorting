@@ -163,11 +163,17 @@ namespace Catalogo._pedidos
                                 dr = movimientos.Leer(_movimientos.Movimientos.DATOS_MOSTRAR.NO_ENVIADOS, "NOTA DE VENTA");
                                 if (dr.HasRows)
                                 {
-                                    MessageBox.Show("Hay un pedido pendiente de envio, sugerimos: \n Ir a pedidos anteriores (no enviados) abrirlo y continuar con el mismo", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                                    paEnviosCbo.SelectedIndex = 2;
-                                    PedidoTab.SelectedIndex = 1;
-                                    nvAntTab.Select();
-                                    PedidoTab.Visible = true;
+
+                                    //-PABLO-ABRIR PEDIDO
+                                    dr.Read();
+                                    AbrirPedido("pedido", dr["Nro"].ToString(), Int16.Parse(dr["IdCliente"].ToString()));
+                                    MessageBox.Show("Acabá de abrir un pedido abierto (no enviado), se recomienda continuar con el mismo", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                                    //MessageBox.Show("Hay un pedido pendiente de envio, sugerimos: \n Ir a pedidos anteriores (no enviados) abrirlo y continuar con el mismo", "atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                    //paEnviosCbo.SelectedIndex = 2;
+                                    //PedidoTab.SelectedIndex = 1;
+                                    //nvAntTab.Select();
+                                    //PedidoTab.Visible = true;
 
                                     return;
                                 }
@@ -220,7 +226,7 @@ namespace Catalogo._pedidos
 
                             nvSimilarChk.Checked = false;
                             nvEsOfertaChk.Checked = false;
-                            nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
+                            nvDepositoCbo.SelectedValue = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
                             nvTransporteCbo.SelectedValue = Decimal.Parse(Funciones.modINIs.ReadINI("DATOS", "Transporte", Global01.setDef_Transporte));
                             PedidoTab.SelectedIndex = 0;
                             PedidoTab.Visible = true;
@@ -239,7 +245,7 @@ namespace Catalogo._pedidos
                                 //if (Global01.miSABOR > Global01.TiposDeCatalogo.Cliente) cboCliente.SelectedIndex = 0;                                
                                 nvSimilarChk.Checked = false;
                                 nvEsOfertaChk.Checked = false;
-                                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
+                                nvDepositoCbo.SelectedValue = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
                                 nvTransporteCbo.SelectedValue = Decimal.Parse(Funciones.modINIs.ReadINI("DATOS", "Transporte", Global01.setDef_Transporte));
                             }
                         }
@@ -416,7 +422,8 @@ namespace Catalogo._pedidos
                         ItemX.SubItems.Add((nvEsOfertaChk.Checked ? "1" : "0")); // ¿ es oferta ?       //07    
                         ItemX.SubItems.Add(ProductoSeleccionado.Cells["ID"].Value.ToString());          //08
                         ItemX.SubItems.Add(ProductoSeleccionado.Cells["CodigoAns"].Value.ToString());   //09    
-                        ItemX.SubItems.Add(nvObservacionesTxt.Text);                                    //10
+                        //ItemX.SubItems.Add(nvObservacionesTxt.Text);                                    //10
+                        ItemX.SubItems.Add(" ");                                    //10
                         ItemX.SubItems.Add((nvlistView.Items.Count + 1).ToString());                    //11
 
                         nvlistView.Visible = false;
@@ -621,6 +628,9 @@ namespace Catalogo._pedidos
 
                         Catalogo._pedidos.Pedido ped = new Catalogo._pedidos.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
                         ped.NroImpresion = 0;
+                        if (nvTransporteCbo.SelectedIndex > 0) ped.Transporte = nvTransporteCbo.Text.ToString();
+                        ped.Observaciones = nvObservacionesTxt.Text;
+
                         for (int i = 0; i < nvlistView.Items.Count; i++)
                         {
                             wSimilar = (nvlistView.Items[i].SubItems[5].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
@@ -647,7 +657,7 @@ namespace Catalogo._pedidos
                         TotalPedido();
                         nvSimilarChk.Checked = false;
                         nvEsOfertaChk.Checked = false;
-                        nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
+                        nvDepositoCbo.SelectedValue = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
                         nvTransporteCbo.SelectedValue = Decimal.Parse(Funciones.modINIs.ReadINI("DATOS", "Transporte", Global01.setDef_Transporte));
                     }
                 }
@@ -675,6 +685,9 @@ namespace Catalogo._pedidos
 
                         Catalogo._pedidos.Pedido ped = new Catalogo._pedidos.Pedido(Global01.Conexion, Global01.NroUsuario.ToString(), Int16.Parse(cboCliente.SelectedValue.ToString()));
                         ped.NroImpresion = 0;
+                        if (nvTransporteCbo.SelectedIndex > 0) ped.Transporte = nvTransporteCbo.Text.ToString();
+                        ped.Observaciones = nvObservacionesTxt.Text;
+
                         for (int i = 0; i < nvlistView.Items.Count; i++)
                         {
                             wSimilar = (nvlistView.Items[i].SubItems[5].Text.ToString() == "1" ? (bool)(true) : (bool)(false));
@@ -914,7 +927,7 @@ namespace Catalogo._pedidos
 
                 nvSimilarChk.Checked = false;
                 nvEsOfertaChk.Checked = false;
-                nvDepositoCbo.SelectedIndex = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
+                nvDepositoCbo.SelectedValue = short.Parse(Funciones.modINIs.ReadINI("DATOS", "Deposito", Global01.setDef_DEP));
                 nvTransporteCbo.SelectedValue = Decimal.Parse(Funciones.modINIs.ReadINI("DATOS", "Transporte", Global01.setDef_Transporte));
                 PedidoTab.SelectedIndex = 0;
                 PedidoTab.Visible = true;

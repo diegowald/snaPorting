@@ -138,6 +138,7 @@
             this.btnCerrar.TabIndex = 0;
             this.btnCerrar.Text = "r";
             this.btnCerrar.UseVisualStyleBackColor = true;
+            this.btnCerrar.Visible = false;
             // 
             // fReporte
             // 
@@ -148,7 +149,6 @@
             this.CancelButton = this.btnCerrar;
             this.ClientSize = new System.Drawing.Size(1024, 600);
             this.Controls.Add(this.PnlFondoRojo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fReporte";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

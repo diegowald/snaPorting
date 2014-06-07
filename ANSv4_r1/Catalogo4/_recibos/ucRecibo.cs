@@ -400,7 +400,8 @@ namespace Catalogo._recibos
                  {
                      for (int i = 0; i < adlistView.Items.Count; i++)
                      {
-                         if (adlistView.Items[i].Text.IndexOf("CASCARA:") != 0)
+                         //if (adlistView.Items[i].Text.IndexOf("CASCARA:") != 0)
+                         if (adlistView.Items[i].Text.Trim().Substring(0, 8) == "CASCARA:")
                          {
                              MessageBox.Show("NO puede agregar aplicación, ni descuentos, \n para ello debe quitar la cascara", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                              wDatosValidos = false;
@@ -664,7 +665,7 @@ namespace Catalogo._recibos
             float Dif = 0;
 
 
-            Dif = ((float.Parse("0" + apTotalAplicacionLbl.Text.ToString()) + float.Parse("0" + adTotalDeducirLbl.Text.ToString()) - float.Parse("0" + adTotalDeducirAlRestoLbl.Text.ToString())) + float.Parse("0" + apTotalPercepcionLbl.Text.ToString())) - float.Parse("0" + raImporteTotalLbl.Text.ToString());
+            Dif = ((float.Parse("0" + apTotalAplicacionLbl.Text.ToString()) - float.Parse("0" + adTotalDeducirLbl.Text.ToString()) - float.Parse("0" + adTotalDeducirAlRestoLbl.Text.ToString())) + float.Parse("0" + apTotalPercepcionLbl.Text.ToString())) - float.Parse("0" + raImporteTotalLbl.Text.ToString());
 
             s += "$ " + string.Format("{0:N2}", float.Parse(apTotalAplicacionLbl.Text)) + "   Aplicación \n\n";
             s += "$ " + string.Format("{0:N2}", float.Parse(adTotalDeducirLbl.Text)) + "   A Deducir \n\n";
@@ -830,7 +831,7 @@ namespace Catalogo._recibos
             }
             else
             {
-                Dif = ((float.Parse("0" + apTotalAplicacionLbl.Text.ToString()) + float.Parse("0" + adTotalDeducirLbl.Text.ToString()) - float.Parse("0" + adTotalDeducirAlRestoLbl.Text.ToString())) + float.Parse("0" + apTotalPercepcionLbl.Text.ToString())) - float.Parse("0" + raImporteTotalLbl.Text.ToString());
+                Dif = ((float.Parse("0" + apTotalAplicacionLbl.Text.ToString()) - float.Parse("0" + adTotalDeducirLbl.Text.ToString()) - float.Parse("0" + adTotalDeducirAlRestoLbl.Text.ToString())) + float.Parse("0" + apTotalPercepcionLbl.Text.ToString())) - float.Parse("0" + raImporteTotalLbl.Text.ToString());
 
                 if (Dif > 0 && Dif > float.Parse(aplistView.Items[aplistView.Items.Count-1].SubItems[1].Text))
                 {

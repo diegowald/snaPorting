@@ -42,7 +42,7 @@ namespace Catalogo.varios
                 Int16 Num;
                 bool isNum = Int16.TryParse(txtBuscar.Text.Trim(), out Num);
                 
-                string sqlSelect = "SELECT Format([ID],'00000') as ID, Trim([RAZONSOCIAL]) AS razonsocial, mid(Trim([CUIT]),1,2) & '-' & mid(Trim([CUIT]),3,8) & '-' & mid(Trim([CUIT]),11,1) AS cuit FROM tblClientes ";
+                string sqlSelect = "SELECT Format([ID],'00000') as ID, Trim([RAZONSOCIAL]) AS razonsocial, mid(Trim([CUIT]),1,2) & '-' & mid(Trim([CUIT]),3,8) & '-' & mid(Trim([CUIT]),11,1) AS cuit, Telefono, Domicilio, Ciudad, Email FROM tblClientes ";
                 string sqlWhere = "Activo<>1";
                
                 if (Funciones.modINIs.ReadINI("DATOS", "EsGerente", Global01.setDef_EsGerente) == "0") sqlWhere += " and (IdViajante=" + Global01.NroUsuario.ToString() + ")";                      

@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Catalogo</RootNamespace>
-    <AssemblyName>ansCatalogo2400</AssemblyName>
+    <AssemblyName>ansCatalogo3400</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -32,8 +32,8 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>38</ApplicationRevision>
-    <ApplicationVersion>4.0.1.%2a</ApplicationVersion>
+    <ApplicationRevision>40</ApplicationRevision>
+    <ApplicationVersion>4.0.5.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -341,6 +341,7 @@
     <Compile Include="_pedidos\ucPedido.Designer.cs">
       <DependentUpon>ucPedido.cs</DependentUpon>
     </Compile>
+    <Compile Include="_pedidos\ObtenerPedidos.cs" />
     <Compile Include="_pedidos\VerEstado.cs" />
     <Compile Include="_preferencias\CheckBoxINI.xaml.cs">
       <DependentUpon>CheckBoxINI.xaml</DependentUpon>

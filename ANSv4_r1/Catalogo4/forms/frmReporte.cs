@@ -8,9 +8,6 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using CrystalDecisions.CrystalReports.Engine;
 using System.Diagnostics;
-//using CrystalDecisions.ReportAppServer.DataDefModel;
-//using CrystalDecisions.Shared;
-//using CrystalDecisions.ReportAppServer.ClientDoc; 
 
 namespace Catalogo.varios
 {
@@ -19,7 +16,6 @@ namespace Catalogo.varios
     {
         public ReportDocument oRpt = null;
         public string DocumentoNro = "";
-
 
         public fReporte()
         {
@@ -53,8 +49,11 @@ namespace Catalogo.varios
         {
             try
             {
-                oRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
-                System.Diagnostics.Process.Start(Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+                using (new varios.WaitCursor())
+                {
+                    oRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+                    System.Diagnostics.Process.Start(Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+                }
             }
             catch (Exception ex)
             {
@@ -67,21 +66,43 @@ namespace Catalogo.varios
         {
             try
             {
-                oRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
-                
-                Global01.EmailAsunto = this.Text;
-                //Global01.EmailTO = "sistemas@autonauticasur.com.ar";
-                Global01.EmailBody = this.Text;
-
-                if (Global01.EmailTO.Trim().Length==0) Global01.EmailTO = "@";
-
-                if (Global01.EmailTO.Trim().Length > 0)
+                using (new varios.WaitCursor())
                 {
-                    Catalogo.util.SendFileTo.MAPI mapi = new Catalogo.util.SendFileTo.MAPI();
-                    mapi.AddRecipientTo(Global01.EmailTO.ToString());
+                    oRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
 
-                    mapi.AddAttachment(Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
-                    mapi.SendMailPopup(Global01.EmailAsunto.ToString(), Global01.EmailBody.ToString());
+                    Global01.EmailAsunto = this.Text;
+                    //Global01.EmailTO = "sistemas@autonauticasur.com.ar";
+                    Global01.EmailBody = this.Text;
+
+                    if (Global01.EmailTO.Trim().Length == 0) Global01.EmailTO = "@";
+
+                    if (Global01.EmailTO.Trim().Length > 0)
+                    {
+                        Catalogo.util.SendFileTo.MAPI mapi = new Catalogo.util.SendFileTo.MAPI();
+                        mapi.AddRecipientTo(Global01.EmailTO.ToString());
+                        mapi.AddAttachment(Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+                        mapi.SendMailPopup(Global01.EmailAsunto.ToString(), Global01.EmailBody.ToString());
+                        mapi = null;
+
+                        //util.MailRecipient _Para = new util.MailRecipient(Global01.EmailTO.ToString(), Global01.EmailTO.ToString(), util.MailRecipientType.To);
+                        //util.MailAttachment _Archivo = new util.MailAttachment(Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+
+                        //List<util.MailRecipient> _Paras = new List<util.MailRecipient>();
+                        //_Paras.Add(_Para);
+
+                        //List<util.MailAttachment> _Archivos = new List<util.MailAttachment>();
+                        //_Archivos.Add(_Archivo);
+
+                        //util.MailMessage _miMail = new util.MailMessage(Global01.EmailAsunto, Global01.EmailBody, _Archivos, _Paras);
+                        
+                        //_miMail.ShowDialog();
+
+                        //_Para = null;
+                        //_Paras = null;
+                        //_Archivo = null;
+                        //_Archivos = null;
+                        //_miMail = null;
+                    }
                 }
             }
             catch (Exception ex)
@@ -90,17 +111,60 @@ namespace Catalogo.varios
                 util.errorHandling.ErrorLogger.LogMessage(ex);
             }
         }
-      
+
+        //const and dll functions for moving form
+        //public const int WM_NCLBUTTONDOWN = 0xA1;
+        //public const int HT_CAPTION = 0x2;
+
+        //[DllImportAttribute("user32.dll")]
+        //public static extern int SendMessage(IntPtr hWnd,
+        //    int Msg, int wParam, int lParam);
+
+        //[DllImportAttribute("user32.dll")]
+        //public static extern bool ReleaseCapture();
+
+        ////call functions to move the form in your form's MouseDown event
+        //private void fReporte_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        //{
+        //    if (e.Button == MouseButtons.Left)
+        //    {
+        //        ReleaseCapture();
+        //        SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+        //    }
+        //}
+
+        //private void fReporte_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    dragging = true;
+        //    //if (e.Button == MouseButtons.Left)
+        //    //{
+        //    //}
+        //}
+
+        //private void fReporte_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    if (dragging)
+        //    {
+        //        Point currentScreenPos = PointToScreen(e.Location);
+        //        Location = new Point(currentScreenPos.X - offset.X, currentScreenPos.Y - offset.Y);
+        //    }
+        //}
+
+        //private void fReporte_MouseUp(object sender, MouseEventArgs e)
+        //{
+        //    dragging = false;
+        //}
+
         //internal void SendSupportEmail(string emailAddress, string subject, string body)
         //{
         //    Process.Start("mailto:" + emailAddress + "?subject=" + subject + "&body="
-        //       + body + "&Attach=" + Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
+        //       + body + "&Attachment=" + Global01.AppPath + "\\pdf\\" + DocumentoNro + ".pdf");
         //}
 
 
         //private void fReporte_MouseDown(object sender, MouseEventArgs e)
         //{
-        //    if (eventArgs.ChangedButton == MouseButton.Left)
+        //    if (e. == MouseButton.Left)
         //    {
         //        this.DragMove();
         //    }

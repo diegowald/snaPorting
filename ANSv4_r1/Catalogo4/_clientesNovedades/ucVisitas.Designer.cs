@@ -42,6 +42,11 @@ namespace Catalogo._clientesNovedades
             this.paEnviosCbo = new System.Windows.Forms.ComboBox();
             this.rTabActual = new System.Windows.Forms.TabPage();
             this.raPnlTop = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.viDetalle2Txt = new System.Windows.Forms.TextBox();
+            this.viDetalle1Txt = new System.Windows.Forms.TextBox();
             this.viCiudadTxt = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.viEmailTxt = new System.Windows.Forms.TextBox();
@@ -61,7 +66,7 @@ namespace Catalogo._clientesNovedades
             this.viEspSuspCb = new System.Windows.Forms.CheckBox();
             this.viEspFrenosCb = new System.Windows.Forms.CheckBox();
             this.viEspMotorCb = new System.Windows.Forms.CheckBox();
-            this.viObservacionesTxt = new System.Windows.Forms.TextBox();
+            this.viDetalle3Txt = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.viRamoAgrCb = new System.Windows.Forms.CheckBox();
@@ -216,6 +221,11 @@ namespace Catalogo._clientesNovedades
             this.raPnlTop.AutoScroll = true;
             this.raPnlTop.BackColor = System.Drawing.Color.Transparent;
             this.raPnlTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.raPnlTop.Controls.Add(this.label16);
+            this.raPnlTop.Controls.Add(this.label15);
+            this.raPnlTop.Controls.Add(this.label14);
+            this.raPnlTop.Controls.Add(this.viDetalle2Txt);
+            this.raPnlTop.Controls.Add(this.viDetalle1Txt);
             this.raPnlTop.Controls.Add(this.viCiudadTxt);
             this.raPnlTop.Controls.Add(this.label13);
             this.raPnlTop.Controls.Add(this.viEmailTxt);
@@ -230,7 +240,7 @@ namespace Catalogo._clientesNovedades
             this.raPnlTop.Controls.Add(this.label2);
             this.raPnlTop.Controls.Add(this.viMarcaCbo);
             this.raPnlTop.Controls.Add(this.viCategoriaPnl);
-            this.raPnlTop.Controls.Add(this.viObservacionesTxt);
+            this.raPnlTop.Controls.Add(this.viDetalle3Txt);
             this.raPnlTop.Controls.Add(this.label8);
             this.raPnlTop.Controls.Add(this.label7);
             this.raPnlTop.Controls.Add(this.viRamoAgrCb);
@@ -256,6 +266,53 @@ namespace Catalogo._clientesNovedades
             this.raPnlTop.Name = "raPnlTop";
             this.raPnlTop.Size = new System.Drawing.Size(778, 389);
             this.raPnlTop.TabIndex = 0;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(15, 551);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(270, 15);
+            this.label16.TabIndex = 81;
+            this.label16.Text = "Comentarios y Observaciones del Mercado Gral.";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(15, 404);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(330, 15);
+            this.label15.TabIndex = 80;
+            this.label15.Text = "Ventas logradas / Acciones de Marketing / Plazo / Cobranza";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 259);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(159, 15);
+            this.label14.TabIndex = 79;
+            this.label14.Text = "Temas tratados con Cliente:";
+            // 
+            // viDetalle2Txt
+            // 
+            this.viDetalle2Txt.Location = new System.Drawing.Point(18, 422);
+            this.viDetalle2Txt.MaxLength = 255;
+            this.viDetalle2Txt.Multiline = true;
+            this.viDetalle2Txt.Name = "viDetalle2Txt";
+            this.viDetalle2Txt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.viDetalle2Txt.Size = new System.Drawing.Size(735, 104);
+            this.viDetalle2Txt.TabIndex = 26;
+            // 
+            // viDetalle1Txt
+            // 
+            this.viDetalle1Txt.Location = new System.Drawing.Point(18, 277);
+            this.viDetalle1Txt.MaxLength = 255;
+            this.viDetalle1Txt.Multiline = true;
+            this.viDetalle1Txt.Name = "viDetalle1Txt";
+            this.viDetalle1Txt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.viDetalle1Txt.Size = new System.Drawing.Size(735, 104);
+            this.viDetalle1Txt.TabIndex = 25;
             // 
             // viCiudadTxt
             // 
@@ -431,15 +488,15 @@ namespace Catalogo._clientesNovedades
             this.viEspMotorCb.Text = "Motor";
             this.viEspMotorCb.UseVisualStyleBackColor = true;
             // 
-            // viObservacionesTxt
+            // viDetalle3Txt
             // 
-            this.viObservacionesTxt.Location = new System.Drawing.Point(18, 250);
-            this.viObservacionesTxt.MaxLength = 255;
-            this.viObservacionesTxt.Multiline = true;
-            this.viObservacionesTxt.Name = "viObservacionesTxt";
-            this.viObservacionesTxt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.viObservacionesTxt.Size = new System.Drawing.Size(735, 142);
-            this.viObservacionesTxt.TabIndex = 25;
+            this.viDetalle3Txt.Location = new System.Drawing.Point(18, 569);
+            this.viDetalle3Txt.MaxLength = 255;
+            this.viDetalle3Txt.Multiline = true;
+            this.viDetalle3Txt.Name = "viDetalle3Txt";
+            this.viDetalle3Txt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.viDetalle3Txt.Size = new System.Drawing.Size(735, 104);
+            this.viDetalle3Txt.TabIndex = 27;
             // 
             // label8
             // 
@@ -775,7 +832,7 @@ namespace Catalogo._clientesNovedades
         private System.Windows.Forms.Label Label11;
         private System.Windows.Forms.TextBox viCComprasTxt;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox viObservacionesTxt;
+        private System.Windows.Forms.TextBox viDetalle3Txt;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox viRamoAgrCb;
@@ -807,5 +864,10 @@ namespace Catalogo._clientesNovedades
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox viCiudadTxt;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox viDetalle2Txt;
+        private System.Windows.Forms.TextBox viDetalle1Txt;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
     }
 }

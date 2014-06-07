@@ -44,7 +44,7 @@ namespace Catalogo._recibos
             System.Windows.Forms.ColumnHeader ccIdClienteLv;
             System.Windows.Forms.ColumnHeader ccEstaAplicadaLv;
             System.Windows.Forms.ColumnHeader ccEsContadoLv;
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -326,8 +326,8 @@ namespace Catalogo._recibos
             this.paDataGridView.AllowUserToAddRows = false;
             this.paDataGridView.AllowUserToDeleteRows = false;
             this.paDataGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            this.paDataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.paDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.paDataGridView.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.paDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -774,6 +774,7 @@ namespace Catalogo._recibos
             this.cclistView.Size = new System.Drawing.Size(754, 320);
             this.cclistView.SmallImageList = this.imageList1;
             this.cclistView.TabIndex = 2;
+            this.cclistView.Tag = "nada";
             this.cclistView.UseCompatibleStateImageBehavior = false;
             this.cclistView.View = System.Windows.Forms.View.Details;
             this.cclistView.Click += new System.EventHandler(this.cclistView_Click);
@@ -900,6 +901,7 @@ namespace Catalogo._recibos
             this.adCascaraBtn.Name = "adCascaraBtn";
             this.adCascaraBtn.Size = new System.Drawing.Size(75, 25);
             this.adCascaraBtn.TabIndex = 65;
+            this.adCascaraBtn.Tag = "nada";
             this.adCascaraBtn.Text = "Cascara";
             this.adCascaraBtn.UseVisualStyleBackColor = false;
             this.adCascaraBtn.Click += new System.EventHandler(this.adCascaraBtn_Click);
@@ -1289,6 +1291,7 @@ namespace Catalogo._recibos
             this.ralistView.Tag = "nada";
             this.ralistView.UseCompatibleStateImageBehavior = false;
             this.ralistView.View = System.Windows.Forms.View.Details;
+            this.ralistView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ralistView_KeyDown);
             // 
             // raValorLv
             // 
